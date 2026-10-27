@@ -1,0 +1,44 @@
+---
+slug: linear-transformations
+seo_title: Matrices as Linear Transformations: Rotation Matrix Intuition
+description: See a matrix move the plane. Why the columns are where (1, 0) and (0, 1) land, how a rotation matrix is built, and what the determinant measures.
+kicker: Strang §8.1 · Linear transformations
+title: A matrix also moves the whole plane.
+task: Rotate the plane by exactly 90°.
+preview: {"kind":"transform","M":[[0.8660254037844387,-0.5],[0.5,0.8660254037844387]]}
+check: isT(V) && eqM(V.M, [[0,-1],[1,0]])
+---
+<!-- lead -->
+Think of A as a machine. A vector v goes in, Av comes out. Do that to every point at once and the whole plane moves.
+<!-- key -->
+A <span class="vec i"><span>1</span><span>0</span></span> = column 1 &nbsp;&nbsp;&nbsp; A <span class="vec j"><span>0</span><span>1</span></span> = column 2
+<!-- prose -->
+<h2>Think: a sheet of graph paper</h2>
+<p>Pin a sheet of graph paper at the origin. You may stretch it, turn it, slant it or flip it over. You may not bend it, fold it or tear it.</p>
+<p>That is everything a 2 by 2 matrix can do. Straight lines stay straight. Evenly spaced lines stay evenly spaced. The pin never moves.</p>
+<h2>Two landmarks are enough</h2>
+<p>If you know where two landmarks moved, you can work out where everything else went. The landmarks are <span class="i">(1, 0)</span> and <span class="j">(0, 1)</span>.</p>
+<p>Every point is a combination of them: (x, y) = x·(1, 0) + y·(0, 1). The machine keeps combinations intact, so A(x, y) = x·(column 1) + y·(column 2). It is slide 2 again.</p>
+<p>To build any matrix, decide where the two landmarks should land and write those as the columns.</p>
+<h2>Worked example: rotation</h2>
+<div class="worked">
+<div>Turning by θ sends (1, 0) to (cos θ, sin θ) and (0, 1) to (−sin θ, cos θ). Those are the columns:</div>
+<div class="row">Q = <span class="mx"><span class="c1">cos θ</span><span class="c2">−sin θ</span><span class="c1">sin θ</span><span class="c2">cos θ</span></span></div>
+<div>For 90°: cos = 0 and sin = 1, so Q = <span class="mx"><span class="c1">0</span><span class="c2">-1</span><span class="c1">1</span><span class="c2">0</span></span>. It sends (1, 0) to (0, 1), a quarter turn.</div>
+</div>
+<h2>Area: the determinant</h2>
+<p>Watch the shaded unit square. After the move it is a parallelogram with area |det A| (§5.3). Every other shape scales by the same factor.</p>
+<p>A rotation has det = cos²θ + sin²θ = 1. It turns the paper without stretching it.</p>
+<h2>Where you meet this</h2>
+<p>An IMU measures in the drone's own axes. A 3 by 3 rotation matrix turns those readings into the world's axes. That is what an attitude estimator keeps updating.</p>
+<!-- code -->
+import numpy as np
+
+theta = np.radians(30)
+
+Q = np.array([[np.cos(theta), -np.sin(theta)],
+              [np.sin(theta),  np.cos(theta)]])
+
+print(np.round(Q, 3))
+print("det =", np.round(np.linalg.det(Q), 6))
+show(Q)

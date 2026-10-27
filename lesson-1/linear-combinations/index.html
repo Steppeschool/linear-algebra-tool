@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Linear Combinations Explained Visually | Linear Algebra, Live</title>
+<meta name="description" content="What cv + dw really means, with an everyday picture, a worked example and Python you can run in your browser. Follows Strang §1.1.">
+<link rel="canonical" href="https://linearalgebra.steppeschool.com/lesson-1/linear-combinations/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Linear Algebra, Live">
+<meta property="og:title" content="Linear Combinations Explained Visually | Linear Algebra, Live">
+<meta property="og:description" content="What cv + dw really means, with an everyday picture, a worked example and Python you can run in your browser. Follows Strang §1.1.">
+<meta property="og:url" content="https://linearalgebra.steppeschool.com/lesson-1/linear-combinations/">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/lesson.css">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "Linear Combinations Explained Visually", "headline": "Linear algebra starts with cv + dw.", "description": "What cv + dw really means, with an everyday picture, a worked example and Python you can run in your browser. Follows Strang §1.1.", "url": "https://linearalgebra.steppeschool.com/lesson-1/linear-combinations/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": true, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 1: Columns first", "item": "https://linearalgebra.steppeschool.com/lesson-1/"}, {"@type": "ListItem", "position": 3, "name": "Linear Combinations Explained Visually", "item": "https://linearalgebra.steppeschool.com/lesson-1/linear-combinations/"}]}]</script>
+</head>
+<body>
+<header class="top">
+  <div class="course"><b><a href="../../" style="color:inherit;text-decoration:none">Linear Algebra, Live</a></b><span>Lesson 1 · Columns first · Strang, chapter 1</span></div>
+  <nav class="steps" aria-label="Slides in this lesson"><a class="step on" href="../linear-combinations/" data-slug="linear-combinations" aria-current="page" title="Linear Combinations Explained Visually">1</a><a class="step" href="../matrix-vector-multiplication/" data-slug="matrix-vector-multiplication" title="Matrix-Vector Multiplication: Ax as a Combination of Columns">2</a><a class="step" href="../column-space/" data-slug="column-space" title="Column Space Explained Visually">3</a><a class="step" href="../row-and-column-picture/" data-slug="row-and-column-picture" title="Row Picture vs Column Picture of Ax = b">4</a><a class="step" href="../linear-transformations/" data-slug="linear-transformations" title="Matrices as Linear Transformations: Rotation Matrix Intuition">5</a><a class="step" href="../matrix-multiplication-order/" data-slug="matrix-multiplication-order" title="Matrix Multiplication: Why AB Is Not BA">6</a><a class="step" href="../reflection-matrix/" data-slug="reflection-matrix" title="Reflection Matrix Challenge: Mirror the F">7</a><a class="step" href="../recap/" data-slug="recap" title="Lesson 1 Recap: Columns First">8</a></nav>
+</header>
+
+<main class="app">
+  <article class="page">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">All lessons</a> › <a href="../">Lesson 1</a></nav>
+    <div class="kicker">Strang §1.1 · Linear combinations</div>
+    <h1>Linear algebra starts with cv + dw.</h1>
+    <p class="lead">Take two vectors. Stretch each one by a number, then add. That is a linear combination, and the whole subject is built on it.</p>
+    <div class="key">c <span class="vec i"><span>2</span><span>1</span></span> + d <span class="vec j"><span>-1</span><span>1</span></span> = <span class="vec "><span>2c − d</span><span>c + d</span></span></div>
+    <div class="prose">
+<h2>Think: directions you can give</h2>
+<p>You are guiding someone across a field. You may only use two kinds of step: step <span class="i">v</span> and step <span class="j">w</span>.</p>
+<p>"Take 3 steps of v, then 2 steps of w." Where do they end up? At 3v + 2w. Every instruction of that kind is a linear combination.</p>
+<h2>The two moves</h2>
+<ul>
+<li><b>Scale:</b> 3v = (6, 3). Each component is multiplied by 3. A negative number turns the arrow around.</li>
+<li><b>Add:</b> put the tail of w on the tip of v. The sum goes from the start to the final tip. In numbers, add component by component.</li>
+</ul>
+<p>Why the word "linear"? Scale one vector by every possible number and its tip traces a straight line through the origin.</p>
+<h2>Worked example</h2>
+<div class="worked">
+<div>Take <span class="i">v = (2, 1)</span> and <span class="j">w = (−1, 1)</span>, with c = 3 and d = 2.</div>
+<div class="row">3v = (6, 3) &nbsp;&nbsp; 2w = (−2, 2) &nbsp;&nbsp; 3v + 2w = (4, 5)</div>
+</div>
+<h2>You already use this</h2>
+<p>The point (4, 5) is itself a combination: 4 steps along (1, 0) plus 5 steps along (0, 1). Coordinates are just the numbers c and d for the two standard directions.</p>
+<h2>The question behind everything</h2>
+<p>Which points can you reach? Think of each result as the dot at the tip of its arrow. Try all c and d and the dots fill the whole plane, because v and w point in different directions.</p>
+<p>If w pointed along v, every dot would stay on one line. Slide 3 is about exactly that.</p>
+<p>Finding c and d for a target means solving 2c − d = 4 and c + d = 5. On slide 4 this turns into Ax = b.</p>
+    </div>
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Find c and d so that cv + dw lands exactly on the target (4, 5).</span>
+      <span class="hint" id="hint">Edit the code in the lab and press Run.</span>
+    </div>
+    <div class="nav">
+      <a class="btn" id="prev" href="../">← Overview</a>
+      <span class="count">1 / 8</span>
+      <a class="btn primary" id="next" href="../matrix-vector-multiplication/">Next →</a>
+    </div>
+  </article>
+
+  <aside class="lab" aria-label="Lab">
+    <figure class="figure" style="margin:0">
+      <div class="plane"><canvas id="cv" aria-label="The plane"></canvas></div>
+      <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+    </figure>
+    <div class="editor-card">
+      <div class="bar">
+        <span class="file">slide_1.py</span>
+        <span class="status" id="pystatus">Loading Python…</span>
+        <button class="btn" id="reset">Reset</button>
+        <button class="btn primary" id="run" disabled>Run ▸</button>
+      </div>
+      <div class="editor">
+        <div class="gutter" id="gutter">1</div>
+        <div class="code" id="codewrap">
+          <pre id="hl" aria-hidden="true"></pre>
+          <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+v = np.array([2, 1])
+w = np.array([-1, 1])
+
+c, d = 1, 1               # change these
+target = np.array([4, 5])
+
+print(&quot;cv + dw =&quot;, c*v + d*w)
+combo(np.column_stack([v, w]), [c, d], target)</textarea>
+        </div>
+      </div>
+      <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+      <pre class="out" id="out"><span class="sys">Press Run. show(A), combo(A, x, b) and rowpic(A, b) draw on the plane.</span></pre>
+    </div>
+  </aside>
+</main>
+<footer class="foot">
+  Follows the order and notation of Gilbert Strang, <i>Introduction to Linear Algebra</i>, 5th edition (2016); § numbers refer to that book.
+  Explanations, examples and code are original. Made by <a href="https://www.steppeschool.com">Steppeschool</a>.
+</footer>
+
+<script>window.SLIDE = {"slug": "linear-combinations", "lesson": "lesson-1", "assets": "../../assets/", "preview": {"kind": "combo", "A": [[2, -1], [1, 1]], "x": [1, 1], "b": [4, 5]}, "check": "isC(V) && near(Ax(V)[0], 4) && near(Ax(V)[1], 5)"};</script>
+<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
+<script src="../../assets/lab.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+---
+slug: column-space
+seo_title: Column Space Explained Visually
+description: The column space is everything Ax can reach. Learn it with a two-thruster boat, rank, a worked example and Python you can run. Strang §1.3 and §3.1.
+kicker: Strang §1.3 and §3.1 · Column space
+title: The column space C(A) is every possible Ax.
+task: Change column 2 into a multiple of column 1 and watch C(A) shrink to a line.
+preview: {"kind":"combo","A":[[1,1],[2,-1]],"x":[1,1],"b":[]}
+check: isC(V) && near(det(V.A), 0, 1e-9) && nonzero(V.A)
+---
+<!-- lead -->
+A matrix can only produce certain outputs. The column space is the list of everything Ax can produce. Solving Ax = b means asking one question: is b on that list?
+<!-- key -->
+C(A) = all vectors Ax = all combinations of the columns
+<!-- prose -->
+<h2>Think: reachable outputs</h2>
+<p>The columns are the directions you are allowed to move in. The vector x says how far to go along each one. Ax is where you end up.</p>
+<p>Try every possible x and mark every place you land. That set of landing spots is C(A).</p>
+<h2>An engineering picture</h2>
+<p>A small boat has two thrusters. Column 1 is the push you get from thruster 1 at full throttle. Column 2 is the push from thruster 2. The entries of x are the two throttle settings, and a negative throttle means reverse.</p>
+<ul>
+<li><b>Thrusters at an angle:</b> by mixing them you can push the boat in any direction. C(A) is the whole plane.</li>
+<li><b>Both thrusters pointing forward:</b> you can only go forward or back. C(A) is a line. A sideways target is out of reach, whatever the throttles.</li>
+</ul>
+<h2>Three possibilities in the plane</h2>
+<ul>
+<li><b>The whole plane:</b> the columns point in different directions. They are <b>independent</b>.</li>
+<li><b>A line:</b> one column is a multiple of the other. They are <b>dependent</b>.</li>
+<li><b>Just the origin:</b> A is all zeros.</li>
+</ul>
+<p>The <b>rank</b> counts how many dimensions survive: 2, 1 or 0. It is also the number of independent columns.</p>
+<h2>Worked example</h2>
+<div class="worked">
+<div>A = <span class="mx"><span class="c1">1</span><span class="c2">2</span><span class="c1">2</span><span class="c2">4</span></span>. Column 2 is 2 times column 1.</div>
+<div class="row">Ax = x₁(1, 2) + x₂(2, 4) = (x₁ + 2x₂)·(1, 2)</div>
+<div>Every output is a multiple of (1, 2). So b = (3, 6) is reachable, and b = (1, 0) never is.</div>
+<div>Notice that x = (3, 0) and x = (1, 1) both give (3, 6). With dependent columns, different inputs can land on the same output. Chapter 3 calls the leftover freedom the nullspace.</div>
+</div>
+<h2>Two questions that look alike</h2>
+<ul>
+<li><b>Can I solve Ax = b for this b?</b> Only if b is in C(A).</li>
+<li><b>Can I solve Ax = b for every b?</b> Only if C(A) is the whole plane.</li>
+</ul>
+<p>For 2 by 2 there is a quick test. The columns are independent exactly when ad − bc ≠ 0. When it is 0, the plane gets squashed onto a line. A squash cannot be undone, so A has no inverse.</p>
+<!-- code -->
+import numpy as np
+
+A = np.array([[1,  1],
+              [2, -1]])
+x = np.array([1, 1])
+
+print("columns:", A[:, 0], A[:, 1])
+print("det =", np.linalg.det(A), "  (0 means dependent columns)")
+combo(A, x)

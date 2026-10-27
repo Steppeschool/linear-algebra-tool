@@ -1,0 +1,47 @@
+---
+slug: matrix-multiplication-order
+seo_title: Matrix Multiplication: Why AB Is Not BA
+description: AB means apply B first, then A. See it with a rotation and a shear, learn the rules of matrix products, and try it in Python. Strang §2.4.
+kicker: Strang §2.4 · Rules for matrix operations
+title: AB means: apply B first, then A.
+task: Run it, then show S @ R instead and compare the F.
+preview: {"kind":"transform","M":[[0,-1],[1,1]]}
+check: isT(V) && eqM(V.M, mul([[1,1],[0,1]], [[0,-1],[1,0]]))
+---
+<!-- lead -->
+Multiplying matrices chains two moves into one. (AB)v = A(Bv): B moves the plane first, then A moves the result.
+<!-- key -->
+AB = A <span class="vec" style="grid-template-columns:auto auto;gap:0 10px"><span>b₁</span><span>b₂</span></span> = <span class="vec" style="grid-template-columns:auto auto;gap:0 10px"><span>Ab₁</span><span>Ab₂</span></span>
+<!-- prose -->
+<h2>Think: socks and shoes</h2>
+<p>Socks first, then shoes. Swap the order and you get a very different result. Matrix moves work the same way.</p>
+<p>Read a product from right to left, like f(g(x)) in maths. In AB, B acts first.</p>
+<h2>Column by column</h2>
+<p>Where does (1, 0) end up after both moves? B sends it to b₁, the first column of B. Then A sends that to Ab₁. So the first column of AB is A times the first column of B. Same for the second column.</p>
+<p>You already know matrix times vector. Matrix times matrix is just that, once per column.</p>
+<h2>Worked example</h2>
+<div class="worked">
+<div>R turns by 90°. S is a shear.</div>
+<div class="row">R = <span class="mx"><span class="c1">0</span><span class="c2">-1</span><span class="c1">1</span><span class="c2">0</span></span> &nbsp; S = <span class="mx"><span class="c1">1</span><span class="c2">1</span><span class="c1">0</span><span class="c2">1</span></span></div>
+<div class="row">RS = <span class="mx"><span class="c1">0</span><span class="c2">-1</span><span class="c1">1</span><span class="c2">1</span></span> &nbsp; SR = <span class="mx"><span class="c1">1</span><span class="c2">-1</span><span class="c1">1</span><span class="c2">0</span></span></div>
+<div>RS shears, then turns. SR turns, then shears. Different matrices, different moves. Look where the F ends up.</div>
+</div>
+<h2>The rules</h2>
+<ul>
+<li><b>AB is usually not BA.</b> Order matters.</li>
+<li><b>(AB)C = A(BC).</b> Either way, C acts first, then B, then A. Brackets only change how you write it.</li>
+<li><b>det(AB) = det(A)·det(B).</b> If B doubles areas and A triples them, together they multiply areas by 6 (chapter 5).</li>
+</ul>
+<h2>Where you meet this</h2>
+<p>A robot arm is a chain of rotations, one per joint. To find the gripper, multiply them in joint order. Swap two and the gripper ends up somewhere else.</p>
+<!-- code -->
+import numpy as np
+
+R = np.array([[0, -1],    # rotate 90°
+              [1,  0]])
+S = np.array([[1, 1],     # shear
+              [0, 1]])
+
+print("R @ S =\n", R @ S)
+print("S @ R =\n", S @ R)
+show(R @ S)

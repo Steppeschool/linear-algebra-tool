@@ -1,0 +1,45 @@
+---
+slug: row-and-column-picture
+seo_title: Row Picture vs Column Picture of Ax = b
+description: Two ways to see a linear system: lines crossing, or columns combining to make b. Interactive plot and Python in the browser. Strang §2.1.
+kicker: Strang §2.1 · Vectors and linear equations
+title: Two pictures of the same equations.
+task: Run the row picture, then switch to combo(A, x, b) for the column picture.
+preview: {"kind":"rows","A":[[1,-2],[3,2]],"b":[1,11]}
+check: isC(V) && eqM(V.A, [[1,-2],[3,2]]) && near(Ax(V)[0], 1) && near(Ax(V)[1], 11)
+---
+<!-- lead -->
+Strang's first system: x − 2y = 1 and 3x + 2y = 11. You can look at it by rows or by columns. Both pictures give the same answer, x = 3 and y = 1.
+<!-- key -->
+<span class="mx"><span class="c1">1</span><span class="c2">-2</span><span class="c1">3</span><span class="c2">2</span></span> <span class="vec "><span>x</span><span>y</span></span> = <span class="vec "><span>1</span><span>11</span></span>
+<!-- prose -->
+<h2>Row picture: two clues</h2>
+<p>A navigator takes two compass bearings. Each bearing says "the ship is somewhere on this line". The ship is where the two lines cross.</p>
+<p>Each equation works the same way. All points with x − 2y = 1 form one line. All points with 3x + 2y = 11 form another. The solution is the point on both: (3, 1).</p>
+<h2>Column picture: a recipe</h2>
+<p>Now read the system as a mix of the columns, like the basket on slide 2:</p>
+<div class="worked">
+<div class="row">x·<span class="i">(1, 3)</span> + y·<span class="j">(−2, 2)</span> = (1, 11)</div>
+<div class="row">3·(1, 3) + 1·(−2, 2) = (3 − 2, 9 + 2) = (1, 11) ✓</div>
+</div>
+<p>The question changes from "where do the lines cross?" to "how much of each column makes b?". Same x, different picture.</p>
+<h2>When it goes wrong</h2>
+<ul>
+<li><b>Parallel lines:</b> the clues never agree, so there is no solution. In the column picture, the columns are dependent and b is off their line.</li>
+<li><b>The same line twice:</b> the second clue tells you nothing new. Infinitely many solutions, and b sits on the line of the columns.</li>
+</ul>
+<h2>Why Strang prefers columns</h2>
+<p>With three unknowns, each clue becomes a plane in space, and three planes crossing is hard to draw. The column picture stays simple: three arrows, one target.</p>
+<p>The row picture is still how you solve by hand. The next lesson, elimination, works on rows.</p>
+<!-- code -->
+import numpy as np
+
+A = np.array([[1, -2],
+              [3,  2]])
+b = np.array([1, 11])
+
+x = np.linalg.solve(A, b)
+print("solution x =", x)
+
+rowpic(A, b)          # row picture: two lines meet at x
+# combo(A, x, b)      # column picture: combine the columns to reach b

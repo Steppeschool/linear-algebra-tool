@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lesson 1 Recap: Columns First | Linear Algebra, Live</title>
+<meta name="description" content="Six core ideas of linear algebra on one page: combinations, Ax by columns, column space, row and column pictures, transformations and matrix products.">
+<link rel="canonical" href="https://linearalgebra.steppeschool.com/lesson-1/recap/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Linear Algebra, Live">
+<meta property="og:title" content="Lesson 1 Recap: Columns First | Linear Algebra, Live">
+<meta property="og:description" content="Six core ideas of linear algebra on one page: combinations, Ax by columns, column space, row and column pictures, transformations and matrix products.">
+<meta property="og:url" content="https://linearalgebra.steppeschool.com/lesson-1/recap/">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/lesson.css">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "Lesson 1 Recap: Columns First", "headline": "What you can now do.", "description": "Six core ideas of linear algebra on one page: combinations, Ax by columns, column space, row and column pictures, transformations and matrix products.", "url": "https://linearalgebra.steppeschool.com/lesson-1/recap/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": true, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 1: Columns first", "item": "https://linearalgebra.steppeschool.com/lesson-1/"}, {"@type": "ListItem", "position": 3, "name": "Lesson 1 Recap: Columns First", "item": "https://linearalgebra.steppeschool.com/lesson-1/recap/"}]}]</script>
+</head>
+<body>
+<header class="top">
+  <div class="course"><b><a href="../../" style="color:inherit;text-decoration:none">Linear Algebra, Live</a></b><span>Lesson 1 · Columns first · Strang, chapter 1</span></div>
+  <nav class="steps" aria-label="Slides in this lesson"><a class="step" href="../linear-combinations/" data-slug="linear-combinations" title="Linear Combinations Explained Visually">1</a><a class="step" href="../matrix-vector-multiplication/" data-slug="matrix-vector-multiplication" title="Matrix-Vector Multiplication: Ax as a Combination of Columns">2</a><a class="step" href="../column-space/" data-slug="column-space" title="Column Space Explained Visually">3</a><a class="step" href="../row-and-column-picture/" data-slug="row-and-column-picture" title="Row Picture vs Column Picture of Ax = b">4</a><a class="step" href="../linear-transformations/" data-slug="linear-transformations" title="Matrices as Linear Transformations: Rotation Matrix Intuition">5</a><a class="step" href="../matrix-multiplication-order/" data-slug="matrix-multiplication-order" title="Matrix Multiplication: Why AB Is Not BA">6</a><a class="step" href="../reflection-matrix/" data-slug="reflection-matrix" title="Reflection Matrix Challenge: Mirror the F">7</a><a class="step on" href="../recap/" data-slug="recap" aria-current="page" title="Lesson 1 Recap: Columns First">8</a></nav>
+</header>
+
+<main class="app">
+  <article class="page">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">All lessons</a> › <a href="../">Lesson 1</a></nav>
+    <div class="kicker">Recap · Reading</div>
+    <h1>What you can now do.</h1>
+    <p class="lead">Six ideas, all built on one operation: combining columns.</p>
+    <div class="key">Ax = x₁·(column 1) + x₂·(column 2)</div>
+    <div class="prose">
+<ul>
+<li><b>§1.1 Linear combinations.</b> Scale and add: steps of v and steps of w.</li>
+<li><b>§1.3 Ax by columns.</b> The basket: each column is a food, x is how many of each, Ax is the total. Compute by rows, think by columns.</li>
+<li><b>§1.3, §3.1 Column space.</b> Everywhere the boat can reach. Ax = b is solvable exactly when b is in C(A).</li>
+<li><b>§2.1 Row and column pictures.</b> Two bearings crossing, or a recipe that makes b. Same answer.</li>
+<li><b>§8.1, §5.3 Transformations.</b> Graph paper pinned at the origin. The columns are where the two landmarks land, and |det A| is the area factor.</li>
+<li><b>§2.4 Products.</b> Socks, then shoes. AB applies B first.</li>
+</ul>
+<h2>Next lesson: elimination (§2.2, §2.3, §2.6)</h2>
+<p>Solve Ax = b the way a computer does. Subtract multiples of one row from another until the matrix is triangular. Then solve from the bottom up. Write those steps as matrices and you get A = LU.</p>
+<h2>Read along</h2>
+<p>Gilbert Strang, <i>Introduction to Linear Algebra</i>, 5th edition (2016), chapter 1 and §2.1. His MIT 18.06 lectures are free on <a href="https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/" target="_blank" rel="noopener">MIT OpenCourseWare</a>. For more pictures, watch 3Blue1Brown's <a href="https://www.3blue1brown.com/topics/linear-algebra" target="_blank" rel="noopener">Essence of Linear Algebra</a>.</p>
+    </div>
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Free play: try anything, for example combo([[0, 1], [1, 0]], [2, 1]).</span>
+      <span class="hint" id="hint">Edit the code in the lab and press Run.</span>
+    </div>
+    <div class="nav">
+      <a class="btn" id="prev" href="../reflection-matrix/">← Back</a>
+      <span class="count">8 / 8</span>
+      <a class="btn primary" id="next" href="../../">All lessons →</a>
+    </div>
+  </article>
+
+  <aside class="lab" aria-label="Lab">
+    <figure class="figure" style="margin:0">
+      <div class="plane"><canvas id="cv" aria-label="The plane"></canvas></div>
+      <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+    </figure>
+    <div class="editor-card">
+      <div class="bar">
+        <span class="file">slide_8.py</span>
+        <span class="status" id="pystatus">Loading Python…</span>
+        <button class="btn" id="reset">Reset</button>
+        <button class="btn primary" id="run" disabled>Run ▸</button>
+      </div>
+      <div class="editor">
+        <div class="gutter" id="gutter">1</div>
+        <div class="code" id="codewrap">
+          <pre id="hl" aria-hidden="true"></pre>
+          <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+A = np.array([[0, 1],
+              [1, 0]])
+
+print(&quot;det =&quot;, np.linalg.det(A))
+show(A, [1, 2])       # transformation view, extra vectors are drawn too
+# combo(A, [2, 1])    # column picture</textarea>
+        </div>
+      </div>
+      <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+      <pre class="out" id="out"><span class="sys">Press Run. show(A), combo(A, x, b) and rowpic(A, b) draw on the plane.</span></pre>
+    </div>
+  </aside>
+</main>
+<footer class="foot">
+  Follows the order and notation of Gilbert Strang, <i>Introduction to Linear Algebra</i>, 5th edition (2016); § numbers refer to that book.
+  Explanations, examples and code are original. Made by <a href="https://www.steppeschool.com">Steppeschool</a>.
+</footer>
+
+<script>window.SLIDE = {"slug": "recap", "lesson": "lesson-1", "assets": "../../assets/", "preview": {"kind": "transform", "M": [[1, 0], [0, 1]]}, "check": "!!V"};</script>
+<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
+<script src="../../assets/lab.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+---
+slug: matrix-vector-multiplication
+seo_title: Matrix-Vector Multiplication: Ax as a Combination of Columns
+description: Why Ax is a mix of the columns of A, explained with a shopping basket, a worked example and live Python. Row way vs column way. Strang §1.3.
+kicker: Strang §1.3 · Matrices
+title: Ax is a combination of the columns of A.
+task: Choose x so that Ax = (0, 3).
+preview: {"kind":"combo","A":[[1,1],[-1,2]],"x":[2,1],"b":[0,3]}
+check: isC(V) && eqM(V.A, [[1,1],[-1,2]]) && near(Ax(V)[0], 0) && near(Ax(V)[1], 3)
+---
+<!-- lead -->
+Stack v and w side by side as the columns of a matrix A. Put the numbers c and d into a vector x. Then Ax is exactly cv + dw.
+<!-- key -->
+<span class="mx"><span class="c1">a₁₁</span><span class="c2">a₁₂</span><span class="c1">a₂₁</span><span class="c2">a₂₂</span></span> <span class="vec "><span>x₁</span><span>x₂</span></span> = x₁ <span class="vec i"><span>a₁₁</span><span>a₂₁</span></span> + x₂ <span class="vec j"><span>a₁₂</span><span>a₂₂</span></span>
+<!-- prose -->
+<h2>Think: a shopping basket</h2>
+<p>You buy eggs and rice. Each food gives you roughly this much protein and carbs:</p>
+<div class="worked">
+<div class="row">1 egg = <span class="i">(6 g protein, 1 g carbs)</span> &nbsp;&nbsp; 1 bowl of rice = <span class="j">(4 g protein, 45 g carbs)</span></div>
+<div class="row">A = <span class="mx"><span class="c1">6</span><span class="c2">4</span><span class="c1">1</span><span class="c2">45</span></span> &nbsp; x = (2 eggs, 1 bowl)</div>
+</div>
+<p>Each column of A is one food. The vector x says how many of each you take. Ax is the total in your basket.</p>
+<h2>Two ways to add it up</h2>
+<ul>
+<li><b>By columns (whole foods):</b> 2 eggs + 1 bowl = 2·(6, 1) + 1·(4, 45) = (16, 47).</li>
+<li><b>By rows (one nutrient at a time):</b> protein 6·2 + 4·1 = 16. Carbs 1·2 + 45·1 = 47.</li>
+</ul>
+<p>Same totals. The row way is how you calculate by hand: each entry is a dot product of a row with x. The column way is how you think: Ax is a mix of the columns.</p>
+<p>Strang's advice: compute by rows if you like, but think by columns. The column view tells you what Ax can be.</p>
+<h2>Watch out</h2>
+<p>x needs one number per column. Two foods, two quantities. A 2 by 2 matrix needs a vector with 2 entries.</p>
+<p>In the lab, the code computes Ax both ways. The plane draws the column way: x₁ times column 1, then x₂ times column 2 from its tip.</p>
+<!-- code -->
+import numpy as np
+
+A = np.array([[ 1, 1],
+              [-1, 2]])
+x = np.array([2, 1])      # change x
+b = np.array([0, 3])
+
+row_way = np.array([A[0] @ x, A[1] @ x])      # dot products with the rows
+col_way = x[0] * A[:, 0] + x[1] * A[:, 1]      # combination of the columns
+print("row way:   ", row_way)
+print("column way:", col_way)
+combo(A, x, b)

@@ -1,0 +1,40 @@
+---
+slug: reflection-matrix
+seo_title: Reflection Matrix Challenge: Mirror the F
+description: Build the 2x2 matrix that mirrors the plane, and see why a reflection has determinant −1. An interactive linear algebra challenge in Python.
+kicker: Challenge
+title: Mirror the F.
+task: Mirror the plane across the vertical axis.
+preview: {"kind":"transform","M":[[1,0],[0,1]]}
+check: isT(V) && eqM(V.M, [[-1,0],[0,1]])
+---
+<!-- lead -->
+Build the matrix that flips the plane left to right, like a mirror standing on the vertical axis. The F keeps its size. It only faces the other way.
+<!-- key -->
+(x, y) &nbsp;→&nbsp; (−x, y)
+<!-- prose -->
+<h2>Think: the word on an ambulance</h2>
+<p>AMBULANCE is printed backwards on the front of the vehicle. In a driver's mirror it reads the right way round. A mirror keeps sizes and distances but reverses left and right.</p>
+<h2>How to build it</h2>
+<p>Use the rule from slide 5: decide where the two landmarks land, then write them as the columns.</p>
+<ul>
+<li>A mirror on the vertical axis sends points on the right over to the left.</li>
+<li>Points on the vertical axis itself stay where they are.</li>
+</ul>
+<h2>What the determinant says</h2>
+<p>The F keeps its size, so |det A| = 1.</p>
+<p>But the F now reads backwards, like turning a sheet of paper over to its other side. No rotation can do that. The determinant signals the flip with a minus sign. Watch the readout under the plane.</p>
+<h2>After you solve it</h2>
+<ul>
+<li><b>Mirror twice:</b> two mirrors in a barber's shop show your face the right way round. Check that A @ A gives the identity.</li>
+<li><b>Another mirror:</b> try the mirror on the diagonal line y = x. Where do (1, 0) and (0, 1) go?</li>
+</ul>
+<!-- code -->
+import numpy as np
+
+A = np.array([[1, 0],
+              [0, 1]])
+
+print("det =", np.linalg.det(A))
+print("A @ A =\n", A @ A)
+show(A)

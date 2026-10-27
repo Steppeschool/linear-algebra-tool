@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Matrices as Linear Transformations: Rotation Matrix Intuition | Linear Algebra, Live</title>
+<meta name="description" content="See a matrix move the plane. Why the columns are where (1, 0) and (0, 1) land, how a rotation matrix is built, and what the determinant measures.">
+<link rel="canonical" href="https://linearalgebra.steppeschool.com/lesson-1/linear-transformations/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Linear Algebra, Live">
+<meta property="og:title" content="Matrices as Linear Transformations: Rotation Matrix Intuition | Linear Algebra, Live">
+<meta property="og:description" content="See a matrix move the plane. Why the columns are where (1, 0) and (0, 1) land, how a rotation matrix is built, and what the determinant measures.">
+<meta property="og:url" content="https://linearalgebra.steppeschool.com/lesson-1/linear-transformations/">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/lesson.css">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "Matrices as Linear Transformations: Rotation Matrix Intuition", "headline": "A matrix also moves the whole plane.", "description": "See a matrix move the plane. Why the columns are where (1, 0) and (0, 1) land, how a rotation matrix is built, and what the determinant measures.", "url": "https://linearalgebra.steppeschool.com/lesson-1/linear-transformations/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": true, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 1: Columns first", "item": "https://linearalgebra.steppeschool.com/lesson-1/"}, {"@type": "ListItem", "position": 3, "name": "Matrices as Linear Transformations: Rotation Matrix Intuition", "item": "https://linearalgebra.steppeschool.com/lesson-1/linear-transformations/"}]}]</script>
+</head>
+<body>
+<header class="top">
+  <div class="course"><b><a href="../../" style="color:inherit;text-decoration:none">Linear Algebra, Live</a></b><span>Lesson 1 · Columns first · Strang, chapter 1</span></div>
+  <nav class="steps" aria-label="Slides in this lesson"><a class="step" href="../linear-combinations/" data-slug="linear-combinations" title="Linear Combinations Explained Visually">1</a><a class="step" href="../matrix-vector-multiplication/" data-slug="matrix-vector-multiplication" title="Matrix-Vector Multiplication: Ax as a Combination of Columns">2</a><a class="step" href="../column-space/" data-slug="column-space" title="Column Space Explained Visually">3</a><a class="step" href="../row-and-column-picture/" data-slug="row-and-column-picture" title="Row Picture vs Column Picture of Ax = b">4</a><a class="step on" href="../linear-transformations/" data-slug="linear-transformations" aria-current="page" title="Matrices as Linear Transformations: Rotation Matrix Intuition">5</a><a class="step" href="../matrix-multiplication-order/" data-slug="matrix-multiplication-order" title="Matrix Multiplication: Why AB Is Not BA">6</a><a class="step" href="../reflection-matrix/" data-slug="reflection-matrix" title="Reflection Matrix Challenge: Mirror the F">7</a><a class="step" href="../recap/" data-slug="recap" title="Lesson 1 Recap: Columns First">8</a></nav>
+</header>
+
+<main class="app">
+  <article class="page">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">All lessons</a> › <a href="../">Lesson 1</a></nav>
+    <div class="kicker">Strang §8.1 · Linear transformations</div>
+    <h1>A matrix also moves the whole plane.</h1>
+    <p class="lead">Think of A as a machine. A vector v goes in, Av comes out. Do that to every point at once and the whole plane moves.</p>
+    <div class="key">A <span class="vec i"><span>1</span><span>0</span></span> = column 1 &nbsp;&nbsp;&nbsp; A <span class="vec j"><span>0</span><span>1</span></span> = column 2</div>
+    <div class="prose">
+<h2>Think: a sheet of graph paper</h2>
+<p>Pin a sheet of graph paper at the origin. You may stretch it, turn it, slant it or flip it over. You may not bend it, fold it or tear it.</p>
+<p>That is everything a 2 by 2 matrix can do. Straight lines stay straight. Evenly spaced lines stay evenly spaced. The pin never moves.</p>
+<h2>Two landmarks are enough</h2>
+<p>If you know where two landmarks moved, you can work out where everything else went. The landmarks are <span class="i">(1, 0)</span> and <span class="j">(0, 1)</span>.</p>
+<p>Every point is a combination of them: (x, y) = x·(1, 0) + y·(0, 1). The machine keeps combinations intact, so A(x, y) = x·(column 1) + y·(column 2). It is slide 2 again.</p>
+<p>To build any matrix, decide where the two landmarks should land and write those as the columns.</p>
+<h2>Worked example: rotation</h2>
+<div class="worked">
+<div>Turning by θ sends (1, 0) to (cos θ, sin θ) and (0, 1) to (−sin θ, cos θ). Those are the columns:</div>
+<div class="row">Q = <span class="mx"><span class="c1">cos θ</span><span class="c2">−sin θ</span><span class="c1">sin θ</span><span class="c2">cos θ</span></span></div>
+<div>For 90°: cos = 0 and sin = 1, so Q = <span class="mx"><span class="c1">0</span><span class="c2">-1</span><span class="c1">1</span><span class="c2">0</span></span>. It sends (1, 0) to (0, 1), a quarter turn.</div>
+</div>
+<h2>Area: the determinant</h2>
+<p>Watch the shaded unit square. After the move it is a parallelogram with area |det A| (§5.3). Every other shape scales by the same factor.</p>
+<p>A rotation has det = cos²θ + sin²θ = 1. It turns the paper without stretching it.</p>
+<h2>Where you meet this</h2>
+<p>An IMU measures in the drone's own axes. A 3 by 3 rotation matrix turns those readings into the world's axes. That is what an attitude estimator keeps updating.</p>
+    </div>
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Rotate the plane by exactly 90°.</span>
+      <span class="hint" id="hint">Edit the code in the lab and press Run.</span>
+    </div>
+    <div class="nav">
+      <a class="btn" id="prev" href="../row-and-column-picture/">← Back</a>
+      <span class="count">5 / 8</span>
+      <a class="btn primary" id="next" href="../matrix-multiplication-order/">Next →</a>
+    </div>
+  </article>
+
+  <aside class="lab" aria-label="Lab">
+    <figure class="figure" style="margin:0">
+      <div class="plane"><canvas id="cv" aria-label="The plane"></canvas></div>
+      <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+    </figure>
+    <div class="editor-card">
+      <div class="bar">
+        <span class="file">slide_5.py</span>
+        <span class="status" id="pystatus">Loading Python…</span>
+        <button class="btn" id="reset">Reset</button>
+        <button class="btn primary" id="run" disabled>Run ▸</button>
+      </div>
+      <div class="editor">
+        <div class="gutter" id="gutter">1</div>
+        <div class="code" id="codewrap">
+          <pre id="hl" aria-hidden="true"></pre>
+          <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+theta = np.radians(30)
+
+Q = np.array([[np.cos(theta), -np.sin(theta)],
+              [np.sin(theta),  np.cos(theta)]])
+
+print(np.round(Q, 3))
+print(&quot;det =&quot;, np.round(np.linalg.det(Q), 6))
+show(Q)</textarea>
+        </div>
+      </div>
+      <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+      <pre class="out" id="out"><span class="sys">Press Run. show(A), combo(A, x, b) and rowpic(A, b) draw on the plane.</span></pre>
+    </div>
+  </aside>
+</main>
+<footer class="foot">
+  Follows the order and notation of Gilbert Strang, <i>Introduction to Linear Algebra</i>, 5th edition (2016); § numbers refer to that book.
+  Explanations, examples and code are original. Made by <a href="https://www.steppeschool.com">Steppeschool</a>.
+</footer>
+
+<script>window.SLIDE = {"slug": "linear-transformations", "lesson": "lesson-1", "assets": "../../assets/", "preview": {"kind": "transform", "M": [[0.8660254037844387, -0.5], [0.5, 0.8660254037844387]]}, "check": "isT(V) && eqM(V.M, [[0,-1],[1,0]])"};</script>
+<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
+<script src="../../assets/lab.js" defer></script>
+</body>
+</html>
