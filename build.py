@@ -115,7 +115,7 @@ def steps_for(lesson, slides, practice, current, rel):
     if practice:
         on = current == "practice"
         out += (f'<a class="step practice{" on" if on else ""}" href="{rel}practice/"{" aria-current=\"page\"" if on else ""} '
-                f'title="Examples and problems">✎</a>')
+                f'title="Examples and problems">✎ Practice</a>')
     return out
 
 e = html.escape
@@ -203,7 +203,7 @@ def slide_page(lesson, slides, i, next_lesson=None, practice=None):
               "preview": json.loads(s["preview"]), "check": s["check"]}
     return head(title, s["description"], url, prefix, "article", jsonld) + topnav(prefix, lesson, steps, s["slug"]) + f"""
 
-<main class="app">
+<main class="lesson">
   <article class="page">
     <div class="kicker">{e(s['kicker'])}</div>
     <h1>{e(s['title'])}</h1>
@@ -212,41 +212,47 @@ def slide_page(lesson, slides, i, next_lesson=None, practice=None):
     <div class="prose">
 {s['prose']}
     </div>
+  </article>
+
+  <section class="labsec" aria-label="Lab">
     <div class="exercise" id="exercise">
       <span class="tag">Exercise</span>
       <span class="task">{e(s['task'])}</span>
-      <span class="hint" id="hint">Edit the code in the lab and press Run.</span>
+      <span class="hint" id="hint">Edit the code and press Run.</span>
     </div>
+    <div class="lab">
+      <div class="editor-card">
+        <div class="bar">
+          <span class="file">slide_{i + 1}.py</span>
+          <span class="status" id="pystatus">Loading Python…</span>
+          <button class="btn" id="reset">Reset</button>
+          <button class="btn primary" id="run" disabled>Run ▸</button>
+        </div>
+        <div class="editor">
+          <div class="gutter" id="gutter">1</div>
+          <div class="code" id="codewrap">
+            <pre id="hl" aria-hidden="true"></pre>
+            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">{e(s['code'])}</textarea>
+          </div>
+        </div>
+        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+      </div>
+      <figure class="figure">
+        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <div class="after">
+    {f'<a class="practice-link" href="../practice/"><span class="pl-icon">✎</span><span><b>Practice this lesson</b><br>3 worked examples and 5 problems with solutions</span><span class="pl-arrow">→</span></a>' if practice else ""}
     <div class="nav">
       {prev}
       <span class="count">{i + 1} / {len(slides)}</span>
       {nxt}
     </div>
-  </article>
-
-  <aside class="lab" aria-label="Lab">
-    <figure class="figure" style="margin:0">
-      <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
-      <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
-    </figure>
-    <div class="editor-card">
-      <div class="bar">
-        <span class="file">slide_{i + 1}.py</span>
-        <span class="status" id="pystatus">Loading Python…</span>
-        <button class="btn" id="reset">Reset</button>
-        <button class="btn primary" id="run" disabled>Run ▸</button>
-      </div>
-      <div class="editor">
-        <div class="gutter" id="gutter">1</div>
-        <div class="code" id="codewrap">
-          <pre id="hl" aria-hidden="true"></pre>
-          <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">{e(s['code'])}</textarea>
-        </div>
-      </div>
-      <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
-      <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
-    </div>
-  </aside>
+  </div>
 </main>
 {footer()}
 <script>window.SLIDE = {json.dumps(config, ensure_ascii=False)};</script>
@@ -279,7 +285,7 @@ def practice_page(lesson, slides, pr, next_lesson):
     config = {"slug": "practice", "lesson": lesson["dir"], "assets": prefix + "assets/",
               "preview": {"kind": "transform", "M": [[1, 0], [0, 1]]}, "check": "false"}
     return head(title, pr["description"], url, prefix, "article", jsonld) + topnav(prefix, lesson, steps, "practice") + f"""
-<main class="app">
+<main class="lesson">
   <article class="page">
     <div class="kicker">Lesson {lesson['n']} · Examples and problems</div>
     <h1>Practice: {e(lesson['title'])}</h1>
@@ -296,36 +302,42 @@ def practice_page(lesson, slides, pr, next_lesson):
       <p><b>Want more problems?</b> More practice sets are on the way. Get a free Steppeschool account and we'll tell you when they're out.</p>
       <a class="btn primary" href="{SIGNUP}">Get a free account</a>
     </div>
+  </article>
+
+  <section class="labsec" aria-label="Sandbox">
+    <h2 class="practice-h" style="margin:0">Sandbox</h2>
+    <div class="lab">
+      <div class="editor-card">
+        <div class="bar">
+          <span class="file">sandbox.py</span>
+          <span class="status" id="pystatus">Loading Python…</span>
+          <button class="btn" id="reset">Reset</button>
+          <button class="btn primary" id="run" disabled>Run ▸</button>
+        </div>
+        <div class="editor">
+          <div class="gutter" id="gutter">1</div>
+          <div class="code" id="codewrap">
+            <pre id="hl" aria-hidden="true"></pre>
+            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">{e(pr['code'])}</textarea>
+          </div>
+        </div>
+        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+        <pre class="out" id="out"><span class="sys">A sandbox: check your answers here. Ctrl+Enter runs.</span></pre>
+      </div>
+      <figure class="figure">
+        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <div class="after">
     <div class="nav">
       {prev}
       <span class="count">Practice</span>
       {nxt}
     </div>
-  </article>
-
-  <aside class="lab" aria-label="Lab">
-    <figure class="figure" style="margin:0">
-      <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
-      <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
-    </figure>
-    <div class="editor-card">
-      <div class="bar">
-        <span class="file">sandbox.py</span>
-        <span class="status" id="pystatus">Loading Python…</span>
-        <button class="btn" id="reset">Reset</button>
-        <button class="btn primary" id="run" disabled>Run ▸</button>
-      </div>
-      <div class="editor">
-        <div class="gutter" id="gutter">1</div>
-        <div class="code" id="codewrap">
-          <pre id="hl" aria-hidden="true"></pre>
-          <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">{e(pr['code'])}</textarea>
-        </div>
-      </div>
-      <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
-      <pre class="out" id="out"><span class="sys">A sandbox: check your answers here. Ctrl+Enter runs.</span></pre>
-    </div>
-  </aside>
+  </div>
 </main>
 {footer()}
 <script>window.SLIDE = {json.dumps(config, ensure_ascii=False)};</script>

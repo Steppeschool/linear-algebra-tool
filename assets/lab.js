@@ -278,7 +278,7 @@ function renderTask(){
   if (!$("exercise")) return;
   const ok = done.has(S.slug);
   $("exercise").classList.toggle("ok", ok);
-  $("hint").textContent = ok ? "Done. Move on when you're ready." : narrow.matches ? "Edit the code below and press Run." : "Edit the code on the right and press Run.";
+  $("hint").textContent = ok ? "Done. Move on when you're ready." : narrow.matches ? "Edit the code below and press Run." : "Edit the code below and press Run. The picture is on the right.";
 }
 narrow.addEventListener("change", renderTask);
 document.addEventListener("keydown", e => {

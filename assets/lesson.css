@@ -215,3 +215,34 @@ details.sol[open] .s-show{display:none}
 .ch.soon .ch-title{font-family:var(--f-body);font-weight:500;font-size:13.5px;color:var(--muted)}
 .ch.soon .ch-num{width:20px;height:20px;font-size:11px}
 @media (max-width:420px){ .ch-later{grid-template-columns:1fr} }
+
+.step.practice{width:auto;padding:0 12px;border-radius:999px;font-size:12.5px;font-weight:600;border-color:var(--accent);color:var(--accent)}
+.step.practice.on{color:var(--accent-ink)}
+.practice-link{display:flex;align-items:center;gap:14px;margin-top:14px;padding:14px 18px;border:1px dashed var(--accent);border-radius:12px;color:var(--ink);text-decoration:none;font-size:14.5px;line-height:1.45;background:var(--surface)}
+.practice-link:hover{background:var(--accent-soft)}
+.practice-link b{color:var(--accent)}
+.pl-icon{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);font-size:16px}
+.pl-arrow{margin-left:auto;color:var(--accent);font-size:18px}
+
+/* layout v3 (27 Oct): article on top, then code left + visual right */
+.lesson{max-width:1380px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
+.lesson .page{padding:40px 56px 34px}
+.lesson .prose,.lesson .lead{max-width:72ch}
+.lesson .key{max-width:72ch}
+.labsec{display:flex;flex-direction:column;gap:14px}
+.labsec .exercise{margin-top:0;background:var(--surface)}
+.lesson .lab{position:static;height:auto;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+.lesson .figure{position:sticky;top:14px;flex:none;display:block;min-height:0}
+.lesson .plane{flex:none;aspect-ratio:4/3;max-width:100%}
+.lesson .editor{height:auto;min-height:180px;overflow-x:auto;overflow-y:visible}
+.lesson .out{height:auto;min-height:72px;max-height:320px}
+.after{display:flex;flex-direction:column;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:6px 24px 18px}
+.after .practice-link{margin-top:14px}
+.after .nav{border-top:0;margin-top:6px;padding-top:6px}
+@media (max-width:1020px){
+  .lesson .page{padding:26px 22px 22px}
+  .lesson .lab{grid-template-columns:minmax(0,1fr)}
+  .lesson .figure{position:static}
+  .lesson .plane{aspect-ratio:1/1}
+  .after{padding:6px 16px 14px}
+}

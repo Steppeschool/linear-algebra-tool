@@ -21,11 +21,11 @@
 <body>
 <header class="top">
   <div class="topnav"><a class="brand" href="../../">Linear Algebra, Live</a><nav class="crumbnav" aria-label="Chapters and lessons"><details class="menu"><summary>Chapter 2<span class="hide-sm"> · Solving linear equations</span></summary><div class="menu-list chapters"><div class="menu-sub">Chapters</div><div class="ch"><div class="ch-head"><span class="ch-num">1</span><span class="ch-title">Introduction to vectors</span></div><div class="ch-lessons"><a class="ls" href="../../lesson-1/"><span class="ls-num">Lesson 1</span><span class="ls-title">Columns first</span></a></div></div><div class="ch on"><div class="ch-head"><span class="ch-num">2</span><span class="ch-title">Solving linear equations</span></div><div class="ch-lessons"><a class="ls on" href="../../lesson-2/"><span class="ls-num">Lesson 2</span><span class="ls-title">Elimination and A = LU</span></a><a class="ls" href="../../lesson-3/"><span class="ls-num">Lesson 3</span><span class="ls-title">Inverses, transposes and permutations</span></a></div></div><div class="ch"><div class="ch-head"><span class="ch-num">3</span><span class="ch-title">Vector spaces and subspaces</span></div><div class="ch-lessons"><a class="ls" href="../../lesson-4/"><span class="ls-num">Lesson 4</span><span class="ls-title">The four subspaces</span></a></div></div><div class="menu-sub">Coming soon</div><div class="ch-later"><div class="ch soon"><div class="ch-head"><span class="ch-num">4</span><span class="ch-title">Orthogonality</span></div></div><div class="ch soon"><div class="ch-head"><span class="ch-num">5</span><span class="ch-title">Determinants</span></div></div><div class="ch soon"><div class="ch-head"><span class="ch-num">6</span><span class="ch-title">Eigenvalues and eigenvectors</span></div></div><div class="ch soon"><div class="ch-head"><span class="ch-num">7</span><span class="ch-title">The singular value decomposition</span></div></div></div></div></details><span class="sep">›</span><details class="menu"><summary>Lesson 2<span class="hide-sm"> · Elimination and A = LU</span></summary><div class="menu-list"><div class="menu-sub">Chapter 2 lessons</div><div class="ch-lessons flat"><a class="ls on" href="../../lesson-2/"><span class="ls-num">Lesson 2</span><span class="ls-title">Elimination and A = LU</span></a><a class="ls" href="../../lesson-3/"><span class="ls-num">Lesson 3</span><span class="ls-title">Inverses, transposes and permutations</span></a></div><div class="menu-sub">In lesson 2</div><div class="ch-lessons flat slides"><a class="ls" href="../../lesson-2/gaussian-elimination/"><span class="ls-num">1</span><span class="ls-title">Gaussian Elimination Explained Visually</span></a><a class="ls on" href="../../lesson-2/pivots-and-back-substitution/"><span class="ls-num">2</span><span class="ls-title">Pivots and Back Substitution: 3×3 Elimination Step by Step</span></a><a class="ls" href="../../lesson-2/zero-pivots-and-singular-systems/"><span class="ls-num">3</span><span class="ls-title">When Elimination Fails: Zero Pivots and Singular Systems</span></a><a class="ls" href="../../lesson-2/elimination-matrices/"><span class="ls-num">4</span><span class="ls-title">Elimination Matrices: Row Operations as Matrix Multiplication</span></a><a class="ls" href="../../lesson-2/lu-decomposition/"><span class="ls-num">5</span><span class="ls-title">LU Decomposition Explained: Why A = LU</span></a><a class="ls" href="../../lesson-2/recap/"><span class="ls-num">6</span><span class="ls-title">Lesson 2 Recap: Elimination and A = LU</span></a><a class="ls" href="../../lesson-2/practice/"><span class="ls-num">✎</span><span class="ls-title">Examples and problems</span></a></div></div></details></nav></div>
-  <nav class="steps" aria-label="Steps in this lesson"><a class="step" href="../gaussian-elimination/" data-slug="gaussian-elimination" title="Gaussian Elimination Explained Visually">1</a><a class="step on" href="../pivots-and-back-substitution/" data-slug="pivots-and-back-substitution" aria-current="page" title="Pivots and Back Substitution: 3×3 Elimination Step by Step">2</a><a class="step" href="../zero-pivots-and-singular-systems/" data-slug="zero-pivots-and-singular-systems" title="When Elimination Fails: Zero Pivots and Singular Systems">3</a><a class="step" href="../elimination-matrices/" data-slug="elimination-matrices" title="Elimination Matrices: Row Operations as Matrix Multiplication">4</a><a class="step" href="../lu-decomposition/" data-slug="lu-decomposition" title="LU Decomposition Explained: Why A = LU">5</a><a class="step" href="../recap/" data-slug="recap" title="Lesson 2 Recap: Elimination and A = LU">6</a><a class="step practice" href="../practice/" title="Examples and problems">✎</a></nav>
+  <nav class="steps" aria-label="Steps in this lesson"><a class="step" href="../gaussian-elimination/" data-slug="gaussian-elimination" title="Gaussian Elimination Explained Visually">1</a><a class="step on" href="../pivots-and-back-substitution/" data-slug="pivots-and-back-substitution" aria-current="page" title="Pivots and Back Substitution: 3×3 Elimination Step by Step">2</a><a class="step" href="../zero-pivots-and-singular-systems/" data-slug="zero-pivots-and-singular-systems" title="When Elimination Fails: Zero Pivots and Singular Systems">3</a><a class="step" href="../elimination-matrices/" data-slug="elimination-matrices" title="Elimination Matrices: Row Operations as Matrix Multiplication">4</a><a class="step" href="../lu-decomposition/" data-slug="lu-decomposition" title="LU Decomposition Explained: Why A = LU">5</a><a class="step" href="../recap/" data-slug="recap" title="Lesson 2 Recap: Elimination and A = LU">6</a><a class="step practice" href="../practice/" title="Examples and problems">✎ Practice</a></nav>
 </header>
 
 
-<main class="app">
+<main class="lesson">
   <article class="page">
     <div class="kicker">Strang §2.2 · Pivots</div>
     <h1>Pivots clear the columns. Back substitution climbs back up.</h1>
@@ -52,35 +52,27 @@
 <p>Always do the same step to b. Changing A without changing b gives a different system.</p>
 <p>The multiplier uses the current pivot, after earlier steps, not the original entry. Here ℓ₃₂ uses the −8, not the −6.</p>
     </div>
+  </article>
+
+  <section class="labsec" aria-label="Lab">
     <div class="exercise" id="exercise">
       <span class="tag">Exercise</span>
       <span class="task">Finish the elimination: find ℓ₃₂ so that U is upper triangular.</span>
-      <span class="hint" id="hint">Edit the code in the lab and press Run.</span>
+      <span class="hint" id="hint">Edit the code and press Run.</span>
     </div>
-    <div class="nav">
-      <a class="btn" id="prev" href="../gaussian-elimination/">← Back</a>
-      <span class="count">2 / 6</span>
-      <a class="btn primary" id="next" href="../zero-pivots-and-singular-systems/">Next →</a>
-    </div>
-  </article>
-
-  <aside class="lab" aria-label="Lab">
-    <figure class="figure" style="margin:0">
-      <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
-      <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
-    </figure>
-    <div class="editor-card">
-      <div class="bar">
-        <span class="file">slide_2.py</span>
-        <span class="status" id="pystatus">Loading Python…</span>
-        <button class="btn" id="reset">Reset</button>
-        <button class="btn primary" id="run" disabled>Run ▸</button>
-      </div>
-      <div class="editor">
-        <div class="gutter" id="gutter">1</div>
-        <div class="code" id="codewrap">
-          <pre id="hl" aria-hidden="true"></pre>
-          <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+    <div class="lab">
+      <div class="editor-card">
+        <div class="bar">
+          <span class="file">slide_2.py</span>
+          <span class="status" id="pystatus">Loading Python…</span>
+          <button class="btn" id="reset">Reset</button>
+          <button class="btn primary" id="run" disabled>Run ▸</button>
+        </div>
+        <div class="editor">
+          <div class="gutter" id="gutter">1</div>
+          <div class="code" id="codewrap">
+            <pre id="hl" aria-hidden="true"></pre>
+            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
 
 A = np.array([[ 2.,  1., 1.],
               [ 4., -6., 0.],
@@ -97,12 +89,26 @@ U[2] = U[2] - l32 * U[1]
 
 print(&quot;pivots:&quot;, U[0, 0], U[1, 1], U[2, 2])
 table((&quot;A&quot;, A), (&quot;U&quot;, U))</textarea>
+          </div>
         </div>
+        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
       </div>
-      <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
-      <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+      <figure class="figure">
+        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+      </figure>
     </div>
-  </aside>
+  </section>
+
+  <div class="after">
+    <a class="practice-link" href="../practice/"><span class="pl-icon">✎</span><span><b>Practice this lesson</b><br>3 worked examples and 5 problems with solutions</span><span class="pl-arrow">→</span></a>
+    <div class="nav">
+      <a class="btn" id="prev" href="../gaussian-elimination/">← Back</a>
+      <span class="count">2 / 6</span>
+      <a class="btn primary" id="next" href="../zero-pivots-and-singular-systems/">Next →</a>
+    </div>
+  </div>
 </main>
 <footer class="foot">
   Follows the order and notation of Gilbert Strang, <i>Introduction to Linear Algebra</i>, 5th edition (2016); § numbers refer to that book.

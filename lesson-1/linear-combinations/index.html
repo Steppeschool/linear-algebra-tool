@@ -21,11 +21,11 @@
 <body>
 <header class="top">
   <div class="topnav"><a class="brand" href="../../">Linear Algebra, Live</a><nav class="crumbnav" aria-label="Chapters and lessons"><details class="menu"><summary>Chapter 1<span class="hide-sm"> · Introduction to vectors</span></summary><div class="menu-list chapters"><div class="menu-sub">Chapters</div><div class="ch on"><div class="ch-head"><span class="ch-num">1</span><span class="ch-title">Introduction to vectors</span></div><div class="ch-lessons"><a class="ls on" href="../../lesson-1/"><span class="ls-num">Lesson 1</span><span class="ls-title">Columns first</span></a></div></div><div class="ch"><div class="ch-head"><span class="ch-num">2</span><span class="ch-title">Solving linear equations</span></div><div class="ch-lessons"><a class="ls" href="../../lesson-2/"><span class="ls-num">Lesson 2</span><span class="ls-title">Elimination and A = LU</span></a><a class="ls" href="../../lesson-3/"><span class="ls-num">Lesson 3</span><span class="ls-title">Inverses, transposes and permutations</span></a></div></div><div class="ch"><div class="ch-head"><span class="ch-num">3</span><span class="ch-title">Vector spaces and subspaces</span></div><div class="ch-lessons"><a class="ls" href="../../lesson-4/"><span class="ls-num">Lesson 4</span><span class="ls-title">The four subspaces</span></a></div></div><div class="menu-sub">Coming soon</div><div class="ch-later"><div class="ch soon"><div class="ch-head"><span class="ch-num">4</span><span class="ch-title">Orthogonality</span></div></div><div class="ch soon"><div class="ch-head"><span class="ch-num">5</span><span class="ch-title">Determinants</span></div></div><div class="ch soon"><div class="ch-head"><span class="ch-num">6</span><span class="ch-title">Eigenvalues and eigenvectors</span></div></div><div class="ch soon"><div class="ch-head"><span class="ch-num">7</span><span class="ch-title">The singular value decomposition</span></div></div></div></div></details><span class="sep">›</span><details class="menu"><summary>Lesson 1<span class="hide-sm"> · Columns first</span></summary><div class="menu-list"><div class="menu-sub">Chapter 1 lessons</div><div class="ch-lessons flat"><a class="ls on" href="../../lesson-1/"><span class="ls-num">Lesson 1</span><span class="ls-title">Columns first</span></a></div><div class="menu-sub">In lesson 1</div><div class="ch-lessons flat slides"><a class="ls on" href="../../lesson-1/linear-combinations/"><span class="ls-num">1</span><span class="ls-title">Linear Combinations Explained Visually</span></a><a class="ls" href="../../lesson-1/matrix-vector-multiplication/"><span class="ls-num">2</span><span class="ls-title">Matrix-Vector Multiplication: Ax as a Combination of Columns</span></a><a class="ls" href="../../lesson-1/column-space/"><span class="ls-num">3</span><span class="ls-title">Column Space Explained Visually</span></a><a class="ls" href="../../lesson-1/row-and-column-picture/"><span class="ls-num">4</span><span class="ls-title">Row Picture vs Column Picture of Ax = b</span></a><a class="ls" href="../../lesson-1/linear-transformations/"><span class="ls-num">5</span><span class="ls-title">Matrices as Linear Transformations: Rotation Matrix Intuition</span></a><a class="ls" href="../../lesson-1/matrix-multiplication-order/"><span class="ls-num">6</span><span class="ls-title">Matrix Multiplication: Why AB Is Not BA</span></a><a class="ls" href="../../lesson-1/reflection-matrix/"><span class="ls-num">7</span><span class="ls-title">Reflection Matrix Challenge: Mirror the F</span></a><a class="ls" href="../../lesson-1/recap/"><span class="ls-num">8</span><span class="ls-title">Lesson 1 Recap: Columns First</span></a><a class="ls" href="../../lesson-1/practice/"><span class="ls-num">✎</span><span class="ls-title">Examples and problems</span></a></div></div></details></nav></div>
-  <nav class="steps" aria-label="Steps in this lesson"><a class="step on" href="../linear-combinations/" data-slug="linear-combinations" aria-current="page" title="Linear Combinations Explained Visually">1</a><a class="step" href="../matrix-vector-multiplication/" data-slug="matrix-vector-multiplication" title="Matrix-Vector Multiplication: Ax as a Combination of Columns">2</a><a class="step" href="../column-space/" data-slug="column-space" title="Column Space Explained Visually">3</a><a class="step" href="../row-and-column-picture/" data-slug="row-and-column-picture" title="Row Picture vs Column Picture of Ax = b">4</a><a class="step" href="../linear-transformations/" data-slug="linear-transformations" title="Matrices as Linear Transformations: Rotation Matrix Intuition">5</a><a class="step" href="../matrix-multiplication-order/" data-slug="matrix-multiplication-order" title="Matrix Multiplication: Why AB Is Not BA">6</a><a class="step" href="../reflection-matrix/" data-slug="reflection-matrix" title="Reflection Matrix Challenge: Mirror the F">7</a><a class="step" href="../recap/" data-slug="recap" title="Lesson 1 Recap: Columns First">8</a><a class="step practice" href="../practice/" title="Examples and problems">✎</a></nav>
+  <nav class="steps" aria-label="Steps in this lesson"><a class="step on" href="../linear-combinations/" data-slug="linear-combinations" aria-current="page" title="Linear Combinations Explained Visually">1</a><a class="step" href="../matrix-vector-multiplication/" data-slug="matrix-vector-multiplication" title="Matrix-Vector Multiplication: Ax as a Combination of Columns">2</a><a class="step" href="../column-space/" data-slug="column-space" title="Column Space Explained Visually">3</a><a class="step" href="../row-and-column-picture/" data-slug="row-and-column-picture" title="Row Picture vs Column Picture of Ax = b">4</a><a class="step" href="../linear-transformations/" data-slug="linear-transformations" title="Matrices as Linear Transformations: Rotation Matrix Intuition">5</a><a class="step" href="../matrix-multiplication-order/" data-slug="matrix-multiplication-order" title="Matrix Multiplication: Why AB Is Not BA">6</a><a class="step" href="../reflection-matrix/" data-slug="reflection-matrix" title="Reflection Matrix Challenge: Mirror the F">7</a><a class="step" href="../recap/" data-slug="recap" title="Lesson 1 Recap: Columns First">8</a><a class="step practice" href="../practice/" title="Examples and problems">✎ Practice</a></nav>
 </header>
 
 
-<main class="app">
+<main class="lesson">
   <article class="page">
     <div class="kicker">Strang §1.1 · Linear combinations</div>
     <h1>Linear algebra starts with cv + dw.</h1>
@@ -53,35 +53,27 @@
 <p>If w pointed along v, every dot would stay on one line. Slide 3 is about exactly that.</p>
 <p>Finding c and d for a target means solving 2c − d = 4 and c + d = 5. On slide 4 this turns into Ax = b.</p>
     </div>
+  </article>
+
+  <section class="labsec" aria-label="Lab">
     <div class="exercise" id="exercise">
       <span class="tag">Exercise</span>
       <span class="task">Find c and d so that cv + dw lands exactly on the target (4, 5).</span>
-      <span class="hint" id="hint">Edit the code in the lab and press Run.</span>
+      <span class="hint" id="hint">Edit the code and press Run.</span>
     </div>
-    <div class="nav">
-      <a class="btn" id="prev" href="../">← Overview</a>
-      <span class="count">1 / 8</span>
-      <a class="btn primary" id="next" href="../matrix-vector-multiplication/">Next →</a>
-    </div>
-  </article>
-
-  <aside class="lab" aria-label="Lab">
-    <figure class="figure" style="margin:0">
-      <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
-      <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
-    </figure>
-    <div class="editor-card">
-      <div class="bar">
-        <span class="file">slide_1.py</span>
-        <span class="status" id="pystatus">Loading Python…</span>
-        <button class="btn" id="reset">Reset</button>
-        <button class="btn primary" id="run" disabled>Run ▸</button>
-      </div>
-      <div class="editor">
-        <div class="gutter" id="gutter">1</div>
-        <div class="code" id="codewrap">
-          <pre id="hl" aria-hidden="true"></pre>
-          <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+    <div class="lab">
+      <div class="editor-card">
+        <div class="bar">
+          <span class="file">slide_1.py</span>
+          <span class="status" id="pystatus">Loading Python…</span>
+          <button class="btn" id="reset">Reset</button>
+          <button class="btn primary" id="run" disabled>Run ▸</button>
+        </div>
+        <div class="editor">
+          <div class="gutter" id="gutter">1</div>
+          <div class="code" id="codewrap">
+            <pre id="hl" aria-hidden="true"></pre>
+            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
 
 v = np.array([2, 1])
 w = np.array([-1, 1])
@@ -91,12 +83,26 @@ target = np.array([4, 5])
 
 print(&quot;cv + dw =&quot;, c*v + d*w)
 combo(np.column_stack([v, w]), [c, d], target)</textarea>
+          </div>
         </div>
+        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
       </div>
-      <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
-      <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+      <figure class="figure">
+        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+      </figure>
     </div>
-  </aside>
+  </section>
+
+  <div class="after">
+    <a class="practice-link" href="../practice/"><span class="pl-icon">✎</span><span><b>Practice this lesson</b><br>3 worked examples and 5 problems with solutions</span><span class="pl-arrow">→</span></a>
+    <div class="nav">
+      <a class="btn" id="prev" href="../">← Overview</a>
+      <span class="count">1 / 8</span>
+      <a class="btn primary" id="next" href="../matrix-vector-multiplication/">Next →</a>
+    </div>
+  </div>
 </main>
 <footer class="foot">
   Follows the order and notation of Gilbert Strang, <i>Introduction to Linear Algebra</i>, 5th edition (2016); § numbers refer to that book.

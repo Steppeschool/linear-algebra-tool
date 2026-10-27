@@ -21,11 +21,11 @@
 <body>
 <header class="top">
   <div class="topnav"><a class="brand" href="../../">Linear Algebra, Live</a><nav class="crumbnav" aria-label="Chapters and lessons"><details class="menu"><summary>Chapter 3<span class="hide-sm"> · Vector spaces and subspaces</span></summary><div class="menu-list chapters"><div class="menu-sub">Chapters</div><div class="ch"><div class="ch-head"><span class="ch-num">1</span><span class="ch-title">Introduction to vectors</span></div><div class="ch-lessons"><a class="ls" href="../../lesson-1/"><span class="ls-num">Lesson 1</span><span class="ls-title">Columns first</span></a></div></div><div class="ch"><div class="ch-head"><span class="ch-num">2</span><span class="ch-title">Solving linear equations</span></div><div class="ch-lessons"><a class="ls" href="../../lesson-2/"><span class="ls-num">Lesson 2</span><span class="ls-title">Elimination and A = LU</span></a><a class="ls" href="../../lesson-3/"><span class="ls-num">Lesson 3</span><span class="ls-title">Inverses, transposes and permutations</span></a></div></div><div class="ch on"><div class="ch-head"><span class="ch-num">3</span><span class="ch-title">Vector spaces and subspaces</span></div><div class="ch-lessons"><a class="ls on" href="../../lesson-4/"><span class="ls-num">Lesson 4</span><span class="ls-title">The four subspaces</span></a></div></div><div class="menu-sub">Coming soon</div><div class="ch-later"><div class="ch soon"><div class="ch-head"><span class="ch-num">4</span><span class="ch-title">Orthogonality</span></div></div><div class="ch soon"><div class="ch-head"><span class="ch-num">5</span><span class="ch-title">Determinants</span></div></div><div class="ch soon"><div class="ch-head"><span class="ch-num">6</span><span class="ch-title">Eigenvalues and eigenvectors</span></div></div><div class="ch soon"><div class="ch-head"><span class="ch-num">7</span><span class="ch-title">The singular value decomposition</span></div></div></div></div></details><span class="sep">›</span><details class="menu"><summary>Lesson 4<span class="hide-sm"> · The four subspaces</span></summary><div class="menu-list"><div class="menu-sub">Chapter 3 lessons</div><div class="ch-lessons flat"><a class="ls on" href="../../lesson-4/"><span class="ls-num">Lesson 4</span><span class="ls-title">The four subspaces</span></a></div><div class="menu-sub">In lesson 4</div><div class="ch-lessons flat slides"><a class="ls" href="../../lesson-4/vector-spaces-and-subspaces/"><span class="ls-num">1</span><span class="ls-title">Vector Spaces and Subspaces Explained Visually</span></a><a class="ls" href="../../lesson-4/null-space/"><span class="ls-num">2</span><span class="ls-title">Null Space Explained Visually</span></a><a class="ls on" href="../../lesson-4/rref-and-special-solutions/"><span class="ls-num">3</span><span class="ls-title">Reduced Row Echelon Form, Pivot Columns and Special Solutions</span></a><a class="ls" href="../../lesson-4/complete-solution/"><span class="ls-num">4</span><span class="ls-title">The Complete Solution to Ax = b: Particular Plus Null Space</span></a><a class="ls" href="../../lesson-4/independence-basis-dimension/"><span class="ls-num">5</span><span class="ls-title">Linear Independence, Basis and Dimension Explained</span></a><a class="ls" href="../../lesson-4/four-fundamental-subspaces/"><span class="ls-num">6</span><span class="ls-title">The Four Fundamental Subspaces Explained Visually</span></a><a class="ls" href="../../lesson-4/recap/"><span class="ls-num">7</span><span class="ls-title">Lesson 4 Recap: The Four Subspaces</span></a><a class="ls" href="../../lesson-4/practice/"><span class="ls-num">✎</span><span class="ls-title">Examples and problems</span></a></div></div></details></nav></div>
-  <nav class="steps" aria-label="Steps in this lesson"><a class="step" href="../vector-spaces-and-subspaces/" data-slug="vector-spaces-and-subspaces" title="Vector Spaces and Subspaces Explained Visually">1</a><a class="step" href="../null-space/" data-slug="null-space" title="Null Space Explained Visually">2</a><a class="step on" href="../rref-and-special-solutions/" data-slug="rref-and-special-solutions" aria-current="page" title="Reduced Row Echelon Form, Pivot Columns and Special Solutions">3</a><a class="step" href="../complete-solution/" data-slug="complete-solution" title="The Complete Solution to Ax = b: Particular Plus Null Space">4</a><a class="step" href="../independence-basis-dimension/" data-slug="independence-basis-dimension" title="Linear Independence, Basis and Dimension Explained">5</a><a class="step" href="../four-fundamental-subspaces/" data-slug="four-fundamental-subspaces" title="The Four Fundamental Subspaces Explained Visually">6</a><a class="step" href="../recap/" data-slug="recap" title="Lesson 4 Recap: The Four Subspaces">7</a><a class="step practice" href="../practice/" title="Examples and problems">✎</a></nav>
+  <nav class="steps" aria-label="Steps in this lesson"><a class="step" href="../vector-spaces-and-subspaces/" data-slug="vector-spaces-and-subspaces" title="Vector Spaces and Subspaces Explained Visually">1</a><a class="step" href="../null-space/" data-slug="null-space" title="Null Space Explained Visually">2</a><a class="step on" href="../rref-and-special-solutions/" data-slug="rref-and-special-solutions" aria-current="page" title="Reduced Row Echelon Form, Pivot Columns and Special Solutions">3</a><a class="step" href="../complete-solution/" data-slug="complete-solution" title="The Complete Solution to Ax = b: Particular Plus Null Space">4</a><a class="step" href="../independence-basis-dimension/" data-slug="independence-basis-dimension" title="Linear Independence, Basis and Dimension Explained">5</a><a class="step" href="../four-fundamental-subspaces/" data-slug="four-fundamental-subspaces" title="The Four Fundamental Subspaces Explained Visually">6</a><a class="step" href="../recap/" data-slug="recap" title="Lesson 4 Recap: The Four Subspaces">7</a><a class="step practice" href="../practice/" title="Examples and problems">✎ Practice</a></nav>
 </header>
 
 
-<main class="app">
+<main class="lesson">
   <article class="page">
     <div class="kicker">Strang §3.2 · Solving Ax = 0 and Rx = 0</div>
     <h1>Free columns are yours to choose. Pivot columns follow.</h1>
@@ -50,35 +50,27 @@
 <p>A has n = 4 columns and r = 2 pivots, so there are n − r = 2 free variables and 2 special solutions. Every vector in N(A) is a combination of them: x = c·s₁ + d·s₂. N(A) is a plane inside 4-dimensional space.</p>
 <p>A shortcut: the entries of R in the free columns, with their signs flipped, are the pivot values of the special solutions.</p>
     </div>
+  </article>
+
+  <section class="labsec" aria-label="Lab">
     <div class="exercise" id="exercise">
       <span class="tag">Exercise</span>
       <span class="task">Find the second special solution s, with x₂ = 0 and x₄ = 1.</span>
-      <span class="hint" id="hint">Edit the code in the lab and press Run.</span>
+      <span class="hint" id="hint">Edit the code and press Run.</span>
     </div>
-    <div class="nav">
-      <a class="btn" id="prev" href="../null-space/">← Back</a>
-      <span class="count">3 / 7</span>
-      <a class="btn primary" id="next" href="../complete-solution/">Next →</a>
-    </div>
-  </article>
-
-  <aside class="lab" aria-label="Lab">
-    <figure class="figure" style="margin:0">
-      <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
-      <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
-    </figure>
-    <div class="editor-card">
-      <div class="bar">
-        <span class="file">slide_3.py</span>
-        <span class="status" id="pystatus">Loading Python…</span>
-        <button class="btn" id="reset">Reset</button>
-        <button class="btn primary" id="run" disabled>Run ▸</button>
-      </div>
-      <div class="editor">
-        <div class="gutter" id="gutter">1</div>
-        <div class="code" id="codewrap">
-          <pre id="hl" aria-hidden="true"></pre>
-          <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+    <div class="lab">
+      <div class="editor-card">
+        <div class="bar">
+          <span class="file">slide_3.py</span>
+          <span class="status" id="pystatus">Loading Python…</span>
+          <button class="btn" id="reset">Reset</button>
+          <button class="btn primary" id="run" disabled>Run ▸</button>
+        </div>
+        <div class="editor">
+          <div class="gutter" id="gutter">1</div>
+          <div class="code" id="codewrap">
+            <pre id="hl" aria-hidden="true"></pre>
+            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
 
 A = np.array([[1., 2., 1., 3.],
               [2., 4., 3., 8.]])
@@ -88,12 +80,26 @@ print(&quot;pivot columns (counting from 0):&quot;, pivots)
 s = np.array([-2., 1., 0., 0.])     # first special solution: x2 = 1, x4 = 0
                                     # your turn: x2 = 0, x4 = 1
 table((&quot;A&quot;, A), (&quot;R&quot;, R, pivots), (&quot;s&quot;, s), (&quot;A s&quot;, A @ s))</textarea>
+          </div>
         </div>
+        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
       </div>
-      <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
-      <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+      <figure class="figure">
+        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+      </figure>
     </div>
-  </aside>
+  </section>
+
+  <div class="after">
+    <a class="practice-link" href="../practice/"><span class="pl-icon">✎</span><span><b>Practice this lesson</b><br>3 worked examples and 5 problems with solutions</span><span class="pl-arrow">→</span></a>
+    <div class="nav">
+      <a class="btn" id="prev" href="../null-space/">← Back</a>
+      <span class="count">3 / 7</span>
+      <a class="btn primary" id="next" href="../complete-solution/">Next →</a>
+    </div>
+  </div>
 </main>
 <footer class="foot">
   Follows the order and notation of Gilbert Strang, <i>Introduction to Linear Algebra</i>, 5th edition (2016); § numbers refer to that book.
