@@ -48,7 +48,7 @@
 <div>Only the first one undoes RS.</div>
 </div>
 <h2>Where you meet this</h2>
-<p>A robot arm's gripper position is a product of joint rotations, base first. To convert a point from the gripper's view back to the base, you undo the joints from the gripper inwards: last joint first.</p>
+<p>A robot arm's pose is a product of joint matrices: T₁T₂⋯Tₙ takes a point from the gripper's frame to the base's frame. To go the other way, from the base to the gripper, you need the inverse, Tₙ⁻¹⋯T₁⁻¹. The order of the joints reverses.</p>
 <p>A rotation is undone by turning back, and that matrix is also its transpose. Slide 5 explains why that matters.</p>
     </div>
     <div class="exercise" id="exercise">

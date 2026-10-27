@@ -47,7 +47,7 @@
 </ul>
 <p>In both cases the second pivot is 0 and no row below can help. That happens exactly when the columns are dependent, so det A = 0. Lesson 1 called it squashing the plane onto a line.</p>
 <h2>Small pivots are risky too</h2>
-<p>A computer stores numbers with about 16 digits. Dividing by a tiny pivot, like 0.0000001, blows up rounding errors. So real solvers swap in the row with the <b>largest</b> available pivot at every step. It is called partial pivoting, and NumPy does it for you.</p>
+<p>A computer stores numbers with about 16 digits. Dividing by a tiny pivot, like 0.0000001, blows up rounding errors. So real solvers swap in the row whose pivot is <b>largest in absolute value</b> at every step. It is called partial pivoting, and NumPy does it for you.</p>
     </div>
     <div class="exercise" id="exercise">
       <span class="tag">Exercise</span>

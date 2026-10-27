@@ -6,7 +6,7 @@ kicker: Strang §3.3 · The complete solution to Ax = b
 title: Every solution = one particular solution + the nullspace.
 task: Find a different solution of Ax = b, not (4, 0).
 preview: {"kind":"null","A":[[1,2],[2,4]],"x":[4,0],"b":[4,8]}
-check: isN(V) && V.b.length === 2 && close(matvec(V.A, V.x), V.b) && !close(V.x, [4,0]) && eqM(V.A, [[1,2],[2,4]])
+check: isN(V) && V.b.length === 2 && close(matvec(V.A, V.x), V.b) && !close(V.x, [4,0]) && eqM(V.A, [[1,2],[2,4]]) && close(V.b, [4,8])
 ---
 <!-- lead -->
 If Ax = b has one solution x_p, you get all of them by adding any vector from the nullspace. Nothing else solves it.
