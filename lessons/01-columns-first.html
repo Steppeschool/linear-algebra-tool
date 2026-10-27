@@ -59,7 +59,7 @@ body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-siz
 .prose p{margin:0 0 12px}
 .prose ul{margin:0 0 12px;padding-left:20px} .prose li{margin-bottom:6px}
 .worked{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin:6px 0 14px;font-size:15px}
-.worked .row{font-family:var(--f-mono);font-size:14px;line-height:1.8;overflow-x:auto;white-space:nowrap}
+.worked .row{font-family:var(--f-mono);font-size:14px;line-height:1.8;overflow-wrap:anywhere}
 .mx{display:inline-grid;grid-template-columns:auto auto;gap:0 14px;padding:1px 10px;border-left:2px solid currentColor;border-right:2px solid currentColor;border-radius:6px;font-family:var(--f-mono);font-size:.92em;vertical-align:middle;line-height:1.5}
 .vec{display:inline-grid;grid-template-columns:auto;padding:1px 8px;border-left:2px solid currentColor;border-right:2px solid currentColor;border-radius:6px;font-family:var(--f-mono);font-size:.92em;vertical-align:middle;line-height:1.5;text-align:center}
 .c1,.i{color:var(--ihat)} .c2,.j{color:var(--jhat)} .i,.j{font-weight:600}
@@ -402,25 +402,29 @@ const SLIDES = [
 {
   kicker: "Strang §1.1 · Linear combinations",
   title: "Linear algebra starts with cv + dw.",
-  lead: "Two vectors. Two numbers. Scale each vector by its number and add. That is a linear combination, and it is the one operation the whole subject is built on.",
+  lead: "Take two vectors. Stretch each one by a number, then add. That is a linear combination, and the whole subject is built on it.",
   key: `c ${vec(2,1,"i")} + d ${vec(-1,1,"j")} = ${vec("2c − d","c + d")}`,
   prose: `
-<h3>Vectors</h3>
-<p>A vector in the plane is a pair of numbers, like <span class="i">v = (2, 1)</span>. Draw it as an arrow from the origin to the point (2, 1).</p>
-<p>You can do two things with vectors.</p>
+<h3>Think: directions you can give</h3>
+<p>You are guiding someone across a field. You may only use two kinds of step: step <span class="i">v</span> and step <span class="j">w</span>.</p>
+<p>"Take 3 steps of v, then 2 steps of w." Where do they end up? At 3v + 2w. Every instruction of that kind is a linear combination.</p>
+<h3>The two moves</h3>
 <ul>
-<li><b>Scale:</b> 3v = (6, 3). Every component is multiplied by 3. A negative number flips the arrow around.</li>
-<li><b>Add:</b> v + w adds component by component. On the plane, put the tail of w on the tip of v.</li>
+<li><b>Scale:</b> 3v = (6, 3). Each component is multiplied by 3. A negative number turns the arrow around.</li>
+<li><b>Add:</b> put the tail of w on the tip of v. The sum goes from the start to the final tip. In numbers, add component by component.</li>
 </ul>
-<p>Do both at once and you get cv + dw. The numbers c and d can be anything: whole, fractional, negative, zero.</p>
+<p>Why the word "linear"? Scale one vector by every possible number and its tip traces a straight line through the origin.</p>
 <h3>Worked example</h3>
 <div class="worked">
 <div>Take <span class="i">v = (2, 1)</span> and <span class="j">w = (−1, 1)</span>, with c = 3 and d = 2.</div>
 <div class="row">3v = (6, 3) &nbsp;&nbsp; 2w = (−2, 2) &nbsp;&nbsp; 3v + 2w = (4, 5)</div>
 </div>
+<h3>You already use this</h3>
+<p>The point (4, 5) is itself a combination: 4 steps along (1, 0) plus 5 steps along (0, 1). Coordinates are just the numbers c and d for the two standard directions.</p>
 <h3>The question behind everything</h3>
-<p>Which points can you reach with cv + dw? Here, every point in the plane, because v and w point in different directions.</p>
-<p>Finding c and d for a given target means solving two equations: 2c − d = 4 and c + d = 5. Keep that in mind. On slide 4 it turns into Ax = b.</p>`,
+<p>Which points can you reach? Think of each result as the dot at the tip of its arrow. Try all c and d and the dots fill the whole plane, because v and w point in different directions.</p>
+<p>If w pointed along v, every dot would stay on one line. Slide 3 is about exactly that.</p>
+<p>Finding c and d for a target means solving 2c − d = 4 and c + d = 5. On slide 4 this turns into Ax = b.</p>`,
   task: "Find c and d so that cv + dw lands exactly on the target (4, 5).",
   check: V => isC(V) && near(Ax(V)[0], 4) && near(Ax(V)[1], 5),
   preview: {kind:"combo", A:[[2,-1],[1,1]], x:[1,1], b:[4,5]},
@@ -439,24 +443,26 @@ combo(np.column_stack([v, w]), [c, d], target)
 {
   kicker: "Strang §1.3 · Matrices",
   title: "Ax is a combination of the columns of A.",
-  lead: "Put v and w side by side as the columns of a matrix A. Put c and d into a vector x. Then Ax is exactly cv + dw.",
+  lead: "Stack v and w side by side as the columns of a matrix A. Put the numbers c and d into a vector x. Then Ax is exactly cv + dw.",
   key: `${mx("a₁₁","a₁₂","a₂₁","a₂₂")} ${vec("x₁","x₂")} = x₁ ${vec("a₁₁","a₂₁","i")} + x₂ ${vec("a₁₂","a₂₂","j")}`,
   prose: `
-<h3>Two ways to compute Ax</h3>
-<ul>
-<li><b>By rows:</b> each entry of Ax is a dot product. Row 1 of A times x gives the first entry, row 2 gives the second.</li>
-<li><b>By columns:</b> Ax is x₁ times column 1 plus x₂ times column 2.</li>
-</ul>
-<p>Both give the same numbers. Strang's advice: compute by rows if you like, but think by columns. The column view tells you what Ax can be.</p>
-<h3>Worked example</h3>
+<h3>Think: a shopping basket</h3>
+<p>You buy eggs and rice. Each food gives you roughly this much protein and carbs:</p>
 <div class="worked">
-<div>A = ${mx(1,1,-1,2)} and x = (2, 1).</div>
-<div class="row">By rows: &nbsp;&nbsp;(1·2 + 1·1, −1·2 + 2·1) = (3, 0)</div>
-<div class="row">By columns: 2·<span class="i">(1, −1)</span> + 1·<span class="j">(1, 2)</span> = (3, 0)</div>
+<div class="row">1 egg = <span class="i">(6 g protein, 1 g carbs)</span> &nbsp;&nbsp; 1 bowl of rice = <span class="j">(4 g protein, 45 g carbs)</span></div>
+<div class="row">A = ${mx(6,4,1,45)} &nbsp; x = (2 eggs, 1 bowl)</div>
 </div>
+<p>Each column of A is one food. The vector x says how many of each you take. Ax is the total in your basket.</p>
+<h3>Two ways to add it up</h3>
+<ul>
+<li><b>By columns (whole foods):</b> 2 eggs + 1 bowl = 2·(6, 1) + 1·(4, 45) = (16, 47).</li>
+<li><b>By rows (one nutrient at a time):</b> protein 6·2 + 4·1 = 16. Carbs 1·2 + 45·1 = 47.</li>
+</ul>
+<p>Same totals. The row way is how you calculate by hand: each entry is a dot product of a row with x. The column way is how you think: Ax is a mix of the columns.</p>
+<p>Strang's advice: compute by rows if you like, but think by columns. The column view tells you what Ax can be.</p>
 <h3>Watch out</h3>
-<p>Ax only makes sense when x has one entry per column of A. A 2 by 2 matrix needs a vector with 2 entries.</p>
-<p>The code computes Ax both ways and prints them. The plane draws the column way: first x₁ times column 1, then x₂ times column 2 from its tip.</p>`,
+<p>x needs one number per column. Two foods, two quantities. A 2 by 2 matrix needs a vector with 2 entries.</p>
+<p>In the lab, the code computes Ax both ways. The plane draws the column way: x₁ times column 1, then x₂ times column 2 from its tip.</p>`,
   task: "Choose x so that Ax = (0, 3).",
   check: V => isC(V) && eqM(V.A, [[1,1],[-1,2]]) && near(Ax(V)[0], 0) && near(Ax(V)[1], 3),
   preview: {kind:"combo", A:[[1,1],[-1,2]], x:[2,1], b:[0,3]},
@@ -477,24 +483,38 @@ combo(A, x, b)
 {
   kicker: "Strang §1.3 and §3.1 · Column space",
   title: "The column space C(A) is every possible Ax.",
-  lead: "Let x run through every vector. The results Ax fill a set called the column space of A. Ax = b has a solution exactly when b is in that set.",
-  key: `Ax = b is solvable &nbsp;⇔&nbsp; b is in C(A)`,
+  lead: "A matrix can only produce certain outputs. The column space is the list of everything Ax can produce. Solving Ax = b means asking one question: is b on that list?",
+  key: `C(A) = all vectors Ax = all combinations of the columns`,
   prose: `
+<h3>Think: reachable outputs</h3>
+<p>The columns are the directions you are allowed to move in. The vector x says how far to go along each one. Ax is where you end up.</p>
+<p>Try every possible x and mark every place you land. That set of landing spots is C(A).</p>
+<h3>An engineering picture</h3>
+<p>A small boat has two thrusters. Column 1 is the push you get from thruster 1 at full throttle. Column 2 is the push from thruster 2. The entries of x are the two throttle settings, and a negative throttle means reverse.</p>
+<ul>
+<li><b>Thrusters at an angle:</b> by mixing them you can push the boat in any direction. C(A) is the whole plane.</li>
+<li><b>Both thrusters pointing forward:</b> you can only go forward or back. C(A) is a line. A sideways target is out of reach, whatever the throttles.</li>
+</ul>
 <h3>Three possibilities in the plane</h3>
 <ul>
-<li><b>The whole plane:</b> the two columns point in different directions. Every b can be reached.</li>
-<li><b>A line:</b> one column is a multiple of the other. Every Ax stays on that line.</li>
+<li><b>The whole plane:</b> the columns point in different directions. They are <b>independent</b>.</li>
+<li><b>A line:</b> one column is a multiple of the other. They are <b>dependent</b>.</li>
 <li><b>Just the origin:</b> A is all zeros.</li>
 </ul>
-<p>Strang calls columns <b>independent</b> in the first case and <b>dependent</b> otherwise. The number of independent columns is the <b>rank</b>: 2, 1 or 0.</p>
+<p>The <b>rank</b> counts how many dimensions survive: 2, 1 or 0. It is also the number of independent columns.</p>
 <h3>Worked example</h3>
 <div class="worked">
 <div>A = ${mx(1,2,2,4)}. Column 2 is 2 times column 1.</div>
 <div class="row">Ax = x₁(1, 2) + x₂(2, 4) = (x₁ + 2x₂)·(1, 2)</div>
-<div>Every result is a multiple of (1, 2). So b = (3, 6) can be reached (x = (3, 0) works, and so does x = (1, 1)). But b = (1, 0) can never be reached.</div>
+<div>Every output is a multiple of (1, 2). So b = (3, 6) is reachable, and b = (1, 0) never is.</div>
+<div>Notice that x = (3, 0) and x = (1, 1) both give (3, 6). With dependent columns, different inputs can land on the same output. Chapter 3 calls the leftover freedom the nullspace.</div>
 </div>
-<h3>A quick test for 2 by 2</h3>
-<p>The columns are dependent exactly when ad − bc = 0. That number is the determinant. Slide 5 shows what it means on the plane.</p>`,
+<h3>Two questions that look alike</h3>
+<ul>
+<li><b>Can I solve Ax = b for this b?</b> Only if b is in C(A).</li>
+<li><b>Can I solve Ax = b for every b?</b> Only if C(A) is the whole plane.</li>
+</ul>
+<p>For 2 by 2 there is a quick test. The columns are independent exactly when ad − bc ≠ 0. When it is 0, the plane gets squashed onto a line. A squash cannot be undone, so A has no inverse.</p>`,
   task: "Change column 2 into a multiple of column 1 and watch C(A) shrink to a line.",
   check: V => isC(V) && near(det(V.A), 0, 1e-9) && nonzero(V.A),
   preview: {kind:"combo", A:[[1,1],[2,-1]], x:[1,1], b:[]},
@@ -512,25 +532,27 @@ combo(A, x)
 {
   kicker: "Strang §2.1 · Vectors and linear equations",
   title: "Two pictures of the same equations.",
-  lead: "Strang's first system: x − 2y = 1 and 3x + 2y = 11. You can see it by rows or by columns. Both pictures give the same answer, x = 3 and y = 1.",
+  lead: "Strang's first system: x − 2y = 1 and 3x + 2y = 11. You can look at it by rows or by columns. Both pictures give the same answer, x = 3 and y = 1.",
   key: `${mx(1,-2,3,2)} ${vec("x","y")} = ${vec(1,11)}`,
   prose: `
-<h3>Row picture</h3>
-<p>Each equation is a line. All points with x − 2y = 1 form one line. All points with 3x + 2y = 11 form another.</p>
-<p>The solution is the point on both lines: where they cross, at (3, 1).</p>
-<h3>Column picture</h3>
-<p>Read the same system as a combination of columns:</p>
+<h3>Row picture: two clues</h3>
+<p>A navigator takes two compass bearings. Each bearing says "the ship is somewhere on this line". The ship is where the two lines cross.</p>
+<p>Each equation works the same way. All points with x − 2y = 1 form one line. All points with 3x + 2y = 11 form another. The solution is the point on both: (3, 1).</p>
+<h3>Column picture: a recipe</h3>
+<p>Now read the system as a mix of the columns, like the basket on slide 2:</p>
 <div class="worked">
 <div class="row">x·<span class="i">(1, 3)</span> + y·<span class="j">(−2, 2)</span> = (1, 11)</div>
 <div class="row">3·(1, 3) + 1·(−2, 2) = (3 − 2, 9 + 2) = (1, 11) ✓</div>
 </div>
-<p>Now the question is: which combination of the columns produces b? Same x, different picture.</p>
+<p>The question changes from "where do the lines cross?" to "how much of each column makes b?". Same x, different picture.</p>
 <h3>When it goes wrong</h3>
 <ul>
-<li>Parallel lines in the row picture mean dependent columns in the column picture, with b off their line. No solution.</li>
-<li>The same line twice means b is on the line of the columns. Infinitely many solutions.</li>
+<li><b>Parallel lines:</b> the clues never agree, so there is no solution. In the column picture, the columns are dependent and b is off their line.</li>
+<li><b>The same line twice:</b> the second clue tells you nothing new. Infinitely many solutions, and b sits on the line of the columns.</li>
 </ul>
-<p>With three unknowns the lines become planes, and the row picture gets hard to draw. The column picture stays simple. That is why Strang leans on it.</p>`,
+<h3>Why Strang prefers columns</h3>
+<p>With three unknowns, each clue becomes a plane in space, and three planes crossing is hard to draw. The column picture stays simple: three arrows, one target.</p>
+<p>The row picture is still how you solve by hand. The next lesson, elimination, works on rows.</p>`,
   task: "Run the row picture, then switch to combo(A, x, b) for the column picture.",
   check: V => isC(V) && eqM(V.A, [[1,-2],[3,2]]) && near(Ax(V)[0], 1) && near(Ax(V)[1], 11),
   preview: {kind:"rows", A:[[1,-2],[3,2]], b:[1,11]},
@@ -550,21 +572,27 @@ rowpic(A, b)          # row picture: two lines meet at x
 {
   kicker: "Strang §8.1 · Linear transformations",
   title: "A matrix also moves the whole plane.",
-  lead: "Think of A as a machine. Every vector v goes in, Av comes out. Do that to every point at once and the whole plane moves.",
+  lead: "Think of A as a machine. A vector v goes in, Av comes out. Do that to every point at once and the whole plane moves.",
   key: `A ${vec(1,0,"i")} = column 1 &nbsp;&nbsp;&nbsp; A ${vec(0,1,"j")} = column 2`,
   prose: `
-<h3>Why the grid stays a grid</h3>
-<p>Matrices respect combinations: A(cv + dw) = cAv + dAw. Because of that, straight lines stay straight, evenly spaced lines stay evenly spaced, and the origin never moves.</p>
-<h3>Two arrows decide everything</h3>
-<p>Every point is a combination: (x, y) = x·(1, 0) + y·(0, 1). So A(x, y) = x·(column 1) + y·(column 2). It is the column idea again.</p>
-<p>To build a matrix, decide where <span class="i">(1, 0)</span> and <span class="j">(0, 1)</span> should land. Write those two vectors as the columns.</p>
+<h3>Think: a sheet of graph paper</h3>
+<p>Pin a sheet of graph paper at the origin. You may stretch it, turn it, slant it or flip it over. You may not bend it, fold it or tear it.</p>
+<p>That is everything a 2 by 2 matrix can do. Straight lines stay straight. Evenly spaced lines stay evenly spaced. The pin never moves.</p>
+<h3>Two landmarks are enough</h3>
+<p>If you know where two landmarks moved, you can work out where everything else went. The landmarks are <span class="i">(1, 0)</span> and <span class="j">(0, 1)</span>.</p>
+<p>Every point is a combination of them: (x, y) = x·(1, 0) + y·(0, 1). The machine keeps combinations intact, so A(x, y) = x·(column 1) + y·(column 2). It is slide 2 again.</p>
+<p>To build any matrix, decide where the two landmarks should land and write those as the columns.</p>
 <h3>Worked example: rotation</h3>
 <div class="worked">
-<div>Rotating by θ sends (1, 0) to (cos θ, sin θ) and (0, 1) to (−sin θ, cos θ).</div>
-<div class="row">Q = ${mx("cos θ","−sin θ","sin θ","cos θ")} &nbsp;&nbsp; det Q = cos²θ + sin²θ = 1</div>
+<div>Turning by θ sends (1, 0) to (cos θ, sin θ) and (0, 1) to (−sin θ, cos θ). Those are the columns:</div>
+<div class="row">Q = ${mx("cos θ","−sin θ","sin θ","cos θ")}</div>
+<div>For 90°: cos = 0 and sin = 1, so Q = ${mx(0,-1,1,0)}. It sends (1, 0) to (0, 1), a quarter turn.</div>
 </div>
-<p>The shaded unit square becomes a parallelogram with area |det A| (§5.3). A rotation keeps it at 1: it turns space without stretching it.</p>
-<p>Rotation matrices are what an IMU or a drone's attitude estimator works with, in 3 by 3 form.</p>`,
+<h3>Area: the determinant</h3>
+<p>Watch the shaded unit square. After the move it is a parallelogram with area |det A| (§5.3). Every other shape scales by the same factor.</p>
+<p>A rotation has det = cos²θ + sin²θ = 1. It turns the paper without stretching it.</p>
+<h3>Where you meet this</h3>
+<p>An IMU measures in the drone's own axes. A 3 by 3 rotation matrix turns those readings into the world's axes. That is what an attitude estimator keeps updating.</p>`,
   task: "Rotate the plane by exactly 90°.",
   check: V => isT(V) && eqM(V.M, [[0,-1],[1,0]]),
   preview: {kind:"transform", M:ROT30},
@@ -583,25 +611,30 @@ show(Q)
 {
   kicker: "Strang §2.4 · Rules for matrix operations",
   title: "AB means: apply B first, then A.",
-  lead: "Multiplying matrices chains two motions. (AB)v = A(Bv): B moves the plane first, then A moves the result.",
+  lead: "Multiplying matrices chains two moves into one. (AB)v = A(Bv): B moves the plane first, then A moves the result.",
   key: `AB = A ${`<span class="vec" style="grid-template-columns:auto auto;gap:0 10px"><span>b₁</span><span>b₂</span></span>`} = ${`<span class="vec" style="grid-template-columns:auto auto;gap:0 10px"><span>Ab₁</span><span>Ab₂</span></span>`}`,
   prose: `
+<h3>Think: socks and shoes</h3>
+<p>Socks first, then shoes. Swap the order and you get a very different result. Matrix moves work the same way.</p>
+<p>Read a product from right to left, like f(g(x)) in maths. In AB, B acts first.</p>
 <h3>Column by column</h3>
-<p>Column j of AB is A times column j of B. So you can build AB from the matrix-vector product you already know.</p>
+<p>Where does (1, 0) end up after both moves? B sends it to b₁, the first column of B. Then A sends that to Ab₁. So the first column of AB is A times the first column of B. Same for the second column.</p>
+<p>You already know matrix times vector. Matrix times matrix is just that, once per column.</p>
 <h3>Worked example</h3>
 <div class="worked">
-<div>R rotates by 90°, S is a shear:</div>
+<div>R turns by 90°. S is a shear.</div>
 <div class="row">R = ${mx(0,-1,1,0)} &nbsp; S = ${mx(1,1,0,1)}</div>
 <div class="row">RS = ${mx(0,-1,1,1)} &nbsp; SR = ${mx(1,-1,1,0)}</div>
-<div>Different matrices, so different motions. Look at where the F ends up.</div>
+<div>RS shears, then turns. SR turns, then shears. Different matrices, different moves. Look where the F ends up.</div>
 </div>
 <h3>The rules</h3>
 <ul>
-<li>AB is usually not BA. Order matters.</li>
-<li>(AB)C = A(BC). You may group, as long as you keep the order.</li>
-<li>det(AB) = det(A)·det(B). Areas multiply (chapter 5).</li>
+<li><b>AB is usually not BA.</b> Order matters.</li>
+<li><b>(AB)C = A(BC).</b> Either way, C acts first, then B, then A. Brackets only change how you write it.</li>
+<li><b>det(AB) = det(A)·det(B).</b> If B doubles areas and A triples them, together they multiply areas by 6 (chapter 5).</li>
 </ul>
-<p>A robot arm is a chain of rotations, one per joint. Multiply them in the wrong order and the gripper ends up somewhere else.</p>`,
+<h3>Where you meet this</h3>
+<p>A robot arm is a chain of rotations, one per joint. To find the gripper, multiply them in joint order. Swap two and the gripper ends up somewhere else.</p>`,
   task: "Run it, then show S @ R instead and compare the F.",
   check: V => isT(V) && eqM(V.M, mul([[1,1],[0,1]], [[0,-1],[1,0]])),
   preview: {kind:"transform", M:[[0,-1],[1,1]]},
@@ -623,19 +656,21 @@ show(R @ S)
   lead: "Build the matrix that flips the plane left to right, like a mirror standing on the vertical axis. The F keeps its size. It only faces the other way.",
   key: `(x, y) &nbsp;→&nbsp; (−x, y)`,
   prose: `
-<h3>How to think about it</h3>
-<p>Use the rule from slide 5: decide where (1, 0) and (0, 1) land, then write them as columns.</p>
+<h3>Think: the word on an ambulance</h3>
+<p>AMBULANCE is printed backwards on the front of the vehicle. In a driver's mirror it reads the right way round. A mirror keeps sizes and distances but reverses left and right.</p>
+<h3>How to build it</h3>
+<p>Use the rule from slide 5: decide where the two landmarks land, then write them as the columns.</p>
 <ul>
-<li>A mirror on the vertical axis sends points on the right to the left.</li>
-<li>Points on the vertical axis itself do not move.</li>
+<li>A mirror on the vertical axis sends points on the right over to the left.</li>
+<li>Points on the vertical axis itself stay where they are.</li>
 </ul>
-<h3>What the determinant tells you</h3>
-<p>The F keeps its size, so the area factor |det A| is 1.</p>
-<p>But the F now reads backwards. A flip like that shows up as a minus sign: det A is negative. Watch the readout under the plane.</p>
+<h3>What the determinant says</h3>
+<p>The F keeps its size, so |det A| = 1.</p>
+<p>But the F now reads backwards, like turning a sheet of paper over to its other side. No rotation can do that. The determinant signals the flip with a minus sign. Watch the readout under the plane.</p>
 <h3>After you solve it</h3>
 <ul>
-<li>Apply your mirror twice: A @ A. You should get the identity matrix back.</li>
-<li>Try the mirror across the line y = x. Where do (1, 0) and (0, 1) go?</li>
+<li><b>Mirror twice:</b> two mirrors in a barber's shop show your face the right way round. Check that A @ A gives the identity.</li>
+<li><b>Another mirror:</b> try the mirror on the diagonal line y = x. Where do (1, 0) and (0, 1) go?</li>
 </ul>`,
   task: "Mirror the plane across the vertical axis.",
   check: V => isT(V) && eqM(V.M, [[-1,0],[0,1]]),
@@ -657,17 +692,17 @@ show(A)
   key: `Ax = x₁·(column 1) + x₂·(column 2)`,
   prose: `
 <ul>
-<li><b>§1.1</b> A linear combination cv + dw scales and adds vectors.</li>
-<li><b>§1.3</b> Ax is a combination of the columns of A. Compute by rows, think by columns.</li>
-<li><b>§1.3, §3.1</b> The column space C(A) is every possible Ax. Ax = b is solvable exactly when b is in it.</li>
-<li><b>§2.1</b> The row picture crosses lines. The column picture combines columns. Same solution.</li>
-<li><b>§8.1, §5.3</b> A matrix moves the plane. Its columns are where (1, 0) and (0, 1) land, and |det A| is the area factor.</li>
-<li><b>§2.4</b> AB applies B first, then A. Order matters.</li>
+<li><b>§1.1 Linear combinations.</b> Scale and add: steps of v and steps of w.</li>
+<li><b>§1.3 Ax by columns.</b> The basket: each column is a food, x is how many of each, Ax is the total. Compute by rows, think by columns.</li>
+<li><b>§1.3, §3.1 Column space.</b> Everywhere the boat can reach. Ax = b is solvable exactly when b is in C(A).</li>
+<li><b>§2.1 Row and column pictures.</b> Two bearings crossing, or a recipe that makes b. Same answer.</li>
+<li><b>§8.1, §5.3 Transformations.</b> Graph paper pinned at the origin. The columns are where the two landmarks land, and |det A| is the area factor.</li>
+<li><b>§2.4 Products.</b> Socks, then shoes. AB applies B first.</li>
 </ul>
 <h3>Next lesson: elimination (§2.2, §2.3, §2.6)</h3>
-<p>Solve Ax = b step by step, the way a computer does. Subtract multiples of rows until the matrix is triangular, then back-substitute. Those steps, written as matrices, give A = LU.</p>
+<p>Solve Ax = b the way a computer does. Subtract multiples of one row from another until the matrix is triangular. Then solve from the bottom up. Write those steps as matrices and you get A = LU.</p>
 <h3>Read along</h3>
-<p>Gilbert Strang, <i>Introduction to Linear Algebra</i>, 5th edition (2016), chapter 1 and §2.1. His MIT 18.06 lectures are free on <a href="https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/" target="_blank" rel="noopener">MIT OpenCourseWare</a>.</p>`,
+<p>Gilbert Strang, <i>Introduction to Linear Algebra</i>, 5th edition (2016), chapter 1 and §2.1. His MIT 18.06 lectures are free on <a href="https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/" target="_blank" rel="noopener">MIT OpenCourseWare</a>. For more pictures, watch 3Blue1Brown's <a href="https://www.3blue1brown.com/topics/linear-algebra" target="_blank" rel="noopener">Essence of Linear Algebra</a>.</p>`,
   task: "Free play: try anything, for example combo([[0, 1], [1, 0]], [2, 1]).",
   check: (V, n) => !!V,
   preview: {kind:"transform", M:[[1,0],[0,1]]},
@@ -845,6 +880,7 @@ function go(i, scroll = true){
   $("fname").textContent = `slide_${cur+1}.py`;
   ta.value = edits[cur] ?? S.code; sync();
   setView(S.preview);
+  out.innerHTML = '<span class="sys">Press Run to execute this slide\'s code.</span>';
   renderTask(); renderSteps();
   if (scroll) document.querySelector(".page").scrollIntoView({block:"start", behavior: reduce ? "auto" : "smooth"});
 }
