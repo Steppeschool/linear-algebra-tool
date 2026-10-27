@@ -246,3 +246,7 @@ details.sol[open] .s-show{display:none}
   .lesson .plane{aspect-ratio:1/1}
   .after{padding:6px 16px 14px}
 }
+
+.lesson .examples,.lesson .problems{max-width:72ch}
+.practice-note{margin:-6px 0 12px;color:var(--muted);font-size:14.5px}
+.page .practice-h{border-top:1px solid var(--line);padding-top:24px}

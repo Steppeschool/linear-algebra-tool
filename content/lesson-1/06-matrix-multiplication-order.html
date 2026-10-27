@@ -34,6 +34,32 @@ AB = A <span class="vec" style="grid-template-columns:auto auto;gap:0 10px"><spa
 </ul>
 <h2>Where you meet this</h2>
 <p>A robot arm is a chain of rotations, one per joint. To find the gripper, multiply them in joint order. Swap two and the gripper ends up somewhere else.</p>
+<!-- examples -->
+<section class="example"><h3>Example 1 · Two orders</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>0</span><span>1</span></span> (shear), B = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>0</span><span>0</span><span>1</span></span> (stretch).</p><div class="worked"><div class="row">AB = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>2</span><span>0</span><span>1</span></span> &nbsp;&nbsp; BA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>4</span><span>0</span><span>1</span></span></div></div><p>Stretch then shear differs from shear then stretch.</p>
+</section>
+<section class="example"><h3>Example 2 · Two quarter turns</h3>
+<p>R = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>−1</span><span>1</span><span>0</span></span> turns by 90°.</p><div class="worked"><div class="row">RR = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−1</span><span>0</span><span>0</span><span>−1</span></span></div></div><p>Two quarter turns make a half turn. For rotations, multiplying adds the angles.</p>
+</section>
+<!-- problems -->
+<div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Compute AB and BA for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>0</span></span> and B = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>1</span><span>0</span></span>.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>AB = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>0</span><span>1</span></span> and BA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>1</span><span>1</span></span>. Different.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>0</span><span>0</span><span>3</span></span>, B = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>4</span><span>0</span><span>1</span></span>. Find det(AB) without multiplying.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>det A = 6 and det B = 1, so det(AB) = 6. Check: AB = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>8</span><span>0</span><span>3</span></span>, det = 6 ✓</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>Find only the first column of AB for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>4</span></span> and B = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>1</span><span>1</span></span>.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Column 1 of AB = A times column 1 of B = A·(1, 1) = (1 + 2, 3 + 4) = (3, 7).</p>
+</div></details>
+</div></div>
 <!-- code -->
 import numpy as np
 

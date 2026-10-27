@@ -31,6 +31,32 @@ A <span class="vec i"><span>1</span><span>0</span></span> = column 1 &nbsp;&nbsp
 <p>A rotation has det = cos²θ + sin²θ = 1. It turns the paper without stretching it.</p>
 <h2>Where you meet this</h2>
 <p>An IMU measures in the drone's own axes. A 3 by 3 rotation matrix turns those readings into the world's axes. That is what an attitude estimator keeps updating.</p>
+<!-- examples -->
+<section class="example"><h3>Example 1 · Stretch sideways</h3>
+<p>Triple every x-coordinate, keep y: (1, 0) → (3, 0) and (0, 1) → (0, 1).</p><div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>0</span><span>0</span><span>1</span></span> &nbsp;&nbsp; det A = 3</div><div class="row">(1, 1) → (3, 1). Every area becomes 3 times larger</div></div>
+</section>
+<section class="example"><h3>Example 2 · Half a turn</h3>
+<p>Rotate by 180°: cos 180° = −1, sin 180° = 0.</p><div class="worked"><div class="row">Q = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−1</span><span>0</span><span>0</span><span>−1</span></span> &nbsp;&nbsp; det Q = 1</div><div class="row">(2, 1) → (−2, −1): every vector points the opposite way</div></div>
+</section>
+<!-- problems -->
+<div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Find the matrix that sends (1, 0) to (0, 2) and (0, 1) to (1, 0). What does det say?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>The landing spots are the columns: A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>2</span><span>0</span></span>. det A = 0 − 2 = −2: areas double and the plane is flipped.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>Write the rotation by 60°. Where does (1, 0) go?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>cos 60° = ½ and sin 60° = √3/2, so Q = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>½</span><span>−√3/2</span><span>√3/2</span><span>½</span></span>. (1, 0) goes to (½, √3/2).</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>Where does the shear <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>2</span><span>1</span></span> send (1, 0) and (0, 1)? What happens to areas?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Read the columns: (1, 0) → (1, 2) and (0, 1) → (0, 1). det = 1, so areas do not change.</p>
+</div></details>
+</div></div>
 <!-- code -->
 import numpy as np
 

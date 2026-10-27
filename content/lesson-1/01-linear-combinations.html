@@ -33,6 +33,32 @@ c <span class="vec i"><span>2</span><span>1</span></span> + d <span class="vec j
 <p>Which points can you reach? Think of each result as the dot at the tip of its arrow. Try all c and d and the dots fill the whole plane, because v and w point in different directions.</p>
 <p>If w pointed along v, every dot would stay on one line. Slide 3 is about exactly that.</p>
 <p>Finding c and d for a target means solving 2c − d = 4 and c + d = 5. On slide 4 this turns into Ax = b.</p>
+<!-- examples -->
+<section class="example"><h3>Example 1 · Compute a combination</h3>
+<p>v = (1, 1), w = (1, −1), c = 2, d = 3. Find cv + dw.</p><div class="worked"><div class="row">2v = (2, 2) &nbsp;&nbsp; 3w = (3, −3)</div><div class="row">2v + 3w = (2 + 3, 2 − 3) = (5, −1)</div></div>
+</section>
+<section class="example"><h3>Example 2 · Find the numbers</h3>
+<p>Write (3, 0) as c·(1, 1) + d·(1, −1).</p><div class="worked"><div class="row">c + d = 3 &nbsp;&nbsp; c − d = 0</div><div class="row">Adding: 2c = 3, so c = 1.5 and d = 1.5</div><div class="row">Check: 1.5·(1, 1) + 1.5·(1, −1) = (3, 0) ✓</div></div>
+</section>
+<!-- problems -->
+<div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Compute 2v − w for v = (3, 1) and w = (1, 4).</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>2v = (6, 2). 2v − w = (6 − 1, 2 − 4) = (5, −2).</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>Find c and d with c·(1, 2) + d·(0, 1) = (3, 8).</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>The first component gives c = 3. The second: 2·3 + d = 8, so d = 2.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>Can combinations of (2, 4) and (−1, −2) ever reach (1, 0)?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>No. (−1, −2) = −½·(2, 4), so both vectors lie on the line y = 2x. Every combination stays on that line, and (1, 0) is not on it.</p>
+</div></details>
+</div></div>
 <!-- code -->
 import numpy as np
 

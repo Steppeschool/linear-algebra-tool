@@ -29,6 +29,32 @@ Build the matrix that flips the plane left to right, like a mirror standing on t
 <li><b>Mirror twice:</b> two mirrors in a barber's shop show your face the right way round. Check that A @ A gives the identity.</li>
 <li><b>Another mirror:</b> try the mirror on the diagonal line y = x. Where do (1, 0) and (0, 1) go?</li>
 </ul>
+<!-- examples -->
+<section class="example"><h3>Example 1 · Mirror on y = x</h3>
+<p>(1, 0) → (0, 1) and (0, 1) → (1, 0).</p><div class="worked"><div class="row">M = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>1</span><span>0</span></span> &nbsp;&nbsp; det M = −1</div><div class="row">(2, 1) → (1, 2): the coordinates swap</div></div>
+</section>
+<section class="example"><h3>Example 2 · Two mirrors make a turn</h3>
+<p>Mirror on the y-axis, then on the x-axis:</p><div class="worked"><div class="row"><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−1</span><span>0</span><span>0</span><span>1</span></span> <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>−1</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−1</span><span>0</span><span>0</span><span>−1</span></span></div><div class="row">det = (−1)·(−1) = 1</div></div><p>Two flips cancel. The result is the half turn: no mirror image left.</p>
+</section>
+<!-- problems -->
+<div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Write the mirror across the x-axis. Where does (3, 2) go?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>M = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>−1</span></span>. (3, 2) → (3, −2).</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>Check that the mirror on y = x, applied twice, gives the identity.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>1</span><span>0</span></span>² = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>1</span></span>. Swapping the coordinates twice puts them back.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>Is <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>−1</span><span>−1</span><span>0</span></span> a mirror? Which line?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>det = 0 − 1 = −1 and M² = I, so yes. (1, 0) → (0, −1) and (1, −1) stays put: it is the mirror on the line y = −x.</p>
+</div></details>
+</div></div>
 <!-- code -->
 import numpy as np
 

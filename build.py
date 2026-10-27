@@ -212,6 +212,8 @@ def slide_page(lesson, slides, i, next_lesson=None, practice=None):
     <div class="prose">
 {s['prose']}
     </div>
+    {f'<h2 class="practice-h">Worked examples</h2><div class="examples">{s["examples"]}</div>' if s.get("examples") else ""}
+    {f'<h2 class="practice-h">{"Review problems" if s["slug"] == "recap" else "Problems"}</h2><p class="practice-note">Try each one before you open the solution.</p><div class="problems">{s["problems"]}</div>' if s.get("problems") else ""}
   </article>
 
   <section class="labsec" aria-label="Lab">
@@ -246,7 +248,7 @@ def slide_page(lesson, slides, i, next_lesson=None, practice=None):
   </section>
 
   <div class="after">
-    {f'<a class="practice-link" href="../practice/"><span class="pl-icon">✎</span><span><b>Practice this lesson</b><br>3 worked examples and 5 problems with solutions</span><span class="pl-arrow">→</span></a>' if practice else ""}
+    {f'<a class="practice-link" href="../practice/"><span class="pl-icon">✎</span><span><b>Lesson review</b><br>3 more worked examples and 5 mixed problems with solutions</span><span class="pl-arrow">→</span></a>' if practice else ""}
     <div class="nav">
       {prev}
       <span class="count">{i + 1} / {len(slides)}</span>

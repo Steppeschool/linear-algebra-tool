@@ -42,6 +42,32 @@ C(A) = all vectors Ax = all combinations of the columns
 <li><b>Can I solve Ax = b for every b?</b> Only if C(A) is the whole plane.</li>
 </ul>
 <p>For 2 by 2 there is a quick test. The columns are independent exactly when ad − bc ≠ 0. When it is 0, the plane gets squashed onto a line. A squash cannot be undone, so A has no inverse.</p>
+<!-- examples -->
+<section class="example"><h3>Example 1 · A line, and who is on it</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>4</span><span>1</span><span>2</span></span>. Column 2 = 2·column 1, so C(A) is the line through (2, 1).</p><div class="worked"><div class="row">b = (6, 3) = 3·(2, 1): in C(A), for example x = (3, 0)</div><div class="row">b = (1, 1): not a multiple of (2, 1), so Ax = b has no solution</div></div>
+</section>
+<section class="example"><h3>Example 2 · The whole plane</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>−1</span></span>. det A = −1 − 1 = −2 ≠ 0, so C(A) is the whole plane. Solve Ax = (4, 2):</p><div class="worked"><div class="row">x₁ + x₂ = 4 &nbsp;&nbsp; x₁ − x₂ = 2</div><div class="row">x₁ = 3, x₂ = 1</div></div>
+</section>
+<!-- problems -->
+<div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Describe C(A) for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>6</span><span>1</span><span>2</span></span>. What is the rank?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Column 2 = 2·column 1, so C(A) is the line through (3, 1). Rank 1.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>For which t is (t, 4) in the column space of <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>4</span></span>?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>C(A) is the line of multiples of (1, 2). (t, 4) = 2·(1, 2) needs t = 2.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>What is C(A) when A is the zero matrix? When A is the identity?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Zero matrix: only the origin, rank 0. Identity: the whole plane, rank 2, since Ix = x reaches everything.</p>
+</div></details>
+</div></div>
 <!-- code -->
 import numpy as np
 
