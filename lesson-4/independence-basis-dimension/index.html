@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Linear Independence, Basis and Dimension Explained | Linear Algebra, Live</title>
+<meta name="description" content="Independent vectors, a basis and the dimension of a space, with a toolkit analogy, a 3D example and rank in Python. Strang §3.4.">
+<link rel="canonical" href="https://linearalgebra.steppeschool.com/lesson-4/independence-basis-dimension/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Linear Algebra, Live">
+<meta property="og:title" content="Linear Independence, Basis and Dimension Explained | Linear Algebra, Live">
+<meta property="og:description" content="Independent vectors, a basis and the dimension of a space, with a toolkit analogy, a 3D example and rank in Python. Strang §3.4.">
+<meta property="og:url" content="https://linearalgebra.steppeschool.com/lesson-4/independence-basis-dimension/">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/lesson.css">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "Linear Independence, Basis and Dimension Explained", "headline": "A basis: enough vectors, and not one too many.", "description": "Independent vectors, a basis and the dimension of a space, with a toolkit analogy, a 3D example and rank in Python. Strang §3.4.", "url": "https://linearalgebra.steppeschool.com/lesson-4/independence-basis-dimension/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": true, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 4: The four subspaces", "item": "https://linearalgebra.steppeschool.com/lesson-4/"}, {"@type": "ListItem", "position": 3, "name": "Linear Independence, Basis and Dimension Explained", "item": "https://linearalgebra.steppeschool.com/lesson-4/independence-basis-dimension/"}]}]</script>
+</head>
+<body>
+<header class="top">
+  <div class="course"><b><a href="../../" style="color:inherit;text-decoration:none">Linear Algebra, Live</a></b><span>Lesson 4 · The four subspaces · Strang, chapter 3</span></div>
+  <nav class="steps" aria-label="Slides in this lesson"><a class="step" href="../vector-spaces-and-subspaces/" data-slug="vector-spaces-and-subspaces" title="Vector Spaces and Subspaces Explained Visually">1</a><a class="step" href="../null-space/" data-slug="null-space" title="Null Space Explained Visually">2</a><a class="step" href="../rref-and-special-solutions/" data-slug="rref-and-special-solutions" title="Reduced Row Echelon Form, Pivot Columns and Special Solutions">3</a><a class="step" href="../complete-solution/" data-slug="complete-solution" title="The Complete Solution to Ax = b: Particular Plus Null Space">4</a><a class="step on" href="../independence-basis-dimension/" data-slug="independence-basis-dimension" aria-current="page" title="Linear Independence, Basis and Dimension Explained">5</a><a class="step" href="../four-fundamental-subspaces/" data-slug="four-fundamental-subspaces" title="The Four Fundamental Subspaces Explained Visually">6</a><a class="step" href="../recap/" data-slug="recap" title="Lesson 4 Recap: The Four Subspaces">7</a></nav>
+</header>
+
+<main class="app">
+  <article class="page">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">All lessons</a> › <a href="../">Lesson 4</a></nav>
+    <div class="kicker">Strang §3.4 · Independence, basis and dimension</div>
+    <h1>A basis: enough vectors, and not one too many.</h1>
+    <p class="lead">Vectors are independent when none of them is a combination of the others. A basis is an independent set that reaches the whole space. Every basis of a space has the same size: its dimension.</p>
+    <div class="key">independent + spans the space = basis &nbsp;&nbsp; size of every basis = dimension</div>
+    <div class="prose">
+<h2>Think: a minimal toolkit</h2>
+<p>A good toolkit lets you do every job, and has no tool that another tool already covers. Every job doable means the vectors <b>span</b> the space. No redundant tool means they are <b>independent</b>. Both together make a <b>basis</b>.</p>
+<p>The dimension is how many tools that takes. On a map, every place needs exactly two numbers. For a drone in the air, three. That count does not depend on which directions you pick.</p>
+<h2>Tests for independence</h2>
+<p>For the columns of A, these all say the same thing:</p>
+<ul>
+<li>The only combination giving zero is the all-zero one: Ax = 0 only for x = 0.</li>
+<li>N(A) is just the zero vector.</li>
+<li>Every column has a pivot: rank r = n.</li>
+</ul>
+<p>Four vectors in 3D are always dependent. There is no room for a fourth independent direction.</p>
+<h2>Worked example</h2>
+<div class="worked">
+<div>v₁ = (1, 0, 1), v₂ = (0, 1, 1), v₃ = (1, 1, 2).</div>
+<div class="row">v₃ = v₁ + v₂, so 1·v₁ + 1·v₂ − 1·v₃ = 0</div>
+<div>Dependent. The rank is 2. All three lie in one plane, and v₁, v₂ alone are a basis for it. The plane has dimension 2.</div>
+</div>
+<h2>Bases are not unique</h2>
+<p>(1, 0) and (0, 1) are a basis for the plane. So are (1, 1) and (1, −1). Different tools, same number of them. The rank of A is the dimension of its column space.</p>
+    </div>
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Change the third column so the three columns are independent (rank 3).</span>
+      <span class="hint" id="hint">Edit the code in the lab and press Run.</span>
+    </div>
+    <div class="nav">
+      <a class="btn" id="prev" href="../complete-solution/">← Back</a>
+      <span class="count">5 / 7</span>
+      <a class="btn primary" id="next" href="../four-fundamental-subspaces/">Next →</a>
+    </div>
+  </article>
+
+  <aside class="lab" aria-label="Lab">
+    <figure class="figure" style="margin:0">
+      <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+      <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+    </figure>
+    <div class="editor-card">
+      <div class="bar">
+        <span class="file">slide_5.py</span>
+        <span class="status" id="pystatus">Loading Python…</span>
+        <button class="btn" id="reset">Reset</button>
+        <button class="btn primary" id="run" disabled>Run ▸</button>
+      </div>
+      <div class="editor">
+        <div class="gutter" id="gutter">1</div>
+        <div class="code" id="codewrap">
+          <pre id="hl" aria-hidden="true"></pre>
+          <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+A = np.array([[1., 0., 1.],
+              [0., 1., 1.],
+              [1., 1., 2.]])     # column 3 = column 1 + column 2
+
+R, pivots = rref(A)
+print(&quot;rank =&quot;, np.linalg.matrix_rank(A))
+table((&quot;A&quot;, A), (&quot;R&quot;, R, pivots))</textarea>
+        </div>
+      </div>
+      <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+      <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+    </div>
+  </aside>
+</main>
+<footer class="foot">
+  Follows the order and notation of Gilbert Strang, <i>Introduction to Linear Algebra</i>, 5th edition (2016); § numbers refer to that book.
+  Explanations, examples and code are original. Made by <a href="https://www.steppeschool.com">Steppeschool</a>.
+</footer>
+
+<script>window.SLIDE = {"slug": "independence-basis-dimension", "lesson": "lesson-4", "assets": "../../assets/", "preview": {"kind": "table", "items": [{"label": "A", "M": [[1, 0, 1], [0, 1, 1], [1, 1, 2]], "piv": []}]}, "check": "isTab(V) && item(V, 'A') && item(V, 'A').length === 3 && item(V, 'A')[0].length === 3 && rankOf(item(V, 'A')) === 3"};</script>
+<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
+<script src="../../assets/lab.js" defer></script>
+</body>
+</html>

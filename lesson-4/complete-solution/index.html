@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Complete Solution to Ax = b: Particular Plus Null Space | Linear Algebra, Live</title>
+<meta name="description" content="Every solution of Ax = b is one particular solution plus any null space vector. See the solution line in an interactive plot and find it in Python. Strang §3.3.">
+<link rel="canonical" href="https://linearalgebra.steppeschool.com/lesson-4/complete-solution/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Linear Algebra, Live">
+<meta property="og:title" content="The Complete Solution to Ax = b: Particular Plus Null Space | Linear Algebra, Live">
+<meta property="og:description" content="Every solution of Ax = b is one particular solution plus any null space vector. See the solution line in an interactive plot and find it in Python. Strang §3.3.">
+<meta property="og:url" content="https://linearalgebra.steppeschool.com/lesson-4/complete-solution/">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/lesson.css">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "The Complete Solution to Ax = b: Particular Plus Null Space", "headline": "Every solution = one particular solution + the nullspace.", "description": "Every solution of Ax = b is one particular solution plus any null space vector. See the solution line in an interactive plot and find it in Python. Strang §3.3.", "url": "https://linearalgebra.steppeschool.com/lesson-4/complete-solution/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": true, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 4: The four subspaces", "item": "https://linearalgebra.steppeschool.com/lesson-4/"}, {"@type": "ListItem", "position": 3, "name": "The Complete Solution to Ax = b: Particular Plus Null Space", "item": "https://linearalgebra.steppeschool.com/lesson-4/complete-solution/"}]}]</script>
+</head>
+<body>
+<header class="top">
+  <div class="course"><b><a href="../../" style="color:inherit;text-decoration:none">Linear Algebra, Live</a></b><span>Lesson 4 · The four subspaces · Strang, chapter 3</span></div>
+  <nav class="steps" aria-label="Slides in this lesson"><a class="step" href="../vector-spaces-and-subspaces/" data-slug="vector-spaces-and-subspaces" title="Vector Spaces and Subspaces Explained Visually">1</a><a class="step" href="../null-space/" data-slug="null-space" title="Null Space Explained Visually">2</a><a class="step" href="../rref-and-special-solutions/" data-slug="rref-and-special-solutions" title="Reduced Row Echelon Form, Pivot Columns and Special Solutions">3</a><a class="step on" href="../complete-solution/" data-slug="complete-solution" aria-current="page" title="The Complete Solution to Ax = b: Particular Plus Null Space">4</a><a class="step" href="../independence-basis-dimension/" data-slug="independence-basis-dimension" title="Linear Independence, Basis and Dimension Explained">5</a><a class="step" href="../four-fundamental-subspaces/" data-slug="four-fundamental-subspaces" title="The Four Fundamental Subspaces Explained Visually">6</a><a class="step" href="../recap/" data-slug="recap" title="Lesson 4 Recap: The Four Subspaces">7</a></nav>
+</header>
+
+<main class="app">
+  <article class="page">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">All lessons</a> › <a href="../">Lesson 4</a></nav>
+    <div class="kicker">Strang §3.3 · The complete solution to Ax = b</div>
+    <h1>Every solution = one particular solution + the nullspace.</h1>
+    <p class="lead">If Ax = b has one solution x_p, you get all of them by adding any vector from the nullspace. Nothing else solves it.</p>
+    <div class="key">x = x_p + x_n &nbsp;&nbsp;&nbsp; Ax_p = b, &nbsp; Ax_n = 0</div>
+    <div class="prose">
+<h2>Think: a route plus a loop</h2>
+<p>You have one route that reaches the destination. Add any loop that brings you back to where you started, and you still reach the destination. Those loops are the nullspace.</p>
+<p>With the boat: one throttle setting gives the motion you want. Add any cancelling combination, like (2, −1), and the boat moves exactly the same. The engines just work harder.</p>
+<h2>Why it is exactly this</h2>
+<ul>
+<li>Adding a nullspace vector keeps a solution: A(x_p + x_n) = b + 0 = b.</li>
+<li>Any two solutions differ by a nullspace vector: if Ax = b and Ay = b, then A(x − y) = 0.</li>
+</ul>
+<p>In the plot, the solutions form a line parallel to N(A), shifted so it passes through x_p.</p>
+<h2>Worked example</h2>
+<div class="worked">
+<div>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>4</span></span>, b = (4, 8). One solution is x_p = (4, 0).</div>
+<div class="row">N(A) = all c·(2, −1) &nbsp;→&nbsp; x = (4 + 2c, −c)</div>
+<div>With c = −2: x = (0, 2). Check: 0 + 2·2 = 4 and 0 + 4·2 = 8 ✓</div>
+<div>With b = (4, 9) instead, elimination ends in 0 = 1. b is off the column space line, so there is no solution at all.</div>
+</div>
+<h2>How many solutions?</h2>
+<p>It depends on the rank r of an m by n matrix:</p>
+<ul>
+<li><b>r = m = n:</b> exactly one solution. A is invertible.</li>
+<li><b>r = n &lt; m:</b> zero or one. More equations than unknowns.</li>
+<li><b>r = m &lt; n:</b> infinitely many. Every b works, and there are free variables.</li>
+<li><b>r &lt; m and r &lt; n:</b> zero or infinitely many, depending on b.</li>
+</ul>
+    </div>
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Find a different solution of Ax = b, not (4, 0).</span>
+      <span class="hint" id="hint">Edit the code in the lab and press Run.</span>
+    </div>
+    <div class="nav">
+      <a class="btn" id="prev" href="../rref-and-special-solutions/">← Back</a>
+      <span class="count">4 / 7</span>
+      <a class="btn primary" id="next" href="../independence-basis-dimension/">Next →</a>
+    </div>
+  </article>
+
+  <aside class="lab" aria-label="Lab">
+    <figure class="figure" style="margin:0">
+      <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+      <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+    </figure>
+    <div class="editor-card">
+      <div class="bar">
+        <span class="file">slide_4.py</span>
+        <span class="status" id="pystatus">Loading Python…</span>
+        <button class="btn" id="reset">Reset</button>
+        <button class="btn primary" id="run" disabled>Run ▸</button>
+      </div>
+      <div class="editor">
+        <div class="gutter" id="gutter">1</div>
+        <div class="code" id="codewrap">
+          <pre id="hl" aria-hidden="true"></pre>
+          <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+A = np.array([[1., 2.],
+              [2., 4.]])
+b = np.array([4., 8.])
+x = np.array([4., 0.])          # one solution. Find another one
+
+print(&quot;Ax =&quot;, A @ x)
+nullpic(A, x, b)                # orange line: every solution of Ax = b</textarea>
+        </div>
+      </div>
+      <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+      <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+    </div>
+  </aside>
+</main>
+<footer class="foot">
+  Follows the order and notation of Gilbert Strang, <i>Introduction to Linear Algebra</i>, 5th edition (2016); § numbers refer to that book.
+  Explanations, examples and code are original. Made by <a href="https://www.steppeschool.com">Steppeschool</a>.
+</footer>
+
+<script>window.SLIDE = {"slug": "complete-solution", "lesson": "lesson-4", "assets": "../../assets/", "preview": {"kind": "null", "A": [[1, 2], [2, 4]], "x": [4, 0], "b": [4, 8]}, "check": "isN(V) && V.b.length === 2 && close(matvec(V.A, V.x), V.b) && !close(V.x, [4,0]) && eqM(V.A, [[1,2],[2,4]])"};</script>
+<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
+<script src="../../assets/lab.js" defer></script>
+</body>
+</html>

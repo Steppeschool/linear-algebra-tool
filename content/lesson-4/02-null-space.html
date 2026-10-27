@@ -1,0 +1,41 @@
+---
+slug: null-space
+seo_title: Null Space Explained Visually
+description: The null space is every input x with Ax = 0: inputs that produce no output. A two-thruster boat, a worked example and an interactive plot in Python. Strang §3.2.
+kicker: Strang §3.2 · The nullspace of A
+title: The nullspace: inputs that do nothing.
+task: Find a nonzero x with Ax = 0.
+preview: {"kind":"null","A":[[1,2],[2,4]],"x":[1,1],"b":[]}
+check: isN(V) && isZero(matvec(V.A, V.x)) && !isZero(V.x)
+---
+<!-- lead -->
+The nullspace N(A) holds every x with Ax = 0. Feed in any of these inputs and nothing comes out.
+<!-- key -->
+N(A) = all x with Ax = 0
+<!-- prose -->
+<h2>Think: engines running, boat standing still</h2>
+<p>Back to the boat. Thruster 2 points the same way as thruster 1 and pushes twice as hard. So A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>4</span></span>.</p>
+<p>Set thruster 1 forward at 2 and thruster 2 in reverse at 1. The pushes cancel exactly. Both engines are working, and the boat does not move. The throttle setting (2, −1) is in the nullspace.</p>
+<h2>What is always true</h2>
+<ul>
+<li>x = 0 is always in N(A).</li>
+<li>N(A) is a subspace: if Ax = 0 and Ay = 0, then A(cx + dy) = 0 too.</li>
+<li>If A is invertible, N(A) is only the zero vector.</li>
+<li>A nonzero x in N(A) is a recipe for a dependency: x₁·(column 1) + x₂·(column 2) = 0.</li>
+</ul>
+<h2>Worked example</h2>
+<div class="worked">
+<div class="row">A(2, −1) = (1·2 + 2·(−1), 2·2 + 4·(−1)) = (0, 0) ✓</div>
+<div>Every multiple c·(2, −1) works too, so N(A) is a whole line. Look at the plot: it is perpendicular to the row (1, 2). That is no accident, and slide 6 explains it.</div>
+</div>
+<h2>Where you meet this</h2>
+<p>A robot arm with more joints than it needs has a nullspace. Joint motions in that nullspace move the elbow while the hand stays exactly where it is. Engineers use it to steer the elbow around obstacles while the tool keeps working.</p>
+<!-- code -->
+import numpy as np
+
+A = np.array([[1., 2.],
+              [2., 4.]])
+x = np.array([1., 1.])          # your turn: find x with Ax = 0
+
+print("Ax =", A @ x)
+nullpic(A, x)                   # input plane: the nullspace and your x

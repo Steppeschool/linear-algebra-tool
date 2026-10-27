@@ -24,15 +24,24 @@ SIGNUP = "https://www.steppeschool.com/offers/JwLxrqg8/checkout"
 TODAY = datetime.date.today().isoformat()
 
 LESSONS = [
-    {"n": 1, "dir": "lesson-1", "title": "Columns first",
+    {"n": 1, "dir": "lesson-1", "title": "Columns first", "chapter": "Strang, chapter 1",
      "sections": "Strang §1.1, §1.3, §2.1, §2.4, §5.3, §8.1",
      "summary": "Linear combinations, Ax as a mix of columns, the column space, row and column pictures, "
                 "matrices that move the plane, and why AB is not BA."},
+    {"n": 2, "dir": "lesson-2", "title": "Elimination and A = LU", "chapter": "Strang, chapter 2",
+     "sections": "Strang §2.2, §2.3, §2.6",
+     "summary": "How a computer solves Ax = b: subtract rows until the system is a triangle, solve from the bottom up, "
+                "and record the steps as A = LU."},
+    {"n": 3, "dir": "lesson-3", "title": "Inverses, transposes and permutations", "chapter": "Strang, chapter 2",
+     "sections": "Strang §2.5, §2.7",
+     "summary": "The matrix that undoes A, when it exists, how Gauss-Jordan finds it, what the transpose does, "
+                "and the matrices that reorder rows."},
+    {"n": 4, "dir": "lesson-4", "title": "The four subspaces", "chapter": "Strang, chapter 3",
+     "sections": "Strang §3.1 to §3.5",
+     "summary": "Subspaces, the nullspace, pivot and free columns, the complete solution to Ax = b, "
+                "independence and dimension, and the big picture of the four subspaces."},
 ]
 PLANNED = [
-    ("Elimination and A = LU", "§2.2, §2.3, §2.6"),
-    ("Inverses, transposes and permutations", "§2.5, §2.7"),
-    ("The four subspaces", "Chapter 3"),
     ("Orthogonality and least squares", "Chapter 4"),
     ("Determinants", "Chapter 5"),
     ("Eigenvalues and eigenvectors", "Chapter 6"),
@@ -93,7 +102,7 @@ COURSE = {"@type": "Course", "name": SITE, "url": BASE + "/",
           "provider": PROVIDER}
 
 
-def slide_page(lesson, slides, i):
+def slide_page(lesson, slides, i, next_lesson=None):
     s = slides[i]
     prefix = "../../"
     url = f"{BASE}/{lesson['dir']}/{s['slug']}/"
@@ -114,12 +123,17 @@ def slide_page(lesson, slides, i):
         for j, t in enumerate(slides))
     prev = (f'<a class="btn" id="prev" href="../{slides[i - 1]["slug"]}/">← Back</a>' if i > 0
             else f'<a class="btn" id="prev" href="../">← Overview</a>')
-    nxt = (f'<a class="btn primary" id="next" href="../{slides[i + 1]["slug"]}/">Next →</a>' if i < len(slides) - 1
-           else '<a class="btn primary" id="next" href="../../">All lessons →</a>')
+    if i < len(slides) - 1:
+        nxt = f'<a class="btn primary" id="next" href="../{slides[i + 1]["slug"]}/">Next →</a>'
+    elif next_lesson:
+        nxt = f'<a class="btn primary" id="next" href="../../{next_lesson["dir"]}/">Lesson {next_lesson["n"]} →</a>'
+    else:
+        nxt = '<a class="btn primary" id="next" href="../../">All lessons →</a>'
+
     config = {"slug": s["slug"], "lesson": lesson["dir"], "assets": prefix + "assets/",
               "preview": json.loads(s["preview"]), "check": s["check"]}
     return head(title, s["description"], url, prefix, "article", jsonld) + f"""<header class="top">
-  <div class="course"><b><a href="{prefix}" style="color:inherit;text-decoration:none">{SITE}</a></b><span>Lesson {lesson['n']} · {e(lesson['title'])} · Strang, chapter 1</span></div>
+  <div class="course"><b><a href="{prefix}" style="color:inherit;text-decoration:none">{SITE}</a></b><span>Lesson {lesson['n']} · {e(lesson['title'])} · {lesson['chapter']}</span></div>
   <nav class="steps" aria-label="Slides in this lesson">{steps}</nav>
 </header>
 
@@ -147,7 +161,7 @@ def slide_page(lesson, slides, i):
 
   <aside class="lab" aria-label="Lab">
     <figure class="figure" style="margin:0">
-      <div class="plane"><canvas id="cv" aria-label="The plane"></canvas></div>
+      <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
       <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
     </figure>
     <div class="editor-card">
@@ -165,7 +179,7 @@ def slide_page(lesson, slides, i):
         </div>
       </div>
       <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
-      <pre class="out" id="out"><span class="sys">Press Run. show(A), combo(A, x, b) and rowpic(A, b) draw on the plane.</span></pre>
+      <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
     </div>
   </aside>
 </main>
@@ -194,7 +208,7 @@ def lesson_page(lesson, slides):
   <section class="hero">
     <div class="kicker">Lesson {lesson['n']} · {e(lesson['sections'])}</div>
     <h1>{e(lesson['title'])}</h1>
-    <p>{e(lesson['summary'])} Eight short slides. Each one has an everyday picture, a worked example and Python you can run right on the page.</p>
+    <p>{e(lesson['summary'])} {len(slides)} short slides. Each one has an everyday picture, a worked example and Python you can run right on the page.</p>
     <div class="cta"><a class="btn primary" href="{slides[0]['slug']}/">Start the lesson →</a></div>
   </section>
   <h2 class="section-title">Slides</h2>
@@ -231,7 +245,7 @@ def home_page(lessons_built):
   <h2 class="section-title">How it works</h2>
   <div class="panel">
     <p>Every slide explains one idea with an everyday picture first: a boat with two thrusters, a shopping basket, a mirror. Then comes the maths, a worked example with real numbers, and where the idea shows up in drones, IMUs and robot arms.</p>
-    <p>Next to the text is a lab. The Python runs in your browser, nothing to install. Call <code>show(A)</code>, <code>combo(A, x, b)</code> or <code>rowpic(A, b)</code> and the plane redraws. Each slide ends with a small exercise that checks your answer.</p>
+    <p>Next to the text is a lab. The Python runs in your browser, nothing to install. Functions like <code>show(A)</code>, <code>combo(A, x, b)</code>, <code>nullpic(A, x)</code> and <code>four(A)</code> draw on the plane, and <code>table(...)</code> lays out matrices with their pivots. Each slide ends with a small exercise that checks your answer.</p>
   </div>
   <div class="signup">
     <p><b>New lessons by email.</b> Get a free Steppeschool account and we'll tell you when the next lesson is out. It also includes the free STM32 motor control mini-course and the Kalman filter notebook.</p>
@@ -255,7 +269,9 @@ def redirect_page(target):
 def main():
     urls = [BASE + "/"]
     built = []
-    for lesson in LESSONS:
+    available = [l for l in LESSONS if any((ROOT / "content" / l["dir"]).glob("*.html"))]
+    for li, lesson in enumerate(available):
+        next_lesson = available[li + 1] if li + 1 < len(available) else None
         files = sorted((ROOT / "content" / lesson["dir"]).glob("*.html"))
         slides = [parse(f) for f in files]
         built.append((lesson, slides))
@@ -266,7 +282,7 @@ def main():
         for i, s in enumerate(slides):
             d = out / s["slug"]
             d.mkdir(exist_ok=True)
-            (d / "index.html").write_text(slide_page(lesson, slides, i), encoding="utf-8")
+            (d / "index.html").write_text(slide_page(lesson, slides, i, next_lesson), encoding="utf-8")
             urls.append(f"{BASE}/{lesson['dir']}/{s['slug']}/")
     (ROOT / "index.html").write_text(home_page(built), encoding="utf-8")
     # old single-page URL from the first prototype

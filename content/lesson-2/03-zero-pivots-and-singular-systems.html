@@ -1,0 +1,42 @@
+---
+slug: zero-pivots-and-singular-systems
+seo_title: When Elimination Fails: Zero Pivots and Singular Systems
+description: A zero pivot means swap rows or stop. See the three cases in the row picture: one solution, no solution, infinitely many. Strang §2.2.
+kicker: Strang §2.2 · Breakdown of elimination
+title: A zero pivot: swap rows, or stop.
+task: Change b so that the system has no solution and the lines become parallel.
+preview: {"kind":"rows","A":[[1,-2],[2,-4]],"b":[1,2]}
+check: isR(V) && near(det(V.A), 0, 1e-9) && nonzero(V.A) && rankOf(V.A.map((r, i) => [r[0], r[1], V.b[i]])) > rankOf(V.A)
+---
+<!-- lead -->
+Elimination needs a nonzero number in each pivot position. When a zero shows up, either a row exchange fixes it, or the system has no single solution.
+<!-- key -->
+zero pivot &nbsp;→&nbsp; swap with a lower row &nbsp;&nbsp;|&nbsp;&nbsp; nothing to swap &nbsp;→&nbsp; singular
+<!-- prose -->
+<h2>Think: a relay race</h2>
+<p>The runner for the second leg is missing. If another team member can run that leg, you swap the order and carry on. That is a <b>row exchange</b>: a temporary problem.</p>
+<p>If nobody on the team can run it, the race is over. That is a <b>singular</b> system: a permanent problem.</p>
+<h2>Temporary: swap rows</h2>
+<div class="worked">
+<div class="row">0x + 2y = 4 &nbsp;&nbsp; 3x − 2y = 5</div>
+<div>The first pivot is 0. Swap the equations: 3x − 2y = 5 and 2y = 4. Now y = 2 and x = 3.</div>
+</div>
+<h2>Permanent: two ways to fail</h2>
+<ul>
+<li><b>No solution:</b> x − 2y = 1 and 2x − 4y = 11. Subtract 2 times the first: 0 = 9. Impossible. The lines are parallel.</li>
+<li><b>Infinitely many:</b> x − 2y = 1 and 2x − 4y = 2. Subtract: 0 = 0. The second equation said nothing new. Both are the same line.</li>
+</ul>
+<p>In both cases the second pivot is 0 and no row below can help. That happens exactly when the columns are dependent, so det A = 0. Lesson 1 called it squashing the plane onto a line.</p>
+<h2>Small pivots are risky too</h2>
+<p>A computer stores numbers with about 16 digits. Dividing by a tiny pivot, like 0.0000001, blows up rounding errors. So real solvers swap in the row with the <b>largest</b> available pivot at every step. It is called partial pivoting, and NumPy does it for you.</p>
+<!-- code -->
+import numpy as np
+
+A = np.array([[1., -2.],
+              [2., -4.]])
+b = np.array([1., 2.])        # change b[1]
+
+l = A[1, 0] / A[0, 0]
+print("second pivot:", A[1, 1] - l * A[0, 1])
+print("leftover equation: 0 =", b[1] - l * b[0])
+rowpic(A, b)

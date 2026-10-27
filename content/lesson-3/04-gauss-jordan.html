@@ -1,0 +1,46 @@
+---
+slug: gauss-jordan
+seo_title: Gauss-Jordan: Finding the Inverse by Elimination
+description: Put A next to the identity and eliminate until A becomes I. The identity turns into the inverse. Worked 3×3 example with rref in Python. Strang §2.5.
+kicker: Strang §2.5 · Gauss-Jordan elimination
+title: Eliminate on [A | I] and the inverse appears.
+task: Show that 4·K⁻¹ has whole-number entries: make the last item 4 * K_inv.
+preview: {"kind":"table","items":[{"label":"K","M":[[2,-1,0],[-1,2,-1],[0,-1,2]],"piv":[]}]}
+check: isTab(V) && close(lastItem(V), [[3,2,1],[2,4,2],[1,2,3]])
+---
+<!-- lead -->
+Write A and the identity side by side. Use row operations to turn A into I. The same operations turn I into A⁻¹.
+<!-- key -->
+[ A &nbsp;|&nbsp; I ] &nbsp;→&nbsp; [ I &nbsp;|&nbsp; A⁻¹ ]
+<!-- prose -->
+<h2>Think: carbon paper</h2>
+<p>Put a sheet of carbon paper under your work. Every row operation you do on A gets copied onto the identity beside it.</p>
+<p>When A has been turned into I, the copy holds the record of everything you did. Undoing A is exactly what that record does, so the copy is A⁻¹.</p>
+<h2>The steps</h2>
+<ul>
+<li><b>Forward:</b> clear below the pivots, as in lesson 2.</li>
+<li><b>Backward:</b> clear above the pivots too, from the bottom up.</li>
+<li><b>Scale:</b> divide each row by its pivot so the diagonal becomes 1s.</li>
+</ul>
+<p>The result is the reduced row echelon form. The lab's <code>rref</code> does all three steps.</p>
+<h2>Worked example</h2>
+<div class="worked">
+<div>K = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>−1</span><span>0</span><span>−1</span><span>2</span><span>−1</span><span>0</span><span>−1</span><span>2</span></span> shows up for a chain of springs and masses.</div>
+<div class="row">K⁻¹ = ¼ · <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>3</span><span>2</span><span>1</span><span>2</span><span>4</span><span>2</span><span>1</span><span>2</span><span>3</span></span></div>
+<div>Check one column: K times (3, 2, 1) = (6 − 2, −3 + 4 − 1, −2 + 2) = (4, 0, 0), which is 4 times the first column of I ✓</div>
+</div>
+<h2>Don't use it to solve Ax = b</h2>
+<p>Computing A⁻¹ costs about three times the work of elimination, and it adds rounding error. To solve Ax = b, use elimination (A = LU). Strang's advice: think with the inverse, compute without it.</p>
+<!-- code -->
+import numpy as np
+
+K = np.array([[ 2., -1.,  0.],
+              [-1.,  2., -1.],
+              [ 0., -1.,  2.]])
+
+aug = np.hstack([K, np.eye(3)])      # [K | I]
+R, pivots = rref(aug)                # Gauss-Jordan
+K_inv = R[:, 3:]                     # right half
+
+print("K @ K_inv =", np.round(K @ K_inv, 10))
+table(("[K | I]", aug), ("rref", R, pivots), ("K_inv", K_inv))

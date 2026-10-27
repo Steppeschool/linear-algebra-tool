@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>When Elimination Fails: Zero Pivots and Singular Systems | Linear Algebra, Live</title>
+<meta name="description" content="A zero pivot means swap rows or stop. See the three cases in the row picture: one solution, no solution, infinitely many. Strang §2.2.">
+<link rel="canonical" href="https://linearalgebra.steppeschool.com/lesson-2/zero-pivots-and-singular-systems/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Linear Algebra, Live">
+<meta property="og:title" content="When Elimination Fails: Zero Pivots and Singular Systems | Linear Algebra, Live">
+<meta property="og:description" content="A zero pivot means swap rows or stop. See the three cases in the row picture: one solution, no solution, infinitely many. Strang §2.2.">
+<meta property="og:url" content="https://linearalgebra.steppeschool.com/lesson-2/zero-pivots-and-singular-systems/">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/lesson.css">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "When Elimination Fails: Zero Pivots and Singular Systems", "headline": "A zero pivot: swap rows, or stop.", "description": "A zero pivot means swap rows or stop. See the three cases in the row picture: one solution, no solution, infinitely many. Strang §2.2.", "url": "https://linearalgebra.steppeschool.com/lesson-2/zero-pivots-and-singular-systems/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": true, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 2: Elimination and A = LU", "item": "https://linearalgebra.steppeschool.com/lesson-2/"}, {"@type": "ListItem", "position": 3, "name": "When Elimination Fails: Zero Pivots and Singular Systems", "item": "https://linearalgebra.steppeschool.com/lesson-2/zero-pivots-and-singular-systems/"}]}]</script>
+</head>
+<body>
+<header class="top">
+  <div class="course"><b><a href="../../" style="color:inherit;text-decoration:none">Linear Algebra, Live</a></b><span>Lesson 2 · Elimination and A = LU · Strang, chapter 2</span></div>
+  <nav class="steps" aria-label="Slides in this lesson"><a class="step" href="../gaussian-elimination/" data-slug="gaussian-elimination" title="Gaussian Elimination Explained Visually">1</a><a class="step" href="../pivots-and-back-substitution/" data-slug="pivots-and-back-substitution" title="Pivots and Back Substitution: 3×3 Elimination Step by Step">2</a><a class="step on" href="../zero-pivots-and-singular-systems/" data-slug="zero-pivots-and-singular-systems" aria-current="page" title="When Elimination Fails: Zero Pivots and Singular Systems">3</a><a class="step" href="../elimination-matrices/" data-slug="elimination-matrices" title="Elimination Matrices: Row Operations as Matrix Multiplication">4</a><a class="step" href="../lu-decomposition/" data-slug="lu-decomposition" title="LU Decomposition Explained: Why A = LU">5</a><a class="step" href="../recap/" data-slug="recap" title="Lesson 2 Recap: Elimination and A = LU">6</a></nav>
+</header>
+
+<main class="app">
+  <article class="page">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">All lessons</a> › <a href="../">Lesson 2</a></nav>
+    <div class="kicker">Strang §2.2 · Breakdown of elimination</div>
+    <h1>A zero pivot: swap rows, or stop.</h1>
+    <p class="lead">Elimination needs a nonzero number in each pivot position. When a zero shows up, either a row exchange fixes it, or the system has no single solution.</p>
+    <div class="key">zero pivot &nbsp;→&nbsp; swap with a lower row &nbsp;&nbsp;|&nbsp;&nbsp; nothing to swap &nbsp;→&nbsp; singular</div>
+    <div class="prose">
+<h2>Think: a relay race</h2>
+<p>The runner for the second leg is missing. If another team member can run that leg, you swap the order and carry on. That is a <b>row exchange</b>: a temporary problem.</p>
+<p>If nobody on the team can run it, the race is over. That is a <b>singular</b> system: a permanent problem.</p>
+<h2>Temporary: swap rows</h2>
+<div class="worked">
+<div class="row">0x + 2y = 4 &nbsp;&nbsp; 3x − 2y = 5</div>
+<div>The first pivot is 0. Swap the equations: 3x − 2y = 5 and 2y = 4. Now y = 2 and x = 3.</div>
+</div>
+<h2>Permanent: two ways to fail</h2>
+<ul>
+<li><b>No solution:</b> x − 2y = 1 and 2x − 4y = 11. Subtract 2 times the first: 0 = 9. Impossible. The lines are parallel.</li>
+<li><b>Infinitely many:</b> x − 2y = 1 and 2x − 4y = 2. Subtract: 0 = 0. The second equation said nothing new. Both are the same line.</li>
+</ul>
+<p>In both cases the second pivot is 0 and no row below can help. That happens exactly when the columns are dependent, so det A = 0. Lesson 1 called it squashing the plane onto a line.</p>
+<h2>Small pivots are risky too</h2>
+<p>A computer stores numbers with about 16 digits. Dividing by a tiny pivot, like 0.0000001, blows up rounding errors. So real solvers swap in the row with the <b>largest</b> available pivot at every step. It is called partial pivoting, and NumPy does it for you.</p>
+    </div>
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Change b so that the system has no solution and the lines become parallel.</span>
+      <span class="hint" id="hint">Edit the code in the lab and press Run.</span>
+    </div>
+    <div class="nav">
+      <a class="btn" id="prev" href="../pivots-and-back-substitution/">← Back</a>
+      <span class="count">3 / 6</span>
+      <a class="btn primary" id="next" href="../elimination-matrices/">Next →</a>
+    </div>
+  </article>
+
+  <aside class="lab" aria-label="Lab">
+    <figure class="figure" style="margin:0">
+      <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+      <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+    </figure>
+    <div class="editor-card">
+      <div class="bar">
+        <span class="file">slide_3.py</span>
+        <span class="status" id="pystatus">Loading Python…</span>
+        <button class="btn" id="reset">Reset</button>
+        <button class="btn primary" id="run" disabled>Run ▸</button>
+      </div>
+      <div class="editor">
+        <div class="gutter" id="gutter">1</div>
+        <div class="code" id="codewrap">
+          <pre id="hl" aria-hidden="true"></pre>
+          <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+A = np.array([[1., -2.],
+              [2., -4.]])
+b = np.array([1., 2.])        # change b[1]
+
+l = A[1, 0] / A[0, 0]
+print(&quot;second pivot:&quot;, A[1, 1] - l * A[0, 1])
+print(&quot;leftover equation: 0 =&quot;, b[1] - l * b[0])
+rowpic(A, b)</textarea>
+        </div>
+      </div>
+      <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+      <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+    </div>
+  </aside>
+</main>
+<footer class="foot">
+  Follows the order and notation of Gilbert Strang, <i>Introduction to Linear Algebra</i>, 5th edition (2016); § numbers refer to that book.
+  Explanations, examples and code are original. Made by <a href="https://www.steppeschool.com">Steppeschool</a>.
+</footer>
+
+<script>window.SLIDE = {"slug": "zero-pivots-and-singular-systems", "lesson": "lesson-2", "assets": "../../assets/", "preview": {"kind": "rows", "A": [[1, -2], [2, -4]], "b": [1, 2]}, "check": "isR(V) && near(det(V.A), 0, 1e-9) && nonzero(V.A) && rankOf(V.A.map((r, i) => [r[0], r[1], V.b[i]])) > rankOf(V.A)"};</script>
+<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
+<script src="../../assets/lab.js" defer></script>
+</body>
+</html>

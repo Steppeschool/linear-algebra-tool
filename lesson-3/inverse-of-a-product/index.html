@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Inverse of a Product: Why (AB)⁻¹ = B⁻¹A⁻¹ | Linear Algebra, Live</title>
+<meta name="description" content="To undo AB you undo A first, then B, so the order flips: (AB)⁻¹ = B⁻¹A⁻¹. Socks and shoes, a worked 2×2 example and live Python. Strang §2.5.">
+<link rel="canonical" href="https://linearalgebra.steppeschool.com/lesson-3/inverse-of-a-product/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Linear Algebra, Live">
+<meta property="og:title" content="Inverse of a Product: Why (AB)⁻¹ = B⁻¹A⁻¹ | Linear Algebra, Live">
+<meta property="og:description" content="To undo AB you undo A first, then B, so the order flips: (AB)⁻¹ = B⁻¹A⁻¹. Socks and shoes, a worked 2×2 example and live Python. Strang §2.5.">
+<meta property="og:url" content="https://linearalgebra.steppeschool.com/lesson-3/inverse-of-a-product/">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/lesson.css">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "Inverse of a Product: Why (AB)⁻¹ = B⁻¹A⁻¹", "headline": "Undo in reverse order.", "description": "To undo AB you undo A first, then B, so the order flips: (AB)⁻¹ = B⁻¹A⁻¹. Socks and shoes, a worked 2×2 example and live Python. Strang §2.5.", "url": "https://linearalgebra.steppeschool.com/lesson-3/inverse-of-a-product/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": true, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 3: Inverses, transposes and permutations", "item": "https://linearalgebra.steppeschool.com/lesson-3/"}, {"@type": "ListItem", "position": 3, "name": "Inverse of a Product: Why (AB)⁻¹ = B⁻¹A⁻¹", "item": "https://linearalgebra.steppeschool.com/lesson-3/inverse-of-a-product/"}]}]</script>
+</head>
+<body>
+<header class="top">
+  <div class="course"><b><a href="../../" style="color:inherit;text-decoration:none">Linear Algebra, Live</a></b><span>Lesson 3 · Inverses, transposes and permutations · Strang, chapter 2</span></div>
+  <nav class="steps" aria-label="Slides in this lesson"><a class="step" href="../inverse-matrix/" data-slug="inverse-matrix" title="Inverse Matrix Explained Visually">1</a><a class="step" href="../inverse-2x2-formula/" data-slug="inverse-2x2-formula" title="2×2 Inverse Matrix Formula and When It Fails">2</a><a class="step on" href="../inverse-of-a-product/" data-slug="inverse-of-a-product" aria-current="page" title="Inverse of a Product: Why (AB)⁻¹ = B⁻¹A⁻¹">3</a><a class="step" href="../gauss-jordan/" data-slug="gauss-jordan" title="Gauss-Jordan: Finding the Inverse by Elimination">4</a><a class="step" href="../transpose-and-symmetric-matrices/" data-slug="transpose-and-symmetric-matrices" title="Transpose and Symmetric Matrices Explained">5</a><a class="step" href="../permutation-matrices/" data-slug="permutation-matrices" title="Permutation Matrices: Reordering Rows">6</a><a class="step" href="../recap/" data-slug="recap" title="Lesson 3 Recap: Inverses, Transposes and Permutations">7</a></nav>
+</header>
+
+<main class="app">
+  <article class="page">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">All lessons</a> › <a href="../">Lesson 3</a></nav>
+    <div class="kicker">Strang §2.5 · Inverse of a product</div>
+    <h1>Undo in reverse order.</h1>
+    <p class="lead">AB means B first, then A. To undo it, you undo the last move first: A⁻¹ first, then B⁻¹. Written as a product, that is B⁻¹A⁻¹.</p>
+    <div class="key">(AB)⁻¹ = B⁻¹A⁻¹ &nbsp;&nbsp;&nbsp; (ABC)⁻¹ = C⁻¹B⁻¹A⁻¹</div>
+    <div class="prose">
+<h2>Think: socks and shoes, taken off</h2>
+<p>You put on socks, then shoes. In the evening you take off the shoes first, then the socks. Same two steps, reverse order.</p>
+<p>Matrix products read right to left. AB puts on B first. So the inverse takes off A first, and that is written B⁻¹A⁻¹.</p>
+<h2>Check it with algebra</h2>
+<div class="worked">
+<div class="row">(B⁻¹A⁻¹)(AB) = B⁻¹(A⁻¹A)B = B⁻¹ I B = B⁻¹B = I ✓</div>
+<div>The A and its inverse meet in the middle and cancel. Then B and its inverse cancel.</div>
+</div>
+<h2>Worked example</h2>
+<div class="worked">
+<div>R turns by 90°, S is a shear. From lesson 1, RS = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>−1</span><span>1</span><span>1</span></span></div>
+<div class="row">R⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>−1</span><span>0</span></span> (turn back) &nbsp; S⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>0</span><span>1</span></span> (slide back)</div>
+<div class="row">S⁻¹R⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>−1</span><span>0</span></span> &nbsp; but &nbsp; R⁻¹S⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>−1</span><span>1</span></span></div>
+<div>Only the first one undoes RS.</div>
+</div>
+<h2>Where you meet this</h2>
+<p>A robot arm's gripper position is a product of joint rotations, base first. To convert a point from the gripper's view back to the base, you undo the joints from the gripper inwards: last joint first.</p>
+<p>A rotation is undone by turning back, and that matrix is also its transpose. Slide 5 explains why that matters.</p>
+    </div>
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Undo R @ S: show the product of the two inverses in the right order.</span>
+      <span class="hint" id="hint">Edit the code in the lab and press Run.</span>
+    </div>
+    <div class="nav">
+      <a class="btn" id="prev" href="../inverse-2x2-formula/">← Back</a>
+      <span class="count">3 / 7</span>
+      <a class="btn primary" id="next" href="../gauss-jordan/">Next →</a>
+    </div>
+  </article>
+
+  <aside class="lab" aria-label="Lab">
+    <figure class="figure" style="margin:0">
+      <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+      <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+    </figure>
+    <div class="editor-card">
+      <div class="bar">
+        <span class="file">slide_3.py</span>
+        <span class="status" id="pystatus">Loading Python…</span>
+        <button class="btn" id="reset">Reset</button>
+        <button class="btn primary" id="run" disabled>Run ▸</button>
+      </div>
+      <div class="editor">
+        <div class="gutter" id="gutter">1</div>
+        <div class="code" id="codewrap">
+          <pre id="hl" aria-hidden="true"></pre>
+          <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+R = np.array([[0., -1.],
+              [1.,  0.]])      # turn 90°
+S = np.array([[1., 1.],
+              [0., 1.]])       # shear
+
+R_inv = np.linalg.inv(R)
+S_inv = np.linalg.inv(S)
+
+undo = R_inv @ S_inv           # is this the right order?
+print(&quot;undo @ (R @ S) =&quot;, undo @ (R @ S))
+show(undo)</textarea>
+        </div>
+      </div>
+      <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+      <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+    </div>
+  </aside>
+</main>
+<footer class="foot">
+  Follows the order and notation of Gilbert Strang, <i>Introduction to Linear Algebra</i>, 5th edition (2016); § numbers refer to that book.
+  Explanations, examples and code are original. Made by <a href="https://www.steppeschool.com">Steppeschool</a>.
+</footer>
+
+<script>window.SLIDE = {"slug": "inverse-of-a-product", "lesson": "lesson-3", "assets": "../../assets/", "preview": {"kind": "transform", "M": [[0, -1], [1, 1]]}, "check": "isT(V) && eqM(V.M, [[1,1],[-1,0]])"};</script>
+<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
+<script src="../../assets/lab.js" defer></script>
+</body>
+</html>

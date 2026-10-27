@@ -1,0 +1,48 @@
+---
+slug: vector-spaces-and-subspaces
+seo_title: Vector Spaces and Subspaces Explained Visually
+description: A subspace is a set you cannot leave by adding and scaling: a line or plane through the origin. Examples, non-examples and live Python. Strang §3.1.
+kicker: Strang §3.1 · Spaces of vectors
+title: A subspace is a flat sheet through the origin.
+task: C(A) is the line through (1, 2). Choose x so that Ax reaches b = (−3, −6) on that line.
+preview: {"kind":"combo","A":[[1,2],[2,4]],"x":[1,1],"b":[-3,-6]}
+check: isC(V) && eqM(V.A, [[1,2],[2,4]]) && near(Ax(V)[0], -3) && near(Ax(V)[1], -6)
+---
+<!-- lead -->
+A subspace is a set of vectors you cannot escape by adding and scaling. In the plane there are only three kinds: the origin alone, a line through the origin, or the whole plane.
+<!-- key -->
+v and w in S &nbsp;⇒&nbsp; cv + dw in S, for every c and d
+<!-- prose -->
+<h2>Think: a train on rails</h2>
+<p>Straight rails run through the station, which is the origin. Drive forward, reverse, combine trips: you always stay on the rails. That line is a subspace.</p>
+<p>Now picture rails that miss the station. Scale any position by 0 and you should land at the origin, but the origin is not on those rails. So they are not a subspace.</p>
+<h2>The three rules</h2>
+<ul>
+<li>It contains the zero vector.</li>
+<li>Adding two vectors in the set stays in the set.</li>
+<li>Scaling a vector in the set stays in the set.</li>
+</ul>
+<h2>Examples and non-examples</h2>
+<ul>
+<li><b>Yes:</b> the line y = 2x. Add or scale points on it and you stay on it.</li>
+<li><b>No:</b> the line y = 2x + 1. It misses the origin.</li>
+<li><b>No:</b> the first quadrant. Multiply by −1 and you leave it.</li>
+<li><b>No:</b> the two axes together. (1, 0) + (0, 1) = (1, 1) is on neither axis.</li>
+</ul>
+<h2>Worked example in 3D</h2>
+<div class="worked">
+<div>All (x, y, z) with x + y + z = 0. Add two such vectors and the sums add: 0 + 0 = 0. Scale one and the sum scales: c·0 = 0. So it is a subspace, a plane through the origin.</div>
+<div>With x + y + z = 1 instead, the origin fails the test. Not a subspace.</div>
+</div>
+<h2>Why we care</h2>
+<p>The column space from lesson 1 is a subspace. So is the nullspace on the next slide. Chapter 3 is about these spaces, because they tell you exactly which equations Ax = b can be solved, and how many solutions they have.</p>
+<!-- code -->
+import numpy as np
+
+A = np.array([[1., 2.],
+              [2., 4.]])        # column 2 = 2 x column 1
+x = np.array([1., 1.])          # change x
+b = np.array([-3., -6.])
+
+print("Ax =", A @ x)
+combo(A, x, b)

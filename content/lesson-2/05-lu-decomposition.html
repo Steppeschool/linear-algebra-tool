@@ -1,0 +1,45 @@
+---
+slug: lu-decomposition
+seo_title: LU Decomposition Explained: Why A = LU
+description: Elimination turns A into U, and the multipliers fill a lower triangular L so that A = LU. Factor once, solve many times. Python example. Strang §2.6.
+kicker: Strang §2.6 · Elimination = factorization
+title: A = LU: the triangle U and the receipt L.
+task: Fill in the missing multiplier ℓ₃₂ in L so that L @ U gives back A.
+preview: {"kind":"table","items":[{"label":"A","M":[[2,1,1],[4,-6,0],[-2,7,2]],"piv":[]}]}
+check: isTab(V) && close(lastItem(V), [[2,1,1],[4,-6,0],[-2,7,2]]) && close(item(V, 'L'), [[1,0,0],[2,1,0],[-1,-1,1]])
+---
+<!-- lead -->
+Elimination turns A into an upper triangular U. The multipliers you used fit into a lower triangular L, exactly where you used them. Multiply back and you get A.
+<!-- key -->
+A = LU &nbsp;&nbsp; L = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>ℓ₂₁</span><span>1</span><span>0</span><span>ℓ₃₁</span><span>ℓ₃₂</span><span>1</span></span>
+<!-- prose -->
+<h2>Think: meal prep</h2>
+<p>On Sunday you chop every vegetable for the week. That is the slow part. On weekdays each dinner takes five minutes.</p>
+<p>Factoring A = LU is the Sunday work. Each new right-hand side b is a weekday dinner: two quick triangular solves.</p>
+<div class="worked">
+<div class="row">Lc = b &nbsp;(forward, top to bottom) &nbsp;&nbsp; then &nbsp;&nbsp; Ux = c &nbsp;(back, bottom to top)</div>
+</div>
+<h2>Why the multipliers drop right in</h2>
+<p>Elimination is E₃₂E₃₁E₂₁A = U. Undo the cards in reverse order and you get A = E₂₁⁻¹E₃₁⁻¹E₃₂⁻¹U. That product of inverses is L.</p>
+<p>Each inverse just has +ℓ where E had −ℓ. Multiplied in this order, they don't interfere: every ℓ lands in its own position. No extra arithmetic. L is the receipt of every step you took.</p>
+<h2>Worked example</h2>
+<div class="worked">
+<div>From the last two slides: ℓ₂₁ = 2, ℓ₃₁ = −1, ℓ₃₂ = −1.</div>
+<div class="row">L = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>2</span><span>1</span><span>0</span><span>−1</span><span>−1</span><span>1</span></span> &nbsp; U = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>1</span><span>0</span><span>−8</span><span>−2</span><span>0</span><span>0</span><span>1</span></span></div>
+<div>Row 3 of LU: −1·(2, 1, 1) − 1·(0, −8, −2) + 1·(0, 0, 1) = (−2, 7, 2) ✓</div>
+</div>
+<h2>Why it matters</h2>
+<p>For n unknowns, factoring costs about n³/3 operations. Each solve after that costs about n². With n = 1000: around 330 million for the factoring, then about a million per new b.</p>
+<p>So when the matrix stays the same and only the right side changes, as in a simulation stepping through time, you factor once and reuse it. The lab has <code>lu(A)</code> if you want to check your own matrices.</p>
+<!-- code -->
+import numpy as np
+
+U = np.array([[2.,  1.,  1.],
+              [0., -8., -2.],
+              [0.,  0.,  1.]])
+
+L = np.array([[ 1., 0., 0.],
+              [ 2., 1., 0.],
+              [-1., 0., 1.]])      # one multiplier is missing
+
+table(("L", L), ("U", U), ("L @ U", L @ U))

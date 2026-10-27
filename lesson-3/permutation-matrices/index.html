@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Permutation Matrices: Reordering Rows | Linear Algebra, Live</title>
+<meta name="description" content="A permutation matrix reorders the rows of A. Its inverse is its transpose, and it is how elimination handles row exchanges: PA = LU. Python example. Strang §2.7.">
+<link rel="canonical" href="https://linearalgebra.steppeschool.com/lesson-3/permutation-matrices/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Linear Algebra, Live">
+<meta property="og:title" content="Permutation Matrices: Reordering Rows | Linear Algebra, Live">
+<meta property="og:description" content="A permutation matrix reorders the rows of A. Its inverse is its transpose, and it is how elimination handles row exchanges: PA = LU. Python example. Strang §2.7.">
+<meta property="og:url" content="https://linearalgebra.steppeschool.com/lesson-3/permutation-matrices/">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/lesson.css">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "Permutation Matrices: Reordering Rows", "headline": "Permutation matrices shuffle rows.", "description": "A permutation matrix reorders the rows of A. Its inverse is its transpose, and it is how elimination handles row exchanges: PA = LU. Python example. Strang §2.7.", "url": "https://linearalgebra.steppeschool.com/lesson-3/permutation-matrices/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": true, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 3: Inverses, transposes and permutations", "item": "https://linearalgebra.steppeschool.com/lesson-3/"}, {"@type": "ListItem", "position": 3, "name": "Permutation Matrices: Reordering Rows", "item": "https://linearalgebra.steppeschool.com/lesson-3/permutation-matrices/"}]}]</script>
+</head>
+<body>
+<header class="top">
+  <div class="course"><b><a href="../../" style="color:inherit;text-decoration:none">Linear Algebra, Live</a></b><span>Lesson 3 · Inverses, transposes and permutations · Strang, chapter 2</span></div>
+  <nav class="steps" aria-label="Slides in this lesson"><a class="step" href="../inverse-matrix/" data-slug="inverse-matrix" title="Inverse Matrix Explained Visually">1</a><a class="step" href="../inverse-2x2-formula/" data-slug="inverse-2x2-formula" title="2×2 Inverse Matrix Formula and When It Fails">2</a><a class="step" href="../inverse-of-a-product/" data-slug="inverse-of-a-product" title="Inverse of a Product: Why (AB)⁻¹ = B⁻¹A⁻¹">3</a><a class="step" href="../gauss-jordan/" data-slug="gauss-jordan" title="Gauss-Jordan: Finding the Inverse by Elimination">4</a><a class="step" href="../transpose-and-symmetric-matrices/" data-slug="transpose-and-symmetric-matrices" title="Transpose and Symmetric Matrices Explained">5</a><a class="step on" href="../permutation-matrices/" data-slug="permutation-matrices" aria-current="page" title="Permutation Matrices: Reordering Rows">6</a><a class="step" href="../recap/" data-slug="recap" title="Lesson 3 Recap: Inverses, Transposes and Permutations">7</a></nav>
+</header>
+
+<main class="app">
+  <article class="page">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">All lessons</a> › <a href="../">Lesson 3</a></nav>
+    <div class="kicker">Strang §2.7 · Permutations</div>
+    <h1>Permutation matrices shuffle rows.</h1>
+    <p class="lead">A permutation matrix is the identity with its rows in a new order. Multiply A by it and the rows of A move into that order.</p>
+    <div class="key">P = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>0</span><span>0</span><span>1</span><span>1</span><span>0</span><span>0</span><span>0</span><span>1</span><span>0</span></span> &nbsp; PA = rows 3, 1, 2 of A</div>
+    <div class="prose">
+<h2>Think: a playlist</h2>
+<p>A permutation is a new running order for a playlist. Row 1 of P says which song plays first, row 2 which plays second, and so on.</p>
+<p>Each row of P has a single 1. A 1 in column 3 of row 1 means "the first slot gets row 3".</p>
+<h2>Undo by transposing</h2>
+<p>To put the playlist back, read the instructions the other way: "row 3 came from slot 1". That is Pᵀ. So for every permutation, P⁻¹ = Pᵀ.</p>
+<h2>Worked example</h2>
+<div class="worked">
+<div>Use A with rows full of 1s, 2s and 3s, so you can see where each row goes.</div>
+<div class="row">P = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>0</span><span>0</span><span>1</span><span>1</span><span>0</span><span>0</span><span>0</span><span>1</span><span>0</span></span> &nbsp; PA = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>3</span><span>3</span><span>3</span><span>1</span><span>1</span><span>1</span><span>2</span><span>2</span><span>2</span></span></div>
+<div class="row">PᵀP = I ✓</div>
+</div>
+<h2>Counting and the plane</h2>
+<ul>
+<li>There are n! orders of n rows, so 3 by 3 has 6 permutation matrices, including I.</li>
+<li>In the plane, the only swap is <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>1</span><span>0</span></span>. It is the mirror on the line y = x from lesson 1, with det = −1.</li>
+</ul>
+<h2>Back to elimination</h2>
+<p>When lesson 2 hit a zero pivot, we swapped rows. Doing all the swaps first gives PA = LU. That is the form NumPy and every real solver use, with swaps chosen for the largest pivots.</p>
+    </div>
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Build P that puts row 3 on top, then rows 1 and 2: the order 3, 1, 2.</span>
+      <span class="hint" id="hint">Edit the code in the lab and press Run.</span>
+    </div>
+    <div class="nav">
+      <a class="btn" id="prev" href="../transpose-and-symmetric-matrices/">← Back</a>
+      <span class="count">6 / 7</span>
+      <a class="btn primary" id="next" href="../recap/">Next →</a>
+    </div>
+  </article>
+
+  <aside class="lab" aria-label="Lab">
+    <figure class="figure" style="margin:0">
+      <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+      <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+    </figure>
+    <div class="editor-card">
+      <div class="bar">
+        <span class="file">slide_6.py</span>
+        <span class="status" id="pystatus">Loading Python…</span>
+        <button class="btn" id="reset">Reset</button>
+        <button class="btn primary" id="run" disabled>Run ▸</button>
+      </div>
+      <div class="editor">
+        <div class="gutter" id="gutter">1</div>
+        <div class="code" id="codewrap">
+          <pre id="hl" aria-hidden="true"></pre>
+          <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+A = np.array([[1., 1., 1.],
+              [2., 2., 2.],
+              [3., 3., 3.]])
+
+P = np.eye(3)                  # your turn: rows of P = rows of I in the order 3, 1, 2
+
+table((&quot;P&quot;, P), (&quot;A&quot;, A), (&quot;P A&quot;, P @ A), (&quot;P.T P&quot;, P.T @ P))</textarea>
+        </div>
+      </div>
+      <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+      <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+    </div>
+  </aside>
+</main>
+<footer class="foot">
+  Follows the order and notation of Gilbert Strang, <i>Introduction to Linear Algebra</i>, 5th edition (2016); § numbers refer to that book.
+  Explanations, examples and code are original. Made by <a href="https://www.steppeschool.com">Steppeschool</a>.
+</footer>
+
+<script>window.SLIDE = {"slug": "permutation-matrices", "lesson": "lesson-3", "assets": "../../assets/", "preview": {"kind": "table", "items": [{"label": "A", "M": [[1, 1, 1], [2, 2, 2], [3, 3, 3]], "piv": []}]}, "check": "isTab(V) && close(item(V, 'P'), [[0,0,1],[1,0,0],[0,1,0]])"};</script>
+<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
+<script src="../../assets/lab.js" defer></script>
+</body>
+</html>

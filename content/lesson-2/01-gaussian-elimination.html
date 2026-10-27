@@ -1,0 +1,53 @@
+---
+slug: gaussian-elimination
+seo_title: Gaussian Elimination Explained Visually
+description: How elimination solves two equations: subtract to remove an unknown, then back-substitute. A café puzzle, a worked example and live Python. Strang §2.2.
+kicker: Strang §2.2 · The idea of elimination
+title: Elimination knocks out one unknown at a time.
+task: Choose the multiplier l so that the new second row starts with 0.
+preview: {"kind":"rows","A":[[1,-2],[3,2]],"b":[1,11]}
+check: isR(V) && close(V.A, [[1,-2],[0,8]]) && close(V.b, [1,8])
+---
+<!-- lead -->
+Subtract a multiple of one equation from another so an unknown disappears. What is left is one equation with one unknown. Solve it, then work back up.
+<!-- key -->
+x − 2y = 1 &nbsp;&nbsp; 3x + 2y = 11 &nbsp;&nbsp;→&nbsp;&nbsp; 8y = 8
+<!-- prose -->
+<h2>Think: the café puzzle</h2>
+<p>A coffee and a croissant cost €5. A coffee and two croissants cost €7. What does a croissant cost?</p>
+<p>Nobody reaches for a formula. You compare the two orders. The second one has one extra croissant and costs €2 more. So a croissant is €2, and the coffee is €3.</p>
+<p>That comparison is elimination. You subtracted one equation from the other and the coffee disappeared.</p>
+<h2>The steps</h2>
+<ul>
+<li><b>Pivot:</b> the first x coefficient, here 1. It is the number you use to clear the column below it.</li>
+<li><b>Multiplier:</b> ℓ = (entry to remove) ÷ (pivot) = 3 ÷ 1 = 3.</li>
+<li><b>Subtract:</b> equation 2 minus 3 times equation 1.</li>
+<li><b>Back substitution:</b> solve the last equation, then put that value into the one above.</li>
+</ul>
+<h2>Worked example</h2>
+<div class="worked">
+<div class="row">(3x + 2y) − 3(x − 2y) = 11 − 3·1</div>
+<div class="row">8y = 8 &nbsp;→&nbsp; y = 1</div>
+<div class="row">x − 2·1 = 1 &nbsp;→&nbsp; x = 3</div>
+</div>
+<h2>What it looks like</h2>
+<p>Run the code before and after. The second line changes: it turns flat, y = 1. The crossing point stays at (3, 1).</p>
+<p>That is the whole trick. Each step gives a simpler system with exactly the same solution. Anything that solves both old equations also solves the new ones, and the other way round.</p>
+<h2>Where you meet this</h2>
+<p>Every circuit simulator, every finite element program and every least-squares fit solves equations this way. The systems just have thousands of unknowns instead of two.</p>
+<!-- code -->
+import numpy as np
+
+A = np.array([[1., -2.],
+              [3.,  2.]])
+b = np.array([1., 11.])
+
+l = 0                       # multiplier = entry to remove / pivot
+U = A.copy()
+c = b.copy()
+U[1] = U[1] - l * U[0]      # row 2 minus l times row 1
+c[1] = c[1] - l * c[0]
+
+print("U =", U)
+print("c =", c)
+rowpic(U, c)                # same crossing point, simpler line

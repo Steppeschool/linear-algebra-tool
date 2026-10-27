@@ -35,6 +35,10 @@ class ndarray:
         if self.ndim == 1:
             return ndarray(self.d)
         return ndarray([[self.d[i][j] for i in range(self.shape[0])] for j in range(self.shape[1])])
+    def copy(self):
+        return ndarray(self.tolist())
+    def astype(self, t=None):
+        return ndarray(self.tolist())
     def tolist(self):
         return [list(r) for r in self.d] if self.ndim == 2 else list(self.d)
     def __len__(self):
@@ -45,12 +49,18 @@ class ndarray:
     def __getitem__(self, k):
         if isinstance(k, tuple):
             i, j = k
-            if isinstance(i, slice) and isinstance(j, int):
-                return ndarray([r[j] for r in self.d][i])
-            if isinstance(i, int) and isinstance(j, slice):
-                return ndarray(self.d[i][j])
-            return self.d[i][j]
+            if isinstance(i, int) and isinstance(j, int):
+                return self.d[i][j]
+            rows = self.d[i] if isinstance(i, slice) else [self.d[i]]
+            out = [r[j] if isinstance(j, slice) else [r[j]] for r in rows]
+            if isinstance(i, int):
+                return ndarray(out[0])
+            if isinstance(j, int):
+                return ndarray([r[0] for r in out])
+            return ndarray(out)
         v = self.d[k]
+        if isinstance(k, slice) and self.ndim == 1:
+            return ndarray(v)
         return ndarray(v) if isinstance(v, list) else v
     def __setitem__(self, k, val):
         if isinstance(k, tuple):
@@ -110,6 +120,7 @@ np = _NS()
 np.ndarray = ndarray
 np.array = lambda x, dtype=None: ndarray(x)
 np.asarray = asarray
+np.copy = lambda a: asarray(a).copy()
 np.pi = _M.PI
 np.e = _M.E
 def _ufunc(f):
@@ -149,15 +160,59 @@ def _det(a):
     if n == 2:
         return a.d[0][0] * a.d[1][1] - a.d[0][1] * a.d[1][0]
     return sum(((-1) ** j) * a.d[0][j] * _det([r[:j] + r[j + 1:] for r in a.d[1:]]) for j in range(n))
+def _rref(a, tol=1e-10):
+    a = asarray(a)
+    R = [list(r) for r in a.d] if a.ndim == 2 else [list(a.d)]
+    m, n = len(R), len(R[0])
+    pivots = []
+    row = 0
+    for col in range(n):
+        if row >= m:
+            break
+        best = max(range(row, m), key=lambda i: abs(R[i][col]))
+        if abs(R[best][col]) < tol:
+            continue
+        R[row], R[best] = R[best], R[row]
+        p = R[row][col]
+        R[row] = [v / p for v in R[row]]
+        for i in range(m):
+            if i != row and abs(R[i][col]) > tol:
+                f = R[i][col]
+                R[i] = [v - f * w for v, w in zip(R[i], R[row])]
+        pivots.append(col)
+        row += 1
+    R = [[0.0 if abs(v) < tol else v for v in r] for r in R]
+    return ndarray(R), pivots
 def _inv(a):
     a = asarray(a)
-    if a.shape != (2, 2):
-        raise ValueError("this prototype inverts 2x2 matrices only")
-    d = _det(a)
-    if abs(d) < 1e-12:
+    n = a.shape[0]
+    if a.ndim != 2 or a.shape[1] != n:
+        raise ValueError("only square matrices have an inverse, got shape %s" % (a.shape,))
+    if abs(_det(a)) < 1e-12:
         raise ValueError("LinAlgError: singular matrix (det = 0), it has no inverse")
-    (p, q), (r, s) = a.d
-    return ndarray([[s / d, -q / d], [-r / d, p / d]])
+    aug = ndarray([r + [1.0 if i == j else 0.0 for j in range(n)] for i, r in enumerate(a.tolist())])
+    R, piv = _rref(aug)
+    return ndarray([r[n:] for r in R.d])
+def _rank(a):
+    return len(_rref(a)[1])
+def lu(a):
+    """A = LU by elimination without row exchanges. Raises if a pivot is zero."""
+    a = asarray(a)
+    n = a.shape[0]
+    U = [list(r) for r in a.d]
+    L = [[1.0 if i == j else 0.0 for j in range(n)] for i in range(n)]
+    for k in range(n):
+        if abs(U[k][k]) < 1e-12:
+            raise ValueError("zero pivot in row %d: this matrix needs a row exchange (PA = LU)" % (k + 1))
+        for i in range(k + 1, n):
+            l = U[i][k] / U[k][k]
+            L[i][k] = l
+            U[i] = [v - l * w for v, w in zip(U[i], U[k])]
+    U = [[0.0 if abs(v) < 1e-12 else v for v in r] for r in U]
+    return ndarray(L), ndarray(U)
+def rref(a):
+    """Reduced row echelon form. Returns (R, pivot_columns), columns counted from 0."""
+    return _rref(a)
 def _norm(v):
     v = asarray(v)
     f = sum(v.d, []) if v.ndim == 2 else v.d
@@ -167,6 +222,11 @@ np.linalg.det = _det
 np.linalg.inv = _inv
 np.linalg.norm = _norm
 np.linalg.solve = lambda A, b: _inv(A) @ asarray(b)
+np.linalg.matrix_rank = _rank
+np.hstack = lambda ms: ndarray([sum([asarray(m).d[i] if asarray(m).ndim == 2 else [asarray(m).d[i]] for m in ms], []) for i in range(asarray(ms[0]).shape[0])])
+np.vstack = lambda ms: ndarray(sum([asarray(m).tolist() if asarray(m).ndim == 2 else [asarray(m).tolist()] for m in ms], []))
+np.triu = lambda a: ndarray([[v if j >= i else 0.0 for j, v in enumerate(r)] for i, r in enumerate(asarray(a).d)])
+np.tril = lambda a: ndarray([[v if j <= i else 0.0 for j, v in enumerate(r)] for i, r in enumerate(asarray(a).d)])
 np.column_stack = lambda vs: ndarray([[asarray(v).d[i] for v in vs] for i in range(len(asarray(vs[0]).d))])
 
 def combo(A, x, b=None):
@@ -181,6 +241,31 @@ def rowpic(A, b):
         raise ValueError("rowpic() needs a 2x2 matrix A and a right-hand side b with 2 entries")
     window.__pyrows(A.tolist(), b.tolist())
 
+def table(*items):
+    """Draw matrices and vectors side by side. Each item: M, or (label, M), or (label, M, pivot_columns)."""
+    out = []
+    for k, it in enumerate(items):
+        if isinstance(it, tuple):
+            label = str(it[0]); M = asarray(it[1]); piv = list(it[2]) if len(it) > 2 else []
+        else:
+            label = ""; M = asarray(it); piv = []
+        out.append([label, M.tolist() if M.ndim == 2 else [[v] for v in M.d], piv, M.ndim])
+    window.__pytable(out)
+
+def nullpic(A, x, b=None):
+    """Input plane of a 2x2 matrix: its nullspace, your x, and (with b) every solution of Ax = b."""
+    A = asarray(A); x = asarray(x)
+    if A.shape != (2, 2) or x.shape != (2,):
+        raise ValueError("nullpic() needs a 2x2 matrix A and a vector x with 2 entries")
+    window.__pynull(A.tolist(), x.tolist(), [] if b is None else asarray(b).tolist())
+
+def four(A):
+    """The four subspaces of a 2x2 matrix: input plane on the left, output plane on the right."""
+    A = asarray(A)
+    if A.shape != (2, 2):
+        raise ValueError("four() needs a 2x2 matrix")
+    window.__pyfour(A.tolist())
+
 def show(M, *vectors):
     M = asarray(M)
     if M.shape != (2, 2):
@@ -188,7 +273,7 @@ def show(M, *vectors):
     window.__pyshow(M.tolist(), [asarray(v).tolist() for v in vectors])
 
 def run(src):
-    ns = {'np': np, 'show': show, 'combo': combo, 'rowpic': rowpic, 'print': _print, '__name__': '__main__'}
+    ns = {'np': np, 'show': show, 'combo': combo, 'rowpic': rowpic, 'table': table, 'nullpic': nullpic, 'four': four, 'lu': lu, 'rref': rref, 'print': _print, '__name__': '__main__'}
     try:
         exec(compile(src, 'lesson.py', 'exec'), ns)
     except SyntaxError as e:

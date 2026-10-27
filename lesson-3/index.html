@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lesson 3: Inverses, transposes and permutations | Linear Algebra, Live</title>
+<meta name="description" content="Interactive linear algebra lesson 3: The matrix that undoes A, when it exists, how Gauss-Jordan finds it, what the transpose does, and the matrices that reorder rows. Every slide has live Python.">
+<link rel="canonical" href="https://linearalgebra.steppeschool.com/lesson-3/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Linear Algebra, Live">
+<meta property="og:title" content="Lesson 3: Inverses, transposes and permutations | Linear Algebra, Live">
+<meta property="og:description" content="Interactive linear algebra lesson 3: The matrix that undoes A, when it exists, how Gauss-Jordan finds it, what the transpose does, and the matrices that reorder rows. Every slide has live Python.">
+<meta property="og:url" content="https://linearalgebra.steppeschool.com/lesson-3/">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/lesson.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "ItemList", "name": "Lesson 3: Inverses, transposes and permutations | Linear Algebra, Live", "itemListElement": [{"@type": "ListItem", "position": 1, "url": "https://linearalgebra.steppeschool.com/lesson-3/inverse-matrix/", "name": "Inverse Matrix Explained Visually"}, {"@type": "ListItem", "position": 2, "url": "https://linearalgebra.steppeschool.com/lesson-3/inverse-2x2-formula/", "name": "2×2 Inverse Matrix Formula and When It Fails"}, {"@type": "ListItem", "position": 3, "url": "https://linearalgebra.steppeschool.com/lesson-3/inverse-of-a-product/", "name": "Inverse of a Product: Why (AB)⁻¹ = B⁻¹A⁻¹"}, {"@type": "ListItem", "position": 4, "url": "https://linearalgebra.steppeschool.com/lesson-3/gauss-jordan/", "name": "Gauss-Jordan: Finding the Inverse by Elimination"}, {"@type": "ListItem", "position": 5, "url": "https://linearalgebra.steppeschool.com/lesson-3/transpose-and-symmetric-matrices/", "name": "Transpose and Symmetric Matrices Explained"}, {"@type": "ListItem", "position": 6, "url": "https://linearalgebra.steppeschool.com/lesson-3/permutation-matrices/", "name": "Permutation Matrices: Reordering Rows"}, {"@type": "ListItem", "position": 7, "url": "https://linearalgebra.steppeschool.com/lesson-3/recap/", "name": "Lesson 3 Recap: Inverses, Transposes and Permutations"}]}</script>
+</head>
+<body>
+<div class="home">
+  <nav class="crumbs" aria-label="Breadcrumb" style="padding-top:8px"><a href="../">All lessons</a></nav>
+  <section class="hero">
+    <div class="kicker">Lesson 3 · Strang §2.5, §2.7</div>
+    <h1>Inverses, transposes and permutations</h1>
+    <p>The matrix that undoes A, when it exists, how Gauss-Jordan finds it, what the transpose does, and the matrices that reorder rows. 7 short slides. Each one has an everyday picture, a worked example and Python you can run right on the page.</p>
+    <div class="cta"><a class="btn primary" href="inverse-matrix/">Start the lesson →</a></div>
+  </section>
+  <h2 class="section-title">Slides</h2>
+  <div class="cards"><a class="card" href="inverse-matrix/"><span class="n">01 · Strang §2.5 · Inverse matrices</span><h3>Inverse Matrix Explained Visually</h3><p>The inverse matrix undoes A: apply A, then its inverse, and every point is back where it started. See it on the plane and build one in Python. Strang §2.5.</p></a><a class="card" href="inverse-2x2-formula/"><span class="n">02 · Strang §2.5 · The 2 by 2 inverse</span><h3>2×2 Inverse Matrix Formula and When It Fails</h3><p>Swap the diagonal, flip the other signs, divide by ad − bc. Why the determinant appears, and why det = 0 means no inverse. Python example.</p></a><a class="card" href="inverse-of-a-product/"><span class="n">03 · Strang §2.5 · Inverse of a product</span><h3>Inverse of a Product: Why (AB)⁻¹ = B⁻¹A⁻¹</h3><p>To undo AB you undo A first, then B, so the order flips: (AB)⁻¹ = B⁻¹A⁻¹. Socks and shoes, a worked 2×2 example and live Python. Strang §2.5.</p></a><a class="card" href="gauss-jordan/"><span class="n">04 · Strang §2.5 · Gauss-Jordan elimination</span><h3>Gauss-Jordan: Finding the Inverse by Elimination</h3><p>Put A next to the identity and eliminate until A becomes I. The identity turns into the inverse. Worked 3×3 example with rref in Python. Strang §2.5.</p></a><a class="card" href="transpose-and-symmetric-matrices/"><span class="n">05 · Strang §2.7 · Transposes</span><h3>Transpose and Symmetric Matrices Explained</h3><p>The transpose swaps rows and columns. Why (AB)ᵀ = BᵀAᵀ, what a symmetric matrix is, and why AᵀA is always symmetric. Python example. Strang §2.7.</p></a><a class="card" href="permutation-matrices/"><span class="n">06 · Strang §2.7 · Permutations</span><h3>Permutation Matrices: Reordering Rows</h3><p>A permutation matrix reorders the rows of A. Its inverse is its transpose, and it is how elimination handles row exchanges: PA = LU. Python example. Strang §2.7.</p></a><a class="card" href="recap/"><span class="n">07 · Recap · Reading</span><h3>Lesson 3 Recap: Inverses, Transposes and Permutations</h3><p>Inverses, the 2×2 formula, the inverse of a product, Gauss-Jordan, transposes, symmetric matrices and permutation matrices on one page.</p></a></div>
+</div>
+<footer class="foot">
+  Follows the order and notation of Gilbert Strang, <i>Introduction to Linear Algebra</i>, 5th edition (2016); § numbers refer to that book.
+  Explanations, examples and code are original. Made by <a href="https://www.steppeschool.com">Steppeschool</a>.
+</footer>
+</body>
+</html>

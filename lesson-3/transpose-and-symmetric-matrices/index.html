@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Transpose and Symmetric Matrices Explained | Linear Algebra, Live</title>
+<meta name="description" content="The transpose swaps rows and columns. Why (AB)ᵀ = BᵀAᵀ, what a symmetric matrix is, and why AᵀA is always symmetric. Python example. Strang §2.7.">
+<link rel="canonical" href="https://linearalgebra.steppeschool.com/lesson-3/transpose-and-symmetric-matrices/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Linear Algebra, Live">
+<meta property="og:title" content="Transpose and Symmetric Matrices Explained | Linear Algebra, Live">
+<meta property="og:description" content="The transpose swaps rows and columns. Why (AB)ᵀ = BᵀAᵀ, what a symmetric matrix is, and why AᵀA is always symmetric. Python example. Strang §2.7.">
+<meta property="og:url" content="https://linearalgebra.steppeschool.com/lesson-3/transpose-and-symmetric-matrices/">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/lesson.css">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "Transpose and Symmetric Matrices Explained", "headline": "The transpose swaps rows and columns.", "description": "The transpose swaps rows and columns. Why (AB)ᵀ = BᵀAᵀ, what a symmetric matrix is, and why AᵀA is always symmetric. Python example. Strang §2.7.", "url": "https://linearalgebra.steppeschool.com/lesson-3/transpose-and-symmetric-matrices/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": true, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 3: Inverses, transposes and permutations", "item": "https://linearalgebra.steppeschool.com/lesson-3/"}, {"@type": "ListItem", "position": 3, "name": "Transpose and Symmetric Matrices Explained", "item": "https://linearalgebra.steppeschool.com/lesson-3/transpose-and-symmetric-matrices/"}]}]</script>
+</head>
+<body>
+<header class="top">
+  <div class="course"><b><a href="../../" style="color:inherit;text-decoration:none">Linear Algebra, Live</a></b><span>Lesson 3 · Inverses, transposes and permutations · Strang, chapter 2</span></div>
+  <nav class="steps" aria-label="Slides in this lesson"><a class="step" href="../inverse-matrix/" data-slug="inverse-matrix" title="Inverse Matrix Explained Visually">1</a><a class="step" href="../inverse-2x2-formula/" data-slug="inverse-2x2-formula" title="2×2 Inverse Matrix Formula and When It Fails">2</a><a class="step" href="../inverse-of-a-product/" data-slug="inverse-of-a-product" title="Inverse of a Product: Why (AB)⁻¹ = B⁻¹A⁻¹">3</a><a class="step" href="../gauss-jordan/" data-slug="gauss-jordan" title="Gauss-Jordan: Finding the Inverse by Elimination">4</a><a class="step on" href="../transpose-and-symmetric-matrices/" data-slug="transpose-and-symmetric-matrices" aria-current="page" title="Transpose and Symmetric Matrices Explained">5</a><a class="step" href="../permutation-matrices/" data-slug="permutation-matrices" title="Permutation Matrices: Reordering Rows">6</a><a class="step" href="../recap/" data-slug="recap" title="Lesson 3 Recap: Inverses, Transposes and Permutations">7</a></nav>
+</header>
+
+<main class="app">
+  <article class="page">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">All lessons</a> › <a href="../">Lesson 3</a></nav>
+    <div class="kicker">Strang §2.7 · Transposes</div>
+    <h1>The transpose swaps rows and columns.</h1>
+    <p class="lead">Row 1 of A becomes column 1 of Aᵀ. An m by n matrix turns into an n by m matrix. A matrix that equals its own transpose is called symmetric.</p>
+    <div class="key"><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span></span>ᵀ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>3</span><span>5</span><span>2</span><span>4</span><span>6</span></span></div>
+    <div class="prose">
+<h2>Think: turning a spreadsheet</h2>
+<p>A sales sheet has products as rows and months as columns. Your manager wants months as rows instead. You haven't changed any number, only which way you read them. That is the transpose.</p>
+<h2>Symmetric: the distance table</h2>
+<p>Look at a road atlas table of distances between cities. Paris to Lyon is the same as Lyon to Paris. Flip the table across its diagonal and nothing changes. That table is symmetric: S = Sᵀ.</p>
+<h2>The rules</h2>
+<ul>
+<li><b>(AB)ᵀ = BᵀAᵀ.</b> The order flips, just like the inverse.</li>
+<li><b>(A⁻¹)ᵀ = (Aᵀ)⁻¹.</b> Transpose and inverse can be done in either order.</li>
+<li><b>Dot products:</b> x · y = xᵀy, a row times a column.</li>
+<li><b>AᵀA is always symmetric.</b> Its (i, j) entry is column i of A dotted with column j. Swapping i and j gives the same dot product.</li>
+</ul>
+<h2>Worked example</h2>
+<div class="worked">
+<div>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span></span> is 3 by 2, so AᵀA is 2 by 2.</div>
+<div class="row">(1,1): 1 + 9 + 25 = 35 &nbsp; (1,2): 2 + 12 + 30 = 44 &nbsp; (2,2): 4 + 16 + 36 = 56</div>
+<div class="row">AᵀA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>35</span><span>44</span><span>44</span><span>56</span></span></div>
+</div>
+<h2>Where you meet this</h2>
+<p>AᵀA is the heart of least squares (chapter 4): fitting a line to noisy measurements, or calibrating an accelerometer from many readings. For a rotation matrix Q, QᵀQ = I, so the transpose is the inverse. Turning back is free.</p>
+    </div>
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Change the last item to Aᵀ A (2 by 2) and check that it is symmetric.</span>
+      <span class="hint" id="hint">Edit the code in the lab and press Run.</span>
+    </div>
+    <div class="nav">
+      <a class="btn" id="prev" href="../gauss-jordan/">← Back</a>
+      <span class="count">5 / 7</span>
+      <a class="btn primary" id="next" href="../permutation-matrices/">Next →</a>
+    </div>
+  </article>
+
+  <aside class="lab" aria-label="Lab">
+    <figure class="figure" style="margin:0">
+      <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+      <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+    </figure>
+    <div class="editor-card">
+      <div class="bar">
+        <span class="file">slide_5.py</span>
+        <span class="status" id="pystatus">Loading Python…</span>
+        <button class="btn" id="reset">Reset</button>
+        <button class="btn primary" id="run" disabled>Run ▸</button>
+      </div>
+      <div class="editor">
+        <div class="gutter" id="gutter">1</div>
+        <div class="code" id="codewrap">
+          <pre id="hl" aria-hidden="true"></pre>
+          <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+A = np.array([[1., 2.],
+              [3., 4.],
+              [5., 6.]])
+
+print(&quot;A.T =&quot;, A.T)
+G = A @ A.T                    # 3 by 3. Try A.T @ A instead
+print(&quot;symmetric?&quot;, np.allclose(G, G.T))
+table((&quot;A&quot;, A), (&quot;A.T&quot;, A.T), (&quot;result&quot;, G))</textarea>
+        </div>
+      </div>
+      <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+      <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+    </div>
+  </aside>
+</main>
+<footer class="foot">
+  Follows the order and notation of Gilbert Strang, <i>Introduction to Linear Algebra</i>, 5th edition (2016); § numbers refer to that book.
+  Explanations, examples and code are original. Made by <a href="https://www.steppeschool.com">Steppeschool</a>.
+</footer>
+
+<script>window.SLIDE = {"slug": "transpose-and-symmetric-matrices", "lesson": "lesson-3", "assets": "../../assets/", "preview": {"kind": "table", "items": [{"label": "A", "M": [[1, 2], [3, 4], [5, 6]], "piv": []}]}, "check": "isTab(V) && close(lastItem(V), [[35,44],[44,56]])"};</script>
+<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
+<script src="../../assets/lab.js" defer></script>
+</body>
+</html>

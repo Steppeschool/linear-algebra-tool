@@ -1,0 +1,47 @@
+---
+slug: inverse-of-a-product
+seo_title: Inverse of a Product: Why (AB)⁻¹ = B⁻¹A⁻¹
+description: To undo AB you undo A first, then B, so the order flips: (AB)⁻¹ = B⁻¹A⁻¹. Socks and shoes, a worked 2×2 example and live Python. Strang §2.5.
+kicker: Strang §2.5 · Inverse of a product
+title: Undo in reverse order.
+task: Undo R @ S: show the product of the two inverses in the right order.
+preview: {"kind":"transform","M":[[0,-1],[1,1]]}
+check: isT(V) && eqM(V.M, [[1,1],[-1,0]])
+---
+<!-- lead -->
+AB means B first, then A. To undo it, you undo the last move first: A⁻¹ first, then B⁻¹. Written as a product, that is B⁻¹A⁻¹.
+<!-- key -->
+(AB)⁻¹ = B⁻¹A⁻¹ &nbsp;&nbsp;&nbsp; (ABC)⁻¹ = C⁻¹B⁻¹A⁻¹
+<!-- prose -->
+<h2>Think: socks and shoes, taken off</h2>
+<p>You put on socks, then shoes. In the evening you take off the shoes first, then the socks. Same two steps, reverse order.</p>
+<p>Matrix products read right to left. AB puts on B first. So the inverse takes off A first, and that is written B⁻¹A⁻¹.</p>
+<h2>Check it with algebra</h2>
+<div class="worked">
+<div class="row">(B⁻¹A⁻¹)(AB) = B⁻¹(A⁻¹A)B = B⁻¹ I B = B⁻¹B = I ✓</div>
+<div>The A and its inverse meet in the middle and cancel. Then B and its inverse cancel.</div>
+</div>
+<h2>Worked example</h2>
+<div class="worked">
+<div>R turns by 90°, S is a shear. From lesson 1, RS = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>−1</span><span>1</span><span>1</span></span></div>
+<div class="row">R⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>−1</span><span>0</span></span> (turn back) &nbsp; S⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>0</span><span>1</span></span> (slide back)</div>
+<div class="row">S⁻¹R⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>−1</span><span>0</span></span> &nbsp; but &nbsp; R⁻¹S⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>−1</span><span>1</span></span></div>
+<div>Only the first one undoes RS.</div>
+</div>
+<h2>Where you meet this</h2>
+<p>A robot arm's gripper position is a product of joint rotations, base first. To convert a point from the gripper's view back to the base, you undo the joints from the gripper inwards: last joint first.</p>
+<p>A rotation is undone by turning back, and that matrix is also its transpose. Slide 5 explains why that matters.</p>
+<!-- code -->
+import numpy as np
+
+R = np.array([[0., -1.],
+              [1.,  0.]])      # turn 90°
+S = np.array([[1., 1.],
+              [0., 1.]])       # shear
+
+R_inv = np.linalg.inv(R)
+S_inv = np.linalg.inv(S)
+
+undo = R_inv @ S_inv           # is this the right order?
+print("undo @ (R @ S) =", undo @ (R @ S))
+show(undo)

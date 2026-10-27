@@ -1,0 +1,43 @@
+---
+slug: permutation-matrices
+seo_title: Permutation Matrices: Reordering Rows
+description: A permutation matrix reorders the rows of A. Its inverse is its transpose, and it is how elimination handles row exchanges: PA = LU. Python example. Strang §2.7.
+kicker: Strang §2.7 · Permutations
+title: Permutation matrices shuffle rows.
+task: Build P that puts row 3 on top, then rows 1 and 2: the order 3, 1, 2.
+preview: {"kind":"table","items":[{"label":"A","M":[[1,1,1],[2,2,2],[3,3,3]],"piv":[]}]}
+check: isTab(V) && close(item(V, 'P'), [[0,0,1],[1,0,0],[0,1,0]])
+---
+<!-- lead -->
+A permutation matrix is the identity with its rows in a new order. Multiply A by it and the rows of A move into that order.
+<!-- key -->
+P = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>0</span><span>0</span><span>1</span><span>1</span><span>0</span><span>0</span><span>0</span><span>1</span><span>0</span></span> &nbsp; PA = rows 3, 1, 2 of A
+<!-- prose -->
+<h2>Think: a playlist</h2>
+<p>A permutation is a new running order for a playlist. Row 1 of P says which song plays first, row 2 which plays second, and so on.</p>
+<p>Each row of P has a single 1. A 1 in column 3 of row 1 means "the first slot gets row 3".</p>
+<h2>Undo by transposing</h2>
+<p>To put the playlist back, read the instructions the other way: "row 3 came from slot 1". That is Pᵀ. So for every permutation, P⁻¹ = Pᵀ.</p>
+<h2>Worked example</h2>
+<div class="worked">
+<div>Use A with rows full of 1s, 2s and 3s, so you can see where each row goes.</div>
+<div class="row">P = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>0</span><span>0</span><span>1</span><span>1</span><span>0</span><span>0</span><span>0</span><span>1</span><span>0</span></span> &nbsp; PA = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>3</span><span>3</span><span>3</span><span>1</span><span>1</span><span>1</span><span>2</span><span>2</span><span>2</span></span></div>
+<div class="row">PᵀP = I ✓</div>
+</div>
+<h2>Counting and the plane</h2>
+<ul>
+<li>There are n! orders of n rows, so 3 by 3 has 6 permutation matrices, including I.</li>
+<li>In the plane, the only swap is <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>1</span><span>0</span></span>. It is the mirror on the line y = x from lesson 1, with det = −1.</li>
+</ul>
+<h2>Back to elimination</h2>
+<p>When lesson 2 hit a zero pivot, we swapped rows. Doing all the swaps first gives PA = LU. That is the form NumPy and every real solver use, with swaps chosen for the largest pivots.</p>
+<!-- code -->
+import numpy as np
+
+A = np.array([[1., 1., 1.],
+              [2., 2., 2.],
+              [3., 3., 3.]])
+
+P = np.eye(3)                  # your turn: rows of P = rows of I in the order 3, 1, 2
+
+table(("P", P), ("A", A), ("P A", P @ A), ("P.T P", P.T @ P))

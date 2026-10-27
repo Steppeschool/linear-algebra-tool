@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lesson 3 Recap: Inverses, Transposes and Permutations | Linear Algebra, Live</title>
+<meta name="description" content="Inverses, the 2×2 formula, the inverse of a product, Gauss-Jordan, transposes, symmetric matrices and permutation matrices on one page.">
+<link rel="canonical" href="https://linearalgebra.steppeschool.com/lesson-3/recap/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Linear Algebra, Live">
+<meta property="og:title" content="Lesson 3 Recap: Inverses, Transposes and Permutations | Linear Algebra, Live">
+<meta property="og:description" content="Inverses, the 2×2 formula, the inverse of a product, Gauss-Jordan, transposes, symmetric matrices and permutation matrices on one page.">
+<meta property="og:url" content="https://linearalgebra.steppeschool.com/lesson-3/recap/">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/lesson.css">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "Lesson 3 Recap: Inverses, Transposes and Permutations", "headline": "What you can now do.", "description": "Inverses, the 2×2 formula, the inverse of a product, Gauss-Jordan, transposes, symmetric matrices and permutation matrices on one page.", "url": "https://linearalgebra.steppeschool.com/lesson-3/recap/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": true, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 3: Inverses, transposes and permutations", "item": "https://linearalgebra.steppeschool.com/lesson-3/"}, {"@type": "ListItem", "position": 3, "name": "Lesson 3 Recap: Inverses, Transposes and Permutations", "item": "https://linearalgebra.steppeschool.com/lesson-3/recap/"}]}]</script>
+</head>
+<body>
+<header class="top">
+  <div class="course"><b><a href="../../" style="color:inherit;text-decoration:none">Linear Algebra, Live</a></b><span>Lesson 3 · Inverses, transposes and permutations · Strang, chapter 2</span></div>
+  <nav class="steps" aria-label="Slides in this lesson"><a class="step" href="../inverse-matrix/" data-slug="inverse-matrix" title="Inverse Matrix Explained Visually">1</a><a class="step" href="../inverse-2x2-formula/" data-slug="inverse-2x2-formula" title="2×2 Inverse Matrix Formula and When It Fails">2</a><a class="step" href="../inverse-of-a-product/" data-slug="inverse-of-a-product" title="Inverse of a Product: Why (AB)⁻¹ = B⁻¹A⁻¹">3</a><a class="step" href="../gauss-jordan/" data-slug="gauss-jordan" title="Gauss-Jordan: Finding the Inverse by Elimination">4</a><a class="step" href="../transpose-and-symmetric-matrices/" data-slug="transpose-and-symmetric-matrices" title="Transpose and Symmetric Matrices Explained">5</a><a class="step" href="../permutation-matrices/" data-slug="permutation-matrices" title="Permutation Matrices: Reordering Rows">6</a><a class="step on" href="../recap/" data-slug="recap" aria-current="page" title="Lesson 3 Recap: Inverses, Transposes and Permutations">7</a></nav>
+</header>
+
+<main class="app">
+  <article class="page">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">All lessons</a> › <a href="../">Lesson 3</a></nav>
+    <div class="kicker">Recap · Reading</div>
+    <h1>What you can now do.</h1>
+    <p class="lead">Undo a matrix, find its inverse two ways, and use the transpose and permutations with confidence.</p>
+    <div class="key">A⁻¹A = I &nbsp;&nbsp; (AB)⁻¹ = B⁻¹A⁻¹ &nbsp;&nbsp; (AB)ᵀ = BᵀAᵀ &nbsp;&nbsp; P⁻¹ = Pᵀ</div>
+    <div class="prose">
+<ul>
+<li><b>§2.5 The inverse.</b> Rewind: A⁻¹ undoes A. It exists exactly when A has n pivots and det A ≠ 0.</li>
+<li><b>§2.5 The 2 by 2 formula.</b> Swap the diagonal, flip the other signs, divide by ad − bc.</li>
+<li><b>§2.5 Products.</b> Shoes off before socks: (AB)⁻¹ = B⁻¹A⁻¹.</li>
+<li><b>§2.5 Gauss-Jordan.</b> Carbon paper: eliminate on [A | I] until it reads [I | A⁻¹].</li>
+<li><b>§2.7 Transposes.</b> Turn the spreadsheet. Symmetric matrices are distance tables, and AᵀA is always one.</li>
+<li><b>§2.7 Permutations.</b> A new playlist order. P⁻¹ = Pᵀ, and row exchanges give PA = LU.</li>
+</ul>
+<h2>Next lesson: the four subspaces (chapter 3)</h2>
+<p>What happens when A is not invertible, or not even square? The nullspace, pivot and free columns, the complete solution to Ax = b, and the big picture that ties it all together.</p>
+<h2>Read along</h2>
+<p>Gilbert Strang, <i>Introduction to Linear Algebra</i>, 5th edition (2016), sections 2.5 and 2.7. Lectures 3 and 5 of MIT 18.06 on <a href="https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/" target="_blank" rel="noopener">MIT OpenCourseWare</a>.</p>
+    </div>
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Free play: try np.linalg.inv on any matrix, or build a symmetric matrix as A.T @ A.</span>
+      <span class="hint" id="hint">Edit the code in the lab and press Run.</span>
+    </div>
+    <div class="nav">
+      <a class="btn" id="prev" href="../permutation-matrices/">← Back</a>
+      <span class="count">7 / 7</span>
+      <a class="btn primary" id="next" href="../../lesson-4/">Lesson 4 →</a>
+    </div>
+  </article>
+
+  <aside class="lab" aria-label="Lab">
+    <figure class="figure" style="margin:0">
+      <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+      <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+    </figure>
+    <div class="editor-card">
+      <div class="bar">
+        <span class="file">slide_7.py</span>
+        <span class="status" id="pystatus">Loading Python…</span>
+        <button class="btn" id="reset">Reset</button>
+        <button class="btn primary" id="run" disabled>Run ▸</button>
+      </div>
+      <div class="editor">
+        <div class="gutter" id="gutter">1</div>
+        <div class="code" id="codewrap">
+          <pre id="hl" aria-hidden="true"></pre>
+          <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+A = np.array([[2., 1.],
+              [1., 1.]])
+
+A_inv = np.linalg.inv(A)
+print(&quot;A_inv =&quot;, A_inv)
+print(&quot;A_inv @ A =&quot;, A_inv @ A)
+show(A_inv)</textarea>
+        </div>
+      </div>
+      <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+      <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+    </div>
+  </aside>
+</main>
+<footer class="foot">
+  Follows the order and notation of Gilbert Strang, <i>Introduction to Linear Algebra</i>, 5th edition (2016); § numbers refer to that book.
+  Explanations, examples and code are original. Made by <a href="https://www.steppeschool.com">Steppeschool</a>.
+</footer>
+
+<script>window.SLIDE = {"slug": "recap", "lesson": "lesson-3", "assets": "../../assets/", "preview": {"kind": "transform", "M": [[1, 0], [0, 1]]}, "check": "!!V"};</script>
+<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
+<script src="../../assets/lab.js" defer></script>
+</body>
+</html>

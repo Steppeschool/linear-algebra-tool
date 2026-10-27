@@ -1,0 +1,52 @@
+---
+slug: pivots-and-back-substitution
+seo_title: Pivots and Back Substitution: 3×3 Elimination Step by Step
+description: Clear one column at a time with the pivots, reach an upper triangular U, then solve from the bottom up. Worked 3×3 example with Python. Strang §2.2.
+kicker: Strang §2.2 · Pivots
+title: Pivots clear the columns. Back substitution climbs back up.
+task: Finish the elimination: find ℓ₃₂ so that U is upper triangular.
+preview: {"kind":"table","items":[{"label":"A","M":[[2,1,1],[4,-6,0],[-2,7,2]],"piv":[]}]}
+check: isTab(V) && close(item(V, 'U'), [[2,1,1],[0,-8,-2],[0,0,1]])
+---
+<!-- lead -->
+With three equations, use the first pivot to clear column 1, then the second pivot to clear column 2. You end with a triangle U. Its last row has a single unknown.
+<!-- key -->
+<span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>1</span><span>4</span><span>−6</span><span>0</span><span>−2</span><span>7</span><span>2</span></span> &nbsp;→&nbsp; <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>1</span><span>0</span><span>−8</span><span>−2</span><span>0</span><span>0</span><span>1</span></span>
+<!-- prose -->
+<h2>Think: a chain of keys</h2>
+<p>Picture three locked boxes. The key to box 2 is inside box 3. The key to box 1 is inside box 2. You can only start with box 3.</p>
+<p>An upper triangular system works the same way. The last equation has one unknown, so you open it first. Its value unlocks the equation above, and so on to the top. That is back substitution.</p>
+<h2>Forward: clear column by column</h2>
+<ul>
+<li><b>Column 1:</b> the pivot is 2. ℓ₂₁ = 4 ÷ 2 = 2 and ℓ₃₁ = −2 ÷ 2 = −1. Subtract ℓ times row 1 from rows 2 and 3.</li>
+<li><b>Column 2:</b> the new second row starts 0, −8. The pivot is −8. Use it to clear the 8 below it.</li>
+</ul>
+<p>The pivots are the numbers on the diagonal of U: 2, −8 and 1. A pivot is never zero. You divide by it to get each multiplier.</p>
+<h2>Worked example</h2>
+<div class="worked">
+<div>Solve with b = (5, −2, 9). Do the same subtractions to b:</div>
+<div class="row">b₂: −2 − 2·5 = −12 &nbsp;&nbsp; b₃: 9 + 5 = 14, then 14 + (−12) = 2</div>
+<div class="row">z = 2 &nbsp;→&nbsp; −8y − 2·2 = −12, so y = 1 &nbsp;→&nbsp; 2x + 1 + 2 = 5, so x = 1</div>
+<div>Check in the original first row: 2·1 + 1 + 2 = 5 ✓</div>
+</div>
+<h2>Watch out</h2>
+<p>Always do the same step to b. Changing A without changing b gives a different system.</p>
+<p>The multiplier uses the current pivot, after earlier steps, not the original entry. Here ℓ₃₂ uses the −8, not the −6.</p>
+<!-- code -->
+import numpy as np
+
+A = np.array([[ 2.,  1., 1.],
+              [ 4., -6., 0.],
+              [-2.,  7., 2.]])
+U = A.copy()
+
+l21 = U[1, 0] / U[0, 0]          # = 2
+U[1] = U[1] - l21 * U[0]
+l31 = U[2, 0] / U[0, 0]          # = -1
+U[2] = U[2] - l31 * U[0]
+
+l32 = 0                          # your turn: entry to clear / second pivot
+U[2] = U[2] - l32 * U[1]
+
+print("pivots:", U[0, 0], U[1, 1], U[2, 2])
+table(("A", A), ("U", U))

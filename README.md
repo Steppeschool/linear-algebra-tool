@@ -9,7 +9,9 @@ The course follows the order and notation of Gilbert Strang, *Introduction to Li
 | # | Lesson | Strang sections | File |
 |---|---|---|---|
 | 1 | Columns first | §1.1, §1.3, §2.1, §2.4, §5.3, §8.1 | `lesson-1/` |
-| 2 | Elimination and A = LU | §2.2, §2.3, §2.6 | planned |
+| 2 | Elimination and A = LU | §2.2, §2.3, §2.6 | `lesson-2/` |
+| 3 | Inverses, transposes and permutations | §2.5, §2.7 | `lesson-3/` |
+| 4 | The four subspaces | §3.1 to §3.5 | `lesson-4/` |
 
 ## Run locally
 
@@ -26,6 +28,10 @@ Python runs in the browser with [Brython](https://brython.info) and a small NumP
 - `show(A, *vectors)`: the plane after the transformation A
 - `combo(A, x, b=None)`: column picture, Ax as x₁·column 1 + x₂·column 2
 - `rowpic(A, b)`: row picture, one line per equation
+- `table(("label", M), ("R", R, pivots), ...)`: matrices and vectors side by side, pivot columns highlighted
+- `nullpic(A, x, b=None)`: input plane with the nullspace, your x, and every solution of Ax = b
+- `four(A)`: the four subspaces of a 2x2 matrix, input plane and output plane
+- Helpers: `lu(A)`, `rref(A)`, `np.linalg.inv/solve/det/matrix_rank`, `np.hstack`, `np.eye`
 
 ## How the site is built (SEO)
 

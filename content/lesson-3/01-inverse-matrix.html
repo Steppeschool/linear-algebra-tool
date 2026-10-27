@@ -1,0 +1,46 @@
+---
+slug: inverse-matrix
+seo_title: Inverse Matrix Explained Visually
+description: The inverse matrix undoes A: apply A, then its inverse, and every point is back where it started. See it on the plane and build one in Python. Strang §2.5.
+kicker: Strang §2.5 · Inverse matrices
+title: The inverse undoes A.
+task: Fill in S_inv so it slides the plane back. The output should print the identity.
+preview: {"kind":"transform","M":[[1,1],[0,1]]}
+check: isT(V) && eqM(V.M, [[1,-1],[0,1]])
+---
+<!-- lead -->
+A⁻¹ is the matrix that undoes A. Apply A, then A⁻¹, and every point is back where it started.
+<!-- key -->
+A⁻¹A = I &nbsp;&nbsp;&nbsp; Ax = b &nbsp;⇔&nbsp; x = A⁻¹b
+<!-- prose -->
+<h2>Think: rewind</h2>
+<p>A moves the graph paper: it stretches, turns or slants it. A⁻¹ plays that film backwards. After both, nothing has moved.</p>
+<p>"Nothing has moved" is the identity matrix I, with 1s on the diagonal and 0s elsewhere. Ix = x for every x.</p>
+<h2>Why it matters</h2>
+<p>If A has an inverse, Ax = b has exactly one solution for every b: x = A⁻¹b. Multiply both sides of Ax = b by A⁻¹ and the A disappears.</p>
+<h2>Worked example: undo a shear</h2>
+<div class="worked">
+<div>The shear S = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>0</span><span>1</span></span> slides each row to the right by its height.</div>
+<div>To undo it, slide each row back to the left by the same amount: S⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>0</span><span>1</span></span></div>
+<div class="row">S⁻¹S = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>0</span><span>1</span></span> <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>0</span><span>1</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>1</span></span> ✓</div>
+</div>
+<h2>Not every matrix can be undone</h2>
+<p>Think of the boat from lesson 1 with both thrusters pointing forward. Throttles (2, 0) and (0, 2) move the boat exactly the same way. Watching the boat, you cannot tell which settings produced the motion.</p>
+<p>That is a matrix with no inverse. It sends two different inputs to the same output, so there is no way back. Four equivalent tests, all from earlier slides:</p>
+<ul>
+<li>A has n nonzero pivots.</li>
+<li>The columns of A are independent.</li>
+<li>det A ≠ 0: the plane is not squashed.</li>
+<li>Ax = 0 only for x = 0.</li>
+</ul>
+<!-- code -->
+import numpy as np
+
+S = np.array([[1., 1.],
+              [0., 1.]])        # shear
+
+S_inv = np.array([[1., 0.],     # your turn: slide back
+                  [0., 1.]])
+
+print("S_inv @ S =", S_inv @ S)
+show(S_inv)

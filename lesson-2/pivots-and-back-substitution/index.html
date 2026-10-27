@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pivots and Back Substitution: 3×3 Elimination Step by Step | Linear Algebra, Live</title>
+<meta name="description" content="Clear one column at a time with the pivots, reach an upper triangular U, then solve from the bottom up. Worked 3×3 example with Python. Strang §2.2.">
+<link rel="canonical" href="https://linearalgebra.steppeschool.com/lesson-2/pivots-and-back-substitution/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Linear Algebra, Live">
+<meta property="og:title" content="Pivots and Back Substitution: 3×3 Elimination Step by Step | Linear Algebra, Live">
+<meta property="og:description" content="Clear one column at a time with the pivots, reach an upper triangular U, then solve from the bottom up. Worked 3×3 example with Python. Strang §2.2.">
+<meta property="og:url" content="https://linearalgebra.steppeschool.com/lesson-2/pivots-and-back-substitution/">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/lesson.css">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "Pivots and Back Substitution: 3×3 Elimination Step by Step", "headline": "Pivots clear the columns. Back substitution climbs back up.", "description": "Clear one column at a time with the pivots, reach an upper triangular U, then solve from the bottom up. Worked 3×3 example with Python. Strang §2.2.", "url": "https://linearalgebra.steppeschool.com/lesson-2/pivots-and-back-substitution/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": true, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 2: Elimination and A = LU", "item": "https://linearalgebra.steppeschool.com/lesson-2/"}, {"@type": "ListItem", "position": 3, "name": "Pivots and Back Substitution: 3×3 Elimination Step by Step", "item": "https://linearalgebra.steppeschool.com/lesson-2/pivots-and-back-substitution/"}]}]</script>
+</head>
+<body>
+<header class="top">
+  <div class="course"><b><a href="../../" style="color:inherit;text-decoration:none">Linear Algebra, Live</a></b><span>Lesson 2 · Elimination and A = LU · Strang, chapter 2</span></div>
+  <nav class="steps" aria-label="Slides in this lesson"><a class="step" href="../gaussian-elimination/" data-slug="gaussian-elimination" title="Gaussian Elimination Explained Visually">1</a><a class="step on" href="../pivots-and-back-substitution/" data-slug="pivots-and-back-substitution" aria-current="page" title="Pivots and Back Substitution: 3×3 Elimination Step by Step">2</a><a class="step" href="../zero-pivots-and-singular-systems/" data-slug="zero-pivots-and-singular-systems" title="When Elimination Fails: Zero Pivots and Singular Systems">3</a><a class="step" href="../elimination-matrices/" data-slug="elimination-matrices" title="Elimination Matrices: Row Operations as Matrix Multiplication">4</a><a class="step" href="../lu-decomposition/" data-slug="lu-decomposition" title="LU Decomposition Explained: Why A = LU">5</a><a class="step" href="../recap/" data-slug="recap" title="Lesson 2 Recap: Elimination and A = LU">6</a></nav>
+</header>
+
+<main class="app">
+  <article class="page">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">All lessons</a> › <a href="../">Lesson 2</a></nav>
+    <div class="kicker">Strang §2.2 · Pivots</div>
+    <h1>Pivots clear the columns. Back substitution climbs back up.</h1>
+    <p class="lead">With three equations, use the first pivot to clear column 1, then the second pivot to clear column 2. You end with a triangle U. Its last row has a single unknown.</p>
+    <div class="key"><span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>1</span><span>4</span><span>−6</span><span>0</span><span>−2</span><span>7</span><span>2</span></span> &nbsp;→&nbsp; <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>1</span><span>0</span><span>−8</span><span>−2</span><span>0</span><span>0</span><span>1</span></span></div>
+    <div class="prose">
+<h2>Think: a chain of keys</h2>
+<p>Picture three locked boxes. The key to box 2 is inside box 3. The key to box 1 is inside box 2. You can only start with box 3.</p>
+<p>An upper triangular system works the same way. The last equation has one unknown, so you open it first. Its value unlocks the equation above, and so on to the top. That is back substitution.</p>
+<h2>Forward: clear column by column</h2>
+<ul>
+<li><b>Column 1:</b> the pivot is 2. ℓ₂₁ = 4 ÷ 2 = 2 and ℓ₃₁ = −2 ÷ 2 = −1. Subtract ℓ times row 1 from rows 2 and 3.</li>
+<li><b>Column 2:</b> the new second row starts 0, −8. The pivot is −8. Use it to clear the 8 below it.</li>
+</ul>
+<p>The pivots are the numbers on the diagonal of U: 2, −8 and 1. A pivot is never zero. You divide by it to get each multiplier.</p>
+<h2>Worked example</h2>
+<div class="worked">
+<div>Solve with b = (5, −2, 9). Do the same subtractions to b:</div>
+<div class="row">b₂: −2 − 2·5 = −12 &nbsp;&nbsp; b₃: 9 + 5 = 14, then 14 + (−12) = 2</div>
+<div class="row">z = 2 &nbsp;→&nbsp; −8y − 2·2 = −12, so y = 1 &nbsp;→&nbsp; 2x + 1 + 2 = 5, so x = 1</div>
+<div>Check in the original first row: 2·1 + 1 + 2 = 5 ✓</div>
+</div>
+<h2>Watch out</h2>
+<p>Always do the same step to b. Changing A without changing b gives a different system.</p>
+<p>The multiplier uses the current pivot, after earlier steps, not the original entry. Here ℓ₃₂ uses the −8, not the −6.</p>
+    </div>
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Finish the elimination: find ℓ₃₂ so that U is upper triangular.</span>
+      <span class="hint" id="hint">Edit the code in the lab and press Run.</span>
+    </div>
+    <div class="nav">
+      <a class="btn" id="prev" href="../gaussian-elimination/">← Back</a>
+      <span class="count">2 / 6</span>
+      <a class="btn primary" id="next" href="../zero-pivots-and-singular-systems/">Next →</a>
+    </div>
+  </article>
+
+  <aside class="lab" aria-label="Lab">
+    <figure class="figure" style="margin:0">
+      <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+      <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+    </figure>
+    <div class="editor-card">
+      <div class="bar">
+        <span class="file">slide_2.py</span>
+        <span class="status" id="pystatus">Loading Python…</span>
+        <button class="btn" id="reset">Reset</button>
+        <button class="btn primary" id="run" disabled>Run ▸</button>
+      </div>
+      <div class="editor">
+        <div class="gutter" id="gutter">1</div>
+        <div class="code" id="codewrap">
+          <pre id="hl" aria-hidden="true"></pre>
+          <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+A = np.array([[ 2.,  1., 1.],
+              [ 4., -6., 0.],
+              [-2.,  7., 2.]])
+U = A.copy()
+
+l21 = U[1, 0] / U[0, 0]          # = 2
+U[1] = U[1] - l21 * U[0]
+l31 = U[2, 0] / U[0, 0]          # = -1
+U[2] = U[2] - l31 * U[0]
+
+l32 = 0                          # your turn: entry to clear / second pivot
+U[2] = U[2] - l32 * U[1]
+
+print(&quot;pivots:&quot;, U[0, 0], U[1, 1], U[2, 2])
+table((&quot;A&quot;, A), (&quot;U&quot;, U))</textarea>
+        </div>
+      </div>
+      <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+      <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+    </div>
+  </aside>
+</main>
+<footer class="foot">
+  Follows the order and notation of Gilbert Strang, <i>Introduction to Linear Algebra</i>, 5th edition (2016); § numbers refer to that book.
+  Explanations, examples and code are original. Made by <a href="https://www.steppeschool.com">Steppeschool</a>.
+</footer>
+
+<script>window.SLIDE = {"slug": "pivots-and-back-substitution", "lesson": "lesson-2", "assets": "../../assets/", "preview": {"kind": "table", "items": [{"label": "A", "M": [[2, 1, 1], [4, -6, 0], [-2, 7, 2]], "piv": []}]}, "check": "isTab(V) && close(item(V, 'U'), [[2,1,1],[0,-8,-2],[0,0,1]])"};</script>
+<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
+<script src="../../assets/lab.js" defer></script>
+</body>
+</html>

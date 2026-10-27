@@ -1,0 +1,47 @@
+---
+slug: inverse-2x2-formula
+seo_title: 2×2 Inverse Matrix Formula and When It Fails
+description: Swap the diagonal, flip the other signs, divide by ad − bc. Why the determinant appears, and why det = 0 means no inverse. Python example.
+kicker: Strang §2.5 · The 2 by 2 inverse
+title: Swap, flip signs, divide by the determinant.
+task: Compute the inverse of A with the formula and show it.
+preview: {"kind":"transform","M":[[2,1],[5,3]]}
+check: isT(V) && eqM(V.M, [[3,-1],[-5,2]])
+---
+<!-- lead -->
+For a 2 by 2 matrix there is a short recipe. Swap the two diagonal entries, change the signs of the other two, and divide everything by ad − bc.
+<!-- key -->
+<span class="mx" style="grid-template-columns:repeat(2,auto)"><span>a</span><span>b</span><span>c</span><span>d</span></span>⁻¹ = 1/(ad − bc) · <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>d</span><span>−b</span><span>−c</span><span>a</span></span>
+<!-- prose -->
+<h2>Think: why divide by the determinant?</h2>
+<p>Lesson 1 showed that A multiplies every area by det A = ad − bc. To undo A, the inverse has to scale areas back by 1/det A.</p>
+<p>When det A = 0, A squashes the plane flat. You would need to divide by zero to get back. No matrix can unflatten a line into a plane, so there is no inverse.</p>
+<h2>Worked example</h2>
+<div class="worked">
+<div>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>5</span><span>3</span></span> &nbsp; det A = 2·3 − 1·5 = 1</div>
+<div class="row">A⁻¹ = 1/1 · <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>−1</span><span>−5</span><span>2</span></span></div>
+<div class="row">Check: AA⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>6 − 5</span><span>−2 + 2</span><span>15 − 15</span><span>−5 + 6</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>1</span></span> ✓</div>
+</div>
+<h2>Watch out</h2>
+<ul>
+<li>Swap the <b>diagonal</b> (a and d). Do not swap b and c.</li>
+<li>Flip the signs of b and c only.</li>
+<li>Always check by multiplying. AA⁻¹ should give I, and so should A⁻¹A.</li>
+</ul>
+<h2>Beyond 2 by 2</h2>
+<p>There is a formula for bigger matrices too, but it is slow. In practice the inverse comes from elimination. Slide 4 shows how.</p>
+<!-- code -->
+import numpy as np
+
+A = np.array([[2., 1.],
+              [5., 3.]])
+a, b = A[0, 0], A[0, 1]
+c, d = A[1, 0], A[1, 1]
+
+det = a * d - b * c
+A_inv = np.array([[1., 0.],      # your turn: use the recipe
+                  [0., 1.]]) / det
+
+print("det =", det)
+print("A @ A_inv =", A @ A_inv)
+show(A_inv)

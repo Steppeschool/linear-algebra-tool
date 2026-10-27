@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Reduced Row Echelon Form, Pivot Columns and Special Solutions | Linear Algebra, Live</title>
+<meta name="description" content="Reduce A to R, spot the pivot and free columns, and build the special solutions that fill the null space. Worked 2×4 example with Python. Strang §3.2.">
+<link rel="canonical" href="https://linearalgebra.steppeschool.com/lesson-4/rref-and-special-solutions/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Linear Algebra, Live">
+<meta property="og:title" content="Reduced Row Echelon Form, Pivot Columns and Special Solutions | Linear Algebra, Live">
+<meta property="og:description" content="Reduce A to R, spot the pivot and free columns, and build the special solutions that fill the null space. Worked 2×4 example with Python. Strang §3.2.">
+<meta property="og:url" content="https://linearalgebra.steppeschool.com/lesson-4/rref-and-special-solutions/">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/lesson.css">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "Reduced Row Echelon Form, Pivot Columns and Special Solutions", "headline": "Free columns are yours to choose. Pivot columns follow.", "description": "Reduce A to R, spot the pivot and free columns, and build the special solutions that fill the null space. Worked 2×4 example with Python. Strang §3.2.", "url": "https://linearalgebra.steppeschool.com/lesson-4/rref-and-special-solutions/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": true, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 4: The four subspaces", "item": "https://linearalgebra.steppeschool.com/lesson-4/"}, {"@type": "ListItem", "position": 3, "name": "Reduced Row Echelon Form, Pivot Columns and Special Solutions", "item": "https://linearalgebra.steppeschool.com/lesson-4/rref-and-special-solutions/"}]}]</script>
+</head>
+<body>
+<header class="top">
+  <div class="course"><b><a href="../../" style="color:inherit;text-decoration:none">Linear Algebra, Live</a></b><span>Lesson 4 · The four subspaces · Strang, chapter 3</span></div>
+  <nav class="steps" aria-label="Slides in this lesson"><a class="step" href="../vector-spaces-and-subspaces/" data-slug="vector-spaces-and-subspaces" title="Vector Spaces and Subspaces Explained Visually">1</a><a class="step" href="../null-space/" data-slug="null-space" title="Null Space Explained Visually">2</a><a class="step on" href="../rref-and-special-solutions/" data-slug="rref-and-special-solutions" aria-current="page" title="Reduced Row Echelon Form, Pivot Columns and Special Solutions">3</a><a class="step" href="../complete-solution/" data-slug="complete-solution" title="The Complete Solution to Ax = b: Particular Plus Null Space">4</a><a class="step" href="../independence-basis-dimension/" data-slug="independence-basis-dimension" title="Linear Independence, Basis and Dimension Explained">5</a><a class="step" href="../four-fundamental-subspaces/" data-slug="four-fundamental-subspaces" title="The Four Fundamental Subspaces Explained Visually">6</a><a class="step" href="../recap/" data-slug="recap" title="Lesson 4 Recap: The Four Subspaces">7</a></nav>
+</header>
+
+<main class="app">
+  <article class="page">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">All lessons</a> › <a href="../">Lesson 4</a></nav>
+    <div class="kicker">Strang §3.2 · Solving Ax = 0 and Rx = 0</div>
+    <h1>Free columns are yours to choose. Pivot columns follow.</h1>
+    <p class="lead">Reduce A to R. Columns with a pivot belong to pivot variables. The others are free. Set one free variable to 1 and the rest to 0, then solve for the pivot variables: that is a special solution.</p>
+    <div class="key"><span class="mx" style="grid-template-columns:repeat(4,auto)"><span>1</span><span>2</span><span>1</span><span>3</span><span>2</span><span>4</span><span>3</span><span>8</span></span> &nbsp;→&nbsp; R = <span class="mx" style="grid-template-columns:repeat(4,auto)"><span>1</span><span>2</span><span>0</span><span>1</span><span>0</span><span>0</span><span>1</span><span>2</span></span></div>
+    <div class="prose">
+<h2>Think: a mixing desk</h2>
+<p>A mixing desk has four sliders. Two of them are free: you set them however you like. The other two are linked and move by themselves to keep the total at zero.</p>
+<p>Free variables are the free sliders. Pivot variables are the linked ones. Each way of setting the free sliders gives exactly one vector in the nullspace.</p>
+<h2>Reading R</h2>
+<p>R is the reduced row echelon form: zeros below and above each pivot, and every pivot equal to 1. Here the pivots sit in columns 1 and 3. Columns 2 and 4 are free.</p>
+<div class="worked">
+<div class="row">Rx = 0 means: &nbsp; x₁ + 2x₂ + x₄ = 0 &nbsp; and &nbsp; x₃ + 2x₄ = 0</div>
+</div>
+<h2>Worked example</h2>
+<div class="worked">
+<div class="row">Set x₂ = 1, x₄ = 0: &nbsp; x₁ = −2, x₃ = 0 &nbsp;→&nbsp; s₁ = (−2, 1, 0, 0)</div>
+<div>Check against A: 1·(−2) + 2·1 = 0 and 2·(−2) + 4·1 = 0 ✓</div>
+<div>The other special solution comes from x₂ = 0, x₄ = 1. That is your exercise.</div>
+</div>
+<h2>Counting</h2>
+<p>A has n = 4 columns and r = 2 pivots, so there are n − r = 2 free variables and 2 special solutions. Every vector in N(A) is a combination of them: x = c·s₁ + d·s₂. N(A) is a plane inside 4-dimensional space.</p>
+<p>A shortcut: the entries of R in the free columns, with their signs flipped, are the pivot values of the special solutions.</p>
+    </div>
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Find the second special solution s, with x₂ = 0 and x₄ = 1.</span>
+      <span class="hint" id="hint">Edit the code in the lab and press Run.</span>
+    </div>
+    <div class="nav">
+      <a class="btn" id="prev" href="../null-space/">← Back</a>
+      <span class="count">3 / 7</span>
+      <a class="btn primary" id="next" href="../complete-solution/">Next →</a>
+    </div>
+  </article>
+
+  <aside class="lab" aria-label="Lab">
+    <figure class="figure" style="margin:0">
+      <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+      <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+    </figure>
+    <div class="editor-card">
+      <div class="bar">
+        <span class="file">slide_3.py</span>
+        <span class="status" id="pystatus">Loading Python…</span>
+        <button class="btn" id="reset">Reset</button>
+        <button class="btn primary" id="run" disabled>Run ▸</button>
+      </div>
+      <div class="editor">
+        <div class="gutter" id="gutter">1</div>
+        <div class="code" id="codewrap">
+          <pre id="hl" aria-hidden="true"></pre>
+          <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+A = np.array([[1., 2., 1., 3.],
+              [2., 4., 3., 8.]])
+R, pivots = rref(A)
+print(&quot;pivot columns (counting from 0):&quot;, pivots)
+
+s = np.array([-2., 1., 0., 0.])     # first special solution: x2 = 1, x4 = 0
+                                    # your turn: x2 = 0, x4 = 1
+table((&quot;A&quot;, A), (&quot;R&quot;, R, pivots), (&quot;s&quot;, s), (&quot;A s&quot;, A @ s))</textarea>
+        </div>
+      </div>
+      <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+      <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+    </div>
+  </aside>
+</main>
+<footer class="foot">
+  Follows the order and notation of Gilbert Strang, <i>Introduction to Linear Algebra</i>, 5th edition (2016); § numbers refer to that book.
+  Explanations, examples and code are original. Made by <a href="https://www.steppeschool.com">Steppeschool</a>.
+</footer>
+
+<script>window.SLIDE = {"slug": "rref-and-special-solutions", "lesson": "lesson-4", "assets": "../../assets/", "preview": {"kind": "table", "items": [{"label": "A", "M": [[1, 2, 1, 3], [2, 4, 3, 8]], "piv": []}]}, "check": "isTab(V) && close(itemVec(V, 's'), [-1,0,-2,1])"};</script>
+<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
+<script src="../../assets/lab.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Inverse Matrix Explained Visually | Linear Algebra, Live</title>
+<meta name="description" content="The inverse matrix undoes A: apply A, then its inverse, and every point is back where it started. See it on the plane and build one in Python. Strang §2.5.">
+<link rel="canonical" href="https://linearalgebra.steppeschool.com/lesson-3/inverse-matrix/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Linear Algebra, Live">
+<meta property="og:title" content="Inverse Matrix Explained Visually | Linear Algebra, Live">
+<meta property="og:description" content="The inverse matrix undoes A: apply A, then its inverse, and every point is back where it started. See it on the plane and build one in Python. Strang §2.5.">
+<meta property="og:url" content="https://linearalgebra.steppeschool.com/lesson-3/inverse-matrix/">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/lesson.css">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "Inverse Matrix Explained Visually", "headline": "The inverse undoes A.", "description": "The inverse matrix undoes A: apply A, then its inverse, and every point is back where it started. See it on the plane and build one in Python. Strang §2.5.", "url": "https://linearalgebra.steppeschool.com/lesson-3/inverse-matrix/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": true, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 3: Inverses, transposes and permutations", "item": "https://linearalgebra.steppeschool.com/lesson-3/"}, {"@type": "ListItem", "position": 3, "name": "Inverse Matrix Explained Visually", "item": "https://linearalgebra.steppeschool.com/lesson-3/inverse-matrix/"}]}]</script>
+</head>
+<body>
+<header class="top">
+  <div class="course"><b><a href="../../" style="color:inherit;text-decoration:none">Linear Algebra, Live</a></b><span>Lesson 3 · Inverses, transposes and permutations · Strang, chapter 2</span></div>
+  <nav class="steps" aria-label="Slides in this lesson"><a class="step on" href="../inverse-matrix/" data-slug="inverse-matrix" aria-current="page" title="Inverse Matrix Explained Visually">1</a><a class="step" href="../inverse-2x2-formula/" data-slug="inverse-2x2-formula" title="2×2 Inverse Matrix Formula and When It Fails">2</a><a class="step" href="../inverse-of-a-product/" data-slug="inverse-of-a-product" title="Inverse of a Product: Why (AB)⁻¹ = B⁻¹A⁻¹">3</a><a class="step" href="../gauss-jordan/" data-slug="gauss-jordan" title="Gauss-Jordan: Finding the Inverse by Elimination">4</a><a class="step" href="../transpose-and-symmetric-matrices/" data-slug="transpose-and-symmetric-matrices" title="Transpose and Symmetric Matrices Explained">5</a><a class="step" href="../permutation-matrices/" data-slug="permutation-matrices" title="Permutation Matrices: Reordering Rows">6</a><a class="step" href="../recap/" data-slug="recap" title="Lesson 3 Recap: Inverses, Transposes and Permutations">7</a></nav>
+</header>
+
+<main class="app">
+  <article class="page">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">All lessons</a> › <a href="../">Lesson 3</a></nav>
+    <div class="kicker">Strang §2.5 · Inverse matrices</div>
+    <h1>The inverse undoes A.</h1>
+    <p class="lead">A⁻¹ is the matrix that undoes A. Apply A, then A⁻¹, and every point is back where it started.</p>
+    <div class="key">A⁻¹A = I &nbsp;&nbsp;&nbsp; Ax = b &nbsp;⇔&nbsp; x = A⁻¹b</div>
+    <div class="prose">
+<h2>Think: rewind</h2>
+<p>A moves the graph paper: it stretches, turns or slants it. A⁻¹ plays that film backwards. After both, nothing has moved.</p>
+<p>"Nothing has moved" is the identity matrix I, with 1s on the diagonal and 0s elsewhere. Ix = x for every x.</p>
+<h2>Why it matters</h2>
+<p>If A has an inverse, Ax = b has exactly one solution for every b: x = A⁻¹b. Multiply both sides of Ax = b by A⁻¹ and the A disappears.</p>
+<h2>Worked example: undo a shear</h2>
+<div class="worked">
+<div>The shear S = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>0</span><span>1</span></span> slides each row to the right by its height.</div>
+<div>To undo it, slide each row back to the left by the same amount: S⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>0</span><span>1</span></span></div>
+<div class="row">S⁻¹S = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>0</span><span>1</span></span> <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>0</span><span>1</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>1</span></span> ✓</div>
+</div>
+<h2>Not every matrix can be undone</h2>
+<p>Think of the boat from lesson 1 with both thrusters pointing forward. Throttles (2, 0) and (0, 2) move the boat exactly the same way. Watching the boat, you cannot tell which settings produced the motion.</p>
+<p>That is a matrix with no inverse. It sends two different inputs to the same output, so there is no way back. Four equivalent tests, all from earlier slides:</p>
+<ul>
+<li>A has n nonzero pivots.</li>
+<li>The columns of A are independent.</li>
+<li>det A ≠ 0: the plane is not squashed.</li>
+<li>Ax = 0 only for x = 0.</li>
+</ul>
+    </div>
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Fill in S_inv so it slides the plane back. The output should print the identity.</span>
+      <span class="hint" id="hint">Edit the code in the lab and press Run.</span>
+    </div>
+    <div class="nav">
+      <a class="btn" id="prev" href="../">← Overview</a>
+      <span class="count">1 / 7</span>
+      <a class="btn primary" id="next" href="../inverse-2x2-formula/">Next →</a>
+    </div>
+  </article>
+
+  <aside class="lab" aria-label="Lab">
+    <figure class="figure" style="margin:0">
+      <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+      <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+    </figure>
+    <div class="editor-card">
+      <div class="bar">
+        <span class="file">slide_1.py</span>
+        <span class="status" id="pystatus">Loading Python…</span>
+        <button class="btn" id="reset">Reset</button>
+        <button class="btn primary" id="run" disabled>Run ▸</button>
+      </div>
+      <div class="editor">
+        <div class="gutter" id="gutter">1</div>
+        <div class="code" id="codewrap">
+          <pre id="hl" aria-hidden="true"></pre>
+          <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+S = np.array([[1., 1.],
+              [0., 1.]])        # shear
+
+S_inv = np.array([[1., 0.],     # your turn: slide back
+                  [0., 1.]])
+
+print(&quot;S_inv @ S =&quot;, S_inv @ S)
+show(S_inv)</textarea>
+        </div>
+      </div>
+      <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+      <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+    </div>
+  </aside>
+</main>
+<footer class="foot">
+  Follows the order and notation of Gilbert Strang, <i>Introduction to Linear Algebra</i>, 5th edition (2016); § numbers refer to that book.
+  Explanations, examples and code are original. Made by <a href="https://www.steppeschool.com">Steppeschool</a>.
+</footer>
+
+<script>window.SLIDE = {"slug": "inverse-matrix", "lesson": "lesson-3", "assets": "../../assets/", "preview": {"kind": "transform", "M": [[1, 1], [0, 1]]}, "check": "isT(V) && eqM(V.M, [[1,-1],[0,1]])"};</script>
+<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
+<script src="../../assets/lab.js" defer></script>
+</body>
+</html>

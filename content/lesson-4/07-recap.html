@@ -1,0 +1,36 @@
+---
+slug: recap
+seo_title: Lesson 4 Recap: The Four Subspaces
+description: Chapter 3 on one page: subspaces, the null space, pivot and free columns, the complete solution to Ax = b, basis and dimension, and the four fundamental subspaces.
+kicker: Recap · Reading
+title: What you can now do.
+task: Free play: try four(A) and nullpic(A, x) on matrices of your own.
+preview: {"kind":"four","A":[[2,1],[4,2]]}
+check: !!V
+---
+<!-- lead -->
+For any matrix, say which equations can be solved, how many solutions they have, and what they look like.
+<!-- key -->
+dim C(Aᵀ) + dim N(A) = n &nbsp;&nbsp; dim C(A) + dim N(Aᵀ) = m
+<!-- prose -->
+<ul>
+<li><b>§3.1 Subspaces.</b> Rails through the station: sets you cannot leave by adding and scaling.</li>
+<li><b>§3.2 The nullspace.</b> Engines running, boat standing still: every x with Ax = 0.</li>
+<li><b>§3.2 Special solutions.</b> The mixing desk: free variables are yours, pivot variables follow. n − r special solutions span N(A).</li>
+<li><b>§3.3 The complete solution.</b> A route plus a loop: x = x_p + x_n.</li>
+<li><b>§3.4 Basis and dimension.</b> A minimal toolkit. Every basis has the same size.</li>
+<li><b>§3.5 The four subspaces.</b> The shadow: row space and nullspace among inputs, column space and left nullspace among outputs, sizes r, n − r, r, m − r.</li>
+</ul>
+<h2>Next lesson: orthogonality and least squares (chapter 4)</h2>
+<p>Perpendicular subspaces, projections, and the best answer to Ax = b when there is no exact one. That is how you fit a line to noisy sensor data.</p>
+<h2>Read along</h2>
+<p>Gilbert Strang, <i>Introduction to Linear Algebra</i>, 5th edition (2016), chapter 3. Lectures 6 to 10 of MIT 18.06 on <a href="https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/" target="_blank" rel="noopener">MIT OpenCourseWare</a>. Lecture 10 is the four subspaces.</p>
+<!-- code -->
+import numpy as np
+
+A = np.array([[2., 1.],
+              [4., 2.]])
+
+print("rank =", np.linalg.matrix_rank(A))
+four(A)
+# nullpic(A, [1., -2.])

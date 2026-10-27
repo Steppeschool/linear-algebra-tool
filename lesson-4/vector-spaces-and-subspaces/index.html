@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vector Spaces and Subspaces Explained Visually | Linear Algebra, Live</title>
+<meta name="description" content="A subspace is a set you cannot leave by adding and scaling: a line or plane through the origin. Examples, non-examples and live Python. Strang §3.1.">
+<link rel="canonical" href="https://linearalgebra.steppeschool.com/lesson-4/vector-spaces-and-subspaces/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Linear Algebra, Live">
+<meta property="og:title" content="Vector Spaces and Subspaces Explained Visually | Linear Algebra, Live">
+<meta property="og:description" content="A subspace is a set you cannot leave by adding and scaling: a line or plane through the origin. Examples, non-examples and live Python. Strang §3.1.">
+<meta property="og:url" content="https://linearalgebra.steppeschool.com/lesson-4/vector-spaces-and-subspaces/">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/lesson.css">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "Vector Spaces and Subspaces Explained Visually", "headline": "A subspace is a flat sheet through the origin.", "description": "A subspace is a set you cannot leave by adding and scaling: a line or plane through the origin. Examples, non-examples and live Python. Strang §3.1.", "url": "https://linearalgebra.steppeschool.com/lesson-4/vector-spaces-and-subspaces/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": true, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 4: The four subspaces", "item": "https://linearalgebra.steppeschool.com/lesson-4/"}, {"@type": "ListItem", "position": 3, "name": "Vector Spaces and Subspaces Explained Visually", "item": "https://linearalgebra.steppeschool.com/lesson-4/vector-spaces-and-subspaces/"}]}]</script>
+</head>
+<body>
+<header class="top">
+  <div class="course"><b><a href="../../" style="color:inherit;text-decoration:none">Linear Algebra, Live</a></b><span>Lesson 4 · The four subspaces · Strang, chapter 3</span></div>
+  <nav class="steps" aria-label="Slides in this lesson"><a class="step on" href="../vector-spaces-and-subspaces/" data-slug="vector-spaces-and-subspaces" aria-current="page" title="Vector Spaces and Subspaces Explained Visually">1</a><a class="step" href="../null-space/" data-slug="null-space" title="Null Space Explained Visually">2</a><a class="step" href="../rref-and-special-solutions/" data-slug="rref-and-special-solutions" title="Reduced Row Echelon Form, Pivot Columns and Special Solutions">3</a><a class="step" href="../complete-solution/" data-slug="complete-solution" title="The Complete Solution to Ax = b: Particular Plus Null Space">4</a><a class="step" href="../independence-basis-dimension/" data-slug="independence-basis-dimension" title="Linear Independence, Basis and Dimension Explained">5</a><a class="step" href="../four-fundamental-subspaces/" data-slug="four-fundamental-subspaces" title="The Four Fundamental Subspaces Explained Visually">6</a><a class="step" href="../recap/" data-slug="recap" title="Lesson 4 Recap: The Four Subspaces">7</a></nav>
+</header>
+
+<main class="app">
+  <article class="page">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">All lessons</a> › <a href="../">Lesson 4</a></nav>
+    <div class="kicker">Strang §3.1 · Spaces of vectors</div>
+    <h1>A subspace is a flat sheet through the origin.</h1>
+    <p class="lead">A subspace is a set of vectors you cannot escape by adding and scaling. In the plane there are only three kinds: the origin alone, a line through the origin, or the whole plane.</p>
+    <div class="key">v and w in S &nbsp;⇒&nbsp; cv + dw in S, for every c and d</div>
+    <div class="prose">
+<h2>Think: a train on rails</h2>
+<p>Straight rails run through the station, which is the origin. Drive forward, reverse, combine trips: you always stay on the rails. That line is a subspace.</p>
+<p>Now picture rails that miss the station. Scale any position by 0 and you should land at the origin, but the origin is not on those rails. So they are not a subspace.</p>
+<h2>The three rules</h2>
+<ul>
+<li>It contains the zero vector.</li>
+<li>Adding two vectors in the set stays in the set.</li>
+<li>Scaling a vector in the set stays in the set.</li>
+</ul>
+<h2>Examples and non-examples</h2>
+<ul>
+<li><b>Yes:</b> the line y = 2x. Add or scale points on it and you stay on it.</li>
+<li><b>No:</b> the line y = 2x + 1. It misses the origin.</li>
+<li><b>No:</b> the first quadrant. Multiply by −1 and you leave it.</li>
+<li><b>No:</b> the two axes together. (1, 0) + (0, 1) = (1, 1) is on neither axis.</li>
+</ul>
+<h2>Worked example in 3D</h2>
+<div class="worked">
+<div>All (x, y, z) with x + y + z = 0. Add two such vectors and the sums add: 0 + 0 = 0. Scale one and the sum scales: c·0 = 0. So it is a subspace, a plane through the origin.</div>
+<div>With x + y + z = 1 instead, the origin fails the test. Not a subspace.</div>
+</div>
+<h2>Why we care</h2>
+<p>The column space from lesson 1 is a subspace. So is the nullspace on the next slide. Chapter 3 is about these spaces, because they tell you exactly which equations Ax = b can be solved, and how many solutions they have.</p>
+    </div>
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">C(A) is the line through (1, 2). Choose x so that Ax reaches b = (−3, −6) on that line.</span>
+      <span class="hint" id="hint">Edit the code in the lab and press Run.</span>
+    </div>
+    <div class="nav">
+      <a class="btn" id="prev" href="../">← Overview</a>
+      <span class="count">1 / 7</span>
+      <a class="btn primary" id="next" href="../null-space/">Next →</a>
+    </div>
+  </article>
+
+  <aside class="lab" aria-label="Lab">
+    <figure class="figure" style="margin:0">
+      <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+      <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+    </figure>
+    <div class="editor-card">
+      <div class="bar">
+        <span class="file">slide_1.py</span>
+        <span class="status" id="pystatus">Loading Python…</span>
+        <button class="btn" id="reset">Reset</button>
+        <button class="btn primary" id="run" disabled>Run ▸</button>
+      </div>
+      <div class="editor">
+        <div class="gutter" id="gutter">1</div>
+        <div class="code" id="codewrap">
+          <pre id="hl" aria-hidden="true"></pre>
+          <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+A = np.array([[1., 2.],
+              [2., 4.]])        # column 2 = 2 x column 1
+x = np.array([1., 1.])          # change x
+b = np.array([-3., -6.])
+
+print(&quot;Ax =&quot;, A @ x)
+combo(A, x, b)</textarea>
+        </div>
+      </div>
+      <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+      <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+    </div>
+  </aside>
+</main>
+<footer class="foot">
+  Follows the order and notation of Gilbert Strang, <i>Introduction to Linear Algebra</i>, 5th edition (2016); § numbers refer to that book.
+  Explanations, examples and code are original. Made by <a href="https://www.steppeschool.com">Steppeschool</a>.
+</footer>
+
+<script>window.SLIDE = {"slug": "vector-spaces-and-subspaces", "lesson": "lesson-4", "assets": "../../assets/", "preview": {"kind": "combo", "A": [[1, 2], [2, 4]], "x": [1, 1], "b": [-3, -6]}, "check": "isC(V) && eqM(V.A, [[1,2],[2,4]]) && near(Ax(V)[0], -3) && near(Ax(V)[1], -6)"};</script>
+<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
+<script src="../../assets/lab.js" defer></script>
+</body>
+</html>

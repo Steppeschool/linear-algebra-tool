@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>2×2 Inverse Matrix Formula and When It Fails | Linear Algebra, Live</title>
+<meta name="description" content="Swap the diagonal, flip the other signs, divide by ad − bc. Why the determinant appears, and why det = 0 means no inverse. Python example.">
+<link rel="canonical" href="https://linearalgebra.steppeschool.com/lesson-3/inverse-2x2-formula/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Linear Algebra, Live">
+<meta property="og:title" content="2×2 Inverse Matrix Formula and When It Fails | Linear Algebra, Live">
+<meta property="og:description" content="Swap the diagonal, flip the other signs, divide by ad − bc. Why the determinant appears, and why det = 0 means no inverse. Python example.">
+<meta property="og:url" content="https://linearalgebra.steppeschool.com/lesson-3/inverse-2x2-formula/">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/lesson.css">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "2×2 Inverse Matrix Formula and When It Fails", "headline": "Swap, flip signs, divide by the determinant.", "description": "Swap the diagonal, flip the other signs, divide by ad − bc. Why the determinant appears, and why det = 0 means no inverse. Python example.", "url": "https://linearalgebra.steppeschool.com/lesson-3/inverse-2x2-formula/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": true, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 3: Inverses, transposes and permutations", "item": "https://linearalgebra.steppeschool.com/lesson-3/"}, {"@type": "ListItem", "position": 3, "name": "2×2 Inverse Matrix Formula and When It Fails", "item": "https://linearalgebra.steppeschool.com/lesson-3/inverse-2x2-formula/"}]}]</script>
+</head>
+<body>
+<header class="top">
+  <div class="course"><b><a href="../../" style="color:inherit;text-decoration:none">Linear Algebra, Live</a></b><span>Lesson 3 · Inverses, transposes and permutations · Strang, chapter 2</span></div>
+  <nav class="steps" aria-label="Slides in this lesson"><a class="step" href="../inverse-matrix/" data-slug="inverse-matrix" title="Inverse Matrix Explained Visually">1</a><a class="step on" href="../inverse-2x2-formula/" data-slug="inverse-2x2-formula" aria-current="page" title="2×2 Inverse Matrix Formula and When It Fails">2</a><a class="step" href="../inverse-of-a-product/" data-slug="inverse-of-a-product" title="Inverse of a Product: Why (AB)⁻¹ = B⁻¹A⁻¹">3</a><a class="step" href="../gauss-jordan/" data-slug="gauss-jordan" title="Gauss-Jordan: Finding the Inverse by Elimination">4</a><a class="step" href="../transpose-and-symmetric-matrices/" data-slug="transpose-and-symmetric-matrices" title="Transpose and Symmetric Matrices Explained">5</a><a class="step" href="../permutation-matrices/" data-slug="permutation-matrices" title="Permutation Matrices: Reordering Rows">6</a><a class="step" href="../recap/" data-slug="recap" title="Lesson 3 Recap: Inverses, Transposes and Permutations">7</a></nav>
+</header>
+
+<main class="app">
+  <article class="page">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">All lessons</a> › <a href="../">Lesson 3</a></nav>
+    <div class="kicker">Strang §2.5 · The 2 by 2 inverse</div>
+    <h1>Swap, flip signs, divide by the determinant.</h1>
+    <p class="lead">For a 2 by 2 matrix there is a short recipe. Swap the two diagonal entries, change the signs of the other two, and divide everything by ad − bc.</p>
+    <div class="key"><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>a</span><span>b</span><span>c</span><span>d</span></span>⁻¹ = 1/(ad − bc) · <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>d</span><span>−b</span><span>−c</span><span>a</span></span></div>
+    <div class="prose">
+<h2>Think: why divide by the determinant?</h2>
+<p>Lesson 1 showed that A multiplies every area by det A = ad − bc. To undo A, the inverse has to scale areas back by 1/det A.</p>
+<p>When det A = 0, A squashes the plane flat. You would need to divide by zero to get back. No matrix can unflatten a line into a plane, so there is no inverse.</p>
+<h2>Worked example</h2>
+<div class="worked">
+<div>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>5</span><span>3</span></span> &nbsp; det A = 2·3 − 1·5 = 1</div>
+<div class="row">A⁻¹ = 1/1 · <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>−1</span><span>−5</span><span>2</span></span></div>
+<div class="row">Check: AA⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>6 − 5</span><span>−2 + 2</span><span>15 − 15</span><span>−5 + 6</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>1</span></span> ✓</div>
+</div>
+<h2>Watch out</h2>
+<ul>
+<li>Swap the <b>diagonal</b> (a and d). Do not swap b and c.</li>
+<li>Flip the signs of b and c only.</li>
+<li>Always check by multiplying. AA⁻¹ should give I, and so should A⁻¹A.</li>
+</ul>
+<h2>Beyond 2 by 2</h2>
+<p>There is a formula for bigger matrices too, but it is slow. In practice the inverse comes from elimination. Slide 4 shows how.</p>
+    </div>
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Compute the inverse of A with the formula and show it.</span>
+      <span class="hint" id="hint">Edit the code in the lab and press Run.</span>
+    </div>
+    <div class="nav">
+      <a class="btn" id="prev" href="../inverse-matrix/">← Back</a>
+      <span class="count">2 / 7</span>
+      <a class="btn primary" id="next" href="../inverse-of-a-product/">Next →</a>
+    </div>
+  </article>
+
+  <aside class="lab" aria-label="Lab">
+    <figure class="figure" style="margin:0">
+      <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+      <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+    </figure>
+    <div class="editor-card">
+      <div class="bar">
+        <span class="file">slide_2.py</span>
+        <span class="status" id="pystatus">Loading Python…</span>
+        <button class="btn" id="reset">Reset</button>
+        <button class="btn primary" id="run" disabled>Run ▸</button>
+      </div>
+      <div class="editor">
+        <div class="gutter" id="gutter">1</div>
+        <div class="code" id="codewrap">
+          <pre id="hl" aria-hidden="true"></pre>
+          <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+A = np.array([[2., 1.],
+              [5., 3.]])
+a, b = A[0, 0], A[0, 1]
+c, d = A[1, 0], A[1, 1]
+
+det = a * d - b * c
+A_inv = np.array([[1., 0.],      # your turn: use the recipe
+                  [0., 1.]]) / det
+
+print(&quot;det =&quot;, det)
+print(&quot;A @ A_inv =&quot;, A @ A_inv)
+show(A_inv)</textarea>
+        </div>
+      </div>
+      <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+      <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+    </div>
+  </aside>
+</main>
+<footer class="foot">
+  Follows the order and notation of Gilbert Strang, <i>Introduction to Linear Algebra</i>, 5th edition (2016); § numbers refer to that book.
+  Explanations, examples and code are original. Made by <a href="https://www.steppeschool.com">Steppeschool</a>.
+</footer>
+
+<script>window.SLIDE = {"slug": "inverse-2x2-formula", "lesson": "lesson-3", "assets": "../../assets/", "preview": {"kind": "transform", "M": [[2, 1], [5, 3]]}, "check": "isT(V) && eqM(V.M, [[3,-1],[-5,2]])"};</script>
+<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
+<script src="../../assets/lab.js" defer></script>
+</body>
+</html>

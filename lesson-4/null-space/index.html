@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Null Space Explained Visually | Linear Algebra, Live</title>
+<meta name="description" content="The null space is every input x with Ax = 0: inputs that produce no output. A two-thruster boat, a worked example and an interactive plot in Python. Strang §3.2.">
+<link rel="canonical" href="https://linearalgebra.steppeschool.com/lesson-4/null-space/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Linear Algebra, Live">
+<meta property="og:title" content="Null Space Explained Visually | Linear Algebra, Live">
+<meta property="og:description" content="The null space is every input x with Ax = 0: inputs that produce no output. A two-thruster boat, a worked example and an interactive plot in Python. Strang §3.2.">
+<meta property="og:url" content="https://linearalgebra.steppeschool.com/lesson-4/null-space/">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/lesson.css">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "Null Space Explained Visually", "headline": "The nullspace: inputs that do nothing.", "description": "The null space is every input x with Ax = 0: inputs that produce no output. A two-thruster boat, a worked example and an interactive plot in Python. Strang §3.2.", "url": "https://linearalgebra.steppeschool.com/lesson-4/null-space/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": true, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 4: The four subspaces", "item": "https://linearalgebra.steppeschool.com/lesson-4/"}, {"@type": "ListItem", "position": 3, "name": "Null Space Explained Visually", "item": "https://linearalgebra.steppeschool.com/lesson-4/null-space/"}]}]</script>
+</head>
+<body>
+<header class="top">
+  <div class="course"><b><a href="../../" style="color:inherit;text-decoration:none">Linear Algebra, Live</a></b><span>Lesson 4 · The four subspaces · Strang, chapter 3</span></div>
+  <nav class="steps" aria-label="Slides in this lesson"><a class="step" href="../vector-spaces-and-subspaces/" data-slug="vector-spaces-and-subspaces" title="Vector Spaces and Subspaces Explained Visually">1</a><a class="step on" href="../null-space/" data-slug="null-space" aria-current="page" title="Null Space Explained Visually">2</a><a class="step" href="../rref-and-special-solutions/" data-slug="rref-and-special-solutions" title="Reduced Row Echelon Form, Pivot Columns and Special Solutions">3</a><a class="step" href="../complete-solution/" data-slug="complete-solution" title="The Complete Solution to Ax = b: Particular Plus Null Space">4</a><a class="step" href="../independence-basis-dimension/" data-slug="independence-basis-dimension" title="Linear Independence, Basis and Dimension Explained">5</a><a class="step" href="../four-fundamental-subspaces/" data-slug="four-fundamental-subspaces" title="The Four Fundamental Subspaces Explained Visually">6</a><a class="step" href="../recap/" data-slug="recap" title="Lesson 4 Recap: The Four Subspaces">7</a></nav>
+</header>
+
+<main class="app">
+  <article class="page">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">All lessons</a> › <a href="../">Lesson 4</a></nav>
+    <div class="kicker">Strang §3.2 · The nullspace of A</div>
+    <h1>The nullspace: inputs that do nothing.</h1>
+    <p class="lead">The nullspace N(A) holds every x with Ax = 0. Feed in any of these inputs and nothing comes out.</p>
+    <div class="key">N(A) = all x with Ax = 0</div>
+    <div class="prose">
+<h2>Think: engines running, boat standing still</h2>
+<p>Back to the boat. Thruster 2 points the same way as thruster 1 and pushes twice as hard. So A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>4</span></span>.</p>
+<p>Set thruster 1 forward at 2 and thruster 2 in reverse at 1. The pushes cancel exactly. Both engines are working, and the boat does not move. The throttle setting (2, −1) is in the nullspace.</p>
+<h2>What is always true</h2>
+<ul>
+<li>x = 0 is always in N(A).</li>
+<li>N(A) is a subspace: if Ax = 0 and Ay = 0, then A(cx + dy) = 0 too.</li>
+<li>If A is invertible, N(A) is only the zero vector.</li>
+<li>A nonzero x in N(A) is a recipe for a dependency: x₁·(column 1) + x₂·(column 2) = 0.</li>
+</ul>
+<h2>Worked example</h2>
+<div class="worked">
+<div class="row">A(2, −1) = (1·2 + 2·(−1), 2·2 + 4·(−1)) = (0, 0) ✓</div>
+<div>Every multiple c·(2, −1) works too, so N(A) is a whole line. Look at the plot: it is perpendicular to the row (1, 2). That is no accident, and slide 6 explains it.</div>
+</div>
+<h2>Where you meet this</h2>
+<p>A robot arm with more joints than it needs has a nullspace. Joint motions in that nullspace move the elbow while the hand stays exactly where it is. Engineers use it to steer the elbow around obstacles while the tool keeps working.</p>
+    </div>
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Find a nonzero x with Ax = 0.</span>
+      <span class="hint" id="hint">Edit the code in the lab and press Run.</span>
+    </div>
+    <div class="nav">
+      <a class="btn" id="prev" href="../vector-spaces-and-subspaces/">← Back</a>
+      <span class="count">2 / 7</span>
+      <a class="btn primary" id="next" href="../rref-and-special-solutions/">Next →</a>
+    </div>
+  </article>
+
+  <aside class="lab" aria-label="Lab">
+    <figure class="figure" style="margin:0">
+      <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+      <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+    </figure>
+    <div class="editor-card">
+      <div class="bar">
+        <span class="file">slide_2.py</span>
+        <span class="status" id="pystatus">Loading Python…</span>
+        <button class="btn" id="reset">Reset</button>
+        <button class="btn primary" id="run" disabled>Run ▸</button>
+      </div>
+      <div class="editor">
+        <div class="gutter" id="gutter">1</div>
+        <div class="code" id="codewrap">
+          <pre id="hl" aria-hidden="true"></pre>
+          <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+A = np.array([[1., 2.],
+              [2., 4.]])
+x = np.array([1., 1.])          # your turn: find x with Ax = 0
+
+print(&quot;Ax =&quot;, A @ x)
+nullpic(A, x)                   # input plane: the nullspace and your x</textarea>
+        </div>
+      </div>
+      <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+      <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+    </div>
+  </aside>
+</main>
+<footer class="foot">
+  Follows the order and notation of Gilbert Strang, <i>Introduction to Linear Algebra</i>, 5th edition (2016); § numbers refer to that book.
+  Explanations, examples and code are original. Made by <a href="https://www.steppeschool.com">Steppeschool</a>.
+</footer>
+
+<script>window.SLIDE = {"slug": "null-space", "lesson": "lesson-4", "assets": "../../assets/", "preview": {"kind": "null", "A": [[1, 2], [2, 4]], "x": [1, 1], "b": []}, "check": "isN(V) && isZero(matvec(V.A, V.x)) && !isZero(V.x)"};</script>
+<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
+<script src="../../assets/lab.js" defer></script>
+</body>
+</html>

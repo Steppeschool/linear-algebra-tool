@@ -13,6 +13,26 @@ const ROT30 = [[Math.cos(Math.PI/6), -Math.sin(Math.PI/6)],[Math.sin(Math.PI/6),
 const Ax = V => [V.A[0][0]*V.x[0] + V.A[0][1]*V.x[1], V.A[1][0]*V.x[0] + V.A[1][1]*V.x[1]];
 const isT = V => V && V.kind === "transform";
 const isC = V => V && V.kind === "combo";
+const isR = V => V && V.kind === "rows";
+const isTab = V => V && V.kind === "table";
+const isN = V => V && V.kind === "null";
+const isF = V => V && V.kind === "four";
+const flat = M => Array.isArray(M) ? M.flat(Infinity) : [M];
+const close = (a, b, t = 1e-6) => a != null && b != null && flat(a).length === flat(b).length && flat(a).every((v, i) => Math.abs(v - flat(b)[i]) < t);
+const isZero = v => v != null && flat(v).every(x => Math.abs(x) < 1e-9);
+const item = (V, name) => { const it = V && V.items && V.items.find(t => t.label === name); return it ? it.M : null; };
+const itemVec = (V, name) => { const M = item(V, name); return M ? M.map(r => r[0]) : null; };
+const lastItem = V => V && V.items && V.items.length ? V.items[V.items.length - 1].M : null;
+const col = M => M ? M.map(r => r[0]) : null;
+const matvec = (A, x) => A.map(r => r.reduce((s, a, i) => s + a * x[i], 0));
+const matmul = (A, B) => A.map(r => B[0].map((_, j) => r.reduce((s, a, k) => s + a * B[k][j], 0)));
+const T = M => M[0].map((_, j) => M.map(r => r[j]));
+const isUpper = M => M && M.every((r, i) => r.every((v, j) => j >= i || Math.abs(v) < 1e-9));
+function rankOf(M){ const R = M.map(r => r.slice()); let rank = 0; const m = R.length, n = R[0].length;
+  for (let c = 0; c < n && rank < m; c++){ let p = rank; for (let i = rank; i < m; i++) if (Math.abs(R[i][c]) > Math.abs(R[p][c])) p = i;
+    if (Math.abs(R[p][c]) < 1e-9) continue; [R[rank], R[p]] = [R[p], R[rank]];
+    for (let i = rank + 1; i < m; i++){ const f = R[i][c] / R[rank][c]; for (let j = c; j < n; j++) R[i][j] -= f * R[rank][j]; } rank++; }
+  return rank; }
 const nonzero = M => M.some(r => r.some(v => Math.abs(v) > 1e-9));
 function mul(A, B){return [[A[0][0]*B[0][0]+A[0][1]*B[1][0], A[0][0]*B[0][1]+A[0][1]*B[1][1]],[A[1][0]*B[0][0]+A[1][1]*B[1][0], A[1][0]*B[0][1]+A[1][1]*B[1][1]]]}
 
@@ -45,20 +65,45 @@ function setLegend(){
   const sw = (c, t) => `<span><i style="background:var(${c})"></i>${t}</span>`;
   $("legend").innerHTML = view.kind === "transform" ? sw("--ihat","(1, 0) lands on column 1") + sw("--jhat","(0, 1) lands on column 2")
     : view.kind === "combo" ? sw("--ihat","x₁ · column 1") + sw("--jhat","x₂ · column 2") + sw("--accent","Ax")
-    : sw("--ihat","equation 1") + sw("--jhat","equation 2");
+    : view.kind === "rows" ? sw("--ihat","equation 1") + sw("--jhat","equation 2")
+    : view.kind === "null" ? sw("--accent","nullspace N(A)") + (view.b && view.b.length ? sw("--ihat","all solutions of Ax = b") : "") + sw("--ink","your x")
+    : view.kind === "four" ? sw("--ihat","row space") + sw("--accent","nullspace") + sw("--jhat","column space") + sw("--muted","left nullspace")
+    : "";
 }
+function nonzeroRow(A){ return A.find(r => Math.hypot(r[0], r[1]) > 1e-9) || null; }
+function particular(V){ if (!V.b || V.b.length !== 2) return null; const r = nonzeroRow(V.A); if (!r) return null;
+  const i = V.A.indexOf(r), t = V.b[i] / (r[0]*r[0] + r[1]*r[1]), xp = [t*r[0], t*r[1]];
+  const ax = matvec(V.A, xp); return near(ax[0], V.b[0], 1e-6) && near(ax[1], V.b[1], 1e-6) ? xp : null; }
 function rowSolution(V){ const d = det(V.A); if (Math.abs(d) < 1e-12) return null; return [(V.b[0]*V.A[1][1] - V.A[0][1]*V.b[1])/d, (V.A[0][0]*V.b[1] - V.A[1][0]*V.b[0])/d]; }
 function extent(){
   const V = view; let pts = [];
   if (V.kind === "combo"){ const a1=[V.A[0][0],V.A[1][0]], a2=[V.A[0][1],V.A[1][1]], p1=[a1[0]*V.x[0], a1[1]*V.x[0]], r=Ax(V); pts = [a1, a2, p1, r]; if (V.b.length===2) pts.push(V.b); }
   else if (V.kind === "rows"){ const s = rowSolution(V); pts = s ? [s] : []; }
-  else return 4.2;
+  else if (V.kind === "null"){ const xs = [V.x]; const xp = particular(V); if (xp) xs.push(xp); pts = xs; }
+  else if (V.kind !== "transform") return 3;
+  else { const M = to, F = [[1,0],[0,1],[1,1],[2.3,2.05],[1.3,2.05],[2.3,1.75],[1.6,0.3]];
+    return Math.max(2.6, ...F.map(([x,y]) => Math.max(Math.abs(M[0][0]*x+M[0][1]*y), Math.abs(M[1][0]*x+M[1][1]*y))), ...(V.vecs||[]).map(([x,y]) => Math.max(Math.abs(M[0][0]*x+M[0][1]*y), Math.abs(M[1][0]*x+M[1][1]*y)))) * 1.18; }
   return Math.max(2.5, ...pts.map(p => Math.max(Math.abs(p[0]), Math.abs(p[1])))) * 1.2;
 }
 function label(p, text, col, dx=8, dy=-8){ ctx.fillStyle = col; ctx.font = `600 12.5px ${css("--f-mono")}`; ctx.fillText(text, p[0]+dx, p[1]+dy); }
+function fmt(v){ if (Math.abs(v) < 5e-10) return "0"; const r = Math.round(v * 1000) / 1000; return String(r).replace("-", "−"); }
+function renderTable(){
+  const box = $("tablebox");
+  box.innerHTML = view.items.map(it => {
+    const M = it.M, piv = new Set(it.piv || []), cols = M[0].length;
+    const cells = M.map(r => r.map((v, j) => `<span class="${piv.has(j) ? "pv" : ""}">${fmt(v)}</span>`).join("")).join("");
+    return `<div class="tm"><div class="tm-label">${it.label.replace(/&/g,"&amp;").replace(/</g,"&lt;")}</div><div class="tm-grid" style="grid-template-columns:repeat(${cols},auto)">${cells}</div><div class="tm-dim">${M.length}×${cols}</div></div>`;
+  }).join("");
+  const anyPiv = view.items.some(it => it.piv && it.piv.length);
+  $("readout").innerHTML = anyPiv ? '<span class="hi">highlighted columns = pivot columns</span>' : `<span>${view.items.length} item${view.items.length === 1 ? "" : "s"}</span>`;
+}
 function draw(){
   const w = cv.clientWidth, h = cv.clientHeight; if (!w || !h) return;
   ctx.clearRect(0,0,w,h);
+  const box = $("tablebox");
+  if (view.kind === "table"){ box.hidden = false; renderTable(); return; }
+  box.hidden = true;
+  if (view.kind === "four"){ drawFour(w, h); return; }
   const ext = extent(), s = Math.min(w, h) / (2*ext), ox = w/2, oy = h/2;
   const P = (x, y) => [ox + (A[0][0]*x + A[0][1]*y)*s, oy - (A[1][0]*x + A[1][1]*y)*s];
   const Q = (x, y) => [ox + x*s, oy - y*s];
@@ -97,16 +142,67 @@ function draw(){
     if (V.b.length === 2){ const B = Q(...V.b); ctx.strokeStyle = css("--ink"); ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(B[0], B[1], 9, 0, 7); ctx.stroke(); label(B, "b", css("--ink"), 12, -10);
       hit = near(r[0], V.b[0]) && near(r[1], V.b[1]) ? '<span class="good">Ax = b</span>' : `<span>b = (${g(V.b[0])}, ${g(V.b[1])})</span>`; }
     $("readout").innerHTML = `<span>x = (${g(V.x[0])}, ${g(V.x[1])})</span><span class="hi">Ax = (${g(r[0])}, ${g(r[1])})</span>${hit}<span>${dep ? (nonzero(V.A) ? "C(A) is a line" : "C(A) is a point") : "C(A) is the plane"}</span>`;
+  } else if (view.kind === "null"){
+    const V = view, r = nonzeroRow(V.A), far = 4*N, d = det(V.A);
+    let nd = null;
+    if (!r) { ctx.fillStyle = css("--area"); ctx.fillRect(0, 0, w, h); }
+    else if (Math.abs(d) < 1e-9){ nd = [-r[1], r[0]]; const k = far / Math.hypot(...nd);
+      ctx.strokeStyle = css("--accent"); ctx.globalAlpha = .35; ctx.lineWidth = 8; line(Q(-nd[0]*k, -nd[1]*k), Q(nd[0]*k, nd[1]*k)); ctx.globalAlpha = 1;
+      label(Q(nd[0]*1.6/Math.hypot(...nd)*2, nd[1]*1.6/Math.hypot(...nd)*2), "N(A)", css("--accent")); }
+    const xp = particular(V);
+    if (xp && nd){ const k = far / Math.hypot(...nd); ctx.strokeStyle = css("--ihat"); ctx.lineWidth = 2.6; line(Q(xp[0]-nd[0]*k, xp[1]-nd[1]*k), Q(xp[0]+nd[0]*k, xp[1]+nd[1]*k)); }
+    arrow(O, Q(...V.x), css("--ink"), 3); label(Q(...V.x), "x", css("--ink"), 10, -6);
+    const ax = matvec(V.A, V.x);
+    let status;
+    if (V.b && V.b.length === 2) status = near(ax[0], V.b[0]) && near(ax[1], V.b[1]) ? '<span class="good">Ax = b</span>' : `<span>b = (${g(V.b[0])}, ${g(V.b[1])})</span>`;
+    else status = isZero(ax) ? '<span class="good">Ax = 0</span>' : "";
+    $("readout").innerHTML = `<span>x = (${g(V.x[0])}, ${g(V.x[1])})</span><span class="hi">Ax = (${g(ax[0])}, ${g(ax[1])})</span>${status}<span>${!r ? "N(A) is the whole plane" : nd ? "N(A) is a line" : "N(A) is only 0"}</span>`;
   } else {
     const V = view, cols = [css("--ihat"), css("--jhat")], far = 4*N;
     for (let i = 0; i < 2; i++){ const [a, c] = V.A[i], rr = V.b[i]; ctx.strokeStyle = cols[i]; ctx.lineWidth = 2.6;
       if (Math.abs(c) > 1e-12) line(Q(-far, (rr + a*far)/c), Q(far, (rr - a*far)/c)); else if (Math.abs(a) > 1e-12) line(Q(rr/a, -far), Q(rr/a, far)); }
     const sol = rowSolution(V);
     if (sol){ const S = Q(...sol); ctx.fillStyle = css("--ink"); ctx.beginPath(); ctx.arc(S[0], S[1], 5, 0, 7); ctx.fill(); label(S, `(${g(sol[0])}, ${g(sol[1])})`, css("--ink"), 10, -10); }
-    const eq = i => { const a = g(V.A[i][0]), c = g(V.A[i][1]); return `${a}x ${c < 0 ? "−" : "+"} ${Math.abs(c)}y = ${g(V.b[i])}`; };
-    $("readout").innerHTML = `<span style="color:var(--ihat)">${eq(0)}</span><span style="color:var(--jhat)">${eq(1)}</span><span>${sol ? "the lines meet once" : "parallel lines"}</span>`;
+    const coef = (v, first) => { const m = Math.abs(v), sgn = v < 0 ? (first ? "−" : "− ") : (first ? "" : "+ "); return sgn + (m === 1 ? "" : m); };
+    const eq = i => { const a = g(V.A[i][0]), c = g(V.A[i][1]); const parts = [];
+      if (a) parts.push(coef(a, true) + "x"); if (c) parts.push(coef(c, !parts.length) + "y");
+      return `${parts.join(" ") || "0"} = ${g(V.b[i])}`.replace("−", "−"); };
+    $("readout").innerHTML = `<span style="color:var(--ihat)">${eq(0)}</span><span style="color:var(--jhat)">${eq(1)}</span><span>${sol ? "the lines meet once" : rankOf(V.A.map((r, i) => [r[0], r[1], V.b[i]])) > rankOf(V.A) ? "parallel lines: no solution" : "same line: infinitely many solutions"}</span>`;
   }
   ctx.fillStyle = css("--ink"); ctx.beginPath(); ctx.arc(O[0], O[1], 3.2, 0, 7); ctx.fill();
+}
+function drawFour(w, h){
+  const M = view.A, r = rankOf(M), gap = 18, wide = w > 560;
+  const pw = wide ? (w - gap) / 2 : w, ph = wide ? h : (h - gap) / 2;
+  const panels = [{x0: 0, y0: 0, title: "Input space (x)"}, {x0: wide ? pw + gap : 0, y0: wide ? 0 : ph + gap, title: "Output space (Ax)"}];
+  const rowDir = nonzeroRow(M), colDir = (() => { const c1 = [M[0][0], M[1][0]], c2 = [M[0][1], M[1][1]]; return Math.hypot(...c1) > 1e-9 ? c1 : Math.hypot(...c2) > 1e-9 ? c2 : null; })();
+  const perp = v => v ? [-v[1], v[0]] : null;
+  panels.forEach((p, k) => {
+    const s = Math.min(pw, ph) / 6.5, ox = p.x0 + pw/2, oy = p.y0 + ph/2 + 8, R = Math.max(pw, ph);
+    const Q = (x, y) => [ox + x*s, oy - y*s];
+    ctx.save(); ctx.beginPath(); ctx.rect(p.x0, p.y0, pw, ph); ctx.clip();
+    ctx.strokeStyle = css("--grid"); ctx.lineWidth = 1; const n = Math.ceil(R / s);
+    for (let i = -n; i <= n; i++){ if (i){ line(Q(i, -n), Q(i, n)); line(Q(-n, i), Q(n, i)); } }
+    ctx.strokeStyle = css("--muted"); ctx.globalAlpha = .6; line(Q(-n, 0), Q(n, 0)); line(Q(0, -n), Q(0, n)); ctx.globalAlpha = 1;
+    const big = (dir, color, name, dashed) => { if (!dir) return; const u = Math.hypot(...dir), kk = 3*n/u;
+      ctx.strokeStyle = color; ctx.lineWidth = 3; ctx.setLineDash(dashed ? [7, 6] : []); line(Q(-dir[0]*kk, -dir[1]*kk), Q(dir[0]*kk, dir[1]*kk)); ctx.setLineDash([]);
+      label(Q(dir[0]/u*2.4, dir[1]/u*2.4), name, color, 8, -8); };
+    const fill = (color, name) => { ctx.fillStyle = color; ctx.globalAlpha = .12; ctx.fillRect(p.x0, p.y0, pw, ph); ctx.globalAlpha = 1; label([p.x0 + 14, p.y0 + ph - 16], name, color, 0, 0); };
+    if (k === 0){
+      if (r === 2) fill(css("--ihat"), "row space = whole plane, nullspace = {0}");
+      else if (r === 1){ big(rowDir, css("--ihat"), "row space"); big(perp(rowDir), css("--accent"), "nullspace"); }
+      else fill(css("--accent"), "nullspace = whole plane");
+    } else {
+      if (r === 2) fill(css("--jhat"), "column space = whole plane, left nullspace = {0}");
+      else if (r === 1){ big(colDir, css("--jhat"), "column space"); big(perp(colDir), css("--muted"), "left nullspace", true); }
+      else fill(css("--muted"), "left nullspace = whole plane");
+    }
+    ctx.fillStyle = css("--ink"); ctx.beginPath(); ctx.arc(ox, oy, 3, 0, 7); ctx.fill();
+    ctx.restore();
+    ctx.fillStyle = css("--muted"); ctx.font = `600 12px ${css("--f-body")}`; ctx.fillText(p.title.toUpperCase(), p.x0 + 12, p.y0 + 18);
+    if (k === 0 && wide){ ctx.strokeStyle = css("--line"); ctx.lineWidth = 1; line([pw + gap/2, 10], [pw + gap/2, h - 10]); }
+  });
+  $("readout").innerHTML = `<span class="hi">rank r = ${r}</span><span>dim row space = ${r}</span><span>dim nullspace = ${2 - r}</span><span>dim column space = ${r}</span><span>dim left nullspace = ${2 - r}</span>`;
 }
 function line(a,b){ctx.beginPath(); ctx.moveTo(a[0],a[1]); ctx.lineTo(b[0],b[1]); ctx.stroke();}
 function poly(pts, fill, stroke, lw, alpha=1){ctx.beginPath(); pts.forEach((p,i)=> i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1])); ctx.closePath(); ctx.globalAlpha = alpha; ctx.fillStyle = fill; ctx.fill(); ctx.globalAlpha = 1; if (stroke){ctx.strokeStyle = stroke; ctx.lineWidth = lw; ctx.stroke();}}
@@ -151,6 +247,10 @@ const L2 = M => Array.from(M).map(r => Array.from(r));
 window.__pyshow = (M, vs) => { last = {kind:"transform", M:L2(M), vecs:L2(vs).filter(v => v.length === 2)}; setView(last); };
 window.__pycombo = (M, x, b) => { last = {kind:"combo", A:L2(M), x:Array.from(x), b:Array.from(b)}; setView(last); };
 window.__pyrows = (M, b) => { last = {kind:"rows", A:L2(M), b:Array.from(b)}; setView(last); };
+window.__pytable = items => { last = {kind:"table", items: Array.from(items).map(t => ({label: String(t[0]), M: L2(t[1]), piv: Array.from(t[2]).map(Number), ndim: Number(t[3])}))};
+  last.items.forEach(it => { if (it.ndim === 1) it.vec = it.M.map(r => r[0]); }); setView(last); };
+window.__pynull = (M, x, b) => { last = {kind:"null", A:L2(M), x:Array.from(x), b:Array.from(b)}; setView(last); };
+window.__pyfour = M => { last = {kind:"four", A:L2(M)}; setView(last); };
 window.__pyready = () => { ready = true; $("pystatus").textContent = "Python ready"; $("pystatus").classList.add("ready"); $("run").disabled = false; };
 function sys(msg){ const sp = document.createElement("span"); sp.className = "sys"; sp.textContent = msg + "\n"; out.appendChild(sp); }
 function run(){

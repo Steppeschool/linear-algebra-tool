@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Elimination Matrices: Row Operations as Matrix Multiplication | Linear Algebra, Live</title>
+<meta name="description" content="Every elimination step is a matrix E. Multiplying by E subtracts a multiple of one row from another. Build E21 and E31 in Python. Strang §2.3.">
+<link rel="canonical" href="https://linearalgebra.steppeschool.com/lesson-2/elimination-matrices/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Linear Algebra, Live">
+<meta property="og:title" content="Elimination Matrices: Row Operations as Matrix Multiplication | Linear Algebra, Live">
+<meta property="og:description" content="Every elimination step is a matrix E. Multiplying by E subtracts a multiple of one row from another. Build E21 and E31 in Python. Strang §2.3.">
+<meta property="og:url" content="https://linearalgebra.steppeschool.com/lesson-2/elimination-matrices/">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/lesson.css">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "Elimination Matrices: Row Operations as Matrix Multiplication", "headline": "Each elimination step is a matrix.", "description": "Every elimination step is a matrix E. Multiplying by E subtracts a multiple of one row from another. Build E21 and E31 in Python. Strang §2.3.", "url": "https://linearalgebra.steppeschool.com/lesson-2/elimination-matrices/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": true, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 2: Elimination and A = LU", "item": "https://linearalgebra.steppeschool.com/lesson-2/"}, {"@type": "ListItem", "position": 3, "name": "Elimination Matrices: Row Operations as Matrix Multiplication", "item": "https://linearalgebra.steppeschool.com/lesson-2/elimination-matrices/"}]}]</script>
+</head>
+<body>
+<header class="top">
+  <div class="course"><b><a href="../../" style="color:inherit;text-decoration:none">Linear Algebra, Live</a></b><span>Lesson 2 · Elimination and A = LU · Strang, chapter 2</span></div>
+  <nav class="steps" aria-label="Slides in this lesson"><a class="step" href="../gaussian-elimination/" data-slug="gaussian-elimination" title="Gaussian Elimination Explained Visually">1</a><a class="step" href="../pivots-and-back-substitution/" data-slug="pivots-and-back-substitution" title="Pivots and Back Substitution: 3×3 Elimination Step by Step">2</a><a class="step" href="../zero-pivots-and-singular-systems/" data-slug="zero-pivots-and-singular-systems" title="When Elimination Fails: Zero Pivots and Singular Systems">3</a><a class="step on" href="../elimination-matrices/" data-slug="elimination-matrices" aria-current="page" title="Elimination Matrices: Row Operations as Matrix Multiplication">4</a><a class="step" href="../lu-decomposition/" data-slug="lu-decomposition" title="LU Decomposition Explained: Why A = LU">5</a><a class="step" href="../recap/" data-slug="recap" title="Lesson 2 Recap: Elimination and A = LU">6</a></nav>
+</header>
+
+<main class="app">
+  <article class="page">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">All lessons</a> › <a href="../">Lesson 2</a></nav>
+    <div class="kicker">Strang §2.3 · Elimination using matrices</div>
+    <h1>Each elimination step is a matrix.</h1>
+    <p class="lead">Subtracting ℓ times row 1 from row 2 is the same as multiplying by E₂₁: the identity matrix with −ℓ in row 2, column 1.</p>
+    <div class="key">E₂₁ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>−ℓ</span><span>1</span><span>0</span><span>0</span><span>0</span><span>1</span></span> &nbsp;&nbsp; E₂₁A = A with row 2 − ℓ·(row 1)</div>
+    <div class="prose">
+<h2>Think: an instruction card</h2>
+<p>A row operation is an instruction: "take row 2, subtract 2 of row 1, leave everything else alone". E₂₁ is that instruction written as a matrix.</p>
+<p>Multiplying by E is following the card. Elimination is a stack of cards applied one after another:</p>
+<div class="worked"><div class="row">E₃₂ E₃₁ E₂₁ A = U</div><div>Read right to left, like socks and shoes: E₂₁ acts first.</div></div>
+<h2>Why it works: rows combine rows</h2>
+<p>Lesson 1 read Ax by columns. EA is easiest to read by rows: row i of EA is (row i of E) times A. That is a combination of the rows of A.</p>
+<ul>
+<li>Row 1 of E₂₁ is (1, 0, 0): keep row 1 as it is.</li>
+<li>Row 2 is (−ℓ, 1, 0): row 2 minus ℓ times row 1.</li>
+<li>Row 3 is (0, 0, 1): keep row 3.</li>
+</ul>
+<h2>Worked example</h2>
+<div class="worked">
+<div>With ℓ = 2, E₂₁ times A:</div>
+<div class="row">new row 2 = (4, −6, 0) − 2·(2, 1, 1) = (0, −8, −2)</div>
+</div>
+<h2>Undoing a card</h2>
+<p>To undo "subtract 2 of row 1", add 2 of row 1 back. So E₂₁⁻¹ is the identity with +ℓ in the same spot. Hold on to that: it is the key to A = LU on the next slide.</p>
+    </div>
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Build E₃₁ so that E₃₁ E₂₁ A has zeros below the first pivot.</span>
+      <span class="hint" id="hint">Edit the code in the lab and press Run.</span>
+    </div>
+    <div class="nav">
+      <a class="btn" id="prev" href="../zero-pivots-and-singular-systems/">← Back</a>
+      <span class="count">4 / 6</span>
+      <a class="btn primary" id="next" href="../lu-decomposition/">Next →</a>
+    </div>
+  </article>
+
+  <aside class="lab" aria-label="Lab">
+    <figure class="figure" style="margin:0">
+      <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+      <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+    </figure>
+    <div class="editor-card">
+      <div class="bar">
+        <span class="file">slide_4.py</span>
+        <span class="status" id="pystatus">Loading Python…</span>
+        <button class="btn" id="reset">Reset</button>
+        <button class="btn primary" id="run" disabled>Run ▸</button>
+      </div>
+      <div class="editor">
+        <div class="gutter" id="gutter">1</div>
+        <div class="code" id="codewrap">
+          <pre id="hl" aria-hidden="true"></pre>
+          <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+A = np.array([[ 2.,  1., 1.],
+              [ 4., -6., 0.],
+              [-2.,  7., 2.]])
+
+E21 = np.array([[ 1., 0., 0.],
+                [-2., 1., 0.],     # row 2 minus 2 x row 1
+                [ 0., 0., 1.]])
+
+E31 = np.eye(3)                     # your turn: put -l31 in row 3, column 1
+# E31[2, 0] = ...                   # l31 = A[2,0] / A[0,0]
+
+B = E31 @ E21 @ A
+table((&quot;E21&quot;, E21), (&quot;E31&quot;, E31), (&quot;E31 E21 A&quot;, B))</textarea>
+        </div>
+      </div>
+      <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+      <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+    </div>
+  </aside>
+</main>
+<footer class="foot">
+  Follows the order and notation of Gilbert Strang, <i>Introduction to Linear Algebra</i>, 5th edition (2016); § numbers refer to that book.
+  Explanations, examples and code are original. Made by <a href="https://www.steppeschool.com">Steppeschool</a>.
+</footer>
+
+<script>window.SLIDE = {"slug": "elimination-matrices", "lesson": "lesson-2", "assets": "../../assets/", "preview": {"kind": "table", "items": [{"label": "A", "M": [[2, 1, 1], [4, -6, 0], [-2, 7, 2]], "piv": []}]}, "check": "isTab(V) && close(lastItem(V), [[2,1,1],[0,-8,-2],[0,8,3]])"};</script>
+<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
+<script src="../../assets/lab.js" defer></script>
+</body>
+</html>
