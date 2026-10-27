@@ -60,34 +60,45 @@ def chapter_of(lesson):
     return next(c for c in CHAPTERS if c["n"] == lesson["ch"])
 
 
-def topnav(prefix, lesson=None, steps_html=""):
+def topnav(prefix, lesson=None, steps_html="", current=None):
     """Top bar: course name, chapter menu, lesson menu, slide steps."""
     built = [l for l, _, _ in BUILT]
-    groups = ""
+    groups, later = "", ""
     for c in CHAPTERS:
         ls = [l for l in built if l["ch"] == c["n"]]
         cur = lesson is not None and c["n"] == lesson["ch"]
+        if not ls:
+            later += (f'<div class="ch soon"><div class="ch-head"><span class="ch-num">{c["n"]}</span>'
+                      f'<span class="ch-title">{e(c["title"])}</span></div></div>')
+            continue
         items = "".join(
-            f'<a class="menu-item{" on" if lesson is not None and l["n"] == lesson["n"] else ""}" href="{prefix}{l["dir"]}/">Lesson {l["n"]} · {e(l["title"])}</a>' for l in ls)
-        items += "".join(f'<span class="menu-item soon">{e(t)} · coming soon</span>' for t in c.get("planned", []))
-        groups += f'<div class="menu-group{" on" if cur else ""}"><span class="menu-h">Chapter {c["n"]} · {e(c["title"])}</span>{items}</div>'
+            f'<a class="ls{" on" if lesson is not None and l["n"] == lesson["n"] else ""}" href="{prefix}{l["dir"]}/">'
+            f'<span class="ls-num">Lesson {l["n"]}</span><span class="ls-title">{e(l["title"])}</span></a>' for l in ls)
+        groups += (f'<div class="ch{" on" if cur else ""}"><div class="ch-head"><span class="ch-num">{c["n"]}</span>'
+                   f'<span class="ch-title">{e(c["title"])}</span></div><div class="ch-lessons">{items}</div></div>')
+    if later:
+        groups += f'<div class="menu-sub">Coming soon</div><div class="ch-later">{later}</div>'
     if lesson is None:
         ch_label = "Chapters"
     else:
         ch = chapter_of(lesson)
         ch_label = f'Chapter {ch["n"]}<span class="hide-sm"> · {e(ch["title"])}</span>'
-    nav = f'<details class="menu"><summary>{ch_label}</summary><div class="menu-list">{groups}</div></details>'
+    nav = f'<details class="menu"><summary>{ch_label}</summary><div class="menu-list chapters"><div class="menu-sub">Chapters</div>{groups}</div></details>'
     if lesson is not None:
         same = [l for l in built if l["ch"] == lesson["ch"]]
         _, slides, practice = next(t for t in BUILT if t[0]["n"] == lesson["n"])
         items = "".join(
-            f'<a class="menu-item{" on" if l["n"] == lesson["n"] else ""}" href="{prefix}{l["dir"]}/">Lesson {l["n"]} · {e(l["title"])}</a>' for l in same)
-        inside = "".join(f'<a class="menu-item sub" href="{prefix}{lesson["dir"]}/{s["slug"]}/">{j + 1}. {e(s["seo_title"])}</a>' for j, s in enumerate(slides))
+            f'<a class="ls{" on" if l["n"] == lesson["n"] else ""}" href="{prefix}{l["dir"]}/">'
+            f'<span class="ls-num">Lesson {l["n"]}</span><span class="ls-title">{e(l["title"])}</span></a>' for l in same)
+        inside = "".join(
+            f'<a class="ls{" on" if current == s["slug"] else ""}" href="{prefix}{lesson["dir"]}/{s["slug"]}/"><span class="ls-num">{j + 1}</span>'
+            f'<span class="ls-title">{e(s["seo_title"])}</span></a>' for j, s in enumerate(slides))
         if practice:
-            inside += f'<a class="menu-item sub" href="{prefix}{lesson["dir"]}/practice/">✎ Examples and problems</a>'
+            inside += (f'<a class="ls{" on" if current == "practice" else ""}" href="{prefix}{lesson["dir"]}/practice/"><span class="ls-num">✎</span>'
+                       f'<span class="ls-title">Examples and problems</span></a>')
         nav += (f'<span class="sep">›</span><details class="menu"><summary>Lesson {lesson["n"]}<span class="hide-sm"> · {e(lesson["title"])}</span></summary>'
-                f'<div class="menu-list"><div class="menu-group"><span class="menu-h">Chapter {lesson["ch"]} lessons</span>{items}</div>'
-                f'<div class="menu-group"><span class="menu-h">In this lesson</span>{inside}</div></div></details>')
+                f'<div class="menu-list"><div class="menu-sub">Chapter {lesson["ch"]} lessons</div><div class="ch-lessons flat">{items}</div>'
+                f'<div class="menu-sub">In lesson {lesson["n"]}</div><div class="ch-lessons flat slides">{inside}</div></div></details>')
     return f"""<header class="top">
   <div class="topnav"><a class="brand" href="{prefix}">{SITE}</a><nav class="crumbnav" aria-label="Chapters and lessons">{nav}</nav></div>
   {f'<nav class="steps" aria-label="Steps in this lesson">{steps_html}</nav>' if steps_html else ""}
@@ -190,7 +201,7 @@ def slide_page(lesson, slides, i, next_lesson=None, practice=None):
 
     config = {"slug": s["slug"], "lesson": lesson["dir"], "assets": prefix + "assets/",
               "preview": json.loads(s["preview"]), "check": s["check"]}
-    return head(title, s["description"], url, prefix, "article", jsonld) + topnav(prefix, lesson, steps) + f"""
+    return head(title, s["description"], url, prefix, "article", jsonld) + topnav(prefix, lesson, steps, s["slug"]) + f"""
 
 <main class="app">
   <article class="page">
@@ -267,7 +278,7 @@ def practice_page(lesson, slides, pr, next_lesson):
            else '<a class="btn primary" id="next" href="../../">All lessons →</a>')
     config = {"slug": "practice", "lesson": lesson["dir"], "assets": prefix + "assets/",
               "preview": {"kind": "transform", "M": [[1, 0], [0, 1]]}, "check": "false"}
-    return head(title, pr["description"], url, prefix, "article", jsonld) + topnav(prefix, lesson, steps) + f"""
+    return head(title, pr["description"], url, prefix, "article", jsonld) + topnav(prefix, lesson, steps, "practice") + f"""
 <main class="app">
   <article class="page">
     <div class="kicker">Lesson {lesson['n']} · Examples and problems</div>
