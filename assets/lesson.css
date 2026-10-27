@@ -250,3 +250,8 @@ details.sol[open] .s-show{display:none}
 .lesson .examples,.lesson .problems{max-width:72ch}
 .practice-note{margin:-6px 0 12px;color:var(--muted);font-size:14.5px}
 .page .practice-h{border-top:1px solid var(--line);padding-top:24px}
+
+/* full-width article (27 Oct): text and boxes use the whole card width, all aligned to the same edges */
+.lesson .page .lead,.lesson .page .key,.lesson .page .prose,.lesson .page .prose p,.lesson .page .examples,.lesson .page .problems,.lesson .page .example,.lesson .page .problem,.lesson .page .signup{max-width:none}
+.lesson .page .key{justify-content:flex-start;text-align:left}
+.lesson .page .prose ul{padding-left:22px}
