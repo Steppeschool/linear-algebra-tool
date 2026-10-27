@@ -40,3 +40,7 @@ Every slide is its own page with the full text in the HTML, its own title, descr
 - Edit content in `content/lesson-N/NN-slug.html` (front matter + lead, key, prose, code).
 - Shared look and lab: `assets/lesson.css`, `assets/lab.js`, `assets/prelude.py`.
 - Run `python build.py` to regenerate `index.html`, `lesson-N/…/index.html`, `sitemap.xml` and `robots.txt`, then commit. GitHub Pages serves the repo root.
+
+## Practice pages
+
+Each lesson has `content/lesson-N/practice.html`: three worked examples and five problems with solutions that open on click. It builds to `lesson-N/practice/`. Extra problems for a future paid set are kept outside this repository, because everything in it is published by GitHub Pages.

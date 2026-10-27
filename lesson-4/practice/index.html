@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Null Space, Rank and the Four Subspaces: Worked Examples and Practice Problems | Linear Algebra, Live</title>
+<meta name="description" content="Worked examples and practice problems with hidden solutions: subspaces, null space, special solutions, the complete solution to Ax = b, independence and the four subspaces.">
+<link rel="canonical" href="https://linearalgebra.steppeschool.com/lesson-4/practice/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Linear Algebra, Live">
+<meta property="og:title" content="Null Space, Rank and the Four Subspaces: Worked Examples and Practice Problems | Linear Algebra, Live">
+<meta property="og:description" content="Worked examples and practice problems with hidden solutions: subspaces, null space, special solutions, the complete solution to Ax = b, independence and the four subspaces.">
+<meta property="og:url" content="https://linearalgebra.steppeschool.com/lesson-4/practice/">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/lesson.css">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "Null Space, Rank and the Four Subspaces: Worked Examples and Practice Problems", "description": "Worked examples and practice problems with hidden solutions: subspaces, null space, special solutions, the complete solution to Ax = b, independence and the four subspaces.", "url": "https://linearalgebra.steppeschool.com/lesson-4/practice/", "inLanguage": "en", "learningResourceType": "Practice problems", "educationalLevel": "Beginner", "isAccessibleForFree": true, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 4: The four subspaces", "item": "https://linearalgebra.steppeschool.com/lesson-4/"}, {"@type": "ListItem", "position": 3, "name": "Examples and problems", "item": "https://linearalgebra.steppeschool.com/lesson-4/practice/"}]}]</script>
+</head>
+<body>
+<header class="top">
+  <div class="topnav"><a class="brand" href="../../">Linear Algebra, Live</a><nav class="crumbnav" aria-label="Chapters and lessons"><details class="menu"><summary>Chapter 3<span class="hide-sm"> · Vector spaces and subspaces</span></summary><div class="menu-list"><div class="menu-group"><span class="menu-h">Chapter 1 · Introduction to vectors</span><a class="menu-item" href="../../lesson-1/">Lesson 1 · Columns first</a></div><div class="menu-group"><span class="menu-h">Chapter 2 · Solving linear equations</span><a class="menu-item" href="../../lesson-2/">Lesson 2 · Elimination and A = LU</a><a class="menu-item" href="../../lesson-3/">Lesson 3 · Inverses, transposes and permutations</a></div><div class="menu-group on"><span class="menu-h">Chapter 3 · Vector spaces and subspaces</span><a class="menu-item on" href="../../lesson-4/">Lesson 4 · The four subspaces</a></div><div class="menu-group"><span class="menu-h">Chapter 4 · Orthogonality</span><span class="menu-item soon">Orthogonality and least squares · coming soon</span></div><div class="menu-group"><span class="menu-h">Chapter 5 · Determinants</span><span class="menu-item soon">Determinants · coming soon</span></div><div class="menu-group"><span class="menu-h">Chapter 6 · Eigenvalues and eigenvectors</span><span class="menu-item soon">Eigenvalues and eigenvectors · coming soon</span></div><div class="menu-group"><span class="menu-h">Chapter 7 · The singular value decomposition</span><span class="menu-item soon">SVD and PCA · coming soon</span></div></div></details><span class="sep">›</span><details class="menu"><summary>Lesson 4<span class="hide-sm"> · The four subspaces</span></summary><div class="menu-list"><div class="menu-group"><span class="menu-h">Chapter 3 lessons</span><a class="menu-item on" href="../../lesson-4/">Lesson 4 · The four subspaces</a></div><div class="menu-group"><span class="menu-h">In this lesson</span><a class="menu-item sub" href="../../lesson-4/vector-spaces-and-subspaces/">1. Vector Spaces and Subspaces Explained Visually</a><a class="menu-item sub" href="../../lesson-4/null-space/">2. Null Space Explained Visually</a><a class="menu-item sub" href="../../lesson-4/rref-and-special-solutions/">3. Reduced Row Echelon Form, Pivot Columns and Special Solutions</a><a class="menu-item sub" href="../../lesson-4/complete-solution/">4. The Complete Solution to Ax = b: Particular Plus Null Space</a><a class="menu-item sub" href="../../lesson-4/independence-basis-dimension/">5. Linear Independence, Basis and Dimension Explained</a><a class="menu-item sub" href="../../lesson-4/four-fundamental-subspaces/">6. The Four Fundamental Subspaces Explained Visually</a><a class="menu-item sub" href="../../lesson-4/recap/">7. Lesson 4 Recap: The Four Subspaces</a><a class="menu-item sub" href="../../lesson-4/practice/">✎ Examples and problems</a></div></div></details></nav></div>
+  <nav class="steps" aria-label="Steps in this lesson"><a class="step" href="../vector-spaces-and-subspaces/" data-slug="vector-spaces-and-subspaces" title="Vector Spaces and Subspaces Explained Visually">1</a><a class="step" href="../null-space/" data-slug="null-space" title="Null Space Explained Visually">2</a><a class="step" href="../rref-and-special-solutions/" data-slug="rref-and-special-solutions" title="Reduced Row Echelon Form, Pivot Columns and Special Solutions">3</a><a class="step" href="../complete-solution/" data-slug="complete-solution" title="The Complete Solution to Ax = b: Particular Plus Null Space">4</a><a class="step" href="../independence-basis-dimension/" data-slug="independence-basis-dimension" title="Linear Independence, Basis and Dimension Explained">5</a><a class="step" href="../four-fundamental-subspaces/" data-slug="four-fundamental-subspaces" title="The Four Fundamental Subspaces Explained Visually">6</a><a class="step" href="../recap/" data-slug="recap" title="Lesson 4 Recap: The Four Subspaces">7</a><a class="step practice on" href="../practice/" aria-current="page" title="Examples and problems">✎</a></nav>
+</header>
+
+<main class="app">
+  <article class="page">
+    <div class="kicker">Lesson 4 · Examples and problems</div>
+    <h1>Practice: The four subspaces</h1>
+    <p class="lead">Three worked examples, then five problems. <code>rref(A)</code> and <code>np.linalg.matrix_rank(A)</code> in the lab will check your pivots and ranks.</p>
+    <h2 class="practice-h">Worked examples</h2>
+    <div class="examples">
+<section class="example"><h3>Example 1 · Is it a subspace?</h3>
+<p>Is the set of all (x, y, z) with x = 2y a subspace of 3D space?</p>
+<div class="worked"><div class="row">Zero: (0, 0, 0) has 0 = 2·0 ✓</div>
+<div class="row">Add: if x₁ = 2y₁ and x₂ = 2y₂, then x₁ + x₂ = 2(y₁ + y₂) ✓</div>
+<div class="row">Scale: cx₁ = 2(cy₁) ✓</div></div>
+<p>Yes. It is a plane through the origin. With x = 2y + 1 it would fail at once: the origin is missing.</p>
+</section>
+<section class="example"><h3>Example 2 · Nullspace and special solutions</h3>
+<p>Find the nullspace of A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>3</span><span>2</span><span>4</span><span>6</span></span>.</p>
+<div class="worked"><div class="row">Row 2 − 2·row 1 = 0, so R = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>3</span><span>0</span><span>0</span><span>0</span></span>. One pivot (column 1), rank 1.</div>
+<div class="row">Free: x₂, x₃. &nbsp; x₂ = 1, x₃ = 0 gives (−2, 1, 0). &nbsp; x₂ = 0, x₃ = 1 gives (−3, 0, 1).</div></div>
+<p>N(A) is all combinations c·(−2, 1, 0) + d·(−3, 0, 1): a plane, dimension n − r = 3 − 1 = 2.</p>
+</section>
+<section class="example"><h3>Example 3 · The complete solution</h3>
+<p>Solve x + 2y + 3z = 6.</p>
+<div class="worked"><div class="row">Particular solution: set the free variables y = z = 0, then x = 6. x_p = (6, 0, 0)</div>
+<div class="row">Nullspace: the same matrix as Example 2's first row, special solutions (−2, 1, 0) and (−3, 0, 1)</div>
+<div class="row">x = (6, 0, 0) + c·(−2, 1, 0) + d·(−3, 0, 1)</div></div>
+<p>Geometrically: a plane parallel to the nullspace, shifted to pass through (6, 0, 0).</p>
+</section>
+    </div>
+    <h2 class="practice-h">Problems</h2>
+    <div class="problems">
+<div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Which of these are subspaces of the plane? (a) all (x, y) with x = y (b) all (x, y) with x + y = 1 (c) all (x, y) with xy = 0.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>(a) Yes: a line through the origin.</p><p>(b) No: (0, 0) is not on it.</p><p>(c) No: it is the two axes together, and (1, 0) + (0, 1) = (1, 1) has xy = 1.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>Find the nullspace of <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>2</span><span>−2</span></span>.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Both rows say x − y = 0. So N(A) is every multiple of (1, 1): a line.</p><p>Check: A(1, 1) = (1 − 1, 2 − 2) = (0, 0) ✓</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>Find R, the rank and a special solution for A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>1</span><span>2</span><span>4</span><span>3</span><span>3</span><span>6</span><span>4</span></span>.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Row 2 − 2·row 1 = (0, 0, 1), row 3 − 3·row 1 = (0, 0, 1), then row 3 − row 2 = 0. Clearing above the pivot: R = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>0</span><span>0</span><span>0</span><span>1</span><span>0</span><span>0</span><span>0</span></span>.</p><p>Pivots in columns 1 and 3, so rank 2. Column 2 is free: x₂ = 1 gives the special solution (−2, 1, 0).</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">4</span><div class="pbody">
+<p>Are (1, 2, 0), (0, 1, 1) and (1, 3, 1) independent?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>No. (1, 3, 1) = (1, 2, 0) + (0, 1, 1), so 1·v₁ + 1·v₂ − 1·v₃ = 0. The rank is 2 and the three vectors lie in one plane.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">5</span><div class="pbody">
+<p>A is 3 by 5 with rank 2. Give the dimension of each of the four subspaces.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>m = 3, n = 5, r = 2.</p><p>Row space r = 2, nullspace n − r = 3, column space r = 2, left nullspace m − r = 1.</p>
+</div></details>
+</div></div>
+    </div>
+    <div class="signup">
+      <p><b>Want more problems?</b> More practice sets are on the way. Get a free Steppeschool account and we'll tell you when they're out.</p>
+      <a class="btn primary" href="https://www.steppeschool.com/offers/JwLxrqg8/checkout">Get a free account</a>
+    </div>
+    <div class="nav">
+      <a class="btn" id="prev" href="../recap/">← Back</a>
+      <span class="count">Practice</span>
+      <a class="btn primary" id="next" href="../../">All lessons →</a>
+    </div>
+  </article>
+
+  <aside class="lab" aria-label="Lab">
+    <figure class="figure" style="margin:0">
+      <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+      <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+    </figure>
+    <div class="editor-card">
+      <div class="bar">
+        <span class="file">sandbox.py</span>
+        <span class="status" id="pystatus">Loading Python…</span>
+        <button class="btn" id="reset">Reset</button>
+        <button class="btn primary" id="run" disabled>Run ▸</button>
+      </div>
+      <div class="editor">
+        <div class="gutter" id="gutter">1</div>
+        <div class="code" id="codewrap">
+          <pre id="hl" aria-hidden="true"></pre>
+          <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+# A sandbox for the problems. Try:
+A = np.array([[1., 2., 1.],
+              [2., 4., 3.],
+              [3., 6., 4.]])
+R, pivots = rref(A)
+print(&quot;rank =&quot;, np.linalg.matrix_rank(A))
+table((&quot;A&quot;, A), (&quot;R&quot;, R, pivots))</textarea>
+        </div>
+      </div>
+      <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+      <pre class="out" id="out"><span class="sys">A sandbox: check your answers here. Ctrl+Enter runs.</span></pre>
+    </div>
+  </aside>
+</main>
+<footer class="foot">
+  Follows the order and notation of Gilbert Strang, <i>Introduction to Linear Algebra</i>, 5th edition (2016); § numbers refer to that book.
+  Explanations, examples and code are original. Made by <a href="https://www.steppeschool.com">Steppeschool</a>.
+</footer>
+
+<script>window.SLIDE = {"slug": "practice", "lesson": "lesson-4", "assets": "../../assets/", "preview": {"kind": "transform", "M": [[1, 0], [0, 1]]}, "check": "false"};</script>
+<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
+<script src="../../assets/lab.js" defer></script>
+<script src="../../assets/nav.js" defer></script>
+</body>
+</html>

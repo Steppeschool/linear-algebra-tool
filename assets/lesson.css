@@ -139,3 +139,53 @@ a.card:hover{border-color:var(--accent)}
 .tm-grid{display:grid;gap:4px 14px;padding:6px 12px;border-left:2px solid var(--ink);border-right:2px solid var(--ink);border-radius:8px;font-family:var(--f-mono);font-size:15px;font-variant-numeric:tabular-nums;text-align:right}
 .tm-grid .pv{background:var(--accent-soft);color:var(--accent);font-weight:600;border-radius:4px;padding:0 4px;margin:0 -4px}
 .tm-dim{font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+
+/* top navigation: course › chapter › lesson, then steps */
+.top{position:relative;z-index:20}
+.topnav{display:flex;align-items:center;gap:10px 14px;flex-wrap:wrap;min-width:0}
+.brand{font-family:var(--f-display);font-weight:700;font-size:19px;letter-spacing:-.01em;color:var(--ink);text-decoration:none;white-space:nowrap}
+.crumbnav{display:flex;align-items:center;gap:6px;flex-wrap:wrap;min-width:0}
+.crumbnav .sep{color:var(--muted)}
+.menu{position:relative}
+.menu summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:6px;font-size:14px;font-weight:500;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 12px;white-space:nowrap}
+.menu summary::-webkit-details-marker{display:none}
+.menu summary::after{content:"";width:7px;height:7px;border-right:1.5px solid var(--muted);border-bottom:1.5px solid var(--muted);transform:rotate(45deg) translateY(-2px);margin-left:2px}
+.menu[open] summary{border-color:var(--accent)}
+.menu summary:hover{border-color:var(--muted)}
+.menu summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.menu-list{position:absolute;top:calc(100% + 6px);left:0;z-index:30;width:min(360px,calc(100vw - 32px));max-height:min(70vh,560px);overflow:auto;background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:0 12px 32px rgba(15,20,30,.14);padding:8px}
+.menu-group{display:flex;flex-direction:column;padding:6px 0;border-bottom:1px solid var(--line)}
+.menu-group:last-child{border-bottom:0}
+.menu-h{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:4px 10px}
+.menu-group.on .menu-h{color:var(--accent)}
+.menu-item{display:block;padding:7px 10px;border-radius:8px;color:var(--ink);text-decoration:none;font-size:14px;line-height:1.35}
+a.menu-item:hover{background:var(--soft)}
+.menu-item.on{background:var(--accent-soft);color:var(--accent);font-weight:600}
+.menu-item.sub{font-size:13.5px;color:var(--muted)} a.menu-item.sub:hover{color:var(--ink)}
+.menu-item.soon{color:var(--muted);opacity:.7}
+.step.practice{font-size:14px}
+.chapter-title{font-family:var(--f-display);font-size:18px;margin:22px 0 10px;color:var(--muted);letter-spacing:-.01em}
+.practice-card{border-style:dashed}
+@media (max-width:640px){ .hide-sm{display:none} .brand{font-size:17px} .crumbnav{position:relative} .menu{position:static} .menu-list{left:0} }
+
+/* practice page */
+.practice-h{font-family:var(--f-display);font-size:24px;letter-spacing:-.01em;margin:30px 0 12px}
+.examples{display:flex;flex-direction:column;gap:14px}
+.example{border:1px solid var(--line);border-radius:12px;padding:16px 18px;max-width:72ch}
+.example h3{font-family:var(--f-body);font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin:0 0 8px}
+.example p{margin:0 0 10px}
+.problems{display:flex;flex-direction:column;gap:12px}
+.problem{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;border:1px solid var(--line);border-radius:12px;padding:14px 16px;max-width:72ch}
+.pnum{font-family:var(--f-mono);font-weight:600;font-size:13px;width:28px;height:28px;border-radius:50%;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center}
+.pbody p{margin:2px 0 10px}
+details.sol summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:600;color:var(--accent);border:1px solid var(--accent);border-radius:8px;padding:5px 12px}
+details.sol summary::-webkit-details-marker{display:none}
+details.sol summary::before{content:"+";font-family:var(--f-mono)}
+details.sol[open] summary::before{content:"−"}
+details.sol[open] summary{background:var(--accent-soft)}
+details.sol summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.solbody{margin-top:10px;padding:12px 14px;background:var(--soft);border-radius:10px;font-size:15px}
+.solbody p{margin:0 0 8px} .solbody p:last-child{margin:0}
+details.sol .s-hide{display:none}
+details.sol[open] .s-hide{display:inline}
+details.sol[open] .s-show{display:none}
