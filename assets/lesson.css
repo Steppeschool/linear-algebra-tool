@@ -255,3 +255,8 @@ details.sol[open] .s-show{display:none}
 .lesson .page .lead,.lesson .page .key,.lesson .page .prose,.lesson .page .prose p,.lesson .page .examples,.lesson .page .problems,.lesson .page .example,.lesson .page .problem,.lesson .page .signup{max-width:none}
 .lesson .page .key{justify-content:flex-start;text-align:left}
 .lesson .page .prose ul{padding-left:22px}
+
+/* sticky top bar (27 Oct): menus and steps stay visible while scrolling */
+.top{position:sticky;top:0;z-index:40;background:var(--paper);padding-block:calc(10px + env(safe-area-inset-top, 0px)) 10px;margin-bottom:12px;box-shadow:0 0 0 100vmax var(--paper);clip-path:inset(0 -100vmax -1px -100vmax);border-bottom:1px solid var(--line)}
+.lesson .figure{top:84px}
+@media (max-width:640px){ .top{padding-block:calc(8px + env(safe-area-inset-top, 0px)) 8px} }
