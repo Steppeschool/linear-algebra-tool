@@ -9,29 +9,34 @@ preview: {"kind":"table","items":[{"label":"A","M":[[2,1,1],[4,-6,0],[-2,7,2]],"
 check: isTab(V) && close(item(V, 'U'), [[2,1,1],[0,-8,-2],[0,0,1]])
 ---
 <!-- lead -->
-With three equations, use the first pivot to clear column 1, then the second pivot to clear column 2. You end with a triangle U. Its last row has a single unknown.
+With three equations we eliminate one column at a time. The first pivot clears column 1, the second pivot clears column 2, and the system becomes a triangle. Then back substitution solves it from the bottom up.
 <!-- key -->
 <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>1</span><span>4</span><span>−6</span><span>0</span><span>−2</span><span>7</span><span>2</span></span> &nbsp;→&nbsp; <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>1</span><span>0</span><span>−8</span><span>−2</span><span>0</span><span>0</span><span>1</span></span>
+<!-- ideas -->
+<ol class="ideas"><li>Elimination works column by column, from left to right.</li><li>Each multiplier uses the <b>current</b> pivot, after the earlier steps.</li><li>The result is an upper triangular matrix U. Its diagonal entries are the pivots.</li><li>Back substitution solves the last row first, then moves up one row at a time.</li></ol>
 <!-- prose -->
-<h2>Think: a chain of keys</h2>
-<p>Picture three locked boxes. The key to box 2 is inside box 3. The key to box 1 is inside box 2. You can only start with box 3.</p>
-<p>An upper triangular system works the same way. The last equation has one unknown, so you open it first. Its value unlocks the equation above, and so on to the top. That is back substitution.</p>
-<h2>Forward: clear column by column</h2>
+<h3>From two equations to three</h3>
+<p>Nothing new is needed for bigger systems. We just repeat the step from slide 1, carefully, in a fixed order. Take</p>
+<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>1</span><span>4</span><span>−6</span><span>0</span><span>−2</span><span>7</span><span>2</span></span> &nbsp;&nbsp; with right side b = (5, −2, 9)</div></div>
+<h3>Column 1</h3>
+<p>The first pivot is 2, in the top left corner. Below it we must clear the 4 and the −2:</p>
 <ul>
-<li><b>Column 1:</b> the pivot is 2. ℓ₂₁ = 4 ÷ 2 = 2 and ℓ₃₁ = −2 ÷ 2 = −1. Subtract ℓ times row 1 from rows 2 and 3.</li>
-<li><b>Column 2:</b> the new second row starts 0, −8. The pivot is −8. Use it to clear the 8 below it.</li>
+<li>ℓ₂₁ = 4 ÷ 2 = 2. Subtract 2 times row 1 from row 2: (4, −6, 0) − 2·(2, 1, 1) = (0, −8, −2).</li>
+<li>ℓ₃₁ = −2 ÷ 2 = −1. Subtract −1 times row 1 from row 3, which means adding row 1: (−2, 7, 2) + (2, 1, 1) = (0, 8, 3).</li>
 </ul>
-<p>The pivots are the numbers on the diagonal of U: 2, −8 and 1. A pivot is never zero. You divide by it to get each multiplier.</p>
-<h2>Worked example</h2>
+<h3>Column 2</h3>
+<p>Now the second row starts with 0, −8. The second pivot is −8, and we use it to clear the 8 below it. The multiplier is ℓ₃₂ = 8 ÷ (−8) = −1, so we add row 2 to row 3: (0, 8, 3) + (0, −8, −2) = (0, 0, 1).</p>
+<p>Notice that ℓ₃₂ uses −8, the pivot as it stands now, not the −6 that was in that position at the start. This is the most common mistake in hand calculations.</p>
+<h3>The triangle</h3>
+<div class="worked"><div class="row">U = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>1</span><span>0</span><span>−8</span><span>−2</span><span>0</span><span>0</span><span>1</span></span> &nbsp;&nbsp; pivots 2, −8, 1</div></div>
+<p>U is <b>upper triangular</b>: every entry below the diagonal is zero. A pivot can never be zero, because we divide by it to get the multipliers. Slide 3 is about what happens when one is.</p>
+<h3>Back substitution: a chain of keys</h3>
+<p>Picture three locked boxes. The key to box 2 is inside box 3, and the key to box 1 is inside box 2. You have to open box 3 first. A triangular system works the same way: the last equation has only one unknown, its value unlocks the equation above, and so on to the top.</p>
 <div class="worked">
-<div>Solve with b = (5, −2, 9). Do the same subtractions to b:</div>
-<div class="row">b₂: −2 − 2·5 = −12 &nbsp;&nbsp; b₃: 9 + 5 = 14, then 14 + (−12) = 2</div>
-<div class="row">z = 2 &nbsp;→&nbsp; −8y − 2·2 = −12, so y = 1 &nbsp;→&nbsp; 2x + 1 + 2 = 5, so x = 1</div>
-<div>Check in the original first row: 2·1 + 1 + 2 = 5 ✓</div>
+<div>Do the same subtractions to b: b₂ becomes −2 − 2·5 = −12, and b₃ becomes 9 + 5 = 14, then 14 + (−12) = 2.</div>
+<div class="row">Row 3: z = 2 &nbsp;→&nbsp; Row 2: −8y − 2·2 = −12, so y = 1 &nbsp;→&nbsp; Row 1: 2x + 1 + 2 = 5, so x = 1</div>
 </div>
-<h2>Watch out</h2>
-<p>Always do the same step to b. Changing A without changing b gives a different system.</p>
-<p>The multiplier uses the current pivot, after earlier steps, not the original entry. Here ℓ₃₂ uses the −8, not the −6.</p>
+<p>Always apply each step to b as well as to A. Changing only the left side would give a different system.</p>
 <!-- examples -->
 <section class="example"><h3>Example 1 · A full 3 by 3 solve</h3>
 <p>Solve x + y + z = 3, x + 2y + 2z = 5, x + 2y + 3z = 6.</p><div class="worked"><div class="row">ℓ₂₁ = 1: row 2 → (0, 1, 1 | 2). &nbsp; ℓ₃₁ = 1: row 3 → (0, 1, 2 | 3)</div><div class="row">ℓ₃₂ = 1: row 3 → (0, 0, 1 | 1)</div><div class="row">z = 1 &nbsp;→&nbsp; y + 1 = 2, y = 1 &nbsp;→&nbsp; x + 1 + 1 = 3, x = 1</div></div><p>The pivots are 1, 1, 1.</p>

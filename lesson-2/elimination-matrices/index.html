@@ -29,28 +29,29 @@
   <article class="page">
     <div class="kicker">Strang §2.3 · Elimination using matrices</div>
     <h1>Each elimination step is a matrix.</h1>
-    <p class="lead">Subtracting ℓ times row 1 from row 2 is the same as multiplying by E₂₁: the identity matrix with −ℓ in row 2, column 1.</p>
+    <p class="lead">Every elimination step can be written as multiplication by a simple matrix. Subtracting ℓ times row 1 from row 2 is the same as multiplying by E₂₁: the identity matrix with −ℓ in row 2, column 1.</p>
     <div class="key">E₂₁ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>−ℓ</span><span>1</span><span>0</span><span>0</span><span>0</span><span>1</span></span> &nbsp;&nbsp; E₂₁A = A with row 2 − ℓ·(row 1)</div>
-    
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>An <b>elimination matrix</b> E is the identity with one extra entry, −ℓ, below the diagonal.</li><li>Multiplying EA performs that row operation on A.</li><li>A row of EA is a combination of the rows of A.</li><li>To undo E, change −ℓ to +ℓ. This is the key to A = LU on the next slide.</li></ol></div>
     <div class="prose">
-<h2>Think: an instruction card</h2>
-<p>A row operation is an instruction: "take row 2, subtract 2 of row 1, leave everything else alone". E₂₁ is that instruction written as a matrix.</p>
-<p>Multiplying by E is following the card. Elimination is a stack of cards applied one after another:</p>
-<div class="worked"><div class="row">E₃₂ E₃₁ E₂₁ A = U</div><div>Read right to left, like socks and shoes: E₂₁ acts first.</div></div>
-<h2>Why it works: rows combine rows</h2>
-<p>Lesson 1 read Ax by columns. EA is easiest to read by rows: row i of EA is (row i of E) times A. That is a combination of the rows of A.</p>
+<h3>Why write a step as a matrix?</h3>
+<p>So far elimination has been a list of instructions: "subtract 2 times row 1 from row 2", "add row 1 to row 3", and so on. Matrices let us write the whole process as one equation, and then reason about it with the rules from lesson 1.</p>
+<h3>Think of an instruction card</h3>
+<p>A row operation is like a card with an instruction on it: "take row 2, subtract 2 times row 1, leave the other rows alone". The matrix E₂₁ is that card written in numbers, and multiplying by it means following the card.</p>
+<div class="worked"><div class="row">E₂₁ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>−2</span><span>1</span><span>0</span><span>0</span><span>0</span><span>1</span></span></div></div>
+<h3>Why it works: rows combine rows</h3>
+<p>In lesson 1 we read Ax by columns. For EA it is easier to read by rows: <b>row i of EA is row i of E times A</b>, which is a combination of the rows of A.</p>
 <ul>
-<li>Row 1 of E₂₁ is (1, 0, 0): keep row 1 as it is.</li>
-<li>Row 2 is (−ℓ, 1, 0): row 2 minus ℓ times row 1.</li>
-<li>Row 3 is (0, 0, 1): keep row 3.</li>
+<li>Row 1 of E₂₁ is (1, 0, 0): it keeps row 1 of A unchanged.</li>
+<li>Row 2 is (−2, 1, 0): it produces row 2 minus 2 times row 1.</li>
+<li>Row 3 is (0, 0, 1): it keeps row 3 unchanged.</li>
 </ul>
-<h2>Worked example</h2>
-<div class="worked">
-<div>With ℓ = 2, E₂₁ times A:</div>
-<div class="row">new row 2 = (4, −6, 0) − 2·(2, 1, 1) = (0, −8, −2)</div>
-</div>
-<h2>Undoing a card</h2>
-<p>To undo "subtract 2 of row 1", add 2 of row 1 back. So E₂₁⁻¹ is the identity with +ℓ in the same spot. Hold on to that: it is the key to A = LU on the next slide.</p>
+<p>With A from slide 2, the new row 2 is (4, −6, 0) − 2·(2, 1, 1) = (0, −8, −2), exactly as before.</p>
+<h3>The whole process as one product</h3>
+<p>Each step is one card, and elimination applies them one after another:</p>
+<div class="worked"><div class="row">E₃₂ E₃₁ E₂₁ A = U</div></div>
+<p>Read it from right to left, as in lesson 1: E₂₁ acts first.</p>
+<h3>Undoing a step</h3>
+<p>To undo "subtract 2 times row 1 from row 2", we add 2 times row 1 back. So the inverse of E₂₁ is the identity with +2 in the same position. Every elimination matrix is undone by flipping the sign of its one extra entry. The next slide uses this to turn elimination into a factorization of A.</p>
     </div>
     <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · A 2 by 2 step</h3>
 <p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>1</span><span>6</span><span>4</span></span>. The multiplier is ℓ = 6 ÷ 3 = 2.</p><div class="worked"><div class="row">E₂₁ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>−2</span><span>1</span></span> &nbsp;&nbsp; E₂₁A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>1</span><span>0</span><span>2</span></span></div></div>

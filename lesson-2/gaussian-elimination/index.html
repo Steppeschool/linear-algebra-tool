@@ -29,32 +29,32 @@
   <article class="page">
     <div class="kicker">Strang §2.2 · The idea of elimination</div>
     <h1>Elimination knocks out one unknown at a time.</h1>
-    <p class="lead">Subtract a multiple of one equation from another so an unknown disappears. What is left is one equation with one unknown. Solve it, then work back up.</p>
+    <p class="lead">Elimination is the method every computer uses to solve linear equations. We subtract a multiple of one equation from another so that one unknown disappears. What is left is easier, and we repeat until we can read off the answer.</p>
     <div class="key">x − 2y = 1 &nbsp;&nbsp; 3x + 2y = 11 &nbsp;&nbsp;→&nbsp;&nbsp; 8y = 8</div>
-    
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>The <b>pivot</b> is the number we use to clear the entries below it.</li><li>The <b>multiplier</b> is ℓ = (entry to remove) ÷ (pivot).</li><li>Subtracting ℓ times one equation from another keeps the same solution.</li><li>When one unknown is left in the last equation, we solve it and work back up: <b>back substitution</b>.</li></ol></div>
     <div class="prose">
-<h2>Think: the café puzzle</h2>
+<h3>A puzzle you already know how to solve</h3>
 <p>A coffee and a croissant cost €5. A coffee and two croissants cost €7. What does a croissant cost?</p>
-<p>Nobody reaches for a formula. You compare the two orders. The second one has one extra croissant and costs €2 more. So a croissant is €2, and the coffee is €3.</p>
-<p>That comparison is elimination. You subtracted one equation from the other and the coffee disappeared.</p>
-<h2>The steps</h2>
+<p>Nobody writes down a formula for this. We compare the two orders: the second has exactly one more croissant and costs €2 more, so a croissant is €2 and the coffee is €3. Without saying so, we subtracted the first equation from the second, and the coffee disappeared. That is elimination.</p>
+<h3>The same idea, step by step</h3>
+<p>Take Strang's first system from lesson 1: x − 2y = 1 and 3x + 2y = 11.</p>
 <ul>
-<li><b>Pivot:</b> the first x coefficient, here 1. It is the number you use to clear the column below it.</li>
-<li><b>Multiplier:</b> ℓ = (entry to remove) ÷ (pivot) = 3 ÷ 1 = 3.</li>
-<li><b>Subtract:</b> equation 2 minus 3 times equation 1.</li>
-<li><b>Back substitution:</b> solve the last equation, then put that value into the one above.</li>
+<li>The first equation starts with 1x. That coefficient is the <b>pivot</b>: we will use it to clear the x below it.</li>
+<li>The second equation has 3x. To remove it we need 3 copies of the first equation. That number is the <b>multiplier</b>, ℓ = 3 ÷ 1 = 3.</li>
+<li>Subtract 3 times equation 1 from equation 2. The x terms cancel.</li>
 </ul>
-<h2>Worked example</h2>
 <div class="worked">
 <div class="row">(3x + 2y) − 3(x − 2y) = 11 − 3·1</div>
-<div class="row">8y = 8 &nbsp;→&nbsp; y = 1</div>
-<div class="row">x − 2·1 = 1 &nbsp;→&nbsp; x = 3</div>
+<div class="row">8y = 8, &nbsp;so y = 1</div>
+<div class="row">Back up to equation 1: x − 2·1 = 1, &nbsp;so x = 3</div>
 </div>
-<h2>What it looks like</h2>
-<p>Run the code before and after. The second line changes: it turns flat, y = 1. The crossing point stays at (3, 1).</p>
-<p>That is the whole trick. Each step gives a simpler system with exactly the same solution. Anything that solves both old equations also solves the new ones, and the other way round.</p>
-<h2>Where you meet this</h2>
-<p>Circuit simulators, finite element programs and many other engineering tools solve equations this way. The systems just have thousands of unknowns instead of two.</p>
+<p>The last step, putting y = 1 back into the first equation, is called back substitution.</p>
+<h3>Why the answer does not change</h3>
+<p>If (x, y) satisfies both original equations, it also satisfies "equation 2 minus 3 times equation 1", because we only combined true statements. And we can undo the step by adding 3 times equation 1 back. So the new system has exactly the same solutions as the old one, just in an easier form.</p>
+<h3>What it looks like</h3>
+<p>Run the code in the lab before and after the subtraction. In the row picture, the second line turns flat: it becomes y = 1. The first line does not move, and the crossing point stays at (3, 1). Elimination tilts the lines into a simpler position without moving their meeting point.</p>
+<h3>Where this is used</h3>
+<p>Circuit simulators, structural analysis and many other engineering tools solve equations this way. Their systems simply have thousands of unknowns instead of two, and a computer does the subtractions.</p>
     </div>
     <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · Subtract twice the first equation</h3>
 <p>Solve 2x + y = 5 and 4x − y = 1.</p><div class="worked"><div class="row">Pivot 2, multiplier ℓ = 4 ÷ 2 = 2</div><div class="row">(4x − y) − 2(2x + y) = 1 − 2·5 &nbsp;→&nbsp; −3y = −9 &nbsp;→&nbsp; y = 3</div><div class="row">Back up: 2x + 3 = 5, so x = 1</div><div class="row">Check: 4·1 − 3 = 1 ✓</div></div>

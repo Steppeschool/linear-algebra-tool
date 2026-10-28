@@ -9,28 +9,29 @@ preview: {"kind":"table","items":[{"label":"A","M":[[2,1,1],[4,-6,0],[-2,7,2]],"
 check: isTab(V) && close(lastItem(V), [[2,1,1],[4,-6,0],[-2,7,2]]) && close(item(V, 'L'), [[1,0,0],[2,1,0],[-1,-1,1]])
 ---
 <!-- lead -->
-Elimination turns A into an upper triangular U. The multipliers you used fit into a lower triangular L, exactly where you used them. Multiply back and you get A.
+Elimination turns A into an upper triangular matrix U. If we keep the multipliers, they form a lower triangular matrix L, and multiplying L times U gives A back. This factorization A = LU is how computers solve systems in practice.
 <!-- key -->
 A = LU &nbsp;&nbsp; L = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>ℓ₂₁</span><span>1</span><span>0</span><span>ℓ₃₁</span><span>ℓ₃₂</span><span>1</span></span>
+<!-- ideas -->
+<ol class="ideas"><li><b>A = LU</b>: L is lower triangular with 1s on its diagonal, U is upper triangular.</li><li>The multipliers ℓᵢⱼ go straight into L, in the positions where they were used.</li><li>To solve Ax = b: first solve Lc = b, then Ux = c. Both are fast triangular solves.</li><li>Factor once, then reuse L and U for every new right-hand side b.</li></ol>
 <!-- prose -->
-<h2>Think: meal prep</h2>
-<p>On Sunday you chop every vegetable for the week. That is the slow part. On weekdays each dinner takes five minutes.</p>
+<h3>Think of meal prep</h3>
+<p>On Sunday you chop all the vegetables for the week. That takes time. Then every weekday dinner takes five minutes, because the slow part is already done.</p>
 <p>Factoring A = LU is the Sunday work. Each new right-hand side b is a weekday dinner: two quick triangular solves.</p>
+<div class="worked"><div class="row">Lc = b &nbsp;(forward substitution, top to bottom) &nbsp;&nbsp; then &nbsp;&nbsp; Ux = c &nbsp;(back substitution, bottom to top)</div></div>
+<h3>Where L comes from</h3>
+<p>Slide 4 wrote elimination as E₃₂E₃₁E₂₁A = U. To get A back, undo the steps in reverse order:</p>
+<div class="worked"><div class="row">A = E₂₁⁻¹ E₃₁⁻¹ E₃₂⁻¹ U = LU</div></div>
+<p>Each inverse is the identity with +ℓ where E had −ℓ. Multiplied together in this order, they do not interfere with each other, and each multiplier lands in its own position. So L needs no extra arithmetic: it is simply the record of every multiplier we used, like a receipt.</p>
+<h3>The example from slides 2 to 4</h3>
 <div class="worked">
-<div class="row">Lc = b &nbsp;(forward, top to bottom) &nbsp;&nbsp; then &nbsp;&nbsp; Ux = c &nbsp;(back, bottom to top)</div>
-</div>
-<h2>Why the multipliers drop right in</h2>
-<p>Elimination is E₃₂E₃₁E₂₁A = U. Undo the cards in reverse order and you get A = E₂₁⁻¹E₃₁⁻¹E₃₂⁻¹U. That product of inverses is L.</p>
-<p>Each inverse just has +ℓ where E had −ℓ. Multiplied in this order, they don't interfere: every ℓ lands in its own position. No extra arithmetic. L is the receipt of every step you took.</p>
-<h2>Worked example</h2>
-<div class="worked">
-<div>From the last two slides: ℓ₂₁ = 2, ℓ₃₁ = −1, ℓ₃₂ = −1.</div>
+<div>The multipliers were ℓ₂₁ = 2, ℓ₃₁ = −1, ℓ₃₂ = −1.</div>
 <div class="row">L = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>2</span><span>1</span><span>0</span><span>−1</span><span>−1</span><span>1</span></span> &nbsp; U = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>1</span><span>0</span><span>−8</span><span>−2</span><span>0</span><span>0</span><span>1</span></span></div>
-<div>Row 3 of LU: −1·(2, 1, 1) − 1·(0, −8, −2) + 1·(0, 0, 1) = (−2, 7, 2) ✓</div>
+<div>Check row 3 of LU: −1·(2, 1, 1) − 1·(0, −8, −2) + 1·(0, 0, 1) = (−2, 7, 2), which is row 3 of A ✓</div>
 </div>
-<h2>Why it matters</h2>
-<p>For n unknowns, factoring costs about n³/3 operations. Each solve after that costs about n². With n = 1000: around 330 million for the factoring, then about a million per new b.</p>
-<p>So when the matrix stays the same and only the right side changes, as in a simulation stepping through time, you factor once and reuse it. The lab has <code>lu(A)</code> if you want to check your own matrices.</p>
+<h3>Why it saves time</h3>
+<p>For n unknowns, factoring costs about n³/3 multiplications. Each triangular solve after that costs about n². With n = 1000 that is roughly 330 million operations for the factoring, and then about a million for each new b.</p>
+<p>So when the matrix stays the same and only the right side changes, as in a simulation stepping through time, we factor once and reuse L and U. In the lab, <code>lu(A)</code> returns both factors so you can check your own work.</p>
 <!-- examples -->
 <section class="example"><h3>Example 1 · Factor, then solve</h3>
 <p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>8</span></span>, b = (5, 19).</p><div class="worked"><div class="row">ℓ = 3: U = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>0</span><span>2</span></span>, L = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>3</span><span>1</span></span></div><div class="row">Lc = b: c₁ = 5, c₂ = 19 − 15 = 4</div><div class="row">Ux = c: 2x₂ = 4, x₂ = 2; x₁ + 4 = 5, x₁ = 1</div></div>

@@ -9,27 +9,27 @@ preview: {"kind":"null","A":[[1,2],[2,4]],"x":[1,1],"b":[]}
 check: isN(V) && isZero(matvec(V.A, V.x)) && !isZero(V.x)
 ---
 <!-- lead -->
-The nullspace N(A) holds every x with Ax = 0. Feed in any of these inputs and nothing comes out.
+The nullspace N(A) contains every vector x with Ax = 0. These are the inputs that produce no output at all. It tells us whether solutions are unique.
 <!-- key -->
 N(A) = all x with Ax = 0
+<!-- ideas -->
+<ol class="ideas"><li>N(A) = all solutions of Ax = 0. It always contains x = 0.</li><li>N(A) is a subspace: if Ax = 0 and Ay = 0, then A(cx + dy) = 0.</li><li>If A is invertible, N(A) contains only 0.</li><li>A nonzero x in N(A) describes a dependency between the columns.</li></ol>
 <!-- prose -->
-<h2>Think: engines running, boat standing still</h2>
-<p>Back to the boat. Thruster 2 points the same way as thruster 1 and pushes twice as hard. So A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>4</span></span>.</p>
-<p>Set thruster 1 forward at 2 and thruster 2 in reverse at 1. The pushes cancel exactly. Both engines are working, and the boat does not move. The throttle setting (2, −1) is in the nullspace.</p>
-<h2>What is always true</h2>
-<ul>
-<li>x = 0 is always in N(A).</li>
-<li>N(A) is a subspace: if Ax = 0 and Ay = 0, then A(cx + dy) = 0 too.</li>
-<li>If A is invertible, N(A) is only the zero vector.</li>
-<li>A nonzero x in N(A) is a recipe for a dependency: x₁·(column 1) + x₂·(column 2) = 0.</li>
-</ul>
-<h2>Worked example</h2>
+<h3>Think of engines running and a boat standing still</h3>
+<p>Back to the boat with two thrusters pointing the same way, thruster 2 twice as strong: A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>4</span></span>.</p>
+<p>Run thruster 1 forward at 2 and thruster 2 in reverse at 1. The two pushes cancel exactly: both engines are working, and the boat does not move. The throttle setting x = (2, −1) is in the nullspace, because Ax = 0.</p>
+<h3>Why the nullspace is a subspace</h3>
+<p>If Ax = 0 and Ay = 0, then A(x + y) = Ax + Ay = 0 and A(cx) = cAx = 0. So sums and multiples of nullspace vectors stay in the nullspace. In the example, every multiple c·(2, −1) is also a cancelling setting, and N(A) is a whole line.</p>
+<h3>What a nullspace vector tells us</h3>
+<p>Ax = 0 says x₁·(column 1) + x₂·(column 2) = 0. So a nonzero vector in N(A) is a recipe for combining the columns into zero, which means the columns are dependent. Here: 2·(1, 2) − 1·(2, 4) = (0, 0).</p>
+<p>If A is invertible, the only solution of Ax = 0 is x = A⁻¹0 = 0, so the nullspace is just the zero vector.</p>
+<h3>A worked check</h3>
 <div class="worked">
 <div class="row">A(2, −1) = (1·2 + 2·(−1), 2·2 + 4·(−1)) = (0, 0) ✓</div>
-<div>Every multiple c·(2, −1) works too, so N(A) is a whole line. Look at the plot: it is perpendicular to the row (1, 2). That is no accident, and slide 6 explains it.</div>
+<div>In the plot, N(A) is the line through (2, −1). It is perpendicular to the row (1, 2). That is no accident: slide 6 explains why.</div>
 </div>
-<h2>Where you meet this</h2>
-<p>A robot arm with more joints than it needs has a nullspace. Joint motions in that nullspace move the elbow while the hand stays exactly where it is. Engineers use it to steer the elbow around obstacles while the tool keeps working.</p>
+<h3>Where this is used</h3>
+<p>A robot arm with more joints than it needs has a nullspace. Joint motions in that nullspace move the elbow while the hand stays exactly where it is. Engineers use this freedom to steer the elbow around obstacles while the tool keeps working.</p>
 <!-- examples -->
 <section class="example"><h3>Example 1 · Equal columns</h3>
 <p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>1</span></span>.</p><div class="worked"><div class="row">Ax = 0 means x₁ + x₂ = 0</div><div class="row">N(A) = all multiples of (1, −1)</div></div>

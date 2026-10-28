@@ -9,33 +9,37 @@ preview: {"kind":"combo","A":[[1,2],[2,4]],"x":[1,1],"b":[-3,-6]}
 check: isC(V) && eqM(V.A, [[1,2],[2,4]]) && near(Ax(V)[0], -3) && near(Ax(V)[1], -6)
 ---
 <!-- lead -->
-A subspace is a set of vectors you cannot escape by adding and scaling. In the plane there are only three kinds: the origin alone, a line through the origin, or the whole plane.
+A subspace is a collection of vectors that you cannot leave by adding and scaling. In the plane there are only three kinds: the origin alone, a line through the origin, or the whole plane.
 <!-- key -->
 v and w in S &nbsp;⇒&nbsp; cv + dw in S, for every c and d
+<!-- ideas -->
+<ol class="ideas"><li>A <b>subspace</b> contains the zero vector and is closed under addition and scaling.</li><li>Lines and planes through the origin are subspaces. Those that miss the origin are not.</li><li>The column space C(A) from lesson 1 is a subspace.</li><li>Chapter 3 is about four subspaces that every matrix carries.</li></ol>
 <!-- prose -->
-<h2>Think: a train on rails</h2>
-<p>Straight rails run through the station, which is the origin. Drive forward, reverse, combine trips: you always stay on the rails. That line is a subspace.</p>
-<p>Now picture rails that miss the station. Scale any position by 0 and you should land at the origin, but the origin is not on those rails. So they are not a subspace.</p>
-<h2>The three rules</h2>
+<h3>Think of a train on rails</h3>
+<p>Straight rails run through a station at the origin. The train can go forward, reverse, or combine several trips, and it always stays on the rails. In vector language: adding and scaling vectors on the line keeps them on the line. That line is a subspace.</p>
+<p>Now picture rails that do not pass through the station. Scaling any position by 0 should give the origin, but the origin is not on those rails. So a line that misses the origin is not a subspace.</p>
+<h3>The definition</h3>
+<p>A set of vectors S is a subspace when three things hold:</p>
 <ul>
-<li>It contains the zero vector.</li>
-<li>Adding two vectors in the set stays in the set.</li>
-<li>Scaling a vector in the set stays in the set.</li>
+<li>The zero vector is in S.</li>
+<li>If v and w are in S, so is v + w.</li>
+<li>If v is in S, so is cv for every number c.</li>
 </ul>
-<h2>Examples and non-examples</h2>
+<p>Together these say: every linear combination cv + dw of vectors in S stays in S.</p>
+<h3>Examples and non-examples in the plane</h3>
 <ul>
-<li><b>Yes:</b> the line y = 2x. Add or scale points on it and you stay on it.</li>
+<li><b>Yes:</b> the line y = 2x. Sums and multiples of points on it stay on it.</li>
 <li><b>No:</b> the line y = 2x + 1. It misses the origin.</li>
-<li><b>No:</b> the first quadrant. Multiply by −1 and you leave it.</li>
-<li><b>No:</b> the two axes together. (1, 0) + (0, 1) = (1, 1) is on neither axis.</li>
+<li><b>No:</b> the first quadrant (x ≥ 0, y ≥ 0). Multiplying by −1 leaves it.</li>
+<li><b>No:</b> the two axes together. (1, 0) and (0, 1) are in the set, but their sum (1, 1) is not.</li>
 </ul>
-<h2>Worked example in 3D</h2>
+<h3>An example in 3D</h3>
 <div class="worked">
-<div>All (x, y, z) with x + y + z = 0. Add two such vectors and the sums add: 0 + 0 = 0. Scale one and the sum scales: c·0 = 0. So it is a subspace, a plane through the origin.</div>
-<div>With x + y + z = 1 instead, the origin fails the test. Not a subspace.</div>
+<div>All (x, y, z) with x + y + z = 0. Adding two such vectors adds their sums, 0 + 0 = 0. Scaling multiplies the sum, c·0 = 0. So this is a subspace: a plane through the origin.</div>
+<div>With x + y + z = 1 instead, the origin fails the test, so it is not a subspace.</div>
 </div>
-<h2>Why we care</h2>
-<p>The column space from lesson 1 is a subspace. So is the nullspace on the next slide. Chapter 3 is about these spaces, because they tell you exactly which equations Ax = b can be solved, and how many solutions they have.</p>
+<h3>Why subspaces matter</h3>
+<p>The column space of lesson 1 is a subspace, and so is the nullspace on the next slide. Together with two more, they answer the central questions of this chapter: which equations Ax = b can be solved, and how many solutions they have.</p>
 <!-- examples -->
 <section class="example"><h3>Example 1 · A line through the origin</h3>
 <p>All (x, y) with y = 3x.</p><div class="worked"><div class="row">Contains (0, 0). If y₁ = 3x₁ and y₂ = 3x₂, then y₁ + y₂ = 3(x₁ + x₂), and cy₁ = 3(cx₁)</div></div><p>A subspace.</p>

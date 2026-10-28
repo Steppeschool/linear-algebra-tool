@@ -29,27 +29,28 @@
   <article class="page">
     <div class="kicker">Strang §2.5 · Inverse matrices</div>
     <h1>The inverse undoes A.</h1>
-    <p class="lead">A⁻¹ is the matrix that undoes A. Apply A, then A⁻¹, and every point is back where it started.</p>
+    <p class="lead">The inverse of A is the matrix that undoes A. Apply A, then A⁻¹, and every vector is back where it started. When it exists, it solves Ax = b in one step: x = A⁻¹b.</p>
     <div class="key">A⁻¹A = I &nbsp;&nbsp;&nbsp; Ax = b &nbsp;⇔&nbsp; x = A⁻¹b</div>
-    
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>A⁻¹A = I and AA⁻¹ = I, where I is the identity matrix.</li><li>If A is invertible, Ax = b has exactly one solution, x = A⁻¹b.</li><li>A matrix that sends two different vectors to the same output cannot be undone.</li><li>Invertible ⇔ n nonzero pivots ⇔ independent columns ⇔ det A ≠ 0.</li></ol></div>
     <div class="prose">
-<h2>Think: rewind</h2>
-<p>A moves the graph paper: it stretches, turns or slants it. A⁻¹ plays that film backwards. After both, nothing has moved.</p>
-<p>"Nothing has moved" is the identity matrix I, with 1s on the diagonal and 0s elsewhere. Ix = x for every x.</p>
-<h2>Why it matters</h2>
-<p>If A has an inverse, Ax = b has exactly one solution for every b: x = A⁻¹b. Multiply both sides of Ax = b by A⁻¹ and the A disappears.</p>
-<h2>Worked example: undo a shear</h2>
+<h3>Think of rewinding a film</h3>
+<p>Lesson 1 showed a matrix as a motion of the plane: it stretches, turns or slants the graph paper. The inverse plays that motion backwards. After A and then A⁻¹, nothing has moved.</p>
+<p>"Nothing has moved" is the <b>identity matrix</b> I, with 1s on the diagonal and 0s elsewhere. It satisfies Ix = x for every vector x.</p>
+<h3>Why the inverse solves equations</h3>
+<p>Start from Ax = b and multiply both sides on the left by A⁻¹. Since A⁻¹A = I, the left side becomes Ix = x, so x = A⁻¹b. If the inverse exists, there is exactly one solution, and we know how to get it.</p>
+<h3>Example: undoing a shear</h3>
 <div class="worked">
-<div>The shear S = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>0</span><span>1</span></span> slides each row to the right by its height.</div>
-<div>To undo it, slide each row back to the left by the same amount: S⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>0</span><span>1</span></span></div>
-<div class="row">S⁻¹S = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>0</span><span>1</span></span> <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>0</span><span>1</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>1</span></span> ✓</div>
+<div>The shear S = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>0</span><span>1</span></span> slides each point to the right by its height.</div>
+<div>To undo it, slide each point back to the left by the same amount: S⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>0</span><span>1</span></span></div>
+<div class="row">S⁻¹S = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>0</span><span>1</span></span><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>0</span><span>1</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>1</span></span> ✓</div>
 </div>
-<h2>Not every matrix can be undone</h2>
-<p>Think of the boat from lesson 1 with both thrusters pointing forward, thruster 2 pushing twice as hard. Throttles (2, 0) and (0, 1) move the boat exactly the same way. Watching the boat, you cannot tell which settings produced the motion.</p>
-<p>That is a matrix with no inverse. It sends two different inputs to the same output, so there is no way back. Four equivalent tests, all from earlier slides:</p>
+<p>In the lab, follow the vector v = (1, 2): S moves it to (3, 2), and your S⁻¹ should bring it back.</p>
+<h3>When there is no inverse</h3>
+<p>Think of the boat from lesson 1 with both thrusters pointing forward, thruster 2 twice as strong as thruster 1. The throttle settings (2, 0) and (0, 1) push the boat in exactly the same way. If you only see the boat move, you cannot tell which setting was used.</p>
+<p>That is a matrix with no inverse: it sends two different inputs to the same output, so no matrix can reverse it. All of these say the same thing about a square matrix A:</p>
 <ul>
-<li>A has n nonzero pivots.</li>
-<li>The columns of A are independent.</li>
+<li>A has n nonzero pivots (lesson 2).</li>
+<li>The columns of A are independent (lesson 1).</li>
 <li>det A ≠ 0: the plane is not squashed.</li>
 <li>Ax = 0 only for x = 0.</li>
 </ul>

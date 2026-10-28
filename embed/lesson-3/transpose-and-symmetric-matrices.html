@@ -3,29 +3,30 @@
   <article class="page">
     <div class="kicker">Strang §2.7 · Transposes</div>
     <h1>The transpose swaps rows and columns.</h1>
-    <p class="lead">Row 1 of A becomes column 1 of Aᵀ. An m by n matrix turns into an n by m matrix. A matrix that equals its own transpose is called symmetric.</p>
+    <p class="lead">The transpose Aᵀ turns the rows of A into columns. A matrix that equals its own transpose is called symmetric, and the product AᵀA is always symmetric.</p>
     <div class="key"><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span></span>ᵀ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>3</span><span>5</span><span>2</span><span>4</span><span>6</span></span></div>
-    
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Row i of A becomes column i of Aᵀ. An m by n matrix becomes n by m.</li><li>(AB)ᵀ = BᵀAᵀ: the order reverses, as for inverses.</li><li><b>Symmetric</b> means S = Sᵀ: entry (i, j) equals entry (j, i).</li><li>AᵀA is always symmetric. It is the heart of least squares in chapter 4.</li></ol></div>
     <div class="prose">
-<h2>Think: turning a spreadsheet</h2>
-<p>A sales sheet has products as rows and months as columns. Your manager wants months as rows instead. You haven't changed any number, only which way you read them. That is the transpose.</p>
-<h2>Symmetric: the distance table</h2>
-<p>Look at a road atlas table of distances between cities. Paris to Lyon is the same as Lyon to Paris. Flip the table across its diagonal and nothing changes. That table is symmetric: S = Sᵀ.</p>
-<h2>The rules</h2>
+<h3>Think of turning a spreadsheet</h3>
+<p>A sales sheet has one row per product and one column per month. Your manager asks for months as rows instead. No number changes; only the way you read them does. That is the transpose.</p>
+<div class="worked"><div class="row"><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span></span>ᵀ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>3</span><span>5</span><span>2</span><span>4</span><span>6</span></span></div></div>
+<h3>Symmetric matrices: the distance table</h3>
+<p>A road atlas has a table of distances between cities. The distance from Paris to Lyon equals the distance from Lyon to Paris, so if you flip the table across its diagonal, nothing changes. Such a table is a <b>symmetric</b> matrix.</p>
+<h3>The rules</h3>
 <ul>
-<li><b>(AB)ᵀ = BᵀAᵀ.</b> The order flips, just like the inverse.</li>
-<li><b>(A⁻¹)ᵀ = (Aᵀ)⁻¹.</b> Transpose and inverse can be done in either order.</li>
-<li><b>Dot products:</b> x · y = xᵀy, a row times a column.</li>
-<li><b>AᵀA is always symmetric.</b> Its (i, j) entry is column i of A dotted with column j. Swapping i and j gives the same dot product.</li>
+<li><b>(AB)ᵀ = BᵀAᵀ.</b> The order reverses, just as for inverses on slide 3.</li>
+<li><b>(A⁻¹)ᵀ = (Aᵀ)⁻¹.</b> Transposing and inverting can be done in either order.</li>
+<li><b>The dot product</b> of x and y can be written xᵀy: a row times a column.</li>
+<li><b>AᵀA is symmetric.</b> Its (i, j) entry is column i of A dotted with column j. Swapping i and j gives the same dot product.</li>
 </ul>
-<h2>Worked example</h2>
+<h3>A worked example</h3>
 <div class="worked">
 <div>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span></span> is 3 by 2, so AᵀA is 2 by 2.</div>
-<div class="row">(1,1): 1 + 9 + 25 = 35 &nbsp; (1,2): 2 + 12 + 30 = 44 &nbsp; (2,2): 4 + 16 + 36 = 56</div>
+<div class="row">(1, 1): 1 + 9 + 25 = 35 &nbsp; (1, 2): 2 + 12 + 30 = 44 &nbsp; (2, 2): 4 + 16 + 36 = 56</div>
 <div class="row">AᵀA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>35</span><span>44</span><span>44</span><span>56</span></span></div>
 </div>
-<h2>Where you meet this</h2>
-<p>AᵀA is the heart of least squares (chapter 4): fitting a line to noisy measurements, or calibrating an accelerometer from many readings. For a rotation matrix Q, QᵀQ = I, so the transpose is the inverse. Turning back is free.</p>
+<h3>Where this is used</h3>
+<p>AᵀA appears whenever we fit a model to many noisy measurements, for example a straight line through sensor readings or the calibration of an accelerometer. For a rotation matrix Q, QᵀQ = I, so the transpose is the inverse: turning back costs nothing to compute.</p>
     </div>
     <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · A wide matrix turned tall</h3>
 <p>A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span></span> is 2 by 3.</p><div class="worked"><div class="row">Aᵀ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>4</span><span>2</span><span>5</span><span>3</span><span>6</span></span> is 3 by 2</div></div>

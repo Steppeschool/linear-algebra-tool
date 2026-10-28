@@ -3,27 +3,30 @@
   <article class="page">
     <div class="kicker">Strang §2.5 · The 2 by 2 inverse</div>
     <h1>Swap, flip signs, divide by the determinant.</h1>
-    <p class="lead">For a 2 by 2 matrix there is a short recipe. Swap the two diagonal entries, change the signs of the other two, and divide everything by ad − bc.</p>
+    <p class="lead">For a 2 by 2 matrix the inverse has a short formula: swap the two diagonal entries, change the signs of the other two, and divide by the determinant ad − bc.</p>
     <div class="key"><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>a</span><span>b</span><span>c</span><span>d</span></span>⁻¹ = 1/(ad − bc) · <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>d</span><span>−b</span><span>−c</span><span>a</span></span></div>
-    
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>A⁻¹ = 1/(ad − bc) times [[d, −b], [−c, a]].</li><li>Dividing by det A undoes the area scaling of A.</li><li>If ad − bc = 0 there is no inverse.</li><li>Always check the answer by multiplying: AA⁻¹ should be I.</li></ol></div>
     <div class="prose">
-<h2>Think: why divide by the determinant?</h2>
-<p>Lesson 1 showed that A multiplies every area by |det A|, where det A = ad − bc (its sign records a flip). To undo A, the inverse has to scale areas back by 1/|det A|, and its determinant is 1/det A.</p>
-<p>When det A = 0, A squashes the plane flat. You would need to divide by zero to get back. No matrix can unflatten a line into a plane, so there is no inverse.</p>
-<h2>Worked example</h2>
+<h3>The recipe</h3>
+<div class="worked"><div class="row"><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>a</span><span>b</span><span>c</span><span>d</span></span>⁻¹ = 1/(ad − bc) · <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>d</span><span>−b</span><span>−c</span><span>a</span></span></div></div>
+<p>Three moves: swap a and d, flip the signs of b and c, divide everything by ad − bc.</p>
+<h3>Why the determinant appears</h3>
+<p>Lesson 1 showed that A multiplies every area by |det A|, where det A = ad − bc, and that the sign of det A records whether the plane is flipped. To undo A, its inverse must shrink areas back by the same factor, so it must divide by det A.</p>
+<p>When det A = 0, A squashes the plane onto a line. Undoing that would mean dividing by zero, and no matrix can turn a line back into a plane. So a matrix with ad − bc = 0 has no inverse.</p>
+<h3>A worked example</h3>
 <div class="worked">
 <div>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>5</span><span>3</span></span> &nbsp; det A = 2·3 − 1·5 = 1</div>
 <div class="row">A⁻¹ = 1/1 · <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>−1</span><span>−5</span><span>2</span></span></div>
 <div class="row">Check: AA⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>6 − 5</span><span>−2 + 2</span><span>15 − 15</span><span>−5 + 6</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>1</span></span> ✓</div>
 </div>
-<h2>Watch out</h2>
+<h3>Common mistakes</h3>
 <ul>
-<li>Swap the <b>diagonal</b> (a and d). Do not swap b and c.</li>
-<li>Flip the signs of b and c only.</li>
-<li>Always check by multiplying. AA⁻¹ should give I, and so should A⁻¹A.</li>
+<li>Swapping b and c instead of a and d. Only the <b>diagonal</b> entries trade places.</li>
+<li>Flipping the signs of a and d. Only b and c change sign.</li>
+<li>Forgetting to divide by det A. The example above hides this because det A = 1.</li>
 </ul>
-<h2>Beyond 2 by 2</h2>
-<p>There is a formula for bigger matrices too, but it is slow. In practice the inverse comes from elimination. Slide 4 shows how.</p>
+<h3>Bigger matrices</h3>
+<p>There is a formula for larger matrices too (chapter 5), but it is far too slow to use. In practice the inverse comes from elimination, as slide 4 shows.</p>
     </div>
     <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · Determinant 1</h3>
 <p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>3</span><span>1</span><span>2</span></span>, det A = 4 − 3 = 1.</p><div class="worked"><div class="row">A⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>−3</span><span>−1</span><span>2</span></span></div></div>

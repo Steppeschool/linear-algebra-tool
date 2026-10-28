@@ -29,28 +29,27 @@
   <article class="page">
     <div class="kicker">Strang §2.7 · Permutations</div>
     <h1>Permutation matrices shuffle rows.</h1>
-    <p class="lead">A permutation matrix is the identity with its rows in a new order. Multiply A by it and the rows of A move into that order.</p>
+    <p class="lead">A permutation matrix is the identity with its rows in a new order. Multiplying PA puts the rows of A into that order. Permutations are how elimination records row exchanges.</p>
     <div class="key">P = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>0</span><span>0</span><span>1</span><span>1</span><span>0</span><span>0</span><span>0</span><span>1</span><span>0</span></span> &nbsp; PA = rows 3, 1, 2 of A</div>
-    
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Each row and each column of P contains a single 1.</li><li>PA reorders the rows of A; AP reorders its columns.</li><li>P⁻¹ = Pᵀ: transposing undoes the reordering.</li><li>With row exchanges, elimination gives PA = LU.</li></ol></div>
     <div class="prose">
-<h2>Think: a playlist</h2>
-<p>A permutation is a new running order for a playlist. Row 1 of P says which song plays first, row 2 which plays second, and so on.</p>
-<p>Each row of P has a single 1. A 1 in column 3 of row 1 means "the first slot gets row 3".</p>
-<h2>Undo by transposing</h2>
-<p>To put the playlist back, read the instructions the other way: "row 3 came from slot 1". That is Pᵀ. So for every permutation, P⁻¹ = Pᵀ.</p>
-<h2>Worked example</h2>
+<h3>Think of a playlist</h3>
+<p>A permutation is a new running order for a playlist. Row 1 of P says which song plays first, row 2 which plays second, and so on. A 1 in column 3 of row 1 means "the first slot gets row 3".</p>
+<h3>Undoing a permutation</h3>
+<p>To put the playlist back, read the instructions the other way round: "row 3 went to slot 1" becomes "slot 1 goes back to row 3". Reading P this way is exactly reading its transpose, so P⁻¹ = Pᵀ for every permutation matrix.</p>
+<h3>A worked example</h3>
 <div class="worked">
-<div>Use A with rows full of 1s, 2s and 3s, so you can see where each row goes.</div>
+<div>Use a matrix A whose rows are full of 1s, 2s and 3s, so you can see where each row goes.</div>
 <div class="row">P = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>0</span><span>0</span><span>1</span><span>1</span><span>0</span><span>0</span><span>0</span><span>1</span><span>0</span></span> &nbsp; PA = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>3</span><span>3</span><span>3</span><span>1</span><span>1</span><span>1</span><span>2</span><span>2</span><span>2</span></span></div>
 <div class="row">PᵀP = I ✓</div>
 </div>
-<h2>Counting and the plane</h2>
+<h3>How many are there?</h3>
 <ul>
-<li>There are n! orders of n rows, so 3 by 3 has 6 permutation matrices, including I.</li>
-<li>In the plane, the only swap is <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>1</span><span>0</span></span>. It is the mirror on the line y = x from lesson 1, with det = −1.</li>
+<li>n rows can be ordered in n! ways, so there are 6 permutation matrices of size 3 (including I).</li>
+<li>In the plane the only exchange is <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>1</span><span>0</span></span>. As a motion it is the mirror on the line y = x from lesson 1, with det = −1.</li>
 </ul>
-<h2>Back to elimination</h2>
-<p>When lesson 2 hit a zero pivot, we swapped rows. Doing all the swaps first gives PA = LU. That is the form NumPy and every real solver use, with swaps chosen for the largest pivots.</p>
+<h3>Back to elimination</h3>
+<p>When lesson 2 met a zero pivot, we exchanged rows. If we do all the exchanges first, with a permutation P, elimination never meets a zero pivot, and we get PA = LU. This is the form that NumPy and other solvers actually compute, choosing the exchanges so that each pivot is as large as possible.</p>
     </div>
     <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · Rows or columns</h3>
 <p>P = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>1</span><span>0</span></span>, A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>4</span></span>.</p><div class="worked"><div class="row">PA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>4</span><span>1</span><span>2</span></span>: the rows swap</div><div class="row">AP = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>4</span><span>3</span></span>: the columns swap</div></div>
