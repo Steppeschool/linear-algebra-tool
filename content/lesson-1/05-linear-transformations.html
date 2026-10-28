@@ -16,8 +16,9 @@ A <span class="vec i"><span>1</span><span>0</span></span> = column 1 &nbsp;&nbsp
 <ol class="ideas"><li>A matrix sends each vector v to a new vector Av. Applied to every point, it moves the whole plane.</li><li>Lines stay straight, evenly spaced lines stay evenly spaced, and the origin stays fixed.</li><li><b>Column 1 is where (1, 0) lands. Column 2 is where (0, 1) lands.</b> Those two facts decide everything.</li><li>The area of any shape is multiplied by |det A|.</li></ol>
 <!-- prose -->
 <h3>Think of graph paper</h3>
-<p>Pin a sheet of graph paper at the origin. You may stretch it, turn it, slant it, or flip it over. You may not bend it, fold it or tear it. Every 2 by 2 matrix does some mix of these motions. A <b>singular</b> matrix, one with determinant 0 (the number ps − qr from slide 3), can also squash the paper flat onto a line.</p>
-<p>Why can't a matrix bend the paper? Because matrices respect combinations: A(cv + dw) = cAv + dAw. The reason is the row way from slide 2: each entry is a row times the vector, and ordinary algebra gives row·(cv + dw) = c(row·v) + d(row·w). Points that were evenly spaced along a straight line stay evenly spaced along a straight line.</p>
+<p>Pin a sheet of graph paper at the origin. You may stretch it, turn it, slant it, or flip it over. You may not bend it, fold it or tear it. Every 2 by 2 matrix does some mix of these motions. A matrix with determinant 0 (the number ps − qr from slide 3) is called <b>singular</b>. A singular matrix can also squash the paper flat onto a line, or onto the origin.</p>
+<p>Why can't a matrix bend the paper? Because matrices respect combinations: A(cv + dw) = cAv + dAw. The reason is the row way from slide 2: each entry is a row times the vector, and ordinary algebra gives row·(cv + dw) = c(row·v) + d(row·w). Points that were evenly spaced along a straight line stay evenly spaced along a straight line:</p>
+<div class="worked"><div class="row">points v + t·w (t = 0, 1, 2, …) &nbsp;→&nbsp; Av + t·Aw: again a line, with the same even step Aw</div></div>
 <h3>Two landmarks decide everything</h3>
 <p>Every point can be written as a combination of the two basic vectors: (x, y) = x·(1, 0) + y·(0, 1). Since A respects combinations,</p>
 <div class="worked"><div class="row">A(x, y) = x·A(1, 0) + y·A(0, 1) = x·(column 1) + y·(column 2)</div></div>
@@ -27,14 +28,15 @@ A <span class="vec i"><span>1</span><span>0</span></span> = column 1 &nbsp;&nbsp
 <p>To turn the plane by an angle θ (counterclockwise), follow the two landmarks around the unit circle. (1, 0) sits at angle 0°, so it lands at angle θ: the point (cos θ, sin θ). (0, 1) sits at 90°, so it lands at angle 90° + θ: the point (cos(90° + θ), sin(90° + θ)) = (−sin θ, cos θ). Those are the columns:</p>
 <div class="worked">
 <div class="row">Q = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>cos θ</span><span>−sin θ</span><span>sin θ</span><span>cos θ</span></span></div>
-<div>For a quarter turn, θ = 90°: cos θ = 0 and sin θ = 1, so Q = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>−1</span><span>1</span><span>0</span></span>. It sends (1, 0) to (0, 1).</div>
+<div>For a quarter turn, θ = 90°: cos θ = 0 and sin θ = 1, so Q = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>−1</span><span>1</span><span>0</span></span>. It sends (1, 0) to (0, 1) and (0, 1) to (−1, 0).</div>
+<div>Check with a picture: turn the arrow (1, 0) a quarter turn counterclockwise and it points straight up, at (0, 1). Turn (0, 1) the same way and it points left, at (−1, 0). The formula agrees.</div>
 </div>
 <h3>What happens to areas</h3>
 <p>Watch the shaded unit square in the lab. The matrix turns it into a parallelogram, and the area of that parallelogram is |det A| = |ps − qr|, with p, q, r, s named as on slide 3. Every other shape has its area multiplied by the same number (Strang §5.3).</p>
 <p>The sign of det A says one more thing. A <b>negative</b> determinant means the plane has been flipped over, like graph paper turned face down. Slide 7 builds such a flip.</p>
 <p>A rotation has det Q = cos²θ + sin²θ = 1. It turns the paper without stretching it.</p>
 <h3>Where this is used</h3>
-<p>An IMU measures acceleration along the drone's own axes. A 3 by 3 rotation matrix turns those readings into north, east and up. An attitude estimator spends its time keeping that matrix up to date.</p>
+<p>A drone carries an IMU (inertial measurement unit), a small sensor chip that measures motion along the drone's own axes: its forward, sideways and up directions. A 3 by 3 rotation matrix turns those readings into north, east and up. The attitude estimator is the part of the flight software that tracks which way the drone is tilted and facing. Its job is to keep that rotation matrix up to date.</p>
 <!-- examples -->
 <section class="example"><h3>Example 1 · Stretch sideways</h3>
 <p>Triple every x-coordinate, keep y: (1, 0) → (3, 0) and (0, 1) → (0, 1).</p><div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>0</span><span>0</span><span>1</span></span> &nbsp;&nbsp; det A = 3</div><div class="row">(1, 1) → (3, 1). Every area becomes 3 times larger</div></div>

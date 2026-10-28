@@ -242,6 +242,19 @@ def _qr(A):
         qs.append(v / L)
     Q = np.column_stack(qs)
     return Q, Q.T @ A
+def _prod(a):
+    out = 1.0
+    for v in (sum(asarray(a).d, []) if asarray(a).ndim == 2 else asarray(a).d):
+        out *= v
+    return out
+np.prod = _prod
+np.diag = lambda a: ndarray([asarray(a).d[i][i] for i in range(min(asarray(a).shape))])
+def _cross(u, v):
+    u = asarray(u).d; v = asarray(v).d
+    if len(u) != 3 or len(v) != 3:
+        raise ValueError("cross() needs two vectors with 3 entries")
+    return ndarray([u[1] * v[2] - u[2] * v[1], u[2] * v[0] - u[0] * v[2], u[0] * v[1] - u[1] * v[0]])
+np.cross = _cross
 np.linalg = _NS()
 np.linalg.det = _det
 np.linalg.inv = _inv

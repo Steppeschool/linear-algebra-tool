@@ -1,0 +1,76 @@
+---
+slug: cramers-rule-and-inverse
+seo_title: Cramer's Rule and the Inverse Matrix Formula
+description: Cramer's rule solves Ax = b with ratios of determinants, and cofactors give A⁻¹ = Cᵀ / det A. When to use them and when not. Examples and Python. Strang §5.3.
+kicker: Strang §5.3 · Cramer's rule and inverses
+title: Cramer's rule: each unknown is a ratio of two determinants.
+task: Fix B₂ (b goes into column 2) so that Cramer's rule solves Ax = b.
+preview: {"kind":"combo","A":[[2,1],[1,3]],"x":[1,1],"b":[5,10]}
+check: isC(V) && eqM(V.A, [[2,1],[1,3]]) && near(Ax(V)[0], 5) && near(Ax(V)[1], 10)
+---
+<!-- lead -->
+Determinants give closed formulas for the solution of Ax = b and for A⁻¹. Replace column j of A by b and divide determinants: that is xⱼ. Collect the cofactors and divide by det A: that is A⁻¹. Neat formulas, slow in practice.
+<!-- key -->
+xⱼ = det Bⱼ / det A &nbsp;&nbsp; (Bⱼ = A with column j replaced by b) &nbsp;&nbsp; A⁻¹ = Cᵀ / det A
+<!-- ideas -->
+<ol class="ideas"><li>Cramer's rule: xⱼ = det Bⱼ / det A, where Bⱼ is A with its column j replaced by b.</li><li>It needs det A ≠ 0, the same condition as for A⁻¹ to exist.</li><li>The inverse: (A⁻¹)ᵢⱼ = Cⱼᵢ / det A. Note the swap: the cofactor matrix is transposed.</li><li>For 2 by 2 this is exactly the formula from lesson 3.</li></ol>
+<!-- prose -->
+<h3>A recipe card for each unknown</h3>
+<p>Elimination solves all the unknowns together. Cramer's rule gives each unknown its own recipe card: one ratio of two determinants, independent of the others. That is handy for a formula on paper, but each card costs a full determinant.</p>
+<h3>Why it works (2 by 2)</h3>
+<p>Write the columns of A as a₁ and a₂, so b = x₁a₁ + x₂a₂. Put b into column 1 and use the rules from slide 2:</p>
+<div class="worked"><div class="row">det [b  a₂] = det [x₁a₁ + x₂a₂ &nbsp; a₂] = x₁ det [a₁ a₂] + x₂ det [a₂ a₂]</div><div class="row">The last determinant has two equal columns, so it is 0</div><div class="row">det B₁ = x₁ · det A, &nbsp; so x₁ = det B₁ / det A</div></div>
+<p>The same argument works for every column and every size.</p>
+<h3>A worked example</h3>
+<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>3</span></span>, &nbsp; b = (5, 10), &nbsp; det A = 6 − 1 = 5</div><div class="row">B₁ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>5</span><span>1</span><span>10</span><span>3</span></span>: det = 15 − 10 = 5, &nbsp; x₁ = 5/5 = 1</div><div class="row">B₂ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>5</span><span>1</span><span>10</span></span>: det = 20 − 5 = 15, &nbsp; x₂ = 15/5 = 3</div><div class="row">Check: A(1, 3) = (2 + 3, 1 + 9) = (5, 10) ✓</div></div>
+<h3>The inverse from cofactors</h3>
+<p>Column j of A⁻¹ solves Ax = (column j of I). Cramer's rule on those right-hand sides gives every entry of A⁻¹ as a cofactor divided by det A. Put the cofactors Cᵢⱼ in a matrix C, transpose it, and divide:</p>
+<div class="worked"><div class="row">A⁻¹ = Cᵀ / det A</div><div class="row">2 by 2: C = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>d</span><span>−c</span><span>−b</span><span>a</span></span>, &nbsp; Cᵀ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>d</span><span>−b</span><span>−c</span><span>a</span></span>, &nbsp; A⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>d</span><span>−b</span><span>−c</span><span>a</span></span> / (ad − bc)</div></div>
+<p>That is the 2 by 2 recipe from lesson 3, now explained.</p>
+<h3>Where this is used</h3>
+<p>Cramer's rule shows up in formulas, not in solvers. For example, it tells you how sensitive one unknown is to one measurement, written as a clean ratio. To actually solve a system with more than three unknowns, elimination is far faster.</p>
+<!-- examples -->
+<section class="example"><h3>Example 1 · Cramer for another 2 by 2</h3>
+<p>x + 2y = 5, &nbsp; 3x + 4y = 6.</p>
+<div class="worked"><div class="row">det A = 4 − 6 = −2</div><div class="row">x = det <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>5</span><span>2</span><span>6</span><span>4</span></span> / (−2) = (20 − 12)/(−2) = −4</div><div class="row">y = det <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>5</span><span>3</span><span>6</span></span> / (−2) = (6 − 15)/(−2) = 4.5</div><div class="row">Check: −4 + 9 = 5 ✓, &nbsp; −12 + 18 = 6 ✓</div></div>
+</section>
+<section class="example"><h3>Example 2 · An inverse from cofactors</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>5</span><span>3</span></span>, det A = 1.</p>
+<div class="worked"><div class="row">A⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>−1</span><span>−5</span><span>2</span></span> / 1</div><div class="row">Check: A A⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>1</span></span> ✓</div></div>
+</section>
+<section class="example"><h3>Example 3 · When Cramer fails</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>4</span></span>: det A = 0.</p>
+<p>Every ratio would divide by zero. That matches lesson 4: the system has no solution or infinitely many, never exactly one.</p>
+</section>
+<!-- problems -->
+<div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Solve 3x + y = 7, x + 2y = 4 by Cramer's rule.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>det A = 6 − 1 = 5. &nbsp; x = det <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>7</span><span>1</span><span>4</span><span>2</span></span> / 5 = (14 − 4)/5 = 2. &nbsp; y = det <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>7</span><span>1</span><span>4</span></span> / 5 = (12 − 7)/5 = 1.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>Use cofactors to find the inverse of <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>4</span><span>3</span><span>1</span><span>1</span></span>.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>det = 4 − 3 = 1. A⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−3</span><span>−1</span><span>4</span></span>. Check: 4·1 + 3·(−1) = 1 ✓</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>If A has integer entries and det A = 1, why does A⁻¹ also have integer entries?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>A⁻¹ = Cᵀ / 1, and every cofactor is a sum of products of integers.</p>
+</div></details>
+</div></div>
+<!-- code -->
+import numpy as np
+
+A = np.array([[2., 1.],
+              [1., 3.]])
+b = np.array([5., 10.])
+
+B1 = np.column_stack([b, A[:, 1]])        # b replaces column 1
+B2 = np.column_stack([b, A[:, 1]])        # your turn: b should replace column 2
+                                          # hint: np.column_stack([A[:, 0], b])
+x = np.array([np.linalg.det(B1), np.linalg.det(B2)]) / np.linalg.det(A)
+print("x =", x)
+combo(A, x, b)                  # Ax should land on b

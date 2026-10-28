@@ -13,7 +13,7 @@ When Ax = b has a solution, it usually has many. All of them have the same form:
 <!-- key -->
 x = x_p + x_n &nbsp;&nbsp;&nbsp; Ax_p = b, &nbsp; Ax_n = 0
 <!-- ideas -->
-<ol class="ideas"><li>If Ax_p = b, then every solution is x = x_p + x_n with x_n in N(A).</li><li>Ax = b is solvable exactly when b is in the column space C(A).</li><li>To find x_p, eliminate on [A | b], set all free variables to 0 and read off the pivot variables.</li><li>The rank r, together with b, decides whether there are zero, one or infinitely many solutions.</li></ol>
+<ol class="ideas"><li>If Ax_p = b, then every solution is x = x_p + x_n with x_n in N(A).</li><li>Ax = b is solvable exactly when b is in the column space C(A).</li><li>To find x_p, eliminate on [A | b], set all free variables to 0 and read off the pivot variables.</li></ol>
 <!-- prose -->
 <h3>Think of a route plus a loop</h3>
 <p>You know one route that reaches your destination. Add any loop that brings you back to where you started, and you still reach the destination. The loops are the nullspace.</p>
@@ -43,7 +43,7 @@ x = x_p + x_n &nbsp;&nbsp;&nbsp; Ax_p = b, &nbsp; Ax_n = 0
 <ul>
 <li><b>r = m = n:</b> exactly one solution for every b. A is invertible.</li>
 <li><b>r = n &lt; m:</b> zero or one solution. Every column has a pivot, so there are no free variables and at most one solution. There are more equations than unknowns, and the extra equations may contradict the others.</li>
-<li><b>r = m &lt; n:</b> infinitely many solutions for every b. There are free variables.</li>
+<li><b>r = m &lt; n:</b> infinitely many solutions for every b. Every row has a pivot, so no row becomes 0 = nonzero, and a solution always exists. There are free variables, so there are infinitely many.</li>
 <li><b>r &lt; m and r &lt; n:</b> zero or infinitely many, depending on b.</li>
 </ul>
 <!-- examples -->

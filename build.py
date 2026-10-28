@@ -50,15 +50,20 @@ LESSONS = [
      "sections": "Strang §4.1 to §4.4",
      "summary": "Perpendicular subspaces, projections, the best answer when Ax = b has no solution, "
                 "fitting lines to data, and orthonormal bases built by Gram-Schmidt."},
+    {"n": 6, "dir": "lesson-6", "path": "determinants", "seo_title": "Determinants: Area, Properties, Cofactors and Cramer's Rule",
+     "seo_desc": "What the determinant measures, its three rules, computing it from pivots or cofactors, Cramer's rule, the inverse formula and cross products. Free lesson.", "title": "Determinants", "chapter": "Strang, chapter 5",
+     "sections": "Strang §5.1 to §5.3",
+     "summary": "The number that says how much a matrix stretches area and volume: its rules, how to compute it, "
+                "Cramer's rule, the inverse formula, and areas, volumes and cross products."},
 ]
-for _l, _c in zip(LESSONS, [1, 2, 2, 3, 4]):
+for _l, _c in zip(LESSONS, [1, 2, 2, 3, 4, 5]):
     _l["ch"] = _c
 CHAPTERS = [
     {"n": 1, "title": "Introduction to vectors"},
     {"n": 2, "title": "Solving linear equations"},
     {"n": 3, "title": "Vector spaces and subspaces"},
     {"n": 4, "title": "Orthogonality"},
-    {"n": 5, "title": "Determinants", "planned": ["Determinants"]},
+    {"n": 5, "title": "Determinants"},
     {"n": 6, "title": "Eigenvalues and eigenvectors", "planned": ["Eigenvalues and eigenvectors"]},
     {"n": 7, "title": "The singular value decomposition", "planned": ["SVD and PCA"]},
 ]
@@ -228,6 +233,9 @@ CARD_LABEL = {
     "four-fundamental-subspaces": "Four subspaces", "orthogonal-subspaces": "Orthogonality",
     "projection-onto-a-line": "Projection", "projection-matrix": "Projection matrix", "least-squares": "Least squares",
     "fitting-a-line": "Line fitting", "orthonormal-bases": "Orthonormal bases", "gram-schmidt": "Gram-Schmidt",
+    "determinant-as-area": "Determinant", "properties-of-determinants": "Three rules",
+    "determinant-from-pivots": "Det from pivots", "cofactor-formula": "Cofactors",
+    "cramers-rule-and-inverse": "Cramer's rule", "area-volume-cross-product": "Cross product",
     "recap": "Recap", "practice": "Practice",
 }
 

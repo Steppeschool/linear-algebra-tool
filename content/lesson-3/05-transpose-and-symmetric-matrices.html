@@ -13,10 +13,10 @@ The transpose Aᵀ turns the rows of A into columns. A matrix that equals its ow
 <!-- key -->
 <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span></span>ᵀ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>3</span><span>5</span><span>2</span><span>4</span><span>6</span></span>
 <!-- ideas -->
-<ol class="ideas"><li>Row i of A becomes column i of Aᵀ. An m by n matrix becomes n by m.</li><li>(AB)ᵀ = BᵀAᵀ: the order reverses, as for inverses.</li><li><b>Symmetric</b> means S = Sᵀ: entry (i, j) equals entry (j, i).</li><li>AᵀA is always symmetric. It is the heart of least squares in the next part of the course (Strang, chapter 4).</li></ol>
+<ol class="ideas"><li>Row i of A becomes column i of Aᵀ. An m by n matrix becomes n by m.</li><li>(AB)ᵀ = BᵀAᵀ: the order reverses, as for inverses.</li><li><b>Symmetric</b> means S = Sᵀ: entry (i, j), in row i and column j, equals entry (j, i).</li><li>AᵀA is always symmetric. It is the heart of least squares in the next part of the course (Strang, chapter 4).</li></ol>
 <!-- prose -->
 <h3>Think of turning a spreadsheet</h3>
-<p>A sales sheet has one row per product and one column per month. Your manager asks for months as rows instead. No number changes; only the way you read them does. That is the transpose.</p>
+<p>A sales sheet has one row per product and one column per month. Your manager asks for months as rows instead. No number changes; only the way you read them does. That is the transpose. In symbols: entry (i, j) means the number in row i, column j, and entry (i, j) of Aᵀ is entry (j, i) of A.</p>
 <div class="worked"><div class="row"><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span></span>ᵀ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>3</span><span>5</span><span>2</span><span>4</span><span>6</span></span></div></div>
 <h3>Symmetric matrices: the distance table</h3>
 <p>A road atlas has a table of distances between cities. The distance from Paris to Lyon equals the distance from Lyon to Paris, so if you flip the table across its diagonal, nothing changes. Such a table is a <b>symmetric</b> matrix.</p>
@@ -34,7 +34,7 @@ The transpose Aᵀ turns the rows of A into columns. A matrix that equals its ow
 <div class="row">AᵀA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>35</span><span>44</span><span>44</span><span>56</span></span></div>
 </div>
 <h3>Where this is used</h3>
-<p>AᵀA appears whenever we fit a model to many noisy measurements, for example a straight line through sensor readings or the calibration of an accelerometer. For a rotation matrix Q, QᵀQ = I, so the transpose is the inverse: turning back costs nothing to compute.</p>
+<p>AᵀA appears whenever we fit a model to many noisy measurements, for example a straight line through sensor readings or the calibration of an accelerometer. For a rotation matrix Q, QᵀQ = I, so the transpose is the inverse: turning back costs nothing to compute. Check it on the quarter turn R = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>−1</span><span>1</span><span>0</span></span>: Rᵀ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>−1</span><span>0</span></span>, and RᵀR = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0·0 + 1·1</span><span>0·(−1) + 1·0</span><span>−1·0 + 0·1</span><span>(−1)(−1) + 0·0</span></span> = I ✓</p>
 <!-- examples -->
 <section class="example"><h3>Example 1 · A wide matrix turned tall</h3>
 <p>A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span></span> is 2 by 3.</p><div class="worked"><div class="row">Aᵀ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>4</span><span>2</span><span>5</span><span>3</span><span>6</span></span> is 3 by 2</div></div>

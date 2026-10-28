@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cofactor Expansion and the 3×3 Determinant Formula</title>
+<meta name="description" content="The big formula and cofactor expansion: a 3×3 determinant from 2×2 pieces with signs + − +. Worked examples and Python. Strang §5.2.">
+<link rel="canonical" href="https://linearalgebra.steppeschool.com/determinants/cofactor-formula/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Linear Algebra, Live">
+<meta property="og:title" content="Cofactor Expansion and the 3×3 Determinant Formula">
+<meta property="og:description" content="The big formula and cofactor expansion: a 3×3 determinant from 2×2 pieces with signs + − +. Worked examples and Python. Strang §5.2.">
+<meta property="og:url" content="https://linearalgebra.steppeschool.com/determinants/cofactor-formula/">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/lesson.css">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "Cofactor Expansion and the 3×3 Determinant Formula", "headline": "Cofactors: a determinant from smaller ones.", "description": "The big formula and cofactor expansion: a 3×3 determinant from 2×2 pieces with signs + − +. Worked examples and Python. Strang §5.2.", "url": "https://linearalgebra.steppeschool.com/determinants/cofactor-formula/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": true, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 6: Determinants", "item": "https://linearalgebra.steppeschool.com/determinants/"}, {"@type": "ListItem", "position": 3, "name": "Cofactor Expansion and the 3×3 Determinant Formula", "item": "https://linearalgebra.steppeschool.com/determinants/cofactor-formula/"}]}]</script>
+</head>
+<body>
+<header class="top">
+  <div class="topnav"><a class="brand" href="../../">Linear Algebra, Live</a><nav class="crumbnav" aria-label="Chapters and lessons"><details class="menu"><summary>Chapter 5<span class="hide-sm"> · Determinants</span></summary><div class="menu-list chapters"><div class="menu-sub">Chapters</div><div class="ch"><div class="ch-head"><span class="ch-num">1</span><span class="ch-title">Introduction to vectors</span></div><div class="ch-lessons"><a class="ls" href="../../vectors-and-matrices/"><span class="ls-num">Lesson 1</span><span class="ls-title">Columns first</span></a></div></div><div class="ch"><div class="ch-head"><span class="ch-num">2</span><span class="ch-title">Solving linear equations</span></div><div class="ch-lessons"><a class="ls" href="../../gaussian-elimination-and-lu/"><span class="ls-num">Lesson 2</span><span class="ls-title">Elimination and A = LU</span></a><a class="ls" href="../../inverse-transpose-permutation/"><span class="ls-num">Lesson 3</span><span class="ls-title">Inverses, transposes and permutations</span></a></div></div><div class="ch"><div class="ch-head"><span class="ch-num">3</span><span class="ch-title">Vector spaces and subspaces</span></div><div class="ch-lessons"><a class="ls" href="../../vector-spaces-and-four-subspaces/"><span class="ls-num">Lesson 4</span><span class="ls-title">The four subspaces</span></a></div></div><div class="ch"><div class="ch-head"><span class="ch-num">4</span><span class="ch-title">Orthogonality</span></div><div class="ch-lessons"><a class="ls" href="../../orthogonality-and-least-squares/"><span class="ls-num">Lesson 5</span><span class="ls-title">Orthogonality and least squares</span></a></div></div><div class="ch on"><div class="ch-head"><span class="ch-num">5</span><span class="ch-title">Determinants</span></div><div class="ch-lessons"><a class="ls on" href="../../determinants/"><span class="ls-num">Lesson 6</span><span class="ls-title">Determinants</span></a></div></div><div class="menu-sub">Coming soon</div><div class="ch-later"><div class="ch soon"><div class="ch-head"><span class="ch-num">6</span><span class="ch-title">Eigenvalues and eigenvectors</span></div></div><div class="ch soon"><div class="ch-head"><span class="ch-num">7</span><span class="ch-title">The singular value decomposition</span></div></div></div></div></details><span class="sep">›</span><details class="menu"><summary>Lesson 6<span class="hide-sm"> · Determinants</span></summary><div class="menu-list"><div class="menu-sub">Chapter 5 lessons</div><div class="ch-lessons flat"><a class="ls on" href="../../determinants/"><span class="ls-num">Lesson 6</span><span class="ls-title">Determinants</span></a></div><div class="menu-sub">In lesson 6</div><div class="ch-lessons flat slides"><a class="ls" href="../../determinants/determinant-as-area/"><span class="ls-num">1</span><span class="ls-title">Determinant Meaning: Area and Volume Scale Factor</span></a><a class="ls" href="../../determinants/properties-of-determinants/"><span class="ls-num">2</span><span class="ls-title">Properties of Determinants: The Three Rules</span></a><a class="ls" href="../../determinants/determinant-from-pivots/"><span class="ls-num">3</span><span class="ls-title">Determinant by Elimination: Product of the Pivots</span></a><a class="ls on" href="../../determinants/cofactor-formula/"><span class="ls-num">4</span><span class="ls-title">Cofactor Expansion and the 3×3 Determinant Formula</span></a><a class="ls" href="../../determinants/cramers-rule-and-inverse/"><span class="ls-num">5</span><span class="ls-title">Cramer&#x27;s Rule and the Inverse Matrix Formula</span></a><a class="ls" href="../../determinants/area-volume-cross-product/"><span class="ls-num">6</span><span class="ls-title">Area of a Triangle, Volume and the Cross Product</span></a><a class="ls" href="../../determinants/recap/"><span class="ls-num">7</span><span class="ls-title">Lesson 6 Recap: Determinants</span></a><a class="ls" href="../../determinants/practice/"><span class="ls-num">✎</span><span class="ls-title">Examples and problems</span></a></div></div></details></nav></div>
+  <nav class="steps" aria-label="Steps in this lesson"><a class="step" href="../determinant-as-area/" data-slug="determinant-as-area" title="Determinant Meaning: Area and Volume Scale Factor">1</a><a class="step" href="../properties-of-determinants/" data-slug="properties-of-determinants" title="Properties of Determinants: The Three Rules">2</a><a class="step" href="../determinant-from-pivots/" data-slug="determinant-from-pivots" title="Determinant by Elimination: Product of the Pivots">3</a><a class="step on" href="../cofactor-formula/" data-slug="cofactor-formula" aria-current="page" title="Cofactor Expansion and the 3×3 Determinant Formula">4</a><a class="step" href="../cramers-rule-and-inverse/" data-slug="cramers-rule-and-inverse" title="Cramer&#x27;s Rule and the Inverse Matrix Formula">5</a><a class="step" href="../area-volume-cross-product/" data-slug="area-volume-cross-product" title="Area of a Triangle, Volume and the Cross Product">6</a><a class="step" href="../recap/" data-slug="recap" title="Lesson 6 Recap: Determinants">7</a><a class="step practice" href="../practice/" title="Examples and problems">✎ Practice</a></nav>
+</header>
+
+
+<main class="lesson">
+  <article class="page">
+    <div class="slide-head"><div>
+    <div class="kicker">Strang §5.2 · Permutations and cofactors</div>
+    <h1>Cofactors: a determinant from smaller ones.</h1>
+    <p class="lead">There is also an explicit formula. Expand along one row: each entry times the determinant of what is left when you cross out its row and column, with signs alternating + − +. Good for 3 by 3 by hand, hopeless for big matrices.</p>
+    </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-6--cofactor-formula.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 6 · slide 4</small>Cofactors</span></span></div>
+    <div class="key">det A = a₁₁C₁₁ + a₁₂C₁₂ + a₁₃C₁₃ &nbsp;&nbsp; C₁ⱼ = (−1)^(1+j) · det(A without row 1 and column j)</div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>The <b>minor</b> of entry aᵢⱼ is the determinant of A with row i and column j crossed out.</li><li>The <b>cofactor</b> Cᵢⱼ is that minor times (−1)^(i+j): signs + − + in row 1, − + − in row 2, and so on, like a checkerboard.</li><li>Expanding along any row (or column): det A = sum of entries × their cofactors.</li><li>Each of the n! terms of the full formula picks one entry from every row and every column.</li></ol></div>
+    <div class="prose">
+<h3>An itemised receipt</h3>
+<p>Elimination gives the total quickly. Sometimes you want the itemised receipt instead: where each part of the total comes from. That is the cofactor formula. It writes det A as a sum of products, each product using exactly one entry from every row and every column.</p>
+<h3>The 2 by 2 case, seen as choices</h3>
+<p>For <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>a</span><span>b</span><span>c</span><span>d</span></span> there are two ways to pick one entry per row and per column: a with d, or b with c. The first comes with a plus sign, the second (a swapped choice) with a minus: det = ad − bc.</p>
+<h3>Expanding a 3 by 3 along row 1</h3>
+<p>Take each entry of row 1. Cross out its row and column. The 2 by 2 that remains is its <b>minor</b>. Multiply entry × minor, and attach the signs + − + across the row:</p>
+<div class="worked"><div class="row">det A = a₁₁(a₂₂a₃₃ − a₂₃a₃₂) − a₁₂(a₂₁a₃₃ − a₂₃a₃₁) + a₁₃(a₂₁a₃₂ − a₂₂a₃₁)</div></div>
+<p>Each bracket, with its sign, is a <b>cofactor</b>. The signs follow a checkerboard, starting with + in the top left corner: (−1)^(i+j) for row i, column j.</p>
+<h3>A worked example</h3>
+<div class="worked"><div class="row">K = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>1</span><span>4</span><span>−6</span><span>0</span><span>−2</span><span>7</span><span>2</span></span> (the matrix from lesson 2)</div><div class="row">2·((−6)·2 − 0·7) − 1·(4·2 − 0·(−2)) + 1·(4·7 − (−6)·(−2))</div><div class="row">= 2·(−12) − 1·8 + 1·16 = −24 − 8 + 16 = −16 ✓ (the same as the pivots 2 · (−8) · 1)</div></div>
+<h3>Pick the easiest row</h3>
+<p>You may expand along any row or any column, with the checkerboard signs. A row or column with zeros saves work: a zero entry kills its whole term.</p>
+<h3>Why not always use it?</h3>
+<p>A 3 by 3 has 3! = 6 products. A 10 by 10 has 10! = 3,628,800. The count explodes, so computers use pivots. Cofactors earn their place in theory: the next slide uses them to write a formula for A⁻¹.</p>
+    </div>
+    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · A 2 by 2 as a cofactor expansion</h3>
+<p><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>1</span><span>2</span><span>4</span></span>: expand along row 1.</p>
+<div class="worked"><div class="row">3 · (minor 4) − 1 · (minor 2) = 12 − 2 = 10</div></div>
+</section>
+<section class="example"><h3>Example 2 · Use the zeros</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>0</span><span>1</span><span>1</span><span>3</span><span>2</span><span>1</span><span>1</span><span>2</span></span>. Row 1 has a zero in the middle.</p>
+<div class="worked"><div class="row">2·(3·2 − 2·1) − 0·(…) + 1·(1·1 − 3·1)</div><div class="row">= 2·4 − 0 + 1·(−2) = 6</div></div>
+</section>
+<section class="example"><h3>Example 3 · Expand down a column</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>4</span><span>1</span><span>2</span><span>0</span><span>3</span><span>5</span><span>0</span><span>0</span><span>2</span></span>. Column 1 has two zeros.</p>
+<div class="worked"><div class="row">Down column 1: 4·(3·2 − 5·0) − 0 + 0 = 24</div><div class="row">Triangular, so also 4 · 3 · 2 = 24 ✓</div></div>
+</section></div>
+    <details class="more"><summary><span class="pl-icon">✎</span><span class="rv-text"><b>More examples to try</b><span>3 problems with step-by-step solutions. Try each one before you open its solution.</span></span><span class="rv-toggle"><span class="s-show">Show</span><span class="s-hide">Hide</span></span></summary><div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Compute det <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>3</span><span>0</span><span>1</span><span>4</span><span>2</span><span>0</span><span>1</span></span> by cofactors along row 1.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>1·(1·1 − 4·0) − 2·(0·1 − 4·2) + 3·(0·0 − 1·2) = 1 + 16 − 6 = 11.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>What is the sign attached to the cofactor in row 2, column 3?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>(−1)^(2+3) = −1. In the checkerboard, row 2 reads − + −, so column 3 is −.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>How many products are in the full formula for a 4 by 4 determinant?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>4! = 24: one for each way to choose one entry per row with all columns different.</p>
+</div></details>
+</div></div></div></details>
+  </article>
+  <details class="review">
+    <summary><span class="pl-icon">✎</span><span class="rv-text"><b>Lesson review</b><span>3 worked examples and 5 mixed problems with solutions</span></span><span class="rv-toggle"><span class="s-show">Open</span><span class="s-hide">Close</span></span></summary>
+    <div class="review-body">
+      <h2 class="practice-h">Worked examples</h2>
+      <div class="examples"><section class="example"><h3>Example 1 · Elimination with a row swap</h3>
+<p>Find det A for A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>0</span><span>1</span><span>2</span><span>1</span><span>0</span><span>3</span><span>4</span><span>−3</span><span>8</span></span>.</p>
+<div class="worked"><div class="row">The first pivot position holds 0: swap rows 1 and 2 (the sign flips once)</div><div class="row">Row 3 − 4·row 1 = (0, −3, −4). &nbsp; Row 3 + 3·row 2 = (0, 0, 2)</div><div class="row">Pivots 1, 1, 2. &nbsp; det A = −(1 · 1 · 2) = −2</div></div>
+</section>
+<section class="example"><h3>Example 2 · Bookkeeping with the rules</h3>
+<p>A and B are 3 by 3 with det A = 2 and det B = 5.</p>
+<div class="worked"><div class="row">det(AB) = 2 · 5 = 10 &nbsp;&nbsp; det(A⁻¹) = ½ &nbsp;&nbsp; det(Bᵀ) = 5</div><div class="row">det(2A) = 2³ · 2 = 16, because each of the 3 rows doubles</div><div class="row">det(A⁻¹BA) = ½ · 5 · 2 = 5</div></div>
+</section>
+<section class="example"><h3>Example 3 · A triangle in 3D</h3>
+<p>Corners (0, 0, 0), (1, 1, 0), (0, 1, 1).</p>
+<div class="worked"><div class="row">Edges u = (1, 1, 0), v = (0, 1, 1)</div><div class="row">u × v = (1·1 − 0·1, &nbsp; 0·0 − 1·1, &nbsp; 1·1 − 1·0) = (1, −1, 1)</div><div class="row">Parallelogram area ‖u × v‖ = √3, &nbsp; triangle area = √3 / 2 ≈ 0.87</div></div>
+</section></div>
+      <h2 class="practice-h">Problems</h2>
+      <div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Find det <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>10</span></span> by elimination.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Row 2 − 4·row 1 = (0, −3, −6). Row 3 − 7·row 1 = (0, −6, −11). Row 3 − 2·row 2 = (0, 0, 1).</p><p>Pivots 1, −3, 1, so det = −3.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>Find det <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>−1</span><span>0</span><span>−1</span><span>2</span><span>−1</span><span>0</span><span>−1</span><span>2</span></span>.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Pivots 2, 3/2, 4/3 (row 2 + ½·row 1, then row 3 + ⅔·row 2). det = 2 · 3/2 · 4/3 = 4.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>Solve x + y = 2, &nbsp; x + z = 3, &nbsp; y + z = 5 by Cramer's rule.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>det A = −2. Replacing columns by b = (2, 3, 5) gives det B₁ = 0, det B₂ = −4, det B₃ = −6.</p><p>x = 0, y = 2, z = 3. Check: 0 + 2 = 2, 0 + 3 = 3, 2 + 3 = 5 ✓</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">4</span><div class="pbody">
+<p>Find the area of the triangle with corners (1, 0), (4, 1), (2, 3).</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Edges (3, 1) and (1, 3). det = 9 − 1 = 8, area = 4.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">5</span><div class="pbody">
+<p>A and B are 2 by 2 with det A = 3 and det B = −2. Find det(AB), det(BA) and det(A⁻¹B).</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>det(AB) = det(BA) = −6, even though AB and BA are usually different matrices. det(A⁻¹B) = (1/3)(−2) = −2/3.</p>
+</div></details>
+</div></div></div>
+    </div>
+  </details>
+
+  <section class="labsec" aria-label="Lab">
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Fix the cofactor expansion so that it gives det C.</span>
+      <span class="hint" id="hint">Edit the code and press Run.</span>
+    </div>
+    <div class="lab">
+      <div class="editor-card">
+        <div class="bar">
+          <span class="file">slide_4.py</span>
+          <span class="status" id="pystatus">Loading Python…</span>
+          <button class="btn" id="reset">Reset</button>
+          <button class="btn primary" id="run" disabled>Run ▸</button>
+        </div>
+        <div class="editor">
+          <div class="gutter" id="gutter">1</div>
+          <div class="code" id="codewrap">
+            <pre id="hl" aria-hidden="true"></pre>
+            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+C = np.array([[2., 0., 1.],
+              [1., 3., 2.],
+              [1., 1., 2.]])
+a, b, c = C[0]                  # row 1
+
+d = (a * (C[1,1]*C[2,2] - C[1,2]*C[2,1])
+     - b * (C[1,0]*C[2,2] - C[1,2]*C[2,0])
+     - c * (C[1,0]*C[2,1] - C[1,1]*C[2,0]))   # your turn: one sign is wrong (+ − + across row 1)
+
+print(&quot;cofactors give&quot;, d, &quot;  NumPy says&quot;, np.linalg.det(C))
+table((&quot;C&quot;, C), (&quot;det&quot;, np.array([[d]])))</textarea>
+          </div>
+        </div>
+        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+      </div>
+      <figure class="figure">
+        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <div class="after">
+    <div class="nav">
+      <a class="btn" id="prev" href="../determinant-from-pivots/">← Back</a>
+      <span class="count">4 / 7</span>
+      <a class="btn primary" id="next" href="../cramers-rule-and-inverse/">Next →</a>
+    </div>
+  </div>
+</main>
+<footer class="foot">
+  Follows the order and notation of Gilbert Strang, <i>Introduction to Linear Algebra</i>, 5th edition (2016); § numbers refer to that book.
+  Explanations, examples and code are original. Made by <a href="https://www.steppeschool.com">Steppeschool</a>.
+</footer>
+
+<script>window.SLIDE = {"slug": "cofactor-formula", "lesson": "lesson-6", "assets": "../../assets/", "preview": {"kind": "table", "items": [{"label": "C", "M": [[2, 0, 1], [1, 3, 2], [1, 1, 2]], "piv": []}]}, "check": "isTab(V) && item(V, 'C') && item(V, 'det') && close(item(V, 'det'), [[detN(item(V, 'C'))]], 1e-6)"};</script>
+<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
+<script src="../../assets/lab.js" defer></script>
+<script src="../../assets/nav.js" defer></script>
+</body>
+</html>

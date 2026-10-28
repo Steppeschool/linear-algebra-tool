@@ -1,0 +1,61 @@
+---
+seo_title: Determinants Practice Problems
+description: Worked examples and practice problems with hidden solutions: determinants by elimination, the rules, cofactors, Cramer's rule, areas and cross products.
+---
+<!-- intro -->
+Three worked examples, then five problems. np.linalg.det(A), np.cross(u, v) and show(M) in the lab will check your answers.
+<!-- examples -->
+<section class="example"><h3>Example 1 · Elimination with a row swap</h3>
+<p>Find det A for A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>0</span><span>1</span><span>2</span><span>1</span><span>0</span><span>3</span><span>4</span><span>−3</span><span>8</span></span>.</p>
+<div class="worked"><div class="row">The first pivot position holds 0: swap rows 1 and 2 (the sign flips once)</div><div class="row">Row 3 − 4·row 1 = (0, −3, −4). &nbsp; Row 3 + 3·row 2 = (0, 0, 2)</div><div class="row">Pivots 1, 1, 2. &nbsp; det A = −(1 · 1 · 2) = −2</div></div>
+</section>
+<section class="example"><h3>Example 2 · Bookkeeping with the rules</h3>
+<p>A and B are 3 by 3 with det A = 2 and det B = 5.</p>
+<div class="worked"><div class="row">det(AB) = 2 · 5 = 10 &nbsp;&nbsp; det(A⁻¹) = ½ &nbsp;&nbsp; det(Bᵀ) = 5</div><div class="row">det(2A) = 2³ · 2 = 16, because each of the 3 rows doubles</div><div class="row">det(A⁻¹BA) = ½ · 5 · 2 = 5</div></div>
+</section>
+<section class="example"><h3>Example 3 · A triangle in 3D</h3>
+<p>Corners (0, 0, 0), (1, 1, 0), (0, 1, 1).</p>
+<div class="worked"><div class="row">Edges u = (1, 1, 0), v = (0, 1, 1)</div><div class="row">u × v = (1·1 − 0·1, &nbsp; 0·0 − 1·1, &nbsp; 1·1 − 1·0) = (1, −1, 1)</div><div class="row">Parallelogram area ‖u × v‖ = √3, &nbsp; triangle area = √3 / 2 ≈ 0.87</div></div>
+</section>
+<!-- problems -->
+<div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Find det <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>10</span></span> by elimination.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Row 2 − 4·row 1 = (0, −3, −6). Row 3 − 7·row 1 = (0, −6, −11). Row 3 − 2·row 2 = (0, 0, 1).</p><p>Pivots 1, −3, 1, so det = −3.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>Find det <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>−1</span><span>0</span><span>−1</span><span>2</span><span>−1</span><span>0</span><span>−1</span><span>2</span></span>.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Pivots 2, 3/2, 4/3 (row 2 + ½·row 1, then row 3 + ⅔·row 2). det = 2 · 3/2 · 4/3 = 4.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>Solve x + y = 2, &nbsp; x + z = 3, &nbsp; y + z = 5 by Cramer's rule.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>det A = −2. Replacing columns by b = (2, 3, 5) gives det B₁ = 0, det B₂ = −4, det B₃ = −6.</p><p>x = 0, y = 2, z = 3. Check: 0 + 2 = 2, 0 + 3 = 3, 2 + 3 = 5 ✓</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">4</span><div class="pbody">
+<p>Find the area of the triangle with corners (1, 0), (4, 1), (2, 3).</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Edges (3, 1) and (1, 3). det = 9 − 1 = 8, area = 4.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">5</span><div class="pbody">
+<p>A and B are 2 by 2 with det A = 3 and det B = −2. Find det(AB), det(BA) and det(A⁻¹B).</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>det(AB) = det(BA) = −6, even though AB and BA are usually different matrices. det(A⁻¹B) = (1/3)(−2) = −2/3.</p>
+</div></details>
+</div></div>
+<!-- code -->
+import numpy as np
+
+# Sandbox: check your answers here.
+A = np.array([[0., 1., 2.],
+              [1., 0., 3.],
+              [4., -3., 8.]])
+print("det A =", np.linalg.det(A))
+
+print("cross product:", np.cross([1., 1., 0.], [0., 1., 1.]))
+show(np.array([[3., 1.], [1., 3.]]))   # edges of the triangle in problem 4

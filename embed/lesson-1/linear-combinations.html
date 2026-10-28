@@ -24,7 +24,9 @@
 <h3>The question behind everything</h3>
 <p>Here is the question we keep asking for the rest of the course: <b>which vectors can we reach?</b></p>
 <p>For one vector, the multiples cv fill a line through the origin. That is where the word "linear" comes from. For two vectors that point in different directions, like v and w here, the combinations cv + dw fill the whole plane. Every point is reachable.</p>
-<p>Going the other way is harder. Given a target like (4, 5), how do we find c and d? We need 2c − d = 4 and c + d = 5, two equations at once. Solving that kind of system is what slide 4 and lesson 2 are about.</p>
+<p>Going the other way is harder. Given a target like (4, 5), how do we find c and d? First write out the combination, one component at a time:</p>
+<div class="worked"><div class="row">c(2, 1) + d(−1, 1) = (2c − d, c + d)</div></div>
+<p>For this to equal (4, 5), we need 2c − d = 4 and c + d = 5, two equations at once. Solving that kind of system is what slide 4 and lesson 2 are about.</p>
 <h3>The lab</h3>
 <p>Below the text on every slide is <b>the lab</b>: a box of Python code you can edit and run, and a picture that the code draws. Here you change c and d, run, and watch where cv + dw lands.</p>
     </div>
@@ -106,9 +108,9 @@
 </div></details>
 </div></div>
 <div class="problem"><span class="pnum">5</span><div class="pbody">
-<p>R = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>−1</span><span>1</span><span>0</span></span> turns the plane by 90°. Compute R² and R⁴ and explain them without multiplying.</p>
+<p>R = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>−1</span><span>1</span><span>0</span></span> turns the plane by 90°. R² means R·R and R⁴ means R·R·R·R. Predict R² and R⁴ from the picture, then check by multiplying.</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>R² = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−1</span><span>0</span><span>0</span><span>−1</span></span>, a turn by 180°: every vector points the opposite way.</p><p>R⁴ = I, the identity. Four quarter turns bring every vector back to where it started.</p>
+<p>Prediction: two quarter turns make a half turn, so R² sends every vector to its opposite. Four quarter turns make a full turn, so R⁴ leaves every vector where it started: R⁴ = I, the identity.</p><p>Check: column 1 of R² is R(0, 1) = (−1, 0) and column 2 is R(−1, 0) = (0, −1), so R² = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−1</span><span>0</span><span>0</span><span>−1</span></span> ✓. Then R⁴ = R²·R² = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>1</span></span> = I ✓</p>
 </div></details>
 </div></div></div>
     </div>

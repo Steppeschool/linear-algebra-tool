@@ -10,9 +10,9 @@
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Each row and each column of P contains a single 1.</li><li>PA reorders the rows of A; AP reorders its columns (Example 1).</li><li>P⁻¹ = Pᵀ: transposing undoes the reordering.</li><li>With row exchanges, elimination gives PA = LU.</li></ol></div>
     <div class="prose">
 <h3>Think of a playlist</h3>
-<p>A permutation is a new running order for a playlist. Row 1 of P says which song plays first, row 2 which plays second, and so on. A 1 in column 3 of row 1 means "the first slot gets row 3".</p>
+<p>A playlist has slots: first, second, third. In PA, the slots are filled with rows of A. Row i of P fills slot i. A 1 at (i, j) in P, that is in row i and column j, means "slot i takes row j". In the P at the top of this slide, the 1 at (1, 3) means "slot 1 takes row 3".</p>
 <h3>Undoing a permutation</h3>
-<p>To put the playlist back, send each row back where it came from: the row now in slot 1 returns to slot 3, and so on. That reverse instruction has its 1s mirrored across the diagonal: a 1 at (i, j) moves to (j, i). That is exactly Pᵀ. So P⁻¹ = Pᵀ for every permutation matrix.</p>
+<p>To put things back, each row returns to where it came from. If slot i took row j, the reverse instruction is "slot j takes row i back". That is a 1 at (j, i). Moving every 1 from (i, j) to (j, i) mirrors P across its diagonal, which is exactly the transpose Pᵀ. For the P at the top: slot 1 took row 3, so the undo says "slot 3 takes row 1 back", a 1 at (3, 1). Pᵀ has its 1 there. So P⁻¹ = Pᵀ for every permutation matrix.</p>
 <h3>A worked example</h3>
 <div class="worked">
 <div>Use a matrix A whose rows are full of 1s, 2s and 3s, so you can see where each row goes.</div>
@@ -49,9 +49,9 @@
 </div></details>
 </div></div>
 <div class="problem"><span class="pnum">3</span><div class="pbody">
-<p>What is the determinant of a matrix that swaps two rows of I? Hint: start with the 2 by 2 swap <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>1</span><span>0</span></span>, the mirror on y = x. In any size, swapping two rows of I swaps two coordinates and leaves the rest alone, so it is still a mirror.</p>
+<p>What is the determinant of the 2 by 2 swap <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>1</span><span>0</span></span>, the mirror on y = x? Preview of the determinants lesson: what do you expect for a swap of two rows of a larger I?</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>−1. In 2 by 2: 0·0 − 1·1 = −1. A swap is a mirror: it keeps areas (in 3D, volumes) the same, so the size is 1, and it flips the orientation, so the sign is minus.</p>
+<p>−1: 0·0 − 1·1 = −1. A mirror keeps areas the same, so the size is 1, and it flips the plane over, so the sign is minus. Preview: a swap of two rows in any size is still a mirror, and the determinants lesson will show its determinant is also −1.</p>
 </div></details>
 </div></div></div></details>
   </article>
@@ -137,6 +137,8 @@ A = np.array([[1., 1., 1.],
               [3., 3., 3.]])
 
 P = np.eye(3)                  # your turn: rows of P = rows of I in the order 3, 1, 2
+# Type P with np.array([[...], [...], [...]]).
+# Careful: Python counts rows from 0, so np.eye(3)[[3, 1, 2]] fails (there is no row 3).
 
 table((&quot;P&quot;, P), (&quot;A&quot;, A), (&quot;P A&quot;, P @ A), (&quot;P.T P&quot;, P.T @ P))</textarea>
           </div>

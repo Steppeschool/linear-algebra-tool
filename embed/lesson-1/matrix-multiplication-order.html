@@ -7,7 +7,7 @@
     <p class="lead">Multiplying two matrices chains two motions into one. In AB, the matrix B acts first and A acts second, because (AB)v = A(Bv).</p>
     </div><span class="thumb slide-art"><img src="https://linearalgebra.steppeschool.com/assets/cards/lesson-1--matrix-multiplication-order.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 1 · slide 6</small>AB ≠ BA</span></span></div>
     <div class="key">AB = A <span class="vec" style="grid-template-columns:auto auto;gap:0 10px"><span>b₁</span><span>b₂</span></span> = <span class="vec" style="grid-template-columns:auto auto;gap:0 10px"><span>Ab₁</span><span>Ab₂</span></span></div>
-    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>AB means: apply B, then apply A. Read products from right to left.</li><li>Column j of AB is A times column j of B.</li><li>Usually AB ≠ BA. The order of the motions matters.</li><li>Grouping does not matter: (AB)C = A(BC). And det(AB) = det(A)·det(B).</li></ol></div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>AB means: apply B, then apply A. Read products from right to left.</li><li>Column j of AB is A times column j of B.</li><li>Usually AB ≠ BA. The order of the motions matters. When AB = BA we say A and B <b>commute</b>.</li><li>Grouping does not matter: (AB)C = A(BC). And det(AB) = det(A)·det(B).</li></ol></div>
     <div class="prose">
 <h3>Socks and shoes</h3>
 <p>You put on socks first, then shoes. Do it in the other order and the result is very different. Two motions of the plane behave the same way: shear then turn is not the same as turn then shear.</p>
@@ -21,12 +21,13 @@
 <div>R turns by 90°, and S is a shear:</div>
 <div class="row">R = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>−1</span><span>1</span><span>0</span></span> &nbsp; S = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>0</span><span>1</span></span></div>
 <div class="row">Column 1 of RS = R·(column 1 of S) = R(1, 0) = (0, 1). &nbsp; Column 2 = R(1, 1) = 1·(0, 1) + 1·(−1, 0) = (−1, 1)</div>
+<div class="row">Column 1 of SR = S·(column 1 of R) = S(0, 1) = (1, 1). &nbsp; Column 2 = S(−1, 0) = −1·(1, 0) = (−1, 0)</div>
 <div class="row">RS = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>−1</span><span>1</span><span>1</span></span> &nbsp; SR = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>1</span><span>0</span></span></div>
 <div>RS shears first and then turns. SR turns first and then shears. Different matrices, different motions. Watch where the F ends up in the lab. The picture draws a capital letter F on the graph paper: an F looks different when it is turned, slanted or flipped, so it shows each motion at a glance.</div>
 </div>
 <h3>The rules</h3>
 <ul>
-<li><b>AB is usually not BA.</b> Some pairs do commute (two rotations, for example), but we can never assume it.</li>
+<li><b>AB is usually not BA.</b> Some pairs do commute, meaning AB = BA (two rotations, for example), but we can never assume it.</li>
 <li><b>(AB)C = A(BC).</b> Either way C acts first, then B, then A. The brackets only change how we write it.</li>
 <li><b>det(AB) = det(A)·det(B).</b> If B doubles every area and A triples it, together they multiply areas by 6.</li>
 </ul>
@@ -111,9 +112,9 @@
 </div></details>
 </div></div>
 <div class="problem"><span class="pnum">5</span><div class="pbody">
-<p>R = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>−1</span><span>1</span><span>0</span></span> turns the plane by 90°. Compute R² and R⁴ and explain them without multiplying.</p>
+<p>R = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>−1</span><span>1</span><span>0</span></span> turns the plane by 90°. R² means R·R and R⁴ means R·R·R·R. Predict R² and R⁴ from the picture, then check by multiplying.</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>R² = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−1</span><span>0</span><span>0</span><span>−1</span></span>, a turn by 180°: every vector points the opposite way.</p><p>R⁴ = I, the identity. Four quarter turns bring every vector back to where it started.</p>
+<p>Prediction: two quarter turns make a half turn, so R² sends every vector to its opposite. Four quarter turns make a full turn, so R⁴ leaves every vector where it started: R⁴ = I, the identity.</p><p>Check: column 1 of R² is R(0, 1) = (−1, 0) and column 2 is R(−1, 0) = (0, −1), so R² = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−1</span><span>0</span><span>0</span><span>−1</span></span> ✓. Then R⁴ = R²·R² = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>1</span></span> = I ✓</p>
 </div></details>
 </div></div></div>
     </div>

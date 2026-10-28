@@ -1,0 +1,132 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="robots" content="noindex"></head><body>
+<main class="lesson">
+  <article class="page">
+    <div class="slide-head"><div>
+    <div class="kicker">Recap · Reading</div>
+    <h1>What you can now do.</h1>
+    <p class="lead">You can now say how much a matrix stretches space, compute that number quickly, and use it for inverses, solutions, areas and volumes.</p>
+    </div><span class="thumb slide-art"><img src="https://linearalgebra.steppeschool.com/assets/cards/recap.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 6 · slide 7</small>Recap</span></span></div>
+    <div class="key">det A ≠ 0 ⇔ A invertible &nbsp;&nbsp; det AB = det A · det B &nbsp;&nbsp; det = ± product of pivots</div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>det A is the area or volume factor; the sign says whether space is flipped.</li><li>Three rules define it; elimination does not change it.</li><li>Compute it from the pivots; cofactors give the explicit formula.</li><li>Cramer's rule, A⁻¹ = Cᵀ/det A, areas, volumes and cross products all come from it.</li></ol></div>
+    <div class="prose">
+<ul>
+<li><b>§5.1 What it measures.</b> Pizza dough: every area is multiplied by the same factor det A. Negative means flipped, zero means squashed.</li>
+<li><b>§5.1 The three rules.</b> The rules of a game: det I = 1, a swap flips the sign, linear in each row. Elimination steps are shears that keep det.</li>
+<li><b>§5.1 Pivots.</b> Squaring up a box: det A = ± the product of the pivots. det AB = det A det B, det Aᵀ = det A.</li>
+<li><b>§5.2 Cofactors.</b> The itemised receipt: expand along a row with signs + − +.</li>
+<li><b>§5.3 Cramer and the inverse.</b> A recipe card per unknown: xⱼ = det Bⱼ / det A, and A⁻¹ = Cᵀ / det A.</li>
+<li><b>§5.3 Areas and cross products.</b> A field from GPS corners: ½|det| of the edges. Torque τ = r × F.</li>
+</ul>
+<p>Next in Strang: chapter 6, eigenvalues. There the determinant becomes a tool: det(A − λI) = 0 finds the special directions that A only stretches.</p>
+    </div>
+    
+    <details class="more" open><summary><span class="pl-icon">✎</span><span class="rv-text"><b>Review problems</b><span>3 problems with step-by-step solutions. Try each one before you open its solution.</span></span><span class="rv-toggle"><span class="s-show">Show</span><span class="s-hide">Hide</span></span></summary><div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Find det <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>0</span><span>1</span><span>2</span><span>1</span><span>0</span><span>1</span><span>2</span></span> by elimination.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Row 2 − ½·row 1 = (0, 3/2, 1). Row 3 − ⅔·row 2 = (0, 0, 4/3). Pivots 2, 3/2, 4/3, so det = 2 · 3/2 · 4/3 = 4.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>A is 3 by 3 with det A = −2. Find det(3A), det(A⁻¹) and det(AᵀA).</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>det(3A) = 27 · (−2) = −54. &nbsp; det(A⁻¹) = −½. &nbsp; det(AᵀA) = (−2)(−2) = 4.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>Find the area of the triangle with corners (2, 1), (5, 1), (2, 5).</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Edges (3, 0) and (0, 4). det = 12, area = 6. It is a right triangle with legs 3 and 4 ✓</p>
+</div></details>
+</div></div></div></details>
+  </article>
+  <details class="review">
+    <summary><span class="pl-icon">✎</span><span class="rv-text"><b>Lesson review</b><span>3 worked examples and 5 mixed problems with solutions</span></span><span class="rv-toggle"><span class="s-show">Open</span><span class="s-hide">Close</span></span></summary>
+    <div class="review-body">
+      <h2 class="practice-h">Worked examples</h2>
+      <div class="examples"><section class="example"><h3>Example 1 · Elimination with a row swap</h3>
+<p>Find det A for A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>0</span><span>1</span><span>2</span><span>1</span><span>0</span><span>3</span><span>4</span><span>−3</span><span>8</span></span>.</p>
+<div class="worked"><div class="row">The first pivot position holds 0: swap rows 1 and 2 (the sign flips once)</div><div class="row">Row 3 − 4·row 1 = (0, −3, −4). &nbsp; Row 3 + 3·row 2 = (0, 0, 2)</div><div class="row">Pivots 1, 1, 2. &nbsp; det A = −(1 · 1 · 2) = −2</div></div>
+</section>
+<section class="example"><h3>Example 2 · Bookkeeping with the rules</h3>
+<p>A and B are 3 by 3 with det A = 2 and det B = 5.</p>
+<div class="worked"><div class="row">det(AB) = 2 · 5 = 10 &nbsp;&nbsp; det(A⁻¹) = ½ &nbsp;&nbsp; det(Bᵀ) = 5</div><div class="row">det(2A) = 2³ · 2 = 16, because each of the 3 rows doubles</div><div class="row">det(A⁻¹BA) = ½ · 5 · 2 = 5</div></div>
+</section>
+<section class="example"><h3>Example 3 · A triangle in 3D</h3>
+<p>Corners (0, 0, 0), (1, 1, 0), (0, 1, 1).</p>
+<div class="worked"><div class="row">Edges u = (1, 1, 0), v = (0, 1, 1)</div><div class="row">u × v = (1·1 − 0·1, &nbsp; 0·0 − 1·1, &nbsp; 1·1 − 1·0) = (1, −1, 1)</div><div class="row">Parallelogram area ‖u × v‖ = √3, &nbsp; triangle area = √3 / 2 ≈ 0.87</div></div>
+</section></div>
+      <h2 class="practice-h">Problems</h2>
+      <div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Find det <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>10</span></span> by elimination.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Row 2 − 4·row 1 = (0, −3, −6). Row 3 − 7·row 1 = (0, −6, −11). Row 3 − 2·row 2 = (0, 0, 1).</p><p>Pivots 1, −3, 1, so det = −3.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>Find det <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>−1</span><span>0</span><span>−1</span><span>2</span><span>−1</span><span>0</span><span>−1</span><span>2</span></span>.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Pivots 2, 3/2, 4/3 (row 2 + ½·row 1, then row 3 + ⅔·row 2). det = 2 · 3/2 · 4/3 = 4.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>Solve x + y = 2, &nbsp; x + z = 3, &nbsp; y + z = 5 by Cramer's rule.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>det A = −2. Replacing columns by b = (2, 3, 5) gives det B₁ = 0, det B₂ = −4, det B₃ = −6.</p><p>x = 0, y = 2, z = 3. Check: 0 + 2 = 2, 0 + 3 = 3, 2 + 3 = 5 ✓</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">4</span><div class="pbody">
+<p>Find the area of the triangle with corners (1, 0), (4, 1), (2, 3).</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Edges (3, 1) and (1, 3). det = 9 − 1 = 8, area = 4.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">5</span><div class="pbody">
+<p>A and B are 2 by 2 with det A = 3 and det B = −2. Find det(AB), det(BA) and det(A⁻¹B).</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>det(AB) = det(BA) = −6, even though AB and BA are usually different matrices. det(A⁻¹B) = (1/3)(−2) = −2/3.</p>
+</div></details>
+</div></div></div>
+    </div>
+  </details>
+
+  <section class="labsec" aria-label="Lab">
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Free play: try show(M) with matrices of your own and watch the determinant in the readout.</span>
+      <span class="hint" id="hint">Edit the code and press Run.</span>
+    </div>
+    <div class="lab">
+      <div class="editor-card">
+        <div class="bar">
+          <span class="file">slide_7.py</span>
+          <span class="status" id="pystatus">Loading Python…</span>
+          <button class="btn" id="reset">Reset</button>
+          <button class="btn primary" id="run" disabled>Run ▸</button>
+        </div>
+        <div class="editor">
+          <div class="gutter" id="gutter">1</div>
+          <div class="code" id="codewrap">
+            <pre id="hl" aria-hidden="true"></pre>
+            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+# Free play: change M and watch det in the readout.
+M = np.array([[1., 2.],
+              [0., 1.]])        # a shear: det = 1
+show(M)
+
+# A = np.array([[2., 1., 0.], [1., 2., 1.], [0., 1., 2.]])
+# print(np.linalg.det(A))</textarea>
+          </div>
+        </div>
+        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+      </div>
+      <figure class="figure">
+        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+      </figure>
+    </div>
+  </section>
+</main>
+<script type="application/json" id="la-config">{"slug": "recap", "lesson": "lesson-6", "assets": "../../assets/", "preview": {"kind": "transform", "M": [[1, 2], [0, 1]]}, "check": "!!V"}</script>
+</body></html>

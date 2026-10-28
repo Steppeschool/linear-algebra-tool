@@ -18,12 +18,14 @@ independent + spans the space = basis &nbsp;&nbsp; size of every basis = dimensi
 <h3>Think of a minimal toolkit</h3>
 <p>A good toolkit lets you do every job, and contains no tool that another tool already covers. "Every job can be done" is the vectors <b>spanning</b> the space: every vector in it is some combination of them. "No redundant tool" is the vectors being <b>independent</b>. Both together make a <b>basis</b>.</p>
 <p>The dimension is how many tools that takes. A point on a map needs exactly two numbers, and a drone in the air needs three. That count does not depend on which directions we choose.</p>
+<h3>Two ways to say independent</h3>
+<p>The lead says no vector is a combination of the others. The key ideas say only the all-zero combination gives 0. These mean the same thing. If v₃ = v₁ + v₂, move v₃ across: v₁ + v₂ − v₃ = 0, a combination with nonzero coefficients. In reverse, if some combination with a nonzero coefficient gives 0, solve it for that vector, and it is a combination of the others.</p>
 <h3>Testing for independence</h3>
 <p>Put the vectors in the columns of A. These statements all mean the same thing:</p>
 <ul>
 <li>The only solution of Ax = 0 is x = 0.</li>
 <li>N(A) contains only the zero vector.</li>
-<li>Every column has a pivot, so the rank is r = n.</li>
+<li>Every column has a pivot, so the rank is r = n, the number of vectors.</li>
 </ul>
 <p>We write ℝⁿ for all vectors with n components: ℝ² is the plane and ℝ³ is 3D space.</p>
 <p>Four vectors in ℝ³ are always dependent. Put them in the columns of a 3 by 4 matrix. Each pivot needs its own row, so there are at most 3 pivots for 4 columns. At least one column is free, and its special solution is a nonzero x with Ax = 0.</p>
@@ -34,7 +36,7 @@ independent + spans the space = basis &nbsp;&nbsp; size of every basis = dimensi
 <div>The vectors are dependent and the rank is 2. All three lie in one plane, and v₁, v₂ alone form a basis for that plane. Its dimension is 2.</div>
 </div>
 <h3>A basis is not unique</h3>
-<p>(1, 0) and (0, 1) form a basis of the plane, and so do (1, 1) and (1, −1). The vectors differ, but there are always two of them. In general, the pivot columns of A form a basis of its column space, and their number is the rank.</p>
+<p>(1, 0) and (0, 1) form a basis of the plane, and so do (1, 1) and (1, −1). The vectors differ, but there are always two of them. In general, the pivot columns of A form a basis of its column space, and their number is the rank. Each free column is a combination of the pivot columns (its special solution says how), so the pivot columns alone still reach all of C(A).</p>
 <!-- examples -->
 <section class="example"><h3>Example 1 · A basis of the plane</h3>
 <p>(1, 0) and (1, 1).</p><div class="worked"><div class="row">Not multiples of each other: independent. Two independent vectors in 2D span the plane</div></div><p>A basis.</p>
@@ -70,6 +72,7 @@ import numpy as np
 A = np.array([[1., 0., 1.],
               [0., 1., 1.],
               [1., 1., 2.]])     # column 3 = column 1 + column 2
+# column 3 = the last number in each row. Your turn: change those three numbers.
 
 R, pivots = rref(A)
 print("rank =", np.linalg.matrix_rank(A))

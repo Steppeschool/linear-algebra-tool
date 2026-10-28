@@ -1,0 +1,148 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="robots" content="noindex"></head><body>
+<main class="lesson">
+  <article class="page">
+    <div class="slide-head"><div>
+    <div class="kicker">Strang §5.1 · What the determinant measures</div>
+    <h1>The determinant: how much A stretches area.</h1>
+    <p class="lead">Every square matrix has one number attached to it, the determinant. It answers a geometric question: by what factor does the matrix stretch areas (in 2D) or volumes (in 3D)? A negative sign means space is also flipped, and zero means it is squashed flat.</p>
+    </div><span class="thumb slide-art"><img src="https://linearalgebra.steppeschool.com/assets/cards/lesson-6--determinant-as-area.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 6 · slide 1</small>Determinant</span></span></div>
+    <div class="key">det A = ad − bc for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>a</span><span>b</span><span>c</span><span>d</span></span> &nbsp;&nbsp; area of image = |det A| × area</div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>det A is the factor by which A multiplies every area (2D) or volume (3D).</li><li>det A < 0: the matrix also flips space, like a mirror.</li><li>det A = 0: space is squashed into a line or a plane. Then A has no inverse.</li><li>For 2 by 2, det A = ad − bc. Larger matrices follow from three rules (slide 2).</li></ol></div>
+    <div class="prose">
+<h3>Rolling out pizza dough</h3>
+<p>Roll a ball of dough into a sheet and every topping on it grows by the same factor. A slice of pepperoni and an olive both get twice as big if the sheet doubles in area. It does not matter what shape the topping has.</p>
+<p>A matrix acts on the plane the same way. It may turn and slant shapes, but it multiplies every area by one fixed number. That number is the determinant, written det A.</p>
+<h3>Reading it off the unit square</h3>
+<p>The easiest shape to follow is the unit square, with corners at 0, (1, 0), (0, 1) and (1, 1). Lesson 1 showed that A sends (1, 0) to its first column and (0, 1) to its second column. So the square becomes the parallelogram spanned by the two columns, and its area is |det A|.</p>
+<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>0</span><span>0</span><span>2</span></span>: the square becomes a 3 by 2 rectangle, area 6, &nbsp; det A = 3·2 − 0·0 = 6 ✓</div><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>1</span></span>: a slanted parallelogram, &nbsp; det A = 2·1 − 1·1 = 1. Same area as the square.</div></div>
+<h3>The sign: was the plane flipped?</h3>
+<p>Walk around the square from (1, 0) to (0, 1), turning counterclockwise. If the images of those two corners are still met counterclockwise, det A is positive. If the order has reversed, the plane has been mirrored and det A is negative. The mirror from lesson 1, <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−1</span><span>0</span><span>0</span><span>1</span></span>, has det = −1: same area, flipped.</p>
+<h3>Zero: squashed flat</h3>
+<p>If the two columns point along the same line, the parallelogram is flat and its area is 0. Then many inputs land on the same output, so nothing can undo A. That is the most useful fact about determinants: <b>A is invertible exactly when det A ≠ 0</b>.</p>
+<h3>Three dimensions</h3>
+<p>In 3D the unit cube goes to a slanted box (a parallelepiped) spanned by the three columns. Its volume is |det A|. The next slides show how to compute a 3 by 3 determinant.</p>
+<h3>Where this is used</h3>
+<p>Robots that move their joints need the matrix that turns joint speeds into hand speed. When its determinant gets close to zero, the arm is near a "singular" pose (fully stretched out, for example). There, some hand motions need enormous joint speeds. Control software watches this determinant to steer clear.</p>
+    </div>
+    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · A stretch</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>0</span><span>0</span><span>3</span></span>.</p>
+<div class="worked"><div class="row">det A = 2·3 − 0·0 = 6</div><div class="row">The square becomes a 2 by 3 rectangle: area 6 ✓</div></div>
+</section>
+<section class="example"><h3>Example 2 · A shear keeps area</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>0</span><span>1</span></span> slides the top of the square sideways.</p>
+<div class="worked"><div class="row">det A = 1·1 − 2·0 = 1</div><div class="row">The parallelogram has base 1 and height 1: area 1, unchanged</div></div>
+<p>A deck of cards pushed into a slant keeps its volume. Shears change shape, not size.</p>
+</section>
+<section class="example"><h3>Example 3 · A flat image</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>4</span></span>.</p>
+<div class="worked"><div class="row">det A = 1·4 − 2·2 = 0</div><div class="row">Both columns lie on the line through (1, 2): the plane collapses onto that line</div></div>
+<p>A is not invertible: (2, −1) and (0, 0) both go to (0, 0).</p>
+</section></div>
+    <details class="more"><summary><span class="pl-icon">✎</span><span class="rv-text"><b>More examples to try</b><span>3 problems with step-by-step solutions. Try each one before you open its solution.</span></span><span class="rv-toggle"><span class="s-show">Show</span><span class="s-hide">Hide</span></span></summary><div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Find det A for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>1</span><span>2</span><span>4</span></span>. What happens to a shape of area 5?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>det A = 3·4 − 1·2 = 10. Its image has area 5 × 10 = 50.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>For which value of t is <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>t</span><span>3</span><span>6</span></span> not invertible?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>det = 12 − 3t = 0 when t = 4. Then column 2 = 2 × column 1, and the plane is squashed onto a line.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>The rotation R = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>cos θ</span><span>−sin θ</span><span>sin θ</span><span>cos θ</span></span>. Find det R and explain the answer.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>det R = cos²θ + sin²θ = 1. A rotation turns shapes without stretching or flipping them.</p>
+</div></details>
+</div></div></div></details>
+  </article>
+  <details class="review">
+    <summary><span class="pl-icon">✎</span><span class="rv-text"><b>Lesson review</b><span>3 worked examples and 5 mixed problems with solutions</span></span><span class="rv-toggle"><span class="s-show">Open</span><span class="s-hide">Close</span></span></summary>
+    <div class="review-body">
+      <h2 class="practice-h">Worked examples</h2>
+      <div class="examples"><section class="example"><h3>Example 1 · Elimination with a row swap</h3>
+<p>Find det A for A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>0</span><span>1</span><span>2</span><span>1</span><span>0</span><span>3</span><span>4</span><span>−3</span><span>8</span></span>.</p>
+<div class="worked"><div class="row">The first pivot position holds 0: swap rows 1 and 2 (the sign flips once)</div><div class="row">Row 3 − 4·row 1 = (0, −3, −4). &nbsp; Row 3 + 3·row 2 = (0, 0, 2)</div><div class="row">Pivots 1, 1, 2. &nbsp; det A = −(1 · 1 · 2) = −2</div></div>
+</section>
+<section class="example"><h3>Example 2 · Bookkeeping with the rules</h3>
+<p>A and B are 3 by 3 with det A = 2 and det B = 5.</p>
+<div class="worked"><div class="row">det(AB) = 2 · 5 = 10 &nbsp;&nbsp; det(A⁻¹) = ½ &nbsp;&nbsp; det(Bᵀ) = 5</div><div class="row">det(2A) = 2³ · 2 = 16, because each of the 3 rows doubles</div><div class="row">det(A⁻¹BA) = ½ · 5 · 2 = 5</div></div>
+</section>
+<section class="example"><h3>Example 3 · A triangle in 3D</h3>
+<p>Corners (0, 0, 0), (1, 1, 0), (0, 1, 1).</p>
+<div class="worked"><div class="row">Edges u = (1, 1, 0), v = (0, 1, 1)</div><div class="row">u × v = (1·1 − 0·1, &nbsp; 0·0 − 1·1, &nbsp; 1·1 − 1·0) = (1, −1, 1)</div><div class="row">Parallelogram area ‖u × v‖ = √3, &nbsp; triangle area = √3 / 2 ≈ 0.87</div></div>
+</section></div>
+      <h2 class="practice-h">Problems</h2>
+      <div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Find det <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>10</span></span> by elimination.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Row 2 − 4·row 1 = (0, −3, −6). Row 3 − 7·row 1 = (0, −6, −11). Row 3 − 2·row 2 = (0, 0, 1).</p><p>Pivots 1, −3, 1, so det = −3.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>Find det <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>−1</span><span>0</span><span>−1</span><span>2</span><span>−1</span><span>0</span><span>−1</span><span>2</span></span>.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Pivots 2, 3/2, 4/3 (row 2 + ½·row 1, then row 3 + ⅔·row 2). det = 2 · 3/2 · 4/3 = 4.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>Solve x + y = 2, &nbsp; x + z = 3, &nbsp; y + z = 5 by Cramer's rule.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>det A = −2. Replacing columns by b = (2, 3, 5) gives det B₁ = 0, det B₂ = −4, det B₃ = −6.</p><p>x = 0, y = 2, z = 3. Check: 0 + 2 = 2, 0 + 3 = 3, 2 + 3 = 5 ✓</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">4</span><div class="pbody">
+<p>Find the area of the triangle with corners (1, 0), (4, 1), (2, 3).</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Edges (3, 1) and (1, 3). det = 9 − 1 = 8, area = 4.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">5</span><div class="pbody">
+<p>A and B are 2 by 2 with det A = 3 and det B = −2. Find det(AB), det(BA) and det(A⁻¹B).</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>det(AB) = det(BA) = −6, even though AB and BA are usually different matrices. det(A⁻¹B) = (1/3)(−2) = −2/3.</p>
+</div></details>
+</div></div></div>
+    </div>
+  </details>
+
+  <section class="labsec" aria-label="Lab">
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Change M so that the unit square becomes a parallelogram of area 3, without flipping it.</span>
+      <span class="hint" id="hint">Edit the code and press Run.</span>
+    </div>
+    <div class="lab">
+      <div class="editor-card">
+        <div class="bar">
+          <span class="file">slide_1.py</span>
+          <span class="status" id="pystatus">Loading Python…</span>
+          <button class="btn" id="reset">Reset</button>
+          <button class="btn primary" id="run" disabled>Run ▸</button>
+        </div>
+        <div class="editor">
+          <div class="gutter" id="gutter">1</div>
+          <div class="code" id="codewrap">
+            <pre id="hl" aria-hidden="true"></pre>
+            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+M = np.array([[2., 1.],
+              [1., 1.]])        # each inner list is a ROW
+                                # your turn: make det(M) = 3 (and keep it positive)
+print(&quot;det M =&quot;, np.linalg.det(M))
+show(M)                         # the readout shows det beside the picture</textarea>
+          </div>
+        </div>
+        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+      </div>
+      <figure class="figure">
+        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+      </figure>
+    </div>
+  </section>
+</main>
+<script type="application/json" id="la-config">{"slug": "determinant-as-area", "lesson": "lesson-6", "assets": "../../assets/", "preview": {"kind": "transform", "M": [[2, 1], [1, 1]]}, "check": "isT(V) && near(det(V.M), 3, 1e-6)"}</script>
+</body></html>

@@ -20,6 +20,7 @@ N(A) = all x with Ax = 0
 <p>Run thruster 1 forward at 2 and thruster 2 in reverse at 1. The two pushes cancel exactly: both engines are working, and the boat does not move. The throttle setting x = (2, −1) is in the nullspace, because Ax = 0.</p>
 <h3>Why the nullspace is a subspace</h3>
 <p>If Ax = 0 and Ay = 0, then A(x + y) = Ax + Ay = 0 and A(cx) = cAx = 0. So sums and multiples of nullspace vectors stay in the nullspace. In the example, every multiple c·(2, −1) is also a cancelling setting, and N(A) is a whole line.</p>
+<p>A line through 0 can be named by any of its nonzero vectors. All multiples of (2, −1) and all multiples of (−2, 1) are the same line, and later slides use (−2, 1).</p>
 <h3>What a nullspace vector tells us</h3>
 <p>Ax = 0 says x₁·(column 1) + x₂·(column 2) = 0. So a nonzero vector in N(A) is a recipe for combining the columns into zero, which means the columns are dependent. Here: 2·(1, 2) − 1·(2, 4) = (0, 0).</p>
 <p>If A is invertible, the only solution of Ax = 0 is x = A⁻¹0 = 0, so the nullspace is just the zero vector.</p>
@@ -38,7 +39,7 @@ N(A) = all x with Ax = 0
 <p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>4</span></span>, det = −2 ≠ 0 (the area factor from lesson 1), so A is invertible.</p><div class="worked"><div class="row">Only x = 0 solves Ax = 0. N(A) = {0}</div></div>
 </section>
 <section class="example"><h3>Example 3 · A plane in 3D</h3>
-<p>A = [1 1 1], one row and three columns.</p><div class="worked"><div class="row">Ax = 0 means x + y + z = 0</div><div class="row">N(A) is a plane, spanned by (−1, 1, 0) and (−1, 0, 1)</div></div>
+<p>A = [1 1 1], one row and three columns.</p><div class="worked"><div class="row">Ax = 0 means x + y + z = 0</div><div class="row">N(A) is a plane: all combinations of (−1, 1, 0) and (−1, 0, 1)</div></div>
 </section>
 <!-- problems -->
 <div class="problem"><span class="pnum">1</span><div class="pbody">

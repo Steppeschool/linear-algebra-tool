@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cramer&#x27;s Rule and the Inverse Matrix Formula</title>
+<meta name="description" content="Cramer&#x27;s rule solves Ax = b with ratios of determinants, and cofactors give A⁻¹ = Cᵀ / det A. When to use them and when not. Examples and Python. Strang §5.3.">
+<link rel="canonical" href="https://linearalgebra.steppeschool.com/determinants/cramers-rule-and-inverse/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Linear Algebra, Live">
+<meta property="og:title" content="Cramer&#x27;s Rule and the Inverse Matrix Formula">
+<meta property="og:description" content="Cramer&#x27;s rule solves Ax = b with ratios of determinants, and cofactors give A⁻¹ = Cᵀ / det A. When to use them and when not. Examples and Python. Strang §5.3.">
+<meta property="og:url" content="https://linearalgebra.steppeschool.com/determinants/cramers-rule-and-inverse/">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/lesson.css">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "Cramer's Rule and the Inverse Matrix Formula", "headline": "Cramer's rule: each unknown is a ratio of two determinants.", "description": "Cramer's rule solves Ax = b with ratios of determinants, and cofactors give A⁻¹ = Cᵀ / det A. When to use them and when not. Examples and Python. Strang §5.3.", "url": "https://linearalgebra.steppeschool.com/determinants/cramers-rule-and-inverse/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": true, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 6: Determinants", "item": "https://linearalgebra.steppeschool.com/determinants/"}, {"@type": "ListItem", "position": 3, "name": "Cramer's Rule and the Inverse Matrix Formula", "item": "https://linearalgebra.steppeschool.com/determinants/cramers-rule-and-inverse/"}]}]</script>
+</head>
+<body>
+<header class="top">
+  <div class="topnav"><a class="brand" href="../../">Linear Algebra, Live</a><nav class="crumbnav" aria-label="Chapters and lessons"><details class="menu"><summary>Chapter 5<span class="hide-sm"> · Determinants</span></summary><div class="menu-list chapters"><div class="menu-sub">Chapters</div><div class="ch"><div class="ch-head"><span class="ch-num">1</span><span class="ch-title">Introduction to vectors</span></div><div class="ch-lessons"><a class="ls" href="../../vectors-and-matrices/"><span class="ls-num">Lesson 1</span><span class="ls-title">Columns first</span></a></div></div><div class="ch"><div class="ch-head"><span class="ch-num">2</span><span class="ch-title">Solving linear equations</span></div><div class="ch-lessons"><a class="ls" href="../../gaussian-elimination-and-lu/"><span class="ls-num">Lesson 2</span><span class="ls-title">Elimination and A = LU</span></a><a class="ls" href="../../inverse-transpose-permutation/"><span class="ls-num">Lesson 3</span><span class="ls-title">Inverses, transposes and permutations</span></a></div></div><div class="ch"><div class="ch-head"><span class="ch-num">3</span><span class="ch-title">Vector spaces and subspaces</span></div><div class="ch-lessons"><a class="ls" href="../../vector-spaces-and-four-subspaces/"><span class="ls-num">Lesson 4</span><span class="ls-title">The four subspaces</span></a></div></div><div class="ch"><div class="ch-head"><span class="ch-num">4</span><span class="ch-title">Orthogonality</span></div><div class="ch-lessons"><a class="ls" href="../../orthogonality-and-least-squares/"><span class="ls-num">Lesson 5</span><span class="ls-title">Orthogonality and least squares</span></a></div></div><div class="ch on"><div class="ch-head"><span class="ch-num">5</span><span class="ch-title">Determinants</span></div><div class="ch-lessons"><a class="ls on" href="../../determinants/"><span class="ls-num">Lesson 6</span><span class="ls-title">Determinants</span></a></div></div><div class="menu-sub">Coming soon</div><div class="ch-later"><div class="ch soon"><div class="ch-head"><span class="ch-num">6</span><span class="ch-title">Eigenvalues and eigenvectors</span></div></div><div class="ch soon"><div class="ch-head"><span class="ch-num">7</span><span class="ch-title">The singular value decomposition</span></div></div></div></div></details><span class="sep">›</span><details class="menu"><summary>Lesson 6<span class="hide-sm"> · Determinants</span></summary><div class="menu-list"><div class="menu-sub">Chapter 5 lessons</div><div class="ch-lessons flat"><a class="ls on" href="../../determinants/"><span class="ls-num">Lesson 6</span><span class="ls-title">Determinants</span></a></div><div class="menu-sub">In lesson 6</div><div class="ch-lessons flat slides"><a class="ls" href="../../determinants/determinant-as-area/"><span class="ls-num">1</span><span class="ls-title">Determinant Meaning: Area and Volume Scale Factor</span></a><a class="ls" href="../../determinants/properties-of-determinants/"><span class="ls-num">2</span><span class="ls-title">Properties of Determinants: The Three Rules</span></a><a class="ls" href="../../determinants/determinant-from-pivots/"><span class="ls-num">3</span><span class="ls-title">Determinant by Elimination: Product of the Pivots</span></a><a class="ls" href="../../determinants/cofactor-formula/"><span class="ls-num">4</span><span class="ls-title">Cofactor Expansion and the 3×3 Determinant Formula</span></a><a class="ls on" href="../../determinants/cramers-rule-and-inverse/"><span class="ls-num">5</span><span class="ls-title">Cramer&#x27;s Rule and the Inverse Matrix Formula</span></a><a class="ls" href="../../determinants/area-volume-cross-product/"><span class="ls-num">6</span><span class="ls-title">Area of a Triangle, Volume and the Cross Product</span></a><a class="ls" href="../../determinants/recap/"><span class="ls-num">7</span><span class="ls-title">Lesson 6 Recap: Determinants</span></a><a class="ls" href="../../determinants/practice/"><span class="ls-num">✎</span><span class="ls-title">Examples and problems</span></a></div></div></details></nav></div>
+  <nav class="steps" aria-label="Steps in this lesson"><a class="step" href="../determinant-as-area/" data-slug="determinant-as-area" title="Determinant Meaning: Area and Volume Scale Factor">1</a><a class="step" href="../properties-of-determinants/" data-slug="properties-of-determinants" title="Properties of Determinants: The Three Rules">2</a><a class="step" href="../determinant-from-pivots/" data-slug="determinant-from-pivots" title="Determinant by Elimination: Product of the Pivots">3</a><a class="step" href="../cofactor-formula/" data-slug="cofactor-formula" title="Cofactor Expansion and the 3×3 Determinant Formula">4</a><a class="step on" href="../cramers-rule-and-inverse/" data-slug="cramers-rule-and-inverse" aria-current="page" title="Cramer&#x27;s Rule and the Inverse Matrix Formula">5</a><a class="step" href="../area-volume-cross-product/" data-slug="area-volume-cross-product" title="Area of a Triangle, Volume and the Cross Product">6</a><a class="step" href="../recap/" data-slug="recap" title="Lesson 6 Recap: Determinants">7</a><a class="step practice" href="../practice/" title="Examples and problems">✎ Practice</a></nav>
+</header>
+
+
+<main class="lesson">
+  <article class="page">
+    <div class="slide-head"><div>
+    <div class="kicker">Strang §5.3 · Cramer&#x27;s rule and inverses</div>
+    <h1>Cramer&#x27;s rule: each unknown is a ratio of two determinants.</h1>
+    <p class="lead">Determinants give closed formulas for the solution of Ax = b and for A⁻¹. Replace column j of A by b and divide determinants: that is xⱼ. Collect the cofactors and divide by det A: that is A⁻¹. Neat formulas, slow in practice.</p>
+    </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-6--cramers-rule-and-inverse.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 6 · slide 5</small>Cramer&#x27;s rule</span></span></div>
+    <div class="key">xⱼ = det Bⱼ / det A &nbsp;&nbsp; (Bⱼ = A with column j replaced by b) &nbsp;&nbsp; A⁻¹ = Cᵀ / det A</div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Cramer's rule: xⱼ = det Bⱼ / det A, where Bⱼ is A with its column j replaced by b.</li><li>It needs det A ≠ 0, the same condition as for A⁻¹ to exist.</li><li>The inverse: (A⁻¹)ᵢⱼ = Cⱼᵢ / det A. Note the swap: the cofactor matrix is transposed.</li><li>For 2 by 2 this is exactly the formula from lesson 3.</li></ol></div>
+    <div class="prose">
+<h3>A recipe card for each unknown</h3>
+<p>Elimination solves all the unknowns together. Cramer's rule gives each unknown its own recipe card: one ratio of two determinants, independent of the others. That is handy for a formula on paper, but each card costs a full determinant.</p>
+<h3>Why it works (2 by 2)</h3>
+<p>Write the columns of A as a₁ and a₂, so b = x₁a₁ + x₂a₂. Put b into column 1 and use the rules from slide 2:</p>
+<div class="worked"><div class="row">det [b  a₂] = det [x₁a₁ + x₂a₂ &nbsp; a₂] = x₁ det [a₁ a₂] + x₂ det [a₂ a₂]</div><div class="row">The last determinant has two equal columns, so it is 0</div><div class="row">det B₁ = x₁ · det A, &nbsp; so x₁ = det B₁ / det A</div></div>
+<p>The same argument works for every column and every size.</p>
+<h3>A worked example</h3>
+<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>3</span></span>, &nbsp; b = (5, 10), &nbsp; det A = 6 − 1 = 5</div><div class="row">B₁ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>5</span><span>1</span><span>10</span><span>3</span></span>: det = 15 − 10 = 5, &nbsp; x₁ = 5/5 = 1</div><div class="row">B₂ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>5</span><span>1</span><span>10</span></span>: det = 20 − 5 = 15, &nbsp; x₂ = 15/5 = 3</div><div class="row">Check: A(1, 3) = (2 + 3, 1 + 9) = (5, 10) ✓</div></div>
+<h3>The inverse from cofactors</h3>
+<p>Column j of A⁻¹ solves Ax = (column j of I). Cramer's rule on those right-hand sides gives every entry of A⁻¹ as a cofactor divided by det A. Put the cofactors Cᵢⱼ in a matrix C, transpose it, and divide:</p>
+<div class="worked"><div class="row">A⁻¹ = Cᵀ / det A</div><div class="row">2 by 2: C = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>d</span><span>−c</span><span>−b</span><span>a</span></span>, &nbsp; Cᵀ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>d</span><span>−b</span><span>−c</span><span>a</span></span>, &nbsp; A⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>d</span><span>−b</span><span>−c</span><span>a</span></span> / (ad − bc)</div></div>
+<p>That is the 2 by 2 recipe from lesson 3, now explained.</p>
+<h3>Where this is used</h3>
+<p>Cramer's rule shows up in formulas, not in solvers. For example, it tells you how sensitive one unknown is to one measurement, written as a clean ratio. To actually solve a system with more than three unknowns, elimination is far faster.</p>
+    </div>
+    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · Cramer for another 2 by 2</h3>
+<p>x + 2y = 5, &nbsp; 3x + 4y = 6.</p>
+<div class="worked"><div class="row">det A = 4 − 6 = −2</div><div class="row">x = det <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>5</span><span>2</span><span>6</span><span>4</span></span> / (−2) = (20 − 12)/(−2) = −4</div><div class="row">y = det <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>5</span><span>3</span><span>6</span></span> / (−2) = (6 − 15)/(−2) = 4.5</div><div class="row">Check: −4 + 9 = 5 ✓, &nbsp; −12 + 18 = 6 ✓</div></div>
+</section>
+<section class="example"><h3>Example 2 · An inverse from cofactors</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>5</span><span>3</span></span>, det A = 1.</p>
+<div class="worked"><div class="row">A⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>−1</span><span>−5</span><span>2</span></span> / 1</div><div class="row">Check: A A⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>1</span></span> ✓</div></div>
+</section>
+<section class="example"><h3>Example 3 · When Cramer fails</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>4</span></span>: det A = 0.</p>
+<p>Every ratio would divide by zero. That matches lesson 4: the system has no solution or infinitely many, never exactly one.</p>
+</section></div>
+    <details class="more"><summary><span class="pl-icon">✎</span><span class="rv-text"><b>More examples to try</b><span>3 problems with step-by-step solutions. Try each one before you open its solution.</span></span><span class="rv-toggle"><span class="s-show">Show</span><span class="s-hide">Hide</span></span></summary><div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Solve 3x + y = 7, x + 2y = 4 by Cramer's rule.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>det A = 6 − 1 = 5. &nbsp; x = det <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>7</span><span>1</span><span>4</span><span>2</span></span> / 5 = (14 − 4)/5 = 2. &nbsp; y = det <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>7</span><span>1</span><span>4</span></span> / 5 = (12 − 7)/5 = 1.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>Use cofactors to find the inverse of <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>4</span><span>3</span><span>1</span><span>1</span></span>.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>det = 4 − 3 = 1. A⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−3</span><span>−1</span><span>4</span></span>. Check: 4·1 + 3·(−1) = 1 ✓</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>If A has integer entries and det A = 1, why does A⁻¹ also have integer entries?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>A⁻¹ = Cᵀ / 1, and every cofactor is a sum of products of integers.</p>
+</div></details>
+</div></div></div></details>
+  </article>
+  <details class="review">
+    <summary><span class="pl-icon">✎</span><span class="rv-text"><b>Lesson review</b><span>3 worked examples and 5 mixed problems with solutions</span></span><span class="rv-toggle"><span class="s-show">Open</span><span class="s-hide">Close</span></span></summary>
+    <div class="review-body">
+      <h2 class="practice-h">Worked examples</h2>
+      <div class="examples"><section class="example"><h3>Example 1 · Elimination with a row swap</h3>
+<p>Find det A for A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>0</span><span>1</span><span>2</span><span>1</span><span>0</span><span>3</span><span>4</span><span>−3</span><span>8</span></span>.</p>
+<div class="worked"><div class="row">The first pivot position holds 0: swap rows 1 and 2 (the sign flips once)</div><div class="row">Row 3 − 4·row 1 = (0, −3, −4). &nbsp; Row 3 + 3·row 2 = (0, 0, 2)</div><div class="row">Pivots 1, 1, 2. &nbsp; det A = −(1 · 1 · 2) = −2</div></div>
+</section>
+<section class="example"><h3>Example 2 · Bookkeeping with the rules</h3>
+<p>A and B are 3 by 3 with det A = 2 and det B = 5.</p>
+<div class="worked"><div class="row">det(AB) = 2 · 5 = 10 &nbsp;&nbsp; det(A⁻¹) = ½ &nbsp;&nbsp; det(Bᵀ) = 5</div><div class="row">det(2A) = 2³ · 2 = 16, because each of the 3 rows doubles</div><div class="row">det(A⁻¹BA) = ½ · 5 · 2 = 5</div></div>
+</section>
+<section class="example"><h3>Example 3 · A triangle in 3D</h3>
+<p>Corners (0, 0, 0), (1, 1, 0), (0, 1, 1).</p>
+<div class="worked"><div class="row">Edges u = (1, 1, 0), v = (0, 1, 1)</div><div class="row">u × v = (1·1 − 0·1, &nbsp; 0·0 − 1·1, &nbsp; 1·1 − 1·0) = (1, −1, 1)</div><div class="row">Parallelogram area ‖u × v‖ = √3, &nbsp; triangle area = √3 / 2 ≈ 0.87</div></div>
+</section></div>
+      <h2 class="practice-h">Problems</h2>
+      <div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Find det <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>10</span></span> by elimination.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Row 2 − 4·row 1 = (0, −3, −6). Row 3 − 7·row 1 = (0, −6, −11). Row 3 − 2·row 2 = (0, 0, 1).</p><p>Pivots 1, −3, 1, so det = −3.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>Find det <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>−1</span><span>0</span><span>−1</span><span>2</span><span>−1</span><span>0</span><span>−1</span><span>2</span></span>.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Pivots 2, 3/2, 4/3 (row 2 + ½·row 1, then row 3 + ⅔·row 2). det = 2 · 3/2 · 4/3 = 4.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>Solve x + y = 2, &nbsp; x + z = 3, &nbsp; y + z = 5 by Cramer's rule.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>det A = −2. Replacing columns by b = (2, 3, 5) gives det B₁ = 0, det B₂ = −4, det B₃ = −6.</p><p>x = 0, y = 2, z = 3. Check: 0 + 2 = 2, 0 + 3 = 3, 2 + 3 = 5 ✓</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">4</span><div class="pbody">
+<p>Find the area of the triangle with corners (1, 0), (4, 1), (2, 3).</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Edges (3, 1) and (1, 3). det = 9 − 1 = 8, area = 4.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">5</span><div class="pbody">
+<p>A and B are 2 by 2 with det A = 3 and det B = −2. Find det(AB), det(BA) and det(A⁻¹B).</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>det(AB) = det(BA) = −6, even though AB and BA are usually different matrices. det(A⁻¹B) = (1/3)(−2) = −2/3.</p>
+</div></details>
+</div></div></div>
+    </div>
+  </details>
+
+  <section class="labsec" aria-label="Lab">
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Fix B₂ (b goes into column 2) so that Cramer&#x27;s rule solves Ax = b.</span>
+      <span class="hint" id="hint">Edit the code and press Run.</span>
+    </div>
+    <div class="lab">
+      <div class="editor-card">
+        <div class="bar">
+          <span class="file">slide_5.py</span>
+          <span class="status" id="pystatus">Loading Python…</span>
+          <button class="btn" id="reset">Reset</button>
+          <button class="btn primary" id="run" disabled>Run ▸</button>
+        </div>
+        <div class="editor">
+          <div class="gutter" id="gutter">1</div>
+          <div class="code" id="codewrap">
+            <pre id="hl" aria-hidden="true"></pre>
+            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+A = np.array([[2., 1.],
+              [1., 3.]])
+b = np.array([5., 10.])
+
+B1 = np.column_stack([b, A[:, 1]])        # b replaces column 1
+B2 = np.column_stack([b, A[:, 1]])        # your turn: b should replace column 2
+                                          # hint: np.column_stack([A[:, 0], b])
+x = np.array([np.linalg.det(B1), np.linalg.det(B2)]) / np.linalg.det(A)
+print(&quot;x =&quot;, x)
+combo(A, x, b)                  # Ax should land on b</textarea>
+          </div>
+        </div>
+        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+      </div>
+      <figure class="figure">
+        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <div class="after">
+    <div class="nav">
+      <a class="btn" id="prev" href="../cofactor-formula/">← Back</a>
+      <span class="count">5 / 7</span>
+      <a class="btn primary" id="next" href="../area-volume-cross-product/">Next →</a>
+    </div>
+  </div>
+</main>
+<footer class="foot">
+  Follows the order and notation of Gilbert Strang, <i>Introduction to Linear Algebra</i>, 5th edition (2016); § numbers refer to that book.
+  Explanations, examples and code are original. Made by <a href="https://www.steppeschool.com">Steppeschool</a>.
+</footer>
+
+<script>window.SLIDE = {"slug": "cramers-rule-and-inverse", "lesson": "lesson-6", "assets": "../../assets/", "preview": {"kind": "combo", "A": [[2, 1], [1, 3]], "x": [1, 1], "b": [5, 10]}, "check": "isC(V) && eqM(V.A, [[2,1],[1,3]]) && near(Ax(V)[0], 5) && near(Ax(V)[1], 10)"};</script>
+<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
+<script src="../../assets/lab.js" defer></script>
+<script src="../../assets/nav.js" defer></script>
+</body>
+</html>

@@ -4,7 +4,7 @@
     <div class="slide-head"><div>
     <div class="kicker">Challenge</div>
     <h1>Mirror the F.</h1>
-    <p class="lead">A challenge to put the slides together: build the matrix that mirrors the plane left to right. The F should keep its size and simply face the other way.</p>
+    <p class="lead">A challenge to put the slides together: build the matrix for the mirror across the y-axis (the vertical axis). It swaps left and right. The F should keep its size and simply face the other way.</p>
     </div><span class="thumb slide-art"><img src="https://linearalgebra.steppeschool.com/assets/cards/lesson-1--reflection-matrix.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 1 · slide 7</small>Reflection</span></span></div>
     <div class="key">(x, y) &nbsp;→&nbsp; (−x, y)</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>To build a matrix, decide where (1, 0) and (0, 1) land and use them as columns (slide 5).</li><li>A mirror keeps lengths and areas, so |det A| = 1.</li><li>A mirror flips the plane over, and the determinant shows that with a minus sign: det A = −1.</li><li>Applying the same mirror twice brings everything back: A·A = I. Here I = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>1</span></span> is the <b>identity matrix</b>, which leaves every vector where it is.</li></ol></div>
@@ -14,8 +14,8 @@
 <h3>How to build it</h3>
 <p>Use the rule from slide 5. Ask where the two landmarks should go:</p>
 <ul>
-<li>A mirror standing on the vertical axis sends points on the right over to the left. So (1, 0) goes to (−1, 0).</li>
-<li>Points on the vertical axis itself do not move. So (0, 1) stays at (0, 1).</li>
+<li>The mirror across the y-axis sends points on the right over to the left. So (1, 0) goes to (−1, 0).</li>
+<li>Points on the y-axis itself do not move. So (0, 1) stays at (0, 1).</li>
 </ul>
 <p>Those two answers are the columns of the matrix. Write them in, run the code, and watch the F.</p>
 <h3>What the determinant tells us</h3>
@@ -23,14 +23,14 @@
 <h3>After you solve it</h3>
 <ul>
 <li><b>Mirror twice.</b> In a barber's shop, two mirrors show your face the right way round. Check in code that A @ A gives the identity matrix.</li>
-<li><b>Another mirror.</b> Try the mirror on the diagonal line y = x. Where do (1, 0) and (0, 1) go now?</li>
+<li><b>Another mirror.</b> Try the mirror across the line y = x. Where do (1, 0) and (0, 1) go now?</li>
 </ul>
     </div>
-    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · Mirror on y = x</h3>
+    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · Mirror across the line y = x</h3>
 <p>(1, 0) → (0, 1) and (0, 1) → (1, 0).</p><div class="worked"><div class="row">M = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>1</span><span>0</span></span> &nbsp;&nbsp; det M = −1</div><div class="row">(2, 1) → (1, 2): the coordinates swap</div></div>
 </section>
 <section class="example"><h3>Example 2 · Two mirrors make a turn</h3>
-<p>Mirror on the x-axis first, then on the y-axis (the right-hand matrix acts first):</p><div class="worked"><div class="row"><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−1</span><span>0</span><span>0</span><span>1</span></span> <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>−1</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−1</span><span>0</span><span>0</span><span>−1</span></span></div><div class="row">det = (−1)·(−1) = 1</div></div><p>Two flips cancel. The result is the half turn: no mirror image left.</p>
+<p>Mirror across the x-axis first, then across the y-axis (the right-hand matrix acts first):</p><div class="worked"><div class="row"><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−1</span><span>0</span><span>0</span><span>1</span></span> <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>−1</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−1</span><span>0</span><span>0</span><span>−1</span></span></div><div class="row">det = (−1)·(−1) = 1</div></div><p>Two flips cancel. The result is the half turn: no mirror image left.</p>
 </section>
 <section class="example"><h3>Example 3 · Rotation or mirror?</h3>
 <p>Is <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>−1</span><span>0</span></span> a rotation or a mirror?</p><div class="worked"><div class="row">det = 0·0 − 1·(−1) = 1</div><div class="row">(1, 0) → (0, −1) and (0, 1) → (1, 0)</div></div><p>The determinant is +1, so nothing is flipped. It is a rotation: a quarter turn clockwise.
@@ -42,15 +42,15 @@
 </div></details>
 </div></div>
 <div class="problem"><span class="pnum">2</span><div class="pbody">
-<p>Check that the mirror on y = x, applied twice, gives the identity.</p>
+<p>Check that the mirror across the line y = x, applied twice, gives the identity. (For a matrix M, M² means M·M, the matrix times itself.)</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
 <p><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>1</span><span>0</span></span>² = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>1</span></span>. Swapping the coordinates twice puts them back.</p>
 </div></details>
 </div></div>
 <div class="problem"><span class="pnum">3</span><div class="pbody">
-<p>Is <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>−1</span><span>−1</span><span>0</span></span> a mirror? Which line?</p>
+<p>Is M = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>−1</span><span>−1</span><span>0</span></span> a mirror? Which line?</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>det = 0 − 1 = −1 and M² = I, so yes. (1, 0) → (0, −1) and (1, −1) stays put: it is the mirror on the line y = −x.</p>
+<p>det = 0 − 1 = −1 and M² = I, so yes. (1, 0) → (0, −1) and (1, −1) stays put: it is the mirror across the line y = −x.</p>
 </div></details>
 </div></div></div></details>
   </article>
@@ -104,9 +104,9 @@
 </div></details>
 </div></div>
 <div class="problem"><span class="pnum">5</span><div class="pbody">
-<p>R = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>−1</span><span>1</span><span>0</span></span> turns the plane by 90°. Compute R² and R⁴ and explain them without multiplying.</p>
+<p>R = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>−1</span><span>1</span><span>0</span></span> turns the plane by 90°. R² means R·R and R⁴ means R·R·R·R. Predict R² and R⁴ from the picture, then check by multiplying.</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>R² = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−1</span><span>0</span><span>0</span><span>−1</span></span>, a turn by 180°: every vector points the opposite way.</p><p>R⁴ = I, the identity. Four quarter turns bring every vector back to where it started.</p>
+<p>Prediction: two quarter turns make a half turn, so R² sends every vector to its opposite. Four quarter turns make a full turn, so R⁴ leaves every vector where it started: R⁴ = I, the identity.</p><p>Check: column 1 of R² is R(0, 1) = (−1, 0) and column 2 is R(−1, 0) = (0, −1), so R² = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−1</span><span>0</span><span>0</span><span>−1</span></span> ✓. Then R⁴ = R²·R² = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>1</span></span> = I ✓</p>
 </div></details>
 </div></div></div>
     </div>
@@ -115,7 +115,7 @@
   <section class="labsec" aria-label="Lab">
     <div class="exercise" id="exercise">
       <span class="tag">Exercise</span>
-      <span class="task">Mirror the plane across the vertical axis.</span>
+      <span class="task">Mirror the plane across the y-axis (the vertical axis).</span>
       <span class="hint" id="hint">Edit the code and press Run.</span>
     </div>
     <div class="lab">

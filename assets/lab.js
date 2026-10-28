@@ -24,6 +24,11 @@ const dot = (a, b) => a.reduce((s, v, i) => s + v * b[i], 0);
 const projOf = (a, b) => { const k = dot(a, b) / dot(a, a); return a.map(v => k * v); };
 function bestFit(t, b){ const n = t.length, St = t.reduce((s, v) => s + v, 0), Stt = dot(t, t), Sb = b.reduce((s, v) => s + v, 0), Stb = dot(t, b);
   const d = n * Stt - St * St; if (Math.abs(d) < 1e-12) return null; return [(Stt * Sb - St * Stb) / d, (n * Stb - St * Sb) / d]; }
+function detN(M){ const R = M.map(r => r.slice()), n = R.length; let d = 1;
+  for (let c = 0; c < n; c++){ let p = c; for (let i = c + 1; i < n; i++) if (Math.abs(R[i][c]) > Math.abs(R[p][c])) p = i;
+    if (Math.abs(R[p][c]) < 1e-12) return 0; if (p !== c){ [R[p], R[c]] = [R[c], R[p]]; d = -d; }
+    d *= R[c][c]; for (let i = c + 1; i < n; i++){ const f = R[i][c] / R[c][c]; for (let j = c; j < n; j++) R[i][j] -= f * R[c][j]; } }
+  return d; }
 const sse = (t, b, C, D) => t.reduce((s, v, i) => s + (b[i] - C - D * v) ** 2, 0);
 const arrowVec = (V, name) => { const it = V && V.items && V.items.find(t => t.label === name); return it ? it.v : null; };
 const flat = M => Array.isArray(M) ? M.flat(Infinity) : [M];

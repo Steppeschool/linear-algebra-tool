@@ -28,14 +28,16 @@ A⁻¹A = I &nbsp;&nbsp;&nbsp; Ax = b &nbsp;⇔&nbsp; x = A⁻¹b
 </div>
 <p>In the lab, follow the vector v = (1, 2): S moves it to (3, 2), and your S⁻¹ should bring it back.</p>
 <h3>When there is no inverse</h3>
-<p>Think of the boat from lesson 1 with both thrusters pointing forward, thruster 2 twice as strong as thruster 1. The setting (2, 0) runs thruster 1 at 2. The setting (0, 1) runs thruster 2 at 1. Since thruster 2 is twice as strong, 2 × thruster 1 = 1 × thruster 2: both settings give the same forward push. In matrix form:</p>
-<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>0</span><span>0</span></span> &nbsp; A(2, 0) = (2, 0) &nbsp; A(0, 1) = (2, 0)</div></div>
+<p>Think of the boat from lesson 1 with both thrusters pointing the same way, thruster 2 twice as strong as thruster 1:</p>
+<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>4</span></span></div><div>Column 1, (1, 2), is the push from thruster 1 at full power. Column 2, (2, 4), is the push from thruster 2: the same direction, twice as long. The input x holds the two throttle settings. The output Ax is the total push, written as (push along x, push along y).</div></div>
+<p>The setting (2, 0) runs thruster 1 at 2. The setting (0, 1) runs thruster 2 at 1. Since thruster 2 is twice as strong, both settings give the same push:</p>
+<div class="worked"><div class="row">A(2, 0) = 2·(1, 2) = (2, 4) &nbsp; A(0, 1) = 1·(2, 4) = (2, 4)</div><div class="row">A(2, 0) = A(0, 1)</div></div>
 <p>If you only see the boat move, you cannot tell which setting was used.</p>
 <p>That is a matrix with no inverse: it sends two different inputs to the same output, so no matrix can reverse it. For a square matrix A with n rows and n columns (n by n), all of these say the same thing:</p>
 <ul>
 <li>A has n nonzero pivots (lesson 2).</li>
 <li>The columns of A are independent (lesson 1).</li>
-<li>det A ≠ 0: the plane is not squashed.</li>
+<li>det A ≠ 0: the plane is not squashed. For now, think 2 by 2; determinants of larger matrices come in the determinants lesson.</li>
 <li>Ax = 0 only for x = 0. Here is why this belongs: if some x ≠ 0 had Ax = 0, then x and 0 would give the same output, 0. Two inputs, one output, so A could not be undone.</li>
 </ul>
 <!-- examples -->
@@ -56,9 +58,9 @@ A⁻¹A = I &nbsp;&nbsp;&nbsp; Ax = b &nbsp;⇔&nbsp; x = A⁻¹b
 </div></details>
 </div></div>
 <div class="problem"><span class="pnum">2</span><div class="pbody">
-<p>Does <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>4</span></span> have an inverse?</p>
+<p>Does <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>6</span><span>1</span><span>3</span></span> have an inverse?</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>No. Column 2 = 2·column 1, so the plane is squashed onto a line (det = 0). Two different inputs give the same output, so there is no way back.</p>
+<p>No. Column 2 = 3·column 1, so the plane is squashed onto a line (det = 2·3 − 6·1 = 0). Two different inputs give the same output, so there is no way back.</p>
 </div></details>
 </div></div>
 <div class="problem"><span class="pnum">3</span><div class="pbody">

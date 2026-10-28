@@ -4,10 +4,10 @@
     <div class="slide-head"><div>
     <div class="kicker">Strang §3.2 · Solving Ax = 0 and Rx = 0</div>
     <h1>Free columns are yours to choose. Pivot columns follow.</h1>
-    <p class="lead">To find the whole nullspace, reduce A to its reduced row echelon form R. Columns with pivots belong to pivot variables, the others to free variables. Setting one free variable to 1 and the rest to 0 gives a special solution, and every nullspace vector is a combination of these.</p>
+    <p class="lead">To find the whole nullspace, reduce A to its reduced row echelon form R. A variable whose column has a pivot is a pivot variable; the others are free. Setting one free variable to 1 and the rest to 0 gives a special solution, and every nullspace vector is a combination of these.</p>
     </div><span class="thumb slide-art"><img src="https://linearalgebra.steppeschool.com/assets/cards/lesson-4--rref-and-special-solutions.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 4 · slide 3</small>Special solutions</span></span></div>
     <div class="key"><span class="mx" style="grid-template-columns:repeat(4,auto)"><span>1</span><span>2</span><span>1</span><span>3</span><span>2</span><span>4</span><span>3</span><span>8</span></span> &nbsp;→&nbsp; R = <span class="mx" style="grid-template-columns:repeat(4,auto)"><span>1</span><span>2</span><span>0</span><span>1</span><span>0</span><span>0</span><span>1</span><span>2</span></span></div>
-    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Elimination does not change the nullspace: Ax = 0 and Rx = 0 have the same solutions. Row operations combine equations whose right-hand sides are all 0, so the right side stays 0.</li><li><b>Pivot variables</b> belong to columns with pivots. <b>Free variables</b> belong to the other columns.</li><li>Each free variable gives one <b>special solution</b>.</li><li>The <b>rank</b> r of A is the number of pivots.</li><li>An m by n matrix of rank r has n − r special solutions, and every vector in N(A) is a combination of them.</li></ol></div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Elimination does not change the nullspace: Ax = 0 and Rx = 0 have the same solutions. Row operations combine equations whose right-hand sides are all 0, so the right side stays 0.</li><li>A variable whose column has a pivot is a <b>pivot variable</b>. The others are <b>free variables</b>.</li><li>Each free variable gives one <b>special solution</b>.</li><li>The <b>rank</b> r of A is the number of pivots.</li><li>An m by n matrix of rank r has n − r special solutions, and every vector in N(A) is a combination of them.</li></ol></div>
     <div class="prose">
 <h3>Think of a mixing desk</h3>
 <p>A mixing desk has four sliders. Two of them are free: you set them however you like. The other two are linked and move on their own to keep the total output at zero.</p>
@@ -15,12 +15,14 @@
 <h3>Reading R</h3>
 <p>R is the <b>reduced row echelon form</b>: each pivot is 1, and the pivot columns have zeros everywhere else. For our matrix it takes two row operations:</p>
 <div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(4,auto)"><span>1</span><span>2</span><span>1</span><span>3</span><span>2</span><span>4</span><span>3</span><span>8</span></span></div><div class="row">row 2 − 2·row 1: &nbsp;(2, 4, 3, 8) − (2, 4, 2, 6) = (0, 0, 1, 2) &nbsp;→&nbsp; <span class="mx" style="grid-template-columns:repeat(4,auto)"><span>1</span><span>2</span><span>1</span><span>3</span><span>0</span><span>0</span><span>1</span><span>2</span></span></div><div class="row">row 1 − row 2: &nbsp;(1, 2, 1, 3) − (0, 0, 1, 2) = (1, 2, 0, 1) &nbsp;→&nbsp; R = <span class="mx" style="grid-template-columns:repeat(4,auto)"><span>1</span><span>2</span><span>0</span><span>1</span><span>0</span><span>0</span><span>1</span><span>2</span></span></div><div>The second step clears the entry above the pivot in column 3. Both pivots are now 1, with zeros above and below them.</div></div>
-<p>Why is this allowed? Each row operation adds a multiple of one equation to another. When every right-hand side is 0, the new right side is still 0, so no solution is gained or lost.</p>
+<p>Why is this allowed? Each row operation adds a multiple of one equation to another. When every right-hand side is 0, the new right side is still 0, so no solution is gained or lost. Multiplying a row by a nonzero number is also allowed: 0 times that number stays 0.</p>
 <p>The pivots are in columns 1 and 3, so x₁ and x₃ are pivot variables, and x₂ and x₄ are free. Rx = 0 reads:</p>
 <div class="worked"><div class="row">x₁ + 2x₂ + x₄ = 0 &nbsp;&nbsp; and &nbsp;&nbsp; x₃ + 2x₄ = 0</div></div>
 <h3>The special solutions</h3>
 <div class="worked">
-<div class="row">x₂ = 1, x₄ = 0: &nbsp; x₁ = −2, x₃ = 0 &nbsp;→&nbsp; s₁ = (−2, 1, 0, 0)</div>
+<div class="row">Set x₂ = 1, x₄ = 0.</div>
+<div class="row">Second equation: x₃ + 2·0 = 0, so x₃ = 0</div>
+<div class="row">First equation: x₁ + 2·1 + 0 = 0, so x₁ = −2 &nbsp;→&nbsp; s₁ = (−2, 1, 0, 0)</div>
 <div>Check with A: 1·(−2) + 2·1 = 0 and 2·(−2) + 4·1 = 0 ✓</div>
 <div>The second special solution comes from x₂ = 0, x₄ = 1. That is your exercise.</div>
 </div>
@@ -32,7 +34,7 @@
 <p>A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>3</span><span>0</span><span>0</span><span>1</span></span>.</p><div class="worked"><div class="row">row 1 − 3·row 2: R = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>0</span><span>0</span><span>0</span><span>1</span></span>. Pivots in columns 1 and 3</div><div class="row">Free x₂ = 1: x₁ = −2, x₃ = 0. Special solution (−2, 1, 0)</div></div>
 </section>
 <section class="example"><h3>Example 2 · Two free columns</h3>
-<p>A = <span class="mx" style="grid-template-columns:repeat(4,auto)"><span>1</span><span>1</span><span>1</span><span>1</span><span>1</span><span>2</span><span>3</span><span>4</span></span>.</p><div class="worked"><div class="row">R = <span class="mx" style="grid-template-columns:repeat(4,auto)"><span>1</span><span>0</span><span>−1</span><span>−2</span><span>0</span><span>1</span><span>2</span><span>3</span></span></div><div class="row">x₃ = 1: (1, −2, 1, 0). &nbsp; x₄ = 1: (2, −3, 0, 1)</div></div><p>n − r = 4 − 2 = 2 special solutions.</p>
+<p>A = <span class="mx" style="grid-template-columns:repeat(4,auto)"><span>1</span><span>1</span><span>1</span><span>1</span><span>1</span><span>2</span><span>3</span><span>4</span></span>.</p><div class="worked"><div class="row">row 2 − row 1: (0, 1, 2, 3). Then row 1 − row 2: (1, 0, −1, −2)</div><div class="row">R = <span class="mx" style="grid-template-columns:repeat(4,auto)"><span>1</span><span>0</span><span>−1</span><span>−2</span><span>0</span><span>1</span><span>2</span><span>3</span></span>. Pivots in columns 1 and 2</div><div class="row">x₃ = 1 (other free variable x₄ = 0): (1, −2, 1, 0)</div><div class="row">x₄ = 1 (other free variable x₃ = 0): (2, −3, 0, 1)</div></div><p>n − r = 4 − 2 = 2 special solutions.</p>
 </section>
 <section class="example"><h3>Example 3 · A tall matrix</h3>
 <p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>4</span><span>3</span><span>6</span></span>.</p><div class="worked"><div class="row">R = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>0</span><span>0</span><span>0</span><span>0</span></span>, rank 1</div><div class="row">Free x₂ = 1: special solution (−2, 1)</div></div>

@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Properties of Determinants: The Three Rules</title>
+<meta name="description" content="Three rules define the determinant: det I = 1, a row swap flips the sign, and det is linear in each row. Everything else follows. Examples and Python. Strang §5.1.">
+<link rel="canonical" href="https://linearalgebra.steppeschool.com/determinants/properties-of-determinants/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Linear Algebra, Live">
+<meta property="og:title" content="Properties of Determinants: The Three Rules">
+<meta property="og:description" content="Three rules define the determinant: det I = 1, a row swap flips the sign, and det is linear in each row. Everything else follows. Examples and Python. Strang §5.1.">
+<meta property="og:url" content="https://linearalgebra.steppeschool.com/determinants/properties-of-determinants/">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/lesson.css">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "Properties of Determinants: The Three Rules", "headline": "Three rules, and everything follows.", "description": "Three rules define the determinant: det I = 1, a row swap flips the sign, and det is linear in each row. Everything else follows. Examples and Python. Strang §5.1.", "url": "https://linearalgebra.steppeschool.com/determinants/properties-of-determinants/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": true, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 6: Determinants", "item": "https://linearalgebra.steppeschool.com/determinants/"}, {"@type": "ListItem", "position": 3, "name": "Properties of Determinants: The Three Rules", "item": "https://linearalgebra.steppeschool.com/determinants/properties-of-determinants/"}]}]</script>
+</head>
+<body>
+<header class="top">
+  <div class="topnav"><a class="brand" href="../../">Linear Algebra, Live</a><nav class="crumbnav" aria-label="Chapters and lessons"><details class="menu"><summary>Chapter 5<span class="hide-sm"> · Determinants</span></summary><div class="menu-list chapters"><div class="menu-sub">Chapters</div><div class="ch"><div class="ch-head"><span class="ch-num">1</span><span class="ch-title">Introduction to vectors</span></div><div class="ch-lessons"><a class="ls" href="../../vectors-and-matrices/"><span class="ls-num">Lesson 1</span><span class="ls-title">Columns first</span></a></div></div><div class="ch"><div class="ch-head"><span class="ch-num">2</span><span class="ch-title">Solving linear equations</span></div><div class="ch-lessons"><a class="ls" href="../../gaussian-elimination-and-lu/"><span class="ls-num">Lesson 2</span><span class="ls-title">Elimination and A = LU</span></a><a class="ls" href="../../inverse-transpose-permutation/"><span class="ls-num">Lesson 3</span><span class="ls-title">Inverses, transposes and permutations</span></a></div></div><div class="ch"><div class="ch-head"><span class="ch-num">3</span><span class="ch-title">Vector spaces and subspaces</span></div><div class="ch-lessons"><a class="ls" href="../../vector-spaces-and-four-subspaces/"><span class="ls-num">Lesson 4</span><span class="ls-title">The four subspaces</span></a></div></div><div class="ch"><div class="ch-head"><span class="ch-num">4</span><span class="ch-title">Orthogonality</span></div><div class="ch-lessons"><a class="ls" href="../../orthogonality-and-least-squares/"><span class="ls-num">Lesson 5</span><span class="ls-title">Orthogonality and least squares</span></a></div></div><div class="ch on"><div class="ch-head"><span class="ch-num">5</span><span class="ch-title">Determinants</span></div><div class="ch-lessons"><a class="ls on" href="../../determinants/"><span class="ls-num">Lesson 6</span><span class="ls-title">Determinants</span></a></div></div><div class="menu-sub">Coming soon</div><div class="ch-later"><div class="ch soon"><div class="ch-head"><span class="ch-num">6</span><span class="ch-title">Eigenvalues and eigenvectors</span></div></div><div class="ch soon"><div class="ch-head"><span class="ch-num">7</span><span class="ch-title">The singular value decomposition</span></div></div></div></div></details><span class="sep">›</span><details class="menu"><summary>Lesson 6<span class="hide-sm"> · Determinants</span></summary><div class="menu-list"><div class="menu-sub">Chapter 5 lessons</div><div class="ch-lessons flat"><a class="ls on" href="../../determinants/"><span class="ls-num">Lesson 6</span><span class="ls-title">Determinants</span></a></div><div class="menu-sub">In lesson 6</div><div class="ch-lessons flat slides"><a class="ls" href="../../determinants/determinant-as-area/"><span class="ls-num">1</span><span class="ls-title">Determinant Meaning: Area and Volume Scale Factor</span></a><a class="ls on" href="../../determinants/properties-of-determinants/"><span class="ls-num">2</span><span class="ls-title">Properties of Determinants: The Three Rules</span></a><a class="ls" href="../../determinants/determinant-from-pivots/"><span class="ls-num">3</span><span class="ls-title">Determinant by Elimination: Product of the Pivots</span></a><a class="ls" href="../../determinants/cofactor-formula/"><span class="ls-num">4</span><span class="ls-title">Cofactor Expansion and the 3×3 Determinant Formula</span></a><a class="ls" href="../../determinants/cramers-rule-and-inverse/"><span class="ls-num">5</span><span class="ls-title">Cramer&#x27;s Rule and the Inverse Matrix Formula</span></a><a class="ls" href="../../determinants/area-volume-cross-product/"><span class="ls-num">6</span><span class="ls-title">Area of a Triangle, Volume and the Cross Product</span></a><a class="ls" href="../../determinants/recap/"><span class="ls-num">7</span><span class="ls-title">Lesson 6 Recap: Determinants</span></a><a class="ls" href="../../determinants/practice/"><span class="ls-num">✎</span><span class="ls-title">Examples and problems</span></a></div></div></details></nav></div>
+  <nav class="steps" aria-label="Steps in this lesson"><a class="step" href="../determinant-as-area/" data-slug="determinant-as-area" title="Determinant Meaning: Area and Volume Scale Factor">1</a><a class="step on" href="../properties-of-determinants/" data-slug="properties-of-determinants" aria-current="page" title="Properties of Determinants: The Three Rules">2</a><a class="step" href="../determinant-from-pivots/" data-slug="determinant-from-pivots" title="Determinant by Elimination: Product of the Pivots">3</a><a class="step" href="../cofactor-formula/" data-slug="cofactor-formula" title="Cofactor Expansion and the 3×3 Determinant Formula">4</a><a class="step" href="../cramers-rule-and-inverse/" data-slug="cramers-rule-and-inverse" title="Cramer&#x27;s Rule and the Inverse Matrix Formula">5</a><a class="step" href="../area-volume-cross-product/" data-slug="area-volume-cross-product" title="Area of a Triangle, Volume and the Cross Product">6</a><a class="step" href="../recap/" data-slug="recap" title="Lesson 6 Recap: Determinants">7</a><a class="step practice" href="../practice/" title="Examples and problems">✎ Practice</a></nav>
+</header>
+
+
+<main class="lesson">
+  <article class="page">
+    <div class="slide-head"><div>
+    <div class="kicker">Strang §5.1 · The properties of the determinant</div>
+    <h1>Three rules, and everything follows.</h1>
+    <p class="lead">For 3 by 3 and larger matrices we do not start from a formula. We start from three rules that the determinant must obey. Every other fact, including how to compute it, follows from these three.</p>
+    </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-6--properties-of-determinants.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 6 · slide 2</small>Three rules</span></span></div>
+    <div class="key">det I = 1 &nbsp;&nbsp; row swap: det changes sign &nbsp;&nbsp; linear in each row</div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li><b>Rule 1:</b> det I = 1. The identity does not change any volume.</li><li><b>Rule 2:</b> swapping two rows changes the sign of det.</li><li><b>Rule 3:</b> det is linear in each row on its own: multiplying one row by t multiplies det by t, and a row that is a sum splits det into a sum.</li><li>Consequences: two equal rows give det = 0; subtracting a multiple of one row from another leaves det unchanged.</li></ol></div>
+    <div class="prose">
+<h3>Rules of a game</h3>
+<p>Chess is defined by a few rules for how each piece moves. Nobody memorises every possible game: the games follow from the rules. The determinant works the same way. Three rules pin it down completely.</p>
+<h3>The three rules</h3>
+<ul>
+<li><b>det I = 1.</b> The identity moves nothing, so the unit cube keeps volume 1.</li>
+<li><b>A row swap flips the sign.</b> Swapping two rows of <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>1</span><span>0</span></span> gives I, so det <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>1</span><span>0</span></span> = −1. It is a mirror.</li>
+<li><b>Linear in each row, one row at a time.</b> Double one row and the volume doubles: one edge of the box got twice as long. And if one row is a sum, row = u + v, then det splits into two determinants, one with u in that row and one with v (the other rows stay as they are).</li>
+</ul>
+<p>Careful: rule 3 is about one row at a time. Doubling the whole n by n matrix multiplies det by 2ⁿ, because each of the n rows doubles. And det(A + B) is usually not det A + det B.</p>
+<h3>What follows</h3>
+<div class="worked"><div class="row"><b>Two equal rows give det = 0.</b> Swapping them changes nothing, but rule 2 says the sign flips. So det = −det, which means det = 0.</div><div class="row"><b>Subtracting ℓ × row j from row i leaves det unchanged.</b> By rule 3 the new det splits into the old det minus ℓ × (a det with two equal rows) = old det − 0.</div><div class="row"><b>A row of zeros gives det = 0.</b> Multiply that row by 0: rule 3 says det × 0.</div></div>
+<p>The second fact is the big one. It says that the elimination steps from lesson 2 do not change the determinant. Geometrically, they are shears: they slant the box without changing its volume, like pushing a deck of cards sideways.</p>
+<h3>A worked check</h3>
+<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>0</span><span>2</span><span>5</span><span>1</span><span>0</span><span>1</span><span>3</span></span>, &nbsp; det A = 2</div><div class="row">Row 2 − 2·row 1 gives B = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>0</span><span>0</span><span>1</span><span>1</span><span>0</span><span>1</span><span>3</span></span>, &nbsp; det B = 2 ✓</div></div>
+<h3>Where this is used</h3>
+<p>Numerical software never uses a long formula for big determinants. It uses these rules: eliminate (det unchanged), count the row swaps (each flips the sign), and multiply what is left on the diagonal. That is the next slide.</p>
+    </div>
+    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · A row swap</h3>
+<p>det <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>4</span></span> = 4 − 6 = −2.</p>
+<div class="worked"><div class="row">Swap the rows: det <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>4</span><span>1</span><span>2</span></span> = 6 − 4 = 2 = −(−2) ✓</div></div>
+</section>
+<section class="example"><h3>Example 2 · Scaling one row</h3>
+<p>det <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>4</span></span> = −2. Multiply row 1 by 5:</p>
+<div class="worked"><div class="row">det <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>5</span><span>10</span><span>3</span><span>4</span></span> = 20 − 30 = −10 = 5 × (−2) ✓</div></div>
+<p>Multiplying the whole matrix by 5 would give 5² × (−2) = −50.</p>
+</section>
+<section class="example"><h3>Example 3 · Two equal rows</h3>
+<p>det <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>1</span><span>2</span><span>3</span></span> = 0 without any calculation: rows 1 and 3 are equal.</p>
+<p>Geometrically, two edges of the box lie on top of each other, so the box is flat.</p>
+</section></div>
+    <details class="more"><summary><span class="pl-icon">✎</span><span class="rv-text"><b>More examples to try</b><span>3 problems with step-by-step solutions. Try each one before you open its solution.</span></span><span class="rv-toggle"><span class="s-show">Show</span><span class="s-hide">Hide</span></span></summary><div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>If det A = 3 for a 3 by 3 matrix A, what is det(2A)? What is det(−A)?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Each of the 3 rows is doubled: det(2A) = 2³ · 3 = 24. Each row is multiplied by −1: det(−A) = (−1)³ · 3 = −3.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>A is 4 by 4 with det A = 5. You swap rows 1 and 2, then rows 3 and 4. What is the new det?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Two swaps: the sign flips twice. The determinant is 5 again.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>Why does a matrix with a row of zeros have determinant 0? Give the rule you use.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Rule 3: multiplying that row by 0 leaves the matrix the same but multiplies det by 0. So det = 0 · det = 0.</p><p>Geometrically, one edge of the box has length 0.</p>
+</div></details>
+</div></div></div></details>
+  </article>
+  <details class="review">
+    <summary><span class="pl-icon">✎</span><span class="rv-text"><b>Lesson review</b><span>3 worked examples and 5 mixed problems with solutions</span></span><span class="rv-toggle"><span class="s-show">Open</span><span class="s-hide">Close</span></span></summary>
+    <div class="review-body">
+      <h2 class="practice-h">Worked examples</h2>
+      <div class="examples"><section class="example"><h3>Example 1 · Elimination with a row swap</h3>
+<p>Find det A for A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>0</span><span>1</span><span>2</span><span>1</span><span>0</span><span>3</span><span>4</span><span>−3</span><span>8</span></span>.</p>
+<div class="worked"><div class="row">The first pivot position holds 0: swap rows 1 and 2 (the sign flips once)</div><div class="row">Row 3 − 4·row 1 = (0, −3, −4). &nbsp; Row 3 + 3·row 2 = (0, 0, 2)</div><div class="row">Pivots 1, 1, 2. &nbsp; det A = −(1 · 1 · 2) = −2</div></div>
+</section>
+<section class="example"><h3>Example 2 · Bookkeeping with the rules</h3>
+<p>A and B are 3 by 3 with det A = 2 and det B = 5.</p>
+<div class="worked"><div class="row">det(AB) = 2 · 5 = 10 &nbsp;&nbsp; det(A⁻¹) = ½ &nbsp;&nbsp; det(Bᵀ) = 5</div><div class="row">det(2A) = 2³ · 2 = 16, because each of the 3 rows doubles</div><div class="row">det(A⁻¹BA) = ½ · 5 · 2 = 5</div></div>
+</section>
+<section class="example"><h3>Example 3 · A triangle in 3D</h3>
+<p>Corners (0, 0, 0), (1, 1, 0), (0, 1, 1).</p>
+<div class="worked"><div class="row">Edges u = (1, 1, 0), v = (0, 1, 1)</div><div class="row">u × v = (1·1 − 0·1, &nbsp; 0·0 − 1·1, &nbsp; 1·1 − 1·0) = (1, −1, 1)</div><div class="row">Parallelogram area ‖u × v‖ = √3, &nbsp; triangle area = √3 / 2 ≈ 0.87</div></div>
+</section></div>
+      <h2 class="practice-h">Problems</h2>
+      <div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Find det <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>10</span></span> by elimination.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Row 2 − 4·row 1 = (0, −3, −6). Row 3 − 7·row 1 = (0, −6, −11). Row 3 − 2·row 2 = (0, 0, 1).</p><p>Pivots 1, −3, 1, so det = −3.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>Find det <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>−1</span><span>0</span><span>−1</span><span>2</span><span>−1</span><span>0</span><span>−1</span><span>2</span></span>.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Pivots 2, 3/2, 4/3 (row 2 + ½·row 1, then row 3 + ⅔·row 2). det = 2 · 3/2 · 4/3 = 4.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>Solve x + y = 2, &nbsp; x + z = 3, &nbsp; y + z = 5 by Cramer's rule.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>det A = −2. Replacing columns by b = (2, 3, 5) gives det B₁ = 0, det B₂ = −4, det B₃ = −6.</p><p>x = 0, y = 2, z = 3. Check: 0 + 2 = 2, 0 + 3 = 3, 2 + 3 = 5 ✓</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">4</span><div class="pbody">
+<p>Find the area of the triangle with corners (1, 0), (4, 1), (2, 3).</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Edges (3, 1) and (1, 3). det = 9 − 1 = 8, area = 4.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">5</span><div class="pbody">
+<p>A and B are 2 by 2 with det A = 3 and det B = −2. Find det(AB), det(BA) and det(A⁻¹B).</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>det(AB) = det(BA) = −6, even though AB and BA are usually different matrices. det(A⁻¹B) = (1/3)(−2) = −2/3.</p>
+</div></details>
+</div></div></div>
+    </div>
+  </details>
+
+  <section class="labsec" aria-label="Lab">
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Subtract 2 × row 1 from row 2 to make B, and check that the determinant does not change.</span>
+      <span class="hint" id="hint">Edit the code and press Run.</span>
+    </div>
+    <div class="lab">
+      <div class="editor-card">
+        <div class="bar">
+          <span class="file">slide_2.py</span>
+          <span class="status" id="pystatus">Loading Python…</span>
+          <button class="btn" id="reset">Reset</button>
+          <button class="btn primary" id="run" disabled>Run ▸</button>
+        </div>
+        <div class="editor">
+          <div class="gutter" id="gutter">1</div>
+          <div class="code" id="codewrap">
+            <pre id="hl" aria-hidden="true"></pre>
+            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+A = np.array([[1., 2., 0.],
+              [2., 5., 1.],
+              [0., 1., 3.]])
+
+B = A.copy()
+                                # your turn: B[1] = B[1] - 2 * B[0]
+print(&quot;det A =&quot;, np.linalg.det(A), &quot;  det B =&quot;, np.linalg.det(B))
+table((&quot;A&quot;, A), (&quot;B&quot;, B))</textarea>
+          </div>
+        </div>
+        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+      </div>
+      <figure class="figure">
+        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <div class="after">
+    <div class="nav">
+      <a class="btn" id="prev" href="../determinant-as-area/">← Back</a>
+      <span class="count">2 / 7</span>
+      <a class="btn primary" id="next" href="../determinant-from-pivots/">Next →</a>
+    </div>
+  </div>
+</main>
+<footer class="foot">
+  Follows the order and notation of Gilbert Strang, <i>Introduction to Linear Algebra</i>, 5th edition (2016); § numbers refer to that book.
+  Explanations, examples and code are original. Made by <a href="https://www.steppeschool.com">Steppeschool</a>.
+</footer>
+
+<script>window.SLIDE = {"slug": "properties-of-determinants", "lesson": "lesson-6", "assets": "../../assets/", "preview": {"kind": "table", "items": [{"label": "A", "M": [[1, 2, 0], [2, 5, 1], [0, 1, 3]], "piv": []}, {"label": "B", "M": [[1, 2, 0], [2, 5, 1], [0, 1, 3]], "piv": []}]}, "check": "isTab(V) && item(V, 'B') && close(item(V, 'B'), [[1, 2, 0], [0, 1, 1], [0, 1, 3]])"};</script>
+<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
+<script src="../../assets/lab.js" defer></script>
+<script src="../../assets/nav.js" defer></script>
+</body>
+</html>

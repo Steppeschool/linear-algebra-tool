@@ -1,0 +1,74 @@
+---
+slug: area-volume-cross-product
+seo_title: Area of a Triangle, Volume and the Cross Product
+description: Determinants give the area of a triangle from its corners, the volume of a box from its edges, and the cross product u × v. With robotics examples and Python. Strang §5.3.
+kicker: Strang §5.3 · Areas, volumes and cross products
+title: Areas, volumes and the cross product.
+task: Put the two edge vectors of the triangle (not its corners) into the columns of M.
+preview: {"kind":"transform","M":[[4,2],[2,5]]}
+check: isT(V) && eqM(V.M, [[3,1],[1,4]])
+---
+<!-- lead -->
+A determinant measures the area or volume spanned by its columns. So the area of any triangle comes from the determinant of two edge vectors, the volume of a box from three, and the cross product of two 3D vectors is built from 2 by 2 determinants.
+<!-- key -->
+triangle area = ½ |det [edge₁ edge₂]| &nbsp;&nbsp; box volume = |det [u v w]| &nbsp;&nbsp; ‖u × v‖ = parallelogram area
+<!-- ideas -->
+<ol class="ideas"><li>Area of the parallelogram spanned by u and v: |det [u v]|. The triangle is half of it.</li><li>Use edge vectors (corner minus corner), not the corners themselves.</li><li>Volume of the box with edges u, v, w: |det [u v w]|.</li><li>The cross product u × v is perpendicular to both u and v, and its length is the parallelogram's area.</li></ol>
+<!-- prose -->
+<h3>Measuring a field from GPS corners</h3>
+<p>A farmer walks to the three corners of a triangular field with a GPS. How big is the field? No tape measure needed: the area is a determinant.</p>
+<h3>From corners to area</h3>
+<p>Put the first corner at the origin by subtracting it from the others. The two results are edge vectors. They span a parallelogram of area |det|, and the triangle is exactly half of it.</p>
+<div class="worked"><div class="row">Corners (1, 1), (4, 2), (2, 5)</div><div class="row">Edges: (4, 2) − (1, 1) = (3, 1), &nbsp; (2, 5) − (1, 1) = (1, 4)</div><div class="row">det <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>1</span><span>1</span><span>4</span></span> = 12 − 1 = 11, &nbsp; area = 11/2 = 5.5</div></div>
+<p>Using the corners directly would measure a triangle that has a corner at the origin, a different shape. That is the mistake the lab asks you to fix.</p>
+<h3>Volume of a box</h3>
+<p>Three edge vectors u, v, w from one corner span a slanted box. Its volume is |det| of the 3 by 3 matrix with u, v, w as columns (slide 1). A volume of 0 means the three edges lie in one plane.</p>
+<h3>The cross product</h3>
+<p>For two vectors in 3D there is a third vector, u × v, that is perpendicular to both. Its three components are 2 by 2 determinants built from u and v:</p>
+<div class="worked"><div class="row">u × v = (u₂v₃ − u₃v₂, &nbsp; u₃v₁ − u₁v₃, &nbsp; u₁v₂ − u₂v₁)</div><div class="row">(1, 2, 3) × (0, 1, 4) = (8 − 3, 0 − 4, 1 − 0) = (5, −4, 1)</div><div class="row">Check: (5, −4, 1) · (1, 2, 3) = 5 − 8 + 3 = 0 ✓ &nbsp; (5, −4, 1) · (0, 1, 4) = 0 − 4 + 4 = 0 ✓</div></div>
+<p>Its length equals the area of the parallelogram spanned by u and v, and its direction follows the right-hand rule: curl the fingers from u to v, and the thumb points along u × v. Swapping u and v flips it: v × u = −(u × v).</p>
+<h3>Where this is used</h3>
+<p>Torque is a cross product. Push with force F at position r from a joint, and the twist on the joint is τ = r × F. A robot arm controller computes exactly this to know how hard each motor must work. Graphics and 3D printers use u × v to find the outward normal of every triangle in a mesh.</p>
+<!-- examples -->
+<section class="example"><h3>Example 1 · Torque on a joint</h3>
+<p>A force F = (1, 3, 0) N acts at r = (2, 0, 0) m from a joint.</p>
+<div class="worked"><div class="row">τ = r × F = (0·0 − 0·3, &nbsp; 0·1 − 2·0, &nbsp; 2·3 − 0·1) = (0, 0, 6) N·m</div><div class="row">The twist is about the z-axis, of size 6 N·m</div></div>
+<p>Only the sideways part of the force (3 N, at a 2 m lever) twists the joint: 2 × 3 = 6.</p>
+</section>
+<section class="example"><h3>Example 2 · A box volume</h3>
+<p>Edges u = (1, 0, 0), v = (1, 2, 0), w = (0, 1, 3).</p>
+<div class="worked"><div class="row">det <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>1</span><span>0</span><span>0</span><span>2</span><span>1</span><span>0</span><span>0</span><span>3</span></span> (edges as columns) = 1 · 2 · 3 = 6</div><div class="row">Triangular, so the product of the diagonal. Volume 6</div></div>
+</section>
+<section class="example"><h3>Example 3 · Points on one line</h3>
+<p>Corners (0, 0), (1, 2), (2, 4).</p>
+<div class="worked"><div class="row">Edges (1, 2) and (2, 4): det = 4 − 4 = 0</div><div class="row">Area 0: the three points lie on one line</div></div>
+</section>
+<!-- problems -->
+<div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Find the area of the triangle with corners (0, 0), (3, 0), (1, 2).</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Edges (3, 0) and (1, 2). det = 6 − 0 = 6, so the area is 3.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>Compute (1, 0, 0) × (0, 1, 0). Which direction does it point?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>(0·0 − 0·1, 0·0 − 1·0, 1·1 − 0·0) = (0, 0, 1): straight up along z, perpendicular to both, by the right-hand rule.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>The edges u = (1, 1, 0), v = (0, 1, 1), w = (1, 2, 1). What is the volume of their box, and what does it mean?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>w = u + v, so the three edges lie in one plane. det = 0 and the volume is 0: the box is flat.</p>
+</div></details>
+</div></div>
+<!-- code -->
+import numpy as np
+
+P1 = np.array([1., 1.])
+P2 = np.array([4., 2.])
+P3 = np.array([2., 5.])
+
+M = np.column_stack([P2, P3])           # your turn: use edges, P2 - P1 and P3 - P1
+print("triangle area =", abs(np.linalg.det(M)) / 2)
+show(M)                                 # the parallelogram is twice the triangle

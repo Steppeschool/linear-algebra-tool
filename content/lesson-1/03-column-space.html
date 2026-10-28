@@ -9,11 +9,11 @@ preview: {"kind":"combo","A":[[1,1],[2,-1]],"x":[1,1],"b":[]}
 check: isC(V) && near(det(V.A), 0, 1e-9) && nonzero(V.A)
 ---
 <!-- lead -->
-Try every possible x and collect all the outputs Ax. That collection is the column space of A. Solving Ax = b comes down to one question: is b in it?
+Try every possible x and collect all the outputs Ax. That collection is the column space of A. Now pick a target b, a vector we want to reach. Solving Ax = b comes down to one question: is b in the column space?
 <!-- key -->
 C(A) = all vectors Ax = all combinations of the columns
 <!-- ideas -->
-<ol class="ideas"><li>The <b>column space</b> C(A) contains every combination of the columns of A, that is, every vector Ax.</li><li>Ax = b has a solution exactly when b is in C(A).</li><li>In the plane, C(A) is the whole plane, a line through the origin, or just the origin.</li><li>The <b>rank</b> is the number of independent directions in C(A): 2, 1 or 0.</li></ol>
+<ol class="ideas"><li>The <b>column space</b> C(A) contains every combination of the columns of A, that is, every vector Ax.</li><li>Ax = b has a solution exactly when b is in C(A).</li><li>In the plane, C(A) is the whole plane, a line through the origin, or just the origin.</li><li>The <b>rank</b> measures the size of C(A): 2 for the whole plane, 1 for a line, 0 for the origin alone.</li></ol>
 <!-- prose -->
 <h3>All the outputs at once</h3>
 <p>So far we computed one product Ax at a time. Now let x vary over every possible vector and mark each output Ax on the plane. The set of all those points is the column space, written C(A).</p>
@@ -31,7 +31,7 @@ C(A) = all vectors Ax = all combinations of the columns
 <li><b>A line:</b> one column is a multiple of the other. We call them <b>dependent</b>.</li>
 <li><b>Just the origin:</b> both columns are zero.</li>
 </ul>
-<p>The <b>rank</b> counts the independent directions that survive: 2, 1 or 0.</p>
+<p>The <b>rank</b> is a number that says which case we are in: rank 2 when C(A) is the whole plane, rank 1 when it is a line, rank 0 when it is the origin alone.</p>
 <h3>A closer look at the dependent case</h3>
 <div class="worked">
 <div>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>4</span></span>. Column 2 is 2 times column 1.</div>
@@ -44,13 +44,13 @@ C(A) = all vectors Ax = all combinations of the columns
 <li><b>Can we solve Ax = b for this particular b?</b> Yes, if b is in C(A).</li>
 <li><b>Can we solve Ax = b for every b?</b> Only if C(A) is the whole plane.</li>
 </ul>
-<p>For 2 by 2 matrices there is a quick test. Call the entries p, q (top row) and r, s (bottom row): A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>p</span><span>q</span><span>r</span><span>s</span></span>. Column 1 is (p, r) and column 2 is (q, s). The columns are independent exactly when ps − qr ≠ 0. When ps − qr = 0, the matrix squashes the plane onto a line, and no matrix can undo that squash. We will meet this number again as the determinant.</p>
+<p>For 2 by 2 matrices there is a quick test. Call the entries p, q (top row) and r, s (bottom row): A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>p</span><span>q</span><span>r</span><span>s</span></span>. Column 1 is (p, r) and column 2 is (q, s). The columns are independent exactly when ps − qr ≠ 0. When ps − qr = 0, the columns are dependent and C(A) is only a line (or the origin). This number ps − qr is called the <b>determinant</b> of A, written det A. Slide 5 shows what it means as a motion of the plane.</p>
 <!-- examples -->
 <section class="example"><h3>Example 1 · A line, and who is on it</h3>
 <p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>4</span><span>1</span><span>2</span></span>. Column 2 = 2·column 1, so C(A) is the line through (2, 1).</p><div class="worked"><div class="row">b = (6, 3) = 3·(2, 1): in C(A), for example x = (3, 0)</div><div class="row">b = (1, 1): not a multiple of (2, 1), so Ax = b has no solution</div></div>
 </section>
 <section class="example"><h3>Example 2 · The whole plane</h3>
-<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>−1</span></span>. det A = −1 − 1 = −2 ≠ 0, so C(A) is the whole plane. Solve Ax = (4, 2):</p><div class="worked"><div class="row">x₁ + x₂ = 4 &nbsp;&nbsp; x₁ − x₂ = 2</div><div class="row">x₁ = 3, x₂ = 1</div></div>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>−1</span></span>. Here p = 1, q = 1, r = 1, s = −1, so det A = ps − qr = 1·(−1) − 1·1 = −2. That is not 0, so C(A) is the whole plane. Solve Ax = (4, 2):</p><div class="worked"><div class="row">x₁ + x₂ = 4 &nbsp;&nbsp; x₁ − x₂ = 2</div><div class="row">x₁ = 3, x₂ = 1</div></div>
 </section>
 <section class="example"><h3>Example 3 · Is b in the column space?</h3>
 <p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>3</span><span>2</span><span>6</span></span>, b = (2, 5).</p><div class="worked"><div class="row">Column 2 = 3·column 1, so C(A) is the line of multiples of (1, 2)</div><div class="row">Is (2, 5) a multiple of (1, 2)? It would need 2·(1, 2) = (2, 4), not (2, 5)</div></div><p>So b is not in C(A), and Ax = b has no solution. Changing b to (2, 4) would make it solvable.

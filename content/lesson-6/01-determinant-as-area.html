@@ -1,0 +1,73 @@
+---
+slug: determinant-as-area
+seo_title: Determinant Meaning: Area and Volume Scale Factor
+description: The determinant tells how much a matrix stretches areas (2D) or volumes (3D), and its sign tells whether space is flipped. Visual examples and Python. Strang §5.1.
+kicker: Strang §5.1 · What the determinant measures
+title: The determinant: how much A stretches area.
+task: Change M so that the unit square becomes a parallelogram of area 3, without flipping it.
+preview: {"kind":"transform","M":[[2,1],[1,1]]}
+check: isT(V) && near(det(V.M), 3, 1e-6)
+---
+<!-- lead -->
+Every square matrix has one number attached to it, the determinant. It answers a geometric question: by what factor does the matrix stretch areas (in 2D) or volumes (in 3D)? A negative sign means space is also flipped, and zero means it is squashed flat.
+<!-- key -->
+det A = ad − bc for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>a</span><span>b</span><span>c</span><span>d</span></span> &nbsp;&nbsp; area of image = |det A| × area
+<!-- ideas -->
+<ol class="ideas"><li>det A is the factor by which A multiplies every area (2D) or volume (3D).</li><li>det A < 0: the matrix also flips space, like a mirror.</li><li>det A = 0: space is squashed into a line or a plane. Then A has no inverse.</li><li>For 2 by 2, det A = ad − bc. Larger matrices follow from three rules (slide 2).</li></ol>
+<!-- prose -->
+<h3>Rolling out pizza dough</h3>
+<p>Roll a ball of dough into a sheet and every topping on it grows by the same factor. A slice of pepperoni and an olive both get twice as big if the sheet doubles in area. It does not matter what shape the topping has.</p>
+<p>A matrix acts on the plane the same way. It may turn and slant shapes, but it multiplies every area by one fixed number. That number is the determinant, written det A.</p>
+<h3>Reading it off the unit square</h3>
+<p>The easiest shape to follow is the unit square, with corners at 0, (1, 0), (0, 1) and (1, 1). Lesson 1 showed that A sends (1, 0) to its first column and (0, 1) to its second column. So the square becomes the parallelogram spanned by the two columns, and its area is |det A|.</p>
+<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>0</span><span>0</span><span>2</span></span>: the square becomes a 3 by 2 rectangle, area 6, &nbsp; det A = 3·2 − 0·0 = 6 ✓</div><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>1</span></span>: a slanted parallelogram, &nbsp; det A = 2·1 − 1·1 = 1. Same area as the square.</div></div>
+<h3>The sign: was the plane flipped?</h3>
+<p>Walk around the square from (1, 0) to (0, 1), turning counterclockwise. If the images of those two corners are still met counterclockwise, det A is positive. If the order has reversed, the plane has been mirrored and det A is negative. The mirror from lesson 1, <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−1</span><span>0</span><span>0</span><span>1</span></span>, has det = −1: same area, flipped.</p>
+<h3>Zero: squashed flat</h3>
+<p>If the two columns point along the same line, the parallelogram is flat and its area is 0. Then many inputs land on the same output, so nothing can undo A. That is the most useful fact about determinants: <b>A is invertible exactly when det A ≠ 0</b>.</p>
+<h3>Three dimensions</h3>
+<p>In 3D the unit cube goes to a slanted box (a parallelepiped) spanned by the three columns. Its volume is |det A|. The next slides show how to compute a 3 by 3 determinant.</p>
+<h3>Where this is used</h3>
+<p>Robots that move their joints need the matrix that turns joint speeds into hand speed. When its determinant gets close to zero, the arm is near a "singular" pose (fully stretched out, for example). There, some hand motions need enormous joint speeds. Control software watches this determinant to steer clear.</p>
+<!-- examples -->
+<section class="example"><h3>Example 1 · A stretch</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>0</span><span>0</span><span>3</span></span>.</p>
+<div class="worked"><div class="row">det A = 2·3 − 0·0 = 6</div><div class="row">The square becomes a 2 by 3 rectangle: area 6 ✓</div></div>
+</section>
+<section class="example"><h3>Example 2 · A shear keeps area</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>0</span><span>1</span></span> slides the top of the square sideways.</p>
+<div class="worked"><div class="row">det A = 1·1 − 2·0 = 1</div><div class="row">The parallelogram has base 1 and height 1: area 1, unchanged</div></div>
+<p>A deck of cards pushed into a slant keeps its volume. Shears change shape, not size.</p>
+</section>
+<section class="example"><h3>Example 3 · A flat image</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>4</span></span>.</p>
+<div class="worked"><div class="row">det A = 1·4 − 2·2 = 0</div><div class="row">Both columns lie on the line through (1, 2): the plane collapses onto that line</div></div>
+<p>A is not invertible: (2, −1) and (0, 0) both go to (0, 0).</p>
+</section>
+<!-- problems -->
+<div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Find det A for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>1</span><span>2</span><span>4</span></span>. What happens to a shape of area 5?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>det A = 3·4 − 1·2 = 10. Its image has area 5 × 10 = 50.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>For which value of t is <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>t</span><span>3</span><span>6</span></span> not invertible?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>det = 12 − 3t = 0 when t = 4. Then column 2 = 2 × column 1, and the plane is squashed onto a line.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>The rotation R = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>cos θ</span><span>−sin θ</span><span>sin θ</span><span>cos θ</span></span>. Find det R and explain the answer.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>det R = cos²θ + sin²θ = 1. A rotation turns shapes without stretching or flipping them.</p>
+</div></details>
+</div></div>
+<!-- code -->
+import numpy as np
+
+M = np.array([[2., 1.],
+              [1., 1.]])        # each inner list is a ROW
+                                # your turn: make det(M) = 3 (and keep it positive)
+print("det M =", np.linalg.det(M))
+show(M)                         # the readout shows det beside the picture

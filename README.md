@@ -13,6 +13,7 @@ The course follows the order and notation of Gilbert Strang, *Introduction to Li
 | 3 | Inverses, transposes and permutations | §2.5, §2.7 | `inverse-transpose-permutation/` |
 | 4 | The four subspaces | §3.1 to §3.5 | `vector-spaces-and-four-subspaces/` |
 | 5 | Orthogonality and least squares | §4.1 to §4.4 | `orthogonality-and-least-squares/` |
+| 6 | Determinants | §5.1 to §5.3 | `determinants/` |
 
 ## Run locally
 

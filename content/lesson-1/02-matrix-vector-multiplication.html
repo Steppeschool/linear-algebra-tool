@@ -4,7 +4,7 @@ seo_title: Matrix-Vector Multiplication: Ax as a Combination of Columns
 description: Why Ax is a mix of the columns of A, explained with a shopping basket, a worked example and live Python. Row way vs column way. Strang §1.3.
 kicker: Strang §1.3 · Matrices
 title: Ax is a combination of the columns of A.
-task: Choose x so that Ax = (0, 3).
+task: Choose x so that Ax = (0, 3). Hint: write the two equations from the columns first.
 preview: {"kind":"combo","A":[[1,1],[-1,2]],"x":[2,1],"b":[0,3]}
 check: isC(V) && eqM(V.A, [[1,1],[-1,2]]) && near(Ax(V)[0], 0) && near(Ax(V)[1], 3)
 ---
@@ -13,11 +13,12 @@ Put the vectors v and w side by side as the columns of a matrix A, and put the n
 <!-- key -->
 <span class="mx"><span class="c1">a₁₁</span><span class="c2">a₁₂</span><span class="c1">a₂₁</span><span class="c2">a₂₂</span></span> <span class="vec "><span>x₁</span><span>x₂</span></span> = x₁ <span class="vec i"><span>a₁₁</span><span>a₂₁</span></span> + x₂ <span class="vec j"><span>a₁₂</span><span>a₂₂</span></span>
 <!-- ideas -->
-<ol class="ideas"><li>A matrix is a block of numbers. Its columns are vectors.</li><li><b>Ax is a combination of the columns of A</b>, with the entries of x as the weights.</li><li>Each entry of Ax can also be computed as a dot product of a row of A with x. Both ways give the same numbers.</li><li>The column way tells us what Ax means. The row way is how we usually calculate it by hand.</li></ol>
+<ol class="ideas"><li>A matrix is a block of numbers. Its columns are vectors.</li><li><b>Ax is a combination of the columns of A</b>, with the entries of x as the weights.</li><li>Each entry of Ax can also be computed as a <b>dot product</b> of a row of A with x (multiply matching entries and add). Both ways give the same numbers.</li><li>The column way tells us what Ax means. The row way is how we usually calculate it by hand.</li></ol>
 <!-- prose -->
 <h3>From combinations to matrices</h3>
 <p>On the last slide we wrote combinations like c(2, 1) + d(−1, 1). Writing out the vectors every time gets long. So we store them as the columns of a matrix, and store c and d in a vector x:</p>
 <div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>−1</span><span>1</span><span>1</span></span> &nbsp;&nbsp; x = (c, d) &nbsp;&nbsp; Ax = c·(2, 1) + d·(−1, 1)</div></div>
+<p>To save space we write vectors across the line, like (2, 1). It still stands for a column: 2 on top, 1 below.</p>
 <p>Each entry needs a name. We write a<sub>ij</sub> for the entry of A in row i, column j, so a₁₂ sits in row 1, column 2. In the same way x = (x₁, x₂), where x₁ is the c and x₂ is the d from slide 1.</p>
 <p>That is the definition we will use: <b>Ax is <span class="i">x₁ times column 1</span>, plus <span class="j">x₂ times column 2</span></b>. The colours match the arrows in the lab (the code and picture below). If A had more columns, x would need more entries, one weight per column.</p>
 <h3>An everyday picture: a shopping basket</h3>
@@ -73,8 +74,12 @@ import numpy as np
 A = np.array([[ 1, 1],
               [-1, 2]])
 x = np.array([2, 1])      # change x
+# hint: write the two equations from the columns first
 b = np.array([0, 3])
 
+# Python counts from 0: A[0] is row 1, A[:, 0] is column 1
+# @ multiplies; for two vectors like A[0] @ x it gives the dot product
+# (slide 6 uses @ to multiply two matrices)
 row_way = np.array([A[0] @ x, A[1] @ x])      # dot products with the rows
 col_way = x[0] * A[:, 0] + x[1] * A[:, 1]      # combination of the columns
 print("row way:   ", row_way)

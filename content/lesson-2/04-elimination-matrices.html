@@ -9,7 +9,7 @@ preview: {"kind":"table","items":[{"label":"A","M":[[2,1,1],[4,-6,0],[-2,7,2]],"
 check: isTab(V) && close(lastItem(V), [[2,1,1],[0,-8,-2],[0,8,3]])
 ---
 <!-- lead -->
-Every elimination step can be written as multiplication by a simple matrix. Subtracting ℓ times row 1 from row 2 is the same as multiplying by E₂₁: the identity matrix with −ℓ in row 2, column 1. The <b>identity matrix</b> I has 1s on the diagonal and 0s elsewhere, so IA = A: it changes nothing.
+Every elimination step can be written as multiplication by a simple matrix. The <b>identity matrix</b> I has 1s on the diagonal and 0s elsewhere, so IA = A: it changes nothing. Subtracting ℓ times row 1 from row 2 is the same as multiplying by E₂₁: the identity matrix with −ℓ in row 2, column 1.
 <!-- key -->
 E₂₁ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>−ℓ</span><span>1</span><span>0</span><span>0</span><span>0</span><span>1</span></span> &nbsp;&nbsp; E₂₁A = A with row 2 − ℓ·(row 1)
 <!-- ideas -->
@@ -27,7 +27,7 @@ E₂₁ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1<
 <li>Row 2 is (−2, 1, 0): it produces row 2 minus 2 times row 1.</li>
 <li>Row 3 is (0, 0, 1): it keeps row 3 unchanged.</li>
 </ul>
-<p>Here is row 2 written out once, with A from slide 2. The row (−2, 1, 0) times A takes −2 of row 1, 1 of row 2 and 0 of row 3:</p>
+<p>How does a row times a matrix work? Use the row's numbers as weights on the matrix's rows, then add. Here is row 2 written out once, with A from slide 2. The row (−2, 1, 0) times A takes −2 of row 1, 1 of row 2 and 0 of row 3:</p>
 <div class="worked"><div class="row">(−2, 1, 0) A = −2·(2, 1, 1) + 1·(4, −6, 0) + 0·(−2, 7, 2) = (0, −8, −2)</div></div>
 <p>That is exactly the new row 2 from slide 2.</p>
 <h3>The whole process as one product</h3>
@@ -77,7 +77,8 @@ E21 = np.array([[ 1., 0., 0.],
                 [ 0., 0., 1.]])
 
 E31 = np.eye(3)                     # your turn: put -l31 in row 3, column 1
-# E31[2, 0] = ...                   # l31 = A[2,0] / A[0,0] = -1
+# E31[2, 0] = ...                   # delete the # and replace ... with the value
+                                    # l31 = A[2,0] / A[0,0] = -1
                                     # careful: -l31 = +1, not -1
 
 B = E31 @ E21 @ A

@@ -13,7 +13,7 @@ For a 2 by 2 matrix the inverse has a short formula: swap the two diagonal entri
 <!-- key -->
 <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>a</span><span>b</span><span>c</span><span>d</span></span>⁻¹ = 1/(ad − bc) · <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>d</span><span>−b</span><span>−c</span><span>a</span></span>
 <!-- ideas -->
-<ol class="ideas"><li>A⁻¹ = 1/(ad − bc) times [[d, −b], [−c, a]].</li><li>Dividing by det A undoes the area scaling of A.</li><li>If ad − bc = 0 there is no inverse.</li><li>Always check the answer by multiplying: AA⁻¹ should be I.</li></ol>
+<ol class="ideas"><li>A⁻¹ = 1/(ad − bc) times [[d, −b], [−c, a]].</li><li>A times [[d, −b], [−c, a]] is (ad − bc)I, so dividing by ad − bc leaves I.</li><li>If ad − bc = 0 there is no inverse.</li><li>Always check the answer by multiplying: AA⁻¹ should be I.</li></ol>
 <!-- prose -->
 <h3>The recipe</h3>
 <div class="worked"><div class="row"><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>a</span><span>b</span><span>c</span><span>d</span></span>⁻¹ = 1/(ad − bc) · <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>d</span><span>−b</span><span>−c</span><span>a</span></span></div></div>
@@ -23,7 +23,7 @@ For a 2 by 2 matrix the inverse has a short formula: swap the two diagonal entri
 <div class="worked"><div class="row"><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>a</span><span>b</span><span>c</span><span>d</span></span><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>d</span><span>−b</span><span>−c</span><span>a</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>ad − bc</span><span>−ab + ba</span><span>cd − dc</span><span>−cb + da</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>ad − bc</span><span>0</span><span>0</span><span>ad − bc</span></span></div><div class="row">= (ad − bc) I</div></div>
 <p>The off-diagonal entries cancel, and both diagonal entries are ad − bc. So the product is ad − bc times I. Divide by ad − bc and you get exactly I. That is the whole formula.</p>
 <h3>Why the determinant appears</h3>
-<p>Lesson 1 showed that A multiplies every area by |det A|, where det A = ad − bc, and that the sign of det A records whether the plane is flipped. To undo A, its inverse must shrink areas back by the same factor, so it must divide by det A.</p>
+<p>Lesson 1 showed that A multiplies every area by |det A|, where det A = ad − bc. The swapped-and-flipped matrix <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>d</span><span>−b</span><span>−c</span><span>a</span></span> has determinant da − (−b)(−c) = ad − bc too. So, as shown above, A times it is (ad − bc)I, not I. Dividing by ad − bc removes that extra factor and leaves I.</p>
 <p>When det A = 0, A squashes the plane onto a line. Undoing that would mean dividing by zero, and no matrix can turn a line back into a plane. So a matrix with ad − bc = 0 has no inverse.</p>
 <h3>A worked example</h3>
 <div class="worked">

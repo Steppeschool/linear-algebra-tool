@@ -4,12 +4,12 @@ seo_title: Reflection Matrix Challenge: Mirror the F
 description: Build the 2x2 matrix that mirrors the plane, and see why a reflection has determinant −1. An interactive linear algebra challenge in Python.
 kicker: Challenge
 title: Mirror the F.
-task: Mirror the plane across the vertical axis.
+task: Mirror the plane across the y-axis (the vertical axis).
 preview: {"kind":"transform","M":[[1,0],[0,1]]}
 check: isT(V) && eqM(V.M, [[-1,0],[0,1]])
 ---
 <!-- lead -->
-A challenge to put the slides together: build the matrix that mirrors the plane left to right. The F should keep its size and simply face the other way.
+A challenge to put the slides together: build the matrix for the mirror across the y-axis (the vertical axis). It swaps left and right. The F should keep its size and simply face the other way.
 <!-- key -->
 (x, y) &nbsp;→&nbsp; (−x, y)
 <!-- ideas -->
@@ -20,8 +20,8 @@ A challenge to put the slides together: build the matrix that mirrors the plane 
 <h3>How to build it</h3>
 <p>Use the rule from slide 5. Ask where the two landmarks should go:</p>
 <ul>
-<li>A mirror standing on the vertical axis sends points on the right over to the left. So (1, 0) goes to (−1, 0).</li>
-<li>Points on the vertical axis itself do not move. So (0, 1) stays at (0, 1).</li>
+<li>The mirror across the y-axis sends points on the right over to the left. So (1, 0) goes to (−1, 0).</li>
+<li>Points on the y-axis itself do not move. So (0, 1) stays at (0, 1).</li>
 </ul>
 <p>Those two answers are the columns of the matrix. Write them in, run the code, and watch the F.</p>
 <h3>What the determinant tells us</h3>
@@ -29,14 +29,14 @@ A challenge to put the slides together: build the matrix that mirrors the plane 
 <h3>After you solve it</h3>
 <ul>
 <li><b>Mirror twice.</b> In a barber's shop, two mirrors show your face the right way round. Check in code that A @ A gives the identity matrix.</li>
-<li><b>Another mirror.</b> Try the mirror on the diagonal line y = x. Where do (1, 0) and (0, 1) go now?</li>
+<li><b>Another mirror.</b> Try the mirror across the line y = x. Where do (1, 0) and (0, 1) go now?</li>
 </ul>
 <!-- examples -->
-<section class="example"><h3>Example 1 · Mirror on y = x</h3>
+<section class="example"><h3>Example 1 · Mirror across the line y = x</h3>
 <p>(1, 0) → (0, 1) and (0, 1) → (1, 0).</p><div class="worked"><div class="row">M = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>1</span><span>0</span></span> &nbsp;&nbsp; det M = −1</div><div class="row">(2, 1) → (1, 2): the coordinates swap</div></div>
 </section>
 <section class="example"><h3>Example 2 · Two mirrors make a turn</h3>
-<p>Mirror on the x-axis first, then on the y-axis (the right-hand matrix acts first):</p><div class="worked"><div class="row"><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−1</span><span>0</span><span>0</span><span>1</span></span> <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>−1</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−1</span><span>0</span><span>0</span><span>−1</span></span></div><div class="row">det = (−1)·(−1) = 1</div></div><p>Two flips cancel. The result is the half turn: no mirror image left.</p>
+<p>Mirror across the x-axis first, then across the y-axis (the right-hand matrix acts first):</p><div class="worked"><div class="row"><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−1</span><span>0</span><span>0</span><span>1</span></span> <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>−1</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−1</span><span>0</span><span>0</span><span>−1</span></span></div><div class="row">det = (−1)·(−1) = 1</div></div><p>Two flips cancel. The result is the half turn: no mirror image left.</p>
 </section>
 <section class="example"><h3>Example 3 · Rotation or mirror?</h3>
 <p>Is <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>−1</span><span>0</span></span> a rotation or a mirror?</p><div class="worked"><div class="row">det = 0·0 − 1·(−1) = 1</div><div class="row">(1, 0) → (0, −1) and (0, 1) → (1, 0)</div></div><p>The determinant is +1, so nothing is flipped. It is a rotation: a quarter turn clockwise.
@@ -49,15 +49,15 @@ A challenge to put the slides together: build the matrix that mirrors the plane 
 </div></details>
 </div></div>
 <div class="problem"><span class="pnum">2</span><div class="pbody">
-<p>Check that the mirror on y = x, applied twice, gives the identity.</p>
+<p>Check that the mirror across the line y = x, applied twice, gives the identity. (For a matrix M, M² means M·M, the matrix times itself.)</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
 <p><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>1</span><span>0</span></span>² = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>1</span></span>. Swapping the coordinates twice puts them back.</p>
 </div></details>
 </div></div>
 <div class="problem"><span class="pnum">3</span><div class="pbody">
-<p>Is <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>−1</span><span>−1</span><span>0</span></span> a mirror? Which line?</p>
+<p>Is M = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>−1</span><span>−1</span><span>0</span></span> a mirror? Which line?</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>det = 0 − 1 = −1 and M² = I, so yes. (1, 0) → (0, −1) and (1, −1) stays put: it is the mirror on the line y = −x.</p>
+<p>det = 0 − 1 = −1 and M² = I, so yes. (1, 0) → (0, −1) and (1, −1) stays put: it is the mirror across the line y = −x.</p>
 </div></details>
 </div></div>
 <!-- code -->
