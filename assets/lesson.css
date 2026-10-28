@@ -322,3 +322,10 @@ details.more .solbody .s-hide,details.more .sol .s-hide{display:none}
 details.more details.sol[open] .s-hide{display:inline}
 details.more details.sol[open] .s-show{display:none}
 details.more details.sol:not([open]) .s-show{display:inline}
+
+/* members-only block (Kajabi course) */
+.members{margin-top:28px;border:2px solid var(--accent);border-radius:16px;padding:16px 18px 18px;background:var(--accent-soft)}
+.members-h{display:flex;align-items:center;gap:14px;margin-bottom:12px}
+.members-h div{display:flex;flex-direction:column;line-height:1.4}
+.members-h b{color:var(--accent)}
+.members .problem{background:var(--surface)}
