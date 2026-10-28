@@ -31,7 +31,7 @@
     <h1>Gram-Schmidt: making any basis orthonormal.</h1>
     <p class="lead">Start with independent vectors a and b. Keep the direction of a. From b, remove its projection onto a: what is left is perpendicular to a. Then divide each vector by its length. That is Gram-Schmidt, and recording the steps gives A = QR.</p>
     <div class="key">B = b − (aᵀb / aᵀa) a &nbsp;&nbsp; q₁ = a / ‖a‖, &nbsp; q₂ = B / ‖B‖ &nbsp;&nbsp; A = QR</div>
-    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>The first vector keeps its direction: A = a.</li><li>From b, subtract its projection onto A. The remainder B is perpendicular to A.</li><li>From a third vector c, subtract its projections onto both A and B.</li><li>Finally divide each by its length: q = A/‖A‖, and so on.</li><li>The columns of A are combinations of the q's: A = QR with R upper triangular.</li></ol></div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>The first vector a is kept as it is.</li><li>From b, subtract its projection onto a. The remainder B is perpendicular to a.</li><li>From a third vector c, subtract its projections onto both a and B.</li><li>Finally divide each by its length: q₁ = a/‖a‖, q₂ = B/‖B‖, and so on.</li><li>The columns of A are combinations of the q's: A = QR with R upper triangular.</li></ol></div>
     <div class="prose">
 <h3>Squaring up a frame</h3>
 <p>A carpenter building a frame fixes the first board wherever it should go. The second board is then pushed until it sits at a right angle to the first, using a set square. Any lean towards the first board is removed. If there is a third board, it is squared against both.</p>
@@ -43,8 +43,8 @@
 <div class="worked"><div class="row">a = (1, 1), &nbsp; b = (2, 0)</div><div class="row">aᵀb = 2, &nbsp; aᵀa = 2: &nbsp; B = (2, 0) − 1·(1, 1) = (1, −1)</div><div class="row">a · B = 1 − 1 = 0 ✓</div><div class="row">q₁ = (1, 1)/√2, &nbsp; q₂ = (1, −1)/√2</div></div>
 <h3>Three vectors and more</h3>
 <p>For a third vector c, subtract its projection onto each earlier direction:</p>
-<div class="worked"><div class="row">C = c − (Aᵀc / AᵀA) A − (Bᵀc / BᵀB) B</div></div>
-<p>Because A and B are already perpendicular, the two subtractions do not interfere with each other. Each new vector gets squared against everything built before it.</p>
+<div class="worked"><div class="row">C = c − (aᵀc / aᵀa) a − (Bᵀc / BᵀB) B</div></div>
+<p>Each fraction is a number (a dot product over a dot product). Because a and B are already perpendicular, the two subtractions do not interfere with each other. Each new vector gets squared against everything built before it.</p>
 <h3>A = QR</h3>
 <p>Each original vector is a combination of the q's built so far: a uses only q₁, b uses q₁ and q₂, c uses q₁, q₂ and q₃. Collect the coefficients in a matrix R. It is upper triangular, and A = QR. Its entries are dot products, R = QᵀA.</p>
 <div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>1</span><span>0</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1/√2</span><span>1/√2</span><span>1/√2</span><span>−1/√2</span></span><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>√2</span><span>√2</span><span>0</span><span>√2</span></span></div></div>

@@ -17,7 +17,7 @@ P = aaᵀ / aᵀa &nbsp;&nbsp; P = A(AᵀA)⁻¹Aᵀ &nbsp;&nbsp; P² = P
 <!-- prose -->
 <h3>A machine that projects</h3>
 <p>On the last slide we projected one vector. Often we want to project many: every reading from a sensor, every pixel of an image. It is worth building one matrix that does the job for any b.</p>
-<p>Rewrite p = a (aᵀb / aᵀa). The number aᵀb can move to the right of a, because a number commutes with anything: p = (a aᵀ / aᵀa) b. The matrix in brackets is P.</p>
+<p>Write p = a(aᵀb) / aᵀa. Now regroup the product: a(aᵀb) is the same as (aaᵀ)b, because matrix products can be grouped either way. So p = (aaᵀ / aᵀa) b. The matrix in brackets is P.</p>
 <div class="worked"><div class="row">a = (1, 2): &nbsp; aaᵀ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>4</span></span>, &nbsp; aᵀa = 5</div><div class="row">P = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0.2</span><span>0.4</span><span>0.4</span><span>0.8</span></span></div><div class="row">Pb for b = (4, 3): (0.8 + 1.2, 1.6 + 2.4) = (2, 4) ✓ (the same p as slide 2)</div></div>
 <h3>Pressing twice changes nothing</h3>
 <p>Think of a press that flattens dough onto a tray. Once the dough is flat, pressing it again leaves it as it is. A projection behaves the same way. After the first projection, p is already on the line, and its projection is p itself. So P(Pb) = Pb for every b, which says P² = P.</p>
