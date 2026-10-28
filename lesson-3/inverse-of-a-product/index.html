@@ -51,7 +51,7 @@
 <h3>Where this is used</h3>
 <p>A robot arm's pose is a product of joint matrices, T₁T₂⋯Tₙ, which converts a point from the gripper's frame to the base's frame. To convert the other way, from the base to the gripper, we need the inverse, Tₙ⁻¹⋯T₁⁻¹, with the joints in reverse order.</p>
     </div>
-    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · Stretch then shear, undone</h3>
+    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · Shear then stretch, undone</h3>
 <p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>0</span><span>0</span><span>1</span></span>, B = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>0</span><span>1</span></span>.</p><div class="worked"><div class="row">(AB)⁻¹ = B⁻¹A⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>0</span><span>1</span></span><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>½</span><span>0</span><span>0</span><span>1</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>½</span><span>−1</span><span>0</span><span>1</span></span></div><div class="row">Check: AB = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>2</span><span>0</span><span>1</span></span>, whose inverse is ½·<span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−2</span><span>0</span><span>2</span></span> ✓</div></div>
 </section>
 <section class="example"><h3>Example 2 · Powers</h3>

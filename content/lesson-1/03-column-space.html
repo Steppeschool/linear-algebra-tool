@@ -38,13 +38,13 @@ C(A) = all vectors Ax = all combinations of the columns
 <div class="row">Ax = x₁(1, 2) + x₂(2, 4) = (x₁ + 2x₂)·(1, 2)</div>
 <div>Every output is a multiple of (1, 2). So b = (3, 6) is reachable, but b = (1, 0) is not.</div>
 </div>
-<p>Notice something else: x = (3, 0) and x = (1, 1) both give (3, 6). With dependent columns, different inputs can produce the same output. That extra freedom gets its own name in chapter 3: the nullspace.</p>
+<p>Notice something else: x = (3, 0) and x = (1, 1) both give (3, 6). With dependent columns, different inputs can produce the same output. That extra freedom gets its own name in lesson 4: the nullspace.</p>
 <h3>Two questions that sound alike</h3>
 <ul>
 <li><b>Can we solve Ax = b for this particular b?</b> Yes, if b is in C(A).</li>
 <li><b>Can we solve Ax = b for every b?</b> Only if C(A) is the whole plane.</li>
 </ul>
-<p>For 2 by 2 matrices there is a quick test. The columns are independent exactly when ad − bc ≠ 0. When ad − bc = 0, the matrix squashes the plane onto a line, and no matrix can undo that squash. We will meet this number again as the determinant.</p>
+<p>For 2 by 2 matrices there is a quick test. Write A = [[a, b], [c, d]]. The columns are independent exactly when ad − bc ≠ 0. When ad − bc = 0, the matrix squashes the plane onto a line, and no matrix can undo that squash. We will meet this number again as the determinant.</p>
 <!-- examples -->
 <section class="example"><h3>Example 1 · A line, and who is on it</h3>
 <p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>4</span><span>1</span><span>2</span></span>. Column 2 = 2·column 1, so C(A) is the line through (2, 1).</p><div class="worked"><div class="row">b = (6, 3) = 3·(2, 1): in C(A), for example x = (3, 0)</div><div class="row">b = (1, 1): not a multiple of (2, 1), so Ax = b has no solution</div></div>

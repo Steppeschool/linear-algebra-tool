@@ -9,11 +9,11 @@ preview: {"kind":"table","items":[{"label":"A","M":[[1,2,1,3],[2,4,3,8]],"piv":[
 check: isTab(V) && close(itemVec(V, 's'), [-1,0,-2,1])
 ---
 <!-- lead -->
-To find the whole nullspace, reduce A to its row echelon form R. Columns with pivots belong to pivot variables, the others to free variables. Setting one free variable to 1 and the rest to 0 gives a special solution, and every nullspace vector is a combination of these.
+To find the whole nullspace, reduce A to its reduced row echelon form R. Columns with pivots belong to pivot variables, the others to free variables. Setting one free variable to 1 and the rest to 0 gives a special solution, and every nullspace vector is a combination of these.
 <!-- key -->
 <span class="mx" style="grid-template-columns:repeat(4,auto)"><span>1</span><span>2</span><span>1</span><span>3</span><span>2</span><span>4</span><span>3</span><span>8</span></span> &nbsp;→&nbsp; R = <span class="mx" style="grid-template-columns:repeat(4,auto)"><span>1</span><span>2</span><span>0</span><span>1</span><span>0</span><span>0</span><span>1</span><span>2</span></span>
 <!-- ideas -->
-<ol class="ideas"><li>Elimination does not change the nullspace: Ax = 0 and Rx = 0 have the same solutions.</li><li><b>Pivot variables</b> belong to columns with pivots. <b>Free variables</b> belong to the other columns.</li><li>Each free variable gives one <b>special solution</b>.</li><li>An m by n matrix of rank r has n − r special solutions, and they span N(A).</li></ol>
+<ol class="ideas"><li>Elimination does not change the nullspace: Ax = 0 and Rx = 0 have the same solutions.</li><li><b>Pivot variables</b> belong to columns with pivots. <b>Free variables</b> belong to the other columns.</li><li>Each free variable gives one <b>special solution</b>.</li><li>An m by n matrix of rank r has n − r special solutions, and every vector in N(A) is a combination of them.</li></ol>
 <!-- prose -->
 <h3>Think of a mixing desk</h3>
 <p>A mixing desk has four sliders. Two of them are free: you set them however you like. The other two are linked and move on their own to keep the total output at zero.</p>

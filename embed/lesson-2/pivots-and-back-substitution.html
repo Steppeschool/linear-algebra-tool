@@ -21,7 +21,7 @@
 <p>Notice that ℓ₃₂ uses −8, the pivot as it stands now, not the −6 that was in that position at the start. This is the most common mistake in hand calculations.</p>
 <h3>The triangle</h3>
 <div class="worked"><div class="row">U = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>1</span><span>0</span><span>−8</span><span>−2</span><span>0</span><span>0</span><span>1</span></span> &nbsp;&nbsp; pivots 2, −8, 1</div></div>
-<p>U is <b>upper triangular</b>: every entry below the diagonal is zero. A pivot can never be zero, because we divide by it to get the multipliers. Slide 3 is about what happens when one is.</p>
+<p>U is <b>upper triangular</b>: every entry below the diagonal is zero. A pivot must not be zero, because we divide by it to get the multipliers. Slide 3 is about what happens when one is.</p>
 <h3>Back substitution: a chain of keys</h3>
 <p>Picture three locked boxes. The key to box 2 is inside box 3, and the key to box 1 is inside box 2. You have to open box 3 first. A triangular system works the same way: the last equation has only one unknown, its value unlocks the equation above, and so on to the top.</p>
 <div class="worked">
@@ -37,7 +37,7 @@
 <p>Solve Ux = c with U = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>3</span><span>0</span><span>1</span><span>2</span><span>0</span><span>0</span><span>4</span></span> and c = (9, 4, 8).</p><div class="worked"><div class="row">Row 3: 4z = 8, so z = 2</div><div class="row">Row 2: y + 2·2 = 4, so y = 0</div><div class="row">Row 1: 2x + 0 + 3·2 = 9, so x = 1.5</div></div>
 </section>
 <section class="example"><h3>Example 3 · The pivots give the determinant</h3>
-<p>For A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>1</span><span>4</span><span>−6</span><span>0</span><span>−2</span><span>7</span><span>2</span></span>, elimination gave the pivots 2, −8 and 1.</p><div class="worked"><div class="row">det A = 2 · (−8) · 1 = −16</div></div><p>Multiplying the pivots is how computers find determinants. Chapter 5 explains why it works (no row exchanges here).</p>
+<p>For A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>1</span><span>4</span><span>−6</span><span>0</span><span>−2</span><span>7</span><span>2</span></span>, elimination gave the pivots 2, −8 and 1.</p><div class="worked"><div class="row">det A = 2 · (−8) · 1 = −16</div></div><p>Multiplying the pivots is how computers find determinants. Strang's chapter 5 (determinants) explains why it works (no row exchanges here).</p>
 </section></div>
     <details class="more"><summary><span class="pl-icon">✎</span><span class="rv-text"><b>More examples to try</b><span>3 problems with step-by-step solutions. Try each one before you open its solution.</span></span><span class="rv-toggle"><span class="s-show">Show</span><span class="s-hide">Hide</span></span></summary><div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
 <p>Solve x + 2y + z = 4, 2x + 5y + z = 8, 3x + 7y + 4z = 14.</p>
