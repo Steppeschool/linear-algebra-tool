@@ -259,6 +259,16 @@ def nullpic(A, x, b=None):
         raise ValueError("nullpic() needs a 2x2 matrix A and a vector x with 2 entries")
     window.__pynull(A.tolist(), x.tolist(), [] if b is None else asarray(b).tolist())
 
+def arrows(*items):
+    """Draw vectors from the origin in order, joined by dashed steps. Each item: v or ("label", v)."""
+    out = []
+    for k, it in enumerate(items):
+        label, v = (str(it[0]), asarray(it[1])) if isinstance(it, tuple) else ("v%d" % (k + 1), asarray(it))
+        if v.shape != (2,):
+            raise ValueError("arrows() draws 2D vectors, got shape %s" % (v.shape,))
+        out.append([label, v.tolist()])
+    window.__pyarrows(out)
+
 def four(A):
     """The four subspaces of a 2x2 matrix: input plane on the left, output plane on the right."""
     A = asarray(A)
@@ -273,7 +283,7 @@ def show(M, *vectors):
     window.__pyshow(M.tolist(), [asarray(v).tolist() for v in vectors])
 
 def run(src):
-    ns = {'np': np, 'show': show, 'combo': combo, 'rowpic': rowpic, 'table': table, 'nullpic': nullpic, 'four': four, 'lu': lu, 'rref': rref, 'print': _print, '__name__': '__main__'}
+    ns = {'np': np, 'show': show, 'combo': combo, 'rowpic': rowpic, 'table': table, 'nullpic': nullpic, 'four': four, 'arrows': arrows, 'lu': lu, 'rref': rref, 'print': _print, '__name__': '__main__'}
     try:
         exec(compile(src, 'lesson.py', 'exec'), ns)
     except SyntaxError as e:

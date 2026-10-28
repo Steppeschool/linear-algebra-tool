@@ -29,46 +29,51 @@
   <article class="page">
     <div class="kicker">Strang §1.3 and §3.1 · Column space</div>
     <h1>The column space C(A) is every possible Ax.</h1>
-    <p class="lead">A matrix can only produce certain outputs. The column space is the list of everything Ax can produce. Solving Ax = b means asking one question: is b on that list?</p>
+    <p class="lead">Try every possible x and collect all the outputs Ax. That collection is the column space of A. Solving Ax = b comes down to one question: is b in it?</p>
     <div class="key">C(A) = all vectors Ax = all combinations of the columns</div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>The <b>column space</b> C(A) contains every combination of the columns of A, that is, every vector Ax.</li><li>Ax = b has a solution exactly when b is in C(A).</li><li>In the plane, C(A) is the whole plane, a line through the origin, or just the origin.</li><li>The <b>rank</b> is the number of independent directions in C(A): 2, 1 or 0.</li></ol></div>
     <div class="prose">
-<h2>Think: reachable outputs</h2>
-<p>The columns are the directions you are allowed to move in. The vector x says how far to go along each one. Ax is where you end up.</p>
-<p>Try every possible x and mark every place you land. That set of landing spots is C(A).</p>
-<h2>An engineering picture</h2>
-<p>A small boat has two thrusters. Column 1 is the push you get from thruster 1 at full throttle. Column 2 is the push from thruster 2. The entries of x are the two throttle settings, and a negative throttle means reverse.</p>
+<h3>All the outputs at once</h3>
+<p>So far we computed one product Ax at a time. Now let x vary over every possible vector and mark each output Ax on the plane. The set of all those points is the column space, written C(A).</p>
+<p>Because every Ax is a combination of the columns, C(A) is simply "all combinations of the columns". That is where the name comes from.</p>
+<h3>An engineering picture: a boat with two thrusters</h3>
+<p>A small boat has two thrusters. Column 1 of A is the push from thruster 1 at full power, and column 2 is the push from thruster 2. The entries of x are the two throttle settings, and a negative setting means reverse. Then Ax is the total push on the boat.</p>
 <ul>
-<li><b>Thrusters at an angle:</b> by mixing them you can push the boat in any direction. C(A) is the whole plane.</li>
-<li><b>Both thrusters pointing forward:</b> you can only go forward or back. C(A) is a line. A sideways target is out of reach, whatever the throttles.</li>
+<li>If the thrusters point in <b>different directions</b>, mixing them can push the boat any way you like. C(A) is the whole plane.</li>
+<li>If both thrusters point <b>forward</b>, the boat can only go forward or backward. C(A) is a line, and a sideways target is out of reach no matter how you set the throttles.</li>
 </ul>
-<h2>Three possibilities in the plane</h2>
+<h3>Three possibilities in the plane</h3>
+<p>For a 2 by 2 matrix there are only three cases:</p>
 <ul>
-<li><b>The whole plane:</b> the columns point in different directions. They are <b>independent</b>.</li>
-<li><b>A line:</b> one column is a multiple of the other. They are <b>dependent</b>.</li>
-<li><b>Just the origin:</b> A is all zeros.</li>
+<li><b>The whole plane:</b> the two columns point in different directions. We call them <b>independent</b>.</li>
+<li><b>A line:</b> one column is a multiple of the other. We call them <b>dependent</b>.</li>
+<li><b>Just the origin:</b> both columns are zero.</li>
 </ul>
-<p>The <b>rank</b> counts how many dimensions survive: 2, 1 or 0. It is also the number of independent columns.</p>
-<h2>Worked example</h2>
+<p>The <b>rank</b> counts the independent directions that survive: 2, 1 or 0.</p>
+<h3>A closer look at the dependent case</h3>
 <div class="worked">
-<div>A = <span class="mx"><span class="c1">1</span><span class="c2">2</span><span class="c1">2</span><span class="c2">4</span></span>. Column 2 is 2 times column 1.</div>
+<div>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>4</span></span>. Column 2 is 2 times column 1.</div>
 <div class="row">Ax = x₁(1, 2) + x₂(2, 4) = (x₁ + 2x₂)·(1, 2)</div>
-<div>Every output is a multiple of (1, 2). So b = (3, 6) is reachable, and b = (1, 0) never is.</div>
-<div>Notice that x = (3, 0) and x = (1, 1) both give (3, 6). With dependent columns, different inputs can land on the same output. Chapter 3 calls the leftover freedom the nullspace.</div>
+<div>Every output is a multiple of (1, 2). So b = (3, 6) is reachable, but b = (1, 0) is not.</div>
 </div>
-<h2>Two questions that look alike</h2>
+<p>Notice something else: x = (3, 0) and x = (1, 1) both give (3, 6). With dependent columns, different inputs can produce the same output. That extra freedom gets its own name in chapter 3: the nullspace.</p>
+<h3>Two questions that sound alike</h3>
 <ul>
-<li><b>Can I solve Ax = b for this b?</b> Only if b is in C(A).</li>
-<li><b>Can I solve Ax = b for every b?</b> Only if C(A) is the whole plane.</li>
+<li><b>Can we solve Ax = b for this particular b?</b> Yes, if b is in C(A).</li>
+<li><b>Can we solve Ax = b for every b?</b> Only if C(A) is the whole plane.</li>
 </ul>
-<p>For 2 by 2 there is a quick test. The columns are independent exactly when ad − bc ≠ 0. When it is 0, the plane gets squashed onto a line. A squash cannot be undone, so A has no inverse.</p>
+<p>For 2 by 2 matrices there is a quick test. The columns are independent exactly when ad − bc ≠ 0. When ad − bc = 0, the matrix squashes the plane onto a line, and no matrix can undo that squash. We will meet this number again as the determinant.</p>
     </div>
     <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · A line, and who is on it</h3>
 <p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>4</span><span>1</span><span>2</span></span>. Column 2 = 2·column 1, so C(A) is the line through (2, 1).</p><div class="worked"><div class="row">b = (6, 3) = 3·(2, 1): in C(A), for example x = (3, 0)</div><div class="row">b = (1, 1): not a multiple of (2, 1), so Ax = b has no solution</div></div>
 </section>
 <section class="example"><h3>Example 2 · The whole plane</h3>
 <p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>−1</span></span>. det A = −1 − 1 = −2 ≠ 0, so C(A) is the whole plane. Solve Ax = (4, 2):</p><div class="worked"><div class="row">x₁ + x₂ = 4 &nbsp;&nbsp; x₁ − x₂ = 2</div><div class="row">x₁ = 3, x₂ = 1</div></div>
-</section></div>
-    <h2 class="practice-h">Problems</h2><p class="practice-note">Try each one before you open the solution.</p><div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
+</section>
+<section class="example"><h3>Example 3 · Is b in the column space?</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>3</span><span>2</span><span>6</span></span>, b = (2, 5).</p><div class="worked"><div class="row">Column 2 = 3·column 1, so C(A) is the line of multiples of (1, 2)</div><div class="row">Is (2, 5) a multiple of (1, 2)? It would need 2·(1, 2) = (2, 4), not (2, 5)</div></div><p>So b is not in C(A), and Ax = b has no solution. Changing b to (2, 4) would make it solvable.
+</section><!-- problems -->
+<div class="problem"><span class="pnum">1</span><div class="pbody">
 <p>Describe C(A) for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>6</span><span>1</span><span>2</span></span>. What is the rank?</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
 <p>Column 2 = 2·column 1, so C(A) is the line through (3, 1). Rank 1.</p>
@@ -86,6 +91,7 @@
 <p>Zero matrix: only the origin, rank 0. Identity: the whole plane, rank 2, since Ix = x reaches everything.</p>
 </div></details>
 </div></div></div>
+    
   </article>
 
   <section class="labsec" aria-label="Lab">

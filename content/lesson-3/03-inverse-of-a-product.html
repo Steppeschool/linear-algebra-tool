@@ -4,9 +4,9 @@ seo_title: Inverse of a Product: Why (AB)⁻¹ = B⁻¹A⁻¹
 description: To undo AB you undo A first, then B, so the order flips: (AB)⁻¹ = B⁻¹A⁻¹. Socks and shoes, a worked 2×2 example and live Python. Strang §2.5.
 kicker: Strang §2.5 · Inverse of a product
 title: Undo in reverse order.
-task: Undo R @ S: show the product of the two inverses in the right order.
-preview: {"kind":"transform","M":[[0,-1],[1,1]]}
-check: isT(V) && eqM(V.M, [[1,1],[-1,0]])
+task: Fix the order in undo so that the last arrow comes back to v.
+preview: {"kind":"arrows","items":[{"label":"v","v":[1,1]},{"label":"S v","v":[2,1]},{"label":"R S v","v":[-1,2]}]}
+check: isA(V) && V.items.length >= 3 && close(V.items[V.items.length - 1].v, V.items[0].v)
 ---
 <!-- lead -->
 AB means B first, then A. To undo it, you undo the last move first: A⁻¹ first, then B⁻¹. Written as a product, that is B⁻¹A⁻¹.
@@ -39,9 +39,15 @@ R = np.array([[0., -1.],
 S = np.array([[1., 1.],
               [0., 1.]])       # shear
 
+v = np.array([1., 1.])
+Sv = S @ v                     # S acts first
+RSv = R @ Sv                   # then R: this is (R S) v
+
 R_inv = np.linalg.inv(R)
 S_inv = np.linalg.inv(S)
-
 undo = R_inv @ S_inv           # is this the right order?
-print("undo @ (R @ S) =", undo @ (R @ S))
-show(undo)
+back = undo @ RSv
+
+print("R S v        =", RSv)
+print("undo (R S v) =", back)
+arrows(("v", v), ("S v", Sv), ("R S v", RSv), ("undo (R S v)", back))

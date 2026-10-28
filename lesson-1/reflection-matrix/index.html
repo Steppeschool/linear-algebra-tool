@@ -29,24 +29,25 @@
   <article class="page">
     <div class="kicker">Challenge</div>
     <h1>Mirror the F.</h1>
-    <p class="lead">Build the matrix that flips the plane left to right, like a mirror standing on the vertical axis. The F keeps its size. It only faces the other way.</p>
+    <p class="lead">A challenge to put the slides together: build the matrix that mirrors the plane left to right. The F should keep its size and simply face the other way.</p>
     <div class="key">(x, y) &nbsp;→&nbsp; (−x, y)</div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>To build a matrix, decide where (1, 0) and (0, 1) land and use them as columns (slide 5).</li><li>A mirror keeps lengths and areas, so |det A| = 1.</li><li>A mirror flips the plane over, and the determinant shows that with a minus sign: det A = −1.</li><li>Applying the same mirror twice brings everything back: A·A = I.</li></ol></div>
     <div class="prose">
-<h2>Think: the word on an ambulance</h2>
-<p>AMBULANCE is printed backwards on the front of the vehicle. In a driver's mirror it reads the right way round. A mirror keeps sizes and distances but reverses left and right.</p>
-<h2>How to build it</h2>
-<p>Use the rule from slide 5: decide where the two landmarks land, then write them as the columns.</p>
+<h3>A mirror you have seen</h3>
+<p>The word AMBULANCE is printed backwards on the front of the vehicle, so that a driver sees it the right way round in the mirror. A mirror keeps every size and every distance, but swaps left and right.</p>
+<h3>How to build it</h3>
+<p>Use the rule from slide 5. Ask where the two landmarks should go:</p>
 <ul>
-<li>A mirror on the vertical axis sends points on the right over to the left.</li>
-<li>Points on the vertical axis itself stay where they are.</li>
+<li>A mirror standing on the vertical axis sends points on the right over to the left. So (1, 0) goes to (−1, 0).</li>
+<li>Points on the vertical axis itself do not move. So (0, 1) stays at (0, 1).</li>
 </ul>
-<h2>What the determinant says</h2>
-<p>The F keeps its size, so |det A| = 1.</p>
-<p>But the F now reads backwards, like turning a sheet of paper over to its other side. No rotation can do that. The determinant signals the flip with a minus sign. Watch the readout under the plane.</p>
-<h2>After you solve it</h2>
+<p>Those two answers are the columns of the matrix. Write them in, run the code, and watch the F.</p>
+<h3>What the determinant tells us</h3>
+<p>The F keeps its size, so the area factor |det A| must be 1. But the F now reads backwards. That is like turning a sheet of paper over to its other side, and no rotation can do it. The determinant records the flip with a minus sign: a mirror has det A = −1. Look at the readout under the picture.</p>
+<h3>After you solve it</h3>
 <ul>
-<li><b>Mirror twice:</b> two mirrors in a barber's shop show your face the right way round. Check that A @ A gives the identity.</li>
-<li><b>Another mirror:</b> try the mirror on the diagonal line y = x. Where do (1, 0) and (0, 1) go?</li>
+<li><b>Mirror twice.</b> In a barber's shop, two mirrors show your face the right way round. Check in code that A @ A gives the identity matrix.</li>
+<li><b>Another mirror.</b> Try the mirror on the diagonal line y = x. Where do (1, 0) and (0, 1) go now?</li>
 </ul>
     </div>
     <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · Mirror on y = x</h3>
@@ -54,8 +55,11 @@
 </section>
 <section class="example"><h3>Example 2 · Two mirrors make a turn</h3>
 <p>Mirror on the y-axis, then on the x-axis:</p><div class="worked"><div class="row"><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−1</span><span>0</span><span>0</span><span>1</span></span> <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>−1</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−1</span><span>0</span><span>0</span><span>−1</span></span></div><div class="row">det = (−1)·(−1) = 1</div></div><p>Two flips cancel. The result is the half turn: no mirror image left.</p>
-</section></div>
-    <h2 class="practice-h">Problems</h2><p class="practice-note">Try each one before you open the solution.</p><div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
+</section>
+<section class="example"><h3>Example 3 · Rotation or mirror?</h3>
+<p>Is <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>−1</span><span>0</span></span> a rotation or a mirror?</p><div class="worked"><div class="row">det = 0·0 − 1·(−1) = 1</div><div class="row">(1, 0) → (0, −1) and (0, 1) → (1, 0)</div></div><p>The determinant is +1, so nothing is flipped. It is a rotation: a quarter turn clockwise.
+</section><!-- problems -->
+<div class="problem"><span class="pnum">1</span><div class="pbody">
 <p>Write the mirror across the x-axis. Where does (3, 2) go?</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
 <p>M = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>−1</span></span>. (3, 2) → (3, −2).</p>
@@ -73,6 +77,7 @@
 <p>det = 0 − 1 = −1 and M² = I, so yes. (1, 0) → (0, −1) and (1, −1) stays put: it is the mirror on the line y = −x.</p>
 </div></details>
 </div></div></div>
+    
   </article>
 
   <section class="labsec" aria-label="Lab">

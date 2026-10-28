@@ -17,6 +17,8 @@ const isR = V => V && V.kind === "rows";
 const isTab = V => V && V.kind === "table";
 const isN = V => V && V.kind === "null";
 const isF = V => V && V.kind === "four";
+const isA = V => V && V.kind === "arrows";
+const arrowVec = (V, name) => { const it = V && V.items && V.items.find(t => t.label === name); return it ? it.v : null; };
 const flat = M => Array.isArray(M) ? M.flat(Infinity) : [M];
 const close = (a, b, t = 1e-6) => a != null && b != null && flat(a).length === flat(b).length && flat(a).every((v, i) => Math.abs(v - flat(b)[i]) < t);
 const isZero = v => v != null && flat(v).every(x => Math.abs(x) < 1e-9);
@@ -67,6 +69,7 @@ function setLegend(){
     : view.kind === "combo" ? sw("--ihat","x₁ · column 1") + sw("--jhat","x₂ · column 2") + sw("--accent","Ax")
     : view.kind === "rows" ? sw("--ihat","equation 1") + sw("--jhat","equation 2")
     : view.kind === "null" ? sw("--accent","nullspace N(A)") + (view.b && view.b.length ? sw("--ihat","all solutions of Ax = b") : "") + sw("--ink","your x")
+    : view.kind === "arrows" ? view.items.map((it, k) => sw(PALETTE[k % PALETTE.length], it.label)).join("")
     : view.kind === "four" ? sw("--ihat","row space") + sw("--accent","nullspace") + sw("--jhat","column space") + sw("--muted","left nullspace")
     : "";
 }
@@ -79,6 +82,7 @@ function extent(){
   const V = view; let pts = [];
   if (V.kind === "combo"){ const a1=[V.A[0][0],V.A[1][0]], a2=[V.A[0][1],V.A[1][1]], p1=[a1[0]*V.x[0], a1[1]*V.x[0]], r=Ax(V); pts = [a1, a2, p1, r]; if (V.b.length===2) pts.push(V.b); }
   else if (V.kind === "rows"){ const s = rowSolution(V); pts = s ? [s] : []; }
+  else if (V.kind === "arrows"){ pts = V.items.map(it => it.v); }
   else if (V.kind === "null"){ const xs = [V.x]; const xp = particular(V); if (xp) xs.push(xp); pts = xs; }
   else if (V.kind !== "transform") return 3;
   else { const M = to, F = [[1,0],[0,1],[1,1],[2.3,2.05],[1.3,2.05],[2.3,1.75],[1.6,0.3]];
@@ -104,6 +108,7 @@ function draw(){
   if (view.kind === "table"){ box.hidden = false; renderTable(); return; }
   box.hidden = true;
   if (view.kind === "four"){ drawFour(w, h); return; }
+  if (view.kind === "arrows"){ drawArrows(w, h); return; }
   const ext = extent(), s = Math.min(w, h) / (2*ext), ox = w/2, oy = h/2;
   const P = (x, y) => [ox + (A[0][0]*x + A[0][1]*y)*s, oy - (A[1][0]*x + A[1][1]*y)*s];
   const Q = (x, y) => [ox + x*s, oy - y*s];
@@ -170,6 +175,27 @@ function draw(){
     $("readout").innerHTML = `<span style="color:var(--ihat)">${eq(0)}</span><span style="color:var(--jhat)">${eq(1)}</span><span>${sol ? "the lines meet once" : rankOf(V.A.map((r, i) => [r[0], r[1], V.b[i]])) > rankOf(V.A) ? "parallel lines: no solution" : "same line: infinitely many solutions"}</span>`;
   }
   ctx.fillStyle = css("--ink"); ctx.beginPath(); ctx.arc(O[0], O[1], 3.2, 0, 7); ctx.fill();
+}
+const PALETTE = ["--ink", "--ihat", "--jhat", "--accent", "--muted"];
+function drawArrows(w, h){
+  const ext = extent(), s = Math.min(w, h) / (2*ext), ox = w/2, oy = h/2;
+  const Q = (x, y) => [ox + x*s, oy - y*s], N = Math.ceil(Math.max(w, h) / s) + 2;
+  ctx.strokeStyle = css("--grid"); ctx.lineWidth = 1;
+  for (let i = -N; i <= N; i++){ if (i){ line(Q(i, -N), Q(i, N)); line(Q(-N, i), Q(N, i)); } }
+  ctx.strokeStyle = css("--muted"); ctx.globalAlpha = .6; ctx.lineWidth = 1.4; line(Q(-N, 0), Q(N, 0)); line(Q(0, -N), Q(0, N)); ctx.globalAlpha = 1;
+  const its = view.items, f = v => +(+(Math.abs(v) < 5e-4 ? 0 : v).toFixed(3));
+  for (let k = 1; k < its.length; k++){ ctx.setLineDash([5, 5]); ctx.strokeStyle = css("--muted"); ctx.lineWidth = 1.4; line(Q(...its[k-1].v), Q(...its[k].v)); ctx.setLineDash([]); }
+  // later arrows first so the starting vector stays on top when they coincide
+  for (let k = its.length - 1; k >= 0; k--){ const c = css(PALETTE[k % PALETTE.length]); arrow(Q(0, 0), Q(...its[k].v), c, k === 0 ? 3.6 : 2.8); }
+  const back0 = its.length > 1 && near(its[0].v[0], its[its.length-1].v[0]) && near(its[0].v[1], its[its.length-1].v[1]);
+  const seen = [];
+  its.forEach((it, k) => { if (back0 && k === its.length - 1) return; const P = Q(...it.v); const dup = seen.filter(p => Math.hypot(p[0]-P[0], p[1]-P[1]) < 14).length; seen.push(P);
+    label(P, it.label, css(PALETTE[k % PALETTE.length]), 10, -8 + dup*16); });
+  if (back0){ const P = Q(...its[0].v); ctx.strokeStyle = css("--ok"); ctx.lineWidth = 2.5; ctx.beginPath(); ctx.arc(P[0], P[1], 11, 0, 7); ctx.stroke();
+    label(P, "back to " + its[0].label + " ✓", css("--ok"), 16, 18); }
+  ctx.fillStyle = css("--ink"); ctx.beginPath(); ctx.arc(ox, oy, 3.2, 0, 7); ctx.fill();
+  const back = its.length > 1 && near(its[0].v[0], its[its.length-1].v[0]) && near(its[0].v[1], its[its.length-1].v[1]);
+  $("readout").innerHTML = its.map(it => `<span>${it.label} = (${f(it.v[0])}, ${f(it.v[1])})</span>`).join("") + (back ? '<span class="good">back where it started</span>' : "");
 }
 function drawFour(w, h){
   const M = view.A, r = rankOf(M), gap = 18, wide = w > 560;
@@ -250,6 +276,7 @@ window.__pyrows = (M, b) => { last = {kind:"rows", A:L2(M), b:Array.from(b)}; se
 window.__pytable = items => { last = {kind:"table", items: Array.from(items).map(t => ({label: String(t[0]), M: L2(t[1]), piv: Array.from(t[2]).map(Number), ndim: Number(t[3])}))};
   last.items.forEach(it => { if (it.ndim === 1) it.vec = it.M.map(r => r[0]); }); setView(last); };
 window.__pynull = (M, x, b) => { last = {kind:"null", A:L2(M), x:Array.from(x), b:Array.from(b)}; setView(last); };
+window.__pyarrows = items => { last = {kind:"arrows", items: Array.from(items).map(t => ({label: String(t[0]), v: Array.from(t[1]).map(Number)}))}; setView(last); };
 window.__pyfour = M => { last = {kind:"four", A:L2(M)}; setView(last); };
 window.__pyready = () => { ready = true; $("pystatus").textContent = "Python ready"; $("pystatus").classList.add("ready"); $("run").disabled = false; };
 function sys(msg){ const sp = document.createElement("span"); sp.className = "sys"; sp.textContent = msg + "\n"; out.appendChild(sp); }

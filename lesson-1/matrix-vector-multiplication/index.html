@@ -29,34 +29,34 @@
   <article class="page">
     <div class="kicker">Strang §1.3 · Matrices</div>
     <h1>Ax is a combination of the columns of A.</h1>
-    <p class="lead">Stack v and w side by side as the columns of a matrix A. Put the numbers c and d into a vector x. Then Ax is exactly cv + dw.</p>
+    <p class="lead">Put the vectors v and w side by side as the columns of a matrix A, and put the numbers c and d into a vector x. Then the product Ax is exactly the combination cv + dw.</p>
     <div class="key"><span class="mx"><span class="c1">a₁₁</span><span class="c2">a₁₂</span><span class="c1">a₂₁</span><span class="c2">a₂₂</span></span> <span class="vec "><span>x₁</span><span>x₂</span></span> = x₁ <span class="vec i"><span>a₁₁</span><span>a₂₁</span></span> + x₂ <span class="vec j"><span>a₁₂</span><span>a₂₂</span></span></div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>A matrix is a block of numbers. Its columns are vectors.</li><li><b>Ax is a combination of the columns of A</b>, with the entries of x as the weights.</li><li>Each entry of Ax can also be computed as a dot product of a row of A with x. Both ways give the same numbers.</li><li>The column way tells us what Ax means. The row way is how we usually calculate it by hand.</li></ol></div>
     <div class="prose">
-<h2>Think: a shopping basket</h2>
-<p>You buy eggs and rice. Each food gives you roughly this much protein and carbs:</p>
-<div class="worked">
-<div class="row">1 egg = <span class="i">(6 g protein, 1 g carbs)</span> &nbsp;&nbsp; 1 bowl of rice = <span class="j">(4 g protein, 45 g carbs)</span></div>
-<div class="row">A = <span class="mx"><span class="c1">6</span><span class="c2">4</span><span class="c1">1</span><span class="c2">45</span></span> &nbsp; x = (2 eggs, 1 bowl)</div>
-</div>
-<p>Each column of A is one food. The vector x says how many of each you take. Ax is the total in your basket.</p>
-<h2>Two ways to add it up</h2>
-<ul>
-<li><b>By columns (whole foods):</b> 2 eggs + 1 bowl = 2·(6, 1) + 1·(4, 45) = (16, 47).</li>
-<li><b>By rows (one nutrient at a time):</b> protein 6·2 + 4·1 = 16. Carbs 1·2 + 45·1 = 47.</li>
-</ul>
-<p>Same totals. The row way is how you calculate by hand: each entry is a dot product of a row with x. The column way is how you think: Ax is a mix of the columns.</p>
-<p>Strang's advice: compute by rows if you like, but think by columns. The column view tells you what Ax can be.</p>
-<h2>Watch out</h2>
-<p>x needs one number per column. Two foods, two quantities. A 2 by 2 matrix needs a vector with 2 entries.</p>
-<p>In the lab, the code computes Ax both ways. The plane draws the column way: x₁ times column 1, then x₂ times column 2 from its tip.</p>
+<h3>From combinations to matrices</h3>
+<p>On the last slide we wrote combinations like c(2, 1) + d(−1, 1). Writing out the vectors every time gets long. So we store them as the columns of a matrix, and store c and d in a vector x:</p>
+<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>−1</span><span>1</span><span>1</span></span> &nbsp;&nbsp; x = (c, d) &nbsp;&nbsp; Ax = c·(2, 1) + d·(−1, 1)</div></div>
+<p>That is the definition we will use: <b>Ax is x₁ times column 1, plus x₂ times column 2</b>. If A had more columns, x would need more entries, one weight per column.</p>
+<h3>An everyday picture: a shopping basket</h3>
+<p>You buy eggs and rice. One egg gives about 6 g of protein and 1 g of carbohydrate. One bowl of rice gives about 4 g of protein and 45 g of carbohydrate. Put each food in a column:</p>
+<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>6</span><span>4</span><span>1</span><span>45</span></span> &nbsp;&nbsp; x = (2 eggs, 1 bowl)</div></div>
+<p>The total in your basket is 2·(6, 1) + 1·(4, 45) = (16, 47): 16 g of protein and 47 g of carbohydrate. That total is Ax. Adding up whole foods is the column way.</p>
+<h3>The row way gives the same answer</h3>
+<p>You could also add up one nutrient at a time. Protein: 6·2 + 4·1 = 16. Carbohydrate: 1·2 + 45·1 = 47. Each of these is a <b>dot product</b> of a row of A with x: multiply matching entries and add.</p>
+<p>Both ways always agree, because they add the same products in a different order. When we calculate by hand, rows are usually quicker. When we want to understand what Ax can be, columns are the way to think. Strang returns to this point again and again, and so will we.</p>
+<h3>Watch the sizes</h3>
+<p>For Ax to make sense, x must have one entry for each column of A. The result has one entry for each row. A 2 by 3 matrix (2 rows, 3 columns) takes a vector with 3 entries and produces a vector with 2 entries.</p>
     </div>
     <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · Both ways</h3>
 <p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>1</span><span>2</span><span>5</span></span>, x = (1, 2).</p><div class="worked"><div class="row">By columns: 1·(3, 2) + 2·(1, 5) = (5, 12)</div><div class="row">By rows: (3·1 + 1·2, 2·1 + 5·2) = (5, 12)</div></div>
 </section>
 <section class="example"><h3>Example 2 · A wide matrix</h3>
 <p>A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>2</span><span>3</span><span>1</span><span>1</span></span> has 3 columns, so x needs 3 entries. Take x = (2, 1, 1).</p><div class="worked"><div class="row">Ax = 2·(1, 3) + 1·(0, 1) + 1·(2, 1) = (4, 8)</div></div><p>Three columns in, a vector with 2 entries out: one per row of A.</p>
-</section></div>
-    <h2 class="practice-h">Problems</h2><p class="practice-note">Try each one before you open the solution.</p><div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
+</section>
+<section class="example"><h3>Example 3 · Picking out a column</h3>
+<p>What is A times x = (1, 0)? And times (0, 1)?</p><div class="worked"><div class="row">A(1, 0) = 1·(column 1) + 0·(column 2) = column 1</div><div class="row">A(0, 1) = column 2</div></div><p>So the columns of A are exactly what A does to (1, 0) and (0, 1). We use this again on slide 5.</p>
+</section><!-- problems -->
+<div class="problem"><span class="pnum">1</span><div class="pbody">
 <p>Compute Ax by columns for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>4</span><span>2</span><span>0</span></span> and x = (3, −1).</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
 <p>3·(1, 2) − 1·(4, 0) = (3 − 4, 6 − 0) = (−1, 6).</p>
@@ -74,6 +74,7 @@
 <p>x needs 2 entries, one per column. Ax has 3 entries, one per row.</p>
 </div></details>
 </div></div></div>
+    
   </article>
 
   <section class="labsec" aria-label="Lab">

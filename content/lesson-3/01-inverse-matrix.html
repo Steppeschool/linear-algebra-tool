@@ -4,9 +4,9 @@ seo_title: Inverse Matrix Explained Visually
 description: The inverse matrix undoes A: apply A, then its inverse, and every point is back where it started. See it on the plane and build one in Python. Strang §2.5.
 kicker: Strang §2.5 · Inverse matrices
 title: The inverse undoes A.
-task: Fill in S_inv so it slides the plane back. The output should print the identity.
-preview: {"kind":"transform","M":[[1,1],[0,1]]}
-check: isT(V) && eqM(V.M, [[1,-1],[0,1]])
+task: Fill in S_inv so that the last arrow lands back on v.
+preview: {"kind":"arrows","items":[{"label":"v","v":[1,2]},{"label":"S v","v":[3,2]}]}
+check: isA(V) && V.items.length >= 3 && close(V.items[V.items.length - 1].v, V.items[0].v) && !close(V.items[1].v, V.items[0].v)
 ---
 <!-- lead -->
 A⁻¹ is the matrix that undoes A. Apply A, then A⁻¹, and every point is back where it started.
@@ -37,10 +37,16 @@ A⁻¹A = I &nbsp;&nbsp;&nbsp; Ax = b &nbsp;⇔&nbsp; x = A⁻¹b
 import numpy as np
 
 S = np.array([[1., 1.],
-              [0., 1.]])        # shear
+              [0., 1.]])        # a shear: slides each point right by its height
 
-S_inv = np.array([[1., 0.],     # your turn: slide back
+v = np.array([1., 2.])          # start here
+Sv = S @ v                      # S moves v to (3, 2)
+
+S_inv = np.array([[1., 0.],     # your turn: the matrix that slides back
                   [0., 1.]])
+back = S_inv @ Sv               # should be v again
 
-print("S_inv @ S =", S_inv @ S)
-show(S_inv)
+print("v           =", v)
+print("S v         =", Sv)
+print("S_inv (S v) =", back)
+arrows(("v", v), ("S v", Sv), ("S_inv S v", back))

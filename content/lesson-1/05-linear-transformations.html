@@ -9,28 +9,31 @@ preview: {"kind":"transform","M":[[0.8660254037844387,-0.5],[0.5,0.8660254037844
 check: isT(V) && eqM(V.M, [[0,-1],[1,0]])
 ---
 <!-- lead -->
-Think of A as a machine. A vector v goes in, Av comes out. Do that to every point at once and the whole plane moves.
+A matrix can also be seen as a machine that moves points. Feed in a vector v and out comes Av. Do this to every point at once and the whole plane moves.
 <!-- key -->
 A <span class="vec i"><span>1</span><span>0</span></span> = column 1 &nbsp;&nbsp;&nbsp; A <span class="vec j"><span>0</span><span>1</span></span> = column 2
+<!-- ideas -->
+<ol class="ideas"><li>A matrix sends each vector v to a new vector Av. Applied to every point, it moves the whole plane.</li><li>Lines stay straight, evenly spaced lines stay evenly spaced, and the origin stays fixed.</li><li><b>Column 1 is where (1, 0) lands. Column 2 is where (0, 1) lands.</b> Those two facts decide everything.</li><li>The area of any shape is multiplied by |det A|.</li></ol>
 <!-- prose -->
-<h2>Think: a sheet of graph paper</h2>
-<p>Pin a sheet of graph paper at the origin. You may stretch it, turn it, slant it or flip it over. You may not bend it, fold it or tear it.</p>
-<p>That is everything a 2 by 2 matrix can do. Straight lines stay straight. Evenly spaced lines stay evenly spaced. The pin never moves.</p>
-<h2>Two landmarks are enough</h2>
-<p>If you know where two landmarks moved, you can work out where everything else went. The landmarks are <span class="i">(1, 0)</span> and <span class="j">(0, 1)</span>.</p>
-<p>Every point is a combination of them: (x, y) = x·(1, 0) + y·(0, 1). The machine keeps combinations intact, so A(x, y) = x·(column 1) + y·(column 2). It is slide 2 again.</p>
-<p>To build any matrix, decide where the two landmarks should land and write those as the columns.</p>
-<h2>Worked example: rotation</h2>
+<h3>Think of graph paper</h3>
+<p>Pin a sheet of graph paper at the origin. You may stretch it, turn it, slant it, or flip it over. You may not bend it, fold it or tear it. Every 2 by 2 matrix does exactly one of these motions (or a mix of them) to the plane.</p>
+<p>Why can't a matrix bend the paper? Because matrices respect combinations: A(cv + dw) = cAv + dAw. Points that were evenly spaced along a straight line stay evenly spaced along a straight line.</p>
+<h3>Two landmarks decide everything</h3>
+<p>Every point can be written as a combination of the two basic vectors: (x, y) = x·(1, 0) + y·(0, 1). Since A respects combinations,</p>
+<div class="worked"><div class="row">A(x, y) = x·A(1, 0) + y·A(0, 1) = x·(column 1) + y·(column 2)</div></div>
+<p>This is slide 2 again, seen in a new way. If we know where the two landmarks (1, 0) and (0, 1) go, we know where every point goes.</p>
+<p>That also tells us how to build a matrix: decide where (1, 0) and (0, 1) should land, and write those two vectors as the columns.</p>
+<h3>Building a rotation</h3>
+<p>To turn the plane by an angle θ, the vector (1, 0) must go to (cos θ, sin θ), and (0, 1) must go to (−sin θ, cos θ). Those are the columns:</p>
 <div class="worked">
-<div>Turning by θ sends (1, 0) to (cos θ, sin θ) and (0, 1) to (−sin θ, cos θ). Those are the columns:</div>
-<div class="row">Q = <span class="mx"><span class="c1">cos θ</span><span class="c2">−sin θ</span><span class="c1">sin θ</span><span class="c2">cos θ</span></span></div>
-<div>For 90°: cos = 0 and sin = 1, so Q = <span class="mx"><span class="c1">0</span><span class="c2">-1</span><span class="c1">1</span><span class="c2">0</span></span>. It sends (1, 0) to (0, 1), a quarter turn.</div>
+<div class="row">Q = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>cos θ</span><span>−sin θ</span><span>sin θ</span><span>cos θ</span></span></div>
+<div>For a quarter turn, θ = 90°: cos θ = 0 and sin θ = 1, so Q = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>−1</span><span>1</span><span>0</span></span>. It sends (1, 0) to (0, 1).</div>
 </div>
-<h2>Area: the determinant</h2>
-<p>Watch the shaded unit square. After the move it is a parallelogram with area |det A| (§5.3). Every other shape scales by the same factor.</p>
-<p>A rotation has det = cos²θ + sin²θ = 1. It turns the paper without stretching it.</p>
-<h2>Where you meet this</h2>
-<p>An IMU measures in the drone's own axes. A 3 by 3 rotation matrix turns those readings into the world's axes. That is what an attitude estimator keeps updating.</p>
+<h3>What happens to areas</h3>
+<p>Watch the shaded unit square in the lab. The matrix turns it into a parallelogram, and the area of that parallelogram is |det A| = |ad − bc|. Every other shape has its area multiplied by the same number (Strang §5.3).</p>
+<p>A rotation has det Q = cos²θ + sin²θ = 1. It turns the paper without stretching it.</p>
+<h3>Where this is used</h3>
+<p>An IMU measures acceleration along the drone's own axes. A 3 by 3 rotation matrix turns those readings into north, east and up. An attitude estimator spends its time keeping that matrix up to date.</p>
 <!-- examples -->
 <section class="example"><h3>Example 1 · Stretch sideways</h3>
 <p>Triple every x-coordinate, keep y: (1, 0) → (3, 0) and (0, 1) → (0, 1).</p><div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>0</span><span>0</span><span>1</span></span> &nbsp;&nbsp; det A = 3</div><div class="row">(1, 1) → (3, 1). Every area becomes 3 times larger</div></div>
@@ -38,7 +41,9 @@ A <span class="vec i"><span>1</span><span>0</span></span> = column 1 &nbsp;&nbsp
 <section class="example"><h3>Example 2 · Half a turn</h3>
 <p>Rotate by 180°: cos 180° = −1, sin 180° = 0.</p><div class="worked"><div class="row">Q = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−1</span><span>0</span><span>0</span><span>−1</span></span> &nbsp;&nbsp; det Q = 1</div><div class="row">(2, 1) → (−2, −1): every vector points the opposite way</div></div>
 </section>
-<!-- problems -->
+<section class="example"><h3>Example 3 · Squash onto a line</h3>
+<p>Where does A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>1</span><span>2</span></span> send the plane?</p><div class="worked"><div class="row">(1, 0) → (1, 1) and (0, 1) → (2, 2): both columns lie on the line y = x</div><div class="row">det A = 1·2 − 2·1 = 0</div></div><p>Every point lands on the line y = x, and every area becomes 0. This is the dependent case from slide 3, seen as a motion.
+</section><!-- problems -->
 <div class="problem"><span class="pnum">1</span><div class="pbody">
 <p>Find the matrix that sends (1, 0) to (0, 2) and (0, 1) to (1, 0). What does det say?</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">

@@ -31,6 +31,7 @@
     <h1>The inverse undoes A.</h1>
     <p class="lead">A⁻¹ is the matrix that undoes A. Apply A, then A⁻¹, and every point is back where it started.</p>
     <div class="key">A⁻¹A = I &nbsp;&nbsp;&nbsp; Ax = b &nbsp;⇔&nbsp; x = A⁻¹b</div>
+    
     <div class="prose">
 <h2>Think: rewind</h2>
 <p>A moves the graph paper: it stretches, turns or slants it. A⁻¹ plays that film backwards. After both, nothing has moved.</p>
@@ -60,7 +61,7 @@
   <section class="labsec" aria-label="Lab">
     <div class="exercise" id="exercise">
       <span class="tag">Exercise</span>
-      <span class="task">Fill in S_inv so it slides the plane back. The output should print the identity.</span>
+      <span class="task">Fill in S_inv so that the last arrow lands back on v.</span>
       <span class="hint" id="hint">Edit the code and press Run.</span>
     </div>
     <div class="lab">
@@ -78,13 +79,19 @@
             <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
 
 S = np.array([[1., 1.],
-              [0., 1.]])        # shear
+              [0., 1.]])        # a shear: slides each point right by its height
 
-S_inv = np.array([[1., 0.],     # your turn: slide back
+v = np.array([1., 2.])          # start here
+Sv = S @ v                      # S moves v to (3, 2)
+
+S_inv = np.array([[1., 0.],     # your turn: the matrix that slides back
                   [0., 1.]])
+back = S_inv @ Sv               # should be v again
 
-print(&quot;S_inv @ S =&quot;, S_inv @ S)
-show(S_inv)</textarea>
+print(&quot;v           =&quot;, v)
+print(&quot;S v         =&quot;, Sv)
+print(&quot;S_inv (S v) =&quot;, back)
+arrows((&quot;v&quot;, v), (&quot;S v&quot;, Sv), (&quot;S_inv S v&quot;, back))</textarea>
           </div>
         </div>
         <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
@@ -111,7 +118,7 @@ show(S_inv)</textarea>
   Explanations, examples and code are original. Made by <a href="https://www.steppeschool.com">Steppeschool</a>.
 </footer>
 
-<script>window.SLIDE = {"slug": "inverse-matrix", "lesson": "lesson-3", "assets": "../../assets/", "preview": {"kind": "transform", "M": [[1, 1], [0, 1]]}, "check": "isT(V) && eqM(V.M, [[1,-1],[0,1]])"};</script>
+<script>window.SLIDE = {"slug": "inverse-matrix", "lesson": "lesson-3", "assets": "../../assets/", "preview": {"kind": "arrows", "items": [{"label": "v", "v": [1, 2]}, {"label": "S v", "v": [3, 2]}]}, "check": "isA(V) && V.items.length >= 3 && close(V.items[V.items.length - 1].v, V.items[0].v) && !close(V.items[1].v, V.items[0].v)"};</script>
 <script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
 <script src="../../assets/lab.js" defer></script>
 <script src="../../assets/nav.js" defer></script>

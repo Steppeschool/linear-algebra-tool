@@ -29,38 +29,43 @@
   <article class="page">
     <div class="kicker">Strang §2.4 · Rules for matrix operations</div>
     <h1>AB means: apply B first, then A.</h1>
-    <p class="lead">Multiplying matrices chains two moves into one. (AB)v = A(Bv): B moves the plane first, then A moves the result.</p>
+    <p class="lead">Multiplying two matrices chains two motions into one. In AB, the matrix B acts first and A acts second, because (AB)v = A(Bv).</p>
     <div class="key">AB = A <span class="vec" style="grid-template-columns:auto auto;gap:0 10px"><span>b₁</span><span>b₂</span></span> = <span class="vec" style="grid-template-columns:auto auto;gap:0 10px"><span>Ab₁</span><span>Ab₂</span></span></div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>AB means: apply B, then apply A. Read products from right to left.</li><li>Column j of AB is A times column j of B.</li><li>Usually AB ≠ BA. The order of the motions matters.</li><li>Grouping does not matter: (AB)C = A(BC). And det(AB) = det(A)·det(B).</li></ol></div>
     <div class="prose">
-<h2>Think: socks and shoes</h2>
-<p>Socks first, then shoes. Swap the order and you get a very different result. Matrix moves work the same way.</p>
-<p>Read a product from right to left, like f(g(x)) in maths. In AB, B acts first.</p>
-<h2>Column by column</h2>
-<p>Where does (1, 0) end up after both moves? B sends it to b₁, the first column of B. Then A sends that to Ab₁. So the first column of AB is A times the first column of B. Same for the second column.</p>
-<p>You already know matrix times vector. Matrix times matrix is just that, once per column.</p>
-<h2>Worked example</h2>
+<h3>Socks and shoes</h3>
+<p>You put on socks first, then shoes. Do it in the other order and the result is very different. Two motions of the plane behave the same way: shear then turn is not the same as turn then shear.</p>
+<p>In the product AB the matrix next to the vector acts first: (AB)v = A(Bv). So we read products from right to left, just as f(g(x)) applies g first.</p>
+<h3>How to compute AB</h3>
+<p>Where does (1, 0) end up after both motions? First B sends it to its first column, b₁. Then A sends b₁ to Ab₁. So the first column of AB is A times the first column of B, and the same holds for every column:</p>
+<div class="worked"><div class="row">AB = A [ b₁ &nbsp; b₂ ] = [ Ab₁ &nbsp; Ab₂ ]</div></div>
+<p>So multiplying two matrices is nothing new: it is matrix times vector, once for each column of B.</p>
+<h3>A worked example</h3>
 <div class="worked">
-<div>R turns by 90°. S is a shear.</div>
-<div class="row">R = <span class="mx"><span class="c1">0</span><span class="c2">-1</span><span class="c1">1</span><span class="c2">0</span></span> &nbsp; S = <span class="mx"><span class="c1">1</span><span class="c2">1</span><span class="c1">0</span><span class="c2">1</span></span></div>
-<div class="row">RS = <span class="mx"><span class="c1">0</span><span class="c2">-1</span><span class="c1">1</span><span class="c2">1</span></span> &nbsp; SR = <span class="mx"><span class="c1">1</span><span class="c2">-1</span><span class="c1">1</span><span class="c2">0</span></span></div>
-<div>RS shears, then turns. SR turns, then shears. Different matrices, different moves. Look where the F ends up.</div>
+<div>R turns by 90°, and S is a shear:</div>
+<div class="row">R = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>−1</span><span>1</span><span>0</span></span> &nbsp; S = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>0</span><span>1</span></span></div>
+<div class="row">RS = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>−1</span><span>1</span><span>1</span></span> &nbsp; SR = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>1</span><span>0</span></span></div>
+<div>RS shears first and then turns. SR turns first and then shears. Different matrices, different motions. Watch where the F ends up in the lab.</div>
 </div>
-<h2>The rules</h2>
+<h3>The rules</h3>
 <ul>
-<li><b>AB is usually not BA.</b> Order matters.</li>
-<li><b>(AB)C = A(BC).</b> Either way, C acts first, then B, then A. Brackets only change how you write it.</li>
-<li><b>det(AB) = det(A)·det(B).</b> If B doubles areas and A triples them, together they multiply areas by 6 (chapter 5).</li>
+<li><b>AB is usually not BA.</b> Some pairs do commute (two rotations, for example), but we can never assume it.</li>
+<li><b>(AB)C = A(BC).</b> Either way C acts first, then B, then A. The brackets only change how we write it.</li>
+<li><b>det(AB) = det(A)·det(B).</b> If B doubles every area and A triples it, together they multiply areas by 6.</li>
 </ul>
-<h2>Where you meet this</h2>
-<p>A robot arm is a chain of rotations, one per joint. To find the gripper, multiply them in joint order. Swap two and the gripper ends up somewhere else.</p>
+<h3>Where this is used</h3>
+<p>A robot arm is a chain of joints, each one a rotation. The position of the gripper comes from multiplying those matrices in joint order. Swap two of them and the gripper ends up somewhere else.</p>
     </div>
     <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · Two orders</h3>
 <p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>0</span><span>1</span></span> (shear), B = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>0</span><span>0</span><span>1</span></span> (stretch).</p><div class="worked"><div class="row">AB = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>2</span><span>0</span><span>1</span></span> &nbsp;&nbsp; BA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>4</span><span>0</span><span>1</span></span></div></div><p>Stretch then shear differs from shear then stretch.</p>
 </section>
 <section class="example"><h3>Example 2 · Two quarter turns</h3>
 <p>R = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>−1</span><span>1</span><span>0</span></span> turns by 90°.</p><div class="worked"><div class="row">RR = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−1</span><span>0</span><span>0</span><span>−1</span></span></div></div><p>Two quarter turns make a half turn. For rotations, multiplying adds the angles.</p>
-</section></div>
-    <h2 class="practice-h">Problems</h2><p class="practice-note">Try each one before you open the solution.</p><div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
+</section>
+<section class="example"><h3>Example 3 · A pair that commutes</h3>
+<p>Two stretches: A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>0</span><span>0</span><span>1</span></span>, B = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>3</span></span>.</p><div class="worked"><div class="row">AB = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>0</span><span>0</span><span>3</span></span> = BA</div></div><p>Stretching along x and stretching along y don't interfere, so the order doesn't matter here. Diagonal matrices always commute with each other.
+</section><!-- problems -->
+<div class="problem"><span class="pnum">1</span><div class="pbody">
 <p>Compute AB and BA for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>0</span></span> and B = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>1</span><span>0</span></span>.</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
 <p>AB = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>0</span><span>1</span></span> and BA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>1</span><span>1</span></span>. Different.</p>
@@ -78,6 +83,7 @@
 <p>Column 1 of AB = A times column 1 of B = A·(1, 1) = (1 + 2, 3 + 4) = (3, 7).</p>
 </div></details>
 </div></div></div>
+    
   </article>
 
   <section class="labsec" aria-label="Lab">

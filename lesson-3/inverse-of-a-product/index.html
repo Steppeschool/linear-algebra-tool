@@ -31,6 +31,7 @@
     <h1>Undo in reverse order.</h1>
     <p class="lead">AB means B first, then A. To undo it, you undo the last move first: A⁻¹ first, then B⁻¹. Written as a product, that is B⁻¹A⁻¹.</p>
     <div class="key">(AB)⁻¹ = B⁻¹A⁻¹ &nbsp;&nbsp;&nbsp; (ABC)⁻¹ = C⁻¹B⁻¹A⁻¹</div>
+    
     <div class="prose">
 <h2>Think: socks and shoes, taken off</h2>
 <p>You put on socks, then shoes. In the evening you take off the shoes first, then the socks. Same two steps, reverse order.</p>
@@ -58,7 +59,7 @@
   <section class="labsec" aria-label="Lab">
     <div class="exercise" id="exercise">
       <span class="tag">Exercise</span>
-      <span class="task">Undo R @ S: show the product of the two inverses in the right order.</span>
+      <span class="task">Fix the order in undo so that the last arrow comes back to v.</span>
       <span class="hint" id="hint">Edit the code and press Run.</span>
     </div>
     <div class="lab">
@@ -80,12 +81,18 @@ R = np.array([[0., -1.],
 S = np.array([[1., 1.],
               [0., 1.]])       # shear
 
+v = np.array([1., 1.])
+Sv = S @ v                     # S acts first
+RSv = R @ Sv                   # then R: this is (R S) v
+
 R_inv = np.linalg.inv(R)
 S_inv = np.linalg.inv(S)
-
 undo = R_inv @ S_inv           # is this the right order?
-print(&quot;undo @ (R @ S) =&quot;, undo @ (R @ S))
-show(undo)</textarea>
+back = undo @ RSv
+
+print(&quot;R S v        =&quot;, RSv)
+print(&quot;undo (R S v) =&quot;, back)
+arrows((&quot;v&quot;, v), (&quot;S v&quot;, Sv), (&quot;R S v&quot;, RSv), (&quot;undo (R S v)&quot;, back))</textarea>
           </div>
         </div>
         <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
@@ -112,7 +119,7 @@ show(undo)</textarea>
   Explanations, examples and code are original. Made by <a href="https://www.steppeschool.com">Steppeschool</a>.
 </footer>
 
-<script>window.SLIDE = {"slug": "inverse-of-a-product", "lesson": "lesson-3", "assets": "../../assets/", "preview": {"kind": "transform", "M": [[0, -1], [1, 1]]}, "check": "isT(V) && eqM(V.M, [[1,1],[-1,0]])"};</script>
+<script>window.SLIDE = {"slug": "inverse-of-a-product", "lesson": "lesson-3", "assets": "../../assets/", "preview": {"kind": "arrows", "items": [{"label": "v", "v": [1, 1]}, {"label": "S v", "v": [2, 1]}, {"label": "R S v", "v": [-1, 2]}]}, "check": "isA(V) && V.items.length >= 3 && close(V.items[V.items.length - 1].v, V.items[0].v)"};</script>
 <script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
 <script src="../../assets/lab.js" defer></script>
 <script src="../../assets/nav.js" defer></script>

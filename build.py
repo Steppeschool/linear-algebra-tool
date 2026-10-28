@@ -209,6 +209,7 @@ def slide_page(lesson, slides, i, next_lesson=None, practice=None):
     <h1>{e(s['title'])}</h1>
     <p class="lead">{s['lead']}</p>
     <div class="key">{s['key']}</div>
+    {f'<div class="ideas-box"><div class="ideas-h">Key ideas</div>{s["ideas"]}</div>' if s.get("ideas") else ""}
     <div class="prose">
 {s['prose']}
     </div>
