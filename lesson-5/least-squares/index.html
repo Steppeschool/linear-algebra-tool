@@ -27,9 +27,11 @@
 
 <main class="lesson">
   <article class="page">
+    <div class="slide-head"><div>
     <div class="kicker">Strang §4.3 · Least squares approximations</div>
     <h1>Least squares: the best answer when there is no exact one.</h1>
     <p class="lead">With more equations than unknowns, Ax = b usually has no solution. Least squares picks the x̂ that makes the error ‖b − Ax‖ as small as possible. Geometrically, Ax̂ is the projection of b onto the column space, and x̂ solves AᵀAx̂ = Aᵀb.</p>
+    </div><img class="slide-art" src="../../assets/cards/lesson-5--least-squares.webp" alt="" width="640" height="360" decoding="async"></div>
     <div class="key">AᵀA x̂ = Aᵀb &nbsp;&nbsp; e = b − Ax̂ &nbsp;&nbsp; Aᵀe = 0</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Ax = b is solvable only when b lies in the column space C(A). Noisy data almost never does.</li><li>Least squares minimizes E = ‖b − Ax‖², the sum of the squared errors.</li><li>The best Ax̂ is the projection of b onto C(A). The error is perpendicular to every column: Aᵀe = 0.</li><li>That condition is the <b>normal equations</b> AᵀAx̂ = Aᵀb.</li><li>AᵀA is square and invertible when the columns of A are independent.</li></ol></div>
     <div class="prose">

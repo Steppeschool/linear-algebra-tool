@@ -1,9 +1,11 @@
 <!doctype html><html><head><meta charset="utf-8"><meta name="robots" content="noindex"></head><body>
 <main class="lesson">
   <article class="page">
+    <div class="slide-head"><div>
     <div class="kicker">Strang §3.2 · Solving Ax = 0 and Rx = 0</div>
     <h1>Free columns are yours to choose. Pivot columns follow.</h1>
     <p class="lead">To find the whole nullspace, reduce A to its reduced row echelon form R. Columns with pivots belong to pivot variables, the others to free variables. Setting one free variable to 1 and the rest to 0 gives a special solution, and every nullspace vector is a combination of these.</p>
+    </div><img class="slide-art" src="https://linearalgebra.steppeschool.com/assets/cards/lesson-4--rref-and-special-solutions.webp" alt="" width="640" height="360" decoding="async"></div>
     <div class="key"><span class="mx" style="grid-template-columns:repeat(4,auto)"><span>1</span><span>2</span><span>1</span><span>3</span><span>2</span><span>4</span><span>3</span><span>8</span></span> &nbsp;→&nbsp; R = <span class="mx" style="grid-template-columns:repeat(4,auto)"><span>1</span><span>2</span><span>0</span><span>1</span><span>0</span><span>0</span><span>1</span><span>2</span></span></div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Elimination does not change the nullspace: Ax = 0 and Rx = 0 have the same solutions.</li><li><b>Pivot variables</b> belong to columns with pivots. <b>Free variables</b> belong to the other columns.</li><li>Each free variable gives one <b>special solution</b>.</li><li>An m by n matrix of rank r has n − r special solutions, and every vector in N(A) is a combination of them.</li></ol></div>
     <div class="prose">

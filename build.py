@@ -205,6 +205,25 @@ def review_block(pr):
 """
 
 
+def card_img(lesson, slug):
+    """Path (from the site root) of a slide's illustration; recap and practice share one each."""
+    f = ROOT / "assets" / "cards" / f"{lesson['dir']}--{slug}.webp"
+    if f.exists():
+        return f"assets/cards/{f.name}"
+    return "assets/cards/practice.webp" if slug == "practice" else "assets/cards/recap.webp"
+
+
+def ideas_text(s, k=3):
+    items = re.findall(r"<li>(.*?)</li>", s.get("ideas", ""), re.S)
+    return [re.sub(r"<[^>]+>", "", t).strip() for t in items[:k]]
+
+
+def thumb(src, peek_title, items):
+    li = "".join(f"<li>{e(t)}</li>" for t in items)
+    return (f'<span class="thumb"><img src="{src}" alt="" loading="lazy" decoding="async" width="640" height="360">'
+            f'<span class="peek"><span class="peek-h">{e(peek_title)}</span><ul>{li}</ul></span></span>')
+
+
 def slide_page(lesson, slides, i, next_lesson=None, practice=None):
     s = slides[i]
     prefix = "../../"
@@ -238,9 +257,11 @@ def slide_page(lesson, slides, i, next_lesson=None, practice=None):
 
 <main class="lesson">
   <article class="page">
+    <div class="slide-head"><div>
     <div class="kicker">{e(s['kicker'])}</div>
     <h1>{e(s['title'])}</h1>
     <p class="lead">{s['lead']}</p>
+    </div><img class="slide-art" src="{prefix}{card_img(lesson, s['slug'])}" alt="" width="640" height="360" decoding="async"></div>
     <div class="key">{s['key']}</div>
     {f'<div class="ideas-box"><div class="ideas-h">Key ideas</div>{s["ideas"]}</div>' if s.get("ideas") else ""}
     <div class="prose">
@@ -390,13 +411,16 @@ def lesson_page(lesson, slides, practice=None):
     title = f"Lesson {lesson['n']}: {lesson['title']} | {SITE}"
     desc = f"Interactive linear algebra lesson {lesson['n']}: {lesson['summary']} Every slide has live Python."
     cards = "".join(
-        f'<a class="card" href="{s["slug"]}/"><span class="n">{j + 1:02d} · {e(s["kicker"])}</span>'
+        f'<a class="card pic" href="{s["slug"]}/">{thumb(prefix + card_img(lesson, s["slug"]), "Inside this slide", ideas_text(s))}'
+        f'<span class="n">{j + 1:02d} · {e(s["kicker"])}</span>'
         f'<h3>{e(s["seo_title"])}</h3><p>{e(s["description"])}</p></a>' for j, s in enumerate(slides))
     jsonld = {"@context": "https://schema.org", "@type": "ItemList", "name": title,
               "itemListElement": [{"@type": "ListItem", "position": j + 1, "url": f"{url}{s['slug']}/", "name": s["seo_title"]}
                                   for j, s in enumerate(slides)]}
     if practice:
-        cards += (f'<a class="card practice-card" href="practice/"><span class="n">✎ · Practice</span>'
+        cards += (f'<a class="card pic practice-card" href="practice/">'
+                  f'{thumb(prefix + card_img(lesson, "practice"), "Inside", ["3 worked examples, step by step", "5 problems with hidden solutions", "A Python sandbox to check your answers"])}'
+                  f'<span class="n">✎ · Practice</span>'
                   f'<h3>Worked examples and problems</h3><p>{e(practice["description"])}</p></a>')
     return head(title, desc, url, prefix, jsonld=jsonld) + topnav(prefix, lesson) + f"""<div class="home">
   <section class="hero">
@@ -425,7 +449,8 @@ def home_page(lessons_built):
         row = ""
         for lesson, slides, _ in lessons_built:
             if lesson["ch"] == c["n"]:
-                row += (f'<a class="card" href="{lesson["dir"]}/"><span class="n">Lesson {lesson["n"]} · {e(lesson["sections"])}</span>'
+                row += (f'<a class="card pic" href="{lesson["dir"]}/">{thumb(card_img(lesson, slides[0]["slug"]), f"{len(slides)} slides inside", [sl["title"] for sl in slides[:5]] + ([f"…and {len(slides) - 5} more"] if len(slides) > 5 else []))}'
+                        f'<span class="n">Lesson {lesson["n"]} · {e(lesson["sections"])}</span>'
                         f'<h3>{e(lesson["title"])}</h3><p>{e(lesson["summary"])}</p></a>')
         for name in c.get("planned", []):
             k += 1
@@ -490,7 +515,7 @@ def main():
             page = (d / "index.html").read_text(encoding="utf-8")
             main = re.search(r'<main class="lesson">.*?</main>', page, re.S).group(0)
             main = re.sub(r'\s*<div class="after">.*?</div>\s*</div>\s*(?=</main>)', '\n', main, flags=re.S)
-            main = main.replace('href="../../', f'href="{BASE}/')
+            main = main.replace('href="../../', f'href="{BASE}/').replace('src="../../', f'src="{BASE}/')
             cfg = re.search(r'window\.SLIDE = (\{.*?\});</script>', page).group(1)
             ed = ROOT / "embed" / lesson["dir"]
             ed.mkdir(parents=True, exist_ok=True)

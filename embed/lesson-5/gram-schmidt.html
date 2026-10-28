@@ -1,9 +1,11 @@
 <!doctype html><html><head><meta charset="utf-8"><meta name="robots" content="noindex"></head><body>
 <main class="lesson">
   <article class="page">
+    <div class="slide-head"><div>
     <div class="kicker">Strang §4.4 · The Gram-Schmidt process</div>
     <h1>Gram-Schmidt: making any basis orthonormal.</h1>
     <p class="lead">Start with independent vectors a and b. Keep the direction of a. From b, remove its projection onto a: what is left is perpendicular to a. Then divide each vector by its length. That is Gram-Schmidt, and recording the steps gives A = QR.</p>
+    </div><img class="slide-art" src="https://linearalgebra.steppeschool.com/assets/cards/lesson-5--gram-schmidt.webp" alt="" width="640" height="360" decoding="async"></div>
     <div class="key">B = b − (aᵀb / aᵀa) a &nbsp;&nbsp; q₁ = a / ‖a‖, &nbsp; q₂ = B / ‖B‖ &nbsp;&nbsp; A = QR</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>The first vector a is kept as it is.</li><li>From b, subtract its projection onto a. The remainder B is perpendicular to a.</li><li>From a third vector c, subtract its projections onto both a and B.</li><li>Finally divide each by its length: q₁ = a/‖a‖, q₂ = B/‖B‖, and so on.</li><li>The columns of A are combinations of the q's: A = QR with R upper triangular.</li></ol></div>
     <div class="prose">
