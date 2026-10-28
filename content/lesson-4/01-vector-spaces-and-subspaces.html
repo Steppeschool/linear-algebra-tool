@@ -36,6 +36,35 @@ v and w in S &nbsp;⇒&nbsp; cv + dw in S, for every c and d
 </div>
 <h2>Why we care</h2>
 <p>The column space from lesson 1 is a subspace. So is the nullspace on the next slide. Chapter 3 is about these spaces, because they tell you exactly which equations Ax = b can be solved, and how many solutions they have.</p>
+<!-- examples -->
+<section class="example"><h3>Example 1 · A line through the origin</h3>
+<p>All (x, y) with y = 3x.</p><div class="worked"><div class="row">Contains (0, 0). If y₁ = 3x₁ and y₂ = 3x₂, then y₁ + y₂ = 3(x₁ + x₂), and cy₁ = 3(cx₁)</div></div><p>A subspace.</p>
+</section>
+<section class="example"><h3>Example 2 · A half-plane</h3>
+<p>All (x, y) with x ≥ 0.</p><div class="worked"><div class="row">(1, 0) is in the set, but (−1)·(1, 0) = (−1, 0) is not</div></div><p>Not a subspace: scaling can leave it.</p>
+</section>
+<section class="example"><h3>Example 3 · Two planes in 3D</h3>
+<p>All (x, y, z) with z = 0, and all with z = 1.</p><div class="worked"><div class="row">z = 0: the floor, a plane through the origin. A subspace</div><div class="row">z = 1: a parallel plane that misses the origin. Not a subspace</div></div>
+</section>
+<!-- problems -->
+<div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Is the set of all (x, y) with x + 2y = 0 a subspace?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Yes. It is the line through the origin in the direction (−2, 1).</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>Is the parabola y = x² a subspace?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>No. (1, 1) is on it, but 2·(1, 1) = (2, 2) is not, since 2 ≠ 4.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>Is the set containing only (0, 0) a subspace?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Yes, the smallest one. 0 + 0 = 0 and c·0 = 0.</p>
+</div></details>
+</div></div>
 <!-- code -->
 import numpy as np
 

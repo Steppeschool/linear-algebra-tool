@@ -306,3 +306,19 @@ details.review[open] .rv-toggle .s-show{display:none}
 .lesson .editor-card{min-width:0;max-width:100%;width:100%}
 .lesson .bar{flex-wrap:wrap}
 @media (max-width:640px){ .steps{flex-wrap:nowrap;overflow-x:auto;max-width:100%;padding-bottom:2px;scrollbar-width:none} .steps::-webkit-scrollbar{display:none} .step.practice{flex:none} .top{gap:8px} }
+
+/* "More examples to try": collapsible extra problems on each slide */
+details.more{margin-top:26px;border:1px dashed var(--accent);border-radius:14px;background:var(--surface)}
+details.more[open]{border-style:solid}
+details.more > summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:14px;padding:14px 18px}
+details.more > summary::-webkit-details-marker{display:none}
+details.more > summary:hover{background:var(--accent-soft);border-radius:14px}
+details.more > summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:14px}
+details.more .s-hide{display:none}
+details.more[open] > summary .rv-toggle .s-hide{display:inline}
+details.more[open] > summary .rv-toggle .s-show{display:none}
+details.more .problems{padding:0 18px 18px}
+details.more .solbody .s-hide,details.more .sol .s-hide{display:none}
+details.more details.sol[open] .s-hide{display:inline}
+details.more details.sol[open] .s-show{display:none}
+details.more details.sol:not([open]) .s-show{display:inline}

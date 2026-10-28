@@ -31,6 +31,35 @@ AB means B first, then A. To undo it, you undo the last move first: A⁻¹ first
 <h2>Where you meet this</h2>
 <p>A robot arm's pose is a product of joint matrices: T₁T₂⋯Tₙ takes a point from the gripper's frame to the base's frame. To go the other way, from the base to the gripper, you need the inverse, Tₙ⁻¹⋯T₁⁻¹. The order of the joints reverses.</p>
 <p>A rotation is undone by turning back, and that matrix is also its transpose. Slide 5 explains why that matters.</p>
+<!-- examples -->
+<section class="example"><h3>Example 1 · Stretch then shear, undone</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>0</span><span>0</span><span>1</span></span>, B = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>0</span><span>1</span></span>.</p><div class="worked"><div class="row">(AB)⁻¹ = B⁻¹A⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>0</span><span>1</span></span><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>½</span><span>0</span><span>0</span><span>1</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>½</span><span>−1</span><span>0</span><span>1</span></span></div><div class="row">Check: AB = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>2</span><span>0</span><span>1</span></span>, whose inverse is ½·<span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−2</span><span>0</span><span>2</span></span> ✓</div></div>
+</section>
+<section class="example"><h3>Example 2 · Powers</h3>
+<p>If A is invertible, so is A²:</p><div class="worked"><div class="row">(A²)⁻¹ = (AA)⁻¹ = A⁻¹A⁻¹ = (A⁻¹)²</div><div class="row">(A⁻¹)⁻¹ = A: undoing the undo gets you back</div></div>
+</section>
+<section class="example"><h3>Example 3 · Three steps</h3>
+<p>For three invertible matrices:</p><div class="worked"><div class="row">(ABC)⁻¹ = C⁻¹B⁻¹A⁻¹</div></div><p>C acted first, so it is undone last.</p>
+</section>
+<!-- problems -->
+<div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>2</span><span>1</span></span>, B = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>3</span><span>0</span><span>1</span></span>. Find (AB)⁻¹.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>B⁻¹A⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−3</span><span>0</span><span>1</span></span><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>−2</span><span>1</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>7</span><span>−3</span><span>−2</span><span>1</span></span>. Check: AB = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>3</span><span>2</span><span>7</span></span> has det 1 and that inverse ✓</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>If A⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>0</span><span>1</span></span>, what is (A²)⁻¹?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>(A⁻¹)² = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>0</span><span>1</span></span>.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>True or false: (A + B)⁻¹ = A⁻¹ + B⁻¹.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>False. Take A = B = I: (2I)⁻¹ = ½I, but A⁻¹ + B⁻¹ = 2I.</p>
+</div></details>
+</div></div>
 <!-- code -->
 import numpy as np
 

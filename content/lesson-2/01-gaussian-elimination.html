@@ -35,6 +35,35 @@ x − 2y = 1 &nbsp;&nbsp; 3x + 2y = 11 &nbsp;&nbsp;→&nbsp;&nbsp; 8y = 8
 <p>That is the whole trick. Each step gives a simpler system with exactly the same solution. Anything that solves both old equations also solves the new ones, and the other way round.</p>
 <h2>Where you meet this</h2>
 <p>Circuit simulators, finite element programs and many other engineering tools solve equations this way. The systems just have thousands of unknowns instead of two.</p>
+<!-- examples -->
+<section class="example"><h3>Example 1 · Subtract twice the first equation</h3>
+<p>Solve 2x + y = 5 and 4x − y = 1.</p><div class="worked"><div class="row">Pivot 2, multiplier ℓ = 4 ÷ 2 = 2</div><div class="row">(4x − y) − 2(2x + y) = 1 − 2·5 &nbsp;→&nbsp; −3y = −9 &nbsp;→&nbsp; y = 3</div><div class="row">Back up: 2x + 3 = 5, so x = 1</div><div class="row">Check: 4·1 − 3 = 1 ✓</div></div>
+</section>
+<section class="example"><h3>Example 2 · A pivot of 1</h3>
+<p>Solve x + 3y = 7 and 2x + y = 4.</p><div class="worked"><div class="row">ℓ = 2 ÷ 1 = 2. &nbsp; (2x + y) − 2(x + 3y) = 4 − 14 &nbsp;→&nbsp; −5y = −10 &nbsp;→&nbsp; y = 2</div><div class="row">x + 6 = 7, so x = 1</div></div><p>A pivot of 1 is the friendliest case: the multiplier is just the entry below it.</p>
+</section>
+<section class="example"><h3>Example 3 · A fractional multiplier</h3>
+<p>Solve 3x + 2y = 7 and x + 4y = 9.</p><div class="worked"><div class="row">ℓ = 1 ÷ 3 = 1/3</div><div class="row">(x + 4y) − (1/3)(3x + 2y) = 9 − 7/3 &nbsp;→&nbsp; (10/3) y = 20/3 &nbsp;→&nbsp; y = 2</div><div class="row">3x + 4 = 7, so x = 1</div></div><p>Fractions are fine. The rule never changes: multiplier = entry to remove ÷ pivot.</p>
+</section>
+<!-- problems -->
+<div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Solve x + y = 4 and 2x − y = 2 by elimination.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>ℓ = 2: (2x − y) − 2(x + y) = 2 − 8 gives −3y = −6, so y = 2 and x = 2.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>Solve 5x + 2y = 9 and 10x + 3y = 16.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>ℓ = 10 ÷ 5 = 2: (10x + 3y) − 2(5x + 2y) = 16 − 18 gives −y = −2, so y = 2. Then 5x + 4 = 9, x = 1.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>The first equation is 4x + y = 6, the second 6x + 5y = 16. Find ℓ and solve.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>ℓ = 6 ÷ 4 = 1.5. (6x + 5y) − 1.5(4x + y) = 16 − 9 gives 3.5y = 7, so y = 2. Then 4x + 2 = 6, x = 1.</p>
+</div></details>
+</div></div>
 <!-- code -->
 import numpy as np
 

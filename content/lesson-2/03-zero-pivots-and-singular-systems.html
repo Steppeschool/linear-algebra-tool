@@ -29,6 +29,35 @@ zero pivot &nbsp;→&nbsp; swap with a lower row &nbsp;&nbsp;|&nbsp;&nbsp; nothi
 <p>In both cases the second pivot is 0 and no row below can help. That happens exactly when the columns are dependent, so det A = 0. Lesson 1 called it squashing the plane onto a line.</p>
 <h2>Small pivots are risky too</h2>
 <p>A computer stores numbers with about 16 digits. Dividing by a tiny pivot, like 0.0000001, blows up rounding errors. So real solvers swap in the row whose pivot is <b>largest in absolute value</b> at every step. It is called partial pivoting, and NumPy does it for you.</p>
+<!-- examples -->
+<section class="example"><h3>Example 1 · A swap fixes it</h3>
+<p>0x + y = 2 and x + y = 3.</p><div class="worked"><div class="row">The first pivot is 0. Swap the equations: x + y = 3, y = 2</div><div class="row">y = 2, then x = 1</div></div>
+</section>
+<section class="example"><h3>Example 2 · Infinitely many solutions</h3>
+<p>x + y = 2 and 2x + 2y = 4.</p><div class="worked"><div class="row">ℓ = 2: the second equation becomes 0 = 0</div><div class="row">Only x + y = 2 is left. Choose y = t freely; then x = 2 − t</div></div><p>Every point (2 − t, t) is a solution: the whole line.</p>
+</section>
+<section class="example"><h3>Example 3 · A zero pivot in the middle of a 3 by 3</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>1</span><span>1</span><span>1</span><span>1</span><span>2</span><span>1</span><span>2</span><span>3</span></span>.</p><div class="worked"><div class="row">ℓ₂₁ = 1: row 2 → (0, 0, 1). &nbsp; ℓ₃₁ = 1: row 3 → (0, 1, 2)</div><div class="row">The second pivot is 0, but row 3 has a 1 there. Swap rows 2 and 3</div><div class="row">U = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>1</span><span>1</span><span>0</span><span>1</span><span>2</span><span>0</span><span>0</span><span>1</span></span>, pivots 1, 1, 1</div></div><p>A temporary breakdown: the matrix is invertible.</p>
+</section>
+<!-- problems -->
+<div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Solve 0x + 2y = 6, 3x + y = 6.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Swap the equations. Then 2y = 6 gives y = 3, and 3x + 3 = 6 gives x = 1.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>For which b does x − y = 1, 3x − 3y = b have a solution? How many?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>ℓ = 3 leaves 0 = b − 3. Only b = 3 works, and then there are infinitely many solutions (x = 1 + y for any y).</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>For which k is kx + y = 1, x + ky = 1 singular? What happens in each case?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>det = k² − 1 = 0 for k = 1 or k = −1.</p><p>k = 1: both equations are x + y = 1, the same line, infinitely many solutions. k = −1: −x + y = 1 and x − y = 1 are parallel, no solution.</p>
+</div></details>
+</div></div>
 <!-- code -->
 import numpy as np
 

@@ -31,6 +31,35 @@ A = LU &nbsp;&nbsp; L = <span class="mx" style="grid-template-columns:repeat(3,a
 <h2>Why it matters</h2>
 <p>For n unknowns, factoring costs about n³/3 operations. Each solve after that costs about n². With n = 1000: around 330 million for the factoring, then about a million per new b.</p>
 <p>So when the matrix stays the same and only the right side changes, as in a simulation stepping through time, you factor once and reuse it. The lab has <code>lu(A)</code> if you want to check your own matrices.</p>
+<!-- examples -->
+<section class="example"><h3>Example 1 · Factor, then solve</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>8</span></span>, b = (5, 19).</p><div class="worked"><div class="row">ℓ = 3: U = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>0</span><span>2</span></span>, L = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>3</span><span>1</span></span></div><div class="row">Lc = b: c₁ = 5, c₂ = 19 − 15 = 4</div><div class="row">Ux = c: 2x₂ = 4, x₂ = 2; x₁ + 4 = 5, x₁ = 1</div></div>
+</section>
+<section class="example"><h3>Example 2 · A 3 by 3 factorization</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>1</span><span>1</span><span>1</span><span>2</span><span>2</span><span>1</span><span>2</span><span>3</span></span> (from slide 2).</p><div class="worked"><div class="row">L = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>1</span><span>1</span><span>0</span><span>1</span><span>1</span><span>1</span></span> &nbsp; U = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>1</span><span>1</span><span>0</span><span>1</span><span>1</span><span>0</span><span>0</span><span>1</span></span></div></div><p>Each multiplier was 1, so L has 1s everywhere below the diagonal.</p>
+</section>
+<section class="example"><h3>Example 3 · A fractional multiplier</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>4</span><span>3</span><span>6</span><span>3</span></span>.</p><div class="worked"><div class="row">ℓ = 6 ÷ 4 = 1.5: U = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>4</span><span>3</span><span>0</span><span>−1.5</span></span>, L = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>1.5</span><span>1</span></span></div><div class="row">Check row 2 of LU: 1.5·(4, 3) + (0, −1.5) = (6, 3) ✓</div></div>
+</section>
+<!-- problems -->
+<div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Find L and U for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>8</span><span>7</span></span>.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>ℓ = 4. U = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>0</span><span>3</span></span>, L = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>4</span><span>1</span></span>.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>Solve Lc = b by forward substitution: L = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>2</span><span>1</span><span>0</span><span>−1</span><span>−1</span><span>1</span></span>, b = (5, −2, 9).</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>c₁ = 5. Then 2·5 + c₂ = −2, so c₂ = −12. Then −5 + 12 + c₃ = 9, so c₃ = 2. c = (5, −12, 2), as on the slide.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>Why does A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>1</span><span>1</span></span> have no LU factorization? How is it fixed?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>The first pivot is 0, so no multiplier can be formed. Swap the rows first: PA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>0</span><span>1</span></span> is already upper triangular, so PA = LU with L = I.</p>
+</div></details>
+</div></div>
 <!-- code -->
 import numpy as np
 

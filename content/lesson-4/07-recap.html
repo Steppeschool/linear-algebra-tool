@@ -25,6 +25,25 @@ dim C(Aᵀ) + dim N(A) = n &nbsp;&nbsp; dim C(A) + dim N(Aᵀ) = m
 <p>Perpendicular subspaces, projections, and the best answer to Ax = b when there is no exact one. That is how you fit a line to noisy sensor data.</p>
 <h2>Read along</h2>
 <p>Gilbert Strang, <i>Introduction to Linear Algebra</i>, 5th edition (2016), chapter 3. Lectures 6 to 10 of MIT 18.06 on <a href="https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/" target="_blank" rel="noopener">MIT OpenCourseWare</a>. Lecture 10 is the four subspaces.</p>
+<!-- problems -->
+<div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Find N(A) for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>3</span><span>2</span><span>6</span></span>.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>All multiples of (−3, 1).</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>Give the complete solution of x + y + z = 1.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>x = (1, 0, 0) + c·(−1, 1, 0) + d·(−1, 0, 1).</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>Find the rank and the four dimensions for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span></span>.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Rank 2 (m = 3, n = 2). Row space 2, nullspace 0, column space 2, left nullspace 1.</p>
+</div></details>
+</div></div>
 <!-- code -->
 import numpy as np
 

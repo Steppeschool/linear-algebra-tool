@@ -30,6 +30,35 @@ For a 2 by 2 matrix there is a short recipe. Swap the two diagonal entries, chan
 </ul>
 <h2>Beyond 2 by 2</h2>
 <p>There is a formula for bigger matrices too, but it is slow. In practice the inverse comes from elimination. Slide 4 shows how.</p>
+<!-- examples -->
+<section class="example"><h3>Example 1 · Determinant 1</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>3</span><span>1</span><span>2</span></span>, det A = 4 − 3 = 1.</p><div class="worked"><div class="row">A⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>−3</span><span>−1</span><span>2</span></span></div></div>
+</section>
+<section class="example"><h3>Example 2 · Determinant −2</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>4</span></span>, det A = 4 − 6 = −2.</p><div class="worked"><div class="row">A⁻¹ = −½ · <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>4</span><span>−2</span><span>−3</span><span>1</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−2</span><span>1</span><span>1.5</span><span>−0.5</span></span></div></div>
+</section>
+<section class="example"><h3>Example 3 · No inverse</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>4</span><span>1</span><span>2</span></span>, det A = 4 − 4 = 0.</p><div class="worked"><div class="row">The formula would divide by 0. The columns are dependent, and A has no inverse</div></div>
+</section>
+<!-- problems -->
+<div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Invert <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>5</span><span>2</span><span>2</span><span>1</span></span>.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>det = 5 − 4 = 1, so the inverse is <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−2</span><span>−2</span><span>5</span></span>.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>Invert <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>4</span><span>2</span><span>3</span><span>1</span></span>.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>det = 4 − 6 = −2. Inverse = −½·<span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−2</span><span>−3</span><span>4</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−0.5</span><span>1</span><span>1.5</span><span>−2</span></span>.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>For which t is <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>t</span><span>1</span><span>4</span><span>t</span></span> invertible?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>det = t² − 4. Invertible for every t except t = 2 and t = −2.</p>
+</div></details>
+</div></div>
 <!-- code -->
 import numpy as np
 

@@ -53,8 +53,33 @@
 <h2>Bases are not unique</h2>
 <p>(1, 0) and (0, 1) are a basis for the plane. So are (1, 1) and (1, −1). Different tools, same number of them. The rank of A is the dimension of its column space.</p>
     </div>
-    
-    
+    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · A basis of the plane</h3>
+<p>(1, 0) and (1, 1).</p><div class="worked"><div class="row">Not multiples of each other: independent. Two independent vectors in 2D span the plane</div></div><p>A basis.</p>
+</section>
+<section class="example"><h3>Example 2 · Too many vectors</h3>
+<p>(1, 2), (2, 4) and (0, 1) in the plane.</p><div class="worked"><div class="row">(2, 4) = 2·(1, 2): dependent</div><div class="row">Keep (1, 2) and (0, 1): a basis of the plane</div></div><p>Three vectors in 2D are always dependent.</p>
+</section>
+<section class="example"><h3>Example 3 · Triangular columns</h3>
+<p>The columns of <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>1</span><span>0</span><span>1</span><span>1</span><span>0</span><span>0</span><span>1</span></span>.</p><div class="worked"><div class="row">Upper triangular with nonzero pivots: rank 3</div><div class="row">The columns are a basis for 3D space</div></div>
+</section></div>
+    <details class="more"><summary><span class="pl-icon">✎</span><span class="rv-text"><b>More examples to try</b><span>3 problems with step-by-step solutions. Try each one before you open its solution.</span></span><span class="rv-toggle"><span class="s-show">Show</span><span class="s-hide">Hide</span></span></summary><div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Are (1, 1, 0), (0, 1, 1), (1, 0, 1) independent?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Yes. As columns of a matrix they give det = 2 ≠ 0, so rank 3.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>What is the dimension of the plane x + y + z = 0?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>2. A basis is (−1, 1, 0) and (−1, 0, 1).</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>Find a basis for C(A), A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>0</span><span>2</span><span>4</span><span>1</span></span>.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Pivot columns 1 and 3: (1, 2) and (0, 1). They span all of ℝ², so the rank is 2.</p>
+</div></details>
+</div></div></div></details>
   </article>
   <details class="review">
     <summary><span class="pl-icon">✎</span><span class="rv-text"><b>Lesson review</b><span>3 worked examples and 5 mixed problems with solutions</span></span><span class="rv-toggle"><span class="s-show">Open</span><span class="s-hide">Close</span></span></summary>

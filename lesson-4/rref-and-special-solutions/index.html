@@ -51,8 +51,33 @@
 <p>A has n = 4 columns and r = 2 pivots, so there are n − r = 2 free variables and 2 special solutions. Every vector in N(A) is a combination of them: x = c·s₁ + d·s₂. N(A) is a plane inside 4-dimensional space.</p>
 <p>A shortcut: the entries of R in the free columns, with their signs flipped, are the pivot values of the special solutions.</p>
     </div>
-    
-    
+    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · One free column</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>3</span><span>0</span><span>0</span><span>1</span></span>.</p><div class="worked"><div class="row">row 1 − 3·row 2: R = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>0</span><span>0</span><span>0</span><span>1</span></span>. Pivots in columns 1 and 3</div><div class="row">Free x₂ = 1: x₁ = −2, x₃ = 0. Special solution (−2, 1, 0)</div></div>
+</section>
+<section class="example"><h3>Example 2 · Two free columns</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(4,auto)"><span>1</span><span>1</span><span>1</span><span>1</span><span>1</span><span>2</span><span>3</span><span>4</span></span>.</p><div class="worked"><div class="row">R = <span class="mx" style="grid-template-columns:repeat(4,auto)"><span>1</span><span>0</span><span>−1</span><span>−2</span><span>0</span><span>1</span><span>2</span><span>3</span></span></div><div class="row">x₃ = 1: (1, −2, 1, 0). &nbsp; x₄ = 1: (2, −3, 0, 1)</div></div><p>n − r = 4 − 2 = 2 special solutions.</p>
+</section>
+<section class="example"><h3>Example 3 · A tall matrix</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>4</span><span>3</span><span>6</span></span>.</p><div class="worked"><div class="row">R = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>0</span><span>0</span><span>0</span><span>0</span></span>, rank 1</div><div class="row">Free x₂ = 1: special solution (−2, 1)</div></div>
+</section></div>
+    <details class="more"><summary><span class="pl-icon">✎</span><span class="rv-text"><b>More examples to try</b><span>3 problems with step-by-step solutions. Try each one before you open its solution.</span></span><span class="rv-toggle"><span class="s-show">Show</span><span class="s-hide">Hide</span></span></summary><div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Find R and the special solution for A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>4</span><span>2</span><span>1</span><span>2</span><span>3</span></span>.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Divide row 1 by 2: (1, 2, 1). Row 2 − row 1: (0, 0, 2), then divide by 2. Clear above: R = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>0</span><span>0</span><span>0</span><span>1</span></span>. Special solution (−2, 1, 0).</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>A is already in R form: <span class="mx" style="grid-template-columns:repeat(4,auto)"><span>1</span><span>0</span><span>2</span><span>3</span><span>0</span><span>1</span><span>4</span><span>5</span></span>. List the special solutions.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>x₃ = 1: (−2, −4, 1, 0). x₄ = 1: (−3, −5, 0, 1). The free columns' entries, with signs flipped.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>A is 3 by 7 with rank 3. How many special solutions?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>n − r = 7 − 3 = 4.</p>
+</div></details>
+</div></div></div></details>
   </article>
   <details class="review">
     <summary><span class="pl-icon">✎</span><span class="rv-text"><b>Lesson review</b><span>3 worked examples and 5 mixed problems with solutions</span></span><span class="rv-toggle"><span class="s-show">Open</span><span class="s-hide">Close</span></span></summary>

@@ -172,6 +172,19 @@ COURSE = {"@type": "Course", "name": SITE, "url": BASE + "/",
           "provider": PROVIDER}
 
 
+def more_block(s):
+    """Extra problems for this slide, collapsed behind a clear button. Solutions stay hidden inside."""
+    if not s.get("problems"):
+        return ""
+    n = s["problems"].count('class="problem"')
+    recap = s["slug"] == "recap"
+    title = "Review problems" if recap else "More examples to try"
+    return (f'<details class="more"{" open" if recap else ""}><summary><span class="pl-icon">✎</span><span class="rv-text"><b>{title}</b>'
+            f'<span>{n} problems with step-by-step solutions. Try each one before you open its solution.</span></span>'
+            f'<span class="rv-toggle"><span class="s-show">Show</span><span class="s-hide">Hide</span></span></summary>'
+            f'<div class="problems">{s["problems"]}</div></details>')
+
+
 def review_block(pr):
     """The lesson review (examples + problems), collapsed, shown above the lab on every slide."""
     if not pr:
@@ -230,7 +243,7 @@ def slide_page(lesson, slides, i, next_lesson=None, practice=None):
 {s['prose']}
     </div>
     {f'<h2 class="practice-h">Worked examples</h2><div class="examples">{s["examples"]}</div>' if s.get("examples") else ""}
-    {f'<h2 class="practice-h">{"Review problems" if s["slug"] == "recap" else "Problems"}</h2><p class="practice-note">Try each one before you open the solution.</p><div class="problems">{s["problems"]}</div>' if s.get("problems") else ""}
+    {more_block(s)}
   </article>
 {review_block(practice)}
   <section class="labsec" aria-label="Lab">

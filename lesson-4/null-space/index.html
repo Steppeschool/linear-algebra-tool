@@ -51,8 +51,33 @@
 <h2>Where you meet this</h2>
 <p>A robot arm with more joints than it needs has a nullspace. Joint motions in that nullspace move the elbow while the hand stays exactly where it is. Engineers use it to steer the elbow around obstacles while the tool keeps working.</p>
     </div>
-    
-    
+    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · Equal columns</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>1</span></span>.</p><div class="worked"><div class="row">Ax = 0 means x₁ + x₂ = 0</div><div class="row">N(A) = all multiples of (1, −1)</div></div>
+</section>
+<section class="example"><h3>Example 2 · An invertible matrix</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>4</span></span>, det = −2 ≠ 0.</p><div class="worked"><div class="row">Only x = 0 solves Ax = 0. N(A) = {0}</div></div>
+</section>
+<section class="example"><h3>Example 3 · A plane in 3D</h3>
+<p>A = [1 1 1], one row and three columns.</p><div class="worked"><div class="row">Ax = 0 means x + y + z = 0</div><div class="row">N(A) is a plane, spanned by (−1, 1, 0) and (−1, 0, 1)</div></div>
+</section></div>
+    <details class="more"><summary><span class="pl-icon">✎</span><span class="rv-text"><b>More examples to try</b><span>3 problems with step-by-step solutions. Try each one before you open its solution.</span></span><span class="rv-toggle"><span class="s-show">Show</span><span class="s-hide">Hide</span></span></summary><div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Find N(A) for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>4</span><span>1</span><span>2</span></span>.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Both rows say x₁ + 2x₂ = 0. N(A) = all multiples of (−2, 1).</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>Find N(A) for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>0</span></span>.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Ax = (x₁, 0), so x₁ = 0 and x₂ is free. N(A) = all multiples of (0, 1).</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>Find N(A) for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>1</span></span>.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>det = 1 − 4 = −3 ≠ 0, so N(A) = {0}.</p>
+</div></details>
+</div></div></div></details>
   </article>
   <details class="review">
     <summary><span class="pl-icon">✎</span><span class="rv-text"><b>Lesson review</b><span>3 worked examples and 5 mixed problems with solutions</span></span><span class="rv-toggle"><span class="s-show">Open</span><span class="s-hide">Close</span></span></summary>

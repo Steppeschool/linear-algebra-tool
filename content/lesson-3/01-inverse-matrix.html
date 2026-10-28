@@ -33,6 +33,35 @@ A⁻¹A = I &nbsp;&nbsp;&nbsp; Ax = b &nbsp;⇔&nbsp; x = A⁻¹b
 <li>det A ≠ 0: the plane is not squashed.</li>
 <li>Ax = 0 only for x = 0.</li>
 </ul>
+<!-- examples -->
+<section class="example"><h3>Example 1 · Undo a stretch</h3>
+<p>D = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>0</span><span>0</span><span>5</span></span> stretches x by 2 and y by 5.</p><div class="worked"><div class="row">D⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>½</span><span>0</span><span>0</span><span>⅕</span></span>: shrink x by 2 and y by 5</div></div>
+</section>
+<section class="example"><h3>Example 2 · Undo a quarter turn</h3>
+<p>R = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>−1</span><span>1</span><span>0</span></span> turns by 90°.</p><div class="worked"><div class="row">R⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>−1</span><span>0</span></span> turns back by 90°</div><div class="row">RR⁻¹ = I</div></div>
+</section>
+<section class="example"><h3>Example 3 · Solve with the inverse</h3>
+<p>Suppose A⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>1</span></span>. Then Ax = b with b = (1, 2) is solved by one multiplication:</p><div class="worked"><div class="row">x = A⁻¹b = (2·1 + 1·2, 1·1 + 1·2) = (4, 3)</div></div>
+</section>
+<!-- problems -->
+<div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Find the inverse of <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>0</span><span>0</span><span>−2</span></span>.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Undo each scaling: <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>⅓</span><span>0</span><span>0</span><span>−½</span></span>.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>Does <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>4</span></span> have an inverse?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>No. Column 2 = 2·column 1, so the plane is squashed onto a line (det = 0). Two different inputs give the same output, so there is no way back.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>The shear <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>3</span><span>1</span></span> slides points up by 3 times their x. Write its inverse.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Slide them back down: <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>−3</span><span>1</span></span>.</p>
+</div></details>
+</div></div>
 <!-- code -->
 import numpy as np
 

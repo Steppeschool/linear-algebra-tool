@@ -32,6 +32,35 @@ Row 1 of A becomes column 1 of Aᵀ. An m by n matrix turns into an n by m matri
 </div>
 <h2>Where you meet this</h2>
 <p>AᵀA is the heart of least squares (chapter 4): fitting a line to noisy measurements, or calibrating an accelerometer from many readings. For a rotation matrix Q, QᵀQ = I, so the transpose is the inverse. Turning back is free.</p>
+<!-- examples -->
+<section class="example"><h3>Example 1 · A wide matrix turned tall</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span></span> is 2 by 3.</p><div class="worked"><div class="row">Aᵀ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>4</span><span>2</span><span>5</span><span>3</span><span>6</span></span> is 3 by 2</div></div>
+</section>
+<section class="example"><h3>Example 2 · The order flips</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>0</span><span>1</span></span>, B = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>0</span><span>3</span><span>1</span></span>.</p><div class="worked"><div class="row">AB = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>5</span><span>1</span><span>3</span><span>1</span></span>, so (AB)ᵀ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>5</span><span>3</span><span>1</span><span>1</span></span></div><div class="row">BᵀAᵀ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>3</span><span>0</span><span>1</span></span><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>1</span><span>1</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>5</span><span>3</span><span>1</span><span>1</span></span> ✓</div></div>
+</section>
+<section class="example"><h3>Example 3 · Dot product as xᵀy</h3>
+<p>x = (1, 2, 3), y = (4, 0, −1).</p><div class="worked"><div class="row">xᵀy = 1·4 + 2·0 + 3·(−1) = 1</div></div>
+</section>
+<!-- problems -->
+<div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Is <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>3</span><span>2</span><span>5</span><span>4</span><span>3</span><span>4</span><span>6</span></span> symmetric?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Yes: entry (i, j) equals entry (j, i) everywhere. Flip it across the diagonal and nothing changes.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>Compute AAᵀ for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>0</span><span>1</span></span>.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>AAᵀ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>5</span><span>2</span><span>2</span><span>1</span></span>. It is symmetric, as AAᵀ always is.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>For which a and b is <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>a</span><span>3</span><span>b</span></span> symmetric?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>a = 3. The diagonal entry b can be anything.</p>
+</div></details>
+</div></div>
 <!-- code -->
 import numpy as np
 

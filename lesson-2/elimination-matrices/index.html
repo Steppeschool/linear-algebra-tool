@@ -52,8 +52,33 @@
 <h2>Undoing a card</h2>
 <p>To undo "subtract 2 of row 1", add 2 of row 1 back. So E₂₁⁻¹ is the identity with +ℓ in the same spot. Hold on to that: it is the key to A = LU on the next slide.</p>
     </div>
-    
-    
+    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · A 2 by 2 step</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>1</span><span>6</span><span>4</span></span>. The multiplier is ℓ = 6 ÷ 3 = 2.</p><div class="worked"><div class="row">E₂₁ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>−2</span><span>1</span></span> &nbsp;&nbsp; E₂₁A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>1</span><span>0</span><span>2</span></span></div></div>
+</section>
+<section class="example"><h3>Example 2 · The third step, E₃₂</h3>
+<p>After the first two steps, B = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>1</span><span>0</span><span>−8</span><span>−2</span><span>0</span><span>8</span><span>3</span></span>. Clear the 8 with ℓ₃₂ = 8 ÷ (−8) = −1.</p><div class="worked"><div class="row">E₃₂ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>0</span><span>1</span><span>0</span><span>0</span><span>1</span><span>1</span></span> &nbsp; (−ℓ₃₂ = +1 in row 3, column 2)</div><div class="row">E₃₂B = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>1</span><span>0</span><span>−8</span><span>−2</span><span>0</span><span>0</span><span>1</span></span> = U</div></div>
+</section>
+<section class="example"><h3>Example 3 · Undoing a step</h3>
+<p>E₂₁ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>−2</span><span>1</span><span>0</span><span>0</span><span>0</span><span>1</span></span> subtracts 2·row 1 from row 2.</p><div class="worked"><div class="row">E₂₁⁻¹ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>2</span><span>1</span><span>0</span><span>0</span><span>0</span><span>1</span></span> adds it back</div><div class="row">E₂₁⁻¹E₂₁ = I</div></div><p>Only the sign of the multiplier changes.</p>
+</section></div>
+    <details class="more"><summary><span class="pl-icon">✎</span><span class="rv-text"><b>More examples to try</b><span>3 problems with step-by-step solutions. Try each one before you open its solution.</span></span><span class="rv-toggle"><span class="s-show">Show</span><span class="s-hide">Hide</span></span></summary><div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Write E₂₁ for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>4</span><span>5</span><span>1</span></span> and compute E₂₁A.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>ℓ = 5 ÷ 2 = 2.5, so E₂₁ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>−2.5</span><span>1</span></span> and E₂₁A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>4</span><span>0</span><span>−9</span></span>.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>What does E = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>0</span><span>1</span><span>0</span><span>−3</span><span>0</span><span>1</span></span> do? What is its inverse?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>It subtracts 3 times row 1 from row 3 and leaves the other rows alone. E⁻¹ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>0</span><span>1</span><span>0</span><span>3</span><span>0</span><span>1</span></span> adds it back.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>Check that <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>−3</span><span>1</span></span> times <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>3</span><span>1</span></span> gives I.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Row 2 times column 1: −3·1 + 1·3 = 0. Row 2 times column 2: 0 + 1 = 1. The product is <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>1</span></span>.</p>
+</div></details>
+</div></div></div></details>
   </article>
   <details class="review">
     <summary><span class="pl-icon">✎</span><span class="rv-text"><b>Lesson review</b><span>3 worked examples and 5 mixed problems with solutions</span></span><span class="rv-toggle"><span class="s-show">Open</span><span class="s-hide">Close</span></span></summary>

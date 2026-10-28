@@ -25,6 +25,25 @@ A⁻¹A = I &nbsp;&nbsp; (AB)⁻¹ = B⁻¹A⁻¹ &nbsp;&nbsp; (AB)ᵀ = BᵀA�
 <p>What happens when A is not invertible, or not even square? The nullspace, pivot and free columns, the complete solution to Ax = b, and the big picture that ties it all together.</p>
 <h2>Read along</h2>
 <p>Gilbert Strang, <i>Introduction to Linear Algebra</i>, 5th edition (2016), sections 2.5 and 2.7. Lectures 3 and 5 of MIT 18.06 on <a href="https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/" target="_blank" rel="noopener">MIT OpenCourseWare</a>.</p>
+<!-- problems -->
+<div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Invert <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>3</span><span>2</span></span>.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>det = 4 − 3 = 1, so the inverse is <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>−1</span><span>−3</span><span>2</span></span>.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>A⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>0</span><span>1</span></span> and B⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>0</span><span>0</span><span>1</span></span>. Find (AB)⁻¹.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>(AB)⁻¹ = B⁻¹A⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>2</span><span>0</span><span>1</span></span>.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>Compute AᵀA for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>4</span></span>. Is it symmetric?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>AᵀA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>10</span><span>14</span><span>14</span><span>20</span></span>. Yes, symmetric.</p>
+</div></details>
+</div></div>
 <!-- code -->
 import numpy as np
 
