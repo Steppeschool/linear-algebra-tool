@@ -13,12 +13,12 @@ A permutation matrix is the identity with its rows in a new order. Multiplying P
 <!-- key -->
 P = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>0</span><span>0</span><span>1</span><span>1</span><span>0</span><span>0</span><span>0</span><span>1</span><span>0</span></span> &nbsp; PA = rows 3, 1, 2 of A
 <!-- ideas -->
-<ol class="ideas"><li>Each row and each column of P contains a single 1.</li><li>PA reorders the rows of A; AP reorders its columns.</li><li>P⁻¹ = Pᵀ: transposing undoes the reordering.</li><li>With row exchanges, elimination gives PA = LU.</li></ol>
+<ol class="ideas"><li>Each row and each column of P contains a single 1.</li><li>PA reorders the rows of A; AP reorders its columns (Example 1).</li><li>P⁻¹ = Pᵀ: transposing undoes the reordering.</li><li>With row exchanges, elimination gives PA = LU.</li></ol>
 <!-- prose -->
 <h3>Think of a playlist</h3>
 <p>A permutation is a new running order for a playlist. Row 1 of P says which song plays first, row 2 which plays second, and so on. A 1 in column 3 of row 1 means "the first slot gets row 3".</p>
 <h3>Undoing a permutation</h3>
-<p>To put the playlist back, send each row back where it came from: the row now in slot 1 returns to slot 3, and so on. That reverse instruction has its 1s in the mirrored positions, which is exactly Pᵀ. So P⁻¹ = Pᵀ for every permutation matrix.</p>
+<p>To put the playlist back, send each row back where it came from: the row now in slot 1 returns to slot 3, and so on. That reverse instruction has its 1s mirrored across the diagonal: a 1 at (i, j) moves to (j, i). That is exactly Pᵀ. So P⁻¹ = Pᵀ for every permutation matrix.</p>
 <h3>A worked example</h3>
 <div class="worked">
 <div>Use a matrix A whose rows are full of 1s, 2s and 3s, so you can see where each row goes.</div>
@@ -34,7 +34,7 @@ P = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>0</span>
 <p>When lesson 2 met a zero pivot, we exchanged rows. If A is invertible and we do all the exchanges first, with a permutation P, elimination never meets a zero pivot, and we get PA = LU. This is the form that NumPy and other solvers actually compute, choosing the exchanges so that each pivot is as large as possible.</p>
 <!-- examples -->
 <section class="example"><h3>Example 1 · Rows or columns</h3>
-<p>P = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>1</span><span>0</span></span>, A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>4</span></span>.</p><div class="worked"><div class="row">PA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>4</span><span>1</span><span>2</span></span>: the rows swap</div><div class="row">AP = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>4</span><span>3</span></span>: the columns swap</div></div>
+<p>P = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>1</span><span>0</span></span>, A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>4</span></span>.</p><div class="worked"><div class="row">PA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>4</span><span>1</span><span>2</span></span>: the rows swap</div><div class="row">AP = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>4</span><span>3</span></span>: the columns swap</div></div><p>Why columns? Column j of AP is A times column j of P (Ax by columns, lesson 1). Each column of P has a single 1, so it picks out one column of A. Column 1 of P is (0, 1), which picks column 2 of A.</p>
 </section>
 <section class="example"><h3>Example 2 · Reverse order</h3>
 <p>P = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>0</span><span>0</span><span>1</span><span>0</span><span>1</span><span>0</span><span>1</span><span>0</span><span>0</span></span> puts rows in the order 3, 2, 1.</p><div class="worked"><div class="row">Pᵀ = P, so P⁻¹ = P: doing it twice restores the order</div></div>
@@ -52,13 +52,13 @@ P = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>0</span>
 <div class="problem"><span class="pnum">2</span><div class="pbody">
 <p>How many 3 by 3 permutation matrices are there? Which are their own inverse?</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>3! = 6. Four are their own inverse: I and the three single swaps. The two cycles (2, 3, 1) and (3, 1, 2) undo each other.</p>
+<p>3! = 6. Four are their own inverse: I and the three single swaps. The other two, the orders 2, 3, 1 and 3, 1, 2, undo each other.</p>
 </div></details>
 </div></div>
 <div class="problem"><span class="pnum">3</span><div class="pbody">
-<p>What is the determinant of a matrix that swaps two rows of I?</p>
+<p>What is the determinant of a matrix that swaps two rows of I? Hint: start with the 2 by 2 swap <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>1</span><span>0</span></span>, the mirror on y = x. In any size, swapping two rows of I swaps two coordinates and leaves the rest alone, so it is still a mirror.</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>−1. A swap is a mirror: it keeps areas and flips the orientation.</p>
+<p>−1. In 2 by 2: 0·0 − 1·1 = −1. A swap is a mirror: it keeps areas (in 3D, volumes) the same, so the size is 1, and it flips the orientation, so the sign is minus.</p>
 </div></details>
 </div></div>
 <!-- code -->

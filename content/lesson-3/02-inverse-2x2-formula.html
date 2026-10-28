@@ -4,7 +4,7 @@ seo_title: 2×2 Inverse Matrix Formula and When It Fails
 description: Swap the diagonal, flip the other signs, divide by ad − bc. Why the determinant appears, and why det = 0 means no inverse. Python example.
 kicker: Strang §2.5 · The 2 by 2 inverse
 title: Swap, flip signs, divide by the determinant.
-task: Compute the inverse of A with the formula and show it.
+task: In A_inv, replace the entries [[1., 0.], [0., 1.]] with [[d, -b], [-c, a]]. The division by det is already in the code.
 preview: {"kind":"transform","M":[[2,1],[5,3]]}
 check: isT(V) && eqM(V.M, [[3,-1],[-5,2]])
 ---
@@ -18,6 +18,10 @@ For a 2 by 2 matrix the inverse has a short formula: swap the two diagonal entri
 <h3>The recipe</h3>
 <div class="worked"><div class="row"><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>a</span><span>b</span><span>c</span><span>d</span></span>⁻¹ = 1/(ad − bc) · <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>d</span><span>−b</span><span>−c</span><span>a</span></span></div></div>
 <p>Three moves: swap a and d, flip the signs of b and c, divide everything by ad − bc.</p>
+<h3>Why the recipe works</h3>
+<p>Multiply A by the swapped-and-flipped matrix, before any division:</p>
+<div class="worked"><div class="row"><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>a</span><span>b</span><span>c</span><span>d</span></span><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>d</span><span>−b</span><span>−c</span><span>a</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>ad − bc</span><span>−ab + ba</span><span>cd − dc</span><span>−cb + da</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>ad − bc</span><span>0</span><span>0</span><span>ad − bc</span></span></div><div class="row">= (ad − bc) I</div></div>
+<p>The off-diagonal entries cancel, and both diagonal entries are ad − bc. So the product is ad − bc times I. Divide by ad − bc and you get exactly I. That is the whole formula.</p>
 <h3>Why the determinant appears</h3>
 <p>Lesson 1 showed that A multiplies every area by |det A|, where det A = ad − bc, and that the sign of det A records whether the plane is flipped. To undo A, its inverse must shrink areas back by the same factor, so it must divide by det A.</p>
 <p>When det A = 0, A squashes the plane onto a line. Undoing that would mean dividing by zero, and no matrix can turn a line back into a plane. So a matrix with ad − bc = 0 has no inverse.</p>
@@ -73,7 +77,7 @@ a, b = A[0, 0], A[0, 1]
 c, d = A[1, 0], A[1, 1]
 
 det = a * d - b * c
-A_inv = np.array([[1., 0.],      # your turn: use the recipe
+A_inv = np.array([[1., 0.],      # your turn: replace with [[d, -b], [-c, a]]
                   [0., 1.]]) / det
 
 print("det =", det)

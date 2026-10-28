@@ -17,7 +17,7 @@ AB means: B first, then A. To undo both moves we must undo the last one first, s
 <!-- prose -->
 <h3>Think of taking off socks and shoes</h3>
 <p>In the morning you put on socks, then shoes. In the evening you take off the shoes first, then the socks. Same two steps, opposite order.</p>
-<p>A product of matrices reads from right to left, so AB puts on B first and A second. Its inverse must take off A first, which is A⁻¹ applied first. Written as a product, with the first step on the right, that is B⁻¹A⁻¹.</p>
+<p>A product of matrices reads from right to left, so AB puts on B first and A second. A went on last, so it must come off first. That means A⁻¹ acts first, then B⁻¹. In a product the first step is written on the right. So the inverse is B⁻¹A⁻¹.</p>
 <h3>Check it with algebra</h3>
 <div class="worked">
 <div class="row">(B⁻¹A⁻¹)(AB) = B⁻¹(A⁻¹A)B = B⁻¹ I B = B⁻¹B = I ✓</div>
@@ -31,7 +31,7 @@ AB means: B first, then A. To undo both moves we must undo the last one first, s
 <div>Only S⁻¹R⁻¹ undoes RS. In the lab, follow v = (1, 1) through S and R, then try both orders on the way back.</div>
 </div>
 <h3>Where this is used</h3>
-<p>A robot arm's pose is a product of joint matrices, T₁T₂⋯Tₙ, which converts a point from the gripper's frame to the base's frame. To convert the other way, from the base to the gripper, we need the inverse, Tₙ⁻¹⋯T₁⁻¹, with the joints in reverse order.</p>
+<p>A robot arm's pose is a product of joint matrices, T₁T₂⋯Tₙ, which converts a point measured from the gripper into the same point measured from the base. (Each part of the arm has its own set of axes, called its frame.) To convert the other way, from base measurements to gripper measurements, we need the inverse, Tₙ⁻¹⋯T₁⁻¹, with the joints in reverse order.</p>
 <!-- examples -->
 <section class="example"><h3>Example 1 · Shear then stretch, undone</h3>
 <p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>0</span><span>0</span><span>1</span></span>, B = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>0</span><span>1</span></span>.</p><div class="worked"><div class="row">(AB)⁻¹ = B⁻¹A⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>0</span><span>1</span></span><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>½</span><span>0</span><span>0</span><span>1</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>½</span><span>−1</span><span>0</span><span>1</span></span></div><div class="row">Check: AB = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>2</span><span>0</span><span>1</span></span>, whose inverse is ½·<span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−2</span><span>0</span><span>2</span></span> ✓</div></div>
