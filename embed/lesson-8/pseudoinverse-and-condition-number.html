@@ -4,10 +4,10 @@
     <div class="slide-head"><div>
     <div class="kicker">Strang §7.4 · The pseudoinverse</div>
     <h1>The pseudoinverse: the best undo for any matrix.</h1>
-    <p class="lead">A singular or rectangular matrix has no inverse. The SVD still gives the next best thing: undo each stretch that can be undone, and ignore the directions that were squashed to zero. That is the pseudoinverse A⁺. It also shows how sensitive a problem is: the ratio σ₁/σₙ, the condition number.</p>
+    <p class="lead">A singular or rectangular matrix has no inverse. The SVD still gives the next best thing: undo each stretch that can be undone, and ignore the directions that were squashed to zero. That is the pseudoinverse A⁺. It also shows how sensitive a problem is: the ratio σ₁/σₙ (largest over smallest singular value), the condition number.</p>
     </div><span class="thumb slide-art"><img src="https://linearalgebra.steppeschool.com/assets/cards/lesson-8--pseudoinverse-and-condition-number.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 8 · slide 6</small>Pseudoinverse</span></span></div>
     <div class="key">A⁺ = VΣ⁺Uᵀ (Σ⁺: 1/σ for each nonzero σ) &nbsp;&nbsp; x⁺ = A⁺b &nbsp;&nbsp; condition number = σ₁ / σₙ</div>
-    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Σ⁺ replaces each nonzero σ by 1/σ and keeps the zeros as zeros.</li><li>A⁺ = VΣ⁺Uᵀ. If A is invertible, A⁺ = A⁻¹.</li><li>x⁺ = A⁺b is the least squares solution (lesson 5) with the smallest length.</li><li>The <b>condition number</b> σ₁/σₙ says how much errors in b can be amplified in x.</li></ol></div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Σ⁺ replaces each nonzero σ by 1/σ and keeps the zeros as zeros.</li><li>A⁺ = VΣ⁺Uᵀ. If A is invertible, A⁺ = A⁻¹.</li><li>x⁺ = A⁺b is a least squares solution (lesson 5). When many x are equally good, A⁺ picks the shortest.</li><li>The <b>condition number</b> σ₁/σₙ (σₙ is the smallest singular value) says how much errors in b can be amplified in x.</li></ol></div>
     <div class="prose">
 <h3>The best possible undo</h3>
 <p>A squashed piece of dough cannot be unsquashed: the information about its thickness is gone. But everything that was only stretched can be stretched back. The pseudoinverse does exactly that: undo the turns, divide by every nonzero σ, and leave the squashed directions at zero.</p>
@@ -19,16 +19,16 @@
 <p>The best compromise makes x + y = 3, halfway between 2 and 4: that is least squares. Among all x with x + y = 3, (1.5, 1.5) is the shortest. The pseudoinverse always picks this shortest best answer.</p>
 <h3>The condition number</h3>
 <p>If σ₁ is large and σₙ is tiny, A nearly squashes a direction. Solving Ax = b then divides by that tiny σₙ, and any small error in b is blown up. The ratio σ₁/σₙ is the <b>condition number</b>.</p>
-<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>1.001</span></span>: σ₁ ≈ 2, σ₂ ≈ 0.0005, condition number ≈ 4000</div><div class="row">An error of 0.001 in b can move x by about 4000 times as much (relative)</div></div>
+<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>1.001</span></span>: σ₁ ≈ 2, σ₂ ≈ 0.0005, condition number ≈ 4000</div><div class="row">A 0.1% change in b can change x by up to 4000 × 0.1% = 400%</div></div>
 <h3>Where this is used</h3>
-<p>Robot arms near a singular pose use the pseudoinverse (often a damped version) to turn a desired hand motion into joint speeds without asking for infinite speed. Every numerical solver reports the condition number as a warning light: a large one means "do not trust the last digits".</p>
+<p>Robot arms near a singular pose use the pseudoinverse to turn a desired hand motion into joint speeds without asking for infinite speed. Every numerical solver reports the condition number as a warning light: a large one means "do not trust the last digits".</p>
     </div>
     <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · An invertible matrix</h3>
 <p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>0</span><span>0</span><span>4</span></span>: A⁺ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>½</span><span>0</span><span>0</span><span>¼</span></span> = A⁻¹. Condition number 4/2 = 2: very safe.</p>
 </section>
 <section class="example"><h3>Example 2 · A tall matrix</h3>
 <p>A = (1, 1) as a column (2 by 1), b = (3, 5).</p>
-<div class="worked"><div class="row">σ₁ = √2, u₁ = (1, 1)/√2, v₁ = 1</div><div class="row">A⁺ = (1/√2)·(1/√2)(1, 1) = (½, ½) as a row</div><div class="row">x⁺ = (3 + 5)/2 = 4: the average, as in lesson 5</div></div>
+<div class="worked"><div class="row">σ₁ = √2, u₁ = (1, 1)/√2, v₁ = 1</div><div class="row">Σ is 2 by 1, so Σ⁺ is 1 by 2 (transposed, with 1/σ). A⁺ = (1/√2)·(1/√2)(1, 1) = (½, ½) as a row</div><div class="row">x⁺ = (3 + 5)/2 = 4: the average, as in lesson 5</div></div>
 </section>
 <section class="example"><h3>Example 3 · A zero matrix</h3>
 <p>A = 0: every σ is 0, so A⁺ = 0 and x⁺ = 0, the shortest of all (equally bad) answers.</p>
@@ -66,7 +66,7 @@
 </section>
 <section class="example"><h3>Example 3 · Pseudoinverse of a tall matrix</h3>
 <p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>0</span><span>0</span><span>1</span></span>, b = (1, 2, 3).</p>
-<div class="worked"><div class="row">A⁺ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>0</span><span>0</span><span>1</span></span>, &nbsp; x⁺ = (1, 3)</div><div class="row">The middle equation 0 = 2 cannot be met; x⁺ satisfies the other two exactly</div></div>
+<div class="worked"><div class="row">Both σ's are 1 and A⁺ = Aᵀ here: A⁺ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>0</span><span>0</span><span>1</span></span>, &nbsp; x⁺ = (1, 3)</div><div class="row">The middle equation 0 = 2 cannot be met; x⁺ satisfies the other two exactly</div></div>
 </section></div>
       <h2 class="practice-h">Problems</h2>
       <div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">

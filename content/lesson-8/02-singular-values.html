@@ -9,21 +9,21 @@ preview: {"kind":"table","items":[{"label":"A","M":[[1,1],[0,1]],"piv":[]}]}
 check: isTab(V) && item(V, 'A') && itemVec(V, 'sigma') && itemVec(V, 'sigma').length === 2 && close(itemVec(V, 'sigma').slice().sort((p, q) => q - p), svd2(item(V, 'A')), 1e-6)
 ---
 <!-- lead -->
-AᵀA is symmetric, so it has perpendicular eigenvectors and real eigenvalues that are never negative. Its eigenvectors are the input directions v, and the square roots of its eigenvalues are the singular values. Then each output direction is u = Av / σ.
+AᵀA is symmetric, so it has perpendicular eigenvectors and real eigenvalues. Those eigenvalues are never negative: if AᵀAv = λv with |v| = 1, then λ = vᵀAᵀAv = |Av|² ≥ 0. Its eigenvectors are the input directions v, and the square roots of its eigenvalues are the singular values. Then each output direction is u = Av / σ.
 <!-- key -->
 AᵀA vᵢ = σᵢ² vᵢ &nbsp;&nbsp; σᵢ = √λᵢ(AᵀA) &nbsp;&nbsp; uᵢ = Avᵢ / σᵢ
 <!-- ideas -->
 <ol class="ideas"><li>AᵀA = VΣᵀΣVᵀ: its eigenvectors are the vᵢ and its eigenvalues are σᵢ².</li><li>So σᵢ = √(eigenvalue of AᵀA). These eigenvalues are never negative.</li><li>The output directions are uᵢ = Avᵢ/σᵢ, automatically perpendicular and of length 1.</li><li>Similarly AAᵀ has eigenvectors uᵢ and the same nonzero eigenvalues σᵢ².</li></ol>
 <!-- prose -->
 <h3>Measure the stretch, then take the root</h3>
-<p>To find how much A stretches a unit vector v, look at the squared length: |Av|² = (Av)ᵀ(Av) = vᵀ(AᵀA)v. So everything about stretching lives in the matrix AᵀA. It is symmetric (lesson 7), so it has perpendicular eigenvectors, and its eigenvalues are squared lengths, never negative.</p>
+<p>To find how much A stretches a unit vector v, look at the squared length: |Av|² = (Av)ᵀ(Av) = vᵀ(AᵀA)v. So everything about stretching lives in the matrix AᵀA. It is symmetric (lesson 7), so it has perpendicular eigenvectors. Its eigenvalues are squared lengths |Av|², so they are never negative.</p>
 <h3>Why the eigenvectors of AᵀA are the right v's</h3>
-<div class="worked"><div class="row">A = UΣVᵀ, &nbsp; so Aᵀ = VΣᵀUᵀ</div><div class="row">AᵀA = VΣᵀUᵀUΣVᵀ = V(ΣᵀΣ)Vᵀ, &nbsp; because UᵀU = I</div><div class="row">This is QΛQᵀ from lesson 7 with Q = V and Λ = ΣᵀΣ = diag(σ₁², σ₂², …)</div></div>
-<p>So: eigenvectors of AᵀA give V, and the square roots of its eigenvalues give the σ's. Then uᵢ = Avᵢ/σᵢ.</p>
+<div class="worked"><div class="row">A = UΣVᵀ, &nbsp; so Aᵀ = VΣᵀUᵀ</div><div class="row">AᵀA = VΣᵀUᵀUΣVᵀ = V(ΣᵀΣ)Vᵀ, &nbsp; because UᵀU = I</div><div class="row">This is QΛQᵀ from lesson 7 with Q = V and Λ = ΣᵀΣ = diag(σ₁², σ₂², …). (Σ is rectangular when A is, so we write ΣᵀΣ, a square diagonal matrix.)</div></div>
+<p>So: eigenvectors of AᵀA give V, and the square roots of its eigenvalues give the σ's. Then uᵢ = Avᵢ/σᵢ for every nonzero σᵢ. (When σᵢ = 0 there is nothing to divide; any unit vectors that complete U to an orthogonal matrix will do.) Also σ₁σ₂ = |det A| for a 2 by 2 matrix, because the turns U and V do not change area.</p>
 <h3>A worked example</h3>
 <div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>−2</span><span>1</span><span>1</span></span> (slide 1), &nbsp; AᵀA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>5</span><span>−3</span><span>−3</span><span>5</span></span></div><div class="row">trace 10, det 25 − 9 = 16: &nbsp; λ² − 10λ + 16 = (λ − 8)(λ − 2), &nbsp; λ = 8 and 2</div><div class="row">σ₁ = √8 = 2√2 with v₁ = (1, −1)/√2, &nbsp; σ₂ = √2 with v₂ = (1, 1)/√2 ✓ (as found by turning v on slide 1)</div><div class="row">u₁ = Av₁/σ₁ = (2√2, 0)/(2√2) = (1, 0), &nbsp; u₂ = (0, √2)/√2 = (0, 1)</div></div>
 <h3>Not the eigenvalues of A</h3>
-<p>For a symmetric matrix with positive eigenvalues, the singular values are the eigenvalues. In general they are different. The shear <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>0</span><span>1</span></span> in the lab has both eigenvalues equal to 1, but it stretches some vectors by 1.618 (the golden ratio!) and squeezes others to 0.618. Eigenvalues tell what happens along special directions; singular values tell the largest and smallest stretch overall.</p>
+<p>For a symmetric matrix with positive eigenvalues, the singular values are the eigenvalues. In general they are different. The shear <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>0</span><span>1</span></span> in the code below has both eigenvalues equal to 1, but it stretches some vectors by 1.618 and squeezes others to 0.618. Eigenvalues tell what happens along special directions; singular values tell the largest and smallest stretch overall.</p>
 <h3>Where this is used</h3>
 <p>Engineers check σ₁ to know the worst-case gain of a system: how much an input of size 1 can be amplified. This "largest singular value" is the standard size of a matrix, written ‖A‖.</p>
 <!-- examples -->
@@ -65,7 +65,7 @@ A = np.array([[1., 1.],
               [0., 1.]])        # a shear
 lam, V = np.linalg.eig(A.T @ A) # eigenvalues and eigenvectors of A^T A
 
-sigma = lam                     # your turn: singular values are SQUARE ROOTS of lam
+sigma = lam                     # your turn: singular values are SQUARE ROOTS of lam (np.sqrt)
 print("eigenvalues of A^T A:", lam)
 print("sigma =", sigma)
 table(("A", A), ("A.T @ A", A.T @ A), ("sigma", sigma))

@@ -13,26 +13,26 @@ Multiply out UΣVᵀ column by column and A falls apart into r simple pieces σ�
 <!-- key -->
 A = σ₁u₁v₁ᵀ + σ₂u₂v₂ᵀ + … + σᵣuᵣvᵣᵀ
 <!-- ideas -->
-<ol class="ideas"><li>UΣVᵀ = σ₁u₁v₁ᵀ + … + σᵣuᵣvᵣᵀ, where r is the rank (the number of nonzero σ's).</li><li>Each uvᵀ is a <b>rank-one</b> matrix: a column times a row. All its rows are multiples of vᵀ.</li><li>The pieces are ordered: σ₁ ≥ σ₂ ≥ …, so the first pieces carry the most.</li><li>Keeping only the first k pieces gives the best rank-k approximation of A.</li></ol>
+<ol class="ideas"><li>UΣVᵀ = σ₁u₁v₁ᵀ + … + σᵣuᵣvᵣᵀ, where r is the rank (the number of nonzero σ's).</li><li>Each uvᵀ is a <b>rank-one</b> matrix: a column times a row. All its rows are multiples of vᵀ.</li><li>The pieces are ordered: σ₁ ≥ σ₂ ≥ …, so the first pieces carry the most.</li><li>Keeping only the first k pieces gives the best rank-k approximation of A: the closest matrix of rank k (slide 4).</li></ol>
 <!-- prose -->
 <h3>A song as layers</h3>
-<p>A recorded song can be split into tracks: drums, bass, vocals, a quiet shaker. Mute the quiet tracks and the song is still recognisable. The SVD splits a matrix into layers in the same way, and lists them from loudest to quietest.</p>
+<p>A recorded song can be split into tracks: drums, bass, vocals, some quiet background sounds. Mute the quiet tracks and the song is still recognisable. The SVD splits a matrix into layers in the same way, and lists them from loudest to quietest.</p>
 <h3>Column times row</h3>
 <p>A column u times a row vᵀ is a whole matrix, uvᵀ, called an <b>outer product</b>. Every row of uvᵀ is a multiple of vᵀ, so it has rank 1: the simplest matrix there is.</p>
 <div class="worked"><div class="row">u = (1, 2), v = (3, 1): &nbsp; uvᵀ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>1</span><span>6</span><span>2</span></span>. &nbsp; Row 2 = 2 × row 1</div></div>
 <h3>The SVD as a sum</h3>
-<p>Multiply U times ΣVᵀ by columns-times-rows (lesson 1 style):</p>
+<p>Multiply U times ΣVᵀ as a sum of columns times rows: column i of U times row i of ΣVᵀ. Row i of ΣVᵀ is σᵢvᵢᵀ, so each term is σᵢuᵢvᵢᵀ:</p>
 <div class="worked"><div class="row">A = UΣVᵀ = σ₁u₁v₁ᵀ + σ₂u₂v₂ᵀ + … + σᵣuᵣvᵣᵀ</div></div>
 <p>Pieces with σ = 0 add nothing, so there are exactly r pieces, where r is the rank.</p>
 <h3>A worked example</h3>
-<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>1</span></span>: eigenvalues 3 with (1, 1)/√2 and −1 with (1, −1)/√2</div><div class="row">σ₁ = 3: &nbsp; v₁ = u₁ = (1, 1)/√2, &nbsp; 3u₁v₁ᵀ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1.5</span><span>1.5</span><span>1.5</span><span>1.5</span></span></div><div class="row">σ₂ = 1: &nbsp; v₂ = (1, −1)/√2, u₂ = Av₂ = (−1, 1)/√2, &nbsp; 1·u₂v₂ᵀ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−0.5</span><span>0.5</span><span>0.5</span><span>−0.5</span></span></div><div class="row">Sum: <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>1</span></span> ✓</div></div>
+<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>1</span></span>: eigenvalues 3 with (1, 1)/√2 and −1 with (1, −1)/√2</div><div class="row">σ₁ = 3: &nbsp; v₁ = u₁ = (1, 1)/√2, &nbsp; 3u₁v₁ᵀ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1.5</span><span>1.5</span><span>1.5</span><span>1.5</span></span></div><div class="row">σ₂ = 1: &nbsp; v₂ = (1, −1)/√2, u₂ = Av₂ = (−1, 1)/√2 (the eigenvalue −1 puts its minus sign into u₂), &nbsp; 1·u₂v₂ᵀ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−0.5</span><span>0.5</span><span>0.5</span><span>−0.5</span></span></div><div class="row">Sum: <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>1</span></span> ✓</div></div>
 <p>The first piece alone, all 1.5's, is already the best rank-one guess at A. The second piece adds the detail.</p>
 <h3>Where this is used</h3>
 <p>Recommendation systems (films, products) treat a huge table of ratings as a matrix and keep a few big SVD pieces. Each piece is a "taste" shared by many people. A few dozen pieces explain most of millions of ratings.</p>
 <!-- examples -->
 <section class="example"><h3>Example 1 · Spot a rank-one matrix</h3>
 <p><span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>4</span><span>6</span><span>1</span><span>2</span><span>3</span></span> = (2, 1) times the row (1, 2, 3).</p>
-<p>One piece: σ₁ = |(2, 1)| · |(1, 2, 3)| = √5 · √14 = √70, and σ₂ = 0.</p>
+<p>One piece. Make both vectors unit length: u = (2, 1)/√5, v = (1, 2, 3)/√14. The two lengths move into σ: σ₁ = √5 · √14 = √70, and σ₂ = 0.</p>
 </section>
 <section class="example"><h3>Example 2 · A diagonal matrix</h3>
 <p><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>4</span><span>0</span><span>0</span><span>1</span></span> = 4·(1, 0)(1, 0)ᵀ + 1·(0, 1)(0, 1)ᵀ.</p>

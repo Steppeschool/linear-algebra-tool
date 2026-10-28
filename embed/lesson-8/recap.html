@@ -12,7 +12,7 @@
 <ul>
 <li><b>§7.4 Geometry.</b> Kneading dough: turn, stretch along perpendicular axes, turn. The unit circle becomes an ellipse with half-axes σ₁, σ₂.</li>
 <li><b>§7.2 Singular values.</b> |Av|² = vᵀAᵀAv: the σ's are square roots of the eigenvalues of AᵀA.</li>
-<li><b>§7.2 Pieces.</b> A song as tracks: A = Σ σᵢuᵢvᵢᵀ, loudest first.</li>
+<li><b>§7.2 Pieces.</b> A song as tracks: A = σ₁u₁v₁ᵀ + σ₂u₂v₂ᵀ + …, loudest first.</li>
 <li><b>§7.1 Images.</b> A sketch artist: keep k pieces, store k(m + n + 1) numbers.</li>
 <li><b>§7.3 PCA.</b> The robot along the wall: center, SVD, v₁ is the main direction.</li>
 <li><b>§7.4 Pseudoinverse.</b> The best undo: A⁺ = VΣ⁺Uᵀ, and the condition number σ₁/σₙ.</li>
@@ -53,7 +53,7 @@
 </section>
 <section class="example"><h3>Example 3 · Pseudoinverse of a tall matrix</h3>
 <p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>0</span><span>0</span><span>1</span></span>, b = (1, 2, 3).</p>
-<div class="worked"><div class="row">A⁺ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>0</span><span>0</span><span>1</span></span>, &nbsp; x⁺ = (1, 3)</div><div class="row">The middle equation 0 = 2 cannot be met; x⁺ satisfies the other two exactly</div></div>
+<div class="worked"><div class="row">Both σ's are 1 and A⁺ = Aᵀ here: A⁺ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>0</span><span>0</span><span>1</span></span>, &nbsp; x⁺ = (1, 3)</div><div class="row">The middle equation 0 = 2 cannot be met; x⁺ satisfies the other two exactly</div></div>
 </section></div>
       <h2 class="practice-h">Problems</h2>
       <div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
@@ -92,7 +92,7 @@
   <section class="labsec" aria-label="Lab">
     <div class="exercise" id="exercise">
       <span class="tag">Exercise</span>
-      <span class="task">Free play: try svdpic(A, theta) on matrices of your own and find σ₁ and σ₂.</span>
+      <span class="task">Free play: try svdpic(A, theta) on matrices of your own, find σ₁ and σ₂ by turning v, and compare with print(np.linalg.svd(A)[1]).</span>
       <span class="hint" id="hint">Edit the code and press Run.</span>
     </div>
     <div class="lab">

@@ -11,7 +11,7 @@ check: isImg(V) && item(V, 'original') && item(V, 'approx') && close(item(V, 'ap
 <!-- lead -->
 A grey picture is a matrix of brightness values. Its SVD lists the picture's pieces from most to least important. Keep the first few pieces and you keep most of the picture while storing far fewer numbers. Pictures with simple structure need very few pieces.
 <!-- key -->
-A ≈ A_k = σ₁u₁v₁ᵀ + … + σₖuₖvₖᵀ &nbsp;&nbsp; error = size of the dropped σ's
+A ≈ A_k = σ₁u₁v₁ᵀ + … + σₖuₖvₖᵀ &nbsp;&nbsp; error set by the dropped σ's
 <!-- ideas -->
 <ol class="ideas"><li>A grey image with m rows and n columns of pixels is an m by n matrix.</li><li>A_k, the first k SVD pieces, is the closest matrix of rank k to A (the Eckart–Young theorem).</li><li>Storing A_k needs k(m + n + 1) numbers instead of mn.</li><li>Fast-falling singular values mean the image compresses well.</li></ol>
 <!-- prose -->
@@ -21,7 +21,7 @@ A ≈ A_k = σ₁u₁v₁ᵀ + … + σₖuₖvₖᵀ &nbsp;&nbsp; error = size 
 <p>Give each pixel a number from 0 (white) to 1 (black). An 8 by 8 picture of the letter F becomes an 8 by 8 matrix of 0s and 1s. A photo of 1000 by 1000 pixels is a 1000 by 1000 matrix: a million numbers.</p>
 <h3>Keep k pieces</h3>
 <div class="worked"><div class="row">A_k = σ₁u₁v₁ᵀ + σ₂u₂v₂ᵀ + … + σₖuₖvₖᵀ</div><div class="row">Each piece costs m + n + 1 numbers (u, v and σ)</div><div class="row">1000 by 1000 photo, k = 50: 50 · 2001 ≈ 100,000 numbers instead of 1,000,000</div></div>
-<p>No other matrix of rank k is closer to A than A_k. The error is made of the dropped σ's, so when they are small, the copy is good.</p>
+<p>No other matrix of rank k is closer to A than A_k. The error comes only from the dropped pieces: the most the copy can be off in any direction is σₖ₊₁, the largest dropped σ. When the dropped σ's are small, the copy is good.</p>
 <h3>The letter F</h3>
 <div class="worked"><div class="row">Its singular values: 4.38, 1.41, 0.91, then all zero</div><div class="row">Rank 3: three pieces rebuild the F exactly. One piece gives a blurry block; two pieces get the shape roughly right</div></div>
 <p>The F is made of blocks lined up with the rows and columns, so it needs very few pieces. A photo of a face has slowly falling singular values and needs more, but still far fewer than its size.</p>
@@ -29,7 +29,7 @@ A ≈ A_k = σ₁u₁v₁ᵀ + … + σₖuₖvₖᵀ &nbsp;&nbsp; error = size 
 <p>The same idea, keep the big components and drop the small ones, is used to compress sensor logs, remove noise from signals and shrink large neural networks so they run on a drone's small computer.</p>
 <!-- examples -->
 <section class="example"><h3>Example 1 · A flag with stripes</h3>
-<p>Three horizontal stripes: every row is the same as one of a few rows, all multiples of the all-ones row.</p>
+<p>Three horizontal stripes: each row is one number repeated: a number times the all-ones row.</p>
 <p>Rank 1: one piece (a column of stripe values times a row of ones) rebuilds it exactly.</p>
 </section>
 <section class="example"><h3>Example 2 · A checkerboard</h3>
@@ -67,7 +67,7 @@ rows = ["00000000", "01111100", "01111100", "01111000",
 F = np.array([[float(c) for c in r] for r in rows])      # the letter F, 1 = black
 
 U, s, Vt = np.linalg.svd(F)
-print("singular values:", s)
+print("singular values:", s)   # tiny numbers like 1e-16 are really 0
 
 k = 1                           # your turn: how many pieces does the F need?
 approx = np.zeros((8, 8))

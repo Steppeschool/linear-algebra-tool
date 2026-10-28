@@ -4,7 +4,7 @@ seo_title: Lesson 8 Recap: The SVD and PCA
 description: Chapter 7 on one page: A = UΣVᵀ as turn-stretch-turn, singular values from AᵀA, rank-one pieces, image compression, PCA and the pseudoinverse.
 kicker: Recap · Reading
 title: What you can now do.
-task: Free play: try svdpic(A, theta) on matrices of your own and find σ₁ and σ₂.
+task: Free play: try svdpic(A, theta) on matrices of your own, find σ₁ and σ₂ by turning v, and compare with print(np.linalg.svd(A)[1]).
 preview: {"kind":"svd","A":[[1,1],[0,1]],"th":0}
 check: !!V
 ---
@@ -18,7 +18,7 @@ A = UΣVᵀ = σ₁u₁v₁ᵀ + … + σᵣuᵣvᵣᵀ
 <ul>
 <li><b>§7.4 Geometry.</b> Kneading dough: turn, stretch along perpendicular axes, turn. The unit circle becomes an ellipse with half-axes σ₁, σ₂.</li>
 <li><b>§7.2 Singular values.</b> |Av|² = vᵀAᵀAv: the σ's are square roots of the eigenvalues of AᵀA.</li>
-<li><b>§7.2 Pieces.</b> A song as tracks: A = Σ σᵢuᵢvᵢᵀ, loudest first.</li>
+<li><b>§7.2 Pieces.</b> A song as tracks: A = σ₁u₁v₁ᵀ + σ₂u₂v₂ᵀ + …, loudest first.</li>
 <li><b>§7.1 Images.</b> A sketch artist: keep k pieces, store k(m + n + 1) numbers.</li>
 <li><b>§7.3 PCA.</b> The robot along the wall: center, SVD, v₁ is the main direction.</li>
 <li><b>§7.4 Pseudoinverse.</b> The best undo: A⁺ = VΣ⁺Uᵀ, and the condition number σ₁/σₙ.</li>

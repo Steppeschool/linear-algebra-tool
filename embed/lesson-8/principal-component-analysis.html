@@ -4,10 +4,10 @@
     <div class="slide-head"><div>
     <div class="kicker">Strang §7.3 · Principal component analysis</div>
     <h1>PCA: the direction where the data spreads most.</h1>
-    <p class="lead">Measurements often form a cloud that is long in one direction and thin in the others. Principal component analysis finds those directions. Subtract the average, put the data in a matrix, and take its SVD: the first right singular vector points along the cloud, and σ₁² says how much of the spread it captures.</p>
+    <p class="lead">Measurements often form a cloud that is long in one direction and thin in the others. The spread along a direction is the sum of the squared distances of the points along it, measured from the average. Principal component analysis finds those directions. Subtract the average, put the data in a matrix, and take its SVD: the first right singular vector points along the cloud, and σ₁² says how much of the spread it captures.</p>
     </div><span class="thumb slide-art"><img src="https://linearalgebra.steppeschool.com/assets/cards/lesson-8--principal-component-analysis.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 8 · slide 5</small>PCA</span></span></div>
-    <div class="key">center: C = data − mean &nbsp;&nbsp; C = UΣVᵀ &nbsp;&nbsp; first principal component = v₁ &nbsp;&nbsp; share = σ₁² / Σσᵢ²</div>
-    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Put the measurements as rows of a matrix and subtract the average of each column: the centered matrix C.</li><li>The first principal component is v₁, the first right singular vector of C: the direction of greatest spread.</li><li>σᵢ² measures the spread along vᵢ; σ₁² / (σ₁² + σ₂² + …) is the share it explains.</li><li>The line through the mean along v₁ minimises the sum of squared <b>perpendicular</b> distances to the points.</li></ol></div>
+    <div class="key">center: C = data − mean &nbsp;&nbsp; C = UΣVᵀ &nbsp;&nbsp; first principal component = v₁ &nbsp;&nbsp; share = σ₁² / (σ₁² + σ₂² + …)</div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Put the measurements as rows of a matrix and subtract the average of each column: the centered matrix C.</li><li>The first principal component is v₁, the first input direction of the SVD of C (also called the first right singular vector): the direction of greatest spread.</li><li>σᵢ² measures the spread along vᵢ; σ₁² / (σ₁² + σ₂² + …) is the share it explains.</li><li>The line through the mean along v₁ minimises the sum of squared <b>perpendicular</b> distances to the points.</li></ol></div>
     <div class="prose">
 <h3>A robot vacuum along a wall</h3>
 <p>A robot vacuum drives along a straight wall and logs its (x, y) position eight times. The tracker is noisy, so the points scatter a little around the true path. Which direction is the wall?</p>
@@ -18,9 +18,9 @@
 <p>For a unit direction v, Cv lists how far each point reaches along v, and |Cv|² adds up the squares: the spread along v. Slide 1 says |Cv| is largest for v = v₁, with |Cv₁| = σ₁. So v₁ is the direction of greatest spread: the <b>first principal component</b>.</p>
 <div class="worked"><div class="row">For the robot data: v₁ points at about 29.6°, the second direction v₂ is perpendicular to it</div><div class="row">σ₁² / (σ₁² + σ₂²) ≈ 0.992: the wall direction explains 99.2% of the spread</div></div>
 <h3>Not the same as least squares</h3>
-<p>Lesson 5 fitted a line by making the <b>vertical</b> gaps small: it assumed t was exact and only b was noisy. PCA treats x and y the same and makes the <b>perpendicular</b> distances small. Here both coordinates are noisy, so PCA is the right tool. (Spread along v₁ plus squared distances to the line is the fixed total, so making one big makes the other small.)</p>
+<p>Lesson 5 fitted a line by making the <b>vertical</b> gaps small: it assumed x was exact and only y was noisy. PCA treats x and y the same and makes the <b>perpendicular</b> distances small. Here both coordinates are noisy, so PCA is the right tool. By Pythagoras, each point's squared distance from the average = (part along the line)² + (distance to the line)². The total is fixed, so more spread along the line means smaller distances to it.</p>
 <h3>Where this is used</h3>
-<p>PCA is the first step in most data work: it shrinks hundreds of sensor channels to a few meaningful directions, finds the main axis of an IMU's vibration, and compresses data before it is sent over a slow radio link. In 3D, the first two components of a scanned surface give its best-fitting plane.</p>
+<p>PCA is the first step in most data work: it shrinks hundreds of sensor channels to a few meaningful directions, finds the main axis of a motion sensor's vibration, and compresses data before it is sent over a slow radio link. In 3D, the first two components of a scanned surface give its best-fitting plane.</p>
     </div>
     <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · Points exactly on a line</h3>
 <p>(0, 0), (1, 2), (2, 4), centered: (−1, −2), (0, 0), (1, 2).</p>
@@ -67,7 +67,7 @@
 </section>
 <section class="example"><h3>Example 3 · Pseudoinverse of a tall matrix</h3>
 <p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>0</span><span>0</span><span>1</span></span>, b = (1, 2, 3).</p>
-<div class="worked"><div class="row">A⁺ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>0</span><span>0</span><span>1</span></span>, &nbsp; x⁺ = (1, 3)</div><div class="row">The middle equation 0 = 2 cannot be met; x⁺ satisfies the other two exactly</div></div>
+<div class="worked"><div class="row">Both σ's are 1 and A⁺ = Aᵀ here: A⁺ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>0</span><span>0</span><span>1</span></span>, &nbsp; x⁺ = (1, 3)</div><div class="row">The middle equation 0 = 2 cannot be met; x⁺ satisfies the other two exactly</div></div>
 </section></div>
       <h2 class="practice-h">Problems</h2>
       <div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
