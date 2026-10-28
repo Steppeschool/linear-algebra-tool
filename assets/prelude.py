@@ -255,6 +255,55 @@ def _cross(u, v):
         raise ValueError("cross() needs two vectors with 3 entries")
     return ndarray([u[1] * v[2] - u[2] * v[1], u[2] * v[0] - u[0] * v[2], u[0] * v[1] - u[1] * v[0]])
 np.cross = _cross
+def _eig(A):
+    """Eigenvalues and unit eigenvectors (as columns). 2x2 with real eigenvalues, or symmetric of any size."""
+    A = asarray(A); n = A.shape[0]
+    if A.ndim != 2 or A.shape[1] != n:
+        raise ValueError("eig needs a square matrix")
+    sym = all(abs(A.d[i][j] - A.d[j][i]) < 1e-12 for i in range(n) for j in range(n))
+    if sym:
+        return _eigh(A)
+    if n != 2:
+        raise ValueError("this lab's eig handles 2x2 matrices, or symmetric matrices of any size")
+    a, b, c, d = A.d[0][0], A.d[0][1], A.d[1][0], A.d[1][1]
+    tr = a + d; det = a * d - b * c; disc = tr * tr - 4 * det
+    if disc < -1e-12:
+        raise ValueError("complex eigenvalues: this matrix turns every real direction (like a rotation)")
+    r = _M.sqrt(max(disc, 0.0)); lams = [(tr + r) / 2, (tr - r) / 2]
+    vecs = []
+    for l in lams:
+        v = [b, l - a] if abs(b) > 1e-12 else ([l - d, c] if abs(c) > 1e-12 else ([1.0, 0.0] if abs(l - a) < 1e-12 else [0.0, 1.0]))
+        L = _M.sqrt(v[0] ** 2 + v[1] ** 2); vecs.append([v[0] / L, v[1] / L])
+    return ndarray(lams), ndarray([[vecs[0][0], vecs[1][0]], [vecs[0][1], vecs[1][1]]])
+def _eigh(A):
+    """Symmetric eigenproblem by Jacobi rotations. Eigenvalues sorted from largest to smallest."""
+    A = [list(r) for r in asarray(A).d]; n = len(A)
+    V = [[1.0 if i == j else 0.0 for j in range(n)] for i in range(n)]
+    for sweep in range(100):
+        off = sum(A[i][j] ** 2 for i in range(n) for j in range(n) if i != j)
+        if off < 1e-22:
+            break
+        for p in range(n):
+            for q in range(p + 1, n):
+                if abs(A[p][q]) < 1e-15:
+                    continue
+                th = (A[q][q] - A[p][p]) / (2 * A[p][q])
+                t = (1.0 if th >= 0 else -1.0) / (abs(th) + _M.sqrt(th * th + 1)); c = 1 / _M.sqrt(t * t + 1); s = t * c
+                for k in range(n):
+                    akp, akq = A[k][p], A[k][q]; A[k][p] = c * akp - s * akq; A[k][q] = s * akp + c * akq
+                for k in range(n):
+                    apk, aqk = A[p][k], A[q][k]; A[p][k] = c * apk - s * aqk; A[q][k] = s * apk + c * aqk
+                for k in range(n):
+                    vkp, vkq = V[k][p], V[k][q]; V[k][p] = c * vkp - s * vkq; V[k][q] = s * vkp + c * vkq
+    order = sorted(range(n), key=lambda i: -A[i][i])
+    lams = [A[i][i] for i in order]
+    vecs = [[V[k][i] for i in order] for k in range(n)]
+    for j in range(n):
+        if sum(vecs[k][j] for k in range(n)) < 0:
+            for k in range(n):
+                vecs[k][j] = -vecs[k][j]
+    return ndarray(lams), ndarray(vecs)
+np.trace = lambda a: sum(asarray(a).d[i][i] for i in range(asarray(a).shape[0]))
 np.linalg = _NS()
 np.linalg.det = _det
 np.linalg.inv = _inv
@@ -263,6 +312,8 @@ np.linalg.solve = lambda A, b: _inv(A) @ asarray(b)
 np.linalg.matrix_rank = _rank
 np.linalg.lstsq = _lstsq
 np.linalg.qr = _qr
+np.linalg.eig = _eig
+np.linalg.eigh = _eigh
 np.hstack = lambda ms: ndarray([sum([asarray(m).d[i] if asarray(m).ndim == 2 else [asarray(m).d[i]] for m in ms], []) for i in range(asarray(ms[0]).shape[0])])
 np.vstack = lambda ms: ndarray(sum([asarray(m).tolist() if asarray(m).ndim == 2 else [asarray(m).tolist()] for m in ms], []))
 np.triu = lambda a: ndarray([[v if j >= i else 0.0 for j, v in enumerate(r)] for i, r in enumerate(asarray(a).d)])
@@ -339,6 +390,13 @@ def vectors(*items):
         out.append([label, v.tolist()])
     window.__pyarrows(out, False)
 
+def eigpic(A, v):
+    """A 2x2 matrix, your vector v and Av. Av on the line through v means v is an eigenvector."""
+    A = asarray(A); v = asarray(v)
+    if A.shape != (2, 2) or v.shape != (2,):
+        raise ValueError("eigpic() needs a 2x2 matrix A and a vector v with 2 entries")
+    window.__pyeig(A.tolist(), v.tolist())
+
 def four(A):
     """The four subspaces of a 2x2 matrix: input plane on the left, output plane on the right."""
     A = asarray(A)
@@ -375,7 +433,7 @@ def _hint(kind, msg):
     return ""
 
 def run(src):
-    ns = {'np': np, 'show': show, 'combo': combo, 'rowpic': rowpic, 'table': table, 'nullpic': nullpic, 'four': four, 'arrows': arrows, 'vectors': vectors, 'proj': proj, 'fit': fit, 'lu': lu, 'rref': rref, 'print': _print, '__name__': '__main__'}
+    ns = {'np': np, 'show': show, 'combo': combo, 'rowpic': rowpic, 'table': table, 'nullpic': nullpic, 'four': four, 'arrows': arrows, 'vectors': vectors, 'proj': proj, 'fit': fit, 'eigpic': eigpic, 'lu': lu, 'rref': rref, 'print': _print, '__name__': '__main__'}
     try:
         exec(compile(src, 'lesson.py', 'exec'), ns)
     except SyntaxError as e:

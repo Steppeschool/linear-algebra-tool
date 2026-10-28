@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>How to Find Eigenvalues: det(A − λI) = 0</title>
+<meta name="description" content="Find eigenvalues by solving det(A − λI) = 0, then eigenvectors from the null space of A − λI. Trace and determinant checks, examples and Python. Strang §6.1.">
+<link rel="canonical" href="https://linearalgebra.steppeschool.com/eigenvalues-and-eigenvectors/finding-eigenvalues/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Linear Algebra, Live">
+<meta property="og:title" content="How to Find Eigenvalues: det(A − λI) = 0">
+<meta property="og:description" content="Find eigenvalues by solving det(A − λI) = 0, then eigenvectors from the null space of A − λI. Trace and determinant checks, examples and Python. Strang §6.1.">
+<meta property="og:url" content="https://linearalgebra.steppeschool.com/eigenvalues-and-eigenvectors/finding-eigenvalues/">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/lesson.css">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "How to Find Eigenvalues: det(A − λI) = 0", "headline": "Finding eigenvalues: make A − λI singular.", "description": "Find eigenvalues by solving det(A − λI) = 0, then eigenvectors from the null space of A − λI. Trace and determinant checks, examples and Python. Strang §6.1.", "url": "https://linearalgebra.steppeschool.com/eigenvalues-and-eigenvectors/finding-eigenvalues/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": true, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 7: Eigenvalues and eigenvectors", "item": "https://linearalgebra.steppeschool.com/eigenvalues-and-eigenvectors/"}, {"@type": "ListItem", "position": 3, "name": "How to Find Eigenvalues: det(A − λI) = 0", "item": "https://linearalgebra.steppeschool.com/eigenvalues-and-eigenvectors/finding-eigenvalues/"}]}]</script>
+</head>
+<body>
+<header class="top">
+  <div class="topnav"><a class="brand" href="../../">Linear Algebra, Live</a><nav class="crumbnav" aria-label="Chapters and lessons"><details class="menu"><summary>Chapter 6<span class="hide-sm"> · Eigenvalues and eigenvectors</span></summary><div class="menu-list chapters"><div class="menu-sub">Chapters</div><div class="ch"><div class="ch-head"><span class="ch-num">1</span><span class="ch-title">Introduction to vectors</span></div><div class="ch-lessons"><a class="ls" href="../../vectors-and-matrices/"><span class="ls-num">Lesson 1</span><span class="ls-title">Columns first</span></a></div></div><div class="ch"><div class="ch-head"><span class="ch-num">2</span><span class="ch-title">Solving linear equations</span></div><div class="ch-lessons"><a class="ls" href="../../gaussian-elimination-and-lu/"><span class="ls-num">Lesson 2</span><span class="ls-title">Elimination and A = LU</span></a><a class="ls" href="../../inverse-transpose-permutation/"><span class="ls-num">Lesson 3</span><span class="ls-title">Inverses, transposes and permutations</span></a></div></div><div class="ch"><div class="ch-head"><span class="ch-num">3</span><span class="ch-title">Vector spaces and subspaces</span></div><div class="ch-lessons"><a class="ls" href="../../vector-spaces-and-four-subspaces/"><span class="ls-num">Lesson 4</span><span class="ls-title">The four subspaces</span></a></div></div><div class="ch"><div class="ch-head"><span class="ch-num">4</span><span class="ch-title">Orthogonality</span></div><div class="ch-lessons"><a class="ls" href="../../orthogonality-and-least-squares/"><span class="ls-num">Lesson 5</span><span class="ls-title">Orthogonality and least squares</span></a></div></div><div class="ch"><div class="ch-head"><span class="ch-num">5</span><span class="ch-title">Determinants</span></div><div class="ch-lessons"><a class="ls" href="../../determinants/"><span class="ls-num">Lesson 6</span><span class="ls-title">Determinants</span></a></div></div><div class="ch on"><div class="ch-head"><span class="ch-num">6</span><span class="ch-title">Eigenvalues and eigenvectors</span></div><div class="ch-lessons"><a class="ls on" href="../../eigenvalues-and-eigenvectors/"><span class="ls-num">Lesson 7</span><span class="ls-title">Eigenvalues and eigenvectors</span></a></div></div><div class="menu-sub">Coming soon</div><div class="ch-later"><div class="ch soon"><div class="ch-head"><span class="ch-num">7</span><span class="ch-title">The singular value decomposition</span></div></div></div></div></details><span class="sep">›</span><details class="menu"><summary>Lesson 7<span class="hide-sm"> · Eigenvalues and eigenvectors</span></summary><div class="menu-list"><div class="menu-sub">Chapter 6 lessons</div><div class="ch-lessons flat"><a class="ls on" href="../../eigenvalues-and-eigenvectors/"><span class="ls-num">Lesson 7</span><span class="ls-title">Eigenvalues and eigenvectors</span></a></div><div class="menu-sub">In lesson 7</div><div class="ch-lessons flat slides"><a class="ls" href="../../eigenvalues-and-eigenvectors/eigenvectors/"><span class="ls-num">1</span><span class="ls-title">Eigenvectors and Eigenvalues Explained Visually: Ax = λx</span></a><a class="ls on" href="../../eigenvalues-and-eigenvectors/finding-eigenvalues/"><span class="ls-num">2</span><span class="ls-title">How to Find Eigenvalues: det(A − λI) = 0</span></a><a class="ls" href="../../eigenvalues-and-eigenvectors/diagonalization/"><span class="ls-num">3</span><span class="ls-title">Diagonalizing a Matrix: A = XΛX⁻¹ and Matrix Powers</span></a><a class="ls" href="../../eigenvalues-and-eigenvectors/powers-and-stability/"><span class="ls-num">4</span><span class="ls-title">Eigenvalues, Stability and Markov Matrices (Steady State)</span></a><a class="ls" href="../../eigenvalues-and-eigenvectors/symmetric-matrices/"><span class="ls-num">5</span><span class="ls-title">Symmetric Matrices: Real Eigenvalues and Orthogonal Eigenvectors</span></a><a class="ls" href="../../eigenvalues-and-eigenvectors/positive-definite-matrices/"><span class="ls-num">6</span><span class="ls-title">Positive Definite Matrices: Bowls, Saddles and Eigenvalues</span></a><a class="ls" href="../../eigenvalues-and-eigenvectors/recap/"><span class="ls-num">7</span><span class="ls-title">Lesson 7 Recap: Eigenvalues and Eigenvectors</span></a><a class="ls" href="../../eigenvalues-and-eigenvectors/practice/"><span class="ls-num">✎</span><span class="ls-title">Examples and problems</span></a></div></div></details></nav></div>
+  <nav class="steps" aria-label="Steps in this lesson"><a class="step" href="../eigenvectors/" data-slug="eigenvectors" title="Eigenvectors and Eigenvalues Explained Visually: Ax = λx">1</a><a class="step on" href="../finding-eigenvalues/" data-slug="finding-eigenvalues" aria-current="page" title="How to Find Eigenvalues: det(A − λI) = 0">2</a><a class="step" href="../diagonalization/" data-slug="diagonalization" title="Diagonalizing a Matrix: A = XΛX⁻¹ and Matrix Powers">3</a><a class="step" href="../powers-and-stability/" data-slug="powers-and-stability" title="Eigenvalues, Stability and Markov Matrices (Steady State)">4</a><a class="step" href="../symmetric-matrices/" data-slug="symmetric-matrices" title="Symmetric Matrices: Real Eigenvalues and Orthogonal Eigenvectors">5</a><a class="step" href="../positive-definite-matrices/" data-slug="positive-definite-matrices" title="Positive Definite Matrices: Bowls, Saddles and Eigenvalues">6</a><a class="step" href="../recap/" data-slug="recap" title="Lesson 7 Recap: Eigenvalues and Eigenvectors">7</a><a class="step practice" href="../practice/" title="Examples and problems">✎ Practice</a></nav>
+</header>
+
+
+<main class="lesson">
+  <article class="page">
+    <div class="slide-head"><div>
+    <div class="kicker">Strang §6.1 · The characteristic equation</div>
+    <h1>Finding eigenvalues: make A − λI singular.</h1>
+    <p class="lead">Rewrite Ax = λx as (A − λI)x = 0. A nonzero x can solve that only if A − λI is singular, so its determinant must be zero. That gives an equation for λ alone. Solve it first, then find each eigenvector from a null space.</p>
+    </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-7--finding-eigenvalues.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 7 · slide 2</small>det(A − λI) = 0</span></span></div>
+    <div class="key">det(A − λI) = 0 &nbsp;&nbsp; λ₁ + λ₂ = trace A &nbsp;&nbsp; λ₁ · λ₂ = det A</div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Ax = λx is the same as (A − λI)x = 0.</li><li>A nonzero solution x exists only when A − λI is singular: det(A − λI) = 0. This is the <b>characteristic equation</b>.</li><li>For 2 by 2 it is λ² − (trace)λ + det = 0, where the <b>trace</b> is the sum of the diagonal entries.</li><li>For each λ, the eigenvectors are the nonzero vectors in the null space of A − λI.</li></ol></div>
+    <div class="prose">
+<h3>Tuning until something gives</h3>
+<p>Picture turning a dial labelled λ. For most settings, A − λI is an ordinary invertible matrix: only x = 0 is sent to zero. At a few special settings the matrix suddenly becomes singular and a whole line of vectors is sent to zero. Those settings are the eigenvalues.</p>
+<h3>From Ax = λx to an equation for λ</h3>
+<div class="worked"><div class="row">Ax = λx</div><div class="row">Ax − λx = 0</div><div class="row">(A − λI)x = 0 &nbsp; (we write λI so that we subtract a matrix from a matrix)</div></div>
+<p>If A − λI were invertible, the only solution would be x = 0. We want a nonzero x, so A − λI must be singular. Lesson 6 gives the test: its determinant is zero.</p>
+<h3>A worked example</h3>
+<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>4</span><span>1</span><span>2</span><span>3</span></span>, &nbsp; A − λI = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>4 − λ</span><span>1</span><span>2</span><span>3 − λ</span></span></div><div class="row">det = (4 − λ)(3 − λ) − 2 = λ² − 7λ + 10</div><div class="row">λ² − 7λ + 10 = (λ − 5)(λ − 2) = 0, &nbsp; so λ = 5 or λ = 2</div></div>
+<h3>Then the eigenvectors</h3>
+<div class="worked"><div class="row">λ = 5: &nbsp; A − 5I = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−1</span><span>1</span><span>2</span><span>−2</span></span>. &nbsp; Row 1 says −x₁ + x₂ = 0, so x = (1, 1)</div><div class="row">λ = 2: &nbsp; A − 2I = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>2</span><span>1</span></span>. &nbsp; Row 1 says 2x₁ + x₂ = 0, so x = (1, −2)</div><div class="row">Check: A(1, −2) = (4 − 2, 2 − 6) = (2, −4) = 2·(1, −2) ✓</div></div>
+<h3>Two quick checks</h3>
+<p>For any 2 by 2 matrix the characteristic equation is λ² − (a + d)λ + (ad − bc) = 0. So the two eigenvalues always add up to the <b>trace</b> a + d, and multiply to the determinant. Here 5 + 2 = 7 = 4 + 3 and 5 · 2 = 10 = 12 − 2 ✓. Use these to catch mistakes.</p>
+<h3>Where this is used</h3>
+<p>Engineers check stability by finding eigenvalues. A control loop, a bridge or a filter has a matrix; its eigenvalues say whether disturbances die away or grow. Slide 4 shows how.</p>
+    </div>
+    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · A triangular matrix</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>0</span><span>3</span></span>.</p>
+<div class="worked"><div class="row">det(A − λI) = (1 − λ)(3 − λ) − 0</div><div class="row">λ = 1 and λ = 3: the diagonal entries</div></div>
+<p>For triangular matrices the eigenvalues sit on the diagonal.</p>
+</section>
+<section class="example"><h3>Example 2 · A symmetric matrix</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>3</span><span>3</span><span>2</span></span>: trace 4, det 4 − 9 = −5.</p>
+<div class="worked"><div class="row">λ² − 4λ − 5 = (λ − 5)(λ + 1) = 0</div><div class="row">λ = 5 with x = (1, 1), &nbsp; λ = −1 with x = (1, −1)</div></div>
+</section>
+<section class="example"><h3>Example 3 · A singular matrix</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>4</span></span>: det A = 0.</p>
+<div class="worked"><div class="row">λ² − 5λ + 0 = λ(λ − 5) = 0</div><div class="row">λ = 0: the null space direction (−2, 1) is squashed to zero</div><div class="row">λ = 5: the direction (1, 2)</div></div>
+<p>λ = 0 is an eigenvalue exactly when A is singular.</p>
+</section></div>
+    <details class="more"><summary><span class="pl-icon">✎</span><span class="rv-text"><b>More examples to try</b><span>3 problems with step-by-step solutions. Try each one before you open its solution.</span></span><span class="rv-toggle"><span class="s-show">Show</span><span class="s-hide">Hide</span></span></summary><div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Find the eigenvalues of <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>5</span><span>2</span><span>2</span><span>2</span></span>.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Trace 7, det 10 − 4 = 6. λ² − 7λ + 6 = (λ − 6)(λ − 1) = 0, so λ = 6 and λ = 1.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>Find the eigenvalues and eigenvectors of <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>4</span><span>2</span><span>3</span></span>.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>λ² − 4λ − 5 = (λ − 5)(λ + 1). &nbsp; λ = 5: A − 5I = [−4 4; 2 −2], x = (1, 1). &nbsp; λ = −1: A + I = [2 4; 2 4], x = (2, −1).</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>The eigenvalues of a 2 by 2 matrix are 3 and 4. What are its trace and determinant?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Trace = 3 + 4 = 7, det = 3 · 4 = 12.</p>
+</div></details>
+</div></div></div></details>
+  </article>
+  <details class="review">
+    <summary><span class="pl-icon">✎</span><span class="rv-text"><b>Lesson review</b><span>3 worked examples and 5 mixed problems with solutions</span></span><span class="rv-toggle"><span class="s-show">Open</span><span class="s-hide">Close</span></span></summary>
+    <div class="review-body">
+      <h2 class="practice-h">Worked examples</h2>
+      <div class="examples"><section class="example"><h3>Example 1 · Eigenvalues of a triangular 3 by 3</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>0</span><span>0</span><span>3</span><span>0</span><span>0</span><span>0</span><span>5</span></span>.</p>
+<div class="worked"><div class="row">Triangular: det(A − λI) = (1 − λ)(3 − λ)(5 − λ), so λ = 1, 3, 5</div><div class="row">λ = 3: A − 3I = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>−2</span><span>2</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>2</span></span> gives x = (1, 1, 0)</div><div class="row">λ = 1: x = (1, 0, 0). &nbsp; λ = 5: x = (0, 0, 1)</div></div>
+</section>
+<section class="example"><h3>Example 2 · A power by eigenvectors</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>2</span></span>, u₀ = (3, 1). Find A⁵u₀.</p>
+<div class="worked"><div class="row">Split: (3, 1) = 2·(1, 1) + 1·(1, −1)</div><div class="row">A⁵u₀ = 2·3⁵(1, 1) + 1·1⁵(1, −1) = 486(1, 1) + (1, −1) = (487, 485)</div></div>
+</section>
+<section class="example"><h3>Example 3 · A steady state</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0.6</span><span>0.4</span><span>0.4</span><span>0.6</span></span>: columns add to 1.</p>
+<div class="worked"><div class="row">λ = 1 with (1, 1), &nbsp; λ = 0.2 with (1, −1)</div><div class="row">Steady state (½, ½): the symmetric swap evens things out</div></div>
+</section></div>
+      <h2 class="practice-h">Problems</h2>
+      <div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Find the eigenvalues and eigenvectors of <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>1</span><span>0</span><span>3</span></span>. Can it be diagonalized?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>λ = 3 twice. A − 3I = [0 1; 0 0] has null space only along (1, 0). One eigenvector line, so no: not diagonalizable.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>Find the eigenvalues of <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>-2</span><span>-3</span></span>. Is du/dt = Au stable?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Trace −3, det 2: λ² + 3λ + 2 = (λ + 1)(λ + 2), so λ = −1, −2. Both negative: every solution decays like e^(−t) and e^(−2t). Stable.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>The Fibonacci rule F_(k+2) = F_(k+1) + F_k is u_(k+1) = Au_k with A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>0</span></span>. Find its eigenvalues.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>λ² − λ − 1 = 0, so λ = (1 ± √5)/2 ≈ 1.618 and −0.618. The first grows; it is the golden ratio, and F_(k+1)/F_k approaches it.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">4</span><div class="pbody">
+<p>Diagonalize A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>2</span></span> with Q orthogonal.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>λ = 3 with (1, 1)/√2 and λ = 1 with (1, −1)/√2. Q = (1/√2)[1 1; 1 −1], Λ = diag(3, 1), A = QΛQᵀ.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">5</span><div class="pbody">
+<p>Is <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>-1</span><span>0</span><span>-1</span><span>2</span><span>-1</span><span>0</span><span>-1</span><span>2</span></span> positive definite?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Yes. Pivots 2, 3/2, 4/3 are all positive (lesson 6). The eigenvalues are 2 − √2, 2, 2 + √2, all positive.</p>
+</div></details>
+</div></div></div>
+    </div>
+  </details>
+
+  <section class="labsec" aria-label="Lab">
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Fix the quadratic formula so that it gives the two eigenvalues of A.</span>
+      <span class="hint" id="hint">Edit the code and press Run.</span>
+    </div>
+    <div class="lab">
+      <div class="editor-card">
+        <div class="bar">
+          <span class="file">slide_2.py</span>
+          <span class="status" id="pystatus">Loading Python…</span>
+          <button class="btn" id="reset">Reset</button>
+          <button class="btn primary" id="run" disabled>Run ▸</button>
+        </div>
+        <div class="editor">
+          <div class="gutter" id="gutter">1</div>
+          <div class="code" id="codewrap">
+            <pre id="hl" aria-hidden="true"></pre>
+            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+A = np.array([[4., 1.],
+              [2., 3.]])
+tr = A[0, 0] + A[1, 1]          # trace
+det = np.linalg.det(A)
+
+# lambda^2 - tr*lambda + det = 0, solved by the quadratic formula
+root = np.sqrt(tr * tr + 4 * det)        # your turn: the sign under the root is wrong
+lam = np.array([(tr + root) / 2, (tr - root) / 2])
+print(&quot;eigenvalues:&quot;, lam, &quot;  sum:&quot;, lam[0] + lam[1], &quot;  product:&quot;, lam[0] * lam[1])
+table((&quot;A&quot;, A), (&quot;lambda&quot;, lam))</textarea>
+          </div>
+        </div>
+        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+      </div>
+      <figure class="figure">
+        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <div class="after">
+    <div class="nav">
+      <a class="btn" id="prev" href="../eigenvectors/">← Back</a>
+      <span class="count">2 / 7</span>
+      <a class="btn primary" id="next" href="../diagonalization/">Next →</a>
+    </div>
+  </div>
+</main>
+<footer class="foot">
+  Follows the order and notation of Gilbert Strang, <i>Introduction to Linear Algebra</i>, 5th edition (2016); § numbers refer to that book.
+  Explanations, examples and code are original. Made by <a href="https://www.steppeschool.com">Steppeschool</a>.
+</footer>
+
+<script>window.SLIDE = {"slug": "finding-eigenvalues", "lesson": "lesson-7", "assets": "../../assets/", "preview": {"kind": "table", "items": [{"label": "A", "M": [[4, 1], [2, 3]], "piv": []}]}, "check": "isTab(V) && itemVec(V, 'lambda') && itemVec(V, 'lambda').length === 2 && close(itemVec(V, 'lambda').slice().sort((p, q) => p - q), [2, 5], 1e-6)"};</script>
+<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
+<script src="../../assets/lab.js" defer></script>
+<script src="../../assets/nav.js" defer></script>
+</body>
+</html>

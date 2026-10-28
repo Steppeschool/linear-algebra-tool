@@ -1,0 +1,148 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="robots" content="noindex"></head><body>
+<main class="lesson">
+  <article class="page">
+    <div class="slide-head"><div>
+    <div class="kicker">Strang §6.1 · Introduction to eigenvalues</div>
+    <h1>Eigenvectors: the directions A does not turn.</h1>
+    <p class="lead">Most vectors change direction when you multiply them by a matrix. A few special ones do not: A only stretches them (or shrinks or flips them). These are the eigenvectors, and the stretch factor is the eigenvalue. They show what a matrix really does.</p>
+    </div><span class="thumb slide-art"><img src="https://linearalgebra.steppeschool.com/assets/cards/lesson-7--eigenvectors.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 7 · slide 1</small>Eigenvectors</span></span></div>
+    <div class="key">Ax = λx &nbsp;&nbsp; (x ≠ 0)</div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>An <b>eigenvector</b> of A is a nonzero vector x whose direction A keeps: Ax = λx.</li><li>The number λ (lambda) is its <b>eigenvalue</b>: the stretch factor along that direction.</li><li>λ > 1 stretches, 0 &lt; λ &lt; 1 shrinks, λ &lt; 0 flips the arrow, λ = 0 squashes it to 0.</li><li>Any multiple of an eigenvector is again an eigenvector, with the same λ. What matters is the line.</li></ol></div>
+    <div class="prose">
+<h3>Pulling a rubber sheet</h3>
+<p>Draw arrows in every direction on a rubber sheet, then pull the sheet along one diagonal. Most arrows turn as the sheet deforms. But the arrows that lie exactly along the pull stay on their line: they only get longer. And the arrows exactly across the pull also stay on their line.</p>
+<p>Those unturned directions are the eigenvectors of the stretch. How much each one grows is its eigenvalue.</p>
+<h3>The equation</h3>
+<p>"A keeps the direction of x" means Ax is a multiple of x. Call the multiple λ (the Greek letter lambda):</p>
+<div class="worked"><div class="row">Ax = λx, &nbsp; with x ≠ 0</div></div>
+<p>The zero vector always satisfies A0 = λ0, so it does not count. An eigenvector must be nonzero.</p>
+<h3>A worked example</h3>
+<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>2</span></span></div><div class="row">x = (1, 1): &nbsp; Ax = (2 + 1, 1 + 2) = (3, 3) = 3·(1, 1). &nbsp; Eigenvector, λ = 3</div><div class="row">x = (1, −1): &nbsp; Ax = (2 − 1, 1 − 2) = (1, −1) = 1·(1, −1). &nbsp; Eigenvector, λ = 1</div><div class="row">x = (1, 0): &nbsp; Ax = (2, 1). Not a multiple of (1, 0): A turned it</div></div>
+<p>So this A stretches the diagonal direction (1, 1) by 3 and leaves the direction (1, −1) alone. Every other vector is a mix of these two, which is why it gets turned: its two parts are stretched by different amounts.</p>
+<h3>Why they matter</h3>
+<p>Multiply by A again and again and the eigenvectors keep their direction: A²x = λ²x, A¹⁰x = λ¹⁰x. That makes them the key to anything that repeats: populations year after year, a filter updating every millisecond, a vibrating structure. The next slides find eigenvalues by calculation and use them.</p>
+<h3>Where this is used</h3>
+<p>A spinning object such as a drone or satellite has three special axes, its principal axes. Spun about one of them, it rotates smoothly; spun about any other axis, it wobbles. Those axes are the eigenvectors of its inertia matrix.</p>
+    </div>
+    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · A stretch along the axes</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>0</span><span>0</span><span>½</span></span>.</p>
+<div class="worked"><div class="row">A(1, 0) = (3, 0) = 3·(1, 0): &nbsp; λ = 3</div><div class="row">A(0, 1) = (0, ½) = ½·(0, 1): &nbsp; λ = ½</div></div>
+<p>For a diagonal matrix the eigenvectors are the axes and the eigenvalues are the diagonal entries.</p>
+</section>
+<section class="example"><h3>Example 2 · A mirror</h3>
+<p>The mirror across the line y = x, A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>1</span><span>0</span></span>.</p>
+<div class="worked"><div class="row">A(1, 1) = (1, 1): &nbsp; λ = 1 (the mirror line stays put)</div><div class="row">A(1, −1) = (−1, 1) = −1·(1, −1): &nbsp; λ = −1 (flipped)</div></div>
+</section>
+<section class="example"><h3>Example 3 · A rotation has none</h3>
+<p>The quarter turn A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>−1</span><span>1</span><span>0</span></span> turns every arrow by 90°.</p>
+<p>No real direction stays on its line, so there is no real eigenvector. (The eigenvalues turn out to be complex numbers, i and −i.)</p>
+</section></div>
+    <details class="more"><summary><span class="pl-icon">✎</span><span class="rv-text"><b>More examples to try</b><span>3 problems with step-by-step solutions. Try each one before you open its solution.</span></span><span class="rv-toggle"><span class="s-show">Show</span><span class="s-hide">Hide</span></span></summary><div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Is (1, 2) an eigenvector of <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>4</span><span>1</span></span>? If so, what is λ?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>A(1, 2) = (1 + 2, 4 + 2) = (3, 6) = 3·(1, 2). Yes, with λ = 3.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>If Ax = 5x, what is A²x? And (A − 2I)x?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>A²x = A(5x) = 5Ax = 25x. &nbsp; (A − 2I)x = 5x − 2x = 3x.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>A projection P onto a line. Without computing, what are its eigenvalues and eigenvectors?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Vectors on the line are unchanged: λ = 1. Vectors perpendicular to the line go to 0: λ = 0.</p>
+</div></details>
+</div></div></div></details>
+  </article>
+  <details class="review">
+    <summary><span class="pl-icon">✎</span><span class="rv-text"><b>Lesson review</b><span>3 worked examples and 5 mixed problems with solutions</span></span><span class="rv-toggle"><span class="s-show">Open</span><span class="s-hide">Close</span></span></summary>
+    <div class="review-body">
+      <h2 class="practice-h">Worked examples</h2>
+      <div class="examples"><section class="example"><h3>Example 1 · Eigenvalues of a triangular 3 by 3</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>0</span><span>0</span><span>3</span><span>0</span><span>0</span><span>0</span><span>5</span></span>.</p>
+<div class="worked"><div class="row">Triangular: det(A − λI) = (1 − λ)(3 − λ)(5 − λ), so λ = 1, 3, 5</div><div class="row">λ = 3: A − 3I = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>−2</span><span>2</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>2</span></span> gives x = (1, 1, 0)</div><div class="row">λ = 1: x = (1, 0, 0). &nbsp; λ = 5: x = (0, 0, 1)</div></div>
+</section>
+<section class="example"><h3>Example 2 · A power by eigenvectors</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>2</span></span>, u₀ = (3, 1). Find A⁵u₀.</p>
+<div class="worked"><div class="row">Split: (3, 1) = 2·(1, 1) + 1·(1, −1)</div><div class="row">A⁵u₀ = 2·3⁵(1, 1) + 1·1⁵(1, −1) = 486(1, 1) + (1, −1) = (487, 485)</div></div>
+</section>
+<section class="example"><h3>Example 3 · A steady state</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0.6</span><span>0.4</span><span>0.4</span><span>0.6</span></span>: columns add to 1.</p>
+<div class="worked"><div class="row">λ = 1 with (1, 1), &nbsp; λ = 0.2 with (1, −1)</div><div class="row">Steady state (½, ½): the symmetric swap evens things out</div></div>
+</section></div>
+      <h2 class="practice-h">Problems</h2>
+      <div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Find the eigenvalues and eigenvectors of <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>1</span><span>0</span><span>3</span></span>. Can it be diagonalized?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>λ = 3 twice. A − 3I = [0 1; 0 0] has null space only along (1, 0). One eigenvector line, so no: not diagonalizable.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>Find the eigenvalues of <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>-2</span><span>-3</span></span>. Is du/dt = Au stable?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Trace −3, det 2: λ² + 3λ + 2 = (λ + 1)(λ + 2), so λ = −1, −2. Both negative: every solution decays like e^(−t) and e^(−2t). Stable.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>The Fibonacci rule F_(k+2) = F_(k+1) + F_k is u_(k+1) = Au_k with A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>0</span></span>. Find its eigenvalues.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>λ² − λ − 1 = 0, so λ = (1 ± √5)/2 ≈ 1.618 and −0.618. The first grows; it is the golden ratio, and F_(k+1)/F_k approaches it.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">4</span><div class="pbody">
+<p>Diagonalize A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>2</span></span> with Q orthogonal.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>λ = 3 with (1, 1)/√2 and λ = 1 with (1, −1)/√2. Q = (1/√2)[1 1; 1 −1], Λ = diag(3, 1), A = QΛQᵀ.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">5</span><div class="pbody">
+<p>Is <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>-1</span><span>0</span><span>-1</span><span>2</span><span>-1</span><span>0</span><span>-1</span><span>2</span></span> positive definite?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Yes. Pivots 2, 3/2, 4/3 are all positive (lesson 6). The eigenvalues are 2 − √2, 2, 2 + √2, all positive.</p>
+</div></details>
+</div></div></div>
+    </div>
+  </details>
+
+  <section class="labsec" aria-label="Lab">
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Find a nonzero v that A only stretches: Av lands on the line through v.</span>
+      <span class="hint" id="hint">Edit the code and press Run.</span>
+    </div>
+    <div class="lab">
+      <div class="editor-card">
+        <div class="bar">
+          <span class="file">slide_1.py</span>
+          <span class="status" id="pystatus">Loading Python…</span>
+          <button class="btn" id="reset">Reset</button>
+          <button class="btn primary" id="run" disabled>Run ▸</button>
+        </div>
+        <div class="editor">
+          <div class="gutter" id="gutter">1</div>
+          <div class="code" id="codewrap">
+            <pre id="hl" aria-hidden="true"></pre>
+            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+A = np.array([[2., 1.],
+              [1., 2.]])
+v = np.array([1., 0.])          # your turn: find a v that A does not turn
+                                # (or drag the sliders under the picture)
+print(&quot;Av =&quot;, A @ v)
+eigpic(A, v)                    # a green line means Av = λv</textarea>
+          </div>
+        </div>
+        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+      </div>
+      <figure class="figure">
+        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+      </figure>
+    </div>
+  </section>
+</main>
+<script type="application/json" id="la-config">{"slug": "eigenvectors", "lesson": "lesson-7", "assets": "../../assets/", "preview": {"kind": "eig", "A": [[2, 1], [1, 2]], "v": [1, 0]}, "check": "eigOK(V) && eqM(V.A, [[2,1],[1,2]])"}</script>
+</body></html>

@@ -55,8 +55,13 @@ LESSONS = [
      "sections": "Strang §5.1 to §5.3",
      "summary": "The number that says how much a matrix stretches area and volume: its rules, how to compute it, "
                 "Cramer's rule, the inverse formula, and areas, volumes and cross products."},
+    {"n": 7, "dir": "lesson-7", "path": "eigenvalues-and-eigenvectors", "seo_title": "Eigenvalues and Eigenvectors: Intuition and Diagonalization",
+     "seo_desc": "Eigenvalues and eigenvectors with live Python: det(A − λI) = 0, diagonalization, stability, Markov steady states, symmetric and positive definite matrices.", "title": "Eigenvalues and eigenvectors", "chapter": "Strang, chapter 6",
+     "sections": "Strang §6.1, §6.2, §6.4, §6.5",
+     "summary": "The directions a matrix does not turn: how to find them, A = XΛX⁻¹ and powers, stability and steady states, "
+                "symmetric matrices and positive definite bowls."},
 ]
-for _l, _c in zip(LESSONS, [1, 2, 2, 3, 4, 5]):
+for _l, _c in zip(LESSONS, [1, 2, 2, 3, 4, 5, 6]):
     _l["ch"] = _c
 CHAPTERS = [
     {"n": 1, "title": "Introduction to vectors"},
@@ -64,7 +69,7 @@ CHAPTERS = [
     {"n": 3, "title": "Vector spaces and subspaces"},
     {"n": 4, "title": "Orthogonality"},
     {"n": 5, "title": "Determinants"},
-    {"n": 6, "title": "Eigenvalues and eigenvectors", "planned": ["Eigenvalues and eigenvectors"]},
+    {"n": 6, "title": "Eigenvalues and eigenvectors"},
     {"n": 7, "title": "The singular value decomposition", "planned": ["SVD and PCA"]},
 ]
 PLANNED = [(t, f"Chapter {c['n']}") for c in CHAPTERS for t in c.get("planned", [])]
@@ -236,6 +241,8 @@ CARD_LABEL = {
     "determinant-as-area": "Determinant", "properties-of-determinants": "Three rules",
     "determinant-from-pivots": "Det from pivots", "cofactor-formula": "Cofactors",
     "cramers-rule-and-inverse": "Cramer's rule", "area-volume-cross-product": "Cross product",
+    "eigenvectors": "Eigenvectors", "finding-eigenvalues": "det(A − λI) = 0", "diagonalization": "A = XΛX⁻¹",
+    "powers-and-stability": "Stability", "symmetric-matrices": "Symmetric matrices", "positive-definite-matrices": "Positive definite",
     "recap": "Recap", "practice": "Practice",
 }
 

@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Positive Definite Matrices: Bowls, Saddles and Eigenvalues</title>
+<meta name="description" content="A symmetric matrix is positive definite when all its eigenvalues are positive, or xᵀAx &gt; 0 for x ≠ 0: a bowl, not a saddle. Python examples. Strang §6.5.">
+<link rel="canonical" href="https://linearalgebra.steppeschool.com/eigenvalues-and-eigenvectors/positive-definite-matrices/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Linear Algebra, Live">
+<meta property="og:title" content="Positive Definite Matrices: Bowls, Saddles and Eigenvalues">
+<meta property="og:description" content="A symmetric matrix is positive definite when all its eigenvalues are positive, or xᵀAx &gt; 0 for x ≠ 0: a bowl, not a saddle. Python examples. Strang §6.5.">
+<meta property="og:url" content="https://linearalgebra.steppeschool.com/eigenvalues-and-eigenvectors/positive-definite-matrices/">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/lesson.css">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "Positive Definite Matrices: Bowls, Saddles and Eigenvalues", "headline": "Positive definite: a bowl, not a saddle.", "description": "A symmetric matrix is positive definite when all its eigenvalues are positive, or xᵀAx > 0 for x ≠ 0: a bowl, not a saddle. Python examples. Strang §6.5.", "url": "https://linearalgebra.steppeschool.com/eigenvalues-and-eigenvectors/positive-definite-matrices/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": true, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 7: Eigenvalues and eigenvectors", "item": "https://linearalgebra.steppeschool.com/eigenvalues-and-eigenvectors/"}, {"@type": "ListItem", "position": 3, "name": "Positive Definite Matrices: Bowls, Saddles and Eigenvalues", "item": "https://linearalgebra.steppeschool.com/eigenvalues-and-eigenvectors/positive-definite-matrices/"}]}]</script>
+</head>
+<body>
+<header class="top">
+  <div class="topnav"><a class="brand" href="../../">Linear Algebra, Live</a><nav class="crumbnav" aria-label="Chapters and lessons"><details class="menu"><summary>Chapter 6<span class="hide-sm"> · Eigenvalues and eigenvectors</span></summary><div class="menu-list chapters"><div class="menu-sub">Chapters</div><div class="ch"><div class="ch-head"><span class="ch-num">1</span><span class="ch-title">Introduction to vectors</span></div><div class="ch-lessons"><a class="ls" href="../../vectors-and-matrices/"><span class="ls-num">Lesson 1</span><span class="ls-title">Columns first</span></a></div></div><div class="ch"><div class="ch-head"><span class="ch-num">2</span><span class="ch-title">Solving linear equations</span></div><div class="ch-lessons"><a class="ls" href="../../gaussian-elimination-and-lu/"><span class="ls-num">Lesson 2</span><span class="ls-title">Elimination and A = LU</span></a><a class="ls" href="../../inverse-transpose-permutation/"><span class="ls-num">Lesson 3</span><span class="ls-title">Inverses, transposes and permutations</span></a></div></div><div class="ch"><div class="ch-head"><span class="ch-num">3</span><span class="ch-title">Vector spaces and subspaces</span></div><div class="ch-lessons"><a class="ls" href="../../vector-spaces-and-four-subspaces/"><span class="ls-num">Lesson 4</span><span class="ls-title">The four subspaces</span></a></div></div><div class="ch"><div class="ch-head"><span class="ch-num">4</span><span class="ch-title">Orthogonality</span></div><div class="ch-lessons"><a class="ls" href="../../orthogonality-and-least-squares/"><span class="ls-num">Lesson 5</span><span class="ls-title">Orthogonality and least squares</span></a></div></div><div class="ch"><div class="ch-head"><span class="ch-num">5</span><span class="ch-title">Determinants</span></div><div class="ch-lessons"><a class="ls" href="../../determinants/"><span class="ls-num">Lesson 6</span><span class="ls-title">Determinants</span></a></div></div><div class="ch on"><div class="ch-head"><span class="ch-num">6</span><span class="ch-title">Eigenvalues and eigenvectors</span></div><div class="ch-lessons"><a class="ls on" href="../../eigenvalues-and-eigenvectors/"><span class="ls-num">Lesson 7</span><span class="ls-title">Eigenvalues and eigenvectors</span></a></div></div><div class="menu-sub">Coming soon</div><div class="ch-later"><div class="ch soon"><div class="ch-head"><span class="ch-num">7</span><span class="ch-title">The singular value decomposition</span></div></div></div></div></details><span class="sep">›</span><details class="menu"><summary>Lesson 7<span class="hide-sm"> · Eigenvalues and eigenvectors</span></summary><div class="menu-list"><div class="menu-sub">Chapter 6 lessons</div><div class="ch-lessons flat"><a class="ls on" href="../../eigenvalues-and-eigenvectors/"><span class="ls-num">Lesson 7</span><span class="ls-title">Eigenvalues and eigenvectors</span></a></div><div class="menu-sub">In lesson 7</div><div class="ch-lessons flat slides"><a class="ls" href="../../eigenvalues-and-eigenvectors/eigenvectors/"><span class="ls-num">1</span><span class="ls-title">Eigenvectors and Eigenvalues Explained Visually: Ax = λx</span></a><a class="ls" href="../../eigenvalues-and-eigenvectors/finding-eigenvalues/"><span class="ls-num">2</span><span class="ls-title">How to Find Eigenvalues: det(A − λI) = 0</span></a><a class="ls" href="../../eigenvalues-and-eigenvectors/diagonalization/"><span class="ls-num">3</span><span class="ls-title">Diagonalizing a Matrix: A = XΛX⁻¹ and Matrix Powers</span></a><a class="ls" href="../../eigenvalues-and-eigenvectors/powers-and-stability/"><span class="ls-num">4</span><span class="ls-title">Eigenvalues, Stability and Markov Matrices (Steady State)</span></a><a class="ls" href="../../eigenvalues-and-eigenvectors/symmetric-matrices/"><span class="ls-num">5</span><span class="ls-title">Symmetric Matrices: Real Eigenvalues and Orthogonal Eigenvectors</span></a><a class="ls on" href="../../eigenvalues-and-eigenvectors/positive-definite-matrices/"><span class="ls-num">6</span><span class="ls-title">Positive Definite Matrices: Bowls, Saddles and Eigenvalues</span></a><a class="ls" href="../../eigenvalues-and-eigenvectors/recap/"><span class="ls-num">7</span><span class="ls-title">Lesson 7 Recap: Eigenvalues and Eigenvectors</span></a><a class="ls" href="../../eigenvalues-and-eigenvectors/practice/"><span class="ls-num">✎</span><span class="ls-title">Examples and problems</span></a></div></div></details></nav></div>
+  <nav class="steps" aria-label="Steps in this lesson"><a class="step" href="../eigenvectors/" data-slug="eigenvectors" title="Eigenvectors and Eigenvalues Explained Visually: Ax = λx">1</a><a class="step" href="../finding-eigenvalues/" data-slug="finding-eigenvalues" title="How to Find Eigenvalues: det(A − λI) = 0">2</a><a class="step" href="../diagonalization/" data-slug="diagonalization" title="Diagonalizing a Matrix: A = XΛX⁻¹ and Matrix Powers">3</a><a class="step" href="../powers-and-stability/" data-slug="powers-and-stability" title="Eigenvalues, Stability and Markov Matrices (Steady State)">4</a><a class="step" href="../symmetric-matrices/" data-slug="symmetric-matrices" title="Symmetric Matrices: Real Eigenvalues and Orthogonal Eigenvectors">5</a><a class="step on" href="../positive-definite-matrices/" data-slug="positive-definite-matrices" aria-current="page" title="Positive Definite Matrices: Bowls, Saddles and Eigenvalues">6</a><a class="step" href="../recap/" data-slug="recap" title="Lesson 7 Recap: Eigenvalues and Eigenvectors">7</a><a class="step practice" href="../practice/" title="Examples and problems">✎ Practice</a></nav>
+</header>
+
+
+<main class="lesson">
+  <article class="page">
+    <div class="slide-head"><div>
+    <div class="kicker">Strang §6.5 · Positive definite matrices</div>
+    <h1>Positive definite: a bowl, not a saddle.</h1>
+    <p class="lead">Among symmetric matrices, the most important are the positive definite ones. All their eigenvalues are positive. Equivalently, the 'energy' xᵀAx is positive for every nonzero x, so its graph is a bowl with one lowest point. That is what makes minimisation problems well behaved.</p>
+    </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-7--positive-definite-matrices.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 7 · slide 6</small>Positive definite</span></span></div>
+    <div class="key">A positive definite ⇔ all λ &gt; 0 ⇔ xᵀAx &gt; 0 for all x ≠ 0</div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>A symmetric A is <b>positive definite</b> when all its eigenvalues are positive.</li><li>Equivalent test: the energy xᵀAx &gt; 0 for every nonzero x.</li><li>For 2 by 2 [a b; b c]: a &gt; 0 and ac − b² &gt; 0. (Also: all pivots positive.)</li><li>The graph of xᵀAx is a bowl. One negative eigenvalue turns it into a saddle.</li></ol></div>
+    <div class="prose">
+<h3>A bowl or a saddle</h3>
+<p>Drop a marble into a salad bowl and it rolls to the single lowest point, from any side. Drop it on a horse saddle (or a curved crisp) and it rolls off: the surface goes up in one direction and down in another. Positive definite matrices are the bowls.</p>
+<h3>The energy xᵀAx</h3>
+<p>For A = [a b; b c] and x = (x₁, x₂), the number xᵀAx is a curved surface:</p>
+<div class="worked"><div class="row">xᵀAx = a x₁² + 2b x₁x₂ + c x₂²</div><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>2</span></span>: &nbsp; 2x₁² + 2x₁x₂ + 2x₂² = x₁² + x₂² + (x₁ + x₂)²</div><div class="row">A sum of squares: positive unless x = 0. A bowl</div></div>
+<h3>The eigenvalue test</h3>
+<p>Write x in the perpendicular eigenvectors of A (slide 5): x = c₁q₁ + c₂q₂. Then xᵀAx = λ₁c₁² + λ₂c₂². If both λ are positive, this is positive for every nonzero x. If one λ is negative, moving along that eigenvector makes xᵀAx negative: a saddle.</p>
+<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>2</span></span>: λ = 3 and 1, both positive. Bowl</div><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>3</span><span>3</span><span>2</span></span>: λ = 5 and −1. Saddle: x = (1, −1) gives xᵀAx = 2 − 6 + 2 = −2</div></div>
+<h3>Quick tests for 2 by 2</h3>
+<p>For [a b; b c]: positive definite exactly when a &gt; 0 and the determinant ac − b² &gt; 0. The determinant is λ₁λ₂, so a negative determinant means one eigenvalue is negative: a saddle. For [2 b; b 2], that happens when b² &gt; 4.</p>
+<h3>Where this is used</h3>
+<p>Least squares (lesson 5) minimises a bowl: its matrix AᵀA is positive definite when the columns of A are independent, which is why the minimum is unique. Robot controllers and optimisers check that their "Hessian" matrix is positive definite before trusting a minimum. And a stiffness matrix being positive definite says a structure resists every push.</p>
+    </div>
+    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · A diagonal bowl</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>0</span><span>0</span><span>1</span></span>: xᵀAx = 3x₁² + x₂², positive for x ≠ 0. λ = 3 and 1.</p>
+</section>
+<section class="example"><h3>Example 2 · The borderline case</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>1</span></span>: λ = 2 and 0.</p>
+<div class="worked"><div class="row">xᵀAx = (x₁ + x₂)², which is 0 along x = (1, −1)</div></div>
+<p>A trough, not a bowl: positive <i>semi</i>definite. There is a whole line of lowest points.</p>
+</section>
+<section class="example"><h3>Example 3 · AᵀA is positive definite</h3>
+<p>xᵀ(AᵀA)x = (Ax)ᵀ(Ax) = ‖Ax‖² ≥ 0, and it is 0 only when Ax = 0.</p>
+<p>If the columns of A are independent, Ax = 0 forces x = 0, so AᵀA is positive definite.</p>
+</section></div>
+    <details class="more"><summary><span class="pl-icon">✎</span><span class="rv-text"><b>More examples to try</b><span>3 problems with step-by-step solutions. Try each one before you open its solution.</span></span><span class="rv-toggle"><span class="s-show">Show</span><span class="s-hide">Hide</span></span></summary><div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Is <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>4</span><span>2</span><span>2</span><span>3</span></span> positive definite?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>a = 4 &gt; 0 and det = 12 − 4 = 8 &gt; 0. Yes. (Eigenvalues (7 ± √17)/2, both positive.)</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>For which c is <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>c</span></span> positive definite?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>a = 1 &gt; 0, and det = c − 4 must be positive: c &gt; 4.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>Write xᵀAx for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>3</span><span>3</span><span>1</span></span> and find an x that makes it negative.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>x₁² + 6x₁x₂ + x₂². At x = (1, −1): 1 − 6 + 1 = −4 &lt; 0. A saddle (λ = 4 and −2).</p>
+</div></details>
+</div></div></div></details>
+  </article>
+  <details class="review">
+    <summary><span class="pl-icon">✎</span><span class="rv-text"><b>Lesson review</b><span>3 worked examples and 5 mixed problems with solutions</span></span><span class="rv-toggle"><span class="s-show">Open</span><span class="s-hide">Close</span></span></summary>
+    <div class="review-body">
+      <h2 class="practice-h">Worked examples</h2>
+      <div class="examples"><section class="example"><h3>Example 1 · Eigenvalues of a triangular 3 by 3</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>0</span><span>0</span><span>3</span><span>0</span><span>0</span><span>0</span><span>5</span></span>.</p>
+<div class="worked"><div class="row">Triangular: det(A − λI) = (1 − λ)(3 − λ)(5 − λ), so λ = 1, 3, 5</div><div class="row">λ = 3: A − 3I = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>−2</span><span>2</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>2</span></span> gives x = (1, 1, 0)</div><div class="row">λ = 1: x = (1, 0, 0). &nbsp; λ = 5: x = (0, 0, 1)</div></div>
+</section>
+<section class="example"><h3>Example 2 · A power by eigenvectors</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>2</span></span>, u₀ = (3, 1). Find A⁵u₀.</p>
+<div class="worked"><div class="row">Split: (3, 1) = 2·(1, 1) + 1·(1, −1)</div><div class="row">A⁵u₀ = 2·3⁵(1, 1) + 1·1⁵(1, −1) = 486(1, 1) + (1, −1) = (487, 485)</div></div>
+</section>
+<section class="example"><h3>Example 3 · A steady state</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0.6</span><span>0.4</span><span>0.4</span><span>0.6</span></span>: columns add to 1.</p>
+<div class="worked"><div class="row">λ = 1 with (1, 1), &nbsp; λ = 0.2 with (1, −1)</div><div class="row">Steady state (½, ½): the symmetric swap evens things out</div></div>
+</section></div>
+      <h2 class="practice-h">Problems</h2>
+      <div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Find the eigenvalues and eigenvectors of <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>1</span><span>0</span><span>3</span></span>. Can it be diagonalized?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>λ = 3 twice. A − 3I = [0 1; 0 0] has null space only along (1, 0). One eigenvector line, so no: not diagonalizable.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>Find the eigenvalues of <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>-2</span><span>-3</span></span>. Is du/dt = Au stable?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Trace −3, det 2: λ² + 3λ + 2 = (λ + 1)(λ + 2), so λ = −1, −2. Both negative: every solution decays like e^(−t) and e^(−2t). Stable.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>The Fibonacci rule F_(k+2) = F_(k+1) + F_k is u_(k+1) = Au_k with A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>0</span></span>. Find its eigenvalues.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>λ² − λ − 1 = 0, so λ = (1 ± √5)/2 ≈ 1.618 and −0.618. The first grows; it is the golden ratio, and F_(k+1)/F_k approaches it.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">4</span><div class="pbody">
+<p>Diagonalize A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>2</span></span> with Q orthogonal.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>λ = 3 with (1, 1)/√2 and λ = 1 with (1, −1)/√2. Q = (1/√2)[1 1; 1 −1], Λ = diag(3, 1), A = QΛQᵀ.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">5</span><div class="pbody">
+<p>Is <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>-1</span><span>0</span><span>-1</span><span>2</span><span>-1</span><span>0</span><span>-1</span><span>2</span></span> positive definite?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Yes. Pivots 2, 3/2, 4/3 are all positive (lesson 6). The eigenvalues are 2 − √2, 2, 2 + √2, all positive.</p>
+</div></details>
+</div></div></div>
+    </div>
+  </details>
+
+  <section class="labsec" aria-label="Lab">
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Change b so that A is no longer positive definite: the bowl becomes a saddle.</span>
+      <span class="hint" id="hint">Edit the code and press Run.</span>
+    </div>
+    <div class="lab">
+      <div class="editor-card">
+        <div class="bar">
+          <span class="file">slide_6.py</span>
+          <span class="status" id="pystatus">Loading Python…</span>
+          <button class="btn" id="reset">Reset</button>
+          <button class="btn primary" id="run" disabled>Run ▸</button>
+        </div>
+        <div class="editor">
+          <div class="gutter" id="gutter">1</div>
+          <div class="code" id="codewrap">
+            <pre id="hl" aria-hidden="true"></pre>
+            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+b = 1.                          # your turn: choose b so A becomes a saddle
+A = np.array([[2., b],
+              [b, 2.]])
+lam, Q = np.linalg.eig(A)
+x = np.array([1., -1.])
+print(&quot;eigenvalues:&quot;, lam, &quot;  energy at (1, -1):&quot;, x @ A @ x)
+table((&quot;A&quot;, A), (&quot;eigenvalues&quot;, lam))</textarea>
+          </div>
+        </div>
+        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+      </div>
+      <figure class="figure">
+        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <div class="after">
+    <div class="nav">
+      <a class="btn" id="prev" href="../symmetric-matrices/">← Back</a>
+      <span class="count">6 / 7</span>
+      <a class="btn primary" id="next" href="../recap/">Next →</a>
+    </div>
+  </div>
+</main>
+<footer class="foot">
+  Follows the order and notation of Gilbert Strang, <i>Introduction to Linear Algebra</i>, 5th edition (2016); § numbers refer to that book.
+  Explanations, examples and code are original. Made by <a href="https://www.steppeschool.com">Steppeschool</a>.
+</footer>
+
+<script>window.SLIDE = {"slug": "positive-definite-matrices", "lesson": "lesson-7", "assets": "../../assets/", "preview": {"kind": "table", "items": [{"label": "A", "M": [[2, 1], [1, 2]], "piv": []}]}, "check": "isTab(V) && item(V, 'A') && item(V, 'A').length === 2 && Math.abs(item(V, 'A')[0][1] - item(V, 'A')[1][0]) < 1e-9 && detN(item(V, 'A')) < -1e-9"};</script>
+<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
+<script src="../../assets/lab.js" defer></script>
+<script src="../../assets/nav.js" defer></script>
+</body>
+</html>

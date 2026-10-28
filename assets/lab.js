@@ -20,6 +20,8 @@ const isF = V => V && V.kind === "four";
 const isA = V => V && V.kind === "arrows";
 const isP = V => V && V.kind === "proj";
 const isFit = V => V && V.kind === "fit";
+const isE = V => V && V.kind === "eig";
+const eigOK = V => isE(V) && Math.hypot(...V.v) > 1e-9 && Math.abs(V.v[0] * Ax({A: V.A, x: V.v})[1] - V.v[1] * Ax({A: V.A, x: V.v})[0]) < 1e-6 * (1 + Math.hypot(...V.v) ** 2);
 const dot = (a, b) => a.reduce((s, v, i) => s + v * b[i], 0);
 const projOf = (a, b) => { const k = dot(a, b) / dot(a, a); return a.map(v => k * v); };
 function bestFit(t, b){ const n = t.length, St = t.reduce((s, v) => s + v, 0), Stt = dot(t, t), Sb = b.reduce((s, v) => s + v, 0), Stb = dot(t, b);
@@ -82,6 +84,7 @@ function setLegend(){
     : view.kind === "rows" ? sw("--ihat","equation 1") + sw("--jhat","equation 2")
     : view.kind === "null" ? sw("--accent","nullspace N(A)") + (view.b && view.b.length ? sw("--ihat","all solutions of Ax = b") : "") + sw("--ink","your x")
     : view.kind === "proj" ? sw("--ink","b") + sw("--ihat","line through a") + sw("--accent","p, the projection") + sw("--jhat","error e = b − p")
+    : view.kind === "eig" ? sw("--ink","your v") + sw("--accent","Av") + sw("--muted","the line through v")
     : view.kind === "fit" ? sw("--ink","data points") + sw("--accent","your line C + Dt") + sw("--jhat","errors") + sw("--muted","best line")
     : view.kind === "arrows" ? view.items.map((it, k) => sw(PALETTE[k % PALETTE.length], it.label)).join("")
     : view.kind === "four" ? sw("--ihat","row space") + sw("--accent","nullspace") + sw("--jhat","column space") + sw("--muted","left nullspace")
@@ -98,6 +101,7 @@ function extent(){
   else if (V.kind === "rows"){ const s = rowSolution(V); pts = s ? [s] : []; }
   else if (V.kind === "arrows"){ pts = V.items.map(it => it.v); }
   else if (V.kind === "proj"){ pts = [V.a, V.b, V.p]; }
+  else if (V.kind === "eig"){ pts = [V.v, Ax({A: V.A, x: V.v})]; }
   else if (V.kind === "null"){ const xs = [V.x]; const xp = particular(V); if (xp) xs.push(xp); pts = xs; }
   else if (V.kind !== "transform") return 3;
   else { const M = to, F = [[1,0],[0,1],[1,1],[2.3,2.05],[1.3,2.05],[2.3,1.75],[1.6,0.3]];
@@ -163,6 +167,14 @@ function draw(){
     if (V.b.length === 2){ const B = Q(...V.b); ctx.strokeStyle = css("--ink"); ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(B[0], B[1], 9, 0, 7); ctx.stroke(); label(B, "b", css("--ink"), 12, -10);
       hit = near(r[0], V.b[0]) && near(r[1], V.b[1]) ? '<span class="good">Ax = b</span>' : `<span>b = (${g(V.b[0])}, ${g(V.b[1])})</span>`; }
     $("readout").innerHTML = `<span>x = (${g(V.x[0])}, ${g(V.x[1])})</span><span class="hi">Ax = (${g(r[0])}, ${g(r[1])})</span>${hit}<span>${dep ? (nonzero(V.A) ? "C(A) is a line" : "C(A) is a point") : "C(A) is the plane"}</span>`;
+  } else if (view.kind === "eig"){
+    const V = view, av = Ax({A: V.A, x: V.v}), L = Math.hypot(...V.v), ok = eigOK(V);
+    if (L > 1e-9){ const k = 4*N / L; ctx.setLineDash([6, 6]); ctx.strokeStyle = css(ok ? "--ok" : "--muted"); ctx.lineWidth = ok ? 2.4 : 1.4; line(Q(-V.v[0]*k, -V.v[1]*k), Q(V.v[0]*k, V.v[1]*k)); ctx.setLineDash([]); }
+    arrow(O, Q(...av), css("--accent"), 3.6); label(Q(...av), "Av", css("--accent"), 10, 4);
+    arrow(O, Q(...V.v), css("--ink"), 3); label(Q(...V.v), "v", css("--ink"));
+    const lam = ok ? (Math.abs(V.v[0]) > Math.abs(V.v[1]) ? av[0] / V.v[0] : av[1] / V.v[1]) : null;
+    $("readout").innerHTML = `<span>v = (${g(V.v[0])}, ${g(V.v[1])})</span><span class="hi">Av = (${g(av[0])}, ${g(av[1])})</span>` +
+      (ok ? `<span class="good">Av = ${g(lam)} v: an eigenvector, λ = ${g(lam)}</span>` : L < 1e-9 ? "<span>v = 0 does not count</span>" : "<span>Av turns away from v</span>");
   } else if (view.kind === "proj"){
     const V = view, far = 4*N, u = Math.hypot(...V.a), k = far / u, e = [V.b[0]-V.p[0], V.b[1]-V.p[1]], ae = dot(V.a, e), ok = close(V.p, projOf(V.a, V.b));
     ctx.strokeStyle = css("--ihat"); ctx.globalAlpha = .28; ctx.lineWidth = 7; line(Q(-V.a[0]*k, -V.a[1]*k), Q(V.a[0]*k, V.a[1]*k)); ctx.globalAlpha = 1;
@@ -328,6 +340,7 @@ window.__pyrows = (M, b) => { last = {kind:"rows", A:L2(M), b:Array.from(b)}; se
 window.__pytable = items => { last = {kind:"table", items: Array.from(items).map(t => ({label: String(t[0]), M: L2(t[1]), piv: Array.from(t[2]).map(Number), ndim: Number(t[3])}))};
   last.items.forEach(it => { if (it.ndim === 1) it.vec = it.M.map(r => r[0]); }); setView(last); };
 window.__pynull = (M, x, b) => { last = {kind:"null", A:L2(M), x:Array.from(x), b:Array.from(b)}; setView(last); };
+window.__pyeig = (M, v) => { last = {kind:"eig", A:L2(M), v:Array.from(v).map(Number)}; setView(last); };
 window.__pyproj = (a, b, p, auto) => { last = {kind:"proj", a:Array.from(a), b:Array.from(b), p:Array.from(p), auto:!!auto}; setView(last); };
 window.__pyfit = (t, b, C, D) => { last = {kind:"fit", t:Array.from(t).map(Number), b:Array.from(b).map(Number), C:Number(C), D:Number(D)}; setView(last); };
 window.__pyarrows = (items, chain) => { last = {kind:"arrows", chain: chain !== false, items: Array.from(items).map(t => ({label: String(t[0]), v: Array.from(t[1]).map(Number)}))}; setView(last); };
@@ -359,6 +372,7 @@ const SL = {
   transform: V => [["a", "M", [0,0], -3, 3, .25], ["b", "M", [0,1], -3, 3, .25], ["c", "M", [1,0], -3, 3, .25], ["d", "M", [1,1], -3, 3, .25]],
   four: V => [["a", "A", [0,0], -6, 6, 1], ["b", "A", [0,1], -6, 6, 1], ["c", "A", [1,0], -6, 6, 1], ["d", "A", [1,1], -6, 6, 1]],
   rows: V => [["b₁", "b", 0, -12, 12, 1], ["b₂", "b", 1, -12, 12, 1]],
+  eig: V => [["v₁", "v", 0, -3, 3, .25], ["v₂", "v", 1, -3, 3, .25]],
   proj: V => V.auto ? [["b₁", "b", 0, -5, 5, .5], ["b₂", "b", 1, -5, 5, .5], ["a₁", "a", 0, -4, 4, .5], ["a₂", "a", 1, -4, 4, .5]] : null,
   fit: V => { const bf = bestFit(V.t, V.b) || [0, 0], r = v => Math.round(v * 10) / 10;
     return [["C", "C", null, r(bf[0]) - 4, r(bf[0]) + 4, .1], ["D", "D", null, r(bf[1]) - 3, r(bf[1]) + 3, .1]]; },
