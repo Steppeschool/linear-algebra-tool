@@ -546,6 +546,21 @@ def redirect_page(target):
 """
 
 
+def write_embed(lesson, slug, page_file):
+    """Fragment for embedding a page in the Kajabi members' course (not indexed)."""
+    page = page_file.read_text(encoding="utf-8")
+    main = re.search(r'<main class="lesson">.*?</main>', page, re.S).group(0)
+    main = re.sub(r'\s*<div class="after">.*?</div>\s*</div>\s*(?=</main>)', '\n', main, flags=re.S)
+    main = main.replace('href="../../', f'href="{BASE}/').replace('src="../../', f'src="{BASE}/')
+    main = re.sub(r'\s*<div class="signup">.*?</div>', '', main, flags=re.S)   # members already have an account
+    cfg = re.search(r'window\.SLIDE = (\{.*?\});</script>', page).group(1)
+    ed = ROOT / "embed" / lesson["dir"]
+    ed.mkdir(parents=True, exist_ok=True)
+    (ed / f"{slug}.html").write_text(
+        f'<!doctype html><html><head><meta charset="utf-8"><meta name="robots" content="noindex"></head><body>\n{main}\n'
+        f'<script type="application/json" id="la-config">{cfg}</script>\n</body></html>\n', encoding="utf-8")
+
+
 def main():
     urls = [BASE + "/"]
     built = []
@@ -565,22 +580,13 @@ def main():
             d = out / s["slug"]
             d.mkdir(exist_ok=True)
             (d / "index.html").write_text(slide_page(lesson, slides, i, next_lesson, practice), encoding="utf-8")
-            # fragment for embedding the slide in the Kajabi members' course (not indexed)
-            page = (d / "index.html").read_text(encoding="utf-8")
-            main = re.search(r'<main class="lesson">.*?</main>', page, re.S).group(0)
-            main = re.sub(r'\s*<div class="after">.*?</div>\s*</div>\s*(?=</main>)', '\n', main, flags=re.S)
-            main = main.replace('href="../../', f'href="{BASE}/').replace('src="../../', f'src="{BASE}/')
-            cfg = re.search(r'window\.SLIDE = (\{.*?\});</script>', page).group(1)
-            ed = ROOT / "embed" / lesson["dir"]
-            ed.mkdir(parents=True, exist_ok=True)
-            (ed / f"{s['slug']}.html").write_text(
-                f'<!doctype html><html><head><meta charset="utf-8"><meta name="robots" content="noindex"></head><body>\n{main}\n'
-                f'<script type="application/json" id="la-config">{cfg}</script>\n</body></html>\n', encoding="utf-8")
+            write_embed(lesson, s["slug"], d / "index.html")
             urls.append(f"{BASE}/{lesson['path']}/{s['slug']}/")
         if practice:
             d = out / "practice"
             d.mkdir(exist_ok=True)
             (d / "index.html").write_text(practice_page(lesson, slides, practice, next_lesson), encoding="utf-8")
+            write_embed(lesson, "practice", d / "index.html")
             urls.append(f"{BASE}/{lesson['path']}/practice/")
     for lesson, slides, practice in BUILT:
         old = ROOT / lesson["dir"]

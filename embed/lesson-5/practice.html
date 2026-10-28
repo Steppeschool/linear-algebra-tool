@@ -1,0 +1,100 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="robots" content="noindex"></head><body>
+<main class="lesson">
+  <article class="page">
+    <div class="kicker">Lesson 5 · Examples and problems</div>
+    <h1>Practice: Orthogonality and least squares</h1>
+    <p class="lead">Three worked examples, then five problems. Use the lab to check your numbers: proj(a, b) for projections in 2D, fit(t, b, C, D) for lines, np.linalg.qr(A) for Gram-Schmidt.</p>
+    <h2 class="practice-h">Worked examples</h2>
+    <div class="examples">
+<section class="example"><h3>Example 1 · Project onto a line in 3D</h3>
+<p>Project b = (3, 0, 3) onto the line through a = (1, 2, 2).</p>
+<div class="worked"><div class="row">aᵀb = 3 + 0 + 6 = 9, &nbsp; aᵀa = 1 + 4 + 4 = 9, &nbsp; x̂ = 1</div><div class="row">p = (1, 2, 2), &nbsp; e = b − p = (2, −2, 1)</div><div class="row">a · e = 2 − 4 + 2 = 0 ✓</div></div>
+<p>The distance from b to the line is ‖e‖ = 3.</p>
+</section>
+<section class="example"><h3>Example 2 · Fit a line to five points</h3>
+<p>Fit C + Dt to (−2, 0), (−1, 1), (0, 1), (1, 2), (2, 4).</p>
+<div class="worked"><div class="row">The times are centred: Σt = 0, so the normal equations separate</div><div class="row">5C = Σb = 8, &nbsp; C = 1.6</div><div class="row">10D = Σtb = 0 − 1 + 0 + 2 + 8 = 9, &nbsp; D = 0.9</div></div>
+<p>Best line: 1.6 + 0.9t. Choosing t so that Σt = 0 is a common trick: it makes the columns of A perpendicular, because the column of ones dotted with the column of times is Σt = 0.</p>
+</section>
+<section class="example"><h3>Example 3 · Gram-Schmidt and QR in 3D</h3>
+<p>a = (1, 0, 1), b = (1, 1, 0).</p>
+<div class="worked"><div class="row">aᵀb = 1, aᵀa = 2: &nbsp; u₂ = b − ½a = (½, 1, −½), &nbsp; a · u₂ = ½ − ½ = 0 ✓</div><div class="row">q₁ = (1, 0, 1)/√2, &nbsp; q₂ = u₂/√1.5</div><div class="row">With A = [a b]: R = QᵀA, e.g. R₁₂ = q₁ᵀb = 1/√2 = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>√2</span><span>1/√2</span><span>0</span><span>√1.5</span></span></div></div>
+<p>Check in the lab: Q, R = np.linalg.qr(A), then Q @ R gives A back.</p>
+</section>
+    </div>
+    <h2 class="practice-h">Problems</h2>
+    <div class="problems">
+<div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Are (1, −1, 0) and (1, 1, 5) perpendicular? Find a nonzero vector perpendicular to both.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>1 − 1 + 0 = 0, so yes.</p><p>A vector (x, y, z) perpendicular to both needs x − y = 0 and x + y + 5z = 0. Take x = y = −5, z = 2: (−5, −5, 2). Check: −5 + 5 + 0 = 0 and −5 − 5 + 10 = 0 ✓</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>Project b = (1, 2, 3) onto the line through a = (1, 0, 1).</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>aᵀb = 4, aᵀa = 2, x̂ = 2. p = (2, 0, 2), e = (−1, 2, 1). Check: −1 + 0 + 1 = 0 ✓</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>Find the projection matrix onto the line through a = (2, 1) and apply it to b = (5, 0).</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>P = aaᵀ / aᵀa = ⅕<span class="mx" style="grid-template-columns:repeat(2,auto)"><span>4</span><span>2</span><span>2</span><span>1</span></span>. Pb = ⅕(20, 10) = (4, 2).</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">4</span><div class="pbody">
+<p>Find the least squares solution of x = 1, x = 4, 2x = 4.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>A has one column, a = (1, 1, 2), and b = (1, 4, 4). x̂ = aᵀb / aᵀa = (1 + 4 + 8) / 6 = 13/6 ≈ 2.17.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">5</span><div class="pbody">
+<p>Find the best line C + Dt through (0, 4), (1, 2), (2, 1), (3, 1).</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>m = 4, Σt = 6, Σt² = 14, Σb = 8, Σtb = 0 + 2 + 2 + 3 = 7.</p><p>4C + 6D = 8 and 6C + 14D = 7 give D = −1 and C = 3.5. Best line: 3.5 − t.</p>
+</div></details>
+</div></div>
+    </div>
+  </article>
+
+  <section class="labsec" aria-label="Sandbox">
+    <h2 class="practice-h" style="margin:0">Sandbox</h2>
+    <div class="lab">
+      <div class="editor-card">
+        <div class="bar">
+          <span class="file">sandbox.py</span>
+          <span class="status" id="pystatus">Loading Python…</span>
+          <button class="btn" id="reset">Reset</button>
+          <button class="btn primary" id="run" disabled>Run ▸</button>
+        </div>
+        <div class="editor">
+          <div class="gutter" id="gutter">1</div>
+          <div class="code" id="codewrap">
+            <pre id="hl" aria-hidden="true"></pre>
+            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+# Sandbox: check your answers here.
+a = np.array([1., 2., 2.])
+b = np.array([3., 0., 3.])
+x_hat = (a @ b) / (a @ a)
+print(&quot;p =&quot;, x_hat * a, &quot;  e =&quot;, b - x_hat * a)
+
+t = np.array([-2., -1., 0., 1., 2.])
+y = np.array([0., 1., 1., 2., 4.])
+A = np.column_stack([np.ones(5), t])
+C, D = np.linalg.solve(A.T @ A, A.T @ y)
+fit(t, y, C, D)</textarea>
+          </div>
+        </div>
+        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+        <pre class="out" id="out"><span class="sys">A sandbox: check your answers here. Ctrl+Enter runs.</span></pre>
+      </div>
+      <figure class="figure">
+        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+      </figure>
+    </div>
+  </section>
+</main>
+<script type="application/json" id="la-config">{"slug": "practice", "lesson": "lesson-5", "assets": "../../assets/", "preview": {"kind": "transform", "M": [[1, 0], [0, 1]]}, "check": "false"}</script>
+</body></html>
