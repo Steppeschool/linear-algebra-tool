@@ -172,6 +172,22 @@ COURSE = {"@type": "Course", "name": SITE, "url": BASE + "/",
           "provider": PROVIDER}
 
 
+def review_block(pr):
+    """The lesson review (examples + problems), collapsed, shown above the lab on every slide."""
+    if not pr:
+        return ""
+    return f"""  <details class="review">
+    <summary><span class="pl-icon">✎</span><span class="rv-text"><b>Lesson review</b><span>3 worked examples and 5 mixed problems with solutions</span></span><span class="rv-toggle"><span class="s-show">Open</span><span class="s-hide">Close</span></span></summary>
+    <div class="review-body">
+      <h2 class="practice-h">Worked examples</h2>
+      <div class="examples">{pr['examples']}</div>
+      <h2 class="practice-h">Problems</h2>
+      <div class="problems">{pr['problems']}</div>
+    </div>
+  </details>
+"""
+
+
 def slide_page(lesson, slides, i, next_lesson=None, practice=None):
     s = slides[i]
     prefix = "../../"
@@ -216,7 +232,7 @@ def slide_page(lesson, slides, i, next_lesson=None, practice=None):
     {f'<h2 class="practice-h">Worked examples</h2><div class="examples">{s["examples"]}</div>' if s.get("examples") else ""}
     {f'<h2 class="practice-h">{"Review problems" if s["slug"] == "recap" else "Problems"}</h2><p class="practice-note">Try each one before you open the solution.</p><div class="problems">{s["problems"]}</div>' if s.get("problems") else ""}
   </article>
-
+{review_block(practice)}
   <section class="labsec" aria-label="Lab">
     <div class="exercise" id="exercise">
       <span class="tag">Exercise</span>
@@ -249,7 +265,6 @@ def slide_page(lesson, slides, i, next_lesson=None, practice=None):
   </section>
 
   <div class="after">
-    {f'<a class="practice-link" href="../practice/"><span class="pl-icon">✎</span><span><b>Lesson review</b><br>3 more worked examples and 5 mixed problems with solutions</span><span class="pl-arrow">→</span></a>' if practice else ""}
     <div class="nav">
       {prev}
       <span class="count">{i + 1} / {len(slides)}</span>

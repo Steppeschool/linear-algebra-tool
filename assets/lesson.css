@@ -271,3 +271,20 @@ html,body{overflow-x:clip}
 .ideas{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px}
 .ideas li::marker{font-family:var(--f-mono);font-weight:600;color:var(--accent)}
 .prose h3{font-family:var(--f-body);font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:26px 0 8px}
+
+/* lesson review, collapsible, above the lab */
+details.review{background:var(--surface);border:1px dashed var(--accent);border-radius:16px}
+details.review[open]{border-style:solid}
+details.review > summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:14px;padding:14px 20px}
+details.review > summary::-webkit-details-marker{display:none}
+details.review > summary:hover{background:var(--accent-soft);border-radius:16px}
+details.review > summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:16px}
+.rv-text{display:flex;flex-direction:column;line-height:1.4;font-size:14.5px}
+.rv-text b{color:var(--accent)}
+.rv-toggle{margin-left:auto;font-size:13.5px;font-weight:600;color:var(--accent);border:1px solid var(--accent);border-radius:8px;padding:4px 12px}
+details.review .s-hide{display:none}
+details.review[open] .rv-toggle .s-hide{display:inline}
+details.review[open] .rv-toggle .s-show{display:none}
+.review-body{padding:0 28px 24px}
+.review-body .practice-h:first-child{margin-top:4px}
+@media (max-width:640px){ .review-body{padding:0 16px 18px} details.review > summary{padding:12px 14px} }
