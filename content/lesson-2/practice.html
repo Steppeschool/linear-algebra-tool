@@ -3,7 +3,7 @@ seo_title: Gaussian Elimination and LU Decomposition Practice Problems
 description: Worked examples and practice problems with hidden solutions: 2×2 and 3×3 elimination, pivots, zero pivots, elimination matrices and A = LU.
 ---
 <!-- intro -->
-Three worked examples, then five problems. Do the elimination by hand first. The lab has <code>lu(A)</code> and <code>rref(A)</code> to check your answers.
+Three worked examples, then five problems. Do the elimination by hand first. The lab has <code>lu(A)</code>, which returns L and U, to check your answers.
 <!-- examples -->
 <section class="example"><h3>Example 1 · A 2 by 2 system</h3>
 <p>Solve 2x + 3y = 8 and 4x + 11y = 26.</p>
@@ -40,9 +40,9 @@ Three worked examples, then five problems. Do the elimination by hand first. The
 </div></details>
 </div></div>
 <div class="problem"><span class="pnum">3</span><div class="pbody">
-<p>For which number a does <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>a</span><span>2</span><span>8</span></span> have no second pivot? Can a row exchange fix it?</p>
+<p>For which number a does <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>a</span><span>2</span><span>8</span></span> have a zero second pivot? Can a row exchange fix it?</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>The second pivot is 8 − 2a. It is 0 when a = 4.</p><p>No row exchange helps: the only row below is already used. The matrix is singular (column 2 = 4·column 1).</p>
+<p>The second pivot is 8 − 2a. It is zero when a = 4.</p><p>No row exchange helps: there is no row below row 2 to swap in. The matrix is singular (column 2 = 4·column 1).</p>
 </div></details>
 </div></div>
 <div class="problem"><span class="pnum">4</span><div class="pbody">
