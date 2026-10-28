@@ -60,8 +60,13 @@ LESSONS = [
      "sections": "Strang §6.1, §6.2, §6.4, §6.5",
      "summary": "The directions a matrix does not turn: how to find them, A = XΛX⁻¹ and powers, stability and steady states, "
                 "symmetric matrices and positive definite bowls."},
+    {"n": 8, "dir": "lesson-8", "path": "svd-and-pca", "seo_title": "Singular Value Decomposition (SVD) and PCA, Visually",
+     "seo_desc": "The SVD with live Python: every matrix as turn, stretch, turn, singular values, rank-one pieces, image compression, PCA and the pseudoinverse.", "title": "The SVD and PCA", "chapter": "Strang, chapter 7",
+     "sections": "Strang §7.1 to §7.4",
+     "summary": "Every matrix taken apart: turn, stretch, turn. Singular values, the most important pieces of a matrix, "
+                "image compression, principal component analysis and the pseudoinverse."},
 ]
-for _l, _c in zip(LESSONS, [1, 2, 2, 3, 4, 5, 6]):
+for _l, _c in zip(LESSONS, [1, 2, 2, 3, 4, 5, 6, 7]):
     _l["ch"] = _c
 CHAPTERS = [
     {"n": 1, "title": "Introduction to vectors"},
@@ -70,7 +75,7 @@ CHAPTERS = [
     {"n": 4, "title": "Orthogonality"},
     {"n": 5, "title": "Determinants"},
     {"n": 6, "title": "Eigenvalues and eigenvectors"},
-    {"n": 7, "title": "The singular value decomposition", "planned": ["SVD and PCA"]},
+    {"n": 7, "title": "The singular value decomposition"},
 ]
 PLANNED = [(t, f"Chapter {c['n']}") for c in CHAPTERS for t in c.get("planned", [])]
 BUILT = []   # filled in main(): list of (lesson, slides, practice)
@@ -243,6 +248,8 @@ CARD_LABEL = {
     "cramers-rule-and-inverse": "Cramer's rule", "area-volume-cross-product": "Cross product",
     "eigenvectors": "Eigenvectors", "finding-eigenvalues": "det(A − λI) = 0", "diagonalization": "A = XΛX⁻¹",
     "powers-and-stability": "Stability", "symmetric-matrices": "Symmetric matrices", "positive-definite-matrices": "Positive definite",
+    "svd-geometry": "Turn, stretch, turn", "singular-values": "Singular values", "svd-rank-one-pieces": "Rank-one pieces",
+    "image-compression": "Image compression", "principal-component-analysis": "PCA", "pseudoinverse-and-condition-number": "Pseudoinverse",
     "recap": "Recap", "practice": "Practice",
 }
 

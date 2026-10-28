@@ -21,6 +21,19 @@ const isA = V => V && V.kind === "arrows";
 const isP = V => V && V.kind === "proj";
 const isFit = V => V && V.kind === "fit";
 const isE = V => V && V.kind === "eig";
+const isS = V => V && V.kind === "svd";
+const isImg = V => V && V.kind === "img";
+const isPCA = V => V && V.kind === "pca";
+function svd2(A){ const a = A[0][0], b = A[0][1], c = A[1][0], d = A[1][1];
+  const p = a*a + c*c, q = a*b + c*d, r = b*b + d*d, m = (p + r) / 2, h = Math.sqrt(((p - r) / 2) ** 2 + q * q);
+  return [Math.sqrt(m + h), Math.sqrt(Math.max(m - h, 0))]; }
+const unitAt = th => [Math.cos(th * Math.PI / 180), Math.sin(th * Math.PI / 180)];
+const stretchAt = V => Math.hypot(...matvec(V.A, unitAt(V.th)));
+function pcaStats(P, th){ const n = P.length, mx = P.reduce((s, p) => s + p[0], 0) / n, my = P.reduce((s, p) => s + p[1], 0) / n;
+  const C = P.map(p => [p[0] - mx, p[1] - my]); const sxx = dot(C.map(c => c[0]), C.map(c => c[0])), syy = dot(C.map(c => c[1]), C.map(c => c[1])), sxy = dot(C.map(c => c[0]), C.map(c => c[1]));
+  const tot = sxx + syy, u = unitAt(th), along = C.reduce((s, c) => s + (c[0]*u[0] + c[1]*u[1]) ** 2, 0);
+  const m = tot / 2, h = Math.sqrt(((sxx - syy) / 2) ** 2 + sxy * sxy), best = tot > 0 ? (m + h) / tot : 1;
+  return {mx, my, C, frac: tot > 0 ? along / tot : 1, best}; }
 const eigOK = V => isE(V) && Math.hypot(...V.v) > 1e-9 && Math.abs(V.v[0] * Ax({A: V.A, x: V.v})[1] - V.v[1] * Ax({A: V.A, x: V.v})[0]) < 1e-6 * (1 + Math.hypot(...V.v) ** 2);
 const dot = (a, b) => a.reduce((s, v, i) => s + v * b[i], 0);
 const projOf = (a, b) => { const k = dot(a, b) / dot(a, a); return a.map(v => k * v); };
@@ -84,6 +97,9 @@ function setLegend(){
     : view.kind === "rows" ? sw("--ihat","equation 1") + sw("--jhat","equation 2")
     : view.kind === "null" ? sw("--accent","nullspace N(A)") + (view.b && view.b.length ? sw("--ihat","all solutions of Ax = b") : "") + sw("--ink","your x")
     : view.kind === "proj" ? sw("--ink","b") + sw("--ihat","line through a") + sw("--accent","p, the projection") + sw("--jhat","error e = b − p")
+    : view.kind === "svd" ? sw("--muted","unit circle") + sw("--accent","its image: an ellipse") + sw("--ink","v") + sw("--jhat","Av")
+    : view.kind === "pca" ? sw("--ink","data points") + sw("--accent","your direction") + sw("--jhat","distances to the line")
+    : view.kind === "img" ? ""
     : view.kind === "eig" ? sw("--ink","your v") + sw("--accent","Av") + sw("--muted","the line through v")
     : view.kind === "fit" ? sw("--ink","data points") + sw("--accent","your line C + Dt") + sw("--jhat","errors") + sw("--muted","best line")
     : view.kind === "arrows" ? view.items.map((it, k) => sw(PALETTE[k % PALETTE.length], it.label)).join("")
@@ -101,6 +117,7 @@ function extent(){
   else if (V.kind === "rows"){ const s = rowSolution(V); pts = s ? [s] : []; }
   else if (V.kind === "arrows"){ pts = V.items.map(it => it.v); }
   else if (V.kind === "proj"){ pts = [V.a, V.b, V.p]; }
+  else if (V.kind === "svd"){ const s = svd2(V.A); return Math.max(1.5, s[0]) * 1.25; }
   else if (V.kind === "eig"){ pts = [V.v, Ax({A: V.A, x: V.v})]; }
   else if (V.kind === "null"){ const xs = [V.x]; const xp = particular(V); if (xp) xs.push(xp); pts = xs; }
   else if (V.kind !== "transform") return 3;
@@ -129,6 +146,8 @@ function draw(){
   if (view.kind === "four"){ drawFour(w, h); return; }
   if (view.kind === "arrows"){ drawArrows(w, h); return; }
   if (view.kind === "fit"){ drawFit(w, h); return; }
+  if (view.kind === "img"){ drawImg(w, h); return; }
+  if (view.kind === "pca"){ drawPCA(w, h); return; }
   const ext = extent(), s = Math.min(w, h) / (2*ext), ox = w/2, oy = h/2;
   const P = (x, y) => [ox + (A[0][0]*x + A[0][1]*y)*s, oy - (A[1][0]*x + A[1][1]*y)*s];
   const Q = (x, y) => [ox + x*s, oy - y*s];
@@ -167,6 +186,18 @@ function draw(){
     if (V.b.length === 2){ const B = Q(...V.b); ctx.strokeStyle = css("--ink"); ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(B[0], B[1], 9, 0, 7); ctx.stroke(); label(B, "b", css("--ink"), 12, -10);
       hit = near(r[0], V.b[0]) && near(r[1], V.b[1]) ? '<span class="good">Ax = b</span>' : `<span>b = (${g(V.b[0])}, ${g(V.b[1])})</span>`; }
     $("readout").innerHTML = `<span>x = (${g(V.x[0])}, ${g(V.x[1])})</span><span class="hi">Ax = (${g(r[0])}, ${g(r[1])})</span>${hit}<span>${dep ? (nonzero(V.A) ? "C(A) is a line" : "C(A) is a point") : "C(A) is the plane"}</span>`;
+  } else if (view.kind === "svd"){
+    const V = view, s = svd2(V.A), v = unitAt(V.th), av = matvec(V.A, v), st = Math.hypot(...av);
+    const circ = t => [Math.cos(t), Math.sin(t)];
+    ctx.setLineDash([4, 5]); ctx.strokeStyle = css("--muted"); ctx.lineWidth = 1.4; ctx.beginPath();
+    for (let k = 0; k <= 96; k++){ const p = Q(...circ(k / 96 * 2 * Math.PI)); k ? ctx.lineTo(...p) : ctx.moveTo(...p); } ctx.stroke(); ctx.setLineDash([]);
+    ctx.strokeStyle = css("--accent"); ctx.lineWidth = 2.4; ctx.beginPath();
+    for (let k = 0; k <= 96; k++){ const p = Q(...matvec(V.A, circ(k / 96 * 2 * Math.PI))); k ? ctx.lineTo(...p) : ctx.moveTo(...p); } ctx.stroke();
+    arrow(O, Q(...av), css("--jhat"), 3.4); label(Q(...av), "Av", css("--jhat"), 10, 4);
+    arrow(O, Q(...v), css("--ink"), 3); label(Q(...v), "v", css("--ink"));
+    const best = Math.abs(st - s[0]) < 1e-3 * Math.max(1, s[0]), least = Math.abs(st - s[1]) < 1e-3 * Math.max(1, s[0]);
+    $("readout").innerHTML = `<span>angle of v = ${g(V.th)}°</span><span class="hi">|Av| = ${fmt(st)}</span>` +
+      (best ? `<span class="good">the longest stretch: σ₁ = ${fmt(s[0])}</span>` : least ? `<span class="good">the shortest stretch: σ₂ = ${fmt(s[1])}</span>` : "<span>turn v to find the longest stretch</span>");
   } else if (view.kind === "eig"){
     const V = view, av = Ax({A: V.A, x: V.v}), L = Math.hypot(...V.v), ok = eigOK(V);
     if (L > 1e-9){ const k = 4*N / L; ctx.setLineDash([6, 6]); ctx.strokeStyle = css(ok ? "--ok" : "--muted"); ctx.lineWidth = ok ? 2.4 : 1.4; line(Q(-V.v[0]*k, -V.v[1]*k), Q(V.v[0]*k, V.v[1]*k)); ctx.setLineDash([]); }
@@ -260,6 +291,39 @@ function drawFit(w, h){
   const E = sse(V.t, V.b, V.C, V.D), Eb = best ? sse(V.t, V.b, best[0], best[1]) : null;
   $("readout").innerHTML = `<span>C = ${fmt(V.C)}, D = ${fmt(V.D)}</span><span class="hi">E = sum of e² = ${fmt(E)}</span>` + (Eb == null ? "" : atBest ? '<span class="good">smallest possible E</span>' : `<span>smallest possible: ${fmt(Eb)}</span>`);
 }
+function drawImg(w, h){
+  const its = view.items, gap = 22, n = its.length, top = 30;
+  const cw = (w - gap * (n + 1)) / n, size = Math.min(cw, h - top - 34);
+  const all = its.flatMap(it => it.M.flat()), lo = Math.min(...all), hi = Math.max(...all), span = hi - lo || 1;
+  its.forEach((it, k) => {
+    const M = it.M, r = M.length, c = M[0].length, cell = size / Math.max(r, c), x0 = gap + k * (cw + gap) + (cw - cell * c) / 2, y0 = top;
+    M.forEach((row, i) => row.forEach((v, j) => { const t = Math.round(255 * (1 - (v - lo) / span)); ctx.fillStyle = `rgb(${t},${t},${t})`; ctx.fillRect(x0 + j * cell, y0 + i * cell, Math.ceil(cell), Math.ceil(cell)); }));
+    ctx.strokeStyle = css("--line"); ctx.lineWidth = 1; ctx.strokeRect(x0, y0, cell * c, cell * r);
+    ctx.fillStyle = css("--muted"); ctx.font = `600 12px ${css("--f-mono")}`; ctx.fillText(it.label, x0, y0 - 10);
+  });
+  const ref = its[0].M, nrm = M => Math.sqrt(M.flat().reduce((s, v) => s + v * v, 0));
+  $("readout").innerHTML = its.slice(1).map(it => { if (it.M.length !== ref.length || it.M[0].length !== ref[0].length) return "";
+    const e = nrm(it.M.map((row, i) => row.map((v, j) => v - ref[i][j]))) / (nrm(ref) || 1);
+    return `<span${e < 1e-6 ? ' class="good"' : ""}>${it.label}: error ${fmt(100 * e)}%</span>`; }).join("") || `<span>${ref.length}×${ref[0].length}</span>`;
+}
+function drawPCA(w, h){
+  const V = view, S = pcaStats(V.P, V.th), xs = V.P.map(p => p[0]), ys = V.P.map(p => p[1]);
+  const pad = 30, x0 = Math.min(...xs), x1 = Math.max(...xs), y0 = Math.min(...ys), y1 = Math.max(...ys);
+  const span = Math.max(x1 - x0, y1 - y0, 1) * 1.25, cx = (x0 + x1) / 2, cy = (y0 + y1) / 2, sc = (Math.min(w, h) - 2 * pad) / span;
+  const Q = (x, y) => [w / 2 + (x - cx) * sc, h / 2 - (y - cy) * sc];
+  ctx.strokeStyle = css("--grid"); ctx.lineWidth = 1; const st = Math.pow(10, Math.floor(Math.log10(span / 4)));
+  for (let x = Math.floor((cx - span) / st) * st; x <= cx + span; x += st){ line(Q(x, cy - span), Q(x, cy + span)); }
+  for (let y = Math.floor((cy - span) / st) * st; y <= cy + span; y += st){ line(Q(cx - span, y), Q(cx + span, y)); }
+  const u = unitAt(V.th), L = span * 2;
+  V.P.forEach((p, i) => { const c = S.C[i], t = c[0]*u[0] + c[1]*u[1], f = [S.mx + t*u[0], S.my + t*u[1]];
+    ctx.setLineDash([3, 4]); ctx.strokeStyle = css("--jhat"); ctx.lineWidth = 1.4; line(Q(...p), Q(...f)); ctx.setLineDash([]); });
+  ctx.strokeStyle = css("--accent"); ctx.lineWidth = 3; line(Q(S.mx - u[0]*L, S.my - u[1]*L), Q(S.mx + u[0]*L, S.my + u[1]*L));
+  V.P.forEach(p => { ctx.fillStyle = css("--ink"); ctx.beginPath(); ctx.arc(...Q(...p), 4, 0, 7); ctx.fill(); });
+  ctx.fillStyle = css("--accent"); ctx.beginPath(); ctx.arc(...Q(S.mx, S.my), 6, 0, 7); ctx.fill();
+  const ok = Math.abs(S.frac - S.best) < 1e-3;
+  $("readout").innerHTML = `<span>angle = ${fmt(V.th)}°</span><span class="hi">spread along your line: ${fmt(100 * S.frac)}%</span>` +
+    (ok ? '<span class="good">the first principal component</span>' : `<span>the best line keeps ${fmt(100 * S.best)}%</span>`);
+}
 function drawFour(w, h){
   const M = view.A, r = rankOf(M), gap = 18, wide = w > 560;
   const pw = wide ? (w - gap) / 2 : w, ph = wide ? h : (h - gap) / 2;
@@ -340,6 +404,9 @@ window.__pyrows = (M, b) => { last = {kind:"rows", A:L2(M), b:Array.from(b)}; se
 window.__pytable = items => { last = {kind:"table", items: Array.from(items).map(t => ({label: String(t[0]), M: L2(t[1]), piv: Array.from(t[2]).map(Number), ndim: Number(t[3])}))};
   last.items.forEach(it => { if (it.ndim === 1) it.vec = it.M.map(r => r[0]); }); setView(last); };
 window.__pynull = (M, x, b) => { last = {kind:"null", A:L2(M), x:Array.from(x), b:Array.from(b)}; setView(last); };
+window.__pysvd = (M, th) => { last = {kind:"svd", A:L2(M), th:Number(th)}; setView(last); };
+window.__pyimg = items => { last = {kind:"img", items: Array.from(items).map(t => ({label: String(t[0]), M: L2(t[1])}))}; setView(last); };
+window.__pypca = (P, th) => { last = {kind:"pca", P:L2(P), th:Number(th)}; setView(last); };
 window.__pyeig = (M, v) => { last = {kind:"eig", A:L2(M), v:Array.from(v).map(Number)}; setView(last); };
 window.__pyproj = (a, b, p, auto) => { last = {kind:"proj", a:Array.from(a), b:Array.from(b), p:Array.from(p), auto:!!auto}; setView(last); };
 window.__pyfit = (t, b, C, D) => { last = {kind:"fit", t:Array.from(t).map(Number), b:Array.from(b).map(Number), C:Number(C), D:Number(D)}; setView(last); };
@@ -372,6 +439,8 @@ const SL = {
   transform: V => [["a", "M", [0,0], -3, 3, .25], ["b", "M", [0,1], -3, 3, .25], ["c", "M", [1,0], -3, 3, .25], ["d", "M", [1,1], -3, 3, .25]],
   four: V => [["a", "A", [0,0], -6, 6, 1], ["b", "A", [0,1], -6, 6, 1], ["c", "A", [1,0], -6, 6, 1], ["d", "A", [1,1], -6, 6, 1]],
   rows: V => [["b₁", "b", 0, -12, 12, 1], ["b₂", "b", 1, -12, 12, 1]],
+  svd: V => [["θ", "th", null, -180, 180, 0.5]],
+  pca: V => [["θ", "th", null, -90, 90, 0.5]],
   eig: V => [["v₁", "v", 0, -3, 3, .25], ["v₂", "v", 1, -3, 3, .25]],
   proj: V => V.auto ? [["b₁", "b", 0, -5, 5, .5], ["b₂", "b", 1, -5, 5, .5], ["a₁", "a", 0, -4, 4, .5], ["a₂", "a", 1, -4, 4, .5]] : null,
   fit: V => { const bf = bestFit(V.t, V.b) || [0, 0], r = v => Math.round(v * 10) / 10;

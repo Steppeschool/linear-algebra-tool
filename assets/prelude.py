@@ -88,6 +88,10 @@ class ndarray:
                 return ndarray([[f(x, o) for x in r] for r in self.d])
             return ndarray([f(x, o) for x in self.d])
         o = asarray(o)
+        if self.ndim == 2 and o.ndim == 1 and o.shape[0] == self.shape[1]:
+            return ndarray([[f(a, b) for a, b in zip(r, o.d)] for r in self.d])   # row-wise, like NumPy
+        if self.ndim == 1 and o.ndim == 2 and self.shape[0] == o.shape[1]:
+            return ndarray([[f(a, b) for a, b in zip(self.d, r)] for r in o.d])
         if o.shape != self.shape:
             raise ValueError("shapes %s and %s don't match" % (self.shape, o.shape))
         if self.ndim == 2:
@@ -136,6 +140,7 @@ np.sqrt = _ufunc(lambda v: _M.sqrt(v))
 np.abs = _ufunc(lambda v: abs(v))
 np.radians = _ufunc(lambda v: v * _M.PI / 180)
 np.deg2rad = np.radians
+np.arctan2 = lambda y, x: _M.atan2(y, x)
 np.degrees = _ufunc(lambda v: v * 180 / _M.PI)
 np.round = lambda x, n=0: _ufunc(lambda v: round(v, n))(x)
 np.eye = lambda n: ndarray([[1.0 if i == j else 0.0 for j in range(n)] for i in range(n)])
@@ -303,6 +308,36 @@ def _eigh(A):
             for k in range(n):
                 vecs[k][j] = -vecs[k][j]
     return ndarray(lams), ndarray(vecs)
+def _svd(A, full_matrices=False):
+    """Thin SVD: A = U @ diag(s) @ Vt, singular values from largest to smallest."""
+    A = asarray(A)
+    if A.ndim != 2:
+        raise ValueError("svd needs a matrix")
+    m, n = A.shape
+    if m < n:
+        U, s, Vt = _svd(A.T)
+        return Vt.T, s, U.T
+    lam, V = _eigh(A.T @ A)
+    s = [_M.sqrt(max(l, 0.0)) for l in lam.d]
+    cols = []
+    for j in range(n):
+        if s[j] > 1e-10 * max(1.0, s[0]):
+            cols.append((A @ V[:, j]) / s[j])
+        else:
+            for k in range(m):
+                e = ndarray([1.0 if i == k else 0.0 for i in range(m)])
+                for c in cols:
+                    e = e - (c @ e) * c
+                if _norm(e) > 1e-6:
+                    cols.append(e / _norm(e)); break
+    s = [0.0 if v < 1e-10 * max(1.0, s[0]) else v for v in s]
+    return np.column_stack(cols), ndarray(s), V.T
+def _pinv(A):
+    """Pseudoinverse: V @ diag(1/sigma for nonzero sigma) @ U.T."""
+    U, s, Vt = _svd(A)
+    k = len(s.d)
+    Sp = ndarray([[(1.0 / s.d[i] if i == j and s.d[i] > 0 else 0.0) for j in range(k)] for i in range(k)])
+    return Vt.T @ Sp @ U.T
 np.trace = lambda a: sum(asarray(a).d[i][i] for i in range(asarray(a).shape[0]))
 np.linalg = _NS()
 np.linalg.det = _det
@@ -314,6 +349,9 @@ np.linalg.lstsq = _lstsq
 np.linalg.qr = _qr
 np.linalg.eig = _eig
 np.linalg.eigh = _eigh
+np.linalg.svd = _svd
+np.linalg.pinv = _pinv
+np.linalg.cond = lambda A: _svd(A)[1].d[0] / _svd(A)[1].d[-1] if _svd(A)[1].d[-1] > 0 else float('inf')
 np.hstack = lambda ms: ndarray([sum([asarray(m).d[i] if asarray(m).ndim == 2 else [asarray(m).d[i]] for m in ms], []) for i in range(asarray(ms[0]).shape[0])])
 np.vstack = lambda ms: ndarray(sum([asarray(m).tolist() if asarray(m).ndim == 2 else [asarray(m).tolist()] for m in ms], []))
 np.triu = lambda a: ndarray([[v if j >= i else 0.0 for j, v in enumerate(r)] for i, r in enumerate(asarray(a).d)])
@@ -397,6 +435,30 @@ def eigpic(A, v):
         raise ValueError("eigpic() needs a 2x2 matrix A and a vector v with 2 entries")
     window.__pyeig(A.tolist(), v.tolist())
 
+def svdpic(A, theta):
+    """The unit circle and its image under A, with the unit vector v at angle theta (degrees) and Av."""
+    A = asarray(A)
+    if A.shape != (2, 2):
+        raise ValueError("svdpic() needs a 2x2 matrix")
+    window.__pysvd(A.tolist(), float(theta))
+
+def imgpic(*items):
+    """Show matrices as small grey pictures side by side. Each item: M or ("label", M)."""
+    out = []
+    for k, it in enumerate(items):
+        label, M = (str(it[0]), asarray(it[1])) if isinstance(it, tuple) else ("image %d" % (k + 1), asarray(it))
+        if M.ndim != 2:
+            raise ValueError("imgpic() shows matrices (2D arrays)")
+        out.append([label, M.tolist()])
+    window.__pyimg(out)
+
+def pcapic(P, theta):
+    """Data points (rows of P, 2 columns) and a line through their mean at angle theta (degrees)."""
+    P = asarray(P)
+    if P.ndim != 2 or P.shape[1] != 2:
+        raise ValueError("pcapic() needs points as rows of a matrix with 2 columns")
+    window.__pypca(P.tolist(), float(theta))
+
 def four(A):
     """The four subspaces of a 2x2 matrix: input plane on the left, output plane on the right."""
     A = asarray(A)
@@ -433,7 +495,7 @@ def _hint(kind, msg):
     return ""
 
 def run(src):
-    ns = {'np': np, 'show': show, 'combo': combo, 'rowpic': rowpic, 'table': table, 'nullpic': nullpic, 'four': four, 'arrows': arrows, 'vectors': vectors, 'proj': proj, 'fit': fit, 'eigpic': eigpic, 'lu': lu, 'rref': rref, 'print': _print, '__name__': '__main__'}
+    ns = {'np': np, 'show': show, 'combo': combo, 'rowpic': rowpic, 'table': table, 'nullpic': nullpic, 'four': four, 'arrows': arrows, 'vectors': vectors, 'proj': proj, 'fit': fit, 'eigpic': eigpic, 'svdpic': svdpic, 'imgpic': imgpic, 'pcapic': pcapic, 'lu': lu, 'rref': rref, 'print': _print, '__name__': '__main__'}
     try:
         exec(compile(src, 'lesson.py', 'exec'), ns)
     except SyntaxError as e:

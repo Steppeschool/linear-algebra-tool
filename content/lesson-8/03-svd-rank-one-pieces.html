@@ -1,0 +1,74 @@
+---
+slug: svd-rank-one-pieces
+seo_title: SVD as a Sum of Rank-One Matrices: A = σ₁u₁v₁ᵀ + σ₂u₂v₂ᵀ
+description: The SVD writes any matrix as a sum of simple rank-one pieces σuvᵀ, ordered from most to least important. Worked examples and Python. Strang §7.2.
+kicker: Strang §7.2 · The pieces of the SVD
+title: A is a sum of simple pieces, biggest first.
+task: Add the second piece so that the pieces add up to A.
+preview: {"kind":"table","items":[{"label":"A","M":[[1,2],[2,1]],"piv":[]}]}
+check: isTab(V) && item(V, 'A') && item(V, 'sum of pieces') && close(item(V, 'sum of pieces'), item(V, 'A'), 1e-6)
+---
+<!-- lead -->
+Multiply out UΣVᵀ column by column and A falls apart into r simple pieces σᵢuᵢvᵢᵀ, one for each nonzero singular value. Each piece is a rank-one matrix: every row is a multiple of the same row. The pieces come ordered by size, which is the key to compression.
+<!-- key -->
+A = σ₁u₁v₁ᵀ + σ₂u₂v₂ᵀ + … + σᵣuᵣvᵣᵀ
+<!-- ideas -->
+<ol class="ideas"><li>UΣVᵀ = σ₁u₁v₁ᵀ + … + σᵣuᵣvᵣᵀ, where r is the rank (the number of nonzero σ's).</li><li>Each uvᵀ is a <b>rank-one</b> matrix: a column times a row. All its rows are multiples of vᵀ.</li><li>The pieces are ordered: σ₁ ≥ σ₂ ≥ …, so the first pieces carry the most.</li><li>Keeping only the first k pieces gives the best rank-k approximation of A.</li></ol>
+<!-- prose -->
+<h3>A song as layers</h3>
+<p>A recorded song can be split into tracks: drums, bass, vocals, a quiet shaker. Mute the quiet tracks and the song is still recognisable. The SVD splits a matrix into layers in the same way, and lists them from loudest to quietest.</p>
+<h3>Column times row</h3>
+<p>A column u times a row vᵀ is a whole matrix, uvᵀ, called an <b>outer product</b>. Every row of uvᵀ is a multiple of vᵀ, so it has rank 1: the simplest matrix there is.</p>
+<div class="worked"><div class="row">u = (1, 2), v = (3, 1): &nbsp; uvᵀ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>1</span><span>6</span><span>2</span></span>. &nbsp; Row 2 = 2 × row 1</div></div>
+<h3>The SVD as a sum</h3>
+<p>Multiply U times ΣVᵀ by columns-times-rows (lesson 1 style):</p>
+<div class="worked"><div class="row">A = UΣVᵀ = σ₁u₁v₁ᵀ + σ₂u₂v₂ᵀ + … + σᵣuᵣvᵣᵀ</div></div>
+<p>Pieces with σ = 0 add nothing, so there are exactly r pieces, where r is the rank.</p>
+<h3>A worked example</h3>
+<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>1</span></span>: eigenvalues 3 with (1, 1)/√2 and −1 with (1, −1)/√2</div><div class="row">σ₁ = 3: &nbsp; v₁ = u₁ = (1, 1)/√2, &nbsp; 3u₁v₁ᵀ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1.5</span><span>1.5</span><span>1.5</span><span>1.5</span></span></div><div class="row">σ₂ = 1: &nbsp; v₂ = (1, −1)/√2, u₂ = Av₂ = (−1, 1)/√2, &nbsp; 1·u₂v₂ᵀ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−0.5</span><span>0.5</span><span>0.5</span><span>−0.5</span></span></div><div class="row">Sum: <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>1</span></span> ✓</div></div>
+<p>The first piece alone, all 1.5's, is already the best rank-one guess at A. The second piece adds the detail.</p>
+<h3>Where this is used</h3>
+<p>Recommendation systems (films, products) treat a huge table of ratings as a matrix and keep a few big SVD pieces. Each piece is a "taste" shared by many people. A few dozen pieces explain most of millions of ratings.</p>
+<!-- examples -->
+<section class="example"><h3>Example 1 · Spot a rank-one matrix</h3>
+<p><span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>4</span><span>6</span><span>1</span><span>2</span><span>3</span></span> = (2, 1) times the row (1, 2, 3).</p>
+<p>One piece: σ₁ = |(2, 1)| · |(1, 2, 3)| = √5 · √14 = √70, and σ₂ = 0.</p>
+</section>
+<section class="example"><h3>Example 2 · A diagonal matrix</h3>
+<p><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>4</span><span>0</span><span>0</span><span>1</span></span> = 4·(1, 0)(1, 0)ᵀ + 1·(0, 1)(0, 1)ᵀ.</p>
+<p>The pieces are the two axes, weighted by the diagonal entries.</p>
+</section>
+<section class="example"><h3>Example 3 · Best rank-one approximation</h3>
+<p>For A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>0</span><span>0</span><span>0.1</span></span>, keep only the first piece: <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>0</span><span>0</span><span>0</span></span>.</p>
+<p>The error is the dropped piece, of size σ₂ = 0.1: small, because σ₂ is small.</p>
+</section>
+<!-- problems -->
+<div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Write <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>2</span><span>2</span><span>2</span></span> as a single piece σuvᵀ with unit vectors u and v.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>u = v = (1, 1)/√2 and σ = 4: 4 · ½[1 1; 1 1] = [2 2; 2 2] ✓</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>How many pieces does the SVD of a 5 by 3 matrix of rank 2 have?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Two: one per nonzero singular value, which is the rank.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>A 100 by 100 matrix is approximated by 5 pieces. How many numbers are stored, compared with the full matrix?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Each piece needs σ, u (100 numbers) and v (100 numbers): 201. Five pieces: 1005 numbers instead of 10000.</p>
+</div></details>
+</div></div>
+<!-- code -->
+import numpy as np
+
+A = np.array([[1., 2.],
+              [2., 1.]])
+U, s, Vt = np.linalg.svd(A)     # s = singular values, Vt = V transposed
+
+piece1 = s[0] * np.outer(U[:, 0], Vt[0])
+total = piece1                  # your turn: + s[1] * np.outer(U[:, 1], Vt[1])
+print("singular values:", s)
+table(("A", A), ("piece 1", piece1), ("sum of pieces", total))

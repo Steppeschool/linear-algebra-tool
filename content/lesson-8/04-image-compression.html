@@ -1,0 +1,76 @@
+---
+slug: image-compression
+seo_title: Image Compression with the SVD (Low-Rank Approximation)
+description: A grey image is a matrix. Keep only its largest singular values and the picture survives with far fewer numbers. Interactive Python example. Strang §7.1.
+kicker: Strang §7.1 · Image processing by linear algebra
+title: Compressing an image: keep the big pieces.
+task: Choose k, the number of pieces to keep, so that the copy matches the letter F exactly.
+preview: {"kind":"img","items":[{"label":"original","M":[[0,0,0,0,0,0,0,0],[0,1,1,1,1,1,0,0],[0,1,1,1,1,1,0,0],[0,1,1,1,1,0,0,0],[0,1,1,1,1,0,0,0],[0,1,1,0,0,0,0,0],[0,1,1,0,0,0,0,0],[0,0,0,0,0,0,0,0]]}]}
+check: isImg(V) && item(V, 'original') && item(V, 'approx') && close(item(V, 'approx'), item(V, 'original'), 1e-6)
+---
+<!-- lead -->
+A grey picture is a matrix of brightness values. Its SVD lists the picture's pieces from most to least important. Keep the first few pieces and you keep most of the picture while storing far fewer numbers. Pictures with simple structure need very few pieces.
+<!-- key -->
+A ≈ A_k = σ₁u₁v₁ᵀ + … + σₖuₖvₖᵀ &nbsp;&nbsp; error = size of the dropped σ's
+<!-- ideas -->
+<ol class="ideas"><li>A grey image with m rows and n columns of pixels is an m by n matrix.</li><li>A_k, the first k SVD pieces, is the closest matrix of rank k to A (the Eckart–Young theorem).</li><li>Storing A_k needs k(m + n + 1) numbers instead of mn.</li><li>Fast-falling singular values mean the image compresses well.</li></ol>
+<!-- prose -->
+<h3>A sketch artist</h3>
+<p>A good sketch artist draws the big shapes first, then the main lines, and only then the fine detail. After a few strokes you already recognise the face. The SVD orders an image the same way: the first piece is the biggest pattern, each later piece adds smaller detail.</p>
+<h3>Pictures are matrices</h3>
+<p>Give each pixel a number from 0 (white) to 1 (black). An 8 by 8 picture of the letter F becomes an 8 by 8 matrix of 0s and 1s. A photo of 1000 by 1000 pixels is a 1000 by 1000 matrix: a million numbers.</p>
+<h3>Keep k pieces</h3>
+<div class="worked"><div class="row">A_k = σ₁u₁v₁ᵀ + σ₂u₂v₂ᵀ + … + σₖuₖvₖᵀ</div><div class="row">Each piece costs m + n + 1 numbers (u, v and σ)</div><div class="row">1000 by 1000 photo, k = 50: 50 · 2001 ≈ 100,000 numbers instead of 1,000,000</div></div>
+<p>No other matrix of rank k is closer to A than A_k. The error is made of the dropped σ's, so when they are small, the copy is good.</p>
+<h3>The letter F</h3>
+<div class="worked"><div class="row">Its singular values: 4.38, 1.41, 0.91, then all zero</div><div class="row">Rank 3: three pieces rebuild the F exactly. One piece gives a blurry block; two pieces get the shape roughly right</div></div>
+<p>The F is made of blocks lined up with the rows and columns, so it needs very few pieces. A photo of a face has slowly falling singular values and needs more, but still far fewer than its size.</p>
+<h3>Where this is used</h3>
+<p>The same idea, keep the big components and drop the small ones, is used to compress sensor logs, remove noise from signals and shrink large neural networks so they run on a drone's small computer.</p>
+<!-- examples -->
+<section class="example"><h3>Example 1 · A flag with stripes</h3>
+<p>Three horizontal stripes: every row is the same as one of a few rows, all multiples of the all-ones row.</p>
+<p>Rank 1: one piece (a column of stripe values times a row of ones) rebuilds it exactly.</p>
+</section>
+<section class="example"><h3>Example 2 · A checkerboard</h3>
+<p><span class="mx" style="grid-template-columns:repeat(4,auto)"><span>1</span><span>0</span><span>1</span><span>0</span><span>0</span><span>1</span><span>0</span><span>1</span><span>1</span><span>0</span><span>1</span><span>0</span><span>0</span><span>1</span><span>0</span><span>1</span></span>: rows repeat in two patterns.</p>
+<p>Rank 2: σ₁ = σ₂ = 2, then zeros. Two pieces.</p>
+</section>
+<section class="example"><h3>Example 3 · Counting storage</h3>
+<p>A 640 by 480 image kept with k = 20 pieces.</p>
+<div class="worked"><div class="row">20 · (640 + 480 + 1) = 22,420 numbers</div><div class="row">Full image: 640 · 480 = 307,200. About 7% of the size</div></div>
+</section>
+<!-- problems -->
+<div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>A 100 by 200 image is stored with k pieces. For which k does this stop saving space?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>k(100 + 200 + 1) &lt; 100 · 200 means k &lt; 20000/301 ≈ 66.4. From k = 67 on, the pieces cost more than the image.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>The singular values of an image are 50, 10, 1, 0.1, 0.01. Roughly how good is the rank-2 copy?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>The dropped σ's are 1, 0.1, 0.01, tiny next to 50 and 10. The rank-2 copy is almost perfect.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>Why does a picture of a diagonal line need many pieces, while a vertical stripe needs one?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>A vertical stripe has identical rows: rank 1. A diagonal line has a different row for every row (each row's 1 is in a new column), so its rank is large.</p>
+</div></details>
+</div></div>
+<!-- code -->
+import numpy as np
+
+rows = ["00000000", "01111100", "01111100", "01111000",
+        "01111000", "01100000", "01100000", "00000000"]
+F = np.array([[float(c) for c in r] for r in rows])      # the letter F, 1 = black
+
+U, s, Vt = np.linalg.svd(F)
+print("singular values:", s)
+
+k = 1                           # your turn: how many pieces does the F need?
+approx = np.zeros((8, 8))
+for i in range(k):
+    approx = approx + s[i] * np.outer(U[:, i], Vt[i])
+imgpic(("original", F), ("approx", approx))

@@ -1,0 +1,149 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="robots" content="noindex"></head><body>
+<main class="lesson">
+  <article class="page">
+    <div class="slide-head"><div>
+    <div class="kicker">Strang §7.2 · The pieces of the SVD</div>
+    <h1>A is a sum of simple pieces, biggest first.</h1>
+    <p class="lead">Multiply out UΣVᵀ column by column and A falls apart into r simple pieces σᵢuᵢvᵢᵀ, one for each nonzero singular value. Each piece is a rank-one matrix: every row is a multiple of the same row. The pieces come ordered by size, which is the key to compression.</p>
+    </div><span class="thumb slide-art"><img src="https://linearalgebra.steppeschool.com/assets/cards/lesson-8--svd-rank-one-pieces.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 8 · slide 3</small>Rank-one pieces</span></span></div>
+    <div class="key">A = σ₁u₁v₁ᵀ + σ₂u₂v₂ᵀ + … + σᵣuᵣvᵣᵀ</div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>UΣVᵀ = σ₁u₁v₁ᵀ + … + σᵣuᵣvᵣᵀ, where r is the rank (the number of nonzero σ's).</li><li>Each uvᵀ is a <b>rank-one</b> matrix: a column times a row. All its rows are multiples of vᵀ.</li><li>The pieces are ordered: σ₁ ≥ σ₂ ≥ …, so the first pieces carry the most.</li><li>Keeping only the first k pieces gives the best rank-k approximation of A.</li></ol></div>
+    <div class="prose">
+<h3>A song as layers</h3>
+<p>A recorded song can be split into tracks: drums, bass, vocals, a quiet shaker. Mute the quiet tracks and the song is still recognisable. The SVD splits a matrix into layers in the same way, and lists them from loudest to quietest.</p>
+<h3>Column times row</h3>
+<p>A column u times a row vᵀ is a whole matrix, uvᵀ, called an <b>outer product</b>. Every row of uvᵀ is a multiple of vᵀ, so it has rank 1: the simplest matrix there is.</p>
+<div class="worked"><div class="row">u = (1, 2), v = (3, 1): &nbsp; uvᵀ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>1</span><span>6</span><span>2</span></span>. &nbsp; Row 2 = 2 × row 1</div></div>
+<h3>The SVD as a sum</h3>
+<p>Multiply U times ΣVᵀ by columns-times-rows (lesson 1 style):</p>
+<div class="worked"><div class="row">A = UΣVᵀ = σ₁u₁v₁ᵀ + σ₂u₂v₂ᵀ + … + σᵣuᵣvᵣᵀ</div></div>
+<p>Pieces with σ = 0 add nothing, so there are exactly r pieces, where r is the rank.</p>
+<h3>A worked example</h3>
+<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>1</span></span>: eigenvalues 3 with (1, 1)/√2 and −1 with (1, −1)/√2</div><div class="row">σ₁ = 3: &nbsp; v₁ = u₁ = (1, 1)/√2, &nbsp; 3u₁v₁ᵀ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1.5</span><span>1.5</span><span>1.5</span><span>1.5</span></span></div><div class="row">σ₂ = 1: &nbsp; v₂ = (1, −1)/√2, u₂ = Av₂ = (−1, 1)/√2, &nbsp; 1·u₂v₂ᵀ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−0.5</span><span>0.5</span><span>0.5</span><span>−0.5</span></span></div><div class="row">Sum: <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>1</span></span> ✓</div></div>
+<p>The first piece alone, all 1.5's, is already the best rank-one guess at A. The second piece adds the detail.</p>
+<h3>Where this is used</h3>
+<p>Recommendation systems (films, products) treat a huge table of ratings as a matrix and keep a few big SVD pieces. Each piece is a "taste" shared by many people. A few dozen pieces explain most of millions of ratings.</p>
+    </div>
+    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · Spot a rank-one matrix</h3>
+<p><span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>4</span><span>6</span><span>1</span><span>2</span><span>3</span></span> = (2, 1) times the row (1, 2, 3).</p>
+<p>One piece: σ₁ = |(2, 1)| · |(1, 2, 3)| = √5 · √14 = √70, and σ₂ = 0.</p>
+</section>
+<section class="example"><h3>Example 2 · A diagonal matrix</h3>
+<p><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>4</span><span>0</span><span>0</span><span>1</span></span> = 4·(1, 0)(1, 0)ᵀ + 1·(0, 1)(0, 1)ᵀ.</p>
+<p>The pieces are the two axes, weighted by the diagonal entries.</p>
+</section>
+<section class="example"><h3>Example 3 · Best rank-one approximation</h3>
+<p>For A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>0</span><span>0</span><span>0.1</span></span>, keep only the first piece: <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>0</span><span>0</span><span>0</span></span>.</p>
+<p>The error is the dropped piece, of size σ₂ = 0.1: small, because σ₂ is small.</p>
+</section></div>
+    <details class="more"><summary><span class="pl-icon">✎</span><span class="rv-text"><b>More examples to try</b><span>3 problems with step-by-step solutions. Try each one before you open its solution.</span></span><span class="rv-toggle"><span class="s-show">Show</span><span class="s-hide">Hide</span></span></summary><div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Write <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>2</span><span>2</span><span>2</span></span> as a single piece σuvᵀ with unit vectors u and v.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>u = v = (1, 1)/√2 and σ = 4: 4 · ½[1 1; 1 1] = [2 2; 2 2] ✓</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>How many pieces does the SVD of a 5 by 3 matrix of rank 2 have?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Two: one per nonzero singular value, which is the rank.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>A 100 by 100 matrix is approximated by 5 pieces. How many numbers are stored, compared with the full matrix?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Each piece needs σ, u (100 numbers) and v (100 numbers): 201. Five pieces: 1005 numbers instead of 10000.</p>
+</div></details>
+</div></div></div></details>
+  </article>
+  <details class="review">
+    <summary><span class="pl-icon">✎</span><span class="rv-text"><b>Lesson review</b><span>3 worked examples and 5 mixed problems with solutions</span></span><span class="rv-toggle"><span class="s-show">Open</span><span class="s-hide">Close</span></span></summary>
+    <div class="review-body">
+      <h2 class="practice-h">Worked examples</h2>
+      <div class="examples"><section class="example"><h3>Example 1 · SVD of a tall matrix</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>1</span><span>1</span><span>0</span><span>1</span></span> (3 by 2).</p>
+<div class="worked"><div class="row">AᵀA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>2</span></span>: λ = 3 with (1, 1)/√2, &nbsp; λ = 1 with (1, −1)/√2</div><div class="row">σ₁ = √3, σ₂ = 1</div><div class="row">u₁ = Av₁/σ₁ = (1, 2, 1)/√6, &nbsp; u₂ = Av₂/σ₂ = (1, 0, −1)/√2 (perpendicular ✓)</div></div>
+</section>
+<section class="example"><h3>Example 2 · A rank-one matrix</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>4</span><span>3</span><span>6</span></span> = (1, 2, 3) times the row (1, 2).</p>
+<div class="worked"><div class="row">One piece: σ₁ = |(1, 2, 3)| · |(1, 2)| = √14 · √5 = √70 ≈ 8.37, &nbsp; σ₂ = 0</div><div class="row">u₁ = (1, 2, 3)/√14, &nbsp; v₁ = (1, 2)/√5</div></div>
+</section>
+<section class="example"><h3>Example 3 · Pseudoinverse of a tall matrix</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>0</span><span>0</span><span>1</span></span>, b = (1, 2, 3).</p>
+<div class="worked"><div class="row">A⁺ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>0</span><span>0</span><span>1</span></span>, &nbsp; x⁺ = (1, 3)</div><div class="row">The middle equation 0 = 2 cannot be met; x⁺ satisfies the other two exactly</div></div>
+</section></div>
+      <h2 class="practice-h">Problems</h2>
+      <div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Find the singular values of <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>2</span></span>.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>It is symmetric with eigenvalues 3 and 1, both positive, so σ₁ = 3 and σ₂ = 1.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>Find the singular values of <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>4</span><span>0</span><span>3</span><span>-5</span></span>.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>AᵀA = [25 −15; −15 25]: trace 50, det 625 − 225 = 400. λ² − 50λ + 400 = (λ − 40)(λ − 10). σ₁ = √40 ≈ 6.32, σ₂ = √10 ≈ 3.16. Check: σ₁σ₂ = 20 = |det A| ✓</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>Write <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>3</span><span>1</span><span>1</span></span> as one piece σuvᵀ with unit vectors.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>It is (3, 1) times the row (1, 1). σ = |(3, 1)| · |(1, 1)| = √10 · √2 = √20, u = (3, 1)/√10, v = (1, 1)/√2.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">4</span><div class="pbody">
+<p>A 200 by 300 image has singular values that drop below 1% of σ₁ after the first 30. How many numbers does the rank-30 copy store?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>30 · (200 + 300 + 1) = 15,030, compared with 60,000 for the full image: a quarter.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">5</span><div class="pbody">
+<p>Centered data has singular values 6, 2, 1. What share of the spread do the first two principal components explain?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Squares 36, 4, 1, total 41. (36 + 4)/41 ≈ 97.6%.</p>
+</div></details>
+</div></div></div>
+    </div>
+  </details>
+
+  <section class="labsec" aria-label="Lab">
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Add the second piece so that the pieces add up to A.</span>
+      <span class="hint" id="hint">Edit the code and press Run.</span>
+    </div>
+    <div class="lab">
+      <div class="editor-card">
+        <div class="bar">
+          <span class="file">slide_3.py</span>
+          <span class="status" id="pystatus">Loading Python…</span>
+          <button class="btn" id="reset">Reset</button>
+          <button class="btn primary" id="run" disabled>Run ▸</button>
+        </div>
+        <div class="editor">
+          <div class="gutter" id="gutter">1</div>
+          <div class="code" id="codewrap">
+            <pre id="hl" aria-hidden="true"></pre>
+            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+A = np.array([[1., 2.],
+              [2., 1.]])
+U, s, Vt = np.linalg.svd(A)     # s = singular values, Vt = V transposed
+
+piece1 = s[0] * np.outer(U[:, 0], Vt[0])
+total = piece1                  # your turn: + s[1] * np.outer(U[:, 1], Vt[1])
+print(&quot;singular values:&quot;, s)
+table((&quot;A&quot;, A), (&quot;piece 1&quot;, piece1), (&quot;sum of pieces&quot;, total))</textarea>
+          </div>
+        </div>
+        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+      </div>
+      <figure class="figure">
+        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+      </figure>
+    </div>
+  </section>
+</main>
+<script type="application/json" id="la-config">{"slug": "svd-rank-one-pieces", "lesson": "lesson-8", "assets": "../../assets/", "preview": {"kind": "table", "items": [{"label": "A", "M": [[1, 2], [2, 1]], "piv": []}]}, "check": "isTab(V) && item(V, 'A') && item(V, 'sum of pieces') && close(item(V, 'sum of pieces'), item(V, 'A'), 1e-6)"}</script>
+</body></html>

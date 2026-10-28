@@ -15,6 +15,7 @@ The course follows the order and notation of Gilbert Strang, *Introduction to Li
 | 5 | Orthogonality and least squares | §4.1 to §4.4 | `orthogonality-and-least-squares/` |
 | 6 | Determinants | §5.1 to §5.3 | `determinants/` |
 | 7 | Eigenvalues and eigenvectors | §6.1, §6.2, §6.4, §6.5 | `eigenvalues-and-eigenvectors/` |
+| 8 | The SVD and PCA | §7.1 to §7.4 | `svd-and-pca/` |
 
 ## Run locally
 
@@ -36,6 +37,9 @@ Python runs in the browser with [Brython](https://brython.info) and a small NumP
 - `four(A)`: the four subspaces of a 2x2 matrix, input plane and output plane
 - `vectors(("a", a), ("b", b), ...)`: vectors from the origin, with the dot product and angle of the first two
 - `proj(a, b, p=None)`: projection of b onto the line through a; pass your own p to check it
+- `svdpic(A, theta)`: unit circle, its image ellipse, v at angle theta and Av (theta slider)
+- `imgpic(("label", M), ...)`: matrices as grey pictures, with the error of each against the first
+- `pcapic(P, theta)`: data points (rows of P) and a line through their mean at angle theta, with perpendicular distances
 - `eigpic(A, v)`: v and Av; the line through v turns green when v is an eigenvector; v has sliders
 - `fit(t, b, C, D)`: data points and the line C + Dt, with the errors and the best line; C and D have sliders
 - `np.linalg.lstsq(A, b)` and `np.linalg.qr(A)` are in the NumPy subset

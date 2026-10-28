@@ -1,0 +1,71 @@
+---
+slug: pseudoinverse-and-condition-number
+seo_title: Pseudoinverse and Condition Number from the SVD
+description: The pseudoinverse A⁺ = VΣ⁺Uᵀ gives the best least-squares answer for any matrix, and σ₁/σₙ measures sensitivity. Python examples. Strang §7.4.
+kicker: Strang §7.4 · The pseudoinverse
+title: The pseudoinverse: the best undo for any matrix.
+task: Solve Ax = b for this singular A with the pseudoinverse.
+preview: {"kind":"table","items":[{"label":"A","M":[[1,1],[1,1]],"piv":[]},{"label":"b","M":[[2],[4]],"piv":[]}]}
+check: isTab(V) && itemVec(V, 'x') && close(itemVec(V, 'x'), [1.5, 1.5], 1e-6)
+---
+<!-- lead -->
+A singular or rectangular matrix has no inverse. The SVD still gives the next best thing: undo each stretch that can be undone, and ignore the directions that were squashed to zero. That is the pseudoinverse A⁺. It also shows how sensitive a problem is: the ratio σ₁/σₙ, the condition number.
+<!-- key -->
+A⁺ = VΣ⁺Uᵀ (Σ⁺: 1/σ for each nonzero σ) &nbsp;&nbsp; x⁺ = A⁺b &nbsp;&nbsp; condition number = σ₁ / σₙ
+<!-- ideas -->
+<ol class="ideas"><li>Σ⁺ replaces each nonzero σ by 1/σ and keeps the zeros as zeros.</li><li>A⁺ = VΣ⁺Uᵀ. If A is invertible, A⁺ = A⁻¹.</li><li>x⁺ = A⁺b is the least squares solution (lesson 5) with the smallest length.</li><li>The <b>condition number</b> σ₁/σₙ says how much errors in b can be amplified in x.</li></ol>
+<!-- prose -->
+<h3>The best possible undo</h3>
+<p>A squashed piece of dough cannot be unsquashed: the information about its thickness is gone. But everything that was only stretched can be stretched back. The pseudoinverse does exactly that: undo the turns, divide by every nonzero σ, and leave the squashed directions at zero.</p>
+<h3>The formula</h3>
+<div class="worked"><div class="row">A = UΣVᵀ, &nbsp; so undo in reverse order: &nbsp; A⁺ = VΣ⁺Uᵀ</div><div class="row">Σ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>σ₁</span><span>0</span><span>0</span><span>0</span></span> &nbsp;→&nbsp; Σ⁺ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1/σ₁</span><span>0</span><span>0</span><span>0</span></span></div></div>
+<p>When all σ's are nonzero (A square and invertible), Σ⁺ = Σ⁻¹ and A⁺ is just A⁻¹.</p>
+<h3>A worked example</h3>
+<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>1</span></span>, b = (2, 4): &nbsp; x + y = 2 and x + y = 4 contradict each other</div><div class="row">σ₁ = 2 with u₁ = v₁ = (1, 1)/√2, &nbsp; σ₂ = 0</div><div class="row">A⁺ = v₁(1/2)u₁ᵀ = ¼<span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>1</span></span></div><div class="row">x⁺ = A⁺b = ¼(6, 6) = (1.5, 1.5)</div></div>
+<p>The best compromise makes x + y = 3, halfway between 2 and 4: that is least squares. Among all x with x + y = 3, (1.5, 1.5) is the shortest. The pseudoinverse always picks this shortest best answer.</p>
+<h3>The condition number</h3>
+<p>If σ₁ is large and σₙ is tiny, A nearly squashes a direction. Solving Ax = b then divides by that tiny σₙ, and any small error in b is blown up. The ratio σ₁/σₙ is the <b>condition number</b>.</p>
+<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>1.001</span></span>: σ₁ ≈ 2, σ₂ ≈ 0.0005, condition number ≈ 4000</div><div class="row">An error of 0.001 in b can move x by about 4000 times as much (relative)</div></div>
+<h3>Where this is used</h3>
+<p>Robot arms near a singular pose use the pseudoinverse (often a damped version) to turn a desired hand motion into joint speeds without asking for infinite speed. Every numerical solver reports the condition number as a warning light: a large one means "do not trust the last digits".</p>
+<!-- examples -->
+<section class="example"><h3>Example 1 · An invertible matrix</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>0</span><span>0</span><span>4</span></span>: A⁺ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>½</span><span>0</span><span>0</span><span>¼</span></span> = A⁻¹. Condition number 4/2 = 2: very safe.</p>
+</section>
+<section class="example"><h3>Example 2 · A tall matrix</h3>
+<p>A = (1, 1) as a column (2 by 1), b = (3, 5).</p>
+<div class="worked"><div class="row">σ₁ = √2, u₁ = (1, 1)/√2, v₁ = 1</div><div class="row">A⁺ = (1/√2)·(1/√2)(1, 1) = (½, ½) as a row</div><div class="row">x⁺ = (3 + 5)/2 = 4: the average, as in lesson 5</div></div>
+</section>
+<section class="example"><h3>Example 3 · A zero matrix</h3>
+<p>A = 0: every σ is 0, so A⁺ = 0 and x⁺ = 0, the shortest of all (equally bad) answers.</p>
+</section>
+<!-- problems -->
+<div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Find A⁺ for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>0</span><span>0</span><span>0</span></span>.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>σ₁ = 3, σ₂ = 0. A⁺ = [⅓ 0; 0 0].</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>The singular values of A are 100 and 0.01. What is its condition number, and what does it mean?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>100 / 0.01 = 10,000. Relative errors in b can grow up to 10,000 times in x: about four digits of accuracy are lost.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>Show that AA⁺A = A.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>AA⁺A = UΣVᵀ VΣ⁺Uᵀ UΣVᵀ = UΣΣ⁺ΣVᵀ. ΣΣ⁺Σ = Σ (each nonzero σ gives σ · 1/σ · σ = σ, zeros stay 0). So AA⁺A = UΣVᵀ = A.</p>
+</div></details>
+</div></div>
+<!-- code -->
+import numpy as np
+
+A = np.array([[1., 1.],
+              [1., 1.]])        # singular: no inverse
+b = np.array([2., 4.])          # x + y = 2 and x + y = 4 disagree
+
+x = np.zeros(2)                 # your turn: x = np.linalg.pinv(A) @ b
+print("x =", x, "  Ax =", A @ x)
+print("condition number of a nearly singular matrix:", np.linalg.cond(np.array([[1., 1.], [1., 1.001]])))
+table(("A", A), ("b", b), ("x", x))

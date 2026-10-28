@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SVD Explained Visually: Every Matrix Is Turn, Stretch, Turn</title>
+<meta name="description" content="The SVD says every matrix turns, stretches along perpendicular axes, then turns again: A = UΣVᵀ. The unit circle becomes an ellipse. Strang §7.4.">
+<link rel="canonical" href="https://linearalgebra.steppeschool.com/svd-and-pca/svd-geometry/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Linear Algebra, Live">
+<meta property="og:title" content="SVD Explained Visually: Every Matrix Is Turn, Stretch, Turn">
+<meta property="og:description" content="The SVD says every matrix turns, stretches along perpendicular axes, then turns again: A = UΣVᵀ. The unit circle becomes an ellipse. Strang §7.4.">
+<meta property="og:url" content="https://linearalgebra.steppeschool.com/svd-and-pca/svd-geometry/">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/lesson.css">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "SVD Explained Visually: Every Matrix Is Turn, Stretch, Turn", "headline": "Every matrix: turn, stretch, turn.", "description": "The SVD says every matrix turns, stretches along perpendicular axes, then turns again: A = UΣVᵀ. The unit circle becomes an ellipse. Strang §7.4.", "url": "https://linearalgebra.steppeschool.com/svd-and-pca/svd-geometry/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": true, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 8: The SVD and PCA", "item": "https://linearalgebra.steppeschool.com/svd-and-pca/"}, {"@type": "ListItem", "position": 3, "name": "SVD Explained Visually: Every Matrix Is Turn, Stretch, Turn", "item": "https://linearalgebra.steppeschool.com/svd-and-pca/svd-geometry/"}]}]</script>
+</head>
+<body>
+<header class="top">
+  <div class="topnav"><a class="brand" href="../../">Linear Algebra, Live</a><nav class="crumbnav" aria-label="Chapters and lessons"><details class="menu"><summary>Chapter 7<span class="hide-sm"> · The singular value decomposition</span></summary><div class="menu-list chapters"><div class="menu-sub">Chapters</div><div class="ch"><div class="ch-head"><span class="ch-num">1</span><span class="ch-title">Introduction to vectors</span></div><div class="ch-lessons"><a class="ls" href="../../vectors-and-matrices/"><span class="ls-num">Lesson 1</span><span class="ls-title">Columns first</span></a></div></div><div class="ch"><div class="ch-head"><span class="ch-num">2</span><span class="ch-title">Solving linear equations</span></div><div class="ch-lessons"><a class="ls" href="../../gaussian-elimination-and-lu/"><span class="ls-num">Lesson 2</span><span class="ls-title">Elimination and A = LU</span></a><a class="ls" href="../../inverse-transpose-permutation/"><span class="ls-num">Lesson 3</span><span class="ls-title">Inverses, transposes and permutations</span></a></div></div><div class="ch"><div class="ch-head"><span class="ch-num">3</span><span class="ch-title">Vector spaces and subspaces</span></div><div class="ch-lessons"><a class="ls" href="../../vector-spaces-and-four-subspaces/"><span class="ls-num">Lesson 4</span><span class="ls-title">The four subspaces</span></a></div></div><div class="ch"><div class="ch-head"><span class="ch-num">4</span><span class="ch-title">Orthogonality</span></div><div class="ch-lessons"><a class="ls" href="../../orthogonality-and-least-squares/"><span class="ls-num">Lesson 5</span><span class="ls-title">Orthogonality and least squares</span></a></div></div><div class="ch"><div class="ch-head"><span class="ch-num">5</span><span class="ch-title">Determinants</span></div><div class="ch-lessons"><a class="ls" href="../../determinants/"><span class="ls-num">Lesson 6</span><span class="ls-title">Determinants</span></a></div></div><div class="ch"><div class="ch-head"><span class="ch-num">6</span><span class="ch-title">Eigenvalues and eigenvectors</span></div><div class="ch-lessons"><a class="ls" href="../../eigenvalues-and-eigenvectors/"><span class="ls-num">Lesson 7</span><span class="ls-title">Eigenvalues and eigenvectors</span></a></div></div><div class="ch on"><div class="ch-head"><span class="ch-num">7</span><span class="ch-title">The singular value decomposition</span></div><div class="ch-lessons"><a class="ls on" href="../../svd-and-pca/"><span class="ls-num">Lesson 8</span><span class="ls-title">The SVD and PCA</span></a></div></div></div></details><span class="sep">›</span><details class="menu"><summary>Lesson 8<span class="hide-sm"> · The SVD and PCA</span></summary><div class="menu-list"><div class="menu-sub">Chapter 7 lessons</div><div class="ch-lessons flat"><a class="ls on" href="../../svd-and-pca/"><span class="ls-num">Lesson 8</span><span class="ls-title">The SVD and PCA</span></a></div><div class="menu-sub">In lesson 8</div><div class="ch-lessons flat slides"><a class="ls on" href="../../svd-and-pca/svd-geometry/"><span class="ls-num">1</span><span class="ls-title">SVD Explained Visually: Every Matrix Is Turn, Stretch, Turn</span></a><a class="ls" href="../../svd-and-pca/singular-values/"><span class="ls-num">2</span><span class="ls-title">How to Find Singular Values: Eigenvalues of AᵀA</span></a><a class="ls" href="../../svd-and-pca/svd-rank-one-pieces/"><span class="ls-num">3</span><span class="ls-title">SVD as a Sum of Rank-One Matrices: A = σ₁u₁v₁ᵀ + σ₂u₂v₂ᵀ</span></a><a class="ls" href="../../svd-and-pca/image-compression/"><span class="ls-num">4</span><span class="ls-title">Image Compression with the SVD (Low-Rank Approximation)</span></a><a class="ls" href="../../svd-and-pca/principal-component-analysis/"><span class="ls-num">5</span><span class="ls-title">Principal Component Analysis (PCA) with the SVD, Visually</span></a><a class="ls" href="../../svd-and-pca/pseudoinverse-and-condition-number/"><span class="ls-num">6</span><span class="ls-title">Pseudoinverse and Condition Number from the SVD</span></a><a class="ls" href="../../svd-and-pca/recap/"><span class="ls-num">7</span><span class="ls-title">Lesson 8 Recap: The SVD and PCA</span></a><a class="ls" href="../../svd-and-pca/practice/"><span class="ls-num">✎</span><span class="ls-title">Examples and problems</span></a></div></div></details></nav></div>
+  <nav class="steps" aria-label="Steps in this lesson"><a class="step on" href="../svd-geometry/" data-slug="svd-geometry" aria-current="page" title="SVD Explained Visually: Every Matrix Is Turn, Stretch, Turn">1</a><a class="step" href="../singular-values/" data-slug="singular-values" title="How to Find Singular Values: Eigenvalues of AᵀA">2</a><a class="step" href="../svd-rank-one-pieces/" data-slug="svd-rank-one-pieces" title="SVD as a Sum of Rank-One Matrices: A = σ₁u₁v₁ᵀ + σ₂u₂v₂ᵀ">3</a><a class="step" href="../image-compression/" data-slug="image-compression" title="Image Compression with the SVD (Low-Rank Approximation)">4</a><a class="step" href="../principal-component-analysis/" data-slug="principal-component-analysis" title="Principal Component Analysis (PCA) with the SVD, Visually">5</a><a class="step" href="../pseudoinverse-and-condition-number/" data-slug="pseudoinverse-and-condition-number" title="Pseudoinverse and Condition Number from the SVD">6</a><a class="step" href="../recap/" data-slug="recap" title="Lesson 8 Recap: The SVD and PCA">7</a><a class="step practice" href="../practice/" title="Examples and problems">✎ Practice</a></nav>
+</header>
+
+
+<main class="lesson">
+  <article class="page">
+    <div class="slide-head"><div>
+    <div class="kicker">Strang §7.4 · The geometry of the SVD</div>
+    <h1>Every matrix: turn, stretch, turn.</h1>
+    <p class="lead">Eigenvectors needed a square matrix and did not always exist. The singular value decomposition (SVD) works for every matrix. It says that any matrix is a turn, then a stretch along perpendicular axes, then another turn. The circle of unit vectors always becomes an ellipse.</p>
+    </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-8--svd-geometry.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 8 · slide 1</small>Turn, stretch, turn</span></span></div>
+    <div class="key">A = U Σ Vᵀ &nbsp;&nbsp; U, V orthogonal (turns) &nbsp;&nbsp; Σ diagonal, σ₁ ≥ σ₂ ≥ … ≥ 0 (stretches)</div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Every matrix A can be written A = UΣVᵀ.</li><li>Vᵀ turns (or mirrors) the input; Σ stretches along the axes; U turns (or mirrors) the result.</li><li>The stretch factors σ₁ ≥ σ₂ ≥ … ≥ 0 are the <b>singular values</b>.</li><li>A maps the unit circle to an ellipse whose half-axes have lengths σ₁ and σ₂. σ₁ is the most A ever stretches a unit vector.</li></ol></div>
+    <div class="prose">
+<h3>Kneading dough</h3>
+<p>A baker turns a round piece of dough to a good angle, rolls it out in one direction and presses it in the other, then turns it again to fit the tray. Any 2 by 2 matrix does exactly this to the plane: turn, stretch along two perpendicular directions, turn. A round shape always comes out as an ellipse.</p>
+<h3>The circle becomes an ellipse</h3>
+<p>Take all unit vectors v, the unit circle. Multiply each by A. The results Av trace an ellipse. Its longest half-axis has length σ₁ and its shortest σ₂. These are the <b>singular values</b>. The unit vector v₁ that lands on the long axis is stretched the most: |Av₁| = σ₁.</p>
+<h3>A worked example</h3>
+<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>−2</span><span>1</span><span>1</span></span></div><div class="row">v₁ = (1, −1)/√2: &nbsp; Av₁ = (2 + 2, 1 − 1)/√2 = (4, 0)/√2 = (2√2, 0). &nbsp; Stretched by σ₁ = 2√2 ≈ 2.83</div><div class="row">v₂ = (1, 1)/√2: &nbsp; Av₂ = (0, 2)/√2 = (0, √2). &nbsp; Stretched by σ₂ = √2 ≈ 1.41</div><div class="row">v₁ ⟂ v₂ and Av₁ ⟂ Av₂: two perpendicular directions go to two perpendicular directions</div></div>
+<p>So this A turns the plane by 45° (taking (1, −1) to the x-axis), then stretches x by 2√2 and y by √2. Every other unit vector is stretched by something between √2 and 2√2.</p>
+<h3>The three factors</h3>
+<p>Write the input directions v₁, v₂ as the columns of V and the output directions u₁ = Av₁/σ₁, u₂ = Av₂/σ₂ as the columns of U. Both are orthogonal matrices (lesson 5): pure turns or mirrors. Then AV = UΣ, and since V⁻¹ = Vᵀ:</p>
+<div class="worked"><div class="row">A = UΣVᵀ, &nbsp; Σ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>σ₁</span><span>0</span><span>0</span><span>σ₂</span></span></div></div>
+<p>Read it right to left, like any product: Vᵀ turns, Σ stretches, U turns.</p>
+<h3>Where this is used</h3>
+<p>For a robot arm, the matrix from joint speeds to hand speed maps a circle of joint speeds to an ellipse of hand speeds: the "manipulability ellipse". Its long axis is where the hand moves easily; a tiny σ₂ warns that the arm can hardly move in some direction.</p>
+    </div>
+    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · A pure stretch</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>0</span><span>0</span><span>1</span></span>.</p>
+<div class="worked"><div class="row">The circle becomes an ellipse with half-axes 3 (along x) and 1 (along y)</div><div class="row">σ₁ = 3, σ₂ = 1. U = V = I: no turning needed</div></div>
+</section>
+<section class="example"><h3>Example 2 · A rotation</h3>
+<p>A rotation turns the circle into itself.</p>
+<div class="worked"><div class="row">Every unit vector keeps length 1</div><div class="row">σ₁ = σ₂ = 1. The ellipse is the circle</div></div>
+</section>
+<section class="example"><h3>Example 3 · A flat image</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>1</span></span>.</p>
+<div class="worked"><div class="row">v₁ = (1, 1)/√2: Av₁ = (2, 2)/√2, length 2. &nbsp; v₂ = (1, −1)/√2: Av₂ = 0</div><div class="row">σ₁ = 2, σ₂ = 0: the ellipse is squashed into a line segment</div></div>
+<p>A zero singular value means A squashes a direction: rank 1.</p>
+</section></div>
+    <details class="more"><summary><span class="pl-icon">✎</span><span class="rv-text"><b>More examples to try</b><span>3 problems with step-by-step solutions. Try each one before you open its solution.</span></span><span class="rv-toggle"><span class="s-show">Show</span><span class="s-hide">Hide</span></span></summary><div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>What are the singular values of <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>5</span><span>2</span><span>0</span></span>?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>A(1, 0) = (0, 2) and A(0, 1) = (5, 0): the two axes are stretched by 2 and 5 and stay perpendicular. σ₁ = 5, σ₂ = 2.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>Why are singular values never negative, even though eigenvalues can be?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>A singular value is a length, |Avᵢ|. Any flip is put into U or V (a mirror), so Σ only holds sizes.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>A is 2 by 2 with σ₁ = 4 and σ₂ = 1. What area does A give the unit square, and what is |det A|?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>|det A| = σ₁σ₂ = 4: U and V are turns or mirrors (area 1), and Σ multiplies area by 4 · 1.</p>
+</div></details>
+</div></div></div></details>
+  </article>
+  <details class="review">
+    <summary><span class="pl-icon">✎</span><span class="rv-text"><b>Lesson review</b><span>3 worked examples and 5 mixed problems with solutions</span></span><span class="rv-toggle"><span class="s-show">Open</span><span class="s-hide">Close</span></span></summary>
+    <div class="review-body">
+      <h2 class="practice-h">Worked examples</h2>
+      <div class="examples"><section class="example"><h3>Example 1 · SVD of a tall matrix</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>1</span><span>1</span><span>0</span><span>1</span></span> (3 by 2).</p>
+<div class="worked"><div class="row">AᵀA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>2</span></span>: λ = 3 with (1, 1)/√2, &nbsp; λ = 1 with (1, −1)/√2</div><div class="row">σ₁ = √3, σ₂ = 1</div><div class="row">u₁ = Av₁/σ₁ = (1, 2, 1)/√6, &nbsp; u₂ = Av₂/σ₂ = (1, 0, −1)/√2 (perpendicular ✓)</div></div>
+</section>
+<section class="example"><h3>Example 2 · A rank-one matrix</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>4</span><span>3</span><span>6</span></span> = (1, 2, 3) times the row (1, 2).</p>
+<div class="worked"><div class="row">One piece: σ₁ = |(1, 2, 3)| · |(1, 2)| = √14 · √5 = √70 ≈ 8.37, &nbsp; σ₂ = 0</div><div class="row">u₁ = (1, 2, 3)/√14, &nbsp; v₁ = (1, 2)/√5</div></div>
+</section>
+<section class="example"><h3>Example 3 · Pseudoinverse of a tall matrix</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>0</span><span>0</span><span>1</span></span>, b = (1, 2, 3).</p>
+<div class="worked"><div class="row">A⁺ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>0</span><span>0</span><span>1</span></span>, &nbsp; x⁺ = (1, 3)</div><div class="row">The middle equation 0 = 2 cannot be met; x⁺ satisfies the other two exactly</div></div>
+</section></div>
+      <h2 class="practice-h">Problems</h2>
+      <div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Find the singular values of <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>2</span></span>.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>It is symmetric with eigenvalues 3 and 1, both positive, so σ₁ = 3 and σ₂ = 1.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>Find the singular values of <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>4</span><span>0</span><span>3</span><span>-5</span></span>.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>AᵀA = [25 −15; −15 25]: trace 50, det 625 − 225 = 400. λ² − 50λ + 400 = (λ − 40)(λ − 10). σ₁ = √40 ≈ 6.32, σ₂ = √10 ≈ 3.16. Check: σ₁σ₂ = 20 = |det A| ✓</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>Write <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>3</span><span>1</span><span>1</span></span> as one piece σuvᵀ with unit vectors.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>It is (3, 1) times the row (1, 1). σ = |(3, 1)| · |(1, 1)| = √10 · √2 = √20, u = (3, 1)/√10, v = (1, 1)/√2.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">4</span><div class="pbody">
+<p>A 200 by 300 image has singular values that drop below 1% of σ₁ after the first 30. How many numbers does the rank-30 copy store?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>30 · (200 + 300 + 1) = 15,030, compared with 60,000 for the full image: a quarter.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">5</span><div class="pbody">
+<p>Centered data has singular values 6, 2, 1. What share of the spread do the first two principal components explain?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Squares 36, 4, 1, total 41. (36 + 4)/41 ≈ 97.6%.</p>
+</div></details>
+</div></div></div>
+    </div>
+  </details>
+
+  <section class="labsec" aria-label="Lab">
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Turn v (drag θ or change theta) until A stretches it the most. That longest stretch is σ₁.</span>
+      <span class="hint" id="hint">Edit the code and press Run.</span>
+    </div>
+    <div class="lab">
+      <div class="editor-card">
+        <div class="bar">
+          <span class="file">slide_1.py</span>
+          <span class="status" id="pystatus">Loading Python…</span>
+          <button class="btn" id="reset">Reset</button>
+          <button class="btn primary" id="run" disabled>Run ▸</button>
+        </div>
+        <div class="editor">
+          <div class="gutter" id="gutter">1</div>
+          <div class="code" id="codewrap">
+            <pre id="hl" aria-hidden="true"></pre>
+            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+A = np.array([[2., -2.],
+              [1., 1.]])
+theta = 0.                      # angle of the unit vector v, in degrees
+                                # your turn: find the angle where |Av| is largest
+                                # (or drag the slider under the picture)
+v = np.array([np.cos(np.radians(theta)), np.sin(np.radians(theta))])
+print(&quot;|Av| =&quot;, np.linalg.norm(A @ v))
+svdpic(A, theta)</textarea>
+          </div>
+        </div>
+        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+      </div>
+      <figure class="figure">
+        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <div class="after">
+    <div class="nav">
+      <a class="btn" id="prev" href="../">← Overview</a>
+      <span class="count">1 / 7</span>
+      <a class="btn primary" id="next" href="../singular-values/">Next →</a>
+    </div>
+  </div>
+</main>
+<footer class="foot">
+  Follows the order and notation of Gilbert Strang, <i>Introduction to Linear Algebra</i>, 5th edition (2016); § numbers refer to that book.
+  Explanations, examples and code are original. Made by <a href="https://www.steppeschool.com">Steppeschool</a>.
+</footer>
+
+<script>window.SLIDE = {"slug": "svd-geometry", "lesson": "lesson-8", "assets": "../../assets/", "preview": {"kind": "svd", "A": [[2, -2], [1, 1]], "th": 0}, "check": "isS(V) && eqM(V.A, [[2,-2],[1,1]]) && Math.abs(stretchAt(V) - svd2(V.A)[0]) < 1e-3"};</script>
+<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
+<script src="../../assets/lab.js" defer></script>
+<script src="../../assets/nav.js" defer></script>
+</body>
+</html>
