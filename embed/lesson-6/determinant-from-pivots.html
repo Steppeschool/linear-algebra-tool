@@ -7,7 +7,7 @@
     <p class="lead">Elimination does not change the determinant, and a triangular matrix has an easy determinant: the product of its diagonal. So det A is the product of the pivots, with a minus sign for each row exchange. This is how computers find determinants.</p>
     </div><span class="thumb slide-art"><img src="https://linearalgebra.steppeschool.com/assets/cards/lesson-6--determinant-from-pivots.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 6 · slide 3</small>Det from pivots</span></span></div>
     <div class="key">det A = ± (pivot₁ × pivot₂ × ... × pivotₙ) &nbsp;&nbsp; det AB = det A · det B &nbsp;&nbsp; det Aᵀ = det A</div>
-    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Elimination steps (subtract a multiple of a row) keep det the same.</li><li>Each row exchange flips the sign.</li><li>For a triangular matrix, det = the product of the diagonal entries.</li><li>So det A = ± the product of the pivots. A zero pivot that no swap can fix means det A = 0.</li><li>Two more facts: det AB = det A · det B, and det Aᵀ = det A.</li></ol></div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Elimination steps (subtract a multiple of a row) keep det the same.</li><li>Each row exchange flips the sign.</li><li>For a triangular matrix, multiply down the diagonal.</li><li>So det A = ± the product of the pivots. A zero pivot that no swap can fix means det A = 0.</li><li>Two more facts: det AB = det A · det B, and det Aᵀ = det A.</li></ol></div>
     <div class="prose">
 <h3>Squaring up a box</h3>
 <p>To measure the volume of a slanted box, slide its layers until it stands upright. Sliding layers (shears) does not change the volume. An upright box is easy: multiply its three side lengths.</p>
@@ -21,7 +21,7 @@
 <p>Doing B and then A stretches volumes by det B and then by det A. So <b>det AB = det A · det B</b>. One consequence: A⁻¹A = I gives det A⁻¹ · det A = 1, so det A⁻¹ = 1 / det A.</p>
 <p>Also <b>det Aᵀ = det A</b>. So everything said about rows is also true for columns: swapping two columns flips the sign, and two equal columns give 0.</p>
 <h3>Where this is used</h3>
-<p>Ask NumPy for np.linalg.det(A) and it does exactly this: an LU factorization with row exchanges, then the product of the pivots with the right sign. For a 100 by 100 matrix that takes about a million multiplications. The formula on the next slide would need more operations than there are atoms in the universe.</p>
+<p>Ask NumPy for np.linalg.det(A) and it does exactly this: an LU factorization with row exchanges, then the product of the pivots with the right sign. For a 100 by 100 matrix that takes a few hundred thousand multiplications (about n³/3). The formula on the next slide would need more operations than there are atoms in the universe.</p>
     </div>
     <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · A row exchange</h3>
 <p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>2</span><span>3</span><span>1</span></span>: the first pivot position holds 0.</p>
