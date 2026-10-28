@@ -38,7 +38,7 @@
 <li><b>Can we solve Ax = b for this particular b?</b> Yes, if b is in C(A).</li>
 <li><b>Can we solve Ax = b for every b?</b> Only if C(A) is the whole plane.</li>
 </ul>
-<p>For 2 by 2 matrices there is a quick test. Write A = [[a, b], [c, d]]. The columns are independent exactly when ad − bc ≠ 0. When ad − bc = 0, the matrix squashes the plane onto a line, and no matrix can undo that squash. We will meet this number again as the determinant.</p>
+<p>For 2 by 2 matrices there is a quick test. Call the entries p, q (top row) and r, s (bottom row): A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>p</span><span>q</span><span>r</span><span>s</span></span>. Column 1 is (p, r) and column 2 is (q, s). The columns are independent exactly when ps − qr ≠ 0. When ps − qr = 0, the matrix squashes the plane onto a line, and no matrix can undo that squash. We will meet this number again as the determinant.</p>
     </div>
     <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · A line, and who is on it</h3>
 <p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>4</span><span>1</span><span>2</span></span>. Column 2 = 2·column 1, so C(A) is the line through (2, 1).</p><div class="worked"><div class="row">b = (6, 3) = 3·(2, 1): in C(A), for example x = (3, 0)</div><div class="row">b = (1, 1): not a multiple of (2, 1), so Ax = b has no solution</div></div>
@@ -62,7 +62,7 @@
 </div></details>
 </div></div>
 <div class="problem"><span class="pnum">3</span><div class="pbody">
-<p>What is C(A) when A is the zero matrix? When A is the identity?</p>
+<p>What is C(A) when A is the zero matrix? When A is the identity matrix I = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>1</span></span>, the matrix that leaves every vector where it is?</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
 <p>Zero matrix: only the origin, rank 0. Identity: the whole plane, rank 2, since Ix = x reaches everything.</p>
 </div></details>
@@ -90,7 +90,7 @@
 <p>Find the matrix that sends (1, 0) to (1, 1) and (0, 1) to (−1, 1). What does it do to areas?</p>
 <p>The landing spots are the columns: A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>1</span><span>1</span></span>.</p>
 <div class="worked"><div class="row">det A = 1·1 − (−1)·1 = 2</div></div>
-<p>Both arrows have length √2 and are at 90° to each other, so A turns the plane by 45° and stretches it by √2. Areas double, which matches det A = 2.</p>
+<p>Both arrows have length √2 and are at 90° to each other. (1, 1) points at 45°, so (1, 0) has turned by 45°. (−1, 1) points at 135°, so (0, 1) has turned by 45° too. So A turns the plane by 45° and stretches it by √2. Areas double, which matches det A = 2.</p>
 </section></div>
       <h2 class="practice-h">Problems</h2>
       <div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
@@ -129,7 +129,7 @@
   <section class="labsec" aria-label="Lab">
     <div class="exercise" id="exercise">
       <span class="tag">Exercise</span>
-      <span class="task">Change column 2 into a multiple of column 1 and watch C(A) shrink to a line.</span>
+      <span class="task">Change column 2 (the second number in each row of the code) into a multiple of column 1 and watch C(A) shrink to a line.</span>
       <span class="hint" id="hint">Edit the code and press Run.</span>
     </div>
     <div class="lab">
@@ -146,6 +146,8 @@
             <pre id="hl" aria-hidden="true"></pre>
             <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
 
+# each inner list is a ROW; column 1 is (1, 2), column 2 is (1, -1)
+# so column 2 is the second number in each row
 A = np.array([[1,  1],
               [2, -1]])
 x = np.array([1, 1])

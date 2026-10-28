@@ -33,10 +33,10 @@
     <p class="lead">A system of two equations can be read in two ways. By rows, each equation is a line, and we look for the crossing point. By columns, we look for the combination of columns that produces b. Both pictures give the same answer.</p>
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-1--row-and-column-picture.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 1 · slide 4</small>Rows and columns</span></span></div>
     <div class="key"><span class="mx"><span class="c1">1</span><span class="c2">-2</span><span class="c1">3</span><span class="c2">2</span></span> <span class="vec "><span>x</span><span>y</span></span> = <span class="vec "><span>1</span><span>11</span></span></div>
-    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li><b>Row picture:</b> each equation is a line. The solution is where the lines meet.</li><li><b>Column picture:</b> the system says x·(column 1) + y·(column 2) = b. The solution gives the right weights.</li><li>Both pictures describe the same x. They fail together too: parallel lines go with dependent columns.</li><li>In higher dimensions the column picture stays easy to think about, so we lean on it.</li></ol></div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li><b>Row picture:</b> each equation is a line. The solution is where the lines meet.</li><li><b>Column picture:</b> the unknowns x and y are the two entries of the vector (x, y), and the system says x·(column 1) + y·(column 2) = b. The solution gives the right weights.</li><li>Both pictures find the same solution (x, y). They fail together too: parallel lines go with dependent columns.</li><li>In higher dimensions the column picture stays easy to think about, so we lean on it.</li></ol></div>
     <div class="prose">
 <h3>One system, two readings</h3>
-<p>Take Strang's first example: x − 2y = 1 and 3x + 2y = 11. In matrix form it is Ax = b with</p>
+<p>Take Strang's first example: x − 2y = 1 and 3x + 2y = 11. In matrix form, A times the unknown vector (x, y) equals b. The unknowns x and y are just the two entries of that vector:</p>
 <div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−2</span><span>3</span><span>2</span></span> &nbsp;&nbsp; b = (1, 11)</div></div>
 <h3>The row picture: two clues</h3>
 <p>Think of a navigator who takes two compass bearings. Each bearing says "the ship is somewhere on this line". The ship is at the point that lies on both lines.</p>
@@ -107,7 +107,7 @@
 <p>Find the matrix that sends (1, 0) to (1, 1) and (0, 1) to (−1, 1). What does it do to areas?</p>
 <p>The landing spots are the columns: A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>1</span><span>1</span></span>.</p>
 <div class="worked"><div class="row">det A = 1·1 − (−1)·1 = 2</div></div>
-<p>Both arrows have length √2 and are at 90° to each other, so A turns the plane by 45° and stretches it by √2. Areas double, which matches det A = 2.</p>
+<p>Both arrows have length √2 and are at 90° to each other. (1, 1) points at 45°, so (1, 0) has turned by 45°. (−1, 1) points at 135°, so (0, 1) has turned by 45° too. So A turns the plane by 45° and stretches it by √2. Areas double, which matches det A = 2.</p>
 </section></div>
       <h2 class="practice-h">Problems</h2>
       <div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
@@ -146,7 +146,7 @@
   <section class="labsec" aria-label="Lab">
     <div class="exercise" id="exercise">
       <span class="tag">Exercise</span>
-      <span class="task">Run the row picture, then switch to combo(A, x, b) for the column picture.</span>
+      <span class="task">Run the row picture, then delete the # at the start of the last line and run again to see the column picture.</span>
       <span class="hint" id="hint">Edit the code and press Run.</span>
     </div>
     <div class="lab">
@@ -163,11 +163,11 @@
             <pre id="hl" aria-hidden="true"></pre>
             <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
 
-A = np.array([[1, -2],
-              [3,  2]])
+A = np.array([[1, -2],    # each inner list is a ROW: x - 2y = 1
+              [3,  2]])   # 3x + 2y = 11
 b = np.array([1, 11])
 
-x = np.linalg.solve(A, b)
+x = np.linalg.solve(A, b)   # the vector (x, y): x[0] is x, x[1] is y
 print(&quot;solution x =&quot;, x)
 
 rowpic(A, b)          # row picture: two lines meet at x

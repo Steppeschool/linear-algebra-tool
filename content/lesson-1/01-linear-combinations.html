@@ -4,9 +4,9 @@ seo_title: Linear Combinations Explained Visually
 description: What cv + dw really means, with an everyday picture, a worked example and Python you can run in your browser. Follows Strang §1.1.
 kicker: Strang §1.1 · Linear combinations
 title: Linear algebra starts with cv + dw.
-task: Find c and d so that cv + dw lands exactly on the target (4, 5).
-preview: {"kind":"combo","A":[[2,-1],[1,1]],"x":[1,1],"b":[4,5]}
-check: isC(V) && near(Ax(V)[0], 4) && near(Ax(V)[1], 5)
+task: Find c and d so that cv + dw lands exactly on the new target (1, 5).
+preview: {"kind":"combo","A":[[2,-1],[1,1]],"x":[1,1],"b":[1,5]}
+check: isC(V) && near(Ax(V)[0], 1) && near(Ax(V)[1], 5)
 ---
 <!-- lead -->
 Everything in this course grows out of one operation. Take two vectors, multiply each one by a number, and add the results. The answer is called a linear combination.
@@ -31,6 +31,8 @@ c <span class="vec i"><span>2</span><span>1</span></span> + d <span class="vec j
 <p>Here is the question we keep asking for the rest of the course: <b>which vectors can we reach?</b></p>
 <p>For one vector, the multiples cv fill a line through the origin. That is where the word "linear" comes from. For two vectors that point in different directions, like v and w here, the combinations cv + dw fill the whole plane. Every point is reachable.</p>
 <p>Going the other way is harder. Given a target like (4, 5), how do we find c and d? We need 2c − d = 4 and c + d = 5, two equations at once. Solving that kind of system is what slide 4 and lesson 2 are about.</p>
+<h3>The lab</h3>
+<p>Below the text on every slide is <b>the lab</b>: a box of Python code you can edit and run, and a picture that the code draws. Here you change c and d, run, and watch where cv + dw lands.</p>
 <!-- examples -->
 <section class="example"><h3>Example 1 · Compute a combination</h3>
 <p>v = (1, 1), w = (1, −1), c = 2, d = 3. Find cv + dw.</p><div class="worked"><div class="row">2v = (2, 2) &nbsp;&nbsp; 3w = (3, −3)</div><div class="row">2v + 3w = (2 + 3, 2 − 3) = (5, −1)</div></div>
@@ -67,7 +69,8 @@ v = np.array([2, 1])
 w = np.array([-1, 1])
 
 c, d = 1, 1               # change these
-target = np.array([4, 5])
+target = np.array([1, 5])
 
 print("cv + dw =", c*v + d*w)
+# combo only draws the picture; you do not need to edit this line
 combo(np.column_stack([v, w]), [c, d], target)

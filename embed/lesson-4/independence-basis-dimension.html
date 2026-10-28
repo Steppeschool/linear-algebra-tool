@@ -19,7 +19,8 @@
 <li>N(A) contains only the zero vector.</li>
 <li>Every column has a pivot, so the rank is r = n.</li>
 </ul>
-<p>Four vectors in 3D are always dependent: there is no room for a fourth independent direction.</p>
+<p>We write ℝⁿ for all vectors with n components: ℝ² is the plane and ℝ³ is 3D space.</p>
+<p>Four vectors in ℝ³ are always dependent. Put them in the columns of a 3 by 4 matrix. Each pivot needs its own row, so there are at most 3 pivots for 4 columns. At least one column is free, and its special solution is a nonzero x with Ax = 0.</p>
 <h3>A worked example</h3>
 <div class="worked">
 <div>v₁ = (1, 0, 1), v₂ = (0, 1, 1), v₃ = (1, 1, 2).</div>
@@ -41,7 +42,7 @@
     <details class="more"><summary><span class="pl-icon">✎</span><span class="rv-text"><b>More examples to try</b><span>3 problems with step-by-step solutions. Try each one before you open its solution.</span></span><span class="rv-toggle"><span class="s-show">Show</span><span class="s-hide">Hide</span></span></summary><div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
 <p>Are (1, 1, 0), (0, 1, 1), (1, 0, 1) independent?</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>Yes. As columns of a matrix they give det = 2 ≠ 0, so rank 3.</p>
+<p>Yes. Put them in the columns of A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>1</span><span>1</span><span>1</span><span>0</span><span>0</span><span>1</span><span>1</span></span>. Row 2 − row 1 gives (0, 1, −1). Then row 3 − row 2 gives (0, 0, 2). Three pivots 1, 1, 2, so rank 3, no free variables, and only x = 0 solves Ax = 0.</p>
 </div></details>
 </div></div>
 <div class="problem"><span class="pnum">2</span><div class="pbody">
@@ -77,7 +78,7 @@
 <section class="example"><h3>Example 3 · The complete solution</h3>
 <p>Solve x + 2y + 3z = 6.</p>
 <div class="worked"><div class="row">Particular solution: set the free variables y = z = 0, then x = 6. x_p = (6, 0, 0)</div>
-<div class="row">Nullspace: the same matrix as Example 2's first row, special solutions (−2, 1, 0) and (−3, 0, 1)</div>
+<div class="row">Nullspace: A = [1 2 3], the first row of Example 2's matrix, with special solutions (−2, 1, 0) and (−3, 0, 1)</div>
 <div class="row">x = (6, 0, 0) + c·(−2, 1, 0) + d·(−3, 0, 1)</div></div>
 <p>Geometrically: a plane parallel to the nullspace, shifted to pass through (6, 0, 0).</p>
 </section></div>

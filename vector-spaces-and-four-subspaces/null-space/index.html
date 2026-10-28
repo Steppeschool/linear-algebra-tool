@@ -55,7 +55,7 @@
 <p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>1</span></span>.</p><div class="worked"><div class="row">Ax = 0 means x₁ + x₂ = 0</div><div class="row">N(A) = all multiples of (1, −1)</div></div>
 </section>
 <section class="example"><h3>Example 2 · An invertible matrix</h3>
-<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>4</span></span>, det = −2 ≠ 0.</p><div class="worked"><div class="row">Only x = 0 solves Ax = 0. N(A) = {0}</div></div>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>4</span></span>, det = −2 ≠ 0 (the area factor from lesson 1), so A is invertible.</p><div class="worked"><div class="row">Only x = 0 solves Ax = 0. N(A) = {0}</div></div>
 </section>
 <section class="example"><h3>Example 3 · A plane in 3D</h3>
 <p>A = [1 1 1], one row and three columns.</p><div class="worked"><div class="row">Ax = 0 means x + y + z = 0</div><div class="row">N(A) is a plane, spanned by (−1, 1, 0) and (−1, 0, 1)</div></div>
@@ -75,7 +75,7 @@
 <div class="problem"><span class="pnum">3</span><div class="pbody">
 <p>Find N(A) for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>1</span></span>.</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>det = 1 − 4 = −3 ≠ 0, so N(A) = {0}.</p>
+<p>det = 1 − 4 = −3 ≠ 0 (lesson 1), so A is invertible and N(A) = {0}.</p>
 </div></details>
 </div></div></div></details>
   </article>
@@ -99,7 +99,7 @@
 <section class="example"><h3>Example 3 · The complete solution</h3>
 <p>Solve x + 2y + 3z = 6.</p>
 <div class="worked"><div class="row">Particular solution: set the free variables y = z = 0, then x = 6. x_p = (6, 0, 0)</div>
-<div class="row">Nullspace: the same matrix as Example 2's first row, special solutions (−2, 1, 0) and (−3, 0, 1)</div>
+<div class="row">Nullspace: A = [1 2 3], the first row of Example 2's matrix, with special solutions (−2, 1, 0) and (−3, 0, 1)</div>
 <div class="row">x = (6, 0, 0) + c·(−2, 1, 0) + d·(−3, 0, 1)</div></div>
 <p>Geometrically: a plane parallel to the nullspace, shifted to pass through (6, 0, 0).</p>
 </section></div>

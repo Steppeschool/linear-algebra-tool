@@ -38,22 +38,24 @@
 <h3>From two equations to three</h3>
 <p>Nothing new is needed for bigger systems. We just repeat the step from slide 1, carefully, in a fixed order. Take</p>
 <div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>1</span><span>4</span><span>−6</span><span>0</span><span>−2</span><span>7</span><span>2</span></span> &nbsp;&nbsp; with right side b = (5, −2, 9)</div></div>
+<p>We carry b along with A. Each equation becomes one row, written like (2, 1, 1 | 5): the numbers before the bar | are the coefficients, and the number after it is the right-hand side. So (2, 1, 1 | 5) means 2x + y + z = 5. Every step acts on the whole row, bar included.</p>
+<p>We also name the multipliers. <b>ℓᵢⱼ</b> is the multiplier used to clear the entry in row i, column j. So ℓ₂₁ clears row 2, column 1.</p>
 <h3>Column 1</h3>
 <p>The first pivot is 2, in the top left corner. Below it we must clear the 4 and the −2:</p>
 <ul>
-<li>ℓ₂₁ = 4 ÷ 2 = 2. Subtract 2 times row 1 from row 2: (4, −6, 0) − 2·(2, 1, 1) = (0, −8, −2).</li>
-<li>ℓ₃₁ = −2 ÷ 2 = −1. Subtract −1 times row 1 from row 3, which means adding row 1: (−2, 7, 2) + (2, 1, 1) = (0, 8, 3).</li>
+<li>ℓ₂₁ = 4 ÷ 2 = 2. Subtract 2 times row 1 from row 2: (4, −6, 0 | −2) − 2·(2, 1, 1 | 5) = (0, −8, −2 | −12).</li>
+<li>ℓ₃₁ = −2 ÷ 2 = −1. Subtract −1 times row 1 from row 3, which means adding row 1: (−2, 7, 2 | 9) + (2, 1, 1 | 5) = (0, 8, 3 | 14).</li>
 </ul>
 <h3>Column 2</h3>
-<p>Now the second row starts with 0, −8. The second pivot is −8, and we use it to clear the 8 below it. The multiplier is ℓ₃₂ = 8 ÷ (−8) = −1, so we add row 2 to row 3: (0, 8, 3) + (0, −8, −2) = (0, 0, 1).</p>
+<p>Now the second row starts with 0, −8. The second pivot is −8, and we use it to clear the 8 below it. The multiplier is ℓ₃₂ = 8 ÷ (−8) = −1, so we add row 2 to row 3: (0, 8, 3 | 14) + (0, −8, −2 | −12) = (0, 0, 1 | 2).</p>
 <p>Notice that ℓ₃₂ uses −8, the pivot as it stands now, not the −6 that was in that position at the start. This is the most common mistake in hand calculations.</p>
 <h3>The triangle</h3>
-<div class="worked"><div class="row">U = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>1</span><span>0</span><span>−8</span><span>−2</span><span>0</span><span>0</span><span>1</span></span> &nbsp;&nbsp; pivots 2, −8, 1</div></div>
+<div class="worked"><div class="row">U = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>1</span><span>0</span><span>−8</span><span>−2</span><span>0</span><span>0</span><span>1</span></span> &nbsp;&nbsp; pivots 2, −8, 1 &nbsp;&nbsp; c = (5, −12, 2)</div></div>
+<p>The new right-hand side gets its own name, <b>c</b>: it is b after the same elimination steps. The triangular system is <b>Ux = c</b>, and it has the same solution as Ax = b.</p>
 <p>U is <b>upper triangular</b>: every entry below the diagonal is zero. A pivot must not be zero, because we divide by it to get the multipliers. Slide 3 is about what happens when one is.</p>
 <h3>Back substitution: a chain of keys</h3>
 <p>Picture three locked boxes. The key to box 2 is inside box 3, and the key to box 1 is inside box 2. You have to open box 3 first. A triangular system works the same way: the last equation has only one unknown, its value unlocks the equation above, and so on to the top.</p>
 <div class="worked">
-<div>Do the same subtractions to b: b₂ becomes −2 − 2·5 = −12, and b₃ becomes 9 + 5 = 14, then 14 + (−12) = 2.</div>
 <div class="row">Row 3: z = 2 &nbsp;→&nbsp; Row 2: −8y − 2·2 = −12, so y = 1 &nbsp;→&nbsp; Row 1: 2x + 1 + 2 = 5, so x = 1</div>
 </div>
 <p>Always apply each step to b as well as to A. Changing only the left side would give a different system.</p>
@@ -65,7 +67,7 @@
 <p>Solve Ux = c with U = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>3</span><span>0</span><span>1</span><span>2</span><span>0</span><span>0</span><span>4</span></span> and c = (9, 4, 8).</p><div class="worked"><div class="row">Row 3: 4z = 8, so z = 2</div><div class="row">Row 2: y + 2·2 = 4, so y = 0</div><div class="row">Row 1: 2x + 0 + 3·2 = 9, so x = 1.5</div></div>
 </section>
 <section class="example"><h3>Example 3 · The pivots give the determinant</h3>
-<p>For A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>1</span><span>4</span><span>−6</span><span>0</span><span>−2</span><span>7</span><span>2</span></span>, elimination gave the pivots 2, −8 and 1.</p><div class="worked"><div class="row">det A = 2 · (−8) · 1 = −16</div></div><p>Multiplying the pivots is how computers find determinants. Strang's chapter 5 (determinants) explains why it works (no row exchanges here).</p>
+<p>For A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>1</span><span>4</span><span>−6</span><span>0</span><span>−2</span><span>7</span><span>2</span></span>, elimination gave the pivots 2, −8 and 1.</p><div class="worked"><div class="row">det A = 2 · (−8) · 1 = −16</div></div><p>A side remark. Lesson 1 met the determinant of a 2 by 2 matrix as its area factor. For a square matrix of any size, when no rows are exchanged, the determinant is the product of the pivots. That is how computers find determinants. We take it on trust for now; Strang's chapter 5 explains why it works.</p>
 </section></div>
     <details class="more"><summary><span class="pl-icon">✎</span><span class="rv-text"><b>More examples to try</b><span>3 problems with step-by-step solutions. Try each one before you open its solution.</span></span><span class="rv-toggle"><span class="s-show">Show</span><span class="s-hide">Hide</span></span></summary><div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
 <p>Solve x + 2y + z = 4, 2x + 5y + z = 8, 3x + 7y + 4z = 14.</p>
@@ -125,9 +127,9 @@
 </div></details>
 </div></div>
 <div class="problem"><span class="pnum">3</span><div class="pbody">
-<p>For which number a does <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>a</span><span>2</span><span>8</span></span> have no second pivot? Can a row exchange fix it?</p>
+<p>For which number a does <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>a</span><span>2</span><span>8</span></span> have a zero second pivot? Can a row exchange fix it?</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>The second pivot is 8 − 2a. It is 0 when a = 4.</p><p>No row exchange helps: the only row below is already used. The matrix is singular (column 2 = 4·column 1).</p>
+<p>The second pivot is 8 − 2a. It is zero when a = 4.</p><p>No row exchange helps: there is no row below row 2 to swap in. The matrix is singular (column 2 = 4·column 1).</p>
 </div></details>
 </div></div>
 <div class="problem"><span class="pnum">4</span><div class="pbody">

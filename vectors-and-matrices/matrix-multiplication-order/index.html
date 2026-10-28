@@ -46,8 +46,9 @@
 <div class="worked">
 <div>R turns by 90°, and S is a shear:</div>
 <div class="row">R = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>−1</span><span>1</span><span>0</span></span> &nbsp; S = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>0</span><span>1</span></span></div>
+<div class="row">Column 1 of RS = R·(column 1 of S) = R(1, 0) = (0, 1). &nbsp; Column 2 = R(1, 1) = 1·(0, 1) + 1·(−1, 0) = (−1, 1)</div>
 <div class="row">RS = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>−1</span><span>1</span><span>1</span></span> &nbsp; SR = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>1</span><span>0</span></span></div>
-<div>RS shears first and then turns. SR turns first and then shears. Different matrices, different motions. Watch where the F ends up in the lab.</div>
+<div>RS shears first and then turns. SR turns first and then shears. Different matrices, different motions. Watch where the F ends up in the lab. The picture draws a capital letter F on the graph paper: an F looks different when it is turned, slanted or flipped, so it shows each motion at a glance.</div>
 </div>
 <h3>The rules</h3>
 <ul>
@@ -65,7 +66,7 @@
 <p>R = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>−1</span><span>1</span><span>0</span></span> turns by 90°.</p><div class="worked"><div class="row">RR = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−1</span><span>0</span><span>0</span><span>−1</span></span></div></div><p>Two quarter turns make a half turn. For rotations, multiplying adds the angles.</p>
 </section>
 <section class="example"><h3>Example 3 · A pair that commutes</h3>
-<p>Two stretches: A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>0</span><span>0</span><span>1</span></span>, B = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>3</span></span>.</p><div class="worked"><div class="row">AB = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>0</span><span>0</span><span>3</span></span> = BA</div></div><p>Stretching along x and stretching along y don't interfere, so the order doesn't matter here. Diagonal matrices always commute with each other.
+<p>Two stretches: A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>0</span><span>0</span><span>1</span></span>, B = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>3</span></span>.</p><div class="worked"><div class="row">AB = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>0</span><span>0</span><span>3</span></span> = BA</div></div><p>Stretching along x and stretching along y don't interfere, so the order doesn't matter here. A <b>diagonal matrix</b> has zeros everywhere except on the main diagonal (top left to bottom right). Diagonal matrices always commute with each other.
 </section></div>
     <details class="more"><summary><span class="pl-icon">✎</span><span class="rv-text"><b>More examples to try</b><span>3 problems with step-by-step solutions. Try each one before you open its solution.</span></span><span class="rv-toggle"><span class="s-show">Show</span><span class="s-hide">Hide</span></span></summary><div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
 <p>Compute AB and BA for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>0</span></span> and B = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>1</span><span>0</span></span>.</p>
@@ -108,7 +109,7 @@
 <p>Find the matrix that sends (1, 0) to (1, 1) and (0, 1) to (−1, 1). What does it do to areas?</p>
 <p>The landing spots are the columns: A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>1</span><span>1</span></span>.</p>
 <div class="worked"><div class="row">det A = 1·1 − (−1)·1 = 2</div></div>
-<p>Both arrows have length √2 and are at 90° to each other, so A turns the plane by 45° and stretches it by √2. Areas double, which matches det A = 2.</p>
+<p>Both arrows have length √2 and are at 90° to each other. (1, 1) points at 45°, so (1, 0) has turned by 45°. (−1, 1) points at 135°, so (0, 1) has turned by 45° too. So A turns the plane by 45° and stretches it by √2. Areas double, which matches det A = 2.</p>
 </section></div>
       <h2 class="practice-h">Problems</h2>
       <div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
@@ -147,7 +148,7 @@
   <section class="labsec" aria-label="Lab">
     <div class="exercise" id="exercise">
       <span class="tag">Exercise</span>
-      <span class="task">Run it, then show S @ R instead and compare the F.</span>
+      <span class="task">Run it and look at the long upright stroke of the F: it now leans up and to the left. Then change the last line to show(S @ R). Which way does that stroke point now?</span>
       <span class="hint" id="hint">Edit the code and press Run.</span>
     </div>
     <div class="lab">
@@ -164,11 +165,13 @@
             <pre id="hl" aria-hidden="true"></pre>
             <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
 
+# each inner list is a ROW
 R = np.array([[0, -1],    # rotate 90°
               [1,  0]])
 S = np.array([[1, 1],     # shear
               [0, 1]])
 
+# in Python, @ means matrix multiplication: R @ S is RS
 print(&quot;R @ S =\n&quot;, R @ S)
 print(&quot;S @ R =\n&quot;, S @ R)
 show(R @ S)</textarea>

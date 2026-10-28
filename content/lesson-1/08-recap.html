@@ -37,7 +37,7 @@ Ax = x₁·(column 1) + x₂·(column 2)
 <div class="problem"><span class="pnum">2</span><div class="pbody">
 <p>Build the matrix that turns the plane by 90° and doubles every length. What is its determinant?</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>2R = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>−2</span><span>2</span><span>0</span></span>. Lengths double, so areas grow 4 times: det = 0 − (−4) = 4.</p>
+<p>Start from R = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>−1</span><span>1</span><span>0</span></span>, the 90° turn. Take 2R (multiply every entry by 2): 2R = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>−2</span><span>2</span><span>0</span></span>. Lengths double, so areas grow 4 times: det = 0 − (−4) = 4.</p>
 </div></details>
 </div></div>
 <div class="problem"><span class="pnum">3</span><div class="pbody">
@@ -49,6 +49,7 @@ Ax = x₁·(column 1) + x₂·(column 2)
 <!-- code -->
 import numpy as np
 
+# each inner list is a ROW; column 1 is (0, 1), column 2 is (1, 0)
 A = np.array([[0, 1],
               [1, 0]])
 

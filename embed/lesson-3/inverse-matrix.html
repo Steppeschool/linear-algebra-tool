@@ -7,7 +7,7 @@
     <p class="lead">The inverse of A is the matrix that undoes A. Apply A, then A⁻¹, and every vector is back where it started. When it exists, it solves Ax = b in one step: x = A⁻¹b.</p>
     </div><span class="thumb slide-art"><img src="https://linearalgebra.steppeschool.com/assets/cards/lesson-3--inverse-matrix.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 3 · slide 1</small>The inverse</span></span></div>
     <div class="key">A⁻¹A = I &nbsp;&nbsp;&nbsp; Ax = b &nbsp;⇔&nbsp; x = A⁻¹b</div>
-    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>A⁻¹A = I and AA⁻¹ = I, where I is the identity matrix.</li><li>If A is invertible, Ax = b has exactly one solution, x = A⁻¹b.</li><li>A matrix that sends two different vectors to the same output cannot be undone.</li><li>Invertible ⇔ n nonzero pivots ⇔ independent columns ⇔ det A ≠ 0.</li></ol></div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>A⁻¹A = I and AA⁻¹ = I, where I is the identity matrix.</li><li>If A is invertible, Ax = b has exactly one solution, x = A⁻¹b.</li><li>A matrix that sends two different vectors to the same output cannot be undone.</li><li>An n by n matrix A is invertible ⇔ it has n nonzero pivots ⇔ its columns are independent ⇔ det A ≠ 0.</li></ol></div>
     <div class="prose">
 <h3>Think of rewinding a film</h3>
 <p>Lesson 1 showed a matrix as a motion of the plane: it stretches, turns or slants the graph paper. The inverse plays that motion backwards. After A and then A⁻¹, nothing has moved.</p>
@@ -22,13 +22,15 @@
 </div>
 <p>In the lab, follow the vector v = (1, 2): S moves it to (3, 2), and your S⁻¹ should bring it back.</p>
 <h3>When there is no inverse</h3>
-<p>Think of the boat from lesson 1 with both thrusters pointing forward, thruster 2 twice as strong as thruster 1. The throttle settings (2, 0) and (0, 1) push the boat in exactly the same way. If you only see the boat move, you cannot tell which setting was used.</p>
-<p>That is a matrix with no inverse: it sends two different inputs to the same output, so no matrix can reverse it. All of these say the same thing about a square matrix A:</p>
+<p>Think of the boat from lesson 1 with both thrusters pointing forward, thruster 2 twice as strong as thruster 1. The setting (2, 0) runs thruster 1 at 2. The setting (0, 1) runs thruster 2 at 1. Since thruster 2 is twice as strong, 2 × thruster 1 = 1 × thruster 2: both settings give the same forward push. In matrix form:</p>
+<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>0</span><span>0</span></span> &nbsp; A(2, 0) = (2, 0) &nbsp; A(0, 1) = (2, 0)</div></div>
+<p>If you only see the boat move, you cannot tell which setting was used.</p>
+<p>That is a matrix with no inverse: it sends two different inputs to the same output, so no matrix can reverse it. For a square matrix A with n rows and n columns (n by n), all of these say the same thing:</p>
 <ul>
 <li>A has n nonzero pivots (lesson 2).</li>
 <li>The columns of A are independent (lesson 1).</li>
 <li>det A ≠ 0: the plane is not squashed.</li>
-<li>Ax = 0 only for x = 0.</li>
+<li>Ax = 0 only for x = 0. Here is why this belongs: if some x ≠ 0 had Ax = 0, then x and 0 would give the same output, 0. Two inputs, one output, so A could not be undone.</li>
 </ul>
     </div>
     <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · Undo a stretch</h3>

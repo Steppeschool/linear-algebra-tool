@@ -7,7 +7,7 @@
     <p class="lead">Elimination is the method every computer uses to solve linear equations. We subtract a multiple of one equation from another so that one unknown disappears. What is left is easier, and we repeat until we can read off the answer.</p>
     </div><span class="thumb slide-art"><img src="https://linearalgebra.steppeschool.com/assets/cards/lesson-2--gaussian-elimination.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 2 · slide 1</small>Elimination</span></span></div>
     <div class="key">x − 2y = 1 &nbsp;&nbsp; 3x + 2y = 11 &nbsp;&nbsp;→&nbsp;&nbsp; 8y = 8</div>
-    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>The <b>pivot</b> is the number we use to clear the entries below it.</li><li>The <b>multiplier</b> is ℓ = (entry to remove) ÷ (pivot).</li><li>Subtracting ℓ times one equation from another keeps the same solution.</li><li>When one unknown is left in the last equation, we solve it and work back up: <b>back substitution</b>.</li></ol></div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>The <b>pivot</b> is the first coefficient of the equation we keep (here the 1 in 1x). We use it to remove x from the equations below.</li><li>The <b>multiplier</b> is ℓ = (entry to remove) ÷ (pivot).</li><li>Subtracting ℓ times one equation from another keeps the same solution.</li><li>When one unknown is left in the last equation, we solve it and work back up: <b>back substitution</b>.</li></ol></div>
     <div class="prose">
 <h3>A puzzle you already know how to solve</h3>
 <p>A coffee and a croissant cost €5. A coffee and two croissants cost €7. What does a croissant cost?</p>
@@ -99,9 +99,9 @@
 </div></details>
 </div></div>
 <div class="problem"><span class="pnum">3</span><div class="pbody">
-<p>For which number a does <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>a</span><span>2</span><span>8</span></span> have no second pivot? Can a row exchange fix it?</p>
+<p>For which number a does <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>a</span><span>2</span><span>8</span></span> have a zero second pivot? Can a row exchange fix it?</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>The second pivot is 8 − 2a. It is 0 when a = 4.</p><p>No row exchange helps: the only row below is already used. The matrix is singular (column 2 = 4·column 1).</p>
+<p>The second pivot is 8 − 2a. It is zero when a = 4.</p><p>No row exchange helps: there is no row below row 2 to swap in. The matrix is singular (column 2 = 4·column 1).</p>
 </div></details>
 </div></div>
 <div class="problem"><span class="pnum">4</span><div class="pbody">
@@ -144,8 +144,8 @@ A = np.array([[1., -2.],
 b = np.array([1., 11.])
 
 l = 0                       # multiplier = entry to remove / pivot
-U = A.copy()
-c = b.copy()
+U = A.copy()                # U and c hold the new system:
+c = b.copy()                # row i of U and c is equation i
 U[1] = U[1] - l * U[0]      # row 2 minus l times row 1
 c[1] = c[1] - l * c[0]
 

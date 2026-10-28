@@ -13,13 +13,17 @@
 <p>On Sunday you chop all the vegetables for the week. That takes time. Then every weekday dinner takes five minutes, because the slow part is already done.</p>
 <p>Factoring A = LU is the Sunday work. Each new right-hand side b is a weekday dinner: two quick triangular solves.</p>
 <div class="worked"><div class="row">Lc = b &nbsp;(forward substitution, top to bottom) &nbsp;&nbsp; then &nbsp;&nbsp; Ux = c &nbsp;(back substitution, bottom to top)</div></div>
+<p>Here c is the same c as on slide 2: b after the elimination steps. <b>Forward substitution</b> means solving Lc = b from the top row down, and doing so simply redoes those subtractions on b. Row 2 of L reads ℓ₂₁c₁ + c₂ = b₂, so c₂ = b₂ − ℓ₂₁c₁. With the slide 2 numbers that is c₂ = −2 − 2·5 = −12, the same subtraction we did to b there. Problem 2 below finishes c₃.</p>
 <h3>Where L comes from</h3>
 <p>Slide 4 wrote elimination as E₃₂E₃₁E₂₁A = U. To get A back, undo the steps in reverse order:</p>
 <div class="worked"><div class="row">A = E₂₁⁻¹ E₃₁⁻¹ E₃₂⁻¹ U = LU</div></div>
-<p>Each inverse is the identity with +ℓ where E had −ℓ. Multiplied together in this order, they do not interfere with each other, and each multiplier lands in its own position. So L needs no extra arithmetic: it is simply the record of every multiplier we used, like a receipt.</p>
+<p>Why the reverse order? Think of socks and shoes. You put on socks first and shoes second, but to undo it you take off the shoes first. The last step done is the first one undone. E₃₂ acted last, so its inverse E₃₂⁻¹ sits right next to U and acts on it first.</p>
+<p>Each inverse is the identity with +ℓ where E had −ℓ (slide 4). Multiplied in this order, the multipliers do not mix: each one lands in its own position. So L needs no extra arithmetic. It is simply the record of every multiplier we used, like a receipt. The example below checks this.</p>
 <h3>The example from slides 2 to 4</h3>
 <div class="worked">
-<div>The multipliers were ℓ₂₁ = 2, ℓ₃₁ = −1, ℓ₃₂ = −1.</div>
+<div>The multipliers were ℓ₂₁ = 2, ℓ₃₁ = −1, ℓ₃₂ = −1. Multiply the three inverses:</div>
+<div class="row">E₂₁⁻¹ E₃₁⁻¹ E₃₂⁻¹ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>2</span><span>1</span><span>0</span><span>0</span><span>0</span><span>1</span></span> <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>0</span><span>1</span><span>0</span><span>−1</span><span>0</span><span>1</span></span> <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>0</span><span>1</span><span>0</span><span>0</span><span>−1</span><span>1</span></span> = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>2</span><span>1</span><span>0</span><span>−1</span><span>−1</span><span>1</span></span></div>
+<div>Each multiplier sits in place: ℓ₂₁ in row 2, column 1, ℓ₃₁ in row 3, column 1, ℓ₃₂ in row 3, column 2. (The other order mixes them: E₃₂E₃₁E₂₁ has −1 in row 3, column 1, not −ℓ₃₁ = +1. That is why we record L rather than E.)</div>
 <div class="row">L = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>2</span><span>1</span><span>0</span><span>−1</span><span>−1</span><span>1</span></span> &nbsp; U = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>1</span><span>0</span><span>−8</span><span>−2</span><span>0</span><span>0</span><span>1</span></span></div>
 <div>Check row 3 of LU: −1·(2, 1, 1) − 1·(0, −8, −2) + 1·(0, 0, 1) = (−2, 7, 2), which is row 3 of A ✓</div>
 </div>
@@ -45,7 +49,7 @@
 <div class="problem"><span class="pnum">2</span><div class="pbody">
 <p>Solve Lc = b by forward substitution: L = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>2</span><span>1</span><span>0</span><span>−1</span><span>−1</span><span>1</span></span>, b = (5, −2, 9).</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>c₁ = 5. Then 2·5 + c₂ = −2, so c₂ = −12. Then −5 + 12 + c₃ = 9, so c₃ = 2. c = (5, −12, 2), as on the slide.</p>
+<p>c₁ = 5. Then 2·5 + c₂ = −2, so c₂ = −12. Then −5 + 12 + c₃ = 9, so c₃ = 2. c = (5, −12, 2), the same c as on slide 2.</p>
 </div></details>
 </div></div>
 <div class="problem"><span class="pnum">3</span><div class="pbody">
@@ -94,9 +98,9 @@
 </div></details>
 </div></div>
 <div class="problem"><span class="pnum">3</span><div class="pbody">
-<p>For which number a does <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>a</span><span>2</span><span>8</span></span> have no second pivot? Can a row exchange fix it?</p>
+<p>For which number a does <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>a</span><span>2</span><span>8</span></span> have a zero second pivot? Can a row exchange fix it?</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>The second pivot is 8 − 2a. It is 0 when a = 4.</p><p>No row exchange helps: the only row below is already used. The matrix is singular (column 2 = 4·column 1).</p>
+<p>The second pivot is 8 − 2a. It is zero when a = 4.</p><p>No row exchange helps: there is no row below row 2 to swap in. The matrix is singular (column 2 = 4·column 1).</p>
 </div></details>
 </div></div>
 <div class="problem"><span class="pnum">4</span><div class="pbody">

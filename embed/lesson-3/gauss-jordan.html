@@ -11,28 +11,37 @@
     <div class="prose">
 <h3>Think of carbon paper</h3>
 <p>Put a sheet of carbon paper under your work. Every row operation you apply to A is copied onto the identity beside it. When A has been turned into I, the copy holds the record of every step. Those steps, taken together, undo A, so the copy is A⁻¹.</p>
-<p>In matrix language: if a sequence of steps E turns A into I, then EA = I, which means E = A⁻¹. Applying the same steps to I gives EI = E = A⁻¹.</p>
+<p>In matrix language: in lesson 2 each elimination step was a matrix E₁, E₂, and so on. Dividing a row by its pivot is a step matrix too (the identity with 1/pivot in that row). Multiply all the step matrices together and call the product E. If these steps turn A into I, then EA = I. A matrix that turns A into I undoes A, so E = A⁻¹. The same steps applied to I give EI = E, which is A⁻¹.</p>
 <h3>The three stages</h3>
 <ul>
 <li><b>Forward:</b> clear the entries below each pivot, as in lesson 2.</li>
 <li><b>Backward:</b> clear the entries above each pivot, working from the bottom row up.</li>
 <li><b>Scale:</b> divide each row by its pivot, so the diagonal becomes all 1s.</li>
 </ul>
+<p>Scaling a row does not disturb the zeros, so it can be done at any time. Doing it last just keeps the fractions away until the end.</p>
 <p>The result is called the <b>reduced row echelon form</b>. The lab's <code>rref</code> carries out all three stages.</p>
 <h3>A worked example</h3>
 <div class="worked">
 <div>K = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>−1</span><span>0</span><span>−1</span><span>2</span><span>−1</span><span>0</span><span>−1</span><span>2</span></span> appears in models of a chain of springs and masses.</div>
+<div>Start from [K | I]. Each step below changes one row; the numbers after | are the right half.</div>
+<div class="row">Forward: row 2 + ½·row 1 → [0 &nbsp;3/2 &nbsp;−1 | ½ &nbsp;1 &nbsp;0]</div>
+<div class="row">Forward: row 3 + ⅔·row 2 → [0 &nbsp;0 &nbsp;4/3 | ⅓ &nbsp;⅔ &nbsp;1]. The pivots are 2, 3/2, 4/3.</div>
+<div class="row">Backward: row 2 + ¾·row 3 → [0 &nbsp;3/2 &nbsp;0 | ¾ &nbsp;3/2 &nbsp;¾]</div>
+<div class="row">Backward: row 1 + ⅔·row 2 → [2 &nbsp;0 &nbsp;0 | 3/2 &nbsp;1 &nbsp;½]</div>
+<div class="row">Scale: divide the rows by 2, 3/2 and 4/3. The left half is now I, and the right half is</div>
 <div class="row">K⁻¹ = ¼ · <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>3</span><span>2</span><span>1</span><span>2</span><span>4</span><span>2</span><span>1</span><span>2</span><span>3</span></span></div>
-<div>Check one column: K times (3, 2, 1) = (6 − 2, −3 + 4 − 1, −2 + 2) = (4, 0, 0), which is 4 times the first column of I ✓</div>
+<div>Check one column. The first column of K⁻¹ is ¼·(3, 2, 1), and K times it must give the first column of I, (1, 0, 0). Because of the ¼ in front, K·(3, 2, 1) itself should give 4·(1, 0, 0) = (4, 0, 0):</div>
+<div class="row">K·(3, 2, 1) = (6 − 2, −3 + 4 − 1, −2 + 2) = (4, 0, 0) ✓</div>
+<div>The lab does all of these steps with <code>rref</code>.</div>
 </div>
 <h3>Thinking with the inverse, computing without it</h3>
 <p>Computing A⁻¹ takes about three times the work of factoring A = LU, and it adds rounding error. So to solve Ax = b, use elimination directly. The inverse is invaluable for reasoning, as in x = A⁻¹b, but it is rarely the best way to compute.</p>
     </div>
     <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · A 2 by 2 by hand</h3>
-<p>Invert A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>1</span></span>.</p><div class="worked"><div class="row">[2 1 | 1 0; 1 1 | 0 1] → row 2 − ½·row 1 → [2 1 | 1 0; 0 ½ | −½ 1]</div><div class="row">row 2 × 2 → [0 1 | −1 2]; row 1 − row 2 → [2 0 | 2 −2]; row 1 ÷ 2</div><div class="row">A⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>−1</span><span>2</span></span></div></div>
+<p>Invert A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>1</span></span>.</p><div class="worked"><div class="row">[2 1 | 1 0; 1 1 | 0 1] → row 2 − ½·row 1 → [2 1 | 1 0; 0 ½ | −½ 1]</div><div class="row">above: row 1 − 2·row 2 → [2 0 | 2 −2; 0 ½ | −½ 1]</div><div class="row">divide: row 1 ÷ 2 and row 2 ÷ ½ → [1 0 | 1 −1; 0 1 | −1 2]</div><div class="row">A⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>−1</span><span>2</span></span></div></div>
 </section>
 <section class="example"><h3>Example 2 · A triangular matrix</h3>
-<p>Invert A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>0</span><span>0</span><span>1</span><span>3</span><span>0</span><span>0</span><span>1</span></span>. Only upward steps are needed.</p><div class="worked"><div class="row">row 2 − 3·row 3, then row 1 − 2·row 2</div><div class="row">A⁻¹ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>−2</span><span>6</span><span>0</span><span>1</span><span>−3</span><span>0</span><span>0</span><span>1</span></span></div></div><p>The 6 comes from the two steps interacting: −2 · (−3).</p>
+<p>Invert A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>0</span><span>0</span><span>1</span><span>3</span><span>0</span><span>0</span><span>1</span></span>. Only upward steps are needed.</p><div class="worked"><div class="row">row 2 − 3·row 3, then row 1 − 2·row 2</div><div class="row">A⁻¹ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>−2</span><span>6</span><span>0</span><span>1</span><span>−3</span><span>0</span><span>0</span><span>1</span></span></div></div><p>Where does the 6 come from? Follow the right half, which starts as I. Step 1 puts −3 in row 2, column 3, so row 2 becomes [0 1 −3]. Step 2 subtracts 2 times this new row 2 from row 1. Row 1 had 0 in column 3, so it gets 0 − 2·(−3) = 6. The second step uses the result of the first.</p>
 </section>
 <section class="example"><h3>Example 3 · When Gauss-Jordan stops</h3>
 <p>Try A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>4</span></span>.</p><div class="worked"><div class="row">row 2 − 2·row 1 → [1 2 | 1 0; 0 0 | −2 1]</div></div><p>The left side has a zero row, so it can never become I. No inverse.</p>
@@ -116,7 +125,7 @@
   <section class="labsec" aria-label="Lab">
     <div class="exercise" id="exercise">
       <span class="tag">Exercise</span>
-      <span class="task">Show that 4·K⁻¹ has whole-number entries: make the last item 4 * K_inv.</span>
+      <span class="task">Show that 4·K⁻¹ has whole-number entries. In the last line, change (&quot;K_inv&quot;, K_inv) to (&quot;4 K_inv&quot;, 4 * K_inv).</span>
       <span class="hint" id="hint">Edit the code and press Run.</span>
     </div>
     <div class="lab">
@@ -142,6 +151,7 @@ R, pivots = rref(aug)                # Gauss-Jordan
 K_inv = R[:, 3:]                     # right half
 
 print(&quot;K @ K_inv =&quot;, np.round(K @ K_inv, 10))
+# your turn: change the last item to (&quot;4 K_inv&quot;, 4 * K_inv)
 table((&quot;[K | I]&quot;, aug), (&quot;rref&quot;, R, pivots), (&quot;K_inv&quot;, K_inv))</textarea>
           </div>
         </div>

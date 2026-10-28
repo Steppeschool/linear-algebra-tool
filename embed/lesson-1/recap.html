@@ -32,7 +32,7 @@
 <div class="problem"><span class="pnum">2</span><div class="pbody">
 <p>Build the matrix that turns the plane by 90° and doubles every length. What is its determinant?</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>2R = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>−2</span><span>2</span><span>0</span></span>. Lengths double, so areas grow 4 times: det = 0 − (−4) = 4.</p>
+<p>Start from R = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>−1</span><span>1</span><span>0</span></span>, the 90° turn. Take 2R (multiply every entry by 2): 2R = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>−2</span><span>2</span><span>0</span></span>. Lengths double, so areas grow 4 times: det = 0 − (−4) = 4.</p>
 </div></details>
 </div></div>
 <div class="problem"><span class="pnum">3</span><div class="pbody">
@@ -64,7 +64,7 @@
 <p>Find the matrix that sends (1, 0) to (1, 1) and (0, 1) to (−1, 1). What does it do to areas?</p>
 <p>The landing spots are the columns: A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>1</span><span>1</span></span>.</p>
 <div class="worked"><div class="row">det A = 1·1 − (−1)·1 = 2</div></div>
-<p>Both arrows have length √2 and are at 90° to each other, so A turns the plane by 45° and stretches it by √2. Areas double, which matches det A = 2.</p>
+<p>Both arrows have length √2 and are at 90° to each other. (1, 1) points at 45°, so (1, 0) has turned by 45°. (−1, 1) points at 135°, so (0, 1) has turned by 45° too. So A turns the plane by 45° and stretches it by √2. Areas double, which matches det A = 2.</p>
 </section></div>
       <h2 class="practice-h">Problems</h2>
       <div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
@@ -120,6 +120,7 @@
             <pre id="hl" aria-hidden="true"></pre>
             <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
 
+# each inner list is a ROW; column 1 is (0, 1), column 2 is (1, 0)
 A = np.array([[0, 1],
               [1, 0]])
 

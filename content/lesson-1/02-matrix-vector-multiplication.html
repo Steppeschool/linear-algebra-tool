@@ -18,7 +18,8 @@ Put the vectors v and w side by side as the columns of a matrix A, and put the n
 <h3>From combinations to matrices</h3>
 <p>On the last slide we wrote combinations like c(2, 1) + d(−1, 1). Writing out the vectors every time gets long. So we store them as the columns of a matrix, and store c and d in a vector x:</p>
 <div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>−1</span><span>1</span><span>1</span></span> &nbsp;&nbsp; x = (c, d) &nbsp;&nbsp; Ax = c·(2, 1) + d·(−1, 1)</div></div>
-<p>That is the definition we will use: <b>Ax is <span class="i">x₁ times column 1</span>, plus <span class="j">x₂ times column 2</span></b>. The colours match the arrows in the lab. If A had more columns, x would need more entries, one weight per column.</p>
+<p>Each entry needs a name. We write a<sub>ij</sub> for the entry of A in row i, column j, so a₁₂ sits in row 1, column 2. In the same way x = (x₁, x₂), where x₁ is the c and x₂ is the d from slide 1.</p>
+<p>That is the definition we will use: <b>Ax is <span class="i">x₁ times column 1</span>, plus <span class="j">x₂ times column 2</span></b>. The colours match the arrows in the lab (the code and picture below). If A had more columns, x would need more entries, one weight per column.</p>
 <h3>An everyday picture: a shopping basket</h3>
 <p>You buy eggs and rice. One egg gives about 6 g of protein and 1 g of carbohydrate. One bowl of rice gives about 4 g of protein and 45 g of carbohydrate. Put each food in a column:</p>
 <div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>6</span><span>4</span><span>1</span><span>45</span></span> &nbsp;&nbsp; x = (2 eggs, 1 bowl)</div></div>
@@ -27,7 +28,7 @@ Put the vectors v and w side by side as the columns of a matrix A, and put the n
 <p>You could also add up one nutrient at a time. Protein: 6·2 + 4·1 = 16. Carbohydrate: 1·2 + 45·1 = 47. Each of these is a <b>dot product</b> of a row of A with x: multiply matching entries and add.</p>
 <p>Both ways always agree, because they add the same products in a different order. When we calculate by hand, rows are usually quicker. When we want to understand what Ax can be, columns are the way to think. Strang returns to this point again and again, and so will we.</p>
 <h3>Watch the sizes</h3>
-<p>For Ax to make sense, x must have one entry for each column of A. The result has one entry for each row. A 2 by 3 matrix (2 rows, 3 columns) takes a vector with 3 entries and produces a vector with 2 entries.</p>
+<p>We count a vector as a matrix with one column: a vector with n entries is an n by 1 matrix. For Ax to make sense, x must have one entry for each column of A. The result has one entry for each row. A 2 by 3 matrix (2 rows, 3 columns) takes a vector with 3 entries and produces a vector with 2 entries.</p>
 <div class="worked"><div class="row">(2 × 3) · (3 × 1) → (2 × 1) &nbsp;&nbsp; the inner numbers must match, the outer numbers give the size of the answer</div></div>
 <!-- examples -->
 <section class="example"><h3>Example 1 · Both ways</h3>
@@ -39,12 +40,12 @@ Put the vectors v and w side by side as the columns of a matrix A, and put the n
 <section class="example"><h3>Example 3 · Picking out a column</h3>
 <p>What is A times x = (1, 0)? And times (0, 1)?</p><div class="worked"><div class="row">A(1, 0) = 1·(column 1) + 0·(column 2) = column 1</div><div class="row">A(0, 1) = column 2</div></div><p>So the columns of A are exactly what A does to (1, 0) and (0, 1). We use this again on slide 5.</p>
 </section>
-<section class="example"><h3>Example 4 · Quadcopter motor mixing</h3>
-<p>A quadcopter in "plus" layout has motors front (1), right (2), back (3) and left (4). Each motor's thrust adds to the total lift and tips the drone a little. In simple units, the effect of each motor is one column:</p>
-<div class="worked"><div class="row">M = <span class="mx" style="grid-template-columns:repeat(4,auto)"><span>1</span><span>1</span><span>1</span><span>1</span><span>0</span><span>1</span><span>0</span><span>−1</span><span>1</span><span>0</span><span>−1</span><span>0</span><span>1</span><span>−1</span><span>1</span><span>−1</span></span> &nbsp; rows: lift, roll, pitch, yaw <span class="dims">(4 × 4) · (4 × 1) → (4 × 1)</span></div>
-<div class="row">Hover, all thrusts 2: &nbsp; M(2, 2, 2, 2) = (8, 0, 0, 0)</div>
-<div class="row">Right motor up, left down: &nbsp; M(2, 3, 2, 1) = (8, 2, 0, 0)</div></div>
-<p>The total lift stays 8 and the drone rolls. Read it by columns: the output is motor 1's column times its thrust, plus motor 2's, and so on. The yaw row has alternating signs because front and back props spin one way and left and right the other. Flight controllers use the inverse of this matrix every few milliseconds to turn "lift, roll, pitch, yaw" commands back into four motor thrusts.</p>
+<section class="example"><h3>Example 4 · Two motors on a drone</h3>
+<p>Look at a drone from behind and keep only two motors, left and right. We track two numbers: the <b>lift</b> (the total upward push) and the <b>tilt</b> (right push minus left push; positive means the right side rises). Each motor gives one column:</p>
+<div class="worked"><div class="row">M = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>−1</span><span>1</span></span> &nbsp; column 1: left motor, column 2: right motor</div>
+<div class="row">Both motors at 2: &nbsp; M(2, 2) = 2·(1, −1) + 2·(1, 1) = (4, 0)</div>
+<div class="row">Left 1, right 3: &nbsp; M(1, 3) = 1·(1, −1) + 3·(1, 1) = (4, 2)</div></div>
+<p>The lift stays 4, so the drone holds its height, but now the right side rises. The output is a mix of the motor columns, weighted by the thrusts.</p>
 </section>
 <!-- problems -->
 <div class="problem"><span class="pnum">1</span><div class="pbody">
@@ -68,6 +69,7 @@ Put the vectors v and w side by side as the columns of a matrix A, and put the n
 <!-- code -->
 import numpy as np
 
+# each inner list is a ROW; column 1 is (1, -1), column 2 is (1, 2)
 A = np.array([[ 1, 1],
               [-1, 2]])
 x = np.array([2, 1])      # change x

@@ -40,7 +40,7 @@
 <li><b>§2.2 Back substitution.</b> The chain of keys: the last row gives the last unknown, which unlocks the row above.</li>
 <li><b>§2.2 Breakdown.</b> The relay race: a zero pivot means swap rows if you can, and if you can't, the system is singular.</li>
 <li><b>§2.3 Elimination matrices.</b> Instruction cards: E₂₁ subtracts ℓ times row 1 from row 2. Stack them to reach U.</li>
-<li><b>§2.6 A = LU.</b> Meal prep: factor once, then solve each new b with two fast triangular solves. L holds the multipliers.</li>
+<li><b>§2.6 A = LU.</b> Meal prep: factor once, then solve each new b with two fast triangular solves. L holds the multipliers. In the lab, <code>lu(A)</code> does not exchange rows: if a zero pivot appears, it stops with the error "zero pivot in row k: this matrix needs a row exchange (PA = LU)". Lesson 3 adds the row exchanges.</li>
 </ul>
 <h2>Next lesson: inverses, transposes and permutations (§2.5, §2.7)</h2>
 <p>The matrix that undoes A, when it exists and how Gauss-Jordan finds it. Then the transpose, symmetric matrices and the permutation matrices behind row exchanges.</p>
@@ -106,9 +106,9 @@
 </div></details>
 </div></div>
 <div class="problem"><span class="pnum">3</span><div class="pbody">
-<p>For which number a does <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>a</span><span>2</span><span>8</span></span> have no second pivot? Can a row exchange fix it?</p>
+<p>For which number a does <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>a</span><span>2</span><span>8</span></span> have a zero second pivot? Can a row exchange fix it?</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>The second pivot is 8 − 2a. It is 0 when a = 4.</p><p>No row exchange helps: the only row below is already used. The matrix is singular (column 2 = 4·column 1).</p>
+<p>The second pivot is 8 − 2a. It is zero when a = 4.</p><p>No row exchange helps: there is no row below row 2 to swap in. The matrix is singular (column 2 = 4·column 1).</p>
 </div></details>
 </div></div>
 <div class="problem"><span class="pnum">4</span><div class="pbody">

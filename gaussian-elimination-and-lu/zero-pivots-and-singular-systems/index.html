@@ -33,11 +33,11 @@
     <p class="lead">Elimination needs a nonzero number in every pivot position. When a zero appears there, one of two things is true: either a row exchange fixes it, or the system does not have exactly one solution.</p>
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-2--zero-pivots-and-singular-systems.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 2 · slide 3</small>Zero pivots</span></span></div>
     <div class="key">zero pivot &nbsp;→&nbsp; swap with a lower row &nbsp;&nbsp;|&nbsp;&nbsp; nothing to swap &nbsp;→&nbsp; singular</div>
-    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>A zero in a pivot position stops elimination, because we cannot divide by it.</li><li><b>Temporary failure:</b> a row below has a nonzero entry in that column. Exchange the rows and continue.</li><li><b>Permanent failure:</b> no row can help. The matrix is <b>singular</b>: no solution or infinitely many.</li><li>Singular means dependent columns and det A = 0, the squashed plane from lesson 1.</li></ol></div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>A zero in a pivot position stops elimination, because we cannot divide by it.</li><li><b>Temporary failure:</b> a row below has a nonzero entry in that column. Exchange the rows and continue.</li><li><b>Permanent failure:</b> no row can help. The matrix is <b>singular</b>: no solution or infinitely many.</li><li>Singular means the columns are <b>dependent</b>: one column is a combination of the others (for two columns, a multiple of the other). Then det A = 0, the squashed plane from lesson 1.</li></ol></div>
     <div class="prose">
 <h3>Think of a relay race</h3>
 <p>The runner for the second leg is missing. If someone else on the team can run that leg, you swap the order and the race goes on. That is a temporary problem, and the fix is a <b>row exchange</b>.</p>
-<p>If nobody on the team can run it, the race is over. That is a permanent problem, and the matrix is called <b>singular</b>.</p>
+<p>If nobody on the team can run it, the team cannot finish the normal way. That is a permanent problem, and the matrix is called <b>singular</b>. Whether anything can still be saved depends on the right-hand side: either there is no solution at all, or there are infinitely many.</p>
 <h3>A temporary failure</h3>
 <div class="worked">
 <div class="row">0x + 2y = 4 &nbsp;&nbsp; 3x − 2y = 5</div>
@@ -49,7 +49,7 @@
 <li><b>No solution.</b> x − 2y = 1 and 2x − 4y = 11. Subtracting 2 times the first leaves 0 = 9, which is impossible. In the row picture the two lines are parallel and never meet.</li>
 <li><b>Infinitely many solutions.</b> x − 2y = 1 and 2x − 4y = 2. Subtracting leaves 0 = 0, which is always true. The second equation added no information, and every point on the line x − 2y = 1 is a solution.</li>
 </ul>
-<p>In both cases the second pivot is 0 and there is no row below to exchange with. The left-hand side, x − 2y and 2x − 4y, is the same in both: its columns (1, 2) and (−2, −4) are dependent. That is lesson 1's squashed plane again, with det A = 0. The right-hand side only decides which of the two failures we get.</p>
+<p>In both cases the second pivot is zero and there is no row below to exchange with. The left-hand side, x − 2y and 2x − 4y, is the same in both: its columns (1, 2) and (−2, −4) are dependent: the second is −2 times the first. That is lesson 1's squashed plane again, with det A = 0. The right-hand side only decides which of the two failures we get.</p>
 <h3>Small pivots are dangerous too</h3>
 <p>A computer stores numbers with about 16 significant digits. Dividing by a tiny pivot such as 0.0000001 makes the multipliers huge and magnifies rounding errors. So practical solvers, NumPy's included, exchange rows at every step to bring the entry that is <b>largest in absolute value</b> into the pivot position. This is called partial pivoting.</p>
     </div>
@@ -60,7 +60,7 @@
 <p>x + y = 2 and 2x + 2y = 4.</p><div class="worked"><div class="row">ℓ = 2: the second equation becomes 0 = 0</div><div class="row">Only x + y = 2 is left. Choose y = t freely; then x = 2 − t</div></div><p>Every point (2 − t, t) is a solution: the whole line.</p>
 </section>
 <section class="example"><h3>Example 3 · A zero pivot in the middle of a 3 by 3</h3>
-<p>A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>1</span><span>1</span><span>1</span><span>1</span><span>2</span><span>1</span><span>2</span><span>3</span></span>.</p><div class="worked"><div class="row">ℓ₂₁ = 1: row 2 → (0, 0, 1). &nbsp; ℓ₃₁ = 1: row 3 → (0, 1, 2)</div><div class="row">The second pivot is 0, but row 3 has a 1 there. Swap rows 2 and 3</div><div class="row">U = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>1</span><span>1</span><span>0</span><span>1</span><span>2</span><span>0</span><span>0</span><span>1</span></span>, pivots 1, 1, 1</div></div><p>A temporary breakdown: the matrix is invertible.</p>
+<p>A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>1</span><span>1</span><span>1</span><span>1</span><span>2</span><span>1</span><span>2</span><span>3</span></span>.</p><div class="worked"><div class="row">ℓ₂₁ = 1: row 2 → (0, 0, 1). &nbsp; ℓ₃₁ = 1: row 3 → (0, 1, 2)</div><div class="row">The second pivot is 0, but row 3 has a 1 there. Swap rows 2 and 3</div><div class="row">U = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>1</span><span>1</span><span>0</span><span>1</span><span>2</span><span>0</span><span>0</span><span>1</span></span>, pivots 1, 1, 1</div></div><p>A temporary breakdown: after the swap there are three nonzero pivots, so Ax = b has exactly one solution for every b.</p>
 </section></div>
     <details class="more"><summary><span class="pl-icon">✎</span><span class="rv-text"><b>More examples to try</b><span>3 problems with step-by-step solutions. Try each one before you open its solution.</span></span><span class="rv-toggle"><span class="s-show">Show</span><span class="s-hide">Hide</span></span></summary><div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
 <p>Solve 0x + 2y = 6, 3x + y = 6.</p>
@@ -120,9 +120,9 @@
 </div></details>
 </div></div>
 <div class="problem"><span class="pnum">3</span><div class="pbody">
-<p>For which number a does <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>a</span><span>2</span><span>8</span></span> have no second pivot? Can a row exchange fix it?</p>
+<p>For which number a does <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>a</span><span>2</span><span>8</span></span> have a zero second pivot? Can a row exchange fix it?</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>The second pivot is 8 − 2a. It is 0 when a = 4.</p><p>No row exchange helps: the only row below is already used. The matrix is singular (column 2 = 4·column 1).</p>
+<p>The second pivot is 8 − 2a. It is zero when a = 4.</p><p>No row exchange helps: there is no row below row 2 to swap in. The matrix is singular (column 2 = 4·column 1).</p>
 </div></details>
 </div></div>
 <div class="problem"><span class="pnum">4</span><div class="pbody">

@@ -49,7 +49,7 @@
 <p>Find the matrix that sends (1, 0) to (1, 1) and (0, 1) to (−1, 1). What does it do to areas?</p>
 <p>The landing spots are the columns: A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>1</span><span>1</span></span>.</p>
 <div class="worked"><div class="row">det A = 1·1 − (−1)·1 = 2</div></div>
-<p>Both arrows have length √2 and are at 90° to each other, so A turns the plane by 45° and stretches it by √2. Areas double, which matches det A = 2.</p>
+<p>Both arrows have length √2 and are at 90° to each other. (1, 1) points at 45°, so (1, 0) has turned by 45°. (−1, 1) points at 135°, so (0, 1) has turned by 45° too. So A turns the plane by 45° and stretches it by √2. Areas double, which matches det A = 2.</p>
 </section>
     </div>
     <h2 class="practice-h">Problems</h2>
@@ -108,9 +108,10 @@
             <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
 
 # A sandbox for the problems. Try:
-A = np.array([[1., 3.],
-              [2., 1.]])
-b = np.array([7., 4.])
+# each inner list is a ROW; column 1 is (1, 2), column 2 is (3, 1)
+A = np.array([[1, 3],
+              [2, 1]])
+b = np.array([7, 4])
 x = np.linalg.solve(A, b)
 print(&quot;x =&quot;, x)
 combo(A, x, b)</textarea>

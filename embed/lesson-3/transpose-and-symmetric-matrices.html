@@ -18,8 +18,8 @@
 <ul>
 <li><b>(AB)ᵀ = BᵀAᵀ.</b> The order reverses, just as for inverses on slide 3.</li>
 <li><b>(A⁻¹)ᵀ = (Aᵀ)⁻¹.</b> Transposing and inverting can be done in either order.</li>
-<li><b>The dot product</b> of x and y can be written xᵀy: a row times a column.</li>
-<li><b>AᵀA is symmetric.</b> Its (i, j) entry is column i of A dotted with column j. Swapping i and j gives the same dot product.</li>
+<li><b>The dot product</b> of x and y can be written xᵀy: a row times a column. Here we treat a vector x as a column, an n by 1 matrix. Its transpose xᵀ is a row, 1 by n.</li>
+<li><b>AᵀA is symmetric.</b> Row i of Aᵀ is column i of A. So entry (i, j) of AᵀA, which is row i of Aᵀ times column j of A, is column i of A dotted with column j of A. Swapping i and j gives the same dot product.</li>
 </ul>
 <h3>A worked example</h3>
 <div class="worked">
@@ -118,7 +118,7 @@
   <section class="labsec" aria-label="Lab">
     <div class="exercise" id="exercise">
       <span class="tag">Exercise</span>
-      <span class="task">Change the last item to Aᵀ A (2 by 2) and check that it is symmetric.</span>
+      <span class="task">In the line G = A @ A.T, change A @ A.T to A.T @ A. The last item, &quot;result&quot;, then shows AᵀA: 2 by 2 instead of 3 by 3, and still symmetric.</span>
       <span class="hint" id="hint">Edit the code and press Run.</span>
     </div>
     <div class="lab">
@@ -140,7 +140,7 @@ A = np.array([[1., 2.],
               [5., 6.]])
 
 print(&quot;A.T =&quot;, A.T)
-G = A @ A.T                    # 3 by 3. Try A.T @ A instead
+G = A @ A.T                    # 3 by 3. Your turn: change to A.T @ A
 print(&quot;symmetric?&quot;, np.allclose(G, G.T))
 table((&quot;A&quot;, A), (&quot;A.T&quot;, A.T), (&quot;result&quot;, G))</textarea>
           </div>

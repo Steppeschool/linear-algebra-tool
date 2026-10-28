@@ -7,7 +7,7 @@
     <p class="lead">A challenge to put the slides together: build the matrix that mirrors the plane left to right. The F should keep its size and simply face the other way.</p>
     </div><span class="thumb slide-art"><img src="https://linearalgebra.steppeschool.com/assets/cards/lesson-1--reflection-matrix.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 1 · slide 7</small>Reflection</span></span></div>
     <div class="key">(x, y) &nbsp;→&nbsp; (−x, y)</div>
-    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>To build a matrix, decide where (1, 0) and (0, 1) land and use them as columns (slide 5).</li><li>A mirror keeps lengths and areas, so |det A| = 1.</li><li>A mirror flips the plane over, and the determinant shows that with a minus sign: det A = −1.</li><li>Applying the same mirror twice brings everything back: A·A = I.</li></ol></div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>To build a matrix, decide where (1, 0) and (0, 1) land and use them as columns (slide 5).</li><li>A mirror keeps lengths and areas, so |det A| = 1.</li><li>A mirror flips the plane over, and the determinant shows that with a minus sign: det A = −1.</li><li>Applying the same mirror twice brings everything back: A·A = I. Here I = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>1</span></span> is the <b>identity matrix</b>, which leaves every vector where it is.</li></ol></div>
     <div class="prose">
 <h3>A mirror you have seen</h3>
 <p>The word AMBULANCE is printed backwards on the front of the vehicle, so that a driver sees it the right way round in the mirror. A mirror keeps every size and every distance, but swaps left and right.</p>
@@ -76,7 +76,7 @@
 <p>Find the matrix that sends (1, 0) to (1, 1) and (0, 1) to (−1, 1). What does it do to areas?</p>
 <p>The landing spots are the columns: A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>1</span><span>1</span></span>.</p>
 <div class="worked"><div class="row">det A = 1·1 − (−1)·1 = 2</div></div>
-<p>Both arrows have length √2 and are at 90° to each other, so A turns the plane by 45° and stretches it by √2. Areas double, which matches det A = 2.</p>
+<p>Both arrows have length √2 and are at 90° to each other. (1, 1) points at 45°, so (1, 0) has turned by 45°. (−1, 1) points at 135°, so (0, 1) has turned by 45° too. So A turns the plane by 45° and stretches it by √2. Areas double, which matches det A = 2.</p>
 </section></div>
       <h2 class="practice-h">Problems</h2>
       <div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
@@ -132,6 +132,7 @@
             <pre id="hl" aria-hidden="true"></pre>
             <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
 
+# each inner list is a ROW; column 1 is (1, 0), column 2 is (0, 1)
 A = np.array([[1, 0],
               [0, 1]])
 

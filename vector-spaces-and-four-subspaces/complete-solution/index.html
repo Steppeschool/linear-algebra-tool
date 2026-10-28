@@ -33,20 +33,27 @@
     <p class="lead">When Ax = b has a solution, it usually has many. All of them have the same form: one particular solution plus any vector from the nullspace.</p>
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-4--complete-solution.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 4 · slide 4</small>Complete solution</span></span></div>
     <div class="key">x = x_p + x_n &nbsp;&nbsp;&nbsp; Ax_p = b, &nbsp; Ax_n = 0</div>
-    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>If Ax_p = b, then every solution is x = x_p + x_n with x_n in N(A).</li><li>Ax = b is solvable exactly when b is in the column space C(A).</li><li>To find x_p, set all free variables to 0 and solve for the pivot variables.</li><li>The rank r decides whether there are zero, one or infinitely many solutions.</li></ol></div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>If Ax_p = b, then every solution is x = x_p + x_n with x_n in N(A).</li><li>Ax = b is solvable exactly when b is in the column space C(A).</li><li>To find x_p, eliminate on [A | b], set all free variables to 0 and read off the pivot variables.</li><li>The rank r, together with b, decides whether there are zero, one or infinitely many solutions.</li></ol></div>
     <div class="prose">
 <h3>Think of a route plus a loop</h3>
 <p>You know one route that reaches your destination. Add any loop that brings you back to where you started, and you still reach the destination. The loops are the nullspace.</p>
-<p>With the boat: one throttle setting produces the motion you want. Add any cancelling combination such as (2, −1), and the boat moves exactly the same; the engines just work harder.</p>
+<p>With the boat: one throttle setting produces the motion you want. Add any cancelling combination such as (2, −1), and the boat moves exactly the same.</p>
 <h3>Why every solution has this form</h3>
 <ul>
 <li>Adding a nullspace vector keeps a solution: A(x_p + x_n) = Ax_p + Ax_n = b + 0 = b.</li>
 <li>Any two solutions differ by a nullspace vector: if Ax = b and Ay = b, then A(x − y) = b − b = 0.</li>
 </ul>
 <p>In the plot, the solutions form a line parallel to N(A), shifted so that it passes through x_p.</p>
+<h3>How to find x_p</h3>
+<p>Write b as an extra column next to A, with a bar between them: [A | b]. This is the <b>augmented matrix</b>. The column after the bar holds the right-hand sides. A row operation acts on a whole row, so it changes that column too.</p>
+<div class="worked">
+<div class="row">1. Eliminate on [A | b] until the part before the bar is R.</div>
+<div class="row">2. A row of zeros before the bar with a nonzero number after it says 0 = that number. Then there is no solution.</div>
+<div class="row">3. Otherwise set every free variable to 0. Each nonzero row now says: its pivot variable = the number after the bar. That is x_p.</div>
+</div>
 <h3>A worked example</h3>
 <div class="worked">
-<div>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>4</span></span>, b = (4, 8). Setting the free variable x₂ = 0 gives x_p = (4, 0).</div>
+<div>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>4</span></span>, b = (4, 8). Row 2 − 2·row 1 turns [2 4 | 8] into [0 0 | 0], leaving [1 2 | 4]. The free variable is x₂. Set x₂ = 0, then x₁ = 4, so x_p = (4, 0).</div>
 <div class="row">N(A) = all c·(−2, 1) &nbsp;→&nbsp; x = (4 − 2c, c)</div>
 <div>With c = 2: x = (0, 2). Check: 0 + 2·2 = 4 and 0 + 4·2 = 8 ✓</div>
 <div>With b = (4, 9) instead, elimination ends with 0 = 1. That b is not on the column space line, so there is no solution at all.</div>
@@ -55,7 +62,7 @@
 <p>For an m by n matrix of rank r:</p>
 <ul>
 <li><b>r = m = n:</b> exactly one solution for every b. A is invertible.</li>
-<li><b>r = n &lt; m:</b> zero or one solution. There are more equations than unknowns.</li>
+<li><b>r = n &lt; m:</b> zero or one solution. Every column has a pivot, so there are no free variables and at most one solution. There are more equations than unknowns, and the extra equations may contradict the others.</li>
 <li><b>r = m &lt; n:</b> infinitely many solutions for every b. There are free variables.</li>
 <li><b>r &lt; m and r &lt; n:</b> zero or infinitely many, depending on b.</li>
 </ul>
@@ -64,7 +71,7 @@
 <p>x + y = 2.</p><div class="worked"><div class="row">x_p = (2, 0); N(A) = multiples of (−1, 1)</div><div class="row">x = (2 − c, c)</div></div>
 </section>
 <section class="example"><h3>Example 2 · A 2 by 3 system</h3>
-<p>A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>1</span><span>1</span><span>1</span><span>2</span><span>3</span></span>, b = (3, 6).</p><div class="worked"><div class="row">Eliminate: R = [1 0 −1 | 0; 0 1 2 | 3]</div><div class="row">x_p (free x₃ = 0) = (0, 3, 0); special solution (1, −2, 1)</div><div class="row">x = (0, 3, 0) + c·(1, −2, 1)</div></div>
+<p>A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>1</span><span>1</span><span>1</span><span>2</span><span>3</span></span>, b = (3, 6).</p><div class="worked"><div class="row">[A | b] = [1 1 1 | 3; 1 2 3 | 6]. Row 2 − row 1, then row 1 − row 2: [1 0 −1 | 0; 0 1 2 | 3]</div><div class="row">x_p (free x₃ = 0) = (0, 3, 0); special solution (1, −2, 1)</div><div class="row">x = (0, 3, 0) + c·(1, −2, 1)</div></div>
 </section>
 <section class="example"><h3>Example 3 · No solution</h3>
 <p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>4</span></span>, b = (1, 3).</p><div class="worked"><div class="row">Row 2 − 2·row 1: 0 = 3 − 2 = 1. Impossible</div></div><p>b is not in the column space.</p>
@@ -108,7 +115,7 @@
 <section class="example"><h3>Example 3 · The complete solution</h3>
 <p>Solve x + 2y + 3z = 6.</p>
 <div class="worked"><div class="row">Particular solution: set the free variables y = z = 0, then x = 6. x_p = (6, 0, 0)</div>
-<div class="row">Nullspace: the same matrix as Example 2's first row, special solutions (−2, 1, 0) and (−3, 0, 1)</div>
+<div class="row">Nullspace: A = [1 2 3], the first row of Example 2's matrix, with special solutions (−2, 1, 0) and (−3, 0, 1)</div>
 <div class="row">x = (6, 0, 0) + c·(−2, 1, 0) + d·(−3, 0, 1)</div></div>
 <p>Geometrically: a plane parallel to the nullspace, shifted to pass through (6, 0, 0).</p>
 </section></div>
