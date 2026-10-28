@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Complete Solution to Ax = b: Particular Plus Null Space</title>
+<meta name="description" content="Every solution of Ax = b is one particular solution plus any null space vector. See the solution line in an interactive plot and find it in Python. Strang §3.3.">
+<link rel="canonical" href="https://linearalgebra.steppeschool.com/vector-spaces-and-four-subspaces/complete-solution/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Linear Algebra, Live">
+<meta property="og:title" content="The Complete Solution to Ax = b: Particular Plus Null Space">
+<meta property="og:description" content="Every solution of Ax = b is one particular solution plus any null space vector. See the solution line in an interactive plot and find it in Python. Strang §3.3.">
+<meta property="og:url" content="https://linearalgebra.steppeschool.com/vector-spaces-and-four-subspaces/complete-solution/">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/lesson.css">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "The Complete Solution to Ax = b: Particular Plus Null Space", "headline": "Every solution = one particular solution + the nullspace.", "description": "Every solution of Ax = b is one particular solution plus any null space vector. See the solution line in an interactive plot and find it in Python. Strang §3.3.", "url": "https://linearalgebra.steppeschool.com/vector-spaces-and-four-subspaces/complete-solution/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": true, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 4: The four subspaces", "item": "https://linearalgebra.steppeschool.com/vector-spaces-and-four-subspaces/"}, {"@type": "ListItem", "position": 3, "name": "The Complete Solution to Ax = b: Particular Plus Null Space", "item": "https://linearalgebra.steppeschool.com/vector-spaces-and-four-subspaces/complete-solution/"}]}]</script>
+</head>
+<body>
+<header class="top">
+  <div class="topnav"><a class="brand" href="../../">Linear Algebra, Live</a><nav class="crumbnav" aria-label="Chapters and lessons"><details class="menu"><summary>Chapter 3<span class="hide-sm"> · Vector spaces and subspaces</span></summary><div class="menu-list chapters"><div class="menu-sub">Chapters</div><div class="ch"><div class="ch-head"><span class="ch-num">1</span><span class="ch-title">Introduction to vectors</span></div><div class="ch-lessons"><a class="ls" href="../../vectors-and-matrices/"><span class="ls-num">Lesson 1</span><span class="ls-title">Columns first</span></a></div></div><div class="ch"><div class="ch-head"><span class="ch-num">2</span><span class="ch-title">Solving linear equations</span></div><div class="ch-lessons"><a class="ls" href="../../gaussian-elimination-and-lu/"><span class="ls-num">Lesson 2</span><span class="ls-title">Elimination and A = LU</span></a><a class="ls" href="../../inverse-transpose-permutation/"><span class="ls-num">Lesson 3</span><span class="ls-title">Inverses, transposes and permutations</span></a></div></div><div class="ch on"><div class="ch-head"><span class="ch-num">3</span><span class="ch-title">Vector spaces and subspaces</span></div><div class="ch-lessons"><a class="ls on" href="../../vector-spaces-and-four-subspaces/"><span class="ls-num">Lesson 4</span><span class="ls-title">The four subspaces</span></a></div></div><div class="ch"><div class="ch-head"><span class="ch-num">4</span><span class="ch-title">Orthogonality</span></div><div class="ch-lessons"><a class="ls" href="../../orthogonality-and-least-squares/"><span class="ls-num">Lesson 5</span><span class="ls-title">Orthogonality and least squares</span></a></div></div><div class="menu-sub">Coming soon</div><div class="ch-later"><div class="ch soon"><div class="ch-head"><span class="ch-num">5</span><span class="ch-title">Determinants</span></div></div><div class="ch soon"><div class="ch-head"><span class="ch-num">6</span><span class="ch-title">Eigenvalues and eigenvectors</span></div></div><div class="ch soon"><div class="ch-head"><span class="ch-num">7</span><span class="ch-title">The singular value decomposition</span></div></div></div></div></details><span class="sep">›</span><details class="menu"><summary>Lesson 4<span class="hide-sm"> · The four subspaces</span></summary><div class="menu-list"><div class="menu-sub">Chapter 3 lessons</div><div class="ch-lessons flat"><a class="ls on" href="../../vector-spaces-and-four-subspaces/"><span class="ls-num">Lesson 4</span><span class="ls-title">The four subspaces</span></a></div><div class="menu-sub">In lesson 4</div><div class="ch-lessons flat slides"><a class="ls" href="../../vector-spaces-and-four-subspaces/vector-spaces-and-subspaces/"><span class="ls-num">1</span><span class="ls-title">Vector Spaces and Subspaces Explained Visually</span></a><a class="ls" href="../../vector-spaces-and-four-subspaces/null-space/"><span class="ls-num">2</span><span class="ls-title">Null Space Explained Visually</span></a><a class="ls" href="../../vector-spaces-and-four-subspaces/rref-and-special-solutions/"><span class="ls-num">3</span><span class="ls-title">Reduced Row Echelon Form, Pivot Columns and Special Solutions</span></a><a class="ls on" href="../../vector-spaces-and-four-subspaces/complete-solution/"><span class="ls-num">4</span><span class="ls-title">The Complete Solution to Ax = b: Particular Plus Null Space</span></a><a class="ls" href="../../vector-spaces-and-four-subspaces/independence-basis-dimension/"><span class="ls-num">5</span><span class="ls-title">Linear Independence, Basis and Dimension Explained</span></a><a class="ls" href="../../vector-spaces-and-four-subspaces/four-fundamental-subspaces/"><span class="ls-num">6</span><span class="ls-title">The Four Fundamental Subspaces Explained Visually</span></a><a class="ls" href="../../vector-spaces-and-four-subspaces/recap/"><span class="ls-num">7</span><span class="ls-title">Lesson 4 Recap: The Four Subspaces</span></a><a class="ls" href="../../vector-spaces-and-four-subspaces/practice/"><span class="ls-num">✎</span><span class="ls-title">Examples and problems</span></a></div></div></details></nav></div>
+  <nav class="steps" aria-label="Steps in this lesson"><a class="step" href="../vector-spaces-and-subspaces/" data-slug="vector-spaces-and-subspaces" title="Vector Spaces and Subspaces Explained Visually">1</a><a class="step" href="../null-space/" data-slug="null-space" title="Null Space Explained Visually">2</a><a class="step" href="../rref-and-special-solutions/" data-slug="rref-and-special-solutions" title="Reduced Row Echelon Form, Pivot Columns and Special Solutions">3</a><a class="step on" href="../complete-solution/" data-slug="complete-solution" aria-current="page" title="The Complete Solution to Ax = b: Particular Plus Null Space">4</a><a class="step" href="../independence-basis-dimension/" data-slug="independence-basis-dimension" title="Linear Independence, Basis and Dimension Explained">5</a><a class="step" href="../four-fundamental-subspaces/" data-slug="four-fundamental-subspaces" title="The Four Fundamental Subspaces Explained Visually">6</a><a class="step" href="../recap/" data-slug="recap" title="Lesson 4 Recap: The Four Subspaces">7</a><a class="step practice" href="../practice/" title="Examples and problems">✎ Practice</a></nav>
+</header>
+
+
+<main class="lesson">
+  <article class="page">
+    <div class="slide-head"><div>
+    <div class="kicker">Strang §3.3 · The complete solution to Ax = b</div>
+    <h1>Every solution = one particular solution + the nullspace.</h1>
+    <p class="lead">When Ax = b has a solution, it usually has many. All of them have the same form: one particular solution plus any vector from the nullspace.</p>
+    </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-4--complete-solution.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 4 · slide 4</small>Complete solution</span></span></div>
+    <div class="key">x = x_p + x_n &nbsp;&nbsp;&nbsp; Ax_p = b, &nbsp; Ax_n = 0</div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>If Ax_p = b, then every solution is x = x_p + x_n with x_n in N(A).</li><li>Ax = b is solvable exactly when b is in the column space C(A).</li><li>To find x_p, set all free variables to 0 and solve for the pivot variables.</li><li>The rank r decides whether there are zero, one or infinitely many solutions.</li></ol></div>
+    <div class="prose">
+<h3>Think of a route plus a loop</h3>
+<p>You know one route that reaches your destination. Add any loop that brings you back to where you started, and you still reach the destination. The loops are the nullspace.</p>
+<p>With the boat: one throttle setting produces the motion you want. Add any cancelling combination such as (2, −1), and the boat moves exactly the same; the engines just work harder.</p>
+<h3>Why every solution has this form</h3>
+<ul>
+<li>Adding a nullspace vector keeps a solution: A(x_p + x_n) = Ax_p + Ax_n = b + 0 = b.</li>
+<li>Any two solutions differ by a nullspace vector: if Ax = b and Ay = b, then A(x − y) = b − b = 0.</li>
+</ul>
+<p>In the plot, the solutions form a line parallel to N(A), shifted so that it passes through x_p.</p>
+<h3>A worked example</h3>
+<div class="worked">
+<div>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>4</span></span>, b = (4, 8). Setting the free variable x₂ = 0 gives x_p = (4, 0).</div>
+<div class="row">N(A) = all c·(−2, 1) &nbsp;→&nbsp; x = (4 − 2c, c)</div>
+<div>With c = 2: x = (0, 2). Check: 0 + 2·2 = 4 and 0 + 4·2 = 8 ✓</div>
+<div>With b = (4, 9) instead, elimination ends with 0 = 1. That b is not on the column space line, so there is no solution at all.</div>
+</div>
+<h3>How many solutions?</h3>
+<p>For an m by n matrix of rank r:</p>
+<ul>
+<li><b>r = m = n:</b> exactly one solution for every b. A is invertible.</li>
+<li><b>r = n &lt; m:</b> zero or one solution. There are more equations than unknowns.</li>
+<li><b>r = m &lt; n:</b> infinitely many solutions for every b. There are free variables.</li>
+<li><b>r &lt; m and r &lt; n:</b> zero or infinitely many, depending on b.</li>
+</ul>
+    </div>
+    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · One equation, two unknowns</h3>
+<p>x + y = 2.</p><div class="worked"><div class="row">x_p = (2, 0); N(A) = multiples of (−1, 1)</div><div class="row">x = (2 − c, c)</div></div>
+</section>
+<section class="example"><h3>Example 2 · A 2 by 3 system</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>1</span><span>1</span><span>1</span><span>2</span><span>3</span></span>, b = (3, 6).</p><div class="worked"><div class="row">Eliminate: R = [1 0 −1 | 0; 0 1 2 | 3]</div><div class="row">x_p (free x₃ = 0) = (0, 3, 0); special solution (1, −2, 1)</div><div class="row">x = (0, 3, 0) + c·(1, −2, 1)</div></div>
+</section>
+<section class="example"><h3>Example 3 · No solution</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>4</span></span>, b = (1, 3).</p><div class="worked"><div class="row">Row 2 − 2·row 1: 0 = 3 − 2 = 1. Impossible</div></div><p>b is not in the column space.</p>
+</section></div>
+    <details class="more"><summary><span class="pl-icon">✎</span><span class="rv-text"><b>More examples to try</b><span>3 problems with step-by-step solutions. Try each one before you open its solution.</span></span><span class="rv-toggle"><span class="s-show">Show</span><span class="s-hide">Hide</span></span></summary><div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Give the complete solution of x + 2y = 4.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>x = (4, 0) + c·(−2, 1).</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>Solve Ax = b for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>2</span><span>2</span></span>, b = (3, 6).</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>x = (3, 0) + c·(−1, 1).</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>For which b₂ does <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>3</span><span>2</span><span>6</span></span>x = (2, b₂) have a solution?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Elimination leaves 0 = b₂ − 4. Only b₂ = 4.</p>
+</div></details>
+</div></div></div></details>
+  </article>
+  <details class="review">
+    <summary><span class="pl-icon">✎</span><span class="rv-text"><b>Lesson review</b><span>3 worked examples and 5 mixed problems with solutions</span></span><span class="rv-toggle"><span class="s-show">Open</span><span class="s-hide">Close</span></span></summary>
+    <div class="review-body">
+      <h2 class="practice-h">Worked examples</h2>
+      <div class="examples"><section class="example"><h3>Example 1 · Is it a subspace?</h3>
+<p>Is the set of all (x, y, z) with x = 2y a subspace of 3D space?</p>
+<div class="worked"><div class="row">Zero: (0, 0, 0) has 0 = 2·0 ✓</div>
+<div class="row">Add: if x₁ = 2y₁ and x₂ = 2y₂, then x₁ + x₂ = 2(y₁ + y₂) ✓</div>
+<div class="row">Scale: cx₁ = 2(cy₁) ✓</div></div>
+<p>Yes. It is a plane through the origin. With x = 2y + 1 it would fail at once: the origin is missing.</p>
+</section>
+<section class="example"><h3>Example 2 · Nullspace and special solutions</h3>
+<p>Find the nullspace of A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>3</span><span>2</span><span>4</span><span>6</span></span>.</p>
+<div class="worked"><div class="row">Row 2 − 2·row 1 = 0, so R = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>3</span><span>0</span><span>0</span><span>0</span></span>. One pivot (column 1), rank 1.</div>
+<div class="row">Free: x₂, x₃. &nbsp; x₂ = 1, x₃ = 0 gives (−2, 1, 0). &nbsp; x₂ = 0, x₃ = 1 gives (−3, 0, 1).</div></div>
+<p>N(A) is all combinations c·(−2, 1, 0) + d·(−3, 0, 1): a plane, dimension n − r = 3 − 1 = 2.</p>
+</section>
+<section class="example"><h3>Example 3 · The complete solution</h3>
+<p>Solve x + 2y + 3z = 6.</p>
+<div class="worked"><div class="row">Particular solution: set the free variables y = z = 0, then x = 6. x_p = (6, 0, 0)</div>
+<div class="row">Nullspace: the same matrix as Example 2's first row, special solutions (−2, 1, 0) and (−3, 0, 1)</div>
+<div class="row">x = (6, 0, 0) + c·(−2, 1, 0) + d·(−3, 0, 1)</div></div>
+<p>Geometrically: a plane parallel to the nullspace, shifted to pass through (6, 0, 0).</p>
+</section></div>
+      <h2 class="practice-h">Problems</h2>
+      <div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Which of these are subspaces of the plane? (a) all (x, y) with x = y (b) all (x, y) with x + y = 1 (c) all (x, y) with xy = 0.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>(a) Yes: a line through the origin.</p><p>(b) No: (0, 0) is not on it.</p><p>(c) No: it is the two axes together, and (1, 0) + (0, 1) = (1, 1) has xy = 1.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>Find the nullspace of <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>2</span><span>−2</span></span>.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Both rows say x − y = 0. So N(A) is every multiple of (1, 1): a line.</p><p>Check: A(1, 1) = (1 − 1, 2 − 2) = (0, 0) ✓</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>Find R, the rank and a special solution for A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>1</span><span>2</span><span>4</span><span>3</span><span>3</span><span>6</span><span>4</span></span>.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Row 2 − 2·row 1 = (0, 0, 1), row 3 − 3·row 1 = (0, 0, 1), then row 3 − row 2 = 0. Clearing above the pivot: R = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>0</span><span>0</span><span>0</span><span>1</span><span>0</span><span>0</span><span>0</span></span>.</p><p>Pivots in columns 1 and 3, so rank 2. Column 2 is free: x₂ = 1 gives the special solution (−2, 1, 0).</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">4</span><div class="pbody">
+<p>Are (1, 2, 0), (0, 1, 1) and (1, 3, 1) independent?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>No. (1, 3, 1) = (1, 2, 0) + (0, 1, 1), so 1·v₁ + 1·v₂ − 1·v₃ = 0. The rank is 2 and the three vectors lie in one plane.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">5</span><div class="pbody">
+<p>A is 3 by 5 with rank 2. Give the dimension of each of the four subspaces.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>m = 3, n = 5, r = 2.</p><p>Row space r = 2, nullspace n − r = 3, column space r = 2, left nullspace m − r = 1.</p>
+</div></details>
+</div></div></div>
+    </div>
+  </details>
+
+  <section class="labsec" aria-label="Lab">
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Find a different solution of Ax = b, not (4, 0).</span>
+      <span class="hint" id="hint">Edit the code and press Run.</span>
+    </div>
+    <div class="lab">
+      <div class="editor-card">
+        <div class="bar">
+          <span class="file">slide_4.py</span>
+          <span class="status" id="pystatus">Loading Python…</span>
+          <button class="btn" id="reset">Reset</button>
+          <button class="btn primary" id="run" disabled>Run ▸</button>
+        </div>
+        <div class="editor">
+          <div class="gutter" id="gutter">1</div>
+          <div class="code" id="codewrap">
+            <pre id="hl" aria-hidden="true"></pre>
+            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+A = np.array([[1., 2.],
+              [2., 4.]])
+b = np.array([4., 8.])
+x = np.array([4., 0.])          # one solution. Find another one
+
+print(&quot;Ax =&quot;, A @ x)
+nullpic(A, x, b)                # orange line: every solution of Ax = b</textarea>
+          </div>
+        </div>
+        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+      </div>
+      <figure class="figure">
+        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <div class="after">
+    <div class="nav">
+      <a class="btn" id="prev" href="../rref-and-special-solutions/">← Back</a>
+      <span class="count">4 / 7</span>
+      <a class="btn primary" id="next" href="../independence-basis-dimension/">Next →</a>
+    </div>
+  </div>
+</main>
+<footer class="foot">
+  Follows the order and notation of Gilbert Strang, <i>Introduction to Linear Algebra</i>, 5th edition (2016); § numbers refer to that book.
+  Explanations, examples and code are original. Made by <a href="https://www.steppeschool.com">Steppeschool</a>.
+</footer>
+
+<script>window.SLIDE = {"slug": "complete-solution", "lesson": "lesson-4", "assets": "../../assets/", "preview": {"kind": "null", "A": [[1, 2], [2, 4]], "x": [4, 0], "b": [4, 8]}, "check": "isN(V) && V.b.length === 2 && close(matvec(V.A, V.x), V.b) && !close(V.x, [4,0]) && eqM(V.A, [[1,2],[2,4]]) && close(V.b, [4,8])"};</script>
+<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
+<script src="../../assets/lab.js" defer></script>
+<script src="../../assets/nav.js" defer></script>
+</body>
+</html>

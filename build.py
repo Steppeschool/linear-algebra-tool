@@ -13,6 +13,7 @@ import html
 import json
 import pathlib
 import re
+import shutil
 
 ROOT = pathlib.Path(__file__).parent
 BASE = "https://linearalgebra.steppeschool.com"
@@ -24,23 +25,28 @@ SIGNUP = "https://www.steppeschool.com/offers/JwLxrqg8/checkout"
 TODAY = datetime.date.today().isoformat()
 
 LESSONS = [
-    {"n": 1, "dir": "lesson-1", "title": "Columns first", "chapter": "Strang, chapter 1",
+    {"n": 1, "dir": "lesson-1", "path": "vectors-and-matrices", "seo_title": "Vectors, Linear Combinations and Matrix Multiplication",
+     "seo_desc": "Learn vectors, linear combinations, Ax as a mix of columns, the column space and matrix multiplication with interactive Python. Free lesson following Strang.", "title": "Columns first", "chapter": "Strang, chapter 1",
      "sections": "Strang §1.1, §1.3, §2.1, §2.4, §5.3, §8.1",
      "summary": "Linear combinations, Ax as a mix of columns, the column space, row and column pictures, "
                 "matrices that move the plane, and why AB is not BA."},
-    {"n": 2, "dir": "lesson-2", "title": "Elimination and A = LU", "chapter": "Strang, chapter 2",
+    {"n": 2, "dir": "lesson-2", "path": "gaussian-elimination-and-lu", "seo_title": "Gaussian Elimination and LU Decomposition",
+     "seo_desc": "Solve Ax = b by Gaussian elimination: pivots, back substitution, elimination matrices and A = LU, with live Python in your browser. Free lesson.", "title": "Elimination and A = LU", "chapter": "Strang, chapter 2",
      "sections": "Strang §2.2, §2.3, §2.6",
      "summary": "How a computer solves Ax = b: subtract rows until the system is a triangle, solve from the bottom up, "
                 "and record the steps as A = LU."},
-    {"n": 3, "dir": "lesson-3", "title": "Inverses, transposes and permutations", "chapter": "Strang, chapter 2",
+    {"n": 3, "dir": "lesson-3", "path": "inverse-transpose-permutation", "seo_title": "Inverse Matrix, Transpose and Permutation Matrices",
+     "seo_desc": "The inverse matrix, the 2x2 inverse formula, Gauss-Jordan, transposes, symmetric and permutation matrices, with interactive Python. Free lesson.", "title": "Inverses, transposes and permutations", "chapter": "Strang, chapter 2",
      "sections": "Strang §2.5, §2.7",
      "summary": "The matrix that undoes A, when it exists, how Gauss-Jordan finds it, what the transpose does, "
                 "and the matrices that reorder rows."},
-    {"n": 4, "dir": "lesson-4", "title": "The four subspaces", "chapter": "Strang, chapter 3",
+    {"n": 4, "dir": "lesson-4", "path": "vector-spaces-and-four-subspaces", "seo_title": "Vector Spaces, Null Space and the Four Subspaces",
+     "seo_desc": "Subspaces, the null space, rref and special solutions, the complete solution to Ax = b, basis, dimension and the four fundamental subspaces. Free lesson.", "title": "The four subspaces", "chapter": "Strang, chapter 3",
      "sections": "Strang §3.1 to §3.5",
      "summary": "Subspaces, the nullspace, pivot and free columns, the complete solution to Ax = b, "
                 "independence and dimension, and the big picture of the four subspaces."},
-    {"n": 5, "dir": "lesson-5", "title": "Orthogonality and least squares", "chapter": "Strang, chapter 4",
+    {"n": 5, "dir": "lesson-5", "path": "orthogonality-and-least-squares", "seo_title": "Orthogonality, Projections and Least Squares",
+     "seo_desc": "Orthogonal subspaces, projection onto a line, projection matrices, least squares line fitting and Gram-Schmidt, with interactive Python. Free lesson.", "title": "Orthogonality and least squares", "chapter": "Strang, chapter 4",
      "sections": "Strang §4.1 to §4.4",
      "summary": "Perpendicular subspaces, projections, the best answer when Ax = b has no solution, "
                 "fitting lines to data, and orthonormal bases built by Gram-Schmidt."},
@@ -76,7 +82,7 @@ def topnav(prefix, lesson=None, steps_html="", current=None):
                       f'<span class="ch-title">{e(c["title"])}</span></div></div>')
             continue
         items = "".join(
-            f'<a class="ls{" on" if lesson is not None and l["n"] == lesson["n"] else ""}" href="{prefix}{l["dir"]}/">'
+            f'<a class="ls{" on" if lesson is not None and l["n"] == lesson["n"] else ""}" href="{prefix}{l["path"]}/">'
             f'<span class="ls-num">Lesson {l["n"]}</span><span class="ls-title">{e(l["title"])}</span></a>' for l in ls)
         groups += (f'<div class="ch{" on" if cur else ""}"><div class="ch-head"><span class="ch-num">{c["n"]}</span>'
                    f'<span class="ch-title">{e(c["title"])}</span></div><div class="ch-lessons">{items}</div></div>')
@@ -92,13 +98,13 @@ def topnav(prefix, lesson=None, steps_html="", current=None):
         same = [l for l in built if l["ch"] == lesson["ch"]]
         _, slides, practice = next(t for t in BUILT if t[0]["n"] == lesson["n"])
         items = "".join(
-            f'<a class="ls{" on" if l["n"] == lesson["n"] else ""}" href="{prefix}{l["dir"]}/">'
+            f'<a class="ls{" on" if l["n"] == lesson["n"] else ""}" href="{prefix}{l["path"]}/">'
             f'<span class="ls-num">Lesson {l["n"]}</span><span class="ls-title">{e(l["title"])}</span></a>' for l in same)
         inside = "".join(
-            f'<a class="ls{" on" if current == s["slug"] else ""}" href="{prefix}{lesson["dir"]}/{s["slug"]}/"><span class="ls-num">{j + 1}</span>'
+            f'<a class="ls{" on" if current == s["slug"] else ""}" href="{prefix}{lesson["path"]}/{s["slug"]}/"><span class="ls-num">{j + 1}</span>'
             f'<span class="ls-title">{e(s["seo_title"])}</span></a>' for j, s in enumerate(slides))
         if practice:
-            inside += (f'<a class="ls{" on" if current == "practice" else ""}" href="{prefix}{lesson["dir"]}/practice/"><span class="ls-num">✎</span>'
+            inside += (f'<a class="ls{" on" if current == "practice" else ""}" href="{prefix}{lesson["path"]}/practice/"><span class="ls-num">✎</span>'
                        f'<span class="ls-title">Examples and problems</span></a>')
         nav += (f'<span class="sep">›</span><details class="menu"><summary>Lesson {lesson["n"]}<span class="hide-sm"> · {e(lesson["title"])}</span></summary>'
                 f'<div class="menu-list"><div class="menu-sub">Chapter {lesson["ch"]} lessons</div><div class="ch-lessons flat">{items}</div>'
@@ -139,6 +145,9 @@ def parse(path):
 
 def head(title, description, url, prefix, og_type="website", jsonld=None):
     ld = f'\n<script type="application/ld+json">{json.dumps(jsonld, ensure_ascii=False)}</script>' if jsonld else ""
+    # Google shows about 60 characters: keep the brand suffix only when it fits
+    if title.endswith(" | " + SITE) and len(title) > 62:
+        title = title[: -len(" | " + SITE)]
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -250,7 +259,7 @@ def thumb(src, peek_title, items, label=None):
 def slide_page(lesson, slides, i, next_lesson=None, practice=None):
     s = slides[i]
     prefix = "../../"
-    url = f"{BASE}/{lesson['dir']}/{s['slug']}/"
+    url = f"{BASE}/{lesson['path']}/{s['slug']}/"
     title = f"{s['seo_title']} | {SITE}"
     jsonld = [
         {"@context": "https://schema.org", "@type": "LearningResource", "name": s["seo_title"],
@@ -259,7 +268,7 @@ def slide_page(lesson, slides, i, next_lesson=None, practice=None):
          "isAccessibleForFree": True, "author": PROVIDER, "isPartOf": COURSE},
         {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
             {"@type": "ListItem", "position": 1, "name": SITE, "item": BASE + "/"},
-            {"@type": "ListItem", "position": 2, "name": f"Lesson {lesson['n']}: {lesson['title']}", "item": f"{BASE}/{lesson['dir']}/"},
+            {"@type": "ListItem", "position": 2, "name": f"Lesson {lesson['n']}: {lesson['title']}", "item": f"{BASE}/{lesson['path']}/"},
             {"@type": "ListItem", "position": 3, "name": s["seo_title"], "item": url}]},
     ]
     steps = steps_for(lesson, slides, practice, s["slug"], "../")
@@ -270,7 +279,7 @@ def slide_page(lesson, slides, i, next_lesson=None, practice=None):
     elif practice:
         nxt = '<a class="btn primary" id="next" href="../practice/">Practice →</a>'
     elif next_lesson:
-        nxt = f'<a class="btn primary" id="next" href="../../{next_lesson["dir"]}/">Lesson {next_lesson["n"]} →</a>'
+        nxt = f'<a class="btn primary" id="next" href="../../{next_lesson["path"]}/">Lesson {next_lesson["n"]} →</a>'
     else:
         nxt = '<a class="btn primary" id="next" href="../../">All lessons →</a>'
 
@@ -345,7 +354,7 @@ def slide_page(lesson, slides, i, next_lesson=None, practice=None):
 
 def practice_page(lesson, slides, pr, next_lesson):
     prefix = "../../"
-    url = f"{BASE}/{lesson['dir']}/practice/"
+    url = f"{BASE}/{lesson['path']}/practice/"
     title = f"{pr['seo_title']} | {SITE}"
     jsonld = [
         {"@context": "https://schema.org", "@type": "LearningResource", "name": pr["seo_title"],
@@ -354,12 +363,12 @@ def practice_page(lesson, slides, pr, next_lesson):
          "isAccessibleForFree": True, "author": PROVIDER, "isPartOf": COURSE},
         {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
             {"@type": "ListItem", "position": 1, "name": SITE, "item": BASE + "/"},
-            {"@type": "ListItem", "position": 2, "name": f"Lesson {lesson['n']}: {lesson['title']}", "item": f"{BASE}/{lesson['dir']}/"},
+            {"@type": "ListItem", "position": 2, "name": f"Lesson {lesson['n']}: {lesson['title']}", "item": f"{BASE}/{lesson['path']}/"},
             {"@type": "ListItem", "position": 3, "name": "Examples and problems", "item": url}]},
     ]
     steps = steps_for(lesson, slides, pr, "practice", "../")
     prev = f'<a class="btn" id="prev" href="../{slides[-1]["slug"]}/">← Back</a>'
-    nxt = (f'<a class="btn primary" id="next" href="../../{next_lesson["dir"]}/">Lesson {next_lesson["n"]} →</a>' if next_lesson
+    nxt = (f'<a class="btn primary" id="next" href="../../{next_lesson["path"]}/">Lesson {next_lesson["n"]} →</a>' if next_lesson
            else '<a class="btn primary" id="next" href="../../">All lessons →</a>')
     config = {"slug": "practice", "lesson": lesson["dir"], "assets": prefix + "assets/",
               "preview": {"kind": "transform", "M": [[1, 0], [0, 1]]}, "check": "false"}
@@ -430,9 +439,9 @@ def practice_page(lesson, slides, pr, next_lesson):
 
 def lesson_page(lesson, slides, practice=None):
     prefix = "../"
-    url = f"{BASE}/{lesson['dir']}/"
-    title = f"Lesson {lesson['n']}: {lesson['title']} | {SITE}"
-    desc = f"Interactive linear algebra lesson {lesson['n']}: {lesson['summary']} Every slide has live Python."
+    url = f"{BASE}/{lesson['path']}/"
+    title = f"{lesson['seo_title']} | {SITE}"
+    desc = lesson["seo_desc"]
     cards = "".join(
         f'<a class="card pic" href="{s["slug"]}/">{thumb(prefix + card_img(lesson, s["slug"]), "Open slide", s["title"], card_label(lesson, s["slug"]))}'
         f'<span class="n">{j + 1:02d} · {e(s["kicker"])}</span>'
@@ -464,15 +473,15 @@ def lesson_page(lesson, slides, practice=None):
 def home_page(lessons_built):
     url = BASE + "/"
     title = f"{SITE}: Interactive Linear Algebra with Python"
-    desc = ("Learn linear algebra by running it. Short visual lessons with live Python in your browser, "
-            "following Gilbert Strang's Introduction to Linear Algebra. Built for robotics and engineering.")
+    desc = ("Learn linear algebra by running it: short visual lessons with live Python in your browser, "
+            "following Gilbert Strang's textbook. Built for engineers.")
     cards = ""
     k = len(lessons_built)
     for c in CHAPTERS:
         row = ""
         for lesson, slides, _ in lessons_built:
             if lesson["ch"] == c["n"]:
-                row += (f'<a class="card pic" href="{lesson["dir"]}/">{thumb(card_img(lesson, slides[0]["slug"]), "Start lesson", f"{len(slides)} slides with live Python.", (f"Lesson {lesson['n']}", lesson["title"]))}'
+                row += (f'<a class="card pic" href="{lesson["path"]}/">{thumb(card_img(lesson, slides[0]["slug"]), "Start lesson", f"{len(slides)} slides with live Python.", (f"Lesson {lesson['n']}", lesson["title"]))}'
                         f'<span class="n">Lesson {lesson["n"]} · {e(lesson["sections"])}</span>'
                         f'<h3>{e(lesson["title"])}</h3><p>{e(lesson["summary"])}</p></a>')
         for name in c.get("planned", []):
@@ -486,7 +495,7 @@ def home_page(lessons_built):
     <div class="kicker">Steppeschool · free interactive course</div>
     <h1>Linear algebra you can run.</h1>
     <p>Short visual lessons. Read a slide, change the Python underneath, press Run and watch the plane move. The order follows Gilbert Strang's <i>Introduction to Linear Algebra</i>, and the examples come from robotics and engineering.</p>
-    <div class="cta"><a class="btn primary" href="{first[0]['dir']}/{first[1][0]['slug']}/">Start lesson 1 →</a><a class="btn" href="#lessons">See all lessons</a></div>
+    <div class="cta"><a class="btn primary" href="{first[0]['path']}/{first[1][0]['slug']}/">Start lesson 1 →</a><a class="btn" href="#lessons">See all lessons</a></div>
   </section>
   <h2 class="section-title" id="lessons">Lessons</h2>
   {cards}
@@ -526,10 +535,10 @@ def main():
     built = BUILT
     for li, (lesson, slides, practice) in enumerate(BUILT):
         next_lesson = BUILT[li + 1][0] if li + 1 < len(BUILT) else None
-        out = ROOT / lesson["dir"]
+        out = ROOT / lesson["path"]
         out.mkdir(exist_ok=True)
         (out / "index.html").write_text(lesson_page(lesson, slides, practice), encoding="utf-8")
-        urls.append(f"{BASE}/{lesson['dir']}/")
+        urls.append(f"{BASE}/{lesson['path']}/")
         for i, s in enumerate(slides):
             d = out / s["slug"]
             d.mkdir(exist_ok=True)
@@ -545,17 +554,24 @@ def main():
             (ed / f"{s['slug']}.html").write_text(
                 f'<!doctype html><html><head><meta charset="utf-8"><meta name="robots" content="noindex"></head><body>\n{main}\n'
                 f'<script type="application/json" id="la-config">{cfg}</script>\n</body></html>\n', encoding="utf-8")
-            urls.append(f"{BASE}/{lesson['dir']}/{s['slug']}/")
+            urls.append(f"{BASE}/{lesson['path']}/{s['slug']}/")
         if practice:
             d = out / "practice"
             d.mkdir(exist_ok=True)
             (d / "index.html").write_text(practice_page(lesson, slides, practice, next_lesson), encoding="utf-8")
-            urls.append(f"{BASE}/{lesson['dir']}/practice/")
+            urls.append(f"{BASE}/{lesson['path']}/practice/")
+    for lesson, slides, practice in BUILT:
+        old = ROOT / lesson["dir"]
+        if old.exists():
+            shutil.rmtree(old)
+        for sub in [""] + [s["slug"] + "/" for s in slides] + (["practice/"] if practice else []):
+            (old / sub).mkdir(parents=True, exist_ok=True)
+            (old / sub / "index.html").write_text(redirect_page(f"/{lesson['path']}/{sub}"), encoding="utf-8")
     (ROOT / "index.html").write_text(home_page(built), encoding="utf-8")
     # old single-page URL from the first prototype
     (ROOT / "lessons").mkdir(exist_ok=True)
     (ROOT / "lessons" / "01-columns-first.html").write_text(
-        redirect_page(f"/{LESSONS[0]['dir']}/{built[0][1][0]['slug']}/"), encoding="utf-8")
+        redirect_page(f"/{LESSONS[0]['path']}/{built[0][1][0]['slug']}/"), encoding="utf-8")
     sitemap = "".join(f"  <url><loc>{u}</loc><lastmod>{TODAY}</lastmod></url>\n" for u in urls)
     (ROOT / "sitemap.xml").write_text(
         f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{sitemap}</urlset>\n',

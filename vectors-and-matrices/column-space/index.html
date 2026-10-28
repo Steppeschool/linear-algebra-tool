@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Column Space Explained Visually | Linear Algebra, Live</title>
+<meta name="description" content="The column space is everything Ax can reach. Learn it with a two-thruster boat, rank, a worked example and Python you can run. Strang §1.3 and §3.1.">
+<link rel="canonical" href="https://linearalgebra.steppeschool.com/vectors-and-matrices/column-space/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Linear Algebra, Live">
+<meta property="og:title" content="Column Space Explained Visually | Linear Algebra, Live">
+<meta property="og:description" content="The column space is everything Ax can reach. Learn it with a two-thruster boat, rank, a worked example and Python you can run. Strang §1.3 and §3.1.">
+<meta property="og:url" content="https://linearalgebra.steppeschool.com/vectors-and-matrices/column-space/">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/lesson.css">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "Column Space Explained Visually", "headline": "The column space C(A) is every possible Ax.", "description": "The column space is everything Ax can reach. Learn it with a two-thruster boat, rank, a worked example and Python you can run. Strang §1.3 and §3.1.", "url": "https://linearalgebra.steppeschool.com/vectors-and-matrices/column-space/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": true, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 1: Columns first", "item": "https://linearalgebra.steppeschool.com/vectors-and-matrices/"}, {"@type": "ListItem", "position": 3, "name": "Column Space Explained Visually", "item": "https://linearalgebra.steppeschool.com/vectors-and-matrices/column-space/"}]}]</script>
+</head>
+<body>
+<header class="top">
+  <div class="topnav"><a class="brand" href="../../">Linear Algebra, Live</a><nav class="crumbnav" aria-label="Chapters and lessons"><details class="menu"><summary>Chapter 1<span class="hide-sm"> · Introduction to vectors</span></summary><div class="menu-list chapters"><div class="menu-sub">Chapters</div><div class="ch on"><div class="ch-head"><span class="ch-num">1</span><span class="ch-title">Introduction to vectors</span></div><div class="ch-lessons"><a class="ls on" href="../../vectors-and-matrices/"><span class="ls-num">Lesson 1</span><span class="ls-title">Columns first</span></a></div></div><div class="ch"><div class="ch-head"><span class="ch-num">2</span><span class="ch-title">Solving linear equations</span></div><div class="ch-lessons"><a class="ls" href="../../gaussian-elimination-and-lu/"><span class="ls-num">Lesson 2</span><span class="ls-title">Elimination and A = LU</span></a><a class="ls" href="../../inverse-transpose-permutation/"><span class="ls-num">Lesson 3</span><span class="ls-title">Inverses, transposes and permutations</span></a></div></div><div class="ch"><div class="ch-head"><span class="ch-num">3</span><span class="ch-title">Vector spaces and subspaces</span></div><div class="ch-lessons"><a class="ls" href="../../vector-spaces-and-four-subspaces/"><span class="ls-num">Lesson 4</span><span class="ls-title">The four subspaces</span></a></div></div><div class="ch"><div class="ch-head"><span class="ch-num">4</span><span class="ch-title">Orthogonality</span></div><div class="ch-lessons"><a class="ls" href="../../orthogonality-and-least-squares/"><span class="ls-num">Lesson 5</span><span class="ls-title">Orthogonality and least squares</span></a></div></div><div class="menu-sub">Coming soon</div><div class="ch-later"><div class="ch soon"><div class="ch-head"><span class="ch-num">5</span><span class="ch-title">Determinants</span></div></div><div class="ch soon"><div class="ch-head"><span class="ch-num">6</span><span class="ch-title">Eigenvalues and eigenvectors</span></div></div><div class="ch soon"><div class="ch-head"><span class="ch-num">7</span><span class="ch-title">The singular value decomposition</span></div></div></div></div></details><span class="sep">›</span><details class="menu"><summary>Lesson 1<span class="hide-sm"> · Columns first</span></summary><div class="menu-list"><div class="menu-sub">Chapter 1 lessons</div><div class="ch-lessons flat"><a class="ls on" href="../../vectors-and-matrices/"><span class="ls-num">Lesson 1</span><span class="ls-title">Columns first</span></a></div><div class="menu-sub">In lesson 1</div><div class="ch-lessons flat slides"><a class="ls" href="../../vectors-and-matrices/linear-combinations/"><span class="ls-num">1</span><span class="ls-title">Linear Combinations Explained Visually</span></a><a class="ls" href="../../vectors-and-matrices/matrix-vector-multiplication/"><span class="ls-num">2</span><span class="ls-title">Matrix-Vector Multiplication: Ax as a Combination of Columns</span></a><a class="ls on" href="../../vectors-and-matrices/column-space/"><span class="ls-num">3</span><span class="ls-title">Column Space Explained Visually</span></a><a class="ls" href="../../vectors-and-matrices/row-and-column-picture/"><span class="ls-num">4</span><span class="ls-title">Row Picture vs Column Picture of Ax = b</span></a><a class="ls" href="../../vectors-and-matrices/linear-transformations/"><span class="ls-num">5</span><span class="ls-title">Matrices as Linear Transformations: Rotation Matrix Intuition</span></a><a class="ls" href="../../vectors-and-matrices/matrix-multiplication-order/"><span class="ls-num">6</span><span class="ls-title">Matrix Multiplication: Why AB Is Not BA</span></a><a class="ls" href="../../vectors-and-matrices/reflection-matrix/"><span class="ls-num">7</span><span class="ls-title">Reflection Matrix Challenge: Mirror the F</span></a><a class="ls" href="../../vectors-and-matrices/recap/"><span class="ls-num">8</span><span class="ls-title">Lesson 1 Recap: Columns First</span></a><a class="ls" href="../../vectors-and-matrices/practice/"><span class="ls-num">✎</span><span class="ls-title">Examples and problems</span></a></div></div></details></nav></div>
+  <nav class="steps" aria-label="Steps in this lesson"><a class="step" href="../linear-combinations/" data-slug="linear-combinations" title="Linear Combinations Explained Visually">1</a><a class="step" href="../matrix-vector-multiplication/" data-slug="matrix-vector-multiplication" title="Matrix-Vector Multiplication: Ax as a Combination of Columns">2</a><a class="step on" href="../column-space/" data-slug="column-space" aria-current="page" title="Column Space Explained Visually">3</a><a class="step" href="../row-and-column-picture/" data-slug="row-and-column-picture" title="Row Picture vs Column Picture of Ax = b">4</a><a class="step" href="../linear-transformations/" data-slug="linear-transformations" title="Matrices as Linear Transformations: Rotation Matrix Intuition">5</a><a class="step" href="../matrix-multiplication-order/" data-slug="matrix-multiplication-order" title="Matrix Multiplication: Why AB Is Not BA">6</a><a class="step" href="../reflection-matrix/" data-slug="reflection-matrix" title="Reflection Matrix Challenge: Mirror the F">7</a><a class="step" href="../recap/" data-slug="recap" title="Lesson 1 Recap: Columns First">8</a><a class="step practice" href="../practice/" title="Examples and problems">✎ Practice</a></nav>
+</header>
+
+
+<main class="lesson">
+  <article class="page">
+    <div class="slide-head"><div>
+    <div class="kicker">Strang §1.3 and §3.1 · Column space</div>
+    <h1>The column space C(A) is every possible Ax.</h1>
+    <p class="lead">Try every possible x and collect all the outputs Ax. That collection is the column space of A. Solving Ax = b comes down to one question: is b in it?</p>
+    </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-1--column-space.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 1 · slide 3</small>Column space</span></span></div>
+    <div class="key">C(A) = all vectors Ax = all combinations of the columns</div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>The <b>column space</b> C(A) contains every combination of the columns of A, that is, every vector Ax.</li><li>Ax = b has a solution exactly when b is in C(A).</li><li>In the plane, C(A) is the whole plane, a line through the origin, or just the origin.</li><li>The <b>rank</b> is the number of independent directions in C(A): 2, 1 or 0.</li></ol></div>
+    <div class="prose">
+<h3>All the outputs at once</h3>
+<p>So far we computed one product Ax at a time. Now let x vary over every possible vector and mark each output Ax on the plane. The set of all those points is the column space, written C(A).</p>
+<p>Because every Ax is a combination of the columns, C(A) is simply "all combinations of the columns". That is where the name comes from.</p>
+<h3>An engineering picture: a boat with two thrusters</h3>
+<p>A small boat has two thrusters. Column 1 of A is the push from thruster 1 at full power, and column 2 is the push from thruster 2. The entries of x are the two throttle settings, and a negative setting means reverse. Then Ax is the total push on the boat.</p>
+<ul>
+<li>If the thrusters point in <b>different directions</b>, mixing them can push the boat any way you like. C(A) is the whole plane.</li>
+<li>If both thrusters point <b>forward</b>, the boat can only go forward or backward. C(A) is a line, and a sideways target is out of reach no matter how you set the throttles.</li>
+</ul>
+<h3>Three possibilities in the plane</h3>
+<p>For a 2 by 2 matrix there are only three cases:</p>
+<ul>
+<li><b>The whole plane:</b> the two columns point in different directions. We call them <b>independent</b>.</li>
+<li><b>A line:</b> one column is a multiple of the other. We call them <b>dependent</b>.</li>
+<li><b>Just the origin:</b> both columns are zero.</li>
+</ul>
+<p>The <b>rank</b> counts the independent directions that survive: 2, 1 or 0.</p>
+<h3>A closer look at the dependent case</h3>
+<div class="worked">
+<div>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>4</span></span>. Column 2 is 2 times column 1.</div>
+<div class="row">Ax = x₁(1, 2) + x₂(2, 4) = (x₁ + 2x₂)·(1, 2)</div>
+<div>Every output is a multiple of (1, 2). So b = (3, 6) is reachable, but b = (1, 0) is not.</div>
+</div>
+<p>Notice something else: x = (3, 0) and x = (1, 1) both give (3, 6). With dependent columns, different inputs can produce the same output. That extra freedom gets its own name in lesson 4: the nullspace.</p>
+<h3>Two questions that sound alike</h3>
+<ul>
+<li><b>Can we solve Ax = b for this particular b?</b> Yes, if b is in C(A).</li>
+<li><b>Can we solve Ax = b for every b?</b> Only if C(A) is the whole plane.</li>
+</ul>
+<p>For 2 by 2 matrices there is a quick test. Write A = [[a, b], [c, d]]. The columns are independent exactly when ad − bc ≠ 0. When ad − bc = 0, the matrix squashes the plane onto a line, and no matrix can undo that squash. We will meet this number again as the determinant.</p>
+    </div>
+    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · A line, and who is on it</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>4</span><span>1</span><span>2</span></span>. Column 2 = 2·column 1, so C(A) is the line through (2, 1).</p><div class="worked"><div class="row">b = (6, 3) = 3·(2, 1): in C(A), for example x = (3, 0)</div><div class="row">b = (1, 1): not a multiple of (2, 1), so Ax = b has no solution</div></div>
+</section>
+<section class="example"><h3>Example 2 · The whole plane</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>−1</span></span>. det A = −1 − 1 = −2 ≠ 0, so C(A) is the whole plane. Solve Ax = (4, 2):</p><div class="worked"><div class="row">x₁ + x₂ = 4 &nbsp;&nbsp; x₁ − x₂ = 2</div><div class="row">x₁ = 3, x₂ = 1</div></div>
+</section>
+<section class="example"><h3>Example 3 · Is b in the column space?</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>3</span><span>2</span><span>6</span></span>, b = (2, 5).</p><div class="worked"><div class="row">Column 2 = 3·column 1, so C(A) is the line of multiples of (1, 2)</div><div class="row">Is (2, 5) a multiple of (1, 2)? It would need 2·(1, 2) = (2, 4), not (2, 5)</div></div><p>So b is not in C(A), and Ax = b has no solution. Changing b to (2, 4) would make it solvable.
+</section></div>
+    <details class="more"><summary><span class="pl-icon">✎</span><span class="rv-text"><b>More examples to try</b><span>3 problems with step-by-step solutions. Try each one before you open its solution.</span></span><span class="rv-toggle"><span class="s-show">Show</span><span class="s-hide">Hide</span></span></summary><div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Describe C(A) for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>6</span><span>1</span><span>2</span></span>. What is the rank?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Column 2 = 2·column 1, so C(A) is the line through (3, 1). Rank 1.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>For which t is (t, 4) in the column space of <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>4</span></span>?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>C(A) is the line of multiples of (1, 2). (t, 4) = 2·(1, 2) needs t = 2.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>What is C(A) when A is the zero matrix? When A is the identity?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Zero matrix: only the origin, rank 0. Identity: the whole plane, rank 2, since Ix = x reaches everything.</p>
+</div></details>
+</div></div></div></details>
+  </article>
+  <details class="review">
+    <summary><span class="pl-icon">✎</span><span class="rv-text"><b>Lesson review</b><span>3 worked examples and 5 mixed problems with solutions</span></span><span class="rv-toggle"><span class="s-show">Open</span><span class="s-hide">Close</span></span></summary>
+    <div class="review-body">
+      <h2 class="practice-h">Worked examples</h2>
+      <div class="examples"><section class="example"><h3>Example 1 · Find the combination</h3>
+<p>Write b = (7, 4) as a combination of v = (1, 2) and w = (3, 1).</p>
+<p>We need c and d with c·(1, 2) + d·(3, 1) = (7, 4). Component by component:</p>
+<div class="worked"><div class="row">c + 3d = 7 &nbsp;&nbsp; 2c + d = 4</div>
+<div class="row">From the second: d = 4 − 2c. Into the first: c + 12 − 6c = 7, so c = 1 and d = 2.</div>
+<div class="row">Check: 1·(1, 2) + 2·(3, 1) = (7, 4) ✓</div></div>
+<p>In matrix form this is Ax = b with the columns v and w: <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>3</span><span>2</span><span>1</span></span> x = (7, 4), x = (1, 2).</p>
+</section>
+<section class="example"><h3>Example 2 · Ax by rows and by columns</h3>
+<p>Compute Ax for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>−1</span><span>1</span><span>3</span></span> and x = (3, 2).</p>
+<div class="worked"><div class="row">By columns: 3·(2, 1) + 2·(−1, 3) = (6 − 2, 3 + 6) = (4, 9)</div>
+<div class="row">By rows: (2·3 − 1·2, 1·3 + 3·2) = (4, 9)</div></div>
+<p>Same answer. The column way shows that (4, 9) lies in the column space, because it is built from the columns.</p>
+</section>
+<section class="example"><h3>Example 3 · Build a matrix from where (1, 0) and (0, 1) land</h3>
+<p>Find the matrix that sends (1, 0) to (1, 1) and (0, 1) to (−1, 1). What does it do to areas?</p>
+<p>The landing spots are the columns: A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>1</span><span>1</span></span>.</p>
+<div class="worked"><div class="row">det A = 1·1 − (−1)·1 = 2</div></div>
+<p>Both arrows have length √2 and are at 90° to each other, so A turns the plane by 45° and stretches it by √2. Areas double, which matches det A = 2.</p>
+</section></div>
+      <h2 class="practice-h">Problems</h2>
+      <div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Is (5, 1) a combination of (1, 1) and (2, −1)? If so, find the numbers c and d.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Solve c + 2d = 5 and c − d = 1. Subtracting gives 3d = 4, so d = 4/3 and c = 7/3.</p><p>Check: 7/3 + 8/3 = 5 and 7/3 − 4/3 = 1 ✓. Yes, because the two vectors point in different directions, every vector in the plane is a combination of them.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>Compute Ax by columns for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>4</span></span> and x = (−1, 1).</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Ax = −1·(1, 3) + 1·(2, 4) = (1, 1).</p><p>Check by rows: (−1 + 2, −3 + 4) = (1, 1) ✓</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>For which number k are the columns of <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>k</span><span>2</span><span>6</span></span> dependent? What is the column space then?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>The columns are dependent when det = 1·6 − 2k = 0, so k = 3.</p><p>Then column 2 = (3, 6) = 3·(1, 2). The column space is the line through (1, 2). Ax = b can only be solved when b is a multiple of (1, 2).</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">4</span><div class="pbody">
+<p>Find the 2 by 2 matrix that mirrors the plane across the x-axis. What is its determinant, and what does the sign mean?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>(1, 0) stays put and (0, 1) flips to (0, −1), so A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>−1</span></span>.</p><p>det A = −1. Areas keep their size (|det| = 1), and the minus sign says the plane was flipped over.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">5</span><div class="pbody">
+<p>R = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>−1</span><span>1</span><span>0</span></span> turns the plane by 90°. Compute R² and R⁴ and explain them without multiplying.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>R² = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−1</span><span>0</span><span>0</span><span>−1</span></span>, a turn by 180°: every vector points the opposite way.</p><p>R⁴ = I, the identity. Four quarter turns bring every vector back to where it started.</p>
+</div></details>
+</div></div></div>
+    </div>
+  </details>
+
+  <section class="labsec" aria-label="Lab">
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Change column 2 into a multiple of column 1 and watch C(A) shrink to a line.</span>
+      <span class="hint" id="hint">Edit the code and press Run.</span>
+    </div>
+    <div class="lab">
+      <div class="editor-card">
+        <div class="bar">
+          <span class="file">slide_3.py</span>
+          <span class="status" id="pystatus">Loading Python…</span>
+          <button class="btn" id="reset">Reset</button>
+          <button class="btn primary" id="run" disabled>Run ▸</button>
+        </div>
+        <div class="editor">
+          <div class="gutter" id="gutter">1</div>
+          <div class="code" id="codewrap">
+            <pre id="hl" aria-hidden="true"></pre>
+            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+A = np.array([[1,  1],
+              [2, -1]])
+x = np.array([1, 1])
+
+print(&quot;columns:&quot;, A[:, 0], A[:, 1])
+print(&quot;det =&quot;, np.linalg.det(A), &quot;  (0 means dependent columns)&quot;)
+combo(A, x)</textarea>
+          </div>
+        </div>
+        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+      </div>
+      <figure class="figure">
+        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <div class="after">
+    <div class="nav">
+      <a class="btn" id="prev" href="../matrix-vector-multiplication/">← Back</a>
+      <span class="count">3 / 8</span>
+      <a class="btn primary" id="next" href="../row-and-column-picture/">Next →</a>
+    </div>
+  </div>
+</main>
+<footer class="foot">
+  Follows the order and notation of Gilbert Strang, <i>Introduction to Linear Algebra</i>, 5th edition (2016); § numbers refer to that book.
+  Explanations, examples and code are original. Made by <a href="https://www.steppeschool.com">Steppeschool</a>.
+</footer>
+
+<script>window.SLIDE = {"slug": "column-space", "lesson": "lesson-1", "assets": "../../assets/", "preview": {"kind": "combo", "A": [[1, 1], [2, -1]], "x": [1, 1], "b": []}, "check": "isC(V) && near(det(V.A), 0, 1e-9) && nonzero(V.A)"};</script>
+<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
+<script src="../../assets/lab.js" defer></script>
+<script src="../../assets/nav.js" defer></script>
+</body>
+</html>

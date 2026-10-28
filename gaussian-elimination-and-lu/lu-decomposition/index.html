@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LU Decomposition Explained: Why A = LU | Linear Algebra, Live</title>
+<meta name="description" content="Elimination turns A into U, and the multipliers fill a lower triangular L so that A = LU. Factor once, solve many times. Python example. Strang §2.6.">
+<link rel="canonical" href="https://linearalgebra.steppeschool.com/gaussian-elimination-and-lu/lu-decomposition/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Linear Algebra, Live">
+<meta property="og:title" content="LU Decomposition Explained: Why A = LU | Linear Algebra, Live">
+<meta property="og:description" content="Elimination turns A into U, and the multipliers fill a lower triangular L so that A = LU. Factor once, solve many times. Python example. Strang §2.6.">
+<meta property="og:url" content="https://linearalgebra.steppeschool.com/gaussian-elimination-and-lu/lu-decomposition/">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/lesson.css">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "LU Decomposition Explained: Why A = LU", "headline": "A = LU: the triangle U and the receipt L.", "description": "Elimination turns A into U, and the multipliers fill a lower triangular L so that A = LU. Factor once, solve many times. Python example. Strang §2.6.", "url": "https://linearalgebra.steppeschool.com/gaussian-elimination-and-lu/lu-decomposition/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": true, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 2: Elimination and A = LU", "item": "https://linearalgebra.steppeschool.com/gaussian-elimination-and-lu/"}, {"@type": "ListItem", "position": 3, "name": "LU Decomposition Explained: Why A = LU", "item": "https://linearalgebra.steppeschool.com/gaussian-elimination-and-lu/lu-decomposition/"}]}]</script>
+</head>
+<body>
+<header class="top">
+  <div class="topnav"><a class="brand" href="../../">Linear Algebra, Live</a><nav class="crumbnav" aria-label="Chapters and lessons"><details class="menu"><summary>Chapter 2<span class="hide-sm"> · Solving linear equations</span></summary><div class="menu-list chapters"><div class="menu-sub">Chapters</div><div class="ch"><div class="ch-head"><span class="ch-num">1</span><span class="ch-title">Introduction to vectors</span></div><div class="ch-lessons"><a class="ls" href="../../vectors-and-matrices/"><span class="ls-num">Lesson 1</span><span class="ls-title">Columns first</span></a></div></div><div class="ch on"><div class="ch-head"><span class="ch-num">2</span><span class="ch-title">Solving linear equations</span></div><div class="ch-lessons"><a class="ls on" href="../../gaussian-elimination-and-lu/"><span class="ls-num">Lesson 2</span><span class="ls-title">Elimination and A = LU</span></a><a class="ls" href="../../inverse-transpose-permutation/"><span class="ls-num">Lesson 3</span><span class="ls-title">Inverses, transposes and permutations</span></a></div></div><div class="ch"><div class="ch-head"><span class="ch-num">3</span><span class="ch-title">Vector spaces and subspaces</span></div><div class="ch-lessons"><a class="ls" href="../../vector-spaces-and-four-subspaces/"><span class="ls-num">Lesson 4</span><span class="ls-title">The four subspaces</span></a></div></div><div class="ch"><div class="ch-head"><span class="ch-num">4</span><span class="ch-title">Orthogonality</span></div><div class="ch-lessons"><a class="ls" href="../../orthogonality-and-least-squares/"><span class="ls-num">Lesson 5</span><span class="ls-title">Orthogonality and least squares</span></a></div></div><div class="menu-sub">Coming soon</div><div class="ch-later"><div class="ch soon"><div class="ch-head"><span class="ch-num">5</span><span class="ch-title">Determinants</span></div></div><div class="ch soon"><div class="ch-head"><span class="ch-num">6</span><span class="ch-title">Eigenvalues and eigenvectors</span></div></div><div class="ch soon"><div class="ch-head"><span class="ch-num">7</span><span class="ch-title">The singular value decomposition</span></div></div></div></div></details><span class="sep">›</span><details class="menu"><summary>Lesson 2<span class="hide-sm"> · Elimination and A = LU</span></summary><div class="menu-list"><div class="menu-sub">Chapter 2 lessons</div><div class="ch-lessons flat"><a class="ls on" href="../../gaussian-elimination-and-lu/"><span class="ls-num">Lesson 2</span><span class="ls-title">Elimination and A = LU</span></a><a class="ls" href="../../inverse-transpose-permutation/"><span class="ls-num">Lesson 3</span><span class="ls-title">Inverses, transposes and permutations</span></a></div><div class="menu-sub">In lesson 2</div><div class="ch-lessons flat slides"><a class="ls" href="../../gaussian-elimination-and-lu/gaussian-elimination/"><span class="ls-num">1</span><span class="ls-title">Gaussian Elimination Explained Visually</span></a><a class="ls" href="../../gaussian-elimination-and-lu/pivots-and-back-substitution/"><span class="ls-num">2</span><span class="ls-title">Pivots and Back Substitution: 3×3 Elimination Step by Step</span></a><a class="ls" href="../../gaussian-elimination-and-lu/zero-pivots-and-singular-systems/"><span class="ls-num">3</span><span class="ls-title">When Elimination Fails: Zero Pivots and Singular Systems</span></a><a class="ls" href="../../gaussian-elimination-and-lu/elimination-matrices/"><span class="ls-num">4</span><span class="ls-title">Elimination Matrices: Row Operations as Matrix Multiplication</span></a><a class="ls on" href="../../gaussian-elimination-and-lu/lu-decomposition/"><span class="ls-num">5</span><span class="ls-title">LU Decomposition Explained: Why A = LU</span></a><a class="ls" href="../../gaussian-elimination-and-lu/recap/"><span class="ls-num">6</span><span class="ls-title">Lesson 2 Recap: Elimination and A = LU</span></a><a class="ls" href="../../gaussian-elimination-and-lu/practice/"><span class="ls-num">✎</span><span class="ls-title">Examples and problems</span></a></div></div></details></nav></div>
+  <nav class="steps" aria-label="Steps in this lesson"><a class="step" href="../gaussian-elimination/" data-slug="gaussian-elimination" title="Gaussian Elimination Explained Visually">1</a><a class="step" href="../pivots-and-back-substitution/" data-slug="pivots-and-back-substitution" title="Pivots and Back Substitution: 3×3 Elimination Step by Step">2</a><a class="step" href="../zero-pivots-and-singular-systems/" data-slug="zero-pivots-and-singular-systems" title="When Elimination Fails: Zero Pivots and Singular Systems">3</a><a class="step" href="../elimination-matrices/" data-slug="elimination-matrices" title="Elimination Matrices: Row Operations as Matrix Multiplication">4</a><a class="step on" href="../lu-decomposition/" data-slug="lu-decomposition" aria-current="page" title="LU Decomposition Explained: Why A = LU">5</a><a class="step" href="../recap/" data-slug="recap" title="Lesson 2 Recap: Elimination and A = LU">6</a><a class="step practice" href="../practice/" title="Examples and problems">✎ Practice</a></nav>
+</header>
+
+
+<main class="lesson">
+  <article class="page">
+    <div class="slide-head"><div>
+    <div class="kicker">Strang §2.6 · Elimination = factorization</div>
+    <h1>A = LU: the triangle U and the receipt L.</h1>
+    <p class="lead">Elimination turns A into an upper triangular matrix U. If we keep the multipliers, they form a lower triangular matrix L, and multiplying L times U gives A back. This factorization A = LU is how computers solve systems in practice.</p>
+    </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-2--lu-decomposition.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 2 · slide 5</small>A = LU</span></span></div>
+    <div class="key">A = LU &nbsp;&nbsp; L = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>ℓ₂₁</span><span>1</span><span>0</span><span>ℓ₃₁</span><span>ℓ₃₂</span><span>1</span></span></div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li><b>A = LU</b>: L is lower triangular with 1s on its diagonal, U is upper triangular.</li><li>The multipliers ℓᵢⱼ go straight into L, in the positions where they were used.</li><li>To solve Ax = b: first solve Lc = b, then Ux = c. Both are fast triangular solves.</li><li>Factor once, then reuse L and U for every new right-hand side b.</li></ol></div>
+    <div class="prose">
+<h3>Think of meal prep</h3>
+<p>On Sunday you chop all the vegetables for the week. That takes time. Then every weekday dinner takes five minutes, because the slow part is already done.</p>
+<p>Factoring A = LU is the Sunday work. Each new right-hand side b is a weekday dinner: two quick triangular solves.</p>
+<div class="worked"><div class="row">Lc = b &nbsp;(forward substitution, top to bottom) &nbsp;&nbsp; then &nbsp;&nbsp; Ux = c &nbsp;(back substitution, bottom to top)</div></div>
+<h3>Where L comes from</h3>
+<p>Slide 4 wrote elimination as E₃₂E₃₁E₂₁A = U. To get A back, undo the steps in reverse order:</p>
+<div class="worked"><div class="row">A = E₂₁⁻¹ E₃₁⁻¹ E₃₂⁻¹ U = LU</div></div>
+<p>Each inverse is the identity with +ℓ where E had −ℓ. Multiplied together in this order, they do not interfere with each other, and each multiplier lands in its own position. So L needs no extra arithmetic: it is simply the record of every multiplier we used, like a receipt.</p>
+<h3>The example from slides 2 to 4</h3>
+<div class="worked">
+<div>The multipliers were ℓ₂₁ = 2, ℓ₃₁ = −1, ℓ₃₂ = −1.</div>
+<div class="row">L = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>2</span><span>1</span><span>0</span><span>−1</span><span>−1</span><span>1</span></span> &nbsp; U = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>1</span><span>0</span><span>−8</span><span>−2</span><span>0</span><span>0</span><span>1</span></span></div>
+<div>Check row 3 of LU: −1·(2, 1, 1) − 1·(0, −8, −2) + 1·(0, 0, 1) = (−2, 7, 2), which is row 3 of A ✓</div>
+</div>
+<h3>Why it saves time</h3>
+<p>For n unknowns, factoring costs about n³/3 multiplications. Each triangular solve after that costs about n². With n = 1000 that is roughly 330 million operations for the factoring, and then about a million for each new b.</p>
+<p>So when the matrix stays the same and only the right side changes, as in a simulation stepping through time, we factor once and reuse L and U. In the lab, <code>lu(A)</code> returns both factors so you can check your own work.</p>
+    </div>
+    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · Factor, then solve</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>8</span></span>, b = (5, 19).</p><div class="worked"><div class="row">ℓ = 3: U = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>0</span><span>2</span></span>, L = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>3</span><span>1</span></span></div><div class="row">Lc = b: c₁ = 5, c₂ = 19 − 15 = 4</div><div class="row">Ux = c: 2x₂ = 4, x₂ = 2; x₁ + 4 = 5, x₁ = 1</div></div>
+</section>
+<section class="example"><h3>Example 2 · A 3 by 3 factorization</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>1</span><span>1</span><span>1</span><span>2</span><span>2</span><span>1</span><span>2</span><span>3</span></span> (from slide 2).</p><div class="worked"><div class="row">L = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>1</span><span>1</span><span>0</span><span>1</span><span>1</span><span>1</span></span> &nbsp; U = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>1</span><span>1</span><span>0</span><span>1</span><span>1</span><span>0</span><span>0</span><span>1</span></span></div></div><p>Each multiplier was 1, so L has 1s everywhere below the diagonal.</p>
+</section>
+<section class="example"><h3>Example 3 · A fractional multiplier</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>4</span><span>3</span><span>6</span><span>3</span></span>.</p><div class="worked"><div class="row">ℓ = 6 ÷ 4 = 1.5: U = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>4</span><span>3</span><span>0</span><span>−1.5</span></span>, L = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>1.5</span><span>1</span></span></div><div class="row">Check row 2 of LU: 1.5·(4, 3) + (0, −1.5) = (6, 3) ✓</div></div>
+</section></div>
+    <details class="more"><summary><span class="pl-icon">✎</span><span class="rv-text"><b>More examples to try</b><span>3 problems with step-by-step solutions. Try each one before you open its solution.</span></span><span class="rv-toggle"><span class="s-show">Show</span><span class="s-hide">Hide</span></span></summary><div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Find L and U for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>8</span><span>7</span></span>.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>ℓ = 4. U = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>0</span><span>3</span></span>, L = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>4</span><span>1</span></span>.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>Solve Lc = b by forward substitution: L = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>2</span><span>1</span><span>0</span><span>−1</span><span>−1</span><span>1</span></span>, b = (5, −2, 9).</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>c₁ = 5. Then 2·5 + c₂ = −2, so c₂ = −12. Then −5 + 12 + c₃ = 9, so c₃ = 2. c = (5, −12, 2), as on the slide.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>Why does A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>1</span><span>1</span></span> have no LU factorization? How is it fixed?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>The first pivot is 0, so no multiplier can be formed. Swap the rows first. Lesson 3 writes this swap as a permutation matrix P: PA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>0</span><span>1</span></span> is already upper triangular, so PA = LU with L = I.</p>
+</div></details>
+</div></div></div></details>
+  </article>
+  <details class="review">
+    <summary><span class="pl-icon">✎</span><span class="rv-text"><b>Lesson review</b><span>3 worked examples and 5 mixed problems with solutions</span></span><span class="rv-toggle"><span class="s-show">Open</span><span class="s-hide">Close</span></span></summary>
+    <div class="review-body">
+      <h2 class="practice-h">Worked examples</h2>
+      <div class="examples"><section class="example"><h3>Example 1 · A 2 by 2 system</h3>
+<p>Solve 2x + 3y = 8 and 4x + 11y = 26.</p>
+<div class="worked"><div class="row">Pivot 2, multiplier ℓ = 4 ÷ 2 = 2. Equation 2 − 2·(equation 1): 5y = 10</div>
+<div class="row">Back substitution: y = 2, then 2x + 6 = 8, so x = 1</div>
+<div class="row">Check: 4·1 + 11·2 = 26 ✓</div></div>
+<p>The pivots are 2 and 5. Their product, 10, is det A.</p>
+</section>
+<section class="example"><h3>Example 2 · A 3 by 3 system</h3>
+<p>Solve x + y + z = 6, 2x + 3y + z = 11, x + 3y + 4z = 19.</p>
+<div class="worked"><div class="row">ℓ₂₁ = 2: row 2 becomes (0, 1, −1 | −1). &nbsp; ℓ₃₁ = 1: row 3 becomes (0, 2, 3 | 13)</div>
+<div class="row">ℓ₃₂ = 2: row 3 becomes (0, 0, 5 | 15)</div>
+<div class="row">z = 3 &nbsp;→&nbsp; y − 3 = −1, y = 2 &nbsp;→&nbsp; x + 2 + 3 = 6, x = 1</div></div>
+<p>U = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>1</span><span>1</span><span>0</span><span>1</span><span>−1</span><span>0</span><span>0</span><span>5</span></span>, pivots 1, 1, 5.</p>
+</section>
+<section class="example"><h3>Example 3 · Factor once, solve with L and U</h3>
+<p>Factor A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>6</span><span>8</span></span> and use it to solve Ax = (3, 19).</p>
+<div class="worked"><div class="row">ℓ = 6 ÷ 2 = 3, so U = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>0</span><span>5</span></span> and L = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>3</span><span>1</span></span></div>
+<div class="row">Lc = b: c₁ = 3, then 3·3 + c₂ = 19, so c₂ = 10</div>
+<div class="row">Ux = c: 5x₂ = 10, x₂ = 2, then 2x₁ + 2 = 3, x₁ = 1/2</div>
+<div class="row">Check: 6·(1/2) + 8·2 = 19 ✓</div></div>
+</section></div>
+      <h2 class="practice-h">Problems</h2>
+      <div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Solve x − y = 1 and 3x + 2y = 13 by elimination. Name the pivots.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>ℓ = 3. Equation 2 − 3·(equation 1): 5y = 10, so y = 2 and x = 3. Check: 9 + 4 = 13 ✓</p><p>Pivots: 1 and 5.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>For A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>4</span><span>2</span><span>6</span><span>5</span></span>, find the multiplier ℓ₂₁, the second pivot and det A.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>ℓ₂₁ = 6 ÷ 4 = 1.5. Second pivot: 5 − 1.5·2 = 2.</p><p>det A = 4·2 = 8, the product of the pivots. Check: 4·5 − 2·6 = 8 ✓</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>For which number a does <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>a</span><span>2</span><span>8</span></span> have no second pivot? Can a row exchange fix it?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>The second pivot is 8 − 2a. It is 0 when a = 4.</p><p>No row exchange helps: the only row below is already used. The matrix is singular (column 2 = 4·column 1).</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">4</span><div class="pbody">
+<p>Write the elimination matrix E₂₁ for A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>0</span><span>6</span><span>4</span><span>1</span><span>0</span><span>2</span><span>3</span></span> and compute E₂₁A.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>ℓ₂₁ = 6 ÷ 2 = 3, so E₂₁ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>−3</span><span>1</span><span>0</span><span>0</span><span>0</span><span>1</span></span>.</p><p>E₂₁A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>0</span><span>0</span><span>1</span><span>1</span><span>0</span><span>2</span><span>3</span></span>. Only row 2 changed: (6, 4, 1) − 3·(2, 1, 0) = (0, 1, 1).</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">5</span><div class="pbody">
+<p>Find L and U for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>10</span></span>.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>ℓ = 3, so U = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>0</span><span>4</span></span> and L = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>3</span><span>1</span></span>.</p><p>Check: LU = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>6 + 4</span></span> = A ✓</p>
+</div></details>
+</div></div></div>
+    </div>
+  </details>
+
+  <section class="labsec" aria-label="Lab">
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Fill in the missing multiplier ℓ₃₂ in L so that L @ U gives back A.</span>
+      <span class="hint" id="hint">Edit the code and press Run.</span>
+    </div>
+    <div class="lab">
+      <div class="editor-card">
+        <div class="bar">
+          <span class="file">slide_5.py</span>
+          <span class="status" id="pystatus">Loading Python…</span>
+          <button class="btn" id="reset">Reset</button>
+          <button class="btn primary" id="run" disabled>Run ▸</button>
+        </div>
+        <div class="editor">
+          <div class="gutter" id="gutter">1</div>
+          <div class="code" id="codewrap">
+            <pre id="hl" aria-hidden="true"></pre>
+            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+U = np.array([[2.,  1.,  1.],
+              [0., -8., -2.],
+              [0.,  0.,  1.]])
+
+L = np.array([[ 1., 0., 0.],
+              [ 2., 1., 0.],
+              [-1., 0., 1.]])      # one multiplier is missing
+
+table((&quot;L&quot;, L), (&quot;U&quot;, U), (&quot;L @ U&quot;, L @ U))</textarea>
+          </div>
+        </div>
+        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+      </div>
+      <figure class="figure">
+        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <div class="after">
+    <div class="nav">
+      <a class="btn" id="prev" href="../elimination-matrices/">← Back</a>
+      <span class="count">5 / 6</span>
+      <a class="btn primary" id="next" href="../recap/">Next →</a>
+    </div>
+  </div>
+</main>
+<footer class="foot">
+  Follows the order and notation of Gilbert Strang, <i>Introduction to Linear Algebra</i>, 5th edition (2016); § numbers refer to that book.
+  Explanations, examples and code are original. Made by <a href="https://www.steppeschool.com">Steppeschool</a>.
+</footer>
+
+<script>window.SLIDE = {"slug": "lu-decomposition", "lesson": "lesson-2", "assets": "../../assets/", "preview": {"kind": "table", "items": [{"label": "A", "M": [[2, 1, 1], [4, -6, 0], [-2, 7, 2]], "piv": []}]}, "check": "isTab(V) && close(lastItem(V), [[2,1,1],[4,-6,0],[-2,7,2]]) && close(item(V, 'L'), [[1,0,0],[2,1,0],[-1,-1,1]])"};</script>
+<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
+<script src="../../assets/lab.js" defer></script>
+<script src="../../assets/nav.js" defer></script>
+</body>
+</html>

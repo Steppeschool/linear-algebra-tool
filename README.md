@@ -8,11 +8,11 @@ The course follows the order and notation of Gilbert Strang, *Introduction to Li
 
 | # | Lesson | Strang sections | File |
 |---|---|---|---|
-| 1 | Columns first | §1.1, §1.3, §2.1, §2.4, §5.3, §8.1 | `lesson-1/` |
-| 2 | Elimination and A = LU | §2.2, §2.3, §2.6 | `lesson-2/` |
-| 3 | Inverses, transposes and permutations | §2.5, §2.7 | `lesson-3/` |
-| 4 | The four subspaces | §3.1 to §3.5 | `lesson-4/` |
-| 5 | Orthogonality and least squares | §4.1 to §4.4 | `lesson-5/` |
+| 1 | Columns first | §1.1, §1.3, §2.1, §2.4, §5.3, §8.1 | `vectors-and-matrices/` |
+| 2 | Elimination and A = LU | §2.2, §2.3, §2.6 | `gaussian-elimination-and-lu/` |
+| 3 | Inverses, transposes and permutations | §2.5, §2.7 | `inverse-transpose-permutation/` |
+| 4 | The four subspaces | §3.1 to §3.5 | `vector-spaces-and-four-subspaces/` |
+| 5 | Orthogonality and least squares | §4.1 to §4.4 | `orthogonality-and-least-squares/` |
 
 ## Run locally
 
