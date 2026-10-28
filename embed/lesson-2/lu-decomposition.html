@@ -5,7 +5,7 @@
     <div class="kicker">Strang §2.6 · Elimination = factorization</div>
     <h1>A = LU: the triangle U and the receipt L.</h1>
     <p class="lead">Elimination turns A into an upper triangular matrix U. If we keep the multipliers, they form a lower triangular matrix L, and multiplying L times U gives A back. This factorization A = LU is how computers solve systems in practice.</p>
-    </div><img class="slide-art" src="https://linearalgebra.steppeschool.com/assets/cards/lesson-2--lu-decomposition.webp" alt="" width="640" height="360" decoding="async"></div>
+    </div><span class="thumb slide-art"><img src="https://linearalgebra.steppeschool.com/assets/cards/lesson-2--lu-decomposition.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 2 · slide 5</small>A = LU</span></span></div>
     <div class="key">A = LU &nbsp;&nbsp; L = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>ℓ₂₁</span><span>1</span><span>0</span><span>ℓ₃₁</span><span>ℓ₃₂</span><span>1</span></span></div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li><b>A = LU</b>: L is lower triangular with 1s on its diagonal, U is upper triangular.</li><li>The multipliers ℓᵢⱼ go straight into L, in the positions where they were used.</li><li>To solve Ax = b: first solve Lc = b, then Ux = c. Both are fast triangular solves.</li><li>Factor once, then reuse L and U for every new right-hand side b.</li></ol></div>
     <div class="prose">

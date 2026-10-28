@@ -5,7 +5,7 @@
     <div class="kicker">Strang §4.3 · Fitting a straight line</div>
     <h1>Fitting a straight line to sensor data.</h1>
     <p class="lead">Measurements are noisy, so the points never sit exactly on a line. The best line C + Dt makes the sum of squared vertical errors as small as possible. The normal equations give C and D in one step, for four points or four million.</p>
-    </div><img class="slide-art" src="https://linearalgebra.steppeschool.com/assets/cards/lesson-5--fitting-a-line.webp" alt="" width="640" height="360" decoding="async"></div>
+    </div><span class="thumb slide-art"><img src="https://linearalgebra.steppeschool.com/assets/cards/lesson-5--fitting-a-line.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 5 · slide 5</small>Line fitting</span></span></div>
     <div class="key">E = Σ (bᵢ − C − D tᵢ)² &nbsp;&nbsp; <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>m</span><span>Σt</span><span>Σt</span><span>Σt²</span></span> (C, D) = (Σb, Σtb)</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Each data point (tᵢ, bᵢ) gives one equation C + D tᵢ = bᵢ.</li><li>A has a column of ones (for C) and a column of times tᵢ (for D).</li><li>The errors are the vertical gaps eᵢ = bᵢ − (C + D tᵢ). Least squares minimizes the sum of their squares.</li><li>The normal equations become two equations in C and D, built from m and four sums.</li><li>The same method fits calibration lines, trends and growth rates.</li></ol></div>
     <div class="prose">

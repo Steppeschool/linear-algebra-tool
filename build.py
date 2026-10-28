@@ -205,6 +205,28 @@ def review_block(pr):
 """
 
 
+CARD_LABEL = {
+    "linear-combinations": "Linear combinations", "matrix-vector-multiplication": "Matrix times vector",
+    "column-space": "Column space", "row-and-column-picture": "Rows and columns",
+    "linear-transformations": "Transformations", "matrix-multiplication-order": "AB ≠ BA",
+    "reflection-matrix": "Reflection", "gaussian-elimination": "Elimination",
+    "pivots-and-back-substitution": "Pivots", "zero-pivots-and-singular-systems": "Zero pivots",
+    "elimination-matrices": "Elimination matrices", "lu-decomposition": "A = LU",
+    "inverse-matrix": "The inverse", "inverse-2x2-formula": "2 × 2 inverse", "inverse-of-a-product": "Inverse of AB",
+    "gauss-jordan": "Gauss-Jordan", "transpose-and-symmetric-matrices": "Transpose", "permutation-matrices": "Permutations",
+    "vector-spaces-and-subspaces": "Subspaces", "null-space": "Nullspace", "rref-and-special-solutions": "Special solutions",
+    "complete-solution": "Complete solution", "independence-basis-dimension": "Basis and dimension",
+    "four-fundamental-subspaces": "Four subspaces", "orthogonal-subspaces": "Orthogonality",
+    "projection-onto-a-line": "Projection", "projection-matrix": "Projection matrix", "least-squares": "Least squares",
+    "fitting-a-line": "Line fitting", "orthonormal-bases": "Orthonormal bases", "gram-schmidt": "Gram-Schmidt",
+    "recap": "Recap", "practice": "Practice",
+}
+
+
+def card_label(lesson, slug):
+    return f"Lesson {lesson['n']}", CARD_LABEL.get(slug, "")
+
+
 def card_img(lesson, slug):
     """Path (from the site root) of a slide's illustration; recap and practice share one each."""
     f = ROOT / "assets" / "cards" / f"{lesson['dir']}--{slug}.webp"
@@ -218,9 +240,10 @@ def ideas_text(s, k=3):
     return [re.sub(r"<[^>]+>", "", t).strip() for t in items[:k]]
 
 
-def thumb(src, peek_title, items):
+def thumb(src, peek_title, items, label=None):
     li = "".join(f"<li>{e(t)}</li>" for t in items)
-    return (f'<span class="thumb"><img src="{src}" alt="" loading="lazy" decoding="async" width="640" height="360">'
+    tl = f'<span class="tlabel"><small>{e(label[0])}</small>{e(label[1])}</span>' if label and label[1] else ""
+    return (f'<span class="thumb"><img src="{src}" alt="" loading="lazy" decoding="async" width="640" height="360">{tl}'
             f'<span class="peek"><span class="peek-h">{e(peek_title)}</span><ul>{li}</ul></span></span>')
 
 
@@ -261,7 +284,7 @@ def slide_page(lesson, slides, i, next_lesson=None, practice=None):
     <div class="kicker">{e(s['kicker'])}</div>
     <h1>{e(s['title'])}</h1>
     <p class="lead">{s['lead']}</p>
-    </div><img class="slide-art" src="{prefix}{card_img(lesson, s['slug'])}" alt="" width="640" height="360" decoding="async"></div>
+    </div><span class="thumb slide-art"><img src="{prefix}{card_img(lesson, s['slug'])}" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson {lesson['n']} · slide {i + 1}</small>{e(CARD_LABEL.get(s['slug'], ''))}</span></span></div>
     <div class="key">{s['key']}</div>
     {f'<div class="ideas-box"><div class="ideas-h">Key ideas</div>{s["ideas"]}</div>' if s.get("ideas") else ""}
     <div class="prose">
@@ -411,7 +434,7 @@ def lesson_page(lesson, slides, practice=None):
     title = f"Lesson {lesson['n']}: {lesson['title']} | {SITE}"
     desc = f"Interactive linear algebra lesson {lesson['n']}: {lesson['summary']} Every slide has live Python."
     cards = "".join(
-        f'<a class="card pic" href="{s["slug"]}/">{thumb(prefix + card_img(lesson, s["slug"]), "Inside this slide", ideas_text(s))}'
+        f'<a class="card pic" href="{s["slug"]}/">{thumb(prefix + card_img(lesson, s["slug"]), "Inside this slide", ideas_text(s), card_label(lesson, s["slug"]))}'
         f'<span class="n">{j + 1:02d} · {e(s["kicker"])}</span>'
         f'<h3>{e(s["seo_title"])}</h3><p>{e(s["description"])}</p></a>' for j, s in enumerate(slides))
     jsonld = {"@context": "https://schema.org", "@type": "ItemList", "name": title,
@@ -419,7 +442,7 @@ def lesson_page(lesson, slides, practice=None):
                                   for j, s in enumerate(slides)]}
     if practice:
         cards += (f'<a class="card pic practice-card" href="practice/">'
-                  f'{thumb(prefix + card_img(lesson, "practice"), "Inside", ["3 worked examples, step by step", "5 problems with hidden solutions", "A Python sandbox to check your answers"])}'
+                  f'{thumb(prefix + card_img(lesson, "practice"), "Inside", ["3 worked examples, step by step", "5 problems with hidden solutions", "A Python sandbox to check your answers"], card_label(lesson, "practice"))}'
                   f'<span class="n">✎ · Practice</span>'
                   f'<h3>Worked examples and problems</h3><p>{e(practice["description"])}</p></a>')
     return head(title, desc, url, prefix, jsonld=jsonld) + topnav(prefix, lesson) + f"""<div class="home">
@@ -449,7 +472,7 @@ def home_page(lessons_built):
         row = ""
         for lesson, slides, _ in lessons_built:
             if lesson["ch"] == c["n"]:
-                row += (f'<a class="card pic" href="{lesson["dir"]}/">{thumb(card_img(lesson, slides[0]["slug"]), f"{len(slides)} slides inside", [sl["title"] for sl in slides[:5]] + ([f"…and {len(slides) - 5} more"] if len(slides) > 5 else []))}'
+                row += (f'<a class="card pic" href="{lesson["dir"]}/">{thumb(card_img(lesson, slides[0]["slug"]), f"{len(slides)} slides inside", [sl["title"] for sl in slides[:5]] + ([f"…and {len(slides) - 5} more"] if len(slides) > 5 else []), (f"Lesson {lesson['n']}", lesson["title"]))}'
                         f'<span class="n">Lesson {lesson["n"]} · {e(lesson["sections"])}</span>'
                         f'<h3>{e(lesson["title"])}</h3><p>{e(lesson["summary"])}</p></a>')
         for name in c.get("planned", []):

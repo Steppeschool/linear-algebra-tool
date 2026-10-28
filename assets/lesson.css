@@ -351,3 +351,10 @@ a.card.pic:hover .thumb img, a.card.pic:focus-visible .thumb img{transform:scale
 .slide-art{width:100%;height:auto;border-radius:12px;border:1px solid var(--line);background:#16171b}
 @media (max-width:760px){ .slide-head{grid-template-columns:1fr;gap:14px} .slide-art{order:-1;max-width:420px} }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .thumb img, :root:not([data-theme="light"]) .slide-art{filter:brightness(.92)}}
+.tlabel{position:absolute;left:0;top:0;padding:16px 18px;color:#fff;font-family:var(--f-display);font-weight:700;font-size:clamp(19px,2.1vw,25px);line-height:1.15;letter-spacing:-.01em;max-width:62%;text-shadow:0 1px 12px rgba(0,0,0,.4)}
+.tlabel small{display:block;font-family:var(--f-mono);font-weight:500;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#ff9b7a;margin-bottom:5px}
+.slide-art.thumb{border-radius:12px;border:1px solid var(--line);aspect-ratio:16/9}
+.slide-art .tlabel{font-size:22px}
+.tlabel{transition:opacity .2s}
+.peek{z-index:1}
+a.card.pic:hover .tlabel, a.card.pic:focus-visible .tlabel{opacity:0}
