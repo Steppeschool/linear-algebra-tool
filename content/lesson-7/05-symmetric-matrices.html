@@ -13,7 +13,7 @@ Symmetric matrices (A = Aᵀ) are the friendliest case. Their eigenvalues are re
 <!-- key -->
 A = Aᵀ ⇒ A = QΛQᵀ &nbsp;&nbsp; QᵀQ = I
 <!-- ideas -->
-<ol class="ideas"><li>A symmetric matrix has only real eigenvalues.</li><li>Eigenvectors for different eigenvalues are perpendicular.</li><li>Scaled to length 1, they form the columns of an orthogonal Q (lesson 5): Q⁻¹ = Qᵀ.</li><li>So A = QΛQᵀ: the <b>spectral theorem</b>. Every symmetric matrix is a stretch along perpendicular axes.</li></ol>
+<ol class="ideas"><li>A symmetric matrix has only real eigenvalues (never complex, unlike the rotation on slide 1).</li><li>Eigenvectors for different eigenvalues are perpendicular.</li><li>Scaled to length 1, they form the columns of an orthogonal Q (lesson 5): Q⁻¹ = Qᵀ.</li><li>So A = QΛQᵀ. (This result is called the <b>spectral theorem</b>.) Every symmetric matrix is a stretch along perpendicular axes.</li></ol>
 <!-- prose -->
 <h3>Pulling a sheet in two perpendicular directions</h3>
 <p>Stretch a sheet of rubber harder east-west than north-south. The two stretch directions are perpendicular, and each is a direction the stretch does not turn. That is what a symmetric matrix always looks like: stretches (or squeezes, or flips) along perpendicular axes, and nothing else.</p>
@@ -24,7 +24,7 @@ A = Aᵀ ⇒ A = QΛQᵀ &nbsp;&nbsp; QᵀQ = I
 <div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>1</span><span>1</span><span>3</span></span>: trace 6, det 8, λ² − 6λ + 8 = (λ − 4)(λ − 2)</div><div class="row">λ = 4 with (1, 1), &nbsp; λ = 2 with (1, −1). &nbsp; (1, 1) · (1, −1) = 0 ✓</div><div class="row">Unit length: q₁ = (1, 1)/√2, &nbsp; q₂ = (1, −1)/√2</div><div class="row">Q = (1/√2)<span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>−1</span></span>, &nbsp; Λ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>4</span><span>0</span><span>0</span><span>2</span></span>, &nbsp; A = QΛQᵀ</div></div>
 <p>Forget the √2 and use Q = [1 1; 1 −1]: then QᵀQ = 2I, not I, and QΛQᵀ comes out as 2A. Length 1 matters. That is the lab exercise.</p>
 <h3>A sum of simple pieces</h3>
-<p>Multiplying out QΛQᵀ gives A = λ₁q₁q₁ᵀ + λ₂q₂q₂ᵀ. Each qqᵀ is a projection onto one axis (lesson 5). So a symmetric matrix projects onto each axis, stretches by its λ, and adds up. Here A = 4·(projection onto (1, 1)) + 2·(projection onto (1, −1)).</p>
+<p>Multiplying out QΛQᵀ gives A = λ₁q₁q₁ᵀ + λ₂q₂q₂ᵀ. Each qqᵀ is a projection onto one axis, because q has length 1 (lesson 5). So A splits x onto the two axes, stretches each piece by its λ, and adds the pieces back. Here A = 4·(projection onto (1, 1)) + 2·(projection onto (1, −1)).</p>
 <h3>Where this is used</h3>
 <p>Covariance matrices of sensor data are symmetric. Their perpendicular eigenvectors are the directions in which the data varies most and least. That is principal component analysis (PCA), which comes with the SVD in the next lesson. The inertia matrix of a drone is symmetric too: its eigenvectors are the principal axes from slide 1.</p>
 <!-- examples -->

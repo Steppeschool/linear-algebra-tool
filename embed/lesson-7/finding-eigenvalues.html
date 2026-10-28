@@ -6,7 +6,7 @@
     <h1>Finding eigenvalues: make A − λI singular.</h1>
     <p class="lead">Rewrite Ax = λx as (A − λI)x = 0. A nonzero x can solve that only if A − λI is singular, so its determinant must be zero. That gives an equation for λ alone. Solve it first, then find each eigenvector from a null space.</p>
     </div><span class="thumb slide-art"><img src="https://linearalgebra.steppeschool.com/assets/cards/lesson-7--finding-eigenvalues.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 7 · slide 2</small>det(A − λI) = 0</span></span></div>
-    <div class="key">det(A − λI) = 0 &nbsp;&nbsp; λ₁ + λ₂ = trace A &nbsp;&nbsp; λ₁ · λ₂ = det A</div>
+    <div class="key">det(A − λI) = 0 &nbsp;&nbsp; λ₁ + λ₂ = trace A (sum of the diagonal) &nbsp;&nbsp; λ₁ · λ₂ = det A</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Ax = λx is the same as (A − λI)x = 0.</li><li>A nonzero solution x exists only when A − λI is singular: det(A − λI) = 0. This is the <b>characteristic equation</b>.</li><li>For 2 by 2 it is λ² − (trace)λ + det = 0, where the <b>trace</b> is the sum of the diagonal entries.</li><li>For each λ, the eigenvectors are the nonzero vectors in the null space of A − λI.</li></ol></div>
     <div class="prose">
 <h3>Tuning until something gives</h3>
@@ -17,9 +17,9 @@
 <h3>A worked example</h3>
 <div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>4</span><span>1</span><span>2</span><span>3</span></span>, &nbsp; A − λI = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>4 − λ</span><span>1</span><span>2</span><span>3 − λ</span></span></div><div class="row">det = (4 − λ)(3 − λ) − 2 = λ² − 7λ + 10</div><div class="row">λ² − 7λ + 10 = (λ − 5)(λ − 2) = 0, &nbsp; so λ = 5 or λ = 2</div></div>
 <h3>Then the eigenvectors</h3>
-<div class="worked"><div class="row">λ = 5: &nbsp; A − 5I = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−1</span><span>1</span><span>2</span><span>−2</span></span>. &nbsp; Row 1 says −x₁ + x₂ = 0, so x = (1, 1)</div><div class="row">λ = 2: &nbsp; A − 2I = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>2</span><span>1</span></span>. &nbsp; Row 1 says 2x₁ + x₂ = 0, so x = (1, −2)</div><div class="row">Check: A(1, −2) = (4 − 2, 2 − 6) = (2, −4) = 2·(1, −2) ✓</div></div>
+<div class="worked"><div class="row">λ = 5: &nbsp; A − 5I = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−1</span><span>1</span><span>2</span><span>−2</span></span>. &nbsp; Row 2 is a multiple of row 1 (A − 5I is singular), so one row is enough. For x = (a, b), row 1 says −a + b = 0, so x = (1, 1)</div><div class="row">λ = 2: &nbsp; A − 2I = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>2</span><span>1</span></span>. &nbsp; Row 1 says 2a + b = 0, so x = (1, −2)</div><div class="row">Check: A(1, −2) = (4 − 2, 2 − 6) = (2, −4) = 2·(1, −2) ✓</div></div>
 <h3>Two quick checks</h3>
-<p>For any 2 by 2 matrix the characteristic equation is λ² − (a + d)λ + (ad − bc) = 0. So the two eigenvalues always add up to the <b>trace</b> a + d, and multiply to the determinant. Here 5 + 2 = 7 = 4 + 3 and 5 · 2 = 10 = 12 − 2 ✓. Use these to catch mistakes.</p>
+<p>For any 2 by 2 matrix A = [a b; c d] the characteristic equation is λ² − (a + d)λ + (ad − bc) = 0. So the two eigenvalues always add up to the <b>trace</b> a + d, and multiply to the determinant. Here 5 + 2 = 7 = 4 + 3 and 5 · 2 = 10 = 12 − 2 ✓. Use these to catch mistakes.</p>
 <h3>Where this is used</h3>
 <p>Engineers check stability by finding eigenvalues. A control loop, a bridge or a filter has a matrix; its eigenvalues say whether disturbances die away or grow. Slide 4 shows how.</p>
     </div>
@@ -70,7 +70,7 @@
 </section>
 <section class="example"><h3>Example 3 · A steady state</h3>
 <p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0.6</span><span>0.4</span><span>0.4</span><span>0.6</span></span>: columns add to 1.</p>
-<div class="worked"><div class="row">λ = 1 with (1, 1), &nbsp; λ = 0.2 with (1, −1)</div><div class="row">Steady state (½, ½): the symmetric swap evens things out</div></div>
+<div class="worked"><div class="row">λ = 1 with (1, 1), &nbsp; λ = 0.2 with (1, −1)</div><div class="row">Steady state (½, ½): both cities lose the same share each step, so they end up equal</div></div>
 </section></div>
       <h2 class="practice-h">Problems</h2>
       <div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
@@ -86,7 +86,7 @@
 </div></details>
 </div></div>
 <div class="problem"><span class="pnum">3</span><div class="pbody">
-<p>The Fibonacci rule F_(k+2) = F_(k+1) + F_k is u_(k+1) = Au_k with A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>0</span></span>. Find its eigenvalues.</p>
+<p>The Fibonacci rule F_(k+2) = F_(k+1) + F_k is u_(k+1) = Au_k with u_k = (F_(k+1), F_k) and A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>0</span></span>. Find its eigenvalues.</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
 <p>λ² − λ − 1 = 0, so λ = (1 ± √5)/2 ≈ 1.618 and −0.618. The first grows; it is the golden ratio, and F_(k+1)/F_k approaches it.</p>
 </div></details>

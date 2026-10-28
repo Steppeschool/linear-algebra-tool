@@ -36,7 +36,7 @@
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>An <b>eigenvector</b> of A is a nonzero vector x whose direction A keeps: Ax = λx.</li><li>The number λ (lambda) is its <b>eigenvalue</b>: the stretch factor along that direction.</li><li>λ > 1 stretches, 0 &lt; λ &lt; 1 shrinks, λ &lt; 0 flips the arrow, λ = 0 squashes it to 0.</li><li>Any multiple of an eigenvector is again an eigenvector, with the same λ. What matters is the line.</li></ol></div>
     <div class="prose">
 <h3>Pulling a rubber sheet</h3>
-<p>Draw arrows in every direction on a rubber sheet, then pull the sheet along one diagonal. Most arrows turn as the sheet deforms. But the arrows that lie exactly along the pull stay on their line: they only get longer. And the arrows exactly across the pull also stay on their line.</p>
+<p>Draw arrows in every direction on a rubber sheet, then pull the sheet along one diagonal. Most arrows turn as the sheet deforms. But the arrows that lie exactly along the pull stay on their line: they only get longer. And the arrows exactly across the pull also stay on their line: they keep their length or shrink, but they do not turn.</p>
 <p>Those unturned directions are the eigenvectors of the stretch. How much each one grows is its eigenvalue.</p>
 <h3>The equation</h3>
 <p>"A keeps the direction of x" means Ax is a multiple of x. Call the multiple λ (the Greek letter lambda):</p>
@@ -44,11 +44,11 @@
 <p>The zero vector always satisfies A0 = λ0, so it does not count. An eigenvector must be nonzero.</p>
 <h3>A worked example</h3>
 <div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>2</span></span></div><div class="row">x = (1, 1): &nbsp; Ax = (2 + 1, 1 + 2) = (3, 3) = 3·(1, 1). &nbsp; Eigenvector, λ = 3</div><div class="row">x = (1, −1): &nbsp; Ax = (2 − 1, 1 − 2) = (1, −1) = 1·(1, −1). &nbsp; Eigenvector, λ = 1</div><div class="row">x = (1, 0): &nbsp; Ax = (2, 1). Not a multiple of (1, 0): A turned it</div></div>
-<p>So this A stretches the diagonal direction (1, 1) by 3 and leaves the direction (1, −1) alone. Every other vector is a mix of these two, which is why it gets turned: its two parts are stretched by different amounts.</p>
+<p>So this A stretches the diagonal direction (1, 1) by 3 and leaves the direction (1, −1) alone. Any other vector is a sum of these two. A stretches the two parts by different amounts, so the sum turns.</p>
 <h3>Why they matter</h3>
 <p>Multiply by A again and again and the eigenvectors keep their direction: A²x = λ²x, A¹⁰x = λ¹⁰x. That makes them the key to anything that repeats: populations year after year, a filter updating every millisecond, a vibrating structure. The next slides find eigenvalues by calculation and use them.</p>
 <h3>Where this is used</h3>
-<p>A spinning object such as a drone or satellite has three special axes, its principal axes. Spun about one of them, it rotates smoothly; spun about any other axis, it wobbles. Those axes are the eigenvectors of its inertia matrix.</p>
+<p>A spinning object such as a drone or satellite has three special axes, its principal axes. Spun about one of them, it rotates smoothly; spun about any other axis, it wobbles. Those axes are the eigenvectors of its inertia matrix (a matrix that describes how its mass is spread out).</p>
     </div>
     <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · A stretch along the axes</h3>
 <p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>0</span><span>0</span><span>½</span></span>.</p>
@@ -96,7 +96,7 @@
 </section>
 <section class="example"><h3>Example 3 · A steady state</h3>
 <p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0.6</span><span>0.4</span><span>0.4</span><span>0.6</span></span>: columns add to 1.</p>
-<div class="worked"><div class="row">λ = 1 with (1, 1), &nbsp; λ = 0.2 with (1, −1)</div><div class="row">Steady state (½, ½): the symmetric swap evens things out</div></div>
+<div class="worked"><div class="row">λ = 1 with (1, 1), &nbsp; λ = 0.2 with (1, −1)</div><div class="row">Steady state (½, ½): both cities lose the same share each step, so they end up equal</div></div>
 </section></div>
       <h2 class="practice-h">Problems</h2>
       <div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
@@ -112,7 +112,7 @@
 </div></details>
 </div></div>
 <div class="problem"><span class="pnum">3</span><div class="pbody">
-<p>The Fibonacci rule F_(k+2) = F_(k+1) + F_k is u_(k+1) = Au_k with A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>0</span></span>. Find its eigenvalues.</p>
+<p>The Fibonacci rule F_(k+2) = F_(k+1) + F_k is u_(k+1) = Au_k with u_k = (F_(k+1), F_k) and A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>0</span></span>. Find its eigenvalues.</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
 <p>λ² − λ − 1 = 0, so λ = (1 ± √5)/2 ≈ 1.618 and −0.618. The first grows; it is the golden ratio, and F_(k+1)/F_k approaches it.</p>
 </div></details>

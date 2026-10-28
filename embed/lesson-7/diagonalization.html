@@ -7,20 +7,20 @@
     <p class="lead">Put the eigenvectors of A into the columns of a matrix X and the eigenvalues on the diagonal of Λ. Then AX = XΛ, so A = XΛX⁻¹. In the coordinates of its eigenvectors, A is just a diagonal matrix: each direction is stretched on its own.</p>
     </div><span class="thumb slide-art"><img src="https://linearalgebra.steppeschool.com/assets/cards/lesson-7--diagonalization.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 7 · slide 3</small>A = XΛX⁻¹</span></span></div>
     <div class="key">A = XΛX⁻¹ &nbsp;&nbsp; Aᵏ = XΛᵏX⁻¹</div>
-    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>X has the eigenvectors as columns; Λ (capital lambda) is diagonal with the eigenvalues, in the same order.</li><li>AX = XΛ says Axᵢ = λᵢxᵢ for every column at once.</li><li>If the n eigenvectors are independent, X is invertible and A = XΛX⁻¹.</li><li>Powers become easy: Aᵏ = XΛᵏX⁻¹, and Λᵏ just raises each diagonal entry to the power k.</li></ol></div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>X has the eigenvectors as columns; Λ (capital lambda) is diagonal with the eigenvalues, in the same order.</li><li>AX = XΛ says Axᵢ = λᵢxᵢ for every column at once.</li><li>If A is n by n and has n independent eigenvectors, X is invertible and A = XΛX⁻¹.</li><li>Powers become easy: Aᵏ = XΛᵏX⁻¹, and Λᵏ just raises each diagonal entry to the power k.</li></ol></div>
     <div class="prose">
 <h3>Turning the map</h3>
-<p>A street map is easiest to read when it is turned so the main streets run straight up and across. The city did not change; you chose better axes. Diagonalizing does this for a matrix. In the right coordinates, its eigenvectors, a messy matrix becomes a diagonal one: each axis is stretched by its own eigenvalue and nothing mixes.</p>
+<p>A street map is easiest to read when it is turned so the main streets run straight up and across. The city did not change; you chose better axes. Diagonalizing does this for a matrix. In the right coordinates, its eigenvectors, a messy matrix becomes a diagonal one: each axis is stretched by its own eigenvalue and nothing mixes. (Unlike the streets on a map, these axes do not have to be at right angles.)</p>
 <h3>All eigenvectors at once</h3>
 <p>Put the eigenvectors x₁, x₂ in the columns of X. Multiply by A: column by column, A x₁ = λ₁x₁ and A x₂ = λ₂x₂. Those are the columns of X times the diagonal matrix Λ:</p>
 <div class="worked"><div class="row">AX = A[x₁ x₂] = [λ₁x₁ &nbsp; λ₂x₂] = [x₁ x₂]<span class="mx" style="grid-template-columns:repeat(2,auto)"><span>λ₁</span><span>0</span><span>0</span><span>λ₂</span></span> = XΛ</div><div class="row">Multiply on the right by X⁻¹: &nbsp; A = XΛX⁻¹</div></div>
 <p>The order must match: the eigenvalue in position i of Λ belongs to the eigenvector in column i of X.</p>
 <h3>A worked example</h3>
-<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>4</span><span>1</span><span>2</span><span>3</span></span> (slide 2): &nbsp; λ = 5 with (1, 1), &nbsp; λ = 2 with (1, −2)</div><div class="row">X = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>−2</span></span>, &nbsp; Λ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>5</span><span>0</span><span>0</span><span>2</span></span>, &nbsp; X⁻¹ = ⅓<span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>−1</span></span></div><div class="row">XΛX⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>5</span><span>2</span><span>5</span><span>−4</span></span> · ⅓<span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>−1</span></span> = ⅓<span class="mx" style="grid-template-columns:repeat(2,auto)"><span>12</span><span>3</span><span>6</span><span>9</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>4</span><span>1</span><span>2</span><span>3</span></span> ✓</div></div>
+<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>4</span><span>1</span><span>2</span><span>3</span></span> (slide 2): &nbsp; λ = 5 with (1, 1), &nbsp; λ = 2 with (1, −2)</div><div class="row">X = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>−2</span></span>, &nbsp; Λ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>5</span><span>0</span><span>0</span><span>2</span></span>, &nbsp; X⁻¹ = ⅓<span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>−1</span></span></div><div class="row">XΛ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>5</span><span>2</span><span>5</span><span>−4</span></span>, &nbsp; so XΛX⁻¹ = XΛ · ⅓<span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>−1</span></span> = ⅓<span class="mx" style="grid-template-columns:repeat(2,auto)"><span>12</span><span>3</span><span>6</span><span>9</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>4</span><span>1</span><span>2</span><span>3</span></span> ✓</div></div>
 <h3>Powers for free</h3>
 <p>A² = XΛX⁻¹XΛX⁻¹ = XΛ²X⁻¹, because X⁻¹X = I in the middle. In the same way Aᵏ = XΛᵏX⁻¹. And Λᵏ is easy: raise each diagonal entry to the power k. A¹⁰⁰ costs no more work than A².</p>
 <h3>When it fails</h3>
-<p>Some matrices do not have enough independent eigenvectors. A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>0</span><span>1</span></span> has λ = 1 twice, but only the direction (1, 0). Then X would have two parallel columns, X⁻¹ does not exist, and A cannot be diagonalized. Distinct eigenvalues always give independent eigenvectors, so this only happens when an eigenvalue repeats.</p>
+<p>Some matrices do not have enough independent eigenvectors. A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>0</span><span>1</span></span> has λ = 1 twice, but only the direction (1, 0). Then X would have two parallel columns, X⁻¹ does not exist, and A cannot be diagonalized. This can only happen when an eigenvalue repeats: different eigenvalues always give independent eigenvectors.</p>
 <h3>Where this is used</h3>
 <p>Signal processing, vibration analysis and control design all switch to eigenvector coordinates ("modes"). Each mode can then be studied on its own, as a simple number λ instead of a full matrix.</p>
     </div>
@@ -69,7 +69,7 @@
 </section>
 <section class="example"><h3>Example 3 · A steady state</h3>
 <p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0.6</span><span>0.4</span><span>0.4</span><span>0.6</span></span>: columns add to 1.</p>
-<div class="worked"><div class="row">λ = 1 with (1, 1), &nbsp; λ = 0.2 with (1, −1)</div><div class="row">Steady state (½, ½): the symmetric swap evens things out</div></div>
+<div class="worked"><div class="row">λ = 1 with (1, 1), &nbsp; λ = 0.2 with (1, −1)</div><div class="row">Steady state (½, ½): both cities lose the same share each step, so they end up equal</div></div>
 </section></div>
       <h2 class="practice-h">Problems</h2>
       <div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
@@ -85,7 +85,7 @@
 </div></details>
 </div></div>
 <div class="problem"><span class="pnum">3</span><div class="pbody">
-<p>The Fibonacci rule F_(k+2) = F_(k+1) + F_k is u_(k+1) = Au_k with A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>0</span></span>. Find its eigenvalues.</p>
+<p>The Fibonacci rule F_(k+2) = F_(k+1) + F_k is u_(k+1) = Au_k with u_k = (F_(k+1), F_k) and A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>0</span></span>. Find its eigenvalues.</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
 <p>λ² − λ − 1 = 0, so λ = (1 ± √5)/2 ≈ 1.618 and −0.618. The first grows; it is the golden ratio, and F_(k+1)/F_k approaches it.</p>
 </div></details>

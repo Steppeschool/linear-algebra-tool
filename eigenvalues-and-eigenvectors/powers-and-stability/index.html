@@ -36,17 +36,18 @@
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Split u₀ = c₁x₁ + c₂x₂ into eigenvectors. Then uₖ = Aᵏu₀ = c₁λ₁ᵏx₁ + c₂λ₂ᵏx₂.</li><li>|λ| &lt; 1: that part shrinks to 0. |λ| &gt; 1: it grows. λ = 1: it stays.</li><li>A <b>Markov matrix</b> has nonnegative entries and columns adding to 1. It always has λ = 1.</li><li>Its eigenvector for λ = 1, scaled to add to 1, is the <b>steady state</b> the system settles into.</li></ol></div>
     <div class="prose">
 <h3>Two cities, people moving every year</h3>
-<p>Each year 10% of the people in city 1 move to city 2, and 20% of city 2 moves to city 1. Everyone else stays. Track the fractions u = (city 1, city 2):</p>
+<p>Each year 10% of the people in city 1 move to city 2, and 20% of city 2 moves to city 1. Everyone else stays. Track the fractions u = (city 1, city 2). Write uₖ for the fractions after k years:</p>
 <div class="worked"><div class="row">uₖ₊₁ = A uₖ, &nbsp; A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0.9</span><span>0.2</span><span>0.1</span><span>0.8</span></span></div><div class="row">Column 1: of city 1's people, 0.9 stay and 0.1 leave. Column 2: of city 2's, 0.2 leave and 0.8 stay. Each column adds to 1: nobody is lost</div></div>
 <p>Start with everyone in city 2, u₀ = (0, 1). Then u₁ = (0.2, 0.8), u₂ = (0.34, 0.66), u₃ ≈ (0.44, 0.56) … The fractions creep towards a fixed split. Why, and which split?</p>
 <h3>The eigenvalues explain it</h3>
-<div class="worked"><div class="row">trace = 1.7, &nbsp; det = 0.72 − 0.02 = 0.7, &nbsp; so λ² − 1.7λ + 0.7 = (λ − 1)(λ − 0.7) = 0</div><div class="row">λ = 1: &nbsp; A − I = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−0.1</span><span>0.2</span><span>0.1</span><span>−0.2</span></span> gives x₁ = (2, 1)</div><div class="row">λ = 0.7: &nbsp; x₂ = (1, −1)</div></div>
-<p>Split the start into these two directions. At every step the x₁ part is multiplied by 1, so it stays. The x₂ part is multiplied by 0.7, so after k years it has shrunk by 0.7ᵏ: after 20 years less than 0.1% is left. What survives is the x₁ direction. Scaled so the fractions add to 1, that is the steady state s = (2/3, 1/3).</p>
+<div class="worked"><div class="row">trace = 1.7, &nbsp; det = 0.72 − 0.02 = 0.7, &nbsp; so λ² − 1.7λ + 0.7 = (λ − 1)(λ − 0.7) = 0</div><div class="row">λ = 1: &nbsp; A − I = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−0.1</span><span>0.2</span><span>0.1</span><span>−0.2</span></span> gives x₁ = (2, 1)</div><div class="row">λ = 0.7: &nbsp; A − 0.7I = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0.2</span><span>0.2</span><span>0.1</span><span>0.1</span></span> gives x₂ = (1, −1)</div></div>
+<p>Split the start into these two directions: (0, 1) = ⅓·(2, 1) − ⅔·(1, −1). (Solve 2c₁ + c₂ = 0 and c₁ − c₂ = 1 for the two amounts.) At every step the x₁ part is multiplied by 1, so it stays. The x₂ part is multiplied by 0.7, so after k years it has shrunk by 0.7ᵏ: after 20 years less than 0.1% is left. What survives is the x₁ direction. Scaled so the fractions add to 1, that is the steady state s = (2/3, 1/3).</p>
 <p>Check: As = (0.9·⅔ + 0.2·⅓, 0.1·⅔ + 0.8·⅓) = (⅔, ⅓) ✓. Two thirds end up in city 1, wherever everyone started.</p>
 <h3>Stability</h3>
-<p>The same reasoning answers a central engineering question. A system updated by uₖ₊₁ = Auₖ is <b>stable</b> (every disturbance dies out) exactly when every eigenvalue has |λ| &lt; 1. One eigenvalue with |λ| &gt; 1 and some disturbance grows without limit. For systems that change continuously, du/dt = Au, the solutions behave like e^(λt) and the rule becomes: every λ must be negative (Strang §6.3).</p>
+<p>The same reasoning answers a central engineering question. A system updated by uₖ₊₁ = Auₖ is <b>stable</b> (every disturbance dies out) exactly when every eigenvalue has |λ| &lt; 1. One eigenvalue with |λ| &gt; 1 and some disturbance grows without limit. </p>
+<p>A preview, not needed now: for systems that change smoothly in time (du/dt = Au), each part behaves like e^(λt). There the rule is that every λ must be negative (Strang §6.3).</p>
 <h3>Where this is used</h3>
-<p>A Kalman filter, which fuses GPS and IMU readings on a drone, updates its error by a matrix every step. Designers check that the eigenvalues of that error matrix stay inside |λ| &lt; 1, so errors shrink instead of piling up. Web search ranking (PageRank) is the steady state of a giant Markov matrix.</p>
+<p>A drone's position filter (a Kalman filter) combines GPS and motion-sensor readings and updates its error by a matrix every step. Designers check that the eigenvalues of that error matrix stay inside |λ| &lt; 1, so errors shrink instead of piling up. Web search ranking (PageRank) is the steady state of a giant Markov matrix.</p>
     </div>
     <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · Growth and decay</h3>
 <p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>0</span><span>0</span><span>0.5</span></span>, u₀ = (1, 1).</p>
@@ -75,7 +76,7 @@
 <div class="problem"><span class="pnum">3</span><div class="pbody">
 <p>Why does every Markov matrix have λ = 1?</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>Each column of A adds to 1, so (1, 1, …, 1)A = (1, 1, …, 1): the all-ones row is a left eigenvector with λ = 1. A and Aᵀ have the same eigenvalues (same characteristic equation, since det(A − λI) = det(Aᵀ − λI)), so A has λ = 1 too.</p>
+<p>Each column of A adds to 1, so each column of A − I adds to 0. Then the rows of A − I add up to the zero row, so the rows are dependent and A − I is singular. That means det(A − I) = 0: λ = 1 is an eigenvalue.</p>
 </div></details>
 </div></div></div></details>
   </article>
@@ -93,7 +94,7 @@
 </section>
 <section class="example"><h3>Example 3 · A steady state</h3>
 <p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0.6</span><span>0.4</span><span>0.4</span><span>0.6</span></span>: columns add to 1.</p>
-<div class="worked"><div class="row">λ = 1 with (1, 1), &nbsp; λ = 0.2 with (1, −1)</div><div class="row">Steady state (½, ½): the symmetric swap evens things out</div></div>
+<div class="worked"><div class="row">λ = 1 with (1, 1), &nbsp; λ = 0.2 with (1, −1)</div><div class="row">Steady state (½, ½): both cities lose the same share each step, so they end up equal</div></div>
 </section></div>
       <h2 class="practice-h">Problems</h2>
       <div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
@@ -109,7 +110,7 @@
 </div></details>
 </div></div>
 <div class="problem"><span class="pnum">3</span><div class="pbody">
-<p>The Fibonacci rule F_(k+2) = F_(k+1) + F_k is u_(k+1) = Au_k with A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>0</span></span>. Find its eigenvalues.</p>
+<p>The Fibonacci rule F_(k+2) = F_(k+1) + F_k is u_(k+1) = Au_k with u_k = (F_(k+1), F_k) and A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>0</span></span>. Find its eigenvalues.</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
 <p>λ² − λ − 1 = 0, so λ = (1 ± √5)/2 ≈ 1.618 and −0.618. The first grows; it is the golden ratio, and F_(k+1)/F_k approaches it.</p>
 </div></details>

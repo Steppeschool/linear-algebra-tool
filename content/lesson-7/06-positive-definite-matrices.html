@@ -9,24 +9,24 @@ preview: {"kind":"table","items":[{"label":"A","M":[[2,1],[1,2]],"piv":[]}]}
 check: isTab(V) && item(V, 'A') && item(V, 'A').length === 2 && Math.abs(item(V, 'A')[0][1] - item(V, 'A')[1][0]) < 1e-9 && detN(item(V, 'A')) < -1e-9
 ---
 <!-- lead -->
-Among symmetric matrices, the most important are the positive definite ones. All their eigenvalues are positive. Equivalently, the 'energy' xᵀAx is positive for every nonzero x, so its graph is a bowl with one lowest point. That is what makes minimisation problems well behaved.
+Among symmetric matrices, the most important are the positive definite ones. All their eigenvalues are positive. Equivalently, the number xᵀAx is positive for every nonzero x. Plot the height z = xᵀAx above each point x of the plane and you get a bowl, with exactly one lowest point.
 <!-- key -->
 A positive definite ⇔ all λ &gt; 0 ⇔ xᵀAx &gt; 0 for all x ≠ 0
 <!-- ideas -->
 <ol class="ideas"><li>A symmetric A is <b>positive definite</b> when all its eigenvalues are positive.</li><li>Equivalent test: the energy xᵀAx &gt; 0 for every nonzero x.</li><li>For 2 by 2 [a b; b c]: a &gt; 0 and ac − b² &gt; 0. (Also: all pivots positive.)</li><li>The graph of xᵀAx is a bowl. One negative eigenvalue turns it into a saddle.</li></ol>
 <!-- prose -->
 <h3>A bowl or a saddle</h3>
-<p>Drop a marble into a salad bowl and it rolls to the single lowest point, from any side. Drop it on a horse saddle (or a curved crisp) and it rolls off: the surface goes up in one direction and down in another. Positive definite matrices are the bowls.</p>
-<h3>The energy xᵀAx</h3>
+<p>Drop a marble into a salad bowl and it rolls to the single lowest point, from any side. Drop it on a horse saddle (or a Pringles chip) and it rolls off: the surface goes up in one direction and down in another. Positive definite matrices are the bowls.</p>
+<h3>The number xᵀAx</h3>
 <p>For A = [a b; b c] and x = (x₁, x₂), the number xᵀAx is a curved surface:</p>
 <div class="worked"><div class="row">xᵀAx = a x₁² + 2b x₁x₂ + c x₂²</div><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>2</span></span>: &nbsp; 2x₁² + 2x₁x₂ + 2x₂² = x₁² + x₂² + (x₁ + x₂)²</div><div class="row">A sum of squares: positive unless x = 0. A bowl</div></div>
 <h3>The eigenvalue test</h3>
-<p>Write x in the perpendicular eigenvectors of A (slide 5): x = c₁q₁ + c₂q₂. Then xᵀAx = λ₁c₁² + λ₂c₂². If both λ are positive, this is positive for every nonzero x. If one λ is negative, moving along that eigenvector makes xᵀAx negative: a saddle.</p>
+<p>Write x in the perpendicular eigenvectors of A (slide 5): x = c₁q₁ + c₂q₂. Then xᵀAx = λ₁c₁² + λ₂c₂², because Aqᵢ = λᵢqᵢ and q₁ᵀq₂ = 0 (the cross terms vanish). If both λ are positive, this is positive for every nonzero x. If one λ is negative, moving along that eigenvector makes xᵀAx negative: a saddle.</p>
 <div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>2</span></span>: λ = 3 and 1, both positive. Bowl</div><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>3</span><span>3</span><span>2</span></span>: λ = 5 and −1. Saddle: x = (1, −1) gives xᵀAx = 2 − 6 + 2 = −2</div></div>
 <h3>Quick tests for 2 by 2</h3>
 <p>For [a b; b c]: positive definite exactly when a &gt; 0 and the determinant ac − b² &gt; 0. The determinant is λ₁λ₂, so a negative determinant means one eigenvalue is negative: a saddle. For [2 b; b 2], that happens when b² &gt; 4.</p>
 <h3>Where this is used</h3>
-<p>Least squares (lesson 5) minimises a bowl: its matrix AᵀA is positive definite when the columns of A are independent, which is why the minimum is unique. Robot controllers and optimisers check that their "Hessian" matrix is positive definite before trusting a minimum. And a stiffness matrix being positive definite says a structure resists every push.</p>
+<p>Least squares (lesson 5) minimises a bowl: its matrix AᵀA is positive definite when the columns of A are independent, which is why the minimum is unique. Robot controllers and optimisers check that the matrix of second derivatives of the cost (the "Hessian") is positive definite before trusting a minimum. And a stiffness matrix being positive definite says a structure resists every push.</p>
 <!-- examples -->
 <section class="example"><h3>Example 1 · A diagonal bowl</h3>
 <p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>0</span><span>0</span><span>1</span></span>: xᵀAx = 3x₁² + x₂², positive for x ≠ 0. λ = 3 and 1.</p>
@@ -34,7 +34,7 @@ A positive definite ⇔ all λ &gt; 0 ⇔ xᵀAx &gt; 0 for all x ≠ 0
 <section class="example"><h3>Example 2 · The borderline case</h3>
 <p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>1</span></span>: λ = 2 and 0.</p>
 <div class="worked"><div class="row">xᵀAx = (x₁ + x₂)², which is 0 along x = (1, −1)</div></div>
-<p>A trough, not a bowl: positive <i>semi</i>definite. There is a whole line of lowest points.</p>
+<p>A trough, not a bowl. Such a matrix is called positive <i>semi</i>definite (λ ≥ 0, with a zero allowed). There is a whole line of lowest points.</p>
 </section>
 <section class="example"><h3>Example 3 · AᵀA is positive definite</h3>
 <p>xᵀ(AᵀA)x = (Ax)ᵀ(Ax) = ‖Ax‖² ≥ 0, and it is 0 only when Ax = 0.</p>
