@@ -49,7 +49,7 @@
 <h3>A worked example</h3>
 <div class="worked"><div class="row">a = (2, 1), &nbsp; b = (1, 3)</div><div class="row">aᵀb = 2 + 3 = 5, &nbsp; aᵀa = 4 + 1 = 5, &nbsp; x̂ = 1</div><div class="row">p = (2, 1), &nbsp; e = b − p = (−1, 2)</div><div class="row">check: a · e = −2 + 2 = 0 ✓</div></div>
 <h3>Why p is the closest point</h3>
-<p>Take any other point q on the line. The path from b to q is e plus a step along the line. Those two pieces are perpendicular, so by Pythagoras the squared length is ‖e‖² plus something positive. Every other point is farther away than p.</p>
+<p>Take any other point q on the line. The path from b to q is the path from b to p (that is −e) plus a step along the line from p to q. Those two pieces are perpendicular, so by Pythagoras the squared length is ‖e‖² plus something positive. Every other point is farther away than p.</p>
 <h3>Two quick sanity checks</h3>
 <p>If b already lies on the line, then e = 0 and p = b: you are already on the road. If b is perpendicular to a, then aᵀb = 0, so x̂ = 0 and p = 0: the closest point is the origin.</p>
 <h3>Where this is used</h3>
@@ -104,7 +104,7 @@
 </section>
 <section class="example"><h3>Example 3 · Gram-Schmidt and QR in 3D</h3>
 <p>a = (1, 0, 1), b = (1, 1, 0).</p>
-<div class="worked"><div class="row">aᵀb = 1, aᵀa = 2: &nbsp; B = b − ½a = (½, 1, −½), &nbsp; a · B = ½ − ½ = 0 ✓</div><div class="row">q₁ = (1, 0, 1)/√2, &nbsp; q₂ = B/√1.5</div><div class="row">R = QᵀA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>√2</span><span>1/√2</span><span>0</span><span>√1.5</span></span></div></div>
+<div class="worked"><div class="row">aᵀb = 1, aᵀa = 2: &nbsp; u₂ = b − ½a = (½, 1, −½), &nbsp; a · u₂ = ½ − ½ = 0 ✓</div><div class="row">q₁ = (1, 0, 1)/√2, &nbsp; q₂ = u₂/√1.5</div><div class="row">With A = [a b]: R = QᵀA, e.g. R₁₂ = q₁ᵀb = 1/√2 = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>√2</span><span>1/√2</span><span>0</span><span>√1.5</span></span></div></div>
 <p>Check in the lab: Q, R = np.linalg.qr(A), then Q @ R gives A back.</p>
 </section></div>
       <h2 class="practice-h">Problems</h2>

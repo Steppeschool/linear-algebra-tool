@@ -42,11 +42,11 @@
 <div class="worked"><div class="row">a = (1, 2): &nbsp; aaᵀ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>4</span></span>, &nbsp; aᵀa = 5</div><div class="row">P = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0.2</span><span>0.4</span><span>0.4</span><span>0.8</span></span></div><div class="row">Pb for b = (4, 3): (0.8 + 1.2, 1.6 + 2.4) = (2, 4) ✓ (the same p as slide 2)</div></div>
 <h3>Pressing twice changes nothing</h3>
 <p>Think of a press that flattens dough onto a tray. Once the dough is flat, pressing it again leaves it as it is. A projection behaves the same way. After the first projection, p is already on the line, and its projection is p itself. So P(Pb) = Pb for every b, which says P² = P.</p>
-<p>In the lab, run show(P). The whole plane collapses onto the line through (1, 2). The determinant is 0: P is not invertible. You cannot recover b from its shadow p.</p>
+<p>In the lab, run show(P). The whole plane collapses onto the line through (1, 2). Its determinant (lesson 1) is 0: P is not invertible. You cannot recover b from its shadow p.</p>
 <h3>Projecting onto a plane or a column space</h3>
-<p>Now project b onto the column space of a matrix A with independent columns. The projection is p = Ax̂. Now x̂ is a vector, with one number for each column of A, not a single number as on slide 2. The error e = b − Ax̂ must be perpendicular to <b>every</b> column of A, so Aᵀe = 0:</p>
+<p>Now project b onto the column space of a matrix A with independent columns. The projection is p = Ax̂. Now x̂ is a vector, with one number for each column of A, not a single number as on slide 2. The error e = b − Ax̂ must be perpendicular to <b>every</b> column of A, so Aᵀe = 0. (The rows of Aᵀ are the columns of A, so Aᵀe lists exactly those dot products.)</p>
 <div class="worked"><div class="row">Aᵀ(b − Ax̂) = 0</div><div class="row">AᵀA x̂ = Aᵀb</div><div class="row">x̂ = (AᵀA)⁻¹Aᵀb, &nbsp;&nbsp; p = A(AᵀA)⁻¹Aᵀ b</div></div>
-<p>So P = A(AᵀA)⁻¹Aᵀ. When A has a single column a, AᵀA is the number aᵀa and we get back aaᵀ/aᵀa. The middle equation, AᵀAx̂ = Aᵀb, is the most important equation in this lesson. The next slide puts it to work.</p>
+<p>So P = A(AᵀA)⁻¹Aᵀ. (The next slide shows why AᵀA has an inverse when the columns of A are independent.) When A has a single column a, AᵀA is the number aᵀa and we get back aaᵀ/aᵀa. The middle equation, AᵀAx̂ = Aᵀb, is the most important equation in this lesson. The next slide puts it to work.</p>
 <h3>Where this is used</h3>
 <p>Noise cancelling and signal cleanup often work by projection. Build P onto the subspace where the clean signals live and apply it to every measurement. The part that survives, Pb, is the signal. The part removed, (I − P)b, is treated as noise.</p>
     </div>
@@ -99,7 +99,7 @@
 </section>
 <section class="example"><h3>Example 3 · Gram-Schmidt and QR in 3D</h3>
 <p>a = (1, 0, 1), b = (1, 1, 0).</p>
-<div class="worked"><div class="row">aᵀb = 1, aᵀa = 2: &nbsp; B = b − ½a = (½, 1, −½), &nbsp; a · B = ½ − ½ = 0 ✓</div><div class="row">q₁ = (1, 0, 1)/√2, &nbsp; q₂ = B/√1.5</div><div class="row">R = QᵀA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>√2</span><span>1/√2</span><span>0</span><span>√1.5</span></span></div></div>
+<div class="worked"><div class="row">aᵀb = 1, aᵀa = 2: &nbsp; u₂ = b − ½a = (½, 1, −½), &nbsp; a · u₂ = ½ − ½ = 0 ✓</div><div class="row">q₁ = (1, 0, 1)/√2, &nbsp; q₂ = u₂/√1.5</div><div class="row">With A = [a b]: R = QᵀA, e.g. R₁₂ = q₁ᵀb = 1/√2 = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>√2</span><span>1/√2</span><span>0</span><span>√1.5</span></span></div></div>
 <p>Check in the lab: Q, R = np.linalg.qr(A), then Q @ R gives A back.</p>
 </section></div>
       <h2 class="practice-h">Problems</h2>

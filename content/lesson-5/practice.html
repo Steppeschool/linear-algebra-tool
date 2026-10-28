@@ -17,7 +17,7 @@ Three worked examples, then five problems. Use the lab to check your numbers: pr
 </section>
 <section class="example"><h3>Example 3 · Gram-Schmidt and QR in 3D</h3>
 <p>a = (1, 0, 1), b = (1, 1, 0).</p>
-<div class="worked"><div class="row">aᵀb = 1, aᵀa = 2: &nbsp; B = b − ½a = (½, 1, −½), &nbsp; a · B = ½ − ½ = 0 ✓</div><div class="row">q₁ = (1, 0, 1)/√2, &nbsp; q₂ = B/√1.5</div><div class="row">R = QᵀA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>√2</span><span>1/√2</span><span>0</span><span>√1.5</span></span></div></div>
+<div class="worked"><div class="row">aᵀb = 1, aᵀa = 2: &nbsp; u₂ = b − ½a = (½, 1, −½), &nbsp; a · u₂ = ½ − ½ = 0 ✓</div><div class="row">q₁ = (1, 0, 1)/√2, &nbsp; q₂ = u₂/√1.5</div><div class="row">With A = [a b]: R = QᵀA, e.g. R₁₂ = q₁ᵀb = 1/√2 = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>√2</span><span>1/√2</span><span>0</span><span>√1.5</span></span></div></div>
 <p>Check in the lab: Q, R = np.linalg.qr(A), then Q @ R gives A back.</p>
 </section>
 <!-- problems -->

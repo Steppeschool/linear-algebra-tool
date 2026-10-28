@@ -45,7 +45,7 @@
 <p>Where do the sums come from? The two rows of Aᵀ are the column of ones and the column of times. So every entry of AᵀA and Aᵀb is a dot product of two columns:</p>
 <div class="worked"><div class="row">ones · ones = m, the number of points &nbsp;&nbsp; ones · t = Σt, the sum of the times &nbsp;&nbsp; t · t = Σt², the sum of the squared times</div><div class="row">ones · b = Σb, the sum of the readings &nbsp;&nbsp; t · b = Σtᵢbᵢ, each time multiplied by its reading, then added</div><div class="row">AᵀA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>m</span><span>Σt</span><span>Σt</span><span>Σt²</span></span>, &nbsp; Aᵀb = (Σb, Σtᵢbᵢ)</div></div>
 <p>For the motor:</p>
-<div class="worked"><div class="row">m = 4, &nbsp; Σt = 6, &nbsp; Σt² = 14, &nbsp; Σb = 12, &nbsp; Σtᵢbᵢ = 0 + 2 + 8 + 15 = 25</div><div class="row">4C + 6D = 12 &nbsp;&nbsp; 6C + 14D = 25</div><div class="row">Solve: D = 1.4, &nbsp; C = 0.9. &nbsp; Best line: 0.9 + 1.4t</div><div class="row">predictions (0.9, 2.3, 3.7, 5.1), &nbsp; errors (0.1, −0.3, 0.3, −0.1), &nbsp; E = 0.2</div></div>
+<div class="worked"><div class="row">m = 4, &nbsp; Σt = 6, &nbsp; Σt² = 14, &nbsp; Σb = 12, &nbsp; Σtᵢbᵢ = 0 + 2 + 8 + 15 = 25</div><div class="row">4C + 6D = 12 &nbsp;&nbsp; 6C + 14D = 25</div><div class="row">Multiply the first by 1.5 and subtract: 5D = 7, so D = 1.4 and C = 0.9. &nbsp; Best line: 0.9 + 1.4t</div><div class="row">predictions (0.9, 2.3, 3.7, 5.1), &nbsp; errors (0.1, −0.3, 0.3, −0.1), &nbsp; E = 0.2</div></div>
 <p>The motor warms by about 1.4 degrees per minute. The errors add up to zero, as the last slide predicted.</p>
 <h3>Why squares?</h3>
 <p>We need the errors to count as positive, or misses above and below the line would cancel. Squaring does that, and it gives a smooth bowl-shaped E with a single lowest point. That lowest point is where the normal equations hold. (Calculus confirms it by setting the slopes of E to zero; the projection argument on the last slide reaches the same equations without calculus.) Absolute values also make errors positive, but there is no simple formula for their minimum.</p>
@@ -63,13 +63,13 @@
 </section>
 <section class="example"><h3>Example 3 · Calibrating an accelerometer axis</h3>
 <p>Point the axis down, sideways and up. The true acceleration along it is −1 g, 0 and +1 g. The readings are −0.96, 0.03 and 1.08 g.</p>
-<div class="worked"><div class="row">t = (−1, 0, 1), &nbsp; b = (−0.96, 0.03, 1.08)</div><div class="row">Σt = 0, so the equations separate: &nbsp; 3C = Σb = 0.15, &nbsp; 2D = Σtb = 2.04</div><div class="row">bias C = 0.05 g, &nbsp; scale D = 1.02</div></div>
+<div class="worked"><div class="row">t = (−1, 0, 1), &nbsp; b = (−0.96, 0.03, 1.08)</div><div class="row">m = 3, Σt = 0, Σt² = 2. With Σt = 0 the off-diagonal entries of AᵀA vanish, so each equation has one unknown: &nbsp; 3C = Σb = 0.15, &nbsp; 2D = Σtᵢbᵢ = 2.04</div><div class="row">bias C = 0.05 g, &nbsp; scale D = 1.02</div></div>
 <p>From now on, the corrected reading is (reading − 0.05) / 1.02. Every IMU calibration routine does a version of this.</p>
 </section></div>
     <details class="more"><summary><span class="pl-icon">✎</span><span class="rv-text"><b>More examples to try</b><span>3 problems with step-by-step solutions. Try each one before you open its solution.</span></span><span class="rv-toggle"><span class="s-show">Show</span><span class="s-hide">Hide</span></span></summary><div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
 <p>Find the best line through (−1, 1), (0, 2), (1, 6).</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>Σt = 0, so the equations separate. 3C = Σb = 9 gives C = 3. 2D = Σtb = −1 + 0 + 6 = 5 gives D = 2.5.</p><p>Best line: 3 + 2.5t.</p>
+<p>Σt = 0 makes the off-diagonal entries of AᵀA zero, so the equations separate. With m = 3 and Σt² = 2: 3C = Σb = 9 gives C = 3. 2D = Σtᵢbᵢ = −1 + 0 + 6 = 5 gives D = 2.5.</p><p>Best line: 3 + 2.5t.</p>
 </div></details>
 </div></div>
 <div class="problem"><span class="pnum">2</span><div class="pbody">
@@ -101,7 +101,7 @@
 </section>
 <section class="example"><h3>Example 3 · Gram-Schmidt and QR in 3D</h3>
 <p>a = (1, 0, 1), b = (1, 1, 0).</p>
-<div class="worked"><div class="row">aᵀb = 1, aᵀa = 2: &nbsp; B = b − ½a = (½, 1, −½), &nbsp; a · B = ½ − ½ = 0 ✓</div><div class="row">q₁ = (1, 0, 1)/√2, &nbsp; q₂ = B/√1.5</div><div class="row">R = QᵀA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>√2</span><span>1/√2</span><span>0</span><span>√1.5</span></span></div></div>
+<div class="worked"><div class="row">aᵀb = 1, aᵀa = 2: &nbsp; u₂ = b − ½a = (½, 1, −½), &nbsp; a · u₂ = ½ − ½ = 0 ✓</div><div class="row">q₁ = (1, 0, 1)/√2, &nbsp; q₂ = u₂/√1.5</div><div class="row">With A = [a b]: R = QᵀA, e.g. R₁₂ = q₁ᵀb = 1/√2 = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>√2</span><span>1/√2</span><span>0</span><span>√1.5</span></span></div></div>
 <p>Check in the lab: Q, R = np.linalg.qr(A), then Q @ R gives A back.</p>
 </section></div>
       <h2 class="practice-h">Problems</h2>

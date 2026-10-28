@@ -47,7 +47,7 @@
 <p>We cannot solve Ax = b, but we can always solve AᵀAx̂ = Aᵀb. It is a small square system, n by n, however many measurements there are.</p>
 <h3>A worked example</h3>
 <p>Find the best straight line through three measurements: at times t = 0, 1, 2 we read the values b = 1, 1, 4. The line predicts C + Dt at time t, so each measurement gives one equation C + Dt = b:</p>
-<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>1</span><span>1</span><span>1</span><span>2</span></span>, &nbsp; x = (C, D), &nbsp; b = (1, 1, 4)</div><div class="row">AᵀA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>3</span><span>3</span><span>5</span></span>, &nbsp; Aᵀb = (6, 9)</div><div class="row">Solve 3C + 3D = 6 and 3C + 5D = 9: subtracting gives 2D = 3, so D = 1.5 and C = 0.5. &nbsp; The best line is b = 0.5 + 1.5t</div><div class="row">Ax̂ = (0.5, 2, 3.5), &nbsp; e = (0.5, −1, 0.5), &nbsp; Aᵀe = (0, 0) ✓</div></div>
+<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>1</span><span>1</span><span>1</span><span>2</span></span>, &nbsp; x = (C, D), &nbsp; b = (1, 1, 4)</div><div class="row">AᵀA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>3</span><span>3</span><span>5</span></span>, &nbsp; Aᵀb = (6, 9)</div><div class="row">Solve 3C + 3D = 6 and 3C + 5D = 9: subtracting gives 2D = 3, so D = 1.5 and C = 0.5. &nbsp; The best line is 0.5 + 1.5t</div><div class="row">Ax̂ = (0.5, 2, 3.5), &nbsp; e = (0.5, −1, 0.5), &nbsp; Aᵀe = (0, 0) ✓</div></div>
 <h3>Why AᵀA is invertible</h3>
 <p>Suppose AᵀAx = 0. Multiply by xᵀ on the left: xᵀAᵀAx = (Ax)ᵀ(Ax) = ‖Ax‖² = 0, so Ax = 0. (The transpose of a product reverses the order: (Ax)ᵀ = xᵀAᵀ.) If the columns of A are independent, that forces x = 0. So AᵀA has only the zero vector in its nullspace and is invertible. For a line fit this means: use at least two different times t, so that the column of ones and the column of times are independent.</p>
 <h3>Where this is used</h3>
@@ -102,7 +102,7 @@
 </section>
 <section class="example"><h3>Example 3 · Gram-Schmidt and QR in 3D</h3>
 <p>a = (1, 0, 1), b = (1, 1, 0).</p>
-<div class="worked"><div class="row">aᵀb = 1, aᵀa = 2: &nbsp; B = b − ½a = (½, 1, −½), &nbsp; a · B = ½ − ½ = 0 ✓</div><div class="row">q₁ = (1, 0, 1)/√2, &nbsp; q₂ = B/√1.5</div><div class="row">R = QᵀA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>√2</span><span>1/√2</span><span>0</span><span>√1.5</span></span></div></div>
+<div class="worked"><div class="row">aᵀb = 1, aᵀa = 2: &nbsp; u₂ = b − ½a = (½, 1, −½), &nbsp; a · u₂ = ½ − ½ = 0 ✓</div><div class="row">q₁ = (1, 0, 1)/√2, &nbsp; q₂ = u₂/√1.5</div><div class="row">With A = [a b]: R = QᵀA, e.g. R₁₂ = q₁ᵀb = 1/√2 = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>√2</span><span>1/√2</span><span>0</span><span>√1.5</span></span></div></div>
 <p>Check in the lab: Q, R = np.linalg.qr(A), then Q @ R gives A back.</p>
 </section></div>
       <h2 class="practice-h">Problems</h2>

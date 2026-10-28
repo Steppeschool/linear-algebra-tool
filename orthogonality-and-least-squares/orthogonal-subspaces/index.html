@@ -35,7 +35,7 @@
     <div class="key">vᵀw = 0 &nbsp;&nbsp; N(A) ⟂ C(Aᵀ) &nbsp;&nbsp; N(Aᵀ) ⟂ C(A)</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>v and w are <b>orthogonal</b> (perpendicular) when v · w = vᵀw = 0.</li><li>Then Pythagoras holds: ‖v‖² + ‖w‖² = ‖v + w‖², where ‖v‖ is the length of v.</li><li>Two subspaces are orthogonal when <b>every</b> vector in one is perpendicular to <b>every</b> vector in the other.</li><li>Ax = 0 says each row of A has dot product 0 with x. So the nullspace is perpendicular to the row space.</li><li>The two pieces fill the input space: every x splits into a row space part plus a nullspace part.</li></ol></div>
     <div class="prose">
-<h3>Perpendicular means independent directions</h3>
+<h3>Perpendicular directions do not interfere</h3>
 <p>Walk along a street that runs exactly north. However far you go, your east-west position does not change. North and east are perpendicular directions: moving in one tells you nothing about the other.</p>
 <p>In algebra the test is the dot product. Multiply matching components and add. If the total is zero, the vectors are perpendicular. For v = (2, 1) and w = (−1, 2): v · w = −2 + 2 = 0.</p>
 <p>We also write the dot product as vᵀw: a row times a column. It is the same number.</p>
@@ -49,7 +49,7 @@
 <div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>3</span><span>2</span><span>6</span></span> &nbsp; row space: the line through (1, 3)</div><div class="row">nullspace: the line through (−3, 1)</div><div class="row">(1, 3) · (−3, 1) = −3 + 3 = 0 ✓</div></div>
 <p>The same reasoning with Aᵀ in place of A shows that the left nullspace N(Aᵀ) is perpendicular to the column space C(A).</p>
 <h3>The two pieces fill the space</h3>
-<p>Recall from lesson 4: r is the rank of A (its number of pivots) and n is its number of columns. The row space has dimension r and the nullspace has dimension n − r. Together that is n, the whole input space. So the nullspace is not just some perpendicular subspace: it contains <b>every</b> vector perpendicular to the row space. Strang calls the two subspaces <b>orthogonal complements</b>.</p>
+<p>Recall from lesson 4: r is the rank of A (its number of pivots) and n is its number of columns. The row space has dimension r and the nullspace has dimension n − r. Together that is n, the whole input space. And the nullspace contains <b>every</b> vector perpendicular to the row space: such a vector is perpendicular to each row, so it solves Ax = 0. Strang calls the two subspaces <b>orthogonal complements</b>.</p>
 <p>This means every input x splits in exactly one way into x = x_r + x_n, a row space part plus a nullspace part. Since Ax_n = 0, the matrix only "sees" the row space part: Ax = Ax_r.</p>
 <h3>Where this is used</h3>
 <p>An IMU (the motion sensor in a phone or drone) has three accelerometer axes at right angles. Because the axes are perpendicular, each one measures its own direction only. Tilt the board along x, and the y and z readings stay put, apart from noise.</p>
@@ -103,7 +103,7 @@
 </section>
 <section class="example"><h3>Example 3 · Gram-Schmidt and QR in 3D</h3>
 <p>a = (1, 0, 1), b = (1, 1, 0).</p>
-<div class="worked"><div class="row">aᵀb = 1, aᵀa = 2: &nbsp; B = b − ½a = (½, 1, −½), &nbsp; a · B = ½ − ½ = 0 ✓</div><div class="row">q₁ = (1, 0, 1)/√2, &nbsp; q₂ = B/√1.5</div><div class="row">R = QᵀA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>√2</span><span>1/√2</span><span>0</span><span>√1.5</span></span></div></div>
+<div class="worked"><div class="row">aᵀb = 1, aᵀa = 2: &nbsp; u₂ = b − ½a = (½, 1, −½), &nbsp; a · u₂ = ½ − ½ = 0 ✓</div><div class="row">q₁ = (1, 0, 1)/√2, &nbsp; q₂ = u₂/√1.5</div><div class="row">With A = [a b]: R = QᵀA, e.g. R₁₂ = q₁ᵀb = 1/√2 = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>√2</span><span>1/√2</span><span>0</span><span>√1.5</span></span></div></div>
 <p>Check in the lab: Q, R = np.linalg.qr(A), then Q @ R gives A back.</p>
 </section></div>
       <h2 class="practice-h">Problems</h2>
