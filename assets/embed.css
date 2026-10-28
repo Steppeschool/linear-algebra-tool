@@ -333,13 +333,16 @@
 .la-embed .slide-art{order:-1;max-width:420px}
  }
 
-.la-embed .tlabel{position:absolute;left:0;top:0;padding:16px 18px;color:#fff;font-family:var(--f-display);font-weight:700;font-size:clamp(19px,2.1vw,25px);line-height:1.15;letter-spacing:-.01em;max-width:62%;text-shadow:0 1px 12px rgba(0,0,0,.4)}
+.la-embed .tlabel{position:absolute;left:0;top:0;padding:16px 18px;color:#fff;font-family:var(--f-display);font-weight:700;font-size:clamp(19px,2.1vw,25px);line-height:1.15;letter-spacing:-.01em;max-width:72%;text-shadow:0 1px 12px rgba(0,0,0,.4)}
 .la-embed .tlabel small{display:block;font-family:var(--f-mono);font-weight:500;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#ff9b7a;margin-bottom:5px}
 .la-embed .slide-art.thumb{border-radius:12px;border:1px solid var(--line);aspect-ratio:16/9}
 .la-embed .slide-art .tlabel{font-size:22px}
 .la-embed .tlabel{transition:opacity .2s}
 .la-embed .peek{z-index:1}
 .la-embed a.card.pic:hover .tlabel, .la-embed a.card.pic:focus-visible .tlabel{opacity:0}
+.la-embed .peek{gap:12px;padding:20px 22px}
+.la-embed .peek-t{font-family:var(--f-display);font-weight:700;font-size:20px;line-height:1.25;letter-spacing:-.01em}
+.la-embed .peek-go{font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#ffb39a}
 
 
 @container la (max-width:1020px){.la-embed .app{grid-template-columns:minmax(0,1fr)}
