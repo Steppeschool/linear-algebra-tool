@@ -13,7 +13,7 @@ Vectors that are perpendicular to each other and have length 1 are orthonormal. 
 <!-- key -->
 QᵀQ = I &nbsp;&nbsp; square Q: Q⁻¹ = Qᵀ &nbsp;&nbsp; ‖Qx‖ = ‖x‖
 <!-- ideas -->
-<ol class="ideas"><li>q₁, ..., qₙ are <b>orthonormal</b> when qᵢᵀqⱼ = 0 for i ≠ j and qᵢᵀqᵢ = 1.</li><li>With those vectors as columns, QᵀQ = I.</li><li>A square Q with QᵀQ = I is an <b>orthogonal matrix</b>. Its inverse is its transpose.</li><li>Q keeps lengths and angles: rotations and reflections.</li><li>Coordinates in an orthonormal basis are dot products: x = (q₁ᵀx)q₁ + ... + (qₙᵀx)qₙ.</li></ol>
+<ol class="ideas"><li>q₁, ..., qₙ are <b>orthonormal</b> when qᵢᵀqⱼ = 0 for i ≠ j and qᵢᵀqᵢ = 1.</li><li>With those vectors as columns, QᵀQ = I.</li><li>A square Q with QᵀQ = I is an <b>orthogonal matrix</b>. Its inverse is its transpose. (The name is a historical quirk: the columns are orthonormal, not just orthogonal.)</li><li>Q keeps lengths and angles: rotations and reflections.</li><li>Coordinates in an orthonormal basis are dot products: x = (q₁ᵀx)q₁ + ... + (qₙᵀx)qₙ.</li></ol>
 <!-- prose -->
 <h3>A city with a perfect grid</h3>
 <p>In a city where the streets meet at right angles and every block is exactly 1 km, you can read your position directly from the street signs: 3 blocks east, 2 blocks north. In a city with slanted streets and uneven blocks, finding your coordinates means solving equations.</p>
@@ -27,7 +27,7 @@ QᵀQ = I &nbsp;&nbsp; square Q: Q⁻¹ = Qᵀ &nbsp;&nbsp; ‖Qx‖ = ‖x‖
 <h3>Coordinates are dot products</h3>
 <p>To write x = c₁q₁ + c₂q₂, take the dot product of both sides with q₁. Every other term dies, because the q's are perpendicular, so c₁ = q₁ᵀx. No elimination is needed.</p>
 <div class="worked"><div class="row">x = (5, 5): &nbsp; c₁ = q₁ᵀx = 3 + 4 = 7, &nbsp; c₂ = q₂ᵀx = −4 + 3 = −1</div><div class="row">7·(0.6, 0.8) − 1·(−0.8, 0.6) = (5, 5) ✓</div></div>
-<p>Projections become simple as well. With orthonormal columns, AᵀA becomes QᵀQ = I, the normal equations say x̂ = Qᵀb, and the projection matrix is P = QQᵀ.</p>
+<p>Projections become simple as well. With orthonormal columns, AᵀA becomes QᵀQ = I, the normal equations say x̂ = Qᵀb, and the projection matrix is P = QQᵀ. Careful: when Q has fewer columns than rows, QQᵀ is not I. It is the projection onto the column space of Q.</p>
 <h3>Where this is used</h3>
 <p>A drone's orientation is stored as a 3 by 3 rotation matrix, an orthogonal matrix. After thousands of small updates, rounding errors make its columns drift away from orthonormal. The fix is to make them orthonormal again, which is the job of the next slide.</p>
 <!-- examples -->

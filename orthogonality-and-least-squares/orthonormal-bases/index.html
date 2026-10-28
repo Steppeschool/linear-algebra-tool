@@ -33,7 +33,7 @@
     <p class="lead">Vectors that are perpendicular to each other and have length 1 are orthonormal. Put them in the columns of a matrix Q and QᵀQ = I. With such a basis, coordinates are plain dot products, and projections and least squares need no inverse.</p>
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-5--orthonormal-bases.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 5 · slide 6</small>Orthonormal bases</span></span></div>
     <div class="key">QᵀQ = I &nbsp;&nbsp; square Q: Q⁻¹ = Qᵀ &nbsp;&nbsp; ‖Qx‖ = ‖x‖</div>
-    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>q₁, ..., qₙ are <b>orthonormal</b> when qᵢᵀqⱼ = 0 for i ≠ j and qᵢᵀqᵢ = 1.</li><li>With those vectors as columns, QᵀQ = I.</li><li>A square Q with QᵀQ = I is an <b>orthogonal matrix</b>. Its inverse is its transpose.</li><li>Q keeps lengths and angles: rotations and reflections.</li><li>Coordinates in an orthonormal basis are dot products: x = (q₁ᵀx)q₁ + ... + (qₙᵀx)qₙ.</li></ol></div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>q₁, ..., qₙ are <b>orthonormal</b> when qᵢᵀqⱼ = 0 for i ≠ j and qᵢᵀqᵢ = 1.</li><li>With those vectors as columns, QᵀQ = I.</li><li>A square Q with QᵀQ = I is an <b>orthogonal matrix</b>. Its inverse is its transpose. (The name is a historical quirk: the columns are orthonormal, not just orthogonal.)</li><li>Q keeps lengths and angles: rotations and reflections.</li><li>Coordinates in an orthonormal basis are dot products: x = (q₁ᵀx)q₁ + ... + (qₙᵀx)qₙ.</li></ol></div>
     <div class="prose">
 <h3>A city with a perfect grid</h3>
 <p>In a city where the streets meet at right angles and every block is exactly 1 km, you can read your position directly from the street signs: 3 blocks east, 2 blocks north. In a city with slanted streets and uneven blocks, finding your coordinates means solving equations.</p>
@@ -47,7 +47,7 @@
 <h3>Coordinates are dot products</h3>
 <p>To write x = c₁q₁ + c₂q₂, take the dot product of both sides with q₁. Every other term dies, because the q's are perpendicular, so c₁ = q₁ᵀx. No elimination is needed.</p>
 <div class="worked"><div class="row">x = (5, 5): &nbsp; c₁ = q₁ᵀx = 3 + 4 = 7, &nbsp; c₂ = q₂ᵀx = −4 + 3 = −1</div><div class="row">7·(0.6, 0.8) − 1·(−0.8, 0.6) = (5, 5) ✓</div></div>
-<p>Projections become simple as well. With orthonormal columns, AᵀA becomes QᵀQ = I, the normal equations say x̂ = Qᵀb, and the projection matrix is P = QQᵀ.</p>
+<p>Projections become simple as well. With orthonormal columns, AᵀA becomes QᵀQ = I, the normal equations say x̂ = Qᵀb, and the projection matrix is P = QQᵀ. Careful: when Q has fewer columns than rows, QQᵀ is not I. It is the projection onto the column space of Q.</p>
 <h3>Where this is used</h3>
 <p>A drone's orientation is stored as a 3 by 3 rotation matrix, an orthogonal matrix. After thousands of small updates, rounding errors make its columns drift away from orthonormal. The fix is to make them orthonormal again, which is the job of the next slide.</p>
     </div>
@@ -94,7 +94,7 @@
 <section class="example"><h3>Example 2 · Fit a line to five points</h3>
 <p>Fit C + Dt to (−2, 0), (−1, 1), (0, 1), (1, 2), (2, 4).</p>
 <div class="worked"><div class="row">The times are centred: Σt = 0, so the normal equations separate</div><div class="row">5C = Σb = 8, &nbsp; C = 1.6</div><div class="row">10D = Σtb = 0 − 1 + 0 + 2 + 8 = 9, &nbsp; D = 0.9</div></div>
-<p>Best line: 1.6 + 0.9t. Choosing t so that Σt = 0 is a common trick: it makes the columns of A perpendicular.</p>
+<p>Best line: 1.6 + 0.9t. Choosing t so that Σt = 0 is a common trick: it makes the columns of A perpendicular, because the column of ones dotted with the column of times is Σt = 0.</p>
 </section>
 <section class="example"><h3>Example 3 · Gram-Schmidt and QR in 3D</h3>
 <p>a = (1, 0, 1), b = (1, 1, 0).</p>
@@ -123,7 +123,7 @@
 <div class="problem"><span class="pnum">4</span><div class="pbody">
 <p>Find the least squares solution of x = 1, x = 4, 2x = 4.</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>A = (1, 1, 2), b = (1, 4, 4). x̂ = aᵀb / aᵀa = (1 + 4 + 8) / 6 = 13/6 ≈ 2.17.</p>
+<p>A has one column, a = (1, 1, 2), and b = (1, 4, 4). x̂ = aᵀb / aᵀa = (1 + 4 + 8) / 6 = 13/6 ≈ 2.17.</p>
 </div></details>
 </div></div>
 <div class="problem"><span class="pnum">5</span><div class="pbody">

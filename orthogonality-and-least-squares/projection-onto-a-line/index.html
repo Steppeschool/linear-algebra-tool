@@ -41,7 +41,7 @@
 <h3>From the right angle to a formula</h3>
 <p>Two facts are enough:</p>
 <ul>
-<li>p is on the line, so it is a multiple of a: p = x̂a. We only need the number x̂.</li>
+<li>p is on the line, so it is a multiple of a: p = x̂a. We only need the number x̂ (read "x-hat"; the hat marks the best choice).</li>
 <li>e = b − x̂a is perpendicular to a, so its dot product with a is zero.</li>
 </ul>
 <div class="worked"><div class="row">aᵀ(b − x̂a) = 0</div><div class="row">aᵀb − x̂ aᵀa = 0</div><div class="row">x̂ = aᵀb / aᵀa, &nbsp;&nbsp; p = x̂a</div></div>
@@ -100,7 +100,7 @@
 <section class="example"><h3>Example 2 · Fit a line to five points</h3>
 <p>Fit C + Dt to (−2, 0), (−1, 1), (0, 1), (1, 2), (2, 4).</p>
 <div class="worked"><div class="row">The times are centred: Σt = 0, so the normal equations separate</div><div class="row">5C = Σb = 8, &nbsp; C = 1.6</div><div class="row">10D = Σtb = 0 − 1 + 0 + 2 + 8 = 9, &nbsp; D = 0.9</div></div>
-<p>Best line: 1.6 + 0.9t. Choosing t so that Σt = 0 is a common trick: it makes the columns of A perpendicular.</p>
+<p>Best line: 1.6 + 0.9t. Choosing t so that Σt = 0 is a common trick: it makes the columns of A perpendicular, because the column of ones dotted with the column of times is Σt = 0.</p>
 </section>
 <section class="example"><h3>Example 3 · Gram-Schmidt and QR in 3D</h3>
 <p>a = (1, 0, 1), b = (1, 1, 0).</p>
@@ -129,7 +129,7 @@
 <div class="problem"><span class="pnum">4</span><div class="pbody">
 <p>Find the least squares solution of x = 1, x = 4, 2x = 4.</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>A = (1, 1, 2), b = (1, 4, 4). x̂ = aᵀb / aᵀa = (1 + 4 + 8) / 6 = 13/6 ≈ 2.17.</p>
+<p>A has one column, a = (1, 1, 2), and b = (1, 4, 4). x̂ = aᵀb / aᵀa = (1 + 4 + 8) / 6 = 13/6 ≈ 2.17.</p>
 </div></details>
 </div></div>
 <div class="problem"><span class="pnum">5</span><div class="pbody">

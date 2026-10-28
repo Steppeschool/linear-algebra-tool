@@ -32,36 +32,36 @@
     <h1>Gram-Schmidt: making any basis orthonormal.</h1>
     <p class="lead">Start with independent vectors a and b. Keep the direction of a. From b, remove its projection onto a: what is left is perpendicular to a. Then divide each vector by its length. That is Gram-Schmidt, and recording the steps gives A = QR.</p>
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-5--gram-schmidt.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 5 · slide 7</small>Gram-Schmidt</span></span></div>
-    <div class="key">B = b − (aᵀb / aᵀa) a &nbsp;&nbsp; q₁ = a / ‖a‖, &nbsp; q₂ = B / ‖B‖ &nbsp;&nbsp; A = QR</div>
-    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>The first vector a is kept as it is.</li><li>From b, subtract its projection onto a. The remainder B is perpendicular to a.</li><li>From a third vector c, subtract its projections onto both a and B.</li><li>Finally divide each by its length: q₁ = a/‖a‖, q₂ = B/‖B‖, and so on.</li><li>The columns of A are combinations of the q's: A = QR with R upper triangular.</li></ol></div>
+    <div class="key">u₂ = b − (aᵀb / aᵀa) a &nbsp;&nbsp; q₁ = a / ‖a‖, &nbsp; q₂ = u₂ / ‖u₂‖ &nbsp;&nbsp; A = QR</div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>The first vector a is kept as it is.</li><li>From b, subtract its projection onto a. The remainder u₂ is perpendicular to a.</li><li>From a third vector c, subtract its projections onto both a and u₂.</li><li>Finally divide each by its length: q₁ = a/‖a‖, q₂ = u₂/‖u₂‖, and so on.</li><li>With a, b, c as the columns of A, each column is a combination of the q's: A = QR, with R upper triangular.</li></ol></div>
     <div class="prose">
 <h3>Squaring up a frame</h3>
 <p>A carpenter building a frame fixes the first board wherever it should go. The second board is then pushed until it sits at a right angle to the first, using a set square. Any lean towards the first board is removed. If there is a third board, it is squared against both.</p>
-<p>Gram-Schmidt does the same with vectors. The lean of b towards a is exactly its projection onto a, which we know from slide 2.</p>
+<p>Gram-Schmidt does the same with vectors. We start from independent vectors a, b, c and build perpendicular vectors u₁, u₂, u₃ from them, one at a time. The lean of b towards a is exactly its projection onto a, which we know from slide 2.</p>
 <h3>The steps</h3>
-<div class="worked"><div class="row">Keep a. &nbsp; B = b − (aᵀb / aᵀa) a</div><div class="row">Check: aᵀB = aᵀb − (aᵀb / aᵀa) aᵀa = 0 ✓</div><div class="row">q₁ = a / ‖a‖, &nbsp; q₂ = B / ‖B‖</div></div>
-<p>B is the error vector e from slide 2: the part of b that sticks out of the line through a.</p>
+<div class="worked"><div class="row">Keep the first direction: u₁ = a. &nbsp; u₂ = b − (aᵀb / aᵀa) a</div><div class="row">Check: aᵀu₂ = aᵀb − (aᵀb / aᵀa) aᵀa = 0 ✓</div><div class="row">q₁ = a / ‖a‖, &nbsp; q₂ = u₂ / ‖u₂‖</div></div>
+<p>u₂ is the error vector e from slide 2: the part of b that sticks out of the line through a.</p>
 <h3>A worked example</h3>
-<div class="worked"><div class="row">a = (1, 1), &nbsp; b = (2, 0)</div><div class="row">aᵀb = 2, &nbsp; aᵀa = 2: &nbsp; B = (2, 0) − 1·(1, 1) = (1, −1)</div><div class="row">a · B = 1 − 1 = 0 ✓</div><div class="row">q₁ = (1, 1)/√2, &nbsp; q₂ = (1, −1)/√2</div></div>
+<div class="worked"><div class="row">a = (1, 1), &nbsp; b = (2, 0)</div><div class="row">aᵀb = 2, &nbsp; aᵀa = 2: &nbsp; u₂ = (2, 0) − 1·(1, 1) = (1, −1)</div><div class="row">a · u₂ = 1 − 1 = 0 ✓</div><div class="row">q₁ = (1, 1)/√2, &nbsp; q₂ = (1, −1)/√2</div></div>
 <h3>Three vectors and more</h3>
 <p>For a third vector c, subtract its projection onto each earlier direction:</p>
-<div class="worked"><div class="row">C = c − (aᵀc / aᵀa) a − (Bᵀc / BᵀB) B</div></div>
-<p>Each fraction is a number (a dot product over a dot product). Because a and B are already perpendicular, the two subtractions do not interfere with each other. Each new vector gets squared against everything built before it.</p>
+<div class="worked"><div class="row">u₃ = c − (aᵀc / aᵀa) a − (u₂ᵀc / u₂ᵀu₂) u₂</div></div>
+<p>Each fraction is a number (a dot product over a dot product). Because a and u₂ are already perpendicular, the two subtractions do not interfere: removing the a-part of c does not change its u₂-part, because aᵀu₂ = 0. Each new vector gets squared against everything built before it.</p>
 <h3>A = QR</h3>
-<p>Each original vector is a combination of the q's built so far: a uses only q₁, b uses q₁ and q₂, c uses q₁, q₂ and q₃. Collect the coefficients in a matrix R. It is upper triangular, and A = QR. Its entries are dot products, R = QᵀA.</p>
+<p>Put the original vectors in the columns of a matrix, A = [a b c], and the q's in the columns of Q. Each original vector is a combination of the q's built so far: a uses only q₁, b uses q₁ and q₂, c uses q₁, q₂ and q₃. Collect the coefficients in a matrix R. It is upper triangular, and A = QR. Multiply A = QR by Qᵀ on the left: QᵀQ = I, so R = QᵀA. Every entry of R is a dot product of some q with some original vector.</p>
 <div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>1</span><span>0</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1/√2</span><span>1/√2</span><span>1/√2</span><span>−1/√2</span></span><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>√2</span><span>√2</span><span>0</span><span>√2</span></span></div></div>
-<p>Elimination recorded its steps as A = LU. Gram-Schmidt records its steps as A = QR. With A = QR, least squares becomes Rx̂ = Qᵀb, a triangular system. This is how good software solves least squares.</p>
+<p>Elimination recorded its steps as A = LU. Gram-Schmidt records its steps as A = QR. With A = QR, the normal equations AᵀAx̂ = Aᵀb become RᵀQᵀQRx̂ = RᵀQᵀb, which simplifies to Rx̂ = Qᵀb: a triangular system, solved by back substitution. This is how good software solves least squares.</p>
 <h3>Where this is used</h3>
 <p>The drone's rotation matrix from the last slide drifts away from orthonormal. One Gram-Schmidt pass on its three columns squares it up again, a few times per second.</p>
     </div>
     <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · Two vectors in the plane</h3>
 <p>a = (1, 0), b = (3, 4).</p>
-<div class="worked"><div class="row">aᵀb = 3, aᵀa = 1: &nbsp; B = (3, 4) − 3·(1, 0) = (0, 4)</div><div class="row">q₁ = (1, 0), &nbsp; q₂ = (0, 1)</div></div>
+<div class="worked"><div class="row">aᵀb = 3, aᵀa = 1: &nbsp; u₂ = (3, 4) − 3·(1, 0) = (0, 4)</div><div class="row">q₁ = (1, 0), &nbsp; q₂ = (0, 1)</div></div>
 <p>The result is the standard basis, and R = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>3</span><span>0</span><span>4</span></span>.</p>
 </section>
 <section class="example"><h3>Example 2 · Three vectors in 3D</h3>
 <p>a = (1, 1, 0), b = (1, 0, 1), c = (0, 1, 1).</p>
-<div class="worked"><div class="row">B = b − ½a = (½, −½, 1)</div><div class="row">C = c − ½a − (Bᵀc / BᵀB) B = c − ½a − ⅓B = (−⅔, ⅔, ⅔)</div><div class="row">Checks: a · B = 0, &nbsp; a · C = 0, &nbsp; B · C = −⅓ − ⅓ + ⅔ = 0 ✓</div><div class="row">Divide by the lengths √2, √(3/2) and 2/√3 to get q₁, q₂, q₃</div></div>
+<div class="worked"><div class="row">u₂ = b − ½a = (½, −½, 1)</div><div class="row">aᵀc = 1 and aᵀa = 2; &nbsp; u₂ᵀc = −½ + 1 = ½ and u₂ᵀu₂ = ¼ + ¼ + 1 = 3/2, so the fraction is ⅓</div><div class="row">u₃ = c − ½a − ⅓u₂ = (−⅔, ⅔, ⅔)</div><div class="row">Checks: a · u₂ = 0, &nbsp; a · u₃ = 0, &nbsp; u₂ · u₃ = −⅓ − ⅓ + ⅔ = 0 ✓</div><div class="row">Divide by the lengths √2, √(3/2) and 2/√3 to get q₁, q₂, q₃</div></div>
 </section>
 <section class="example"><h3>Example 3 · The computer's version</h3>
 <p>np.linalg.qr(A) returns Q and R. For A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>1</span><span>0</span></span> it may return −q₁ and −q₂ with a matching sign change in R. Both are correct factorizations. A direction and its opposite span the same line.</p>
@@ -70,19 +70,19 @@
     <details class="more"><summary><span class="pl-icon">✎</span><span class="rv-text"><b>More examples to try</b><span>3 problems with step-by-step solutions. Try each one before you open its solution.</span></span><span class="rv-toggle"><span class="s-show">Show</span><span class="s-hide">Hide</span></span></summary><div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
 <p>Apply Gram-Schmidt to a = (3, 4) and b = (1, 0).</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>aᵀb = 3, aᵀa = 25: B = (1, 0) − 0.12·(3, 4) = (0.64, −0.48). Check: 3·0.64 − 4·0.48 = 0 ✓</p><p>q₁ = (0.6, 0.8), q₂ = B / 0.8 = (0.8, −0.6).</p>
+<p>aᵀb = 3, aᵀa = 25: u₂ = (1, 0) − 0.12·(3, 4) = (0.64, −0.48). Check: 3·0.64 − 4·0.48 = 0 ✓</p><p>q₁ = (0.6, 0.8), q₂ = u₂ / 0.8 = (0.8, −0.6).</p>
 </div></details>
 </div></div>
 <div class="problem"><span class="pnum">2</span><div class="pbody">
 <p>Apply the first step to a = (1, 2, 2) and b = (1, 0, 0).</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>aᵀb = 1, aᵀa = 9: B = (1, 0, 0) − ⅑(1, 2, 2) = (8/9, −2/9, −2/9).</p><p>Check: (8 − 4 − 4)/9 = 0 ✓</p>
+<p>aᵀb = 1, aᵀa = 9: u₂ = (1, 0, 0) − ⅑(1, 2, 2) = (8/9, −2/9, −2/9).</p><p>Check: (8 − 4 − 4)/9 = 0 ✓</p>
 </div></details>
 </div></div>
 <div class="problem"><span class="pnum">3</span><div class="pbody">
 <p>What happens if b is a multiple of a?</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>Then b equals its own projection onto a, and B = 0. There is nothing to normalize, and Gram-Schmidt stops.</p><p>That is the signal that the vectors were dependent: b added no new direction.</p>
+<p>Then b equals its own projection onto a, and u₂ = 0. There is nothing to normalize, and Gram-Schmidt stops.</p><p>That is the signal that the vectors were dependent: b added no new direction.</p>
 </div></details>
 </div></div></div></details>
   </article>
@@ -98,7 +98,7 @@
 <section class="example"><h3>Example 2 · Fit a line to five points</h3>
 <p>Fit C + Dt to (−2, 0), (−1, 1), (0, 1), (1, 2), (2, 4).</p>
 <div class="worked"><div class="row">The times are centred: Σt = 0, so the normal equations separate</div><div class="row">5C = Σb = 8, &nbsp; C = 1.6</div><div class="row">10D = Σtb = 0 − 1 + 0 + 2 + 8 = 9, &nbsp; D = 0.9</div></div>
-<p>Best line: 1.6 + 0.9t. Choosing t so that Σt = 0 is a common trick: it makes the columns of A perpendicular.</p>
+<p>Best line: 1.6 + 0.9t. Choosing t so that Σt = 0 is a common trick: it makes the columns of A perpendicular, because the column of ones dotted with the column of times is Σt = 0.</p>
 </section>
 <section class="example"><h3>Example 3 · Gram-Schmidt and QR in 3D</h3>
 <p>a = (1, 0, 1), b = (1, 1, 0).</p>
@@ -127,7 +127,7 @@
 <div class="problem"><span class="pnum">4</span><div class="pbody">
 <p>Find the least squares solution of x = 1, x = 4, 2x = 4.</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>A = (1, 1, 2), b = (1, 4, 4). x̂ = aᵀb / aᵀa = (1 + 4 + 8) / 6 = 13/6 ≈ 2.17.</p>
+<p>A has one column, a = (1, 1, 2), and b = (1, 4, 4). x̂ = aᵀb / aᵀa = (1 + 4 + 8) / 6 = 13/6 ≈ 2.17.</p>
 </div></details>
 </div></div>
 <div class="problem"><span class="pnum">5</span><div class="pbody">
@@ -142,7 +142,7 @@
   <section class="labsec" aria-label="Lab">
     <div class="exercise" id="exercise">
       <span class="tag">Exercise</span>
-      <span class="task">Make B perpendicular to a by removing from b its projection onto a.</span>
+      <span class="task">Make u2 perpendicular to a by removing from b its projection onto a.</span>
       <span class="hint" id="hint">Edit the code and press Run.</span>
     </div>
     <div class="lab">
@@ -162,12 +162,12 @@
 a = np.array([2., 1.])
 b = np.array([1., 3.])
 
-B = b                           # your turn: B = b - (a @ b) / (a @ a) * a
-print(&quot;a · B =&quot;, a @ B)         # 0 means perpendicular
+u2 = b                          # your turn: u2 = b - (a @ b) / (a @ a) * a
+print(&quot;a · u2 =&quot;, a @ u2)       # 0 means perpendicular
 q1 = a / np.linalg.norm(a)
-q2 = B / np.linalg.norm(B)
+q2 = u2 / np.linalg.norm(u2)
 print(&quot;q1 =&quot;, q1, &quot;  q2 =&quot;, q2)
-vectors((&quot;a&quot;, a), (&quot;B&quot;, B), (&quot;b&quot;, b))</textarea>
+vectors((&quot;a&quot;, a), (&quot;u2&quot;, u2), (&quot;b&quot;, b))</textarea>
           </div>
         </div>
         <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
@@ -193,7 +193,7 @@ vectors((&quot;a&quot;, a), (&quot;B&quot;, B), (&quot;b&quot;, b))</textarea>
   Explanations, examples and code are original. Made by <a href="https://www.steppeschool.com">Steppeschool</a>.
 </footer>
 
-<script>window.SLIDE = {"slug": "gram-schmidt", "lesson": "lesson-5", "assets": "../../assets/", "preview": {"kind": "arrows", "chain": false, "items": [{"label": "a", "v": [2, 1]}, {"label": "B", "v": [1, 3]}, {"label": "b", "v": [1, 3]}]}, "check": "isA(V) && V.chain === false && arrowVec(V, 'a') && arrowVec(V, 'b') && arrowVec(V, 'B') && !isZero(arrowVec(V, 'B')) && Math.abs(dot(arrowVec(V, 'a'), arrowVec(V, 'B'))) < 1e-9 && Math.abs((arrowVec(V, 'b')[0] - arrowVec(V, 'B')[0]) * arrowVec(V, 'a')[1] - (arrowVec(V, 'b')[1] - arrowVec(V, 'B')[1]) * arrowVec(V, 'a')[0]) < 1e-9"};</script>
+<script>window.SLIDE = {"slug": "gram-schmidt", "lesson": "lesson-5", "assets": "../../assets/", "preview": {"kind": "arrows", "chain": false, "items": [{"label": "a", "v": [2, 1]}, {"label": "u2", "v": [1, 3]}, {"label": "b", "v": [1, 3]}]}, "check": "isA(V) && V.chain === false && arrowVec(V, 'a') && arrowVec(V, 'b') && arrowVec(V, 'u2') && !isZero(arrowVec(V, 'u2')) && Math.abs(dot(arrowVec(V, 'a'), arrowVec(V, 'u2'))) < 1e-9 && Math.abs((arrowVec(V, 'b')[0] - arrowVec(V, 'u2')[0]) * arrowVec(V, 'a')[1] - (arrowVec(V, 'b')[1] - arrowVec(V, 'u2')[1]) * arrowVec(V, 'a')[0]) < 1e-9"};</script>
 <script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
 <script src="../../assets/lab.js" defer></script>
 <script src="../../assets/nav.js" defer></script>

@@ -33,17 +33,18 @@
     <p class="lead">The projection p = a(aᵀb)/(aᵀa) can be produced by one matrix P acting on b. For a line, P = aaᵀ/aᵀa. For the column space of a matrix A, P = A(AᵀA)⁻¹Aᵀ. Projecting twice gives the same result as projecting once: P² = P.</p>
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-5--projection-matrix.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 5 · slide 3</small>Projection matrix</span></span></div>
     <div class="key">P = aaᵀ / aᵀa &nbsp;&nbsp; P = A(AᵀA)⁻¹Aᵀ &nbsp;&nbsp; P² = P</div>
-    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>P multiplies any vector b and returns its projection p = Pb.</li><li>For a line, P = aaᵀ / aᵀa: a column times a row, divided by a number.</li><li>P² = P: projecting a second time changes nothing. Also Pᵀ = P.</li><li>For the column space of A (independent columns), P = A(AᵀA)⁻¹Aᵀ.</li><li>I − P projects onto the perpendicular part: (I − P)b = e.</li></ol></div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>P multiplies any vector b and returns its projection p = Pb.</li><li>For a line, P = aaᵀ / aᵀa: a column times a row, divided by a number.</li><li>P² = P: projecting a second time changes nothing. P is also symmetric, Pᵀ = P, because (aaᵀ)ᵀ = aaᵀ.</li><li>For the column space of A (independent columns), P = A(AᵀA)⁻¹Aᵀ.</li><li>I − P projects onto the line perpendicular to a: (I − P)b = e.</li></ol></div>
     <div class="prose">
 <h3>A machine that projects</h3>
 <p>On the last slide we projected one vector. Often we want to project many: every reading from a sensor, every pixel of an image. It is worth building one matrix that does the job for any b.</p>
 <p>Write p = a(aᵀb) / aᵀa. Now regroup the product: a(aᵀb) is the same as (aaᵀ)b, because matrix products can be grouped either way. So p = (aaᵀ / aᵀa) b. The matrix in brackets is P.</p>
+<p>Careful with the order. aᵀa is a row times a column: one number (here 5). aaᵀ is a column times a row: a whole matrix (here 2 by 2). The same two letters, very different objects.</p>
 <div class="worked"><div class="row">a = (1, 2): &nbsp; aaᵀ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>4</span></span>, &nbsp; aᵀa = 5</div><div class="row">P = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0.2</span><span>0.4</span><span>0.4</span><span>0.8</span></span></div><div class="row">Pb for b = (4, 3): (0.8 + 1.2, 1.6 + 2.4) = (2, 4) ✓ (the same p as slide 2)</div></div>
 <h3>Pressing twice changes nothing</h3>
 <p>Think of a press that flattens dough onto a tray. Once the dough is flat, pressing it again leaves it as it is. A projection behaves the same way. After the first projection, p is already on the line, and its projection is p itself. So P(Pb) = Pb for every b, which says P² = P.</p>
 <p>In the lab, run show(P). The whole plane collapses onto the line through (1, 2). The determinant is 0: P is not invertible. You cannot recover b from its shadow p.</p>
 <h3>Projecting onto a plane or a column space</h3>
-<p>Now project b onto the column space of a matrix A with independent columns. The projection is p = Ax̂ for some vector x̂ of coefficients. The error e = b − Ax̂ must be perpendicular to <b>every</b> column of A, so Aᵀe = 0:</p>
+<p>Now project b onto the column space of a matrix A with independent columns. The projection is p = Ax̂. Now x̂ is a vector, with one number for each column of A, not a single number as on slide 2. The error e = b − Ax̂ must be perpendicular to <b>every</b> column of A, so Aᵀe = 0:</p>
 <div class="worked"><div class="row">Aᵀ(b − Ax̂) = 0</div><div class="row">AᵀA x̂ = Aᵀb</div><div class="row">x̂ = (AᵀA)⁻¹Aᵀb, &nbsp;&nbsp; p = A(AᵀA)⁻¹Aᵀ b</div></div>
 <p>So P = A(AᵀA)⁻¹Aᵀ. When A has a single column a, AᵀA is the number aᵀa and we get back aaᵀ/aᵀa. The middle equation, AᵀAx̂ = Aᵀb, is the most important equation in this lesson. The next slide puts it to work.</p>
 <h3>Where this is used</h3>
@@ -94,7 +95,7 @@
 <section class="example"><h3>Example 2 · Fit a line to five points</h3>
 <p>Fit C + Dt to (−2, 0), (−1, 1), (0, 1), (1, 2), (2, 4).</p>
 <div class="worked"><div class="row">The times are centred: Σt = 0, so the normal equations separate</div><div class="row">5C = Σb = 8, &nbsp; C = 1.6</div><div class="row">10D = Σtb = 0 − 1 + 0 + 2 + 8 = 9, &nbsp; D = 0.9</div></div>
-<p>Best line: 1.6 + 0.9t. Choosing t so that Σt = 0 is a common trick: it makes the columns of A perpendicular.</p>
+<p>Best line: 1.6 + 0.9t. Choosing t so that Σt = 0 is a common trick: it makes the columns of A perpendicular, because the column of ones dotted with the column of times is Σt = 0.</p>
 </section>
 <section class="example"><h3>Example 3 · Gram-Schmidt and QR in 3D</h3>
 <p>a = (1, 0, 1), b = (1, 1, 0).</p>
@@ -123,7 +124,7 @@
 <div class="problem"><span class="pnum">4</span><div class="pbody">
 <p>Find the least squares solution of x = 1, x = 4, 2x = 4.</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>A = (1, 1, 2), b = (1, 4, 4). x̂ = aᵀb / aᵀa = (1 + 4 + 8) / 6 = 13/6 ≈ 2.17.</p>
+<p>A has one column, a = (1, 1, 2), and b = (1, 4, 4). x̂ = aᵀb / aᵀa = (1 + 4 + 8) / 6 = 13/6 ≈ 2.17.</p>
 </div></details>
 </div></div>
 <div class="problem"><span class="pnum">5</span><div class="pbody">

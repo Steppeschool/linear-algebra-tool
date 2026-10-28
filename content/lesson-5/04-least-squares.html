@@ -17,7 +17,7 @@ AᵀA x̂ = Aᵀb &nbsp;&nbsp; e = b − Ax̂ &nbsp;&nbsp; Aᵀe = 0
 <!-- prose -->
 <h3>Three stopwatches, one runner</h3>
 <p>Three friends time the same 100 m sprint and get 10.2, 10.5 and 10.0 seconds. The "equations" are x = 10.2, x = 10.5, x = 10.0. No single x satisfies all three. Still, everyone agrees on a sensible answer: the average, 10.23 seconds.</p>
-<p>That everyday choice is least squares. In matrix form, A is the column (1, 1, 1) and b = (10.2, 10.5, 10.0). Slide 2 tells us how to project b onto the line through a:</p>
+<p>That everyday choice is least squares. In matrix form, A has a single column, a = (1, 1, 1), and b = (10.2, 10.5, 10.0). Slide 2 tells us how to project b onto the line through a:</p>
 <div class="worked"><div class="row">x̂ = aᵀb / aᵀa = (10.2 + 10.5 + 10.0) / 3 = 10.23</div></div>
 <p>The average is the projection onto (1, 1, 1).</p>
 <h3>The general recipe</h3>
@@ -26,10 +26,10 @@ AᵀA x̂ = Aᵀb &nbsp;&nbsp; e = b − Ax̂ &nbsp;&nbsp; Aᵀe = 0
 <div class="worked"><div class="row">Aᵀ(b − Ax̂) = 0 &nbsp;&nbsp;⟹&nbsp;&nbsp; AᵀA x̂ = Aᵀb</div></div>
 <p>We cannot solve Ax = b, but we can always solve AᵀAx̂ = Aᵀb. It is a small square system, n by n, however many measurements there are.</p>
 <h3>A worked example</h3>
-<p>Find the best line b = C + Dt through the points (0, 1), (1, 1), (2, 4). Each point gives one equation C + Dt = b:</p>
-<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>1</span><span>1</span><span>1</span><span>2</span></span>, &nbsp; x = (C, D), &nbsp; b = (1, 1, 4)</div><div class="row">AᵀA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>3</span><span>3</span><span>5</span></span>, &nbsp; Aᵀb = (6, 9)</div><div class="row">Solve: C = 0.5, D = 1.5. &nbsp; The best line is b = 0.5 + 1.5t</div><div class="row">Ax̂ = (0.5, 2, 3.5), &nbsp; e = (0.5, −1, 0.5), &nbsp; Aᵀe = (0, 0) ✓</div></div>
+<p>Find the best straight line through three measurements: at times t = 0, 1, 2 we read the values b = 1, 1, 4. The line predicts C + Dt at time t, so each measurement gives one equation C + Dt = b:</p>
+<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>1</span><span>1</span><span>1</span><span>2</span></span>, &nbsp; x = (C, D), &nbsp; b = (1, 1, 4)</div><div class="row">AᵀA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>3</span><span>3</span><span>5</span></span>, &nbsp; Aᵀb = (6, 9)</div><div class="row">Solve 3C + 3D = 6 and 3C + 5D = 9: subtracting gives 2D = 3, so D = 1.5 and C = 0.5. &nbsp; The best line is b = 0.5 + 1.5t</div><div class="row">Ax̂ = (0.5, 2, 3.5), &nbsp; e = (0.5, −1, 0.5), &nbsp; Aᵀe = (0, 0) ✓</div></div>
 <h3>Why AᵀA is invertible</h3>
-<p>Suppose AᵀAx = 0. Multiply by xᵀ: xᵀAᵀAx = ‖Ax‖² = 0, so Ax = 0. If the columns of A are independent, that forces x = 0. So AᵀA has only the zero vector in its nullspace and is invertible. In practice: give the fit enough different measurements.</p>
+<p>Suppose AᵀAx = 0. Multiply by xᵀ on the left: xᵀAᵀAx = (Ax)ᵀ(Ax) = ‖Ax‖² = 0, so Ax = 0. (The transpose of a product reverses the order: (Ax)ᵀ = xᵀAᵀ.) If the columns of A are independent, that forces x = 0. So AᵀA has only the zero vector in its nullspace and is invertible. For a line fit this means: use at least two different times t, so that the column of ones and the column of times are independent.</p>
 <h3>Where this is used</h3>
 <p>A GPS receiver usually sees more satellites than the four it needs. Each one gives an equation, the equations disagree slightly because of noise, and the receiver takes the least squares position. More satellites, more equations, a better average.</p>
 <!-- examples -->
@@ -39,7 +39,7 @@ AᵀA x̂ = Aᵀb &nbsp;&nbsp; e = b − Ax̂ &nbsp;&nbsp; Aᵀe = 0
 </section>
 <section class="example"><h3>Example 2 · The normal equations by hand</h3>
 <p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>1</span><span>1</span><span>1</span></span>, b = (1, 1, 0). The three equations x = 1, y = 1, x + y = 0 disagree.</p>
-<div class="worked"><div class="row">AᵀA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>2</span></span>, &nbsp; Aᵀb = (1, 1)</div><div class="row">x̂ = (⅓, ⅓), &nbsp; Ax̂ = (⅓, ⅓, ⅔)</div><div class="row">e = (⅔, ⅔, −⅔), &nbsp; Aᵀe = (⅔ − ⅔, ⅔ − ⅔) = (0, 0) ✓</div></div>
+<div class="worked"><div class="row">AᵀA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>2</span></span>, &nbsp; Aᵀb = (1, 1)</div><div class="row">2x₁ + x₂ = 1 and x₁ + 2x₂ = 1 give x̂ = (⅓, ⅓), &nbsp; Ax̂ = (⅓, ⅓, ⅔)</div><div class="row">e = (⅔, ⅔, −⅔), &nbsp; Aᵀe = (⅔ − ⅔, ⅔ − ⅔) = (0, 0) ✓</div></div>
 <p>The compromise: each equation is off by ⅔.</p>
 </section>
 <section class="example"><h3>Example 3 · When b is already reachable</h3>
