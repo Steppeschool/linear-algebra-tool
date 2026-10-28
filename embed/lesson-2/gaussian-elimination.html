@@ -1,0 +1,166 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="robots" content="noindex"></head><body>
+<main class="lesson">
+  <article class="page">
+    <div class="kicker">Strang §2.2 · The idea of elimination</div>
+    <h1>Elimination knocks out one unknown at a time.</h1>
+    <p class="lead">Subtract a multiple of one equation from another so an unknown disappears. What is left is one equation with one unknown. Solve it, then work back up.</p>
+    <div class="key">x − 2y = 1 &nbsp;&nbsp; 3x + 2y = 11 &nbsp;&nbsp;→&nbsp;&nbsp; 8y = 8</div>
+    
+    <div class="prose">
+<h2>Think: the café puzzle</h2>
+<p>A coffee and a croissant cost €5. A coffee and two croissants cost €7. What does a croissant cost?</p>
+<p>Nobody reaches for a formula. You compare the two orders. The second one has one extra croissant and costs €2 more. So a croissant is €2, and the coffee is €3.</p>
+<p>That comparison is elimination. You subtracted one equation from the other and the coffee disappeared.</p>
+<h2>The steps</h2>
+<ul>
+<li><b>Pivot:</b> the first x coefficient, here 1. It is the number you use to clear the column below it.</li>
+<li><b>Multiplier:</b> ℓ = (entry to remove) ÷ (pivot) = 3 ÷ 1 = 3.</li>
+<li><b>Subtract:</b> equation 2 minus 3 times equation 1.</li>
+<li><b>Back substitution:</b> solve the last equation, then put that value into the one above.</li>
+</ul>
+<h2>Worked example</h2>
+<div class="worked">
+<div class="row">(3x + 2y) − 3(x − 2y) = 11 − 3·1</div>
+<div class="row">8y = 8 &nbsp;→&nbsp; y = 1</div>
+<div class="row">x − 2·1 = 1 &nbsp;→&nbsp; x = 3</div>
+</div>
+<h2>What it looks like</h2>
+<p>Run the code before and after. The second line changes: it turns flat, y = 1. The crossing point stays at (3, 1).</p>
+<p>That is the whole trick. Each step gives a simpler system with exactly the same solution. Anything that solves both old equations also solves the new ones, and the other way round.</p>
+<h2>Where you meet this</h2>
+<p>Circuit simulators, finite element programs and many other engineering tools solve equations this way. The systems just have thousands of unknowns instead of two.</p>
+    </div>
+    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · Subtract twice the first equation</h3>
+<p>Solve 2x + y = 5 and 4x − y = 1.</p><div class="worked"><div class="row">Pivot 2, multiplier ℓ = 4 ÷ 2 = 2</div><div class="row">(4x − y) − 2(2x + y) = 1 − 2·5 &nbsp;→&nbsp; −3y = −9 &nbsp;→&nbsp; y = 3</div><div class="row">Back up: 2x + 3 = 5, so x = 1</div><div class="row">Check: 4·1 − 3 = 1 ✓</div></div>
+</section>
+<section class="example"><h3>Example 2 · A pivot of 1</h3>
+<p>Solve x + 3y = 7 and 2x + y = 4.</p><div class="worked"><div class="row">ℓ = 2 ÷ 1 = 2. &nbsp; (2x + y) − 2(x + 3y) = 4 − 14 &nbsp;→&nbsp; −5y = −10 &nbsp;→&nbsp; y = 2</div><div class="row">x + 6 = 7, so x = 1</div></div><p>A pivot of 1 is the friendliest case: the multiplier is just the entry below it.</p>
+</section>
+<section class="example"><h3>Example 3 · A fractional multiplier</h3>
+<p>Solve 3x + 2y = 7 and x + 4y = 9.</p><div class="worked"><div class="row">ℓ = 1 ÷ 3 = 1/3</div><div class="row">(x + 4y) − (1/3)(3x + 2y) = 9 − 7/3 &nbsp;→&nbsp; (10/3) y = 20/3 &nbsp;→&nbsp; y = 2</div><div class="row">3x + 4 = 7, so x = 1</div></div><p>Fractions are fine. The rule never changes: multiplier = entry to remove ÷ pivot.</p>
+</section></div>
+    <details class="more"><summary><span class="pl-icon">✎</span><span class="rv-text"><b>More examples to try</b><span>3 problems with step-by-step solutions. Try each one before you open its solution.</span></span><span class="rv-toggle"><span class="s-show">Show</span><span class="s-hide">Hide</span></span></summary><div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Solve x + y = 4 and 2x − y = 2 by elimination.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>ℓ = 2: (2x − y) − 2(x + y) = 2 − 8 gives −3y = −6, so y = 2 and x = 2.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>Solve 5x + 2y = 9 and 10x + 3y = 16.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>ℓ = 10 ÷ 5 = 2: (10x + 3y) − 2(5x + 2y) = 16 − 18 gives −y = −2, so y = 2. Then 5x + 4 = 9, x = 1.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>The first equation is 4x + y = 6, the second 6x + 5y = 16. Find ℓ and solve.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>ℓ = 6 ÷ 4 = 1.5. (6x + 5y) − 1.5(4x + y) = 16 − 9 gives 3.5y = 7, so y = 2. Then 4x + 2 = 6, x = 1.</p>
+</div></details>
+</div></div></div></details>
+  </article>
+  <details class="review">
+    <summary><span class="pl-icon">✎</span><span class="rv-text"><b>Lesson review</b><span>3 worked examples and 5 mixed problems with solutions</span></span><span class="rv-toggle"><span class="s-show">Open</span><span class="s-hide">Close</span></span></summary>
+    <div class="review-body">
+      <h2 class="practice-h">Worked examples</h2>
+      <div class="examples"><section class="example"><h3>Example 1 · A 2 by 2 system</h3>
+<p>Solve 2x + 3y = 8 and 4x + 11y = 26.</p>
+<div class="worked"><div class="row">Pivot 2, multiplier ℓ = 4 ÷ 2 = 2. Equation 2 − 2·(equation 1): 5y = 10</div>
+<div class="row">Back substitution: y = 2, then 2x + 6 = 8, so x = 1</div>
+<div class="row">Check: 4·1 + 11·2 = 26 ✓</div></div>
+<p>The pivots are 2 and 5. Their product, 10, is det A.</p>
+</section>
+<section class="example"><h3>Example 2 · A 3 by 3 system</h3>
+<p>Solve x + y + z = 6, 2x + 3y + z = 11, x + 3y + 4z = 19.</p>
+<div class="worked"><div class="row">ℓ₂₁ = 2: row 2 becomes (0, 1, −1 | −1). &nbsp; ℓ₃₁ = 1: row 3 becomes (0, 2, 3 | 13)</div>
+<div class="row">ℓ₃₂ = 2: row 3 becomes (0, 0, 5 | 15)</div>
+<div class="row">z = 3 &nbsp;→&nbsp; y − 3 = −1, y = 2 &nbsp;→&nbsp; x + 2 + 3 = 6, x = 1</div></div>
+<p>U = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>1</span><span>1</span><span>0</span><span>1</span><span>−1</span><span>0</span><span>0</span><span>5</span></span>, pivots 1, 1, 5.</p>
+</section>
+<section class="example"><h3>Example 3 · Factor once, solve with L and U</h3>
+<p>Factor A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>6</span><span>8</span></span> and use it to solve Ax = (3, 19).</p>
+<div class="worked"><div class="row">ℓ = 6 ÷ 2 = 3, so U = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>0</span><span>5</span></span> and L = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>3</span><span>1</span></span></div>
+<div class="row">Lc = b: c₁ = 3, then 3·3 + c₂ = 19, so c₂ = 10</div>
+<div class="row">Ux = c: 5x₂ = 10, x₂ = 2, then 2x₁ + 2 = 3, x₁ = 1/2</div>
+<div class="row">Check: 6·(1/2) + 8·2 = 19 ✓</div></div>
+</section></div>
+      <h2 class="practice-h">Problems</h2>
+      <div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Solve x − y = 1 and 3x + 2y = 13 by elimination. Name the pivots.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>ℓ = 3. Equation 2 − 3·(equation 1): 5y = 10, so y = 2 and x = 3. Check: 9 + 4 = 13 ✓</p><p>Pivots: 1 and 5.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>For A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>4</span><span>2</span><span>6</span><span>5</span></span>, find the multiplier ℓ₂₁, the second pivot and det A.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>ℓ₂₁ = 6 ÷ 4 = 1.5. Second pivot: 5 − 1.5·2 = 2.</p><p>det A = 4·2 = 8, the product of the pivots. Check: 4·5 − 2·6 = 8 ✓</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>For which number a does <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>a</span><span>2</span><span>8</span></span> have no second pivot? Can a row exchange fix it?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>The second pivot is 8 − 2a. It is 0 when a = 4.</p><p>No row exchange helps: the only row below is already used. The matrix is singular (column 2 = 4·column 1).</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">4</span><div class="pbody">
+<p>Write the elimination matrix E₂₁ for A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>0</span><span>6</span><span>4</span><span>1</span><span>0</span><span>2</span><span>3</span></span> and compute E₂₁A.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>ℓ₂₁ = 6 ÷ 2 = 3, so E₂₁ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>−3</span><span>1</span><span>0</span><span>0</span><span>0</span><span>1</span></span>.</p><p>E₂₁A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>0</span><span>0</span><span>1</span><span>1</span><span>0</span><span>2</span><span>3</span></span>. Only row 2 changed: (6, 4, 1) − 3·(2, 1, 0) = (0, 1, 1).</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">5</span><div class="pbody">
+<p>Find L and U for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>10</span></span>.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>ℓ = 3, so U = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>0</span><span>4</span></span> and L = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>3</span><span>1</span></span>.</p><p>Check: LU = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>6 + 4</span></span> = A ✓</p>
+</div></details>
+</div></div></div>
+    </div>
+  </details>
+
+  <section class="labsec" aria-label="Lab">
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Choose the multiplier l so that the new second row starts with 0.</span>
+      <span class="hint" id="hint">Edit the code and press Run.</span>
+    </div>
+    <div class="lab">
+      <div class="editor-card">
+        <div class="bar">
+          <span class="file">slide_1.py</span>
+          <span class="status" id="pystatus">Loading Python…</span>
+          <button class="btn" id="reset">Reset</button>
+          <button class="btn primary" id="run" disabled>Run ▸</button>
+        </div>
+        <div class="editor">
+          <div class="gutter" id="gutter">1</div>
+          <div class="code" id="codewrap">
+            <pre id="hl" aria-hidden="true"></pre>
+            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+A = np.array([[1., -2.],
+              [3.,  2.]])
+b = np.array([1., 11.])
+
+l = 0                       # multiplier = entry to remove / pivot
+U = A.copy()
+c = b.copy()
+U[1] = U[1] - l * U[0]      # row 2 minus l times row 1
+c[1] = c[1] - l * c[0]
+
+print(&quot;U =&quot;, U)
+print(&quot;c =&quot;, c)
+rowpic(U, c)                # same crossing point, simpler line</textarea>
+          </div>
+        </div>
+        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+      </div>
+      <figure class="figure">
+        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+      </figure>
+    </div>
+  </section>
+</main>
+<script type="application/json" id="la-config">{"slug": "gaussian-elimination", "lesson": "lesson-2", "assets": "../../assets/", "preview": {"kind": "rows", "A": [[1, -2], [3, 2]], "b": [1, 11]}, "check": "isR(V) && close(V.A, [[1,-2],[0,8]]) && close(V.b, [1,8])"}</script>
+</body></html>

@@ -482,6 +482,17 @@ def main():
             d = out / s["slug"]
             d.mkdir(exist_ok=True)
             (d / "index.html").write_text(slide_page(lesson, slides, i, next_lesson, practice), encoding="utf-8")
+            # fragment for embedding the slide in the Kajabi members' course (not indexed)
+            page = (d / "index.html").read_text(encoding="utf-8")
+            main = re.search(r'<main class="lesson">.*?</main>', page, re.S).group(0)
+            main = re.sub(r'\s*<div class="after">.*?</div>\s*</div>\s*(?=</main>)', '\n', main, flags=re.S)
+            main = main.replace('href="../../', f'href="{BASE}/')
+            cfg = re.search(r'window\.SLIDE = (\{.*?\});</script>', page).group(1)
+            ed = ROOT / "embed" / lesson["dir"]
+            ed.mkdir(parents=True, exist_ok=True)
+            (ed / f"{s['slug']}.html").write_text(
+                f'<!doctype html><html><head><meta charset="utf-8"><meta name="robots" content="noindex"></head><body>\n{main}\n'
+                f'<script type="application/json" id="la-config">{cfg}</script>\n</body></html>\n', encoding="utf-8")
             urls.append(f"{BASE}/{lesson['dir']}/{s['slug']}/")
         if practice:
             d = out / "practice"
@@ -497,7 +508,7 @@ def main():
     (ROOT / "sitemap.xml").write_text(
         f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{sitemap}</urlset>\n',
         encoding="utf-8")
-    (ROOT / "robots.txt").write_text(f"User-agent: *\nAllow: /\n\nSitemap: {BASE}/sitemap.xml\n", encoding="utf-8")
+    (ROOT / "robots.txt").write_text(f"User-agent: *\nAllow: /\nDisallow: /embed/\n\nSitemap: {BASE}/sitemap.xml\n", encoding="utf-8")
     print(f"Built {len(urls)} pages.")
 
 

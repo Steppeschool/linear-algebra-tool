@@ -1,0 +1,155 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="robots" content="noindex"></head><body>
+<main class="lesson">
+  <article class="page">
+    <div class="kicker">Strang §3.2 · Solving Ax = 0 and Rx = 0</div>
+    <h1>Free columns are yours to choose. Pivot columns follow.</h1>
+    <p class="lead">Reduce A to R. Columns with a pivot belong to pivot variables. The others are free. Set one free variable to 1 and the rest to 0, then solve for the pivot variables: that is a special solution.</p>
+    <div class="key"><span class="mx" style="grid-template-columns:repeat(4,auto)"><span>1</span><span>2</span><span>1</span><span>3</span><span>2</span><span>4</span><span>3</span><span>8</span></span> &nbsp;→&nbsp; R = <span class="mx" style="grid-template-columns:repeat(4,auto)"><span>1</span><span>2</span><span>0</span><span>1</span><span>0</span><span>0</span><span>1</span><span>2</span></span></div>
+    
+    <div class="prose">
+<h2>Think: a mixing desk</h2>
+<p>A mixing desk has four sliders. Two of them are free: you set them however you like. The other two are linked and move by themselves to keep the total at zero.</p>
+<p>Free variables are the free sliders. Pivot variables are the linked ones. Each way of setting the free sliders gives exactly one vector in the nullspace.</p>
+<h2>Reading R</h2>
+<p>R is the reduced row echelon form: zeros below and above each pivot, and every pivot equal to 1. Here the pivots sit in columns 1 and 3. Columns 2 and 4 are free.</p>
+<div class="worked">
+<div class="row">Rx = 0 means: &nbsp; x₁ + 2x₂ + x₄ = 0 &nbsp; and &nbsp; x₃ + 2x₄ = 0</div>
+</div>
+<h2>Worked example</h2>
+<div class="worked">
+<div class="row">Set x₂ = 1, x₄ = 0: &nbsp; x₁ = −2, x₃ = 0 &nbsp;→&nbsp; s₁ = (−2, 1, 0, 0)</div>
+<div>Check against A: 1·(−2) + 2·1 = 0 and 2·(−2) + 4·1 = 0 ✓</div>
+<div>The other special solution comes from x₂ = 0, x₄ = 1. That is your exercise.</div>
+</div>
+<h2>Counting</h2>
+<p>A has n = 4 columns and r = 2 pivots, so there are n − r = 2 free variables and 2 special solutions. Every vector in N(A) is a combination of them: x = c·s₁ + d·s₂. N(A) is a plane inside 4-dimensional space.</p>
+<p>A shortcut: the entries of R in the free columns, with their signs flipped, are the pivot values of the special solutions.</p>
+    </div>
+    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · One free column</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>3</span><span>0</span><span>0</span><span>1</span></span>.</p><div class="worked"><div class="row">row 1 − 3·row 2: R = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>0</span><span>0</span><span>0</span><span>1</span></span>. Pivots in columns 1 and 3</div><div class="row">Free x₂ = 1: x₁ = −2, x₃ = 0. Special solution (−2, 1, 0)</div></div>
+</section>
+<section class="example"><h3>Example 2 · Two free columns</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(4,auto)"><span>1</span><span>1</span><span>1</span><span>1</span><span>1</span><span>2</span><span>3</span><span>4</span></span>.</p><div class="worked"><div class="row">R = <span class="mx" style="grid-template-columns:repeat(4,auto)"><span>1</span><span>0</span><span>−1</span><span>−2</span><span>0</span><span>1</span><span>2</span><span>3</span></span></div><div class="row">x₃ = 1: (1, −2, 1, 0). &nbsp; x₄ = 1: (2, −3, 0, 1)</div></div><p>n − r = 4 − 2 = 2 special solutions.</p>
+</section>
+<section class="example"><h3>Example 3 · A tall matrix</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>4</span><span>3</span><span>6</span></span>.</p><div class="worked"><div class="row">R = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>0</span><span>0</span><span>0</span><span>0</span></span>, rank 1</div><div class="row">Free x₂ = 1: special solution (−2, 1)</div></div>
+</section></div>
+    <details class="more"><summary><span class="pl-icon">✎</span><span class="rv-text"><b>More examples to try</b><span>3 problems with step-by-step solutions. Try each one before you open its solution.</span></span><span class="rv-toggle"><span class="s-show">Show</span><span class="s-hide">Hide</span></span></summary><div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Find R and the special solution for A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>4</span><span>2</span><span>1</span><span>2</span><span>3</span></span>.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Divide row 1 by 2: (1, 2, 1). Row 2 − row 1: (0, 0, 2), then divide by 2. Clear above: R = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>0</span><span>0</span><span>0</span><span>1</span></span>. Special solution (−2, 1, 0).</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>A is already in R form: <span class="mx" style="grid-template-columns:repeat(4,auto)"><span>1</span><span>0</span><span>2</span><span>3</span><span>0</span><span>1</span><span>4</span><span>5</span></span>. List the special solutions.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>x₃ = 1: (−2, −4, 1, 0). x₄ = 1: (−3, −5, 0, 1). The free columns' entries, with signs flipped.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>A is 3 by 7 with rank 3. How many special solutions?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>n − r = 7 − 3 = 4.</p>
+</div></details>
+</div></div></div></details>
+  </article>
+  <details class="review">
+    <summary><span class="pl-icon">✎</span><span class="rv-text"><b>Lesson review</b><span>3 worked examples and 5 mixed problems with solutions</span></span><span class="rv-toggle"><span class="s-show">Open</span><span class="s-hide">Close</span></span></summary>
+    <div class="review-body">
+      <h2 class="practice-h">Worked examples</h2>
+      <div class="examples"><section class="example"><h3>Example 1 · Is it a subspace?</h3>
+<p>Is the set of all (x, y, z) with x = 2y a subspace of 3D space?</p>
+<div class="worked"><div class="row">Zero: (0, 0, 0) has 0 = 2·0 ✓</div>
+<div class="row">Add: if x₁ = 2y₁ and x₂ = 2y₂, then x₁ + x₂ = 2(y₁ + y₂) ✓</div>
+<div class="row">Scale: cx₁ = 2(cy₁) ✓</div></div>
+<p>Yes. It is a plane through the origin. With x = 2y + 1 it would fail at once: the origin is missing.</p>
+</section>
+<section class="example"><h3>Example 2 · Nullspace and special solutions</h3>
+<p>Find the nullspace of A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>3</span><span>2</span><span>4</span><span>6</span></span>.</p>
+<div class="worked"><div class="row">Row 2 − 2·row 1 = 0, so R = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>3</span><span>0</span><span>0</span><span>0</span></span>. One pivot (column 1), rank 1.</div>
+<div class="row">Free: x₂, x₃. &nbsp; x₂ = 1, x₃ = 0 gives (−2, 1, 0). &nbsp; x₂ = 0, x₃ = 1 gives (−3, 0, 1).</div></div>
+<p>N(A) is all combinations c·(−2, 1, 0) + d·(−3, 0, 1): a plane, dimension n − r = 3 − 1 = 2.</p>
+</section>
+<section class="example"><h3>Example 3 · The complete solution</h3>
+<p>Solve x + 2y + 3z = 6.</p>
+<div class="worked"><div class="row">Particular solution: set the free variables y = z = 0, then x = 6. x_p = (6, 0, 0)</div>
+<div class="row">Nullspace: the same matrix as Example 2's first row, special solutions (−2, 1, 0) and (−3, 0, 1)</div>
+<div class="row">x = (6, 0, 0) + c·(−2, 1, 0) + d·(−3, 0, 1)</div></div>
+<p>Geometrically: a plane parallel to the nullspace, shifted to pass through (6, 0, 0).</p>
+</section></div>
+      <h2 class="practice-h">Problems</h2>
+      <div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Which of these are subspaces of the plane? (a) all (x, y) with x = y (b) all (x, y) with x + y = 1 (c) all (x, y) with xy = 0.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>(a) Yes: a line through the origin.</p><p>(b) No: (0, 0) is not on it.</p><p>(c) No: it is the two axes together, and (1, 0) + (0, 1) = (1, 1) has xy = 1.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>Find the nullspace of <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>2</span><span>−2</span></span>.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Both rows say x − y = 0. So N(A) is every multiple of (1, 1): a line.</p><p>Check: A(1, 1) = (1 − 1, 2 − 2) = (0, 0) ✓</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>Find R, the rank and a special solution for A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>1</span><span>2</span><span>4</span><span>3</span><span>3</span><span>6</span><span>4</span></span>.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Row 2 − 2·row 1 = (0, 0, 1), row 3 − 3·row 1 = (0, 0, 1), then row 3 − row 2 = 0. Clearing above the pivot: R = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>0</span><span>0</span><span>0</span><span>1</span><span>0</span><span>0</span><span>0</span></span>.</p><p>Pivots in columns 1 and 3, so rank 2. Column 2 is free: x₂ = 1 gives the special solution (−2, 1, 0).</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">4</span><div class="pbody">
+<p>Are (1, 2, 0), (0, 1, 1) and (1, 3, 1) independent?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>No. (1, 3, 1) = (1, 2, 0) + (0, 1, 1), so 1·v₁ + 1·v₂ − 1·v₃ = 0. The rank is 2 and the three vectors lie in one plane.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">5</span><div class="pbody">
+<p>A is 3 by 5 with rank 2. Give the dimension of each of the four subspaces.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>m = 3, n = 5, r = 2.</p><p>Row space r = 2, nullspace n − r = 3, column space r = 2, left nullspace m − r = 1.</p>
+</div></details>
+</div></div></div>
+    </div>
+  </details>
+
+  <section class="labsec" aria-label="Lab">
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Find the second special solution s, with x₂ = 0 and x₄ = 1.</span>
+      <span class="hint" id="hint">Edit the code and press Run.</span>
+    </div>
+    <div class="lab">
+      <div class="editor-card">
+        <div class="bar">
+          <span class="file">slide_3.py</span>
+          <span class="status" id="pystatus">Loading Python…</span>
+          <button class="btn" id="reset">Reset</button>
+          <button class="btn primary" id="run" disabled>Run ▸</button>
+        </div>
+        <div class="editor">
+          <div class="gutter" id="gutter">1</div>
+          <div class="code" id="codewrap">
+            <pre id="hl" aria-hidden="true"></pre>
+            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+A = np.array([[1., 2., 1., 3.],
+              [2., 4., 3., 8.]])
+R, pivots = rref(A)
+print(&quot;pivot columns (counting from 0):&quot;, pivots)
+
+s = np.array([-2., 1., 0., 0.])     # first special solution: x2 = 1, x4 = 0
+                                    # your turn: x2 = 0, x4 = 1
+table((&quot;A&quot;, A), (&quot;R&quot;, R, pivots), (&quot;s&quot;, s), (&quot;A s&quot;, A @ s))</textarea>
+          </div>
+        </div>
+        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+      </div>
+      <figure class="figure">
+        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+      </figure>
+    </div>
+  </section>
+</main>
+<script type="application/json" id="la-config">{"slug": "rref-and-special-solutions", "lesson": "lesson-4", "assets": "../../assets/", "preview": {"kind": "table", "items": [{"label": "A", "M": [[1, 2, 1, 3], [2, 4, 3, 8]], "piv": []}]}, "check": "isTab(V) && close(itemVec(V, 's'), [-1,0,-2,1])"}</script>
+</body></html>

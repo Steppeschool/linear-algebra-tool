@@ -1,0 +1,154 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="robots" content="noindex"></head><body>
+<main class="lesson">
+  <article class="page">
+    <div class="kicker">Strang §1.1 · Linear combinations</div>
+    <h1>Linear algebra starts with cv + dw.</h1>
+    <p class="lead">Everything in this course grows out of one operation. Take two vectors, multiply each one by a number, and add the results. The answer is called a linear combination.</p>
+    <div class="key">c <span class="vec i"><span>2</span><span>1</span></span> + d <span class="vec j"><span>-1</span><span>1</span></span> = <span class="vec "><span>2c − d</span><span>c + d</span></span></div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>A vector in the plane is a pair of numbers, v = (v₁, v₂). We draw it as an arrow from the origin.</li><li>Two operations: <b>multiply</b> a vector by a number c, and <b>add</b> two vectors. Both work one component at a time.</li><li>Doing both gives a <b>linear combination</b> cv + dw.</li><li>The big question: which vectors can we reach with all possible c and d?</li></ol></div>
+    <div class="prose">
+<h3>Why vectors at all?</h3>
+<p>Suppose a sensor reports two numbers: 2 metres east and 1 metre north. Those numbers belong together, and it makes no sense to add the east value to the north value. So we keep them as a pair and give the pair one name: v = (2, 1). That is a vector.</p>
+<p>When we add two vectors, the first components go together and the second components go together. They never mix:</p>
+<div class="worked"><div class="row">v = (2, 1), &nbsp; w = (−1, 1) &nbsp;→&nbsp; v + w = (2 + (−1), 1 + 1) = (1, 2)</div></div>
+<p>On the plane, adding means walking: go along v, then from its tip go along w. You arrive at the tip of v + w.</p>
+<h3>Multiplying by a number</h3>
+<p>To get 3v, multiply each component by 3: 3v = (6, 3). The arrow points the same way and is three times as long. The number 3 is called a <b>scalar</b>, because it only scales the vector.</p>
+<p>A negative scalar turns the arrow around: −v = (−2, −1). And 0·v is the zero vector (0, 0), the arrow of length zero at the origin.</p>
+<h3>Putting both together</h3>
+<p>Now combine the two operations. Choose numbers c and d and form cv + dw. With c = 3 and d = 2:</p>
+<div class="worked"><div class="row">3v + 2w = (6, 3) + (−2, 2) = (4, 5)</div></div>
+<p>That is a linear combination. Think of it as giving directions with only two kinds of step: "take 3 steps of v, then 2 steps of w". Every such instruction lands you somewhere.</p>
+<h3>The question behind everything</h3>
+<p>Here is the question we keep asking for the rest of the course: <b>which vectors can we reach?</b></p>
+<p>For one vector, the multiples cv fill a line through the origin. That is where the word "linear" comes from. For two vectors that point in different directions, like v and w here, the combinations cv + dw fill the whole plane. Every point is reachable.</p>
+<p>Going the other way is harder. Given a target like (4, 5), how do we find c and d? We need 2c − d = 4 and c + d = 5, two equations at once. Solving that kind of system is what slide 4 and lesson 2 are about.</p>
+    </div>
+    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · Compute a combination</h3>
+<p>v = (1, 1), w = (1, −1), c = 2, d = 3. Find cv + dw.</p><div class="worked"><div class="row">2v = (2, 2) &nbsp;&nbsp; 3w = (3, −3)</div><div class="row">2v + 3w = (2 + 3, 2 − 3) = (5, −1)</div></div>
+</section>
+<section class="example"><h3>Example 2 · Find the numbers</h3>
+<p>Write (3, 0) as c·(1, 1) + d·(1, −1).</p><div class="worked"><div class="row">c + d = 3 &nbsp;&nbsp; c − d = 0</div><div class="row">Adding: 2c = 3, so c = 1.5 and d = 1.5</div><div class="row">Check: 1.5·(1, 1) + 1.5·(1, −1) = (3, 0) ✓</div></div>
+</section>
+<section class="example"><h3>Example 3 · When the plane is not filled</h3>
+<p>Take v = (1, 2) and w = (2, 4). Notice that w = 2v: both arrows lie on the same line.</p><div class="worked"><div class="row">cv + dw = c(1, 2) + 2d(1, 2) = (c + 2d)·(1, 2)</div></div><p>Every combination is a multiple of (1, 2), so the combinations only fill a line, not the plane. The target (1, 0) can never be reached.
+</section></div>
+    <details class="more"><summary><span class="pl-icon">✎</span><span class="rv-text"><b>More examples to try</b><span>3 problems with step-by-step solutions. Try each one before you open its solution.</span></span><span class="rv-toggle"><span class="s-show">Show</span><span class="s-hide">Hide</span></span></summary><div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Compute 2v − w for v = (3, 1) and w = (1, 4).</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>2v = (6, 2). 2v − w = (6 − 1, 2 − 4) = (5, −2).</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>Find c and d with c·(1, 2) + d·(0, 1) = (3, 8).</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>The first component gives c = 3. The second: 2·3 + d = 8, so d = 2.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>Can combinations of (2, 4) and (−1, −2) ever reach (1, 0)?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>No. (−1, −2) = −½·(2, 4), so both vectors lie on the line y = 2x. Every combination stays on that line, and (1, 0) is not on it.</p>
+</div></details>
+</div></div></div></details>
+  </article>
+  <details class="review">
+    <summary><span class="pl-icon">✎</span><span class="rv-text"><b>Lesson review</b><span>3 worked examples and 5 mixed problems with solutions</span></span><span class="rv-toggle"><span class="s-show">Open</span><span class="s-hide">Close</span></span></summary>
+    <div class="review-body">
+      <h2 class="practice-h">Worked examples</h2>
+      <div class="examples"><section class="example"><h3>Example 1 · Find the combination</h3>
+<p>Write b = (7, 4) as a combination of v = (1, 2) and w = (3, 1).</p>
+<p>We need c and d with c·(1, 2) + d·(3, 1) = (7, 4). Component by component:</p>
+<div class="worked"><div class="row">c + 3d = 7 &nbsp;&nbsp; 2c + d = 4</div>
+<div class="row">From the second: d = 4 − 2c. Into the first: c + 12 − 6c = 7, so c = 1 and d = 2.</div>
+<div class="row">Check: 1·(1, 2) + 2·(3, 1) = (7, 4) ✓</div></div>
+<p>In matrix form this is Ax = b with the columns v and w: <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>3</span><span>2</span><span>1</span></span> x = (7, 4), x = (1, 2).</p>
+</section>
+<section class="example"><h3>Example 2 · Ax by rows and by columns</h3>
+<p>Compute Ax for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>−1</span><span>1</span><span>3</span></span> and x = (3, 2).</p>
+<div class="worked"><div class="row">By columns: 3·(2, 1) + 2·(−1, 3) = (6 − 2, 3 + 6) = (4, 9)</div>
+<div class="row">By rows: (2·3 − 1·2, 1·3 + 3·2) = (4, 9)</div></div>
+<p>Same answer. The column way shows that (4, 9) lies in the column space, because it is built from the columns.</p>
+</section>
+<section class="example"><h3>Example 3 · Build a matrix from where (1, 0) and (0, 1) land</h3>
+<p>Find the matrix that sends (1, 0) to (1, 1) and (0, 1) to (−1, 1). What does it do to areas?</p>
+<p>The landing spots are the columns: A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>1</span><span>1</span></span>.</p>
+<div class="worked"><div class="row">det A = 1·1 − (−1)·1 = 2</div></div>
+<p>Both arrows have length √2 and are at 90° to each other, so A turns the plane by 45° and stretches it by √2. Areas double, which matches det A = 2.</p>
+</section></div>
+      <h2 class="practice-h">Problems</h2>
+      <div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Is (5, 1) a combination of (1, 1) and (2, −1)? If so, find the numbers c and d.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Solve c + 2d = 5 and c − d = 1. Subtracting gives 3d = 4, so d = 4/3 and c = 7/3.</p><p>Check: 7/3 + 8/3 = 5 and 7/3 − 4/3 = 1 ✓. Yes, because the two vectors point in different directions, every vector in the plane is a combination of them.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>Compute Ax by columns for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>4</span></span> and x = (−1, 1).</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Ax = −1·(1, 3) + 1·(2, 4) = (1, 1).</p><p>Check by rows: (−1 + 2, −3 + 4) = (1, 1) ✓</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>For which number k are the columns of <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>k</span><span>2</span><span>6</span></span> dependent? What is the column space then?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>The columns are dependent when det = 1·6 − 2k = 0, so k = 3.</p><p>Then column 2 = (3, 6) = 3·(1, 2). The column space is the line through (1, 2). Ax = b can only be solved when b is a multiple of (1, 2).</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">4</span><div class="pbody">
+<p>Find the 2 by 2 matrix that mirrors the plane across the x-axis. What is its determinant, and what does the sign mean?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>(1, 0) stays put and (0, 1) flips to (0, −1), so A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>−1</span></span>.</p><p>det A = −1. Areas keep their size (|det| = 1), and the minus sign says the plane was flipped over.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">5</span><div class="pbody">
+<p>R = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>−1</span><span>1</span><span>0</span></span> turns the plane by 90°. Compute R² and R⁴ and explain them without multiplying.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>R² = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−1</span><span>0</span><span>0</span><span>−1</span></span>, a turn by 180°: every vector points the opposite way.</p><p>R⁴ = I, the identity. Four quarter turns bring every vector back to where it started.</p>
+</div></details>
+</div></div></div>
+    </div>
+  </details>
+
+  <section class="labsec" aria-label="Lab">
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Find c and d so that cv + dw lands exactly on the target (4, 5).</span>
+      <span class="hint" id="hint">Edit the code and press Run.</span>
+    </div>
+    <div class="lab">
+      <div class="editor-card">
+        <div class="bar">
+          <span class="file">slide_1.py</span>
+          <span class="status" id="pystatus">Loading Python…</span>
+          <button class="btn" id="reset">Reset</button>
+          <button class="btn primary" id="run" disabled>Run ▸</button>
+        </div>
+        <div class="editor">
+          <div class="gutter" id="gutter">1</div>
+          <div class="code" id="codewrap">
+            <pre id="hl" aria-hidden="true"></pre>
+            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+v = np.array([2, 1])
+w = np.array([-1, 1])
+
+c, d = 1, 1               # change these
+target = np.array([4, 5])
+
+print(&quot;cv + dw =&quot;, c*v + d*w)
+combo(np.column_stack([v, w]), [c, d], target)</textarea>
+          </div>
+        </div>
+        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+      </div>
+      <figure class="figure">
+        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+      </figure>
+    </div>
+  </section>
+</main>
+<script type="application/json" id="la-config">{"slug": "linear-combinations", "lesson": "lesson-1", "assets": "../../assets/", "preview": {"kind": "combo", "A": [[2, -1], [1, 1]], "x": [1, 1], "b": [4, 5]}, "check": "isC(V) && near(Ax(V)[0], 4) && near(Ax(V)[1], 5)"}</script>
+</body></html>

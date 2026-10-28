@@ -1,0 +1,152 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="robots" content="noindex"></head><body>
+<main class="lesson">
+  <article class="page">
+    <div class="kicker">Challenge</div>
+    <h1>Mirror the F.</h1>
+    <p class="lead">A challenge to put the slides together: build the matrix that mirrors the plane left to right. The F should keep its size and simply face the other way.</p>
+    <div class="key">(x, y) &nbsp;→&nbsp; (−x, y)</div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>To build a matrix, decide where (1, 0) and (0, 1) land and use them as columns (slide 5).</li><li>A mirror keeps lengths and areas, so |det A| = 1.</li><li>A mirror flips the plane over, and the determinant shows that with a minus sign: det A = −1.</li><li>Applying the same mirror twice brings everything back: A·A = I.</li></ol></div>
+    <div class="prose">
+<h3>A mirror you have seen</h3>
+<p>The word AMBULANCE is printed backwards on the front of the vehicle, so that a driver sees it the right way round in the mirror. A mirror keeps every size and every distance, but swaps left and right.</p>
+<h3>How to build it</h3>
+<p>Use the rule from slide 5. Ask where the two landmarks should go:</p>
+<ul>
+<li>A mirror standing on the vertical axis sends points on the right over to the left. So (1, 0) goes to (−1, 0).</li>
+<li>Points on the vertical axis itself do not move. So (0, 1) stays at (0, 1).</li>
+</ul>
+<p>Those two answers are the columns of the matrix. Write them in, run the code, and watch the F.</p>
+<h3>What the determinant tells us</h3>
+<p>The F keeps its size, so the area factor |det A| must be 1. But the F now reads backwards. That is like turning a sheet of paper over to its other side, and no rotation can do it. The determinant records the flip with a minus sign: a mirror has det A = −1. Look at the readout under the picture.</p>
+<h3>After you solve it</h3>
+<ul>
+<li><b>Mirror twice.</b> In a barber's shop, two mirrors show your face the right way round. Check in code that A @ A gives the identity matrix.</li>
+<li><b>Another mirror.</b> Try the mirror on the diagonal line y = x. Where do (1, 0) and (0, 1) go now?</li>
+</ul>
+    </div>
+    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · Mirror on y = x</h3>
+<p>(1, 0) → (0, 1) and (0, 1) → (1, 0).</p><div class="worked"><div class="row">M = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>1</span><span>0</span></span> &nbsp;&nbsp; det M = −1</div><div class="row">(2, 1) → (1, 2): the coordinates swap</div></div>
+</section>
+<section class="example"><h3>Example 2 · Two mirrors make a turn</h3>
+<p>Mirror on the y-axis, then on the x-axis:</p><div class="worked"><div class="row"><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−1</span><span>0</span><span>0</span><span>1</span></span> <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>−1</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−1</span><span>0</span><span>0</span><span>−1</span></span></div><div class="row">det = (−1)·(−1) = 1</div></div><p>Two flips cancel. The result is the half turn: no mirror image left.</p>
+</section>
+<section class="example"><h3>Example 3 · Rotation or mirror?</h3>
+<p>Is <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>−1</span><span>0</span></span> a rotation or a mirror?</p><div class="worked"><div class="row">det = 0·0 − 1·(−1) = 1</div><div class="row">(1, 0) → (0, −1) and (0, 1) → (1, 0)</div></div><p>The determinant is +1, so nothing is flipped. It is a rotation: a quarter turn clockwise.
+</section></div>
+    <details class="more"><summary><span class="pl-icon">✎</span><span class="rv-text"><b>More examples to try</b><span>3 problems with step-by-step solutions. Try each one before you open its solution.</span></span><span class="rv-toggle"><span class="s-show">Show</span><span class="s-hide">Hide</span></span></summary><div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Write the mirror across the x-axis. Where does (3, 2) go?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>M = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>−1</span></span>. (3, 2) → (3, −2).</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>Check that the mirror on y = x, applied twice, gives the identity.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>1</span><span>0</span></span>² = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>1</span></span>. Swapping the coordinates twice puts them back.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>Is <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>−1</span><span>−1</span><span>0</span></span> a mirror? Which line?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>det = 0 − 1 = −1 and M² = I, so yes. (1, 0) → (0, −1) and (1, −1) stays put: it is the mirror on the line y = −x.</p>
+</div></details>
+</div></div></div></details>
+  </article>
+  <details class="review">
+    <summary><span class="pl-icon">✎</span><span class="rv-text"><b>Lesson review</b><span>3 worked examples and 5 mixed problems with solutions</span></span><span class="rv-toggle"><span class="s-show">Open</span><span class="s-hide">Close</span></span></summary>
+    <div class="review-body">
+      <h2 class="practice-h">Worked examples</h2>
+      <div class="examples"><section class="example"><h3>Example 1 · Find the combination</h3>
+<p>Write b = (7, 4) as a combination of v = (1, 2) and w = (3, 1).</p>
+<p>We need c and d with c·(1, 2) + d·(3, 1) = (7, 4). Component by component:</p>
+<div class="worked"><div class="row">c + 3d = 7 &nbsp;&nbsp; 2c + d = 4</div>
+<div class="row">From the second: d = 4 − 2c. Into the first: c + 12 − 6c = 7, so c = 1 and d = 2.</div>
+<div class="row">Check: 1·(1, 2) + 2·(3, 1) = (7, 4) ✓</div></div>
+<p>In matrix form this is Ax = b with the columns v and w: <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>3</span><span>2</span><span>1</span></span> x = (7, 4), x = (1, 2).</p>
+</section>
+<section class="example"><h3>Example 2 · Ax by rows and by columns</h3>
+<p>Compute Ax for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>−1</span><span>1</span><span>3</span></span> and x = (3, 2).</p>
+<div class="worked"><div class="row">By columns: 3·(2, 1) + 2·(−1, 3) = (6 − 2, 3 + 6) = (4, 9)</div>
+<div class="row">By rows: (2·3 − 1·2, 1·3 + 3·2) = (4, 9)</div></div>
+<p>Same answer. The column way shows that (4, 9) lies in the column space, because it is built from the columns.</p>
+</section>
+<section class="example"><h3>Example 3 · Build a matrix from where (1, 0) and (0, 1) land</h3>
+<p>Find the matrix that sends (1, 0) to (1, 1) and (0, 1) to (−1, 1). What does it do to areas?</p>
+<p>The landing spots are the columns: A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>1</span><span>1</span></span>.</p>
+<div class="worked"><div class="row">det A = 1·1 − (−1)·1 = 2</div></div>
+<p>Both arrows have length √2 and are at 90° to each other, so A turns the plane by 45° and stretches it by √2. Areas double, which matches det A = 2.</p>
+</section></div>
+      <h2 class="practice-h">Problems</h2>
+      <div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Is (5, 1) a combination of (1, 1) and (2, −1)? If so, find the numbers c and d.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Solve c + 2d = 5 and c − d = 1. Subtracting gives 3d = 4, so d = 4/3 and c = 7/3.</p><p>Check: 7/3 + 8/3 = 5 and 7/3 − 4/3 = 1 ✓. Yes, because the two vectors point in different directions, every vector in the plane is a combination of them.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>Compute Ax by columns for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>4</span></span> and x = (−1, 1).</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Ax = −1·(1, 3) + 1·(2, 4) = (1, 1).</p><p>Check by rows: (−1 + 2, −3 + 4) = (1, 1) ✓</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>For which number k are the columns of <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>k</span><span>2</span><span>6</span></span> dependent? What is the column space then?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>The columns are dependent when det = 1·6 − 2k = 0, so k = 3.</p><p>Then column 2 = (3, 6) = 3·(1, 2). The column space is the line through (1, 2). Ax = b can only be solved when b is a multiple of (1, 2).</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">4</span><div class="pbody">
+<p>Find the 2 by 2 matrix that mirrors the plane across the x-axis. What is its determinant, and what does the sign mean?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>(1, 0) stays put and (0, 1) flips to (0, −1), so A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>−1</span></span>.</p><p>det A = −1. Areas keep their size (|det| = 1), and the minus sign says the plane was flipped over.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">5</span><div class="pbody">
+<p>R = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>−1</span><span>1</span><span>0</span></span> turns the plane by 90°. Compute R² and R⁴ and explain them without multiplying.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>R² = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−1</span><span>0</span><span>0</span><span>−1</span></span>, a turn by 180°: every vector points the opposite way.</p><p>R⁴ = I, the identity. Four quarter turns bring every vector back to where it started.</p>
+</div></details>
+</div></div></div>
+    </div>
+  </details>
+
+  <section class="labsec" aria-label="Lab">
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Mirror the plane across the vertical axis.</span>
+      <span class="hint" id="hint">Edit the code and press Run.</span>
+    </div>
+    <div class="lab">
+      <div class="editor-card">
+        <div class="bar">
+          <span class="file">slide_7.py</span>
+          <span class="status" id="pystatus">Loading Python…</span>
+          <button class="btn" id="reset">Reset</button>
+          <button class="btn primary" id="run" disabled>Run ▸</button>
+        </div>
+        <div class="editor">
+          <div class="gutter" id="gutter">1</div>
+          <div class="code" id="codewrap">
+            <pre id="hl" aria-hidden="true"></pre>
+            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+A = np.array([[1, 0],
+              [0, 1]])
+
+print(&quot;det =&quot;, np.linalg.det(A))
+print(&quot;A @ A =\n&quot;, A @ A)
+show(A)</textarea>
+          </div>
+        </div>
+        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+      </div>
+      <figure class="figure">
+        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+      </figure>
+    </div>
+  </section>
+</main>
+<script type="application/json" id="la-config">{"slug": "reflection-matrix", "lesson": "lesson-1", "assets": "../../assets/", "preview": {"kind": "transform", "M": [[1, 0], [0, 1]]}, "check": "isT(V) && eqM(V.M, [[-1,0],[0,1]])"}</script>
+</body></html>

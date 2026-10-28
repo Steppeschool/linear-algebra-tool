@@ -1,0 +1,164 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="robots" content="noindex"></head><body>
+<main class="lesson">
+  <article class="page">
+    <div class="kicker">Strang §2.5 · Inverse of a product</div>
+    <h1>Undo in reverse order.</h1>
+    <p class="lead">AB means B first, then A. To undo it, you undo the last move first: A⁻¹ first, then B⁻¹. Written as a product, that is B⁻¹A⁻¹.</p>
+    <div class="key">(AB)⁻¹ = B⁻¹A⁻¹ &nbsp;&nbsp;&nbsp; (ABC)⁻¹ = C⁻¹B⁻¹A⁻¹</div>
+    
+    <div class="prose">
+<h2>Think: socks and shoes, taken off</h2>
+<p>You put on socks, then shoes. In the evening you take off the shoes first, then the socks. Same two steps, reverse order.</p>
+<p>Matrix products read right to left. AB puts on B first. So the inverse takes off A first, and that is written B⁻¹A⁻¹.</p>
+<h2>Check it with algebra</h2>
+<div class="worked">
+<div class="row">(B⁻¹A⁻¹)(AB) = B⁻¹(A⁻¹A)B = B⁻¹ I B = B⁻¹B = I ✓</div>
+<div>The A and its inverse meet in the middle and cancel. Then B and its inverse cancel.</div>
+</div>
+<h2>Worked example</h2>
+<div class="worked">
+<div>R turns by 90°, S is a shear. From lesson 1, RS = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>−1</span><span>1</span><span>1</span></span></div>
+<div class="row">R⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>−1</span><span>0</span></span> (turn back) &nbsp; S⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>0</span><span>1</span></span> (slide back)</div>
+<div class="row">S⁻¹R⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>−1</span><span>0</span></span> &nbsp; but &nbsp; R⁻¹S⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>−1</span><span>1</span></span></div>
+<div>Only the first one undoes RS.</div>
+</div>
+<h2>Where you meet this</h2>
+<p>A robot arm's pose is a product of joint matrices: T₁T₂⋯Tₙ takes a point from the gripper's frame to the base's frame. To go the other way, from the base to the gripper, you need the inverse, Tₙ⁻¹⋯T₁⁻¹. The order of the joints reverses.</p>
+<p>A rotation is undone by turning back, and that matrix is also its transpose. Slide 5 explains why that matters.</p>
+    </div>
+    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · Stretch then shear, undone</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>0</span><span>0</span><span>1</span></span>, B = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>0</span><span>1</span></span>.</p><div class="worked"><div class="row">(AB)⁻¹ = B⁻¹A⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>0</span><span>1</span></span><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>½</span><span>0</span><span>0</span><span>1</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>½</span><span>−1</span><span>0</span><span>1</span></span></div><div class="row">Check: AB = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>2</span><span>0</span><span>1</span></span>, whose inverse is ½·<span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−2</span><span>0</span><span>2</span></span> ✓</div></div>
+</section>
+<section class="example"><h3>Example 2 · Powers</h3>
+<p>If A is invertible, so is A²:</p><div class="worked"><div class="row">(A²)⁻¹ = (AA)⁻¹ = A⁻¹A⁻¹ = (A⁻¹)²</div><div class="row">(A⁻¹)⁻¹ = A: undoing the undo gets you back</div></div>
+</section>
+<section class="example"><h3>Example 3 · Three steps</h3>
+<p>For three invertible matrices:</p><div class="worked"><div class="row">(ABC)⁻¹ = C⁻¹B⁻¹A⁻¹</div></div><p>C acted first, so it is undone last.</p>
+</section></div>
+    <details class="more"><summary><span class="pl-icon">✎</span><span class="rv-text"><b>More examples to try</b><span>3 problems with step-by-step solutions. Try each one before you open its solution.</span></span><span class="rv-toggle"><span class="s-show">Show</span><span class="s-hide">Hide</span></span></summary><div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>2</span><span>1</span></span>, B = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>3</span><span>0</span><span>1</span></span>. Find (AB)⁻¹.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>B⁻¹A⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−3</span><span>0</span><span>1</span></span><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>−2</span><span>1</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>7</span><span>−3</span><span>−2</span><span>1</span></span>. Check: AB = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>3</span><span>2</span><span>7</span></span> has det 1 and that inverse ✓</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>If A⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>0</span><span>1</span></span>, what is (A²)⁻¹?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>(A⁻¹)² = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>0</span><span>1</span></span>.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>True or false: (A + B)⁻¹ = A⁻¹ + B⁻¹.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>False. Take A = B = I: (2I)⁻¹ = ½I, but A⁻¹ + B⁻¹ = 2I.</p>
+</div></details>
+</div></div></div></details>
+  </article>
+  <details class="review">
+    <summary><span class="pl-icon">✎</span><span class="rv-text"><b>Lesson review</b><span>3 worked examples and 5 mixed problems with solutions</span></span><span class="rv-toggle"><span class="s-show">Open</span><span class="s-hide">Close</span></span></summary>
+    <div class="review-body">
+      <h2 class="practice-h">Worked examples</h2>
+      <div class="examples"><section class="example"><h3>Example 1 · A 2 by 2 inverse</h3>
+<p>Find the inverse of A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>4</span><span>7</span><span>2</span><span>6</span></span>.</p>
+<div class="worked"><div class="row">det A = 4·6 − 7·2 = 10</div>
+<div class="row">A⁻¹ = 1/10 · <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>6</span><span>−7</span><span>−2</span><span>4</span></span></div>
+<div class="row">Check, top-left entry of AA⁻¹: (4·6 + 7·(−2)) / 10 = 1 ✓</div></div>
+</section>
+<section class="example"><h3>Example 2 · Gauss-Jordan step by step</h3>
+<p>Invert A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>7</span></span> by elimination on [A | I].</p>
+<div class="worked"><div class="row">[1 2 | 1 0; 3 7 | 0 1] &nbsp;→ row 2 − 3·row 1 → &nbsp;[1 2 | 1 0; 0 1 | −3 1]</div>
+<div class="row">row 1 − 2·row 2 → &nbsp;[1 0 | 7 −2; 0 1 | −3 1]</div>
+<div class="row">A⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>7</span><span>−2</span><span>−3</span><span>1</span></span></div></div>
+<p>det A = 1, so the formula gives the same answer with no fractions.</p>
+</section>
+<section class="example"><h3>Example 3 · The transpose of a product</h3>
+<p>Check (AB)ᵀ = BᵀAᵀ for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>0</span><span>1</span></span> and B = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>3</span><span>1</span></span>.</p>
+<div class="worked"><div class="row">AB = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>7</span><span>2</span><span>3</span><span>1</span></span>, so (AB)ᵀ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>7</span><span>3</span><span>2</span><span>1</span></span></div>
+<div class="row">BᵀAᵀ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>3</span><span>0</span><span>1</span></span><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>2</span><span>1</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>7</span><span>3</span><span>2</span><span>1</span></span> ✓</div></div>
+<p>AᵀBᵀ would be <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>3</span><span>2</span><span>7</span></span>: the wrong order gives a different matrix.</p>
+</section></div>
+      <h2 class="practice-h">Problems</h2>
+      <div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Find the inverse of <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>1</span><span>5</span><span>2</span></span>.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>det = 3·2 − 1·5 = 1, so A⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>−1</span><span>−5</span><span>3</span></span>.</p><p>Check: row 1 of A times column 1 of A⁻¹ = 3·2 + 1·(−5) = 1 ✓</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>For which k is <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>k</span><span>4</span><span>6</span></span> not invertible?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>det = 12 − 4k = 0 when k = 3. Then column 2 = (3, 6) = 1.5·column 1, and the plane is squashed onto a line.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>0</span><span>1</span></span>, B = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>0</span><span>0</span><span>3</span></span>. Find (AB)⁻¹ as B⁻¹A⁻¹.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>B⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>½</span><span>0</span><span>0</span><span>⅓</span></span> and A⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>0</span><span>1</span></span>.</p><p>B⁻¹A⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>½</span><span>−½</span><span>0</span><span>⅓</span></span>. Check: AB = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>3</span><span>0</span><span>3</span></span> and its inverse from the formula, 1/6·<span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>−3</span><span>0</span><span>2</span></span>, is the same ✓</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">4</span><div class="pbody">
+<p>Compute AᵀA for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>2</span><span>1</span><span>0</span><span>3</span></span>. Is it symmetric?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>AᵀA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>5</span><span>2</span><span>2</span><span>10</span></span>. Entry (1, 1) = 1 + 4 + 0, entry (1, 2) = 0 + 2 + 0, entry (2, 2) = 0 + 1 + 9.</p><p>Yes, it is symmetric, as AᵀA always is.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">5</span><div class="pbody">
+<p>Find the permutation P that puts the rows of a 3 by 3 matrix in the order 2, 3, 1. What is P⁻¹?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>The rows of P are rows 2, 3, 1 of I: P = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>0</span><span>1</span><span>0</span><span>0</span><span>0</span><span>1</span><span>1</span><span>0</span><span>0</span></span>.</p><p>P⁻¹ = Pᵀ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>0</span><span>0</span><span>1</span><span>1</span><span>0</span><span>0</span><span>0</span><span>1</span><span>0</span></span>, which puts the rows back.</p>
+</div></details>
+</div></div></div>
+    </div>
+  </details>
+
+  <section class="labsec" aria-label="Lab">
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Fix the order in undo so that the last arrow comes back to v.</span>
+      <span class="hint" id="hint">Edit the code and press Run.</span>
+    </div>
+    <div class="lab">
+      <div class="editor-card">
+        <div class="bar">
+          <span class="file">slide_3.py</span>
+          <span class="status" id="pystatus">Loading Python…</span>
+          <button class="btn" id="reset">Reset</button>
+          <button class="btn primary" id="run" disabled>Run ▸</button>
+        </div>
+        <div class="editor">
+          <div class="gutter" id="gutter">1</div>
+          <div class="code" id="codewrap">
+            <pre id="hl" aria-hidden="true"></pre>
+            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+R = np.array([[0., -1.],
+              [1.,  0.]])      # turn 90°
+S = np.array([[1., 1.],
+              [0., 1.]])       # shear
+
+v = np.array([1., 1.])
+Sv = S @ v                     # S acts first
+RSv = R @ Sv                   # then R: this is (R S) v
+
+R_inv = np.linalg.inv(R)
+S_inv = np.linalg.inv(S)
+undo = R_inv @ S_inv           # is this the right order?
+back = undo @ RSv
+
+print(&quot;R S v        =&quot;, RSv)
+print(&quot;undo (R S v) =&quot;, back)
+arrows((&quot;v&quot;, v), (&quot;S v&quot;, Sv), (&quot;R S v&quot;, RSv), (&quot;undo (R S v)&quot;, back))</textarea>
+          </div>
+        </div>
+        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+      </div>
+      <figure class="figure">
+        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+      </figure>
+    </div>
+  </section>
+</main>
+<script type="application/json" id="la-config">{"slug": "inverse-of-a-product", "lesson": "lesson-3", "assets": "../../assets/", "preview": {"kind": "arrows", "items": [{"label": "v", "v": [1, 1]}, {"label": "S v", "v": [2, 1]}, {"label": "R S v", "v": [-1, 2]}]}, "check": "isA(V) && V.items.length >= 3 && close(V.items[V.items.length - 1].v, V.items[0].v)"}</script>
+</body></html>

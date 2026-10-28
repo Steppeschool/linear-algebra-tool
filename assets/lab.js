@@ -56,7 +56,7 @@ let A = [[1,0],[0,1]], from = A, to = A, t0 = 0, anim = false;
 let view = S.preview, last = null, runs = 0;
 const I2 = [[1,0],[0,1]];
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const css = n => getComputedStyle(document.querySelector(".la-embed") || document.documentElement).getPropertyValue(n).trim();
 function size(){const r = cv.getBoundingClientRect(), d = devicePixelRatio || 1; cv.width = Math.round(r.width*d); cv.height = Math.round(r.height*d); ctx.setTransform(d,0,0,d,0,0); draw();}
 function setView(V, fromSlider){ view = V; if (!fromSlider) renderSliders(); setTarget(V.kind === "transform" ? V.M : I2); setLegend(); draw(); }
 function setTarget(M){from = A.map(r => r.slice()); to = M; t0 = performance.now(); if (reduce){A = M; draw(); return;} if(!anim){anim = true; requestAnimationFrame(step);} }
