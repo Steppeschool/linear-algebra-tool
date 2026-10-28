@@ -3,13 +3,13 @@ slug: vector-spaces-and-subspaces
 seo_title: Vector Spaces and Subspaces Explained Visually
 description: A subspace is a set you cannot leave by adding and scaling: a line or plane through the origin. Examples, non-examples and live Python. Strang §3.1.
 kicker: Strang §3.1 · Spaces of vectors
-title: A subspace is a flat sheet through the origin.
+title: A subspace is a flat piece through the origin.
 task: C(A) is the line through (1, 2). Choose x so that Ax reaches b = (−3, −6) on that line.
 preview: {"kind":"combo","A":[[1,2],[2,4]],"x":[1,1],"b":[-3,-6]}
 check: isC(V) && eqM(V.A, [[1,2],[2,4]]) && near(Ax(V)[0], -3) && near(Ax(V)[1], -6)
 ---
 <!-- lead -->
-A subspace is a collection of vectors that you cannot leave by adding and scaling. In the plane there are only three kinds: the origin alone, a line through the origin, or the whole plane.
+A subspace is a collection of vectors that you cannot leave by adding and scaling. Picture a flat piece through the origin: a single point, a line or a plane. In the plane there are only three kinds: the origin alone, a line through the origin, or the whole plane.
 <!-- key -->
 v and w in S &nbsp;⇒&nbsp; cv + dw in S, for every c and d
 <!-- ideas -->
