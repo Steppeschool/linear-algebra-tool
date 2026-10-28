@@ -38,6 +38,7 @@
 <h3>Rules of a game</h3>
 <p>Chess is defined by a few rules for how each piece moves. Nobody memorises every possible game: the games follow from the rules. The determinant works the same way. Three rules pin it down completely.</p>
 <h3>The three rules</h3>
+<p>We state the rules for the rows of A. Slide 3 shows that det Aᵀ = det A, so every rule holds for the columns too. That matters because the columns are the edges of the box from slide 1.</p>
 <ul>
 <li><b>det I = 1.</b> The identity moves nothing, so the unit cube keeps volume 1.</li>
 <li><b>A row swap flips the sign.</b> Swapping two rows of <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>1</span><span>0</span></span> gives I, so det <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>1</span><span>0</span></span> = −1. It is a mirror.</li>
@@ -45,7 +46,7 @@
 </ul>
 <p>Careful: rule 3 is about one row at a time. Doubling the whole n by n matrix multiplies det by 2ⁿ, because each of the n rows doubles. And det(A + B) is usually not det A + det B.</p>
 <h3>What follows</h3>
-<div class="worked"><div class="row"><b>Two equal rows give det = 0.</b> Swapping them changes nothing, but rule 2 says the sign flips. So det = −det, which means det = 0.</div><div class="row"><b>Subtracting ℓ × row j from row i leaves det unchanged.</b> By rule 3 the new det splits into the old det minus ℓ × (a det with two equal rows) = old det − 0.</div><div class="row"><b>A row of zeros gives det = 0.</b> Multiply that row by 0: rule 3 says det × 0.</div></div>
+<div class="worked"><div class="row"><b>Two equal rows give det = 0.</b> Swapping them changes nothing, but rule 2 says the sign flips. So det = −det, which means det = 0.</div><div class="row"><b>Subtracting ℓ × row j from row i leaves det unchanged.</b> The new row i is (row i) − ℓ(row j). By rule 3 the det splits into det A − ℓ × det(A with row i replaced by row j). That second matrix has row j twice, so its det is 0. What is left is det A.</div><div class="row"><b>A row of zeros gives det = 0.</b> Multiply that row by 0: rule 3 says det × 0.</div></div>
 <p>The second fact is the big one. It says that the elimination steps from lesson 2 do not change the determinant. Geometrically, they are shears: they slant the box without changing its volume, like pushing a deck of cards sideways.</p>
 <h3>A worked check</h3>
 <div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>0</span><span>2</span><span>5</span><span>1</span><span>0</span><span>1</span><span>3</span></span>, &nbsp; det A = 2</div><div class="row">Row 2 − 2·row 1 gives B = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>0</span><span>0</span><span>1</span><span>1</span><span>0</span><span>1</span><span>3</span></span>, &nbsp; det B = 2 ✓</div></div>
@@ -90,7 +91,7 @@
       <h2 class="practice-h">Worked examples</h2>
       <div class="examples"><section class="example"><h3>Example 1 · Elimination with a row swap</h3>
 <p>Find det A for A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>0</span><span>1</span><span>2</span><span>1</span><span>0</span><span>3</span><span>4</span><span>−3</span><span>8</span></span>.</p>
-<div class="worked"><div class="row">The first pivot position holds 0: swap rows 1 and 2 (the sign flips once)</div><div class="row">Row 3 − 4·row 1 = (0, −3, −4). &nbsp; Row 3 + 3·row 2 = (0, 0, 2)</div><div class="row">Pivots 1, 1, 2. &nbsp; det A = −(1 · 1 · 2) = −2</div></div>
+<div class="worked"><div class="row">The first pivot position holds 0: swap rows 1 and 2 (the sign flips once) to get [1 0 3; 0 1 2; 4 −3 8]</div><div class="row">Row 3 − 4·row 1 = (0, −3, −4). &nbsp; Row 3 + 3·row 2 = (0, 0, 2)</div><div class="row">Pivots 1, 1, 2. &nbsp; det A = −(1 · 1 · 2) = −2</div></div>
 </section>
 <section class="example"><h3>Example 2 · Bookkeeping with the rules</h3>
 <p>A and B are 3 by 3 with det A = 2 and det B = 5.</p>

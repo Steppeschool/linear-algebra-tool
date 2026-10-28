@@ -38,15 +38,15 @@
 <h3>Measuring a field from GPS corners</h3>
 <p>A farmer walks to the three corners of a triangular field with a GPS. How big is the field? No tape measure needed: the area is a determinant.</p>
 <h3>From corners to area</h3>
-<p>Put the first corner at the origin by subtracting it from the others. The two results are edge vectors. They span a parallelogram of area |det|, and the triangle is exactly half of it.</p>
+<p>Put the first corner at the origin by subtracting it from the others. The two results are edge vectors. Put them as the columns of a 2 by 2 matrix [edge₁ edge₂]. They span a parallelogram of area |det|, and the triangle is exactly half of it.</p>
 <div class="worked"><div class="row">Corners (1, 1), (4, 2), (2, 5)</div><div class="row">Edges: (4, 2) − (1, 1) = (3, 1), &nbsp; (2, 5) − (1, 1) = (1, 4)</div><div class="row">det <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>1</span><span>1</span><span>4</span></span> = 12 − 1 = 11, &nbsp; area = 11/2 = 5.5</div></div>
 <p>Using the corners directly would measure a triangle that has a corner at the origin, a different shape. That is the mistake the lab asks you to fix.</p>
 <h3>Volume of a box</h3>
 <p>Three edge vectors u, v, w from one corner span a slanted box. Its volume is |det| of the 3 by 3 matrix with u, v, w as columns (slide 1). A volume of 0 means the three edges lie in one plane.</p>
 <h3>The cross product</h3>
-<p>For two vectors in 3D there is a third vector, u × v, that is perpendicular to both. Its three components are 2 by 2 determinants built from u and v:</p>
+<p>For two vectors in 3D there is a third vector, u × v, that is perpendicular to both. Its three components are 2 by 2 determinants. Stack u and v as two rows: component 1 is the det of columns 2 and 3, component 2 is minus the det of columns 1 and 3, component 3 is the det of columns 1 and 2:</p>
 <div class="worked"><div class="row">u × v = (u₂v₃ − u₃v₂, &nbsp; u₃v₁ − u₁v₃, &nbsp; u₁v₂ − u₂v₁)</div><div class="row">(1, 2, 3) × (0, 1, 4) = (8 − 3, 0 − 4, 1 − 0) = (5, −4, 1)</div><div class="row">Check: (5, −4, 1) · (1, 2, 3) = 5 − 8 + 3 = 0 ✓ &nbsp; (5, −4, 1) · (0, 1, 4) = 0 − 4 + 4 = 0 ✓</div></div>
-<p>Its length equals the area of the parallelogram spanned by u and v, and its direction follows the right-hand rule: curl the fingers from u to v, and the thumb points along u × v. Swapping u and v flips it: v × u = −(u × v).</p>
+<p>Its length equals the area of the parallelogram spanned by u and v (check: (1, 0, 0) × (0, 1, 0) = (0, 0, 1) has length 1, the area of the unit square), and its direction follows the right-hand rule: curl the fingers from u to v, and the thumb points along u × v. Swapping u and v flips it: v × u = −(u × v).</p>
 <h3>Where this is used</h3>
 <p>Torque is a cross product. Push with force F at position r from a joint, and the twist on the joint is τ = r × F. A robot arm controller computes exactly this to know how hard each motor must work. Graphics and 3D printers use u × v to find the outward normal of every triangle in a mesh.</p>
     </div>
@@ -88,7 +88,7 @@
       <h2 class="practice-h">Worked examples</h2>
       <div class="examples"><section class="example"><h3>Example 1 · Elimination with a row swap</h3>
 <p>Find det A for A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>0</span><span>1</span><span>2</span><span>1</span><span>0</span><span>3</span><span>4</span><span>−3</span><span>8</span></span>.</p>
-<div class="worked"><div class="row">The first pivot position holds 0: swap rows 1 and 2 (the sign flips once)</div><div class="row">Row 3 − 4·row 1 = (0, −3, −4). &nbsp; Row 3 + 3·row 2 = (0, 0, 2)</div><div class="row">Pivots 1, 1, 2. &nbsp; det A = −(1 · 1 · 2) = −2</div></div>
+<div class="worked"><div class="row">The first pivot position holds 0: swap rows 1 and 2 (the sign flips once) to get [1 0 3; 0 1 2; 4 −3 8]</div><div class="row">Row 3 − 4·row 1 = (0, −3, −4). &nbsp; Row 3 + 3·row 2 = (0, 0, 2)</div><div class="row">Pivots 1, 1, 2. &nbsp; det A = −(1 · 1 · 2) = −2</div></div>
 </section>
 <section class="example"><h3>Example 2 · Bookkeeping with the rules</h3>
 <p>A and B are 3 by 3 with det A = 2 and det B = 5.</p>

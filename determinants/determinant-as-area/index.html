@@ -33,7 +33,7 @@
     <p class="lead">Every square matrix has one number attached to it, the determinant. It answers a geometric question: by what factor does the matrix stretch areas (in 2D) or volumes (in 3D)? A negative sign means space is also flipped, and zero means it is squashed flat.</p>
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-6--determinant-as-area.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 6 · slide 1</small>Determinant</span></span></div>
     <div class="key">det A = ad − bc for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>a</span><span>b</span><span>c</span><span>d</span></span> &nbsp;&nbsp; area of image = |det A| × area</div>
-    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>det A is the factor by which A multiplies every area (2D) or volume (3D).</li><li>det A < 0: the matrix also flips space, like a mirror.</li><li>det A = 0: space is squashed into a line or a plane. Then A has no inverse.</li><li>For 2 by 2, det A = ad − bc. Larger matrices follow from three rules (slide 2).</li></ol></div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>det A is the factor by which A multiplies every area (2D) or volume (3D).</li><li>det A &lt; 0: the matrix also flips space, like a mirror.</li><li>det A = 0: space is squashed into a line or a plane. Then A has no inverse.</li><li>For 2 by 2, det A = ad − bc. Larger matrices follow from three rules (slide 2).</li></ol></div>
     <div class="prose">
 <h3>Rolling out pizza dough</h3>
 <p>Roll a ball of dough into a sheet and every topping on it grows by the same factor. A slice of pepperoni and an olive both get twice as big if the sheet doubles in area. It does not matter what shape the topping has.</p>
@@ -42,7 +42,7 @@
 <p>The easiest shape to follow is the unit square, with corners at 0, (1, 0), (0, 1) and (1, 1). Lesson 1 showed that A sends (1, 0) to its first column and (0, 1) to its second column. So the square becomes the parallelogram spanned by the two columns, and its area is |det A|.</p>
 <div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>0</span><span>0</span><span>2</span></span>: the square becomes a 3 by 2 rectangle, area 6, &nbsp; det A = 3·2 − 0·0 = 6 ✓</div><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>1</span></span>: a slanted parallelogram, &nbsp; det A = 2·1 − 1·1 = 1. Same area as the square.</div></div>
 <h3>The sign: was the plane flipped?</h3>
-<p>Walk around the square from (1, 0) to (0, 1), turning counterclockwise. If the images of those two corners are still met counterclockwise, det A is positive. If the order has reversed, the plane has been mirrored and det A is negative. The mirror from lesson 1, <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−1</span><span>0</span><span>0</span><span>1</span></span>, has det = −1: same area, flipped.</p>
+<p>Turning from (1, 0) to (0, 1) the short way is a counterclockwise turn. Now turn from column 1 of A to column 2 the short way. If that turn is still counterclockwise, det A &gt; 0. If it has become clockwise, the plane has been mirrored and det A &lt; 0. The mirror from lesson 1, <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−1</span><span>0</span><span>0</span><span>1</span></span>, has det = −1: same area, flipped.</p>
 <h3>Zero: squashed flat</h3>
 <p>If the two columns point along the same line, the parallelogram is flat and its area is 0. Then many inputs land on the same output, so nothing can undo A. That is the most useful fact about determinants: <b>A is invertible exactly when det A ≠ 0</b>.</p>
 <h3>Three dimensions</h3>
@@ -89,7 +89,7 @@
       <h2 class="practice-h">Worked examples</h2>
       <div class="examples"><section class="example"><h3>Example 1 · Elimination with a row swap</h3>
 <p>Find det A for A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>0</span><span>1</span><span>2</span><span>1</span><span>0</span><span>3</span><span>4</span><span>−3</span><span>8</span></span>.</p>
-<div class="worked"><div class="row">The first pivot position holds 0: swap rows 1 and 2 (the sign flips once)</div><div class="row">Row 3 − 4·row 1 = (0, −3, −4). &nbsp; Row 3 + 3·row 2 = (0, 0, 2)</div><div class="row">Pivots 1, 1, 2. &nbsp; det A = −(1 · 1 · 2) = −2</div></div>
+<div class="worked"><div class="row">The first pivot position holds 0: swap rows 1 and 2 (the sign flips once) to get [1 0 3; 0 1 2; 4 −3 8]</div><div class="row">Row 3 − 4·row 1 = (0, −3, −4). &nbsp; Row 3 + 3·row 2 = (0, 0, 2)</div><div class="row">Pivots 1, 1, 2. &nbsp; det A = −(1 · 1 · 2) = −2</div></div>
 </section>
 <section class="example"><h3>Example 2 · Bookkeeping with the rules</h3>
 <p>A and B are 3 by 3 with det A = 2 and det B = 5.</p>

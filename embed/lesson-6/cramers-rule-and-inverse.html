@@ -4,7 +4,7 @@
     <div class="slide-head"><div>
     <div class="kicker">Strang §5.3 · Cramer&#x27;s rule and inverses</div>
     <h1>Cramer&#x27;s rule: each unknown is a ratio of two determinants.</h1>
-    <p class="lead">Determinants give closed formulas for the solution of Ax = b and for A⁻¹. Replace column j of A by b and divide determinants: that is xⱼ. Collect the cofactors and divide by det A: that is A⁻¹. Neat formulas, slow in practice.</p>
+    <p class="lead">Determinants give closed formulas for the solution of Ax = b and for A⁻¹. Replace column j of A by b and divide determinants: that is xⱼ. Collect the cofactors, transpose them and divide by det A: that is A⁻¹. Neat formulas, slow in practice.</p>
     </div><span class="thumb slide-art"><img src="https://linearalgebra.steppeschool.com/assets/cards/lesson-6--cramers-rule-and-inverse.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 6 · slide 5</small>Cramer&#x27;s rule</span></span></div>
     <div class="key">xⱼ = det Bⱼ / det A &nbsp;&nbsp; (Bⱼ = A with column j replaced by b) &nbsp;&nbsp; A⁻¹ = Cᵀ / det A</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Cramer's rule: xⱼ = det Bⱼ / det A, where Bⱼ is A with its column j replaced by b.</li><li>It needs det A ≠ 0, the same condition as for A⁻¹ to exist.</li><li>The inverse: (A⁻¹)ᵢⱼ = Cⱼᵢ / det A. Note the swap: the cofactor matrix is transposed.</li><li>For 2 by 2 this is exactly the formula from lesson 3.</li></ol></div>
@@ -12,13 +12,13 @@
 <h3>A recipe card for each unknown</h3>
 <p>Elimination solves all the unknowns together. Cramer's rule gives each unknown its own recipe card: one ratio of two determinants, independent of the others. That is handy for a formula on paper, but each card costs a full determinant.</p>
 <h3>Why it works (2 by 2)</h3>
-<p>Write the columns of A as a₁ and a₂, so b = x₁a₁ + x₂a₂. Put b into column 1 and use the rules from slide 2:</p>
+<p>Write the columns of A as a₁ and a₂, so b = x₁a₁ + x₂a₂. Put b into column 1 and use the rules from slide 2 (they hold for columns too, since det Aᵀ = det A):</p>
 <div class="worked"><div class="row">det [b  a₂] = det [x₁a₁ + x₂a₂ &nbsp; a₂] = x₁ det [a₁ a₂] + x₂ det [a₂ a₂]</div><div class="row">The last determinant has two equal columns, so it is 0</div><div class="row">det B₁ = x₁ · det A, &nbsp; so x₁ = det B₁ / det A</div></div>
 <p>The same argument works for every column and every size.</p>
 <h3>A worked example</h3>
 <div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>3</span></span>, &nbsp; b = (5, 10), &nbsp; det A = 6 − 1 = 5</div><div class="row">B₁ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>5</span><span>1</span><span>10</span><span>3</span></span>: det = 15 − 10 = 5, &nbsp; x₁ = 5/5 = 1</div><div class="row">B₂ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>5</span><span>1</span><span>10</span></span>: det = 20 − 5 = 15, &nbsp; x₂ = 15/5 = 3</div><div class="row">Check: A(1, 3) = (2 + 3, 1 + 9) = (5, 10) ✓</div></div>
 <h3>The inverse from cofactors</h3>
-<p>Column j of A⁻¹ solves Ax = (column j of I). Cramer's rule on those right-hand sides gives every entry of A⁻¹ as a cofactor divided by det A. Put the cofactors Cᵢⱼ in a matrix C, transpose it, and divide:</p>
+<p>Column j of A⁻¹ solves Ax = (column j of I). Try the 2 by 2 case with b = (1, 0), the first column of I. B₁ = [1 a₁₂; 0 a₂₂] has det a₂₂, which is the cofactor C₁₁. B₂ = [a₁₁ 1; a₂₁ 0] has det −a₂₁, which is the cofactor C₁₂. So column 1 of A⁻¹ is (C₁₁, C₁₂) / det A: row 1 of the cofactor matrix C stands up as column 1 of A⁻¹. That is why C gets transposed:</p>
 <div class="worked"><div class="row">A⁻¹ = Cᵀ / det A</div><div class="row">2 by 2: C = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>d</span><span>−c</span><span>−b</span><span>a</span></span>, &nbsp; Cᵀ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>d</span><span>−b</span><span>−c</span><span>a</span></span>, &nbsp; A⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>d</span><span>−b</span><span>−c</span><span>a</span></span> / (ad − bc)</div></div>
 <p>That is the 2 by 2 recipe from lesson 3, now explained.</p>
 <h3>Where this is used</h3>
@@ -61,7 +61,7 @@
       <h2 class="practice-h">Worked examples</h2>
       <div class="examples"><section class="example"><h3>Example 1 · Elimination with a row swap</h3>
 <p>Find det A for A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>0</span><span>1</span><span>2</span><span>1</span><span>0</span><span>3</span><span>4</span><span>−3</span><span>8</span></span>.</p>
-<div class="worked"><div class="row">The first pivot position holds 0: swap rows 1 and 2 (the sign flips once)</div><div class="row">Row 3 − 4·row 1 = (0, −3, −4). &nbsp; Row 3 + 3·row 2 = (0, 0, 2)</div><div class="row">Pivots 1, 1, 2. &nbsp; det A = −(1 · 1 · 2) = −2</div></div>
+<div class="worked"><div class="row">The first pivot position holds 0: swap rows 1 and 2 (the sign flips once) to get [1 0 3; 0 1 2; 4 −3 8]</div><div class="row">Row 3 − 4·row 1 = (0, −3, −4). &nbsp; Row 3 + 3·row 2 = (0, 0, 2)</div><div class="row">Pivots 1, 1, 2. &nbsp; det A = −(1 · 1 · 2) = −2</div></div>
 </section>
 <section class="example"><h3>Example 2 · Bookkeeping with the rules</h3>
 <p>A and B are 3 by 3 with det A = 2 and det B = 5.</p>

@@ -13,10 +13,10 @@
 <p>To measure the volume of a slanted box, slide its layers until it stands upright. Sliding layers (shears) does not change the volume. An upright box is easy: multiply its three side lengths.</p>
 <p>Elimination is that sliding. It turns A into an upper triangular U without changing the determinant, and the "side lengths" of U are its diagonal entries, the pivots.</p>
 <h3>Why the diagonal is enough</h3>
-<p>For a triangular matrix, use rule 3 to pull each diagonal entry out of its row. What is left has 1s on the diagonal, and more elimination clears the rest to give I, with det I = 1. So det U is just the product of the diagonal.</p>
+<p>For a triangular matrix, use rule 3 to pull each diagonal entry out of its row. What is left has 1s on the diagonal, and more elimination clears the rest to give I, with det I = 1. So det U is just the product of the diagonal. (If a diagonal entry is 0, there is no pivot in that row: elimination produces a zero row and det U = 0, which is still the product of the diagonal.)</p>
 <h3>A worked example</h3>
 <div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>0</span><span>2</span><span>5</span><span>1</span><span>0</span><span>1</span><span>3</span></span></div><div class="row">Row 2 − 2·row 1: (0, 1, 1). &nbsp; Then row 3 − 1·row 2: (0, 0, 2)</div><div class="row">U = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>0</span><span>0</span><span>1</span><span>1</span><span>0</span><span>0</span><span>2</span></span>, &nbsp; pivots 1, 1, 2</div><div class="row">det A = 1 · 1 · 2 = 2 ✓ (no row exchanges)</div></div>
-<p>The 3 by 3 matrix from lesson 2 had pivots 2, −8 and 1, so its determinant is 2 · (−8) · 1 = −16.</p>
+<p>The 3 by 3 matrix K = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>1</span><span>4</span><span>−6</span><span>0</span><span>−2</span><span>7</span><span>2</span></span> from lesson 2 had pivots 2, −8 and 1, so its determinant is 2 · (−8) · 1 = −16.</p>
 <h3>Products and transposes</h3>
 <p>Doing B and then A stretches volumes by det B and then by det A. So <b>det AB = det A · det B</b>. One consequence: A⁻¹A = I gives det A⁻¹ · det A = 1, so det A⁻¹ = 1 / det A.</p>
 <p>Also <b>det Aᵀ = det A</b>. So everything said about rows is also true for columns: swapping two columns flips the sign, and two equal columns give 0.</p>
@@ -60,7 +60,7 @@
       <h2 class="practice-h">Worked examples</h2>
       <div class="examples"><section class="example"><h3>Example 1 · Elimination with a row swap</h3>
 <p>Find det A for A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>0</span><span>1</span><span>2</span><span>1</span><span>0</span><span>3</span><span>4</span><span>−3</span><span>8</span></span>.</p>
-<div class="worked"><div class="row">The first pivot position holds 0: swap rows 1 and 2 (the sign flips once)</div><div class="row">Row 3 − 4·row 1 = (0, −3, −4). &nbsp; Row 3 + 3·row 2 = (0, 0, 2)</div><div class="row">Pivots 1, 1, 2. &nbsp; det A = −(1 · 1 · 2) = −2</div></div>
+<div class="worked"><div class="row">The first pivot position holds 0: swap rows 1 and 2 (the sign flips once) to get [1 0 3; 0 1 2; 4 −3 8]</div><div class="row">Row 3 − 4·row 1 = (0, −3, −4). &nbsp; Row 3 + 3·row 2 = (0, 0, 2)</div><div class="row">Pivots 1, 1, 2. &nbsp; det A = −(1 · 1 · 2) = −2</div></div>
 </section>
 <section class="example"><h3>Example 2 · Bookkeeping with the rules</h3>
 <p>A and B are 3 by 3 with det A = 2 and det B = 5.</p>

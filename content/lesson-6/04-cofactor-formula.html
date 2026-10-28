@@ -13,13 +13,14 @@ There is also an explicit formula. Expand along one row: each entry times the de
 <!-- key -->
 det A = a₁₁C₁₁ + a₁₂C₁₂ + a₁₃C₁₃ &nbsp;&nbsp; C₁ⱼ = (−1)^(1+j) · det(A without row 1 and column j)
 <!-- ideas -->
-<ol class="ideas"><li>The <b>minor</b> of entry aᵢⱼ is the determinant of A with row i and column j crossed out.</li><li>The <b>cofactor</b> Cᵢⱼ is that minor times (−1)^(i+j): signs + − + in row 1, − + − in row 2, and so on, like a checkerboard.</li><li>Expanding along any row (or column): det A = sum of entries × their cofactors.</li><li>Each of the n! terms of the full formula picks one entry from every row and every column.</li></ol>
+<ol class="ideas"><li>The <b>minor</b> of entry aᵢⱼ is the determinant of A with row i and column j crossed out.</li><li>The <b>cofactor</b> Cᵢⱼ is that minor times (−1)^(i+j): signs + − + in row 1, − + − in row 2, and so on, like a checkerboard.</li><li>Expanding along any row (or column): det A = sum of entries × their cofactors.</li><li>Fully expanded, a 3 by 3 determinant is a sum of 3! = 6 products, each using one entry from every row and every column; an n by n has n! of them.</li></ol>
 <!-- prose -->
 <h3>An itemised receipt</h3>
 <p>Elimination gives the total quickly. Sometimes you want the itemised receipt instead: where each part of the total comes from. That is the cofactor formula. It writes det A as a sum of products, each product using exactly one entry from every row and every column.</p>
 <h3>The 2 by 2 case, seen as choices</h3>
-<p>For <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>a</span><span>b</span><span>c</span><span>d</span></span> there are two ways to pick one entry per row and per column: a with d, or b with c. The first comes with a plus sign, the second (a swapped choice) with a minus: det = ad − bc.</p>
+<p>For <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>a</span><span>b</span><span>c</span><span>d</span></span> there are two ways to pick one entry per row and per column: a with d (columns in the order 1, 2), or b with c (columns in the order 2, 1). The second order is one swap away from the first, so by rule 2 it gets a minus sign: det = ad − bc.</p>
 <h3>Expanding a 3 by 3 along row 1</h3>
+<p>Notation: aᵢⱼ is the entry in row i, column j of A.</p>
 <p>Take each entry of row 1. Cross out its row and column. The 2 by 2 that remains is its <b>minor</b>. Multiply entry × minor, and attach the signs + − + across the row:</p>
 <div class="worked"><div class="row">det A = a₁₁(a₂₂a₃₃ − a₂₃a₃₂) − a₁₂(a₂₁a₃₃ − a₂₃a₃₁) + a₁₃(a₂₁a₃₂ − a₂₂a₃₁)</div></div>
 <p>Each bracket, with its sign, is a <b>cofactor</b>. The signs follow a checkerboard, starting with + in the top left corner: (−1)^(i+j) for row i, column j.</p>
@@ -67,7 +68,7 @@ import numpy as np
 C = np.array([[2., 0., 1.],
               [1., 3., 2.],
               [1., 1., 2.]])
-a, b, c = C[0]                  # row 1
+a, b, c = C[0]                  # row 1 (Python counts from 0: C[1,1] is a₂₂)
 
 d = (a * (C[1,1]*C[2,2] - C[1,2]*C[2,1])
      - b * (C[1,0]*C[2,2] - C[1,2]*C[2,0])
