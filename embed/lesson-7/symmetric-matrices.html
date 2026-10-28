@@ -4,10 +4,10 @@
     <div class="slide-head"><div>
     <div class="kicker">Strang §6.4 · Symmetric matrices</div>
     <h1>Symmetric matrices: perpendicular eigenvectors.</h1>
-    <p class="lead">Symmetric matrices (A = Aᵀ) are the friendliest case. Their eigenvalues are real, and their eigenvectors can be chosen perpendicular and of length 1. Then X becomes an orthogonal matrix Q, its inverse is just Qᵀ, and A = QΛQᵀ.</p>
+    <p class="lead">Symmetric matrices (A = Aᵀ) are the friendliest case. All their eigenvalues are real numbers. And we can always pick eigenvectors that meet at right angles, then shrink or stretch them to length 1. Then X becomes an orthogonal matrix Q, its inverse is just Qᵀ, and A = QΛQᵀ.</p>
     </div><span class="thumb slide-art"><img src="https://linearalgebra.steppeschool.com/assets/cards/lesson-7--symmetric-matrices.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 7 · slide 5</small>Symmetric matrices</span></span></div>
     <div class="key">A = Aᵀ ⇒ A = QΛQᵀ &nbsp;&nbsp; QᵀQ = I</div>
-    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>A symmetric matrix has only real eigenvalues (never complex, unlike the rotation on slide 1).</li><li>Eigenvectors for different eigenvalues are perpendicular.</li><li>Scaled to length 1, they form the columns of an orthogonal Q (lesson 5): Q⁻¹ = Qᵀ.</li><li>So A = QΛQᵀ. (This result is called the <b>spectral theorem</b>.) Every symmetric matrix is a stretch along perpendicular axes.</li></ol></div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Every eigenvalue of a symmetric matrix is a real number (never complex, unlike the rotation on slide 1).</li><li>Eigenvectors for different eigenvalues are perpendicular.</li><li>Scaled to length 1, they form the columns of an orthogonal Q (lesson 5): Q⁻¹ = Qᵀ.</li><li>So A = QΛQᵀ. (This result is called the <b>spectral theorem</b>.) Every symmetric matrix is a stretch along perpendicular axes.</li></ol></div>
     <div class="prose">
 <h3>Pulling a sheet in two perpendicular directions</h3>
 <p>Stretch a sheet of rubber harder east-west than north-south. The two stretch directions are perpendicular, and each is a direction the stretch does not turn. That is what a symmetric matrix always looks like: stretches (or squeezes, or flips) along perpendicular axes, and nothing else.</p>
@@ -47,7 +47,7 @@
 </div></details>
 </div></div>
 <div class="problem"><span class="pnum">3</span><div class="pbody">
-<p>A symmetric 2 by 2 matrix has eigenvector (3, 4). Without more information, what is the other eigenvector direction?</p>
+<p>A symmetric 2 by 2 matrix with two different eigenvalues has eigenvector (3, 4). What is the other eigenvector direction?</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
 <p>It must be perpendicular: (4, −3) or any multiple.</p>
 </div></details>
