@@ -13,7 +13,7 @@
 <p>A squashed piece of dough cannot be unsquashed: the information about its thickness is gone. But everything that was only stretched can be stretched back. The pseudoinverse does exactly that: undo the turns, divide by every nonzero σ, and leave the squashed directions at zero.</p>
 <h3>The formula</h3>
 <div class="worked"><div class="row">A = UΣVᵀ, &nbsp; so undo in reverse order: &nbsp; A⁺ = VΣ⁺Uᵀ</div><div class="row">Σ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>σ₁</span><span>0</span><span>0</span><span>0</span></span> &nbsp;→&nbsp; Σ⁺ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1/σ₁</span><span>0</span><span>0</span><span>0</span></span></div></div>
-<p>When all σ's are nonzero (A square and invertible), Σ⁺ = Σ⁻¹ and A⁺ is just A⁻¹.</p>
+<p>When A is square and all its σ's are nonzero (A invertible), Σ⁺ = Σ⁻¹ and A⁺ is just A⁻¹.</p>
 <h3>A worked example</h3>
 <div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>1</span></span>, b = (2, 4): &nbsp; x + y = 2 and x + y = 4 contradict each other</div><div class="row">σ₁ = 2 with u₁ = v₁ = (1, 1)/√2, &nbsp; σ₂ = 0</div><div class="row">A⁺ = v₁(1/2)u₁ᵀ = ¼<span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>1</span></span></div><div class="row">x⁺ = A⁺b = ¼(6, 6) = (1.5, 1.5)</div></div>
 <p>The best compromise makes x + y = 3, halfway between 2 and 4: that is least squares. Among all x with x + y = 3, (1.5, 1.5) is the shortest. The pseudoinverse always picks this shortest best answer.</p>
