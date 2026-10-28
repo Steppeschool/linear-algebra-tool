@@ -282,12 +282,36 @@ def show(M, *vectors):
         raise ValueError("show() needs a 2x2 matrix, got shape %s" % (M.shape,))
     window.__pyshow(M.tolist(), [asarray(v).tolist() for v in vectors])
 
+def _hint(kind, msg):
+    m = msg.lower()
+    if kind == "SyntaxError" and ("never closed" in m or "unmatched" in m or "unexpected eof" in m):
+        return "A bracket is not closed. Every ( or [ needs its ) or ]."
+    if kind in ("SyntaxError", "IndentationError") and "indent" in m:
+        return "Lines inside the same block must start at the same column. Check the spaces at the start of the line."
+    if kind == "SyntaxError":
+        return "Python could not read this line. Look for a missing comma, bracket or quote, or = written instead of ==."
+    if kind == "NameError":
+        return "A name is used before it has a value. Check the spelling, or define it on an earlier line."
+    if "singular" in m or "no inverse" in m:
+        return "This matrix has no inverse because its determinant is 0: it squashes the plane."
+    if "shape" in m or "line up" in m or "match" in m or "same length" in m:
+        return "The sizes do not fit. A matrix with n columns needs a vector with n entries."
+    if kind == "ZeroDivisionError":
+        return "Something was divided by zero. Is a pivot or a determinant equal to 0?"
+    if kind == "TypeError":
+        return "A value has the wrong type. Use np.array([...]) for vectors and matrices, and @ to multiply them."
+    if kind in ("IndexError", "KeyError"):
+        return "That position does not exist. Rows and columns are counted from 0."
+    return ""
+
 def run(src):
     ns = {'np': np, 'show': show, 'combo': combo, 'rowpic': rowpic, 'table': table, 'nullpic': nullpic, 'four': four, 'arrows': arrows, 'lu': lu, 'rref': rref, 'print': _print, '__name__': '__main__'}
     try:
         exec(compile(src, 'lesson.py', 'exec'), ns)
     except SyntaxError as e:
-        window.__pyerr("SyntaxError on line %s: %s" % (e.lineno, e.args[0] if e.args else e))
+        msg = str(e.args[0]) if e.args else str(e)
+        window.__pyerr("Line %s: %s" % (e.lineno, msg))
+        window.__pyhint(_hint(type(e).__name__, msg))
     except Exception as e:
         ln = None
         tb = e.__traceback__
@@ -298,7 +322,8 @@ def run(src):
             except Exception:
                 pass
             tb = tb.tb_next
-        window.__pyerr(type(e).__name__ + ": " + str(e) + ("   (line %s)" % ln if ln else ""))
+        window.__pyerr(("Line %s: " % ln if ln else "") + type(e).__name__ + ": " + str(e))
+        window.__pyhint(_hint(type(e).__name__, str(e)))
 
 window.__pyrun = run
 window.__pyready()

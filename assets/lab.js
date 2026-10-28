@@ -58,7 +58,7 @@ const I2 = [[1,0],[0,1]];
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 function size(){const r = cv.getBoundingClientRect(), d = devicePixelRatio || 1; cv.width = Math.round(r.width*d); cv.height = Math.round(r.height*d); ctx.setTransform(d,0,0,d,0,0); draw();}
-function setView(V){ view = V; setTarget(V.kind === "transform" ? V.M : I2); setLegend(); draw(); }
+function setView(V, fromSlider){ view = V; if (!fromSlider) renderSliders(); setTarget(V.kind === "transform" ? V.M : I2); setLegend(); draw(); }
 function setTarget(M){from = A.map(r => r.slice()); to = M; t0 = performance.now(); if (reduce){A = M; draw(); return;} if(!anim){anim = true; requestAnimationFrame(step);} }
 function step(now){let k = Math.min(1, (now - t0)/750); const e = k<.5 ? 4*k*k*k : 1 - Math.pow(-2*k+2,3)/2;
   A = [[from[0][0]+(to[0][0]-from[0][0])*e, from[0][1]+(to[0][1]-from[0][1])*e],[from[1][0]+(to[1][0]-from[1][0])*e, from[1][1]+(to[1][1]-from[1][1])*e]];
@@ -268,6 +268,7 @@ ta.addEventListener("keydown", e => {
 const out = $("out");
 let ready = false;
 window.__pyout = s => { const sp = document.createElement("span"); sp.textContent = s; out.appendChild(sp); out.scrollTop = out.scrollHeight; };
+window.__pyhint = h => { if (!h) return; const sp = document.createElement("span"); sp.className = "hint"; sp.textContent = "Hint: " + h + "\n"; out.appendChild(sp); out.scrollTop = out.scrollHeight; };
 window.__pyerr = s => { const sp = document.createElement("span"); sp.className = "err"; sp.textContent = s + "\n"; out.appendChild(sp); out.scrollTop = out.scrollHeight; };
 const L2 = M => Array.from(M).map(r => Array.from(r));
 window.__pyshow = (M, vs) => { last = {kind:"transform", M:L2(M), vecs:L2(vs).filter(v => v.length === 2)}; setView(last); };
@@ -278,7 +279,9 @@ window.__pytable = items => { last = {kind:"table", items: Array.from(items).map
 window.__pynull = (M, x, b) => { last = {kind:"null", A:L2(M), x:Array.from(x), b:Array.from(b)}; setView(last); };
 window.__pyarrows = items => { last = {kind:"arrows", items: Array.from(items).map(t => ({label: String(t[0]), v: Array.from(t[1]).map(Number)}))}; setView(last); };
 window.__pyfour = M => { last = {kind:"four", A:L2(M)}; setView(last); };
-window.__pyready = () => { ready = true; $("pystatus").textContent = "Python ready"; $("pystatus").classList.add("ready"); $("run").disabled = false; };
+window.__pyready = () => { ready = true; clearInterval(loadTimer); $("pystatus").textContent = "Python ready"; $("pystatus").classList.add("ready"); $("run").disabled = false; };
+let loadDots = 0; const loadTimer = setInterval(() => { if (ready) return; loadDots = (loadDots + 1) % 4; $("pystatus").textContent = "Starting Python" + ".".repeat(loadDots); }, 450);
+setTimeout(() => { if (!ready) $("pystatus").textContent = "Still loading Python… (first visit only)"; }, 6000);
 function sys(msg){ const sp = document.createElement("span"); sp.className = "sys"; sp.textContent = msg + "\n"; out.appendChild(sp); }
 function run(){
   if (!ready) return;
@@ -295,6 +298,38 @@ $("run").onclick = run;
 $("clear").onclick = () => out.textContent = "";
 $("reset").onclick = () => { ta.value = original; sync(); };
 
+
+/* ---------- sliders: change the numbers without typing ---------- */
+const SL = {
+  combo: V => [["x₁", "x", 0, -5, 5, .5], ["x₂", "x", 1, -5, 5, .5]],
+  null: V => [["x₁", "x", 0, -5, 5, .5], ["x₂", "x", 1, -5, 5, .5]],
+  transform: V => [["a", "M", [0,0], -3, 3, .25], ["b", "M", [0,1], -3, 3, .25], ["c", "M", [1,0], -3, 3, .25], ["d", "M", [1,1], -3, 3, .25]],
+  four: V => [["a", "A", [0,0], -6, 6, 1], ["b", "A", [0,1], -6, 6, 1], ["c", "A", [1,0], -6, 6, 1], ["d", "A", [1,1], -6, 6, 1]],
+  rows: V => [["b₁", "b", 0, -12, 12, 1], ["b₂", "b", 1, -12, 12, 1]],
+};
+function getv(V, key, idx){ return Array.isArray(idx) ? V[key][idx[0]][idx[1]] : V[key][idx]; }
+function setv(V, key, idx, val){ if (Array.isArray(idx)) V[key][idx[0]][idx[1]] = val; else V[key][idx] = val; }
+function renderSliders(){
+  let box = $("sliders");
+  if (!box){ box = document.createElement("div"); box.id = "sliders"; box.className = "sliders"; document.querySelector(".figure").appendChild(box); }
+  const spec = SL[view.kind] ? SL[view.kind](view) : null;
+  if (!spec || (view.kind === "rows" && (!view.b || view.b.length !== 2))){ box.hidden = true; box.innerHTML = ""; return; }
+  box.hidden = false;
+  const fmtv = v => String(+v.toFixed(3)).replace("-", "−");
+  box.innerHTML = '<div class="sl-h">Drag to try values</div>' + spec.map(([lab, key, idx, lo, hi, st], k) => {
+    const v = getv(view, key, idx);
+    return `<label class="sl"><span class="sl-l">${lab}</span><input type="range" id="sl${k}" min="${lo}" max="${hi}" step="${st}" value="${v}"><span class="sl-v" id="slv${k}">${fmtv(v)}</span></label>`;
+  }).join("");
+  spec.forEach(([lab, key, idx], k) => {
+    $("sl" + k).addEventListener("input", e => {
+      const V = JSON.parse(JSON.stringify(view)); const val = +e.target.value;
+      setv(V, key, idx, val); $("slv" + k).textContent = fmtv(val);
+      if (V.kind === "transform"){ A = V.M.map(r => r.slice()); to = A; }
+      last = V; setView(V, true); runs += 1;
+      if (check(last, runs)) markDone(); renderTask();
+    });
+  });
+}
 
 /* ---------- page wiring ---------- */
 const original = ta.defaultValue;

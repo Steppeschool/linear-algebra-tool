@@ -288,3 +288,21 @@ details.review[open] .rv-toggle .s-show{display:none}
 .review-body{padding:0 28px 24px}
 .review-body .practice-h:first-child{margin-top:4px}
 @media (max-width:640px){ .review-body{padding:0 16px 18px} details.review > summary{padding:12px 14px} }
+
+/* friendly error hints */
+.out .hint{color:#E6C07B}
+/* sliders under the picture */
+.sliders{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:6px 18px;padding:10px 16px 14px;border-top:1px solid var(--line)}
+.sl-h{grid-column:1/-1;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.sl{display:flex;align-items:center;gap:10px;font-family:var(--f-mono);font-size:13px}
+.sl-l{min-width:22px;color:var(--ink);font-weight:600}
+.sl input{flex:1;min-width:0;accent-color:var(--accent)}
+.sl-v{min-width:44px;text-align:right;color:var(--accent);font-variant-numeric:tabular-nums}
+/* dimension chips */
+.dims{display:inline-block;font-family:var(--f-mono);font-size:12.5px;color:var(--accent);background:var(--accent-soft);border-radius:6px;padding:1px 8px;margin-left:6px;white-space:nowrap}
+/* phones: picture above the code so it stays in view while editing */
+@media (max-width:1020px){ .lesson .lab{display:flex;flex-direction:column} .lesson .figure{order:-1;position:static} .lesson .plane{aspect-ratio:16/10} }
+.lesson .figure{margin:0;width:100%}
+.lesson .editor-card{min-width:0;max-width:100%;width:100%}
+.lesson .bar{flex-wrap:wrap}
+@media (max-width:640px){ .steps{flex-wrap:nowrap;overflow-x:auto;max-width:100%;padding-bottom:2px;scrollbar-width:none} .steps::-webkit-scrollbar{display:none} .step.practice{flex:none} .top{gap:8px} }
