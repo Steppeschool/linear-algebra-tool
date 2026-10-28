@@ -217,12 +217,39 @@ def _norm(v):
     v = asarray(v)
     f = sum(v.d, []) if v.ndim == 2 else v.d
     return _M.sqrt(sum(x * x for x in f))
+np.ones = lambda s: ndarray([[1.0] * s[1] for _ in range(s[0])]) if isinstance(s, (tuple, list)) else ndarray([1.0] * s)
+np.sum = lambda a: sum(sum(asarray(a).d, []) if asarray(a).ndim == 2 else asarray(a).d)
+np.mean = lambda a: np.sum(a) / (asarray(a).shape[0] * (asarray(a).shape[1] if asarray(a).ndim == 2 else 1))
+np.outer = lambda a, b: ndarray([[x * y for y in asarray(b).d] for x in asarray(a).d])
+np.arange = lambda *a: ndarray([float(v) for v in range(*[int(x) for x in a])])
+def _lstsq(A, b, rcond=None):
+    """Least squares: the x that makes |Ax - b| smallest. Returns (x, residual, rank, None) like NumPy."""
+    A = asarray(A); b = asarray(b)
+    x = _inv(A.T @ A) @ (A.T @ b)
+    e = b - A @ x
+    return x, ndarray([e @ e]), _rank(A), None
+def _qr(A):
+    """A = QR by Gram-Schmidt. Q has orthonormal columns, R is upper triangular."""
+    A = asarray(A); m, n = A.shape
+    qs = []
+    for j in range(n):
+        v = A[:, j]
+        for q in qs:
+            v = v - (q @ A[:, j]) * q
+        L = _norm(v)
+        if L < 1e-12:
+            raise ValueError("the columns are dependent, so Gram-Schmidt cannot continue")
+        qs.append(v / L)
+    Q = np.column_stack(qs)
+    return Q, Q.T @ A
 np.linalg = _NS()
 np.linalg.det = _det
 np.linalg.inv = _inv
 np.linalg.norm = _norm
 np.linalg.solve = lambda A, b: _inv(A) @ asarray(b)
 np.linalg.matrix_rank = _rank
+np.linalg.lstsq = _lstsq
+np.linalg.qr = _qr
 np.hstack = lambda ms: ndarray([sum([asarray(m).d[i] if asarray(m).ndim == 2 else [asarray(m).d[i]] for m in ms], []) for i in range(asarray(ms[0]).shape[0])])
 np.vstack = lambda ms: ndarray(sum([asarray(m).tolist() if asarray(m).ndim == 2 else [asarray(m).tolist()] for m in ms], []))
 np.triu = lambda a: ndarray([[v if j >= i else 0.0 for j, v in enumerate(r)] for i, r in enumerate(asarray(a).d)])
@@ -267,7 +294,37 @@ def arrows(*items):
         if v.shape != (2,):
             raise ValueError("arrows() draws 2D vectors, got shape %s" % (v.shape,))
         out.append([label, v.tolist()])
-    window.__pyarrows(out)
+    window.__pyarrows(out, True)
+
+def proj(a, b, p=None):
+    """Project b onto the line through a. Pass your own p to check it; leave it out and the lab computes it."""
+    a = asarray(a); b = asarray(b)
+    if a.shape != (2,) or b.shape != (2,):
+        raise ValueError("proj() needs two vectors a and b with 2 entries each")
+    if a @ a < 1e-12:
+        raise ValueError("a is the zero vector, so there is no line to project onto")
+    auto = p is None
+    p = (a @ b) / (a @ a) * a if auto else asarray(p)
+    if p.shape != (2,):
+        raise ValueError("p must be a vector with 2 entries")
+    window.__pyproj(a.tolist(), b.tolist(), p.tolist(), auto)
+
+def fit(t, b, C, D):
+    """Data points (t, b) and the line C + D t through them, with the errors drawn."""
+    t = asarray(t); b = asarray(b)
+    if t.ndim != 1 or t.shape != b.shape:
+        raise ValueError("fit() needs t and b as vectors of the same length")
+    window.__pyfit(t.tolist(), b.tolist(), float(C), float(D))
+
+def vectors(*items):
+    """Draw vectors from the origin, no chain. Each item: v or ("label", v). Shows dot products."""
+    out = []
+    for k, it in enumerate(items):
+        label, v = (str(it[0]), asarray(it[1])) if isinstance(it, tuple) else ("v%d" % (k + 1), asarray(it))
+        if v.shape != (2,):
+            raise ValueError("vectors() draws 2D vectors, got shape %s" % (v.shape,))
+        out.append([label, v.tolist()])
+    window.__pyarrows(out, False)
 
 def four(A):
     """The four subspaces of a 2x2 matrix: input plane on the left, output plane on the right."""
@@ -305,7 +362,7 @@ def _hint(kind, msg):
     return ""
 
 def run(src):
-    ns = {'np': np, 'show': show, 'combo': combo, 'rowpic': rowpic, 'table': table, 'nullpic': nullpic, 'four': four, 'arrows': arrows, 'lu': lu, 'rref': rref, 'print': _print, '__name__': '__main__'}
+    ns = {'np': np, 'show': show, 'combo': combo, 'rowpic': rowpic, 'table': table, 'nullpic': nullpic, 'four': four, 'arrows': arrows, 'vectors': vectors, 'proj': proj, 'fit': fit, 'lu': lu, 'rref': rref, 'print': _print, '__name__': '__main__'}
     try:
         exec(compile(src, 'lesson.py', 'exec'), ns)
     except SyntaxError as e:

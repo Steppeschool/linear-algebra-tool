@@ -1,0 +1,80 @@
+---
+slug: least-squares
+seo_title: Least Squares and the Normal Equations AᵀAx = Aᵀb
+description: When Ax = b has no solution, least squares finds the x̂ that makes the error smallest by solving AᵀAx̂ = Aᵀb. Why it works, worked examples and Python. Strang §4.3.
+kicker: Strang §4.3 · Least squares approximations
+title: Least squares: the best answer when there is no exact one.
+task: Solve the normal equations so that the error e is perpendicular to the columns: Aᵀe = 0.
+preview: {"kind":"table","items":[{"label":"A","M":[[1,1],[1,2],[1,3]],"piv":[]},{"label":"b","M":[[2],[3],[5]],"piv":[]}]}
+check: isTab(V) && item(V, 'A.T @ e') && isZero(item(V, 'A.T @ e')) && item(V, 'e') && !isZero(item(V, 'e'))
+---
+<!-- lead -->
+With more equations than unknowns, Ax = b usually has no solution. Least squares picks the x̂ that makes the error ‖b − Ax‖ as small as possible. Geometrically, Ax̂ is the projection of b onto the column space, and x̂ solves AᵀAx̂ = Aᵀb.
+<!-- key -->
+AᵀA x̂ = Aᵀb &nbsp;&nbsp; e = b − Ax̂ &nbsp;&nbsp; Aᵀe = 0
+<!-- ideas -->
+<ol class="ideas"><li>Ax = b is solvable only when b lies in the column space C(A). Noisy data almost never does.</li><li>Least squares minimizes E = ‖b − Ax‖², the sum of the squared errors.</li><li>The best Ax̂ is the projection of b onto C(A). The error is perpendicular to every column: Aᵀe = 0.</li><li>That condition is the <b>normal equations</b> AᵀAx̂ = Aᵀb.</li><li>AᵀA is square and invertible when the columns of A are independent.</li></ol>
+<!-- prose -->
+<h3>Three stopwatches, one runner</h3>
+<p>Three friends time the same 100 m sprint and get 10.2, 10.5 and 10.0 seconds. The "equations" are x = 10.2, x = 10.5, x = 10.0. No single x satisfies all three. Still, everyone agrees on a sensible answer: the average, 10.23 seconds.</p>
+<p>That everyday choice is least squares. In matrix form, A is the column (1, 1, 1) and b = (10.2, 10.5, 10.0). Slide 2 tells us how to project b onto the line through a:</p>
+<div class="worked"><div class="row">x̂ = aᵀb / aᵀa = (10.2 + 10.5 + 10.0) / 3 = 10.23</div></div>
+<p>The average is the projection onto (1, 1, 1).</p>
+<h3>The general recipe</h3>
+<p>Now A has n columns and m &gt; n rows. Every Ax lies in the column space, a flat subspace inside ℝᵐ. The data b sticks out of it. We cannot reach b, so we go to the closest point we can reach, which is the projection p = Ax̂.</p>
+<p>The error e = b − Ax̂ must be perpendicular to the column space, so every column dotted with e gives zero. Stack those dot products and you get Aᵀe = 0:</p>
+<div class="worked"><div class="row">Aᵀ(b − Ax̂) = 0 &nbsp;&nbsp;⟹&nbsp;&nbsp; AᵀA x̂ = Aᵀb</div></div>
+<p>We cannot solve Ax = b, but we can always solve AᵀAx̂ = Aᵀb. It is a small square system, n by n, however many measurements there are.</p>
+<h3>A worked example</h3>
+<p>Find the best line b = C + Dt through the points (0, 1), (1, 1), (2, 4). Each point gives one equation C + Dt = b:</p>
+<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>1</span><span>1</span><span>1</span><span>2</span></span>, &nbsp; x = (C, D), &nbsp; b = (1, 1, 4)</div><div class="row">AᵀA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>3</span><span>3</span><span>5</span></span>, &nbsp; Aᵀb = (6, 9)</div><div class="row">Solve: C = 0.5, D = 1.5. &nbsp; The best line is b = 0.5 + 1.5t</div><div class="row">Ax̂ = (0.5, 2, 3.5), &nbsp; e = (0.5, −1, 0.5), &nbsp; Aᵀe = (0, 0) ✓</div></div>
+<h3>Why AᵀA is invertible</h3>
+<p>Suppose AᵀAx = 0. Multiply by xᵀ: xᵀAᵀAx = ‖Ax‖² = 0, so Ax = 0. If the columns of A are independent, that forces x = 0. So AᵀA has only the zero vector in its nullspace and is invertible. In practice: give the fit enough different measurements.</p>
+<h3>Where this is used</h3>
+<p>A GPS receiver usually sees more satellites than the four it needs. Each one gives an equation, the equations disagree slightly because of noise, and the receiver takes the least squares position. More satellites, more equations, a better average.</p>
+<!-- examples -->
+<section class="example"><h3>Example 1 · The average is least squares</h3>
+<p>One unknown, three readings: x = 3, x = 5, x = 10.</p>
+<div class="worked"><div class="row">a = (1, 1, 1), &nbsp; b = (3, 5, 10)</div><div class="row">x̂ = aᵀb / aᵀa = 18 / 3 = 6</div><div class="row">e = (−3, −1, 4), &nbsp; sum of errors = 0 ✓ (perpendicular to (1, 1, 1))</div></div>
+</section>
+<section class="example"><h3>Example 2 · The normal equations by hand</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>1</span><span>1</span><span>1</span></span>, b = (1, 1, 0). The three equations x = 1, y = 1, x + y = 0 disagree.</p>
+<div class="worked"><div class="row">AᵀA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>2</span></span>, &nbsp; Aᵀb = (1, 1)</div><div class="row">x̂ = (⅓, ⅓), &nbsp; Ax̂ = (⅓, ⅓, ⅔)</div><div class="row">e = (⅔, ⅔, −⅔), &nbsp; Aᵀe = (⅔ − ⅔, ⅔ − ⅔) = (0, 0) ✓</div></div>
+<p>The compromise: each equation is off by ⅔.</p>
+</section>
+<section class="example"><h3>Example 3 · When b is already reachable</h3>
+<p>Same A, but b = (1, 2, 3).</p>
+<div class="worked"><div class="row">Aᵀb = (4, 5), &nbsp; AᵀA x̂ = Aᵀb gives x̂ = (1, 2)</div><div class="row">Ax̂ = (1, 2, 3) = b, &nbsp; e = 0</div></div>
+<p>b was in the column space, so least squares returns the exact solution. It never makes a solvable problem worse.</p>
+</section>
+<!-- problems -->
+<div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Five readings of one length: 4, 5, 5, 6, 10. What is the least squares estimate?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>a = (1, 1, 1, 1, 1), so x̂ = aᵀb / aᵀa = 30 / 5 = 6, the average.</p><p>Note how the outlier 10 pulls the estimate up. Squared errors punish big misses heavily.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>Write the normal equations for the line C + Dt through (0, 2), (1, 0), (2, 1), and solve them.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>1</span><span>1</span><span>1</span><span>2</span></span>, b = (2, 0, 1). AᵀA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>3</span><span>3</span><span>5</span></span>, Aᵀb = (3, 2).</p><p>3C + 3D = 3 and 3C + 5D = 2. Subtract: 2D = −1, so D = −0.5 and C = 1.5. The best line is 1.5 − 0.5t.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>Explain why the errors in a least squares line fit always add up to zero.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>The first column of A is all ones. Aᵀe = 0 says every column is perpendicular to e. For the column of ones, that means e₁ + e₂ + ... + e_m = 0.</p>
+</div></details>
+</div></div>
+<!-- code -->
+import numpy as np
+
+t = np.array([1., 2., 3.])
+b = np.array([2., 3., 5.])           # three readings, no exact line
+A = np.column_stack([np.ones(3), t]) # columns: all ones, and t
+
+x_hat = np.array([1., 1.])           # your turn: solve A.T @ A @ x = A.T @ b
+                                     # hint: np.linalg.solve(A.T @ A, A.T @ b)
+e = b - A @ x_hat
+print("x_hat =", x_hat, "  E =", e @ e)
+table(("A", A), ("b", b), ("x_hat", x_hat), ("e", e), ("A.T @ e", A.T @ e))

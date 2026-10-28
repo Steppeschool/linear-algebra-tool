@@ -12,6 +12,7 @@ The course follows the order and notation of Gilbert Strang, *Introduction to Li
 | 2 | Elimination and A = LU | §2.2, §2.3, §2.6 | `lesson-2/` |
 | 3 | Inverses, transposes and permutations | §2.5, §2.7 | `lesson-3/` |
 | 4 | The four subspaces | §3.1 to §3.5 | `lesson-4/` |
+| 5 | Orthogonality and least squares | §4.1 to §4.4 | `lesson-5/` |
 
 ## Run locally
 
@@ -31,6 +32,10 @@ Python runs in the browser with [Brython](https://brython.info) and a small NumP
 - `table(("label", M), ("R", R, pivots), ...)`: matrices and vectors side by side, pivot columns highlighted
 - `nullpic(A, x, b=None)`: input plane with the nullspace, your x, and every solution of Ax = b
 - `four(A)`: the four subspaces of a 2x2 matrix, input plane and output plane
+- `vectors(("a", a), ("b", b), ...)`: vectors from the origin, with the dot product and angle of the first two
+- `proj(a, b, p=None)`: projection of b onto the line through a; pass your own p to check it
+- `fit(t, b, C, D)`: data points and the line C + Dt, with the errors and the best line; C and D have sliders
+- `np.linalg.lstsq(A, b)` and `np.linalg.qr(A)` are in the NumPy subset
 - Helpers: `lu(A)`, `rref(A)`, `np.linalg.inv/solve/det/matrix_rank`, `np.hstack`, `np.eye`
 
 ## How the site is built (SEO)

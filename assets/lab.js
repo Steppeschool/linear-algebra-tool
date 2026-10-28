@@ -18,6 +18,13 @@ const isTab = V => V && V.kind === "table";
 const isN = V => V && V.kind === "null";
 const isF = V => V && V.kind === "four";
 const isA = V => V && V.kind === "arrows";
+const isP = V => V && V.kind === "proj";
+const isFit = V => V && V.kind === "fit";
+const dot = (a, b) => a.reduce((s, v, i) => s + v * b[i], 0);
+const projOf = (a, b) => { const k = dot(a, b) / dot(a, a); return a.map(v => k * v); };
+function bestFit(t, b){ const n = t.length, St = t.reduce((s, v) => s + v, 0), Stt = dot(t, t), Sb = b.reduce((s, v) => s + v, 0), Stb = dot(t, b);
+  const d = n * Stt - St * St; if (Math.abs(d) < 1e-12) return null; return [(Stt * Sb - St * Stb) / d, (n * Stb - St * Sb) / d]; }
+const sse = (t, b, C, D) => t.reduce((s, v, i) => s + (b[i] - C - D * v) ** 2, 0);
 const arrowVec = (V, name) => { const it = V && V.items && V.items.find(t => t.label === name); return it ? it.v : null; };
 const flat = M => Array.isArray(M) ? M.flat(Infinity) : [M];
 const close = (a, b, t = 1e-6) => a != null && b != null && flat(a).length === flat(b).length && flat(a).every((v, i) => Math.abs(v - flat(b)[i]) < t);
@@ -69,6 +76,8 @@ function setLegend(){
     : view.kind === "combo" ? sw("--ihat","x₁ · column 1") + sw("--jhat","x₂ · column 2") + sw("--accent","Ax")
     : view.kind === "rows" ? sw("--ihat","equation 1") + sw("--jhat","equation 2")
     : view.kind === "null" ? sw("--accent","nullspace N(A)") + (view.b && view.b.length ? sw("--ihat","all solutions of Ax = b") : "") + sw("--ink","your x")
+    : view.kind === "proj" ? sw("--ink","b") + sw("--ihat","line through a") + sw("--accent","p, the projection") + sw("--jhat","error e = b − p")
+    : view.kind === "fit" ? sw("--ink","data points") + sw("--accent","your line C + Dt") + sw("--jhat","errors") + sw("--muted","best line")
     : view.kind === "arrows" ? view.items.map((it, k) => sw(PALETTE[k % PALETTE.length], it.label)).join("")
     : view.kind === "four" ? sw("--ihat","row space") + sw("--accent","nullspace") + sw("--jhat","column space") + sw("--muted","left nullspace")
     : "";
@@ -83,6 +92,7 @@ function extent(){
   if (V.kind === "combo"){ const a1=[V.A[0][0],V.A[1][0]], a2=[V.A[0][1],V.A[1][1]], p1=[a1[0]*V.x[0], a1[1]*V.x[0]], r=Ax(V); pts = [a1, a2, p1, r]; if (V.b.length===2) pts.push(V.b); }
   else if (V.kind === "rows"){ const s = rowSolution(V); pts = s ? [s] : []; }
   else if (V.kind === "arrows"){ pts = V.items.map(it => it.v); }
+  else if (V.kind === "proj"){ pts = [V.a, V.b, V.p]; }
   else if (V.kind === "null"){ const xs = [V.x]; const xp = particular(V); if (xp) xs.push(xp); pts = xs; }
   else if (V.kind !== "transform") return 3;
   else { const M = to, F = [[1,0],[0,1],[1,1],[2.3,2.05],[1.3,2.05],[2.3,1.75],[1.6,0.3]];
@@ -109,6 +119,7 @@ function draw(){
   box.hidden = true;
   if (view.kind === "four"){ drawFour(w, h); return; }
   if (view.kind === "arrows"){ drawArrows(w, h); return; }
+  if (view.kind === "fit"){ drawFit(w, h); return; }
   const ext = extent(), s = Math.min(w, h) / (2*ext), ox = w/2, oy = h/2;
   const P = (x, y) => [ox + (A[0][0]*x + A[0][1]*y)*s, oy - (A[1][0]*x + A[1][1]*y)*s];
   const Q = (x, y) => [ox + x*s, oy - y*s];
@@ -147,6 +158,18 @@ function draw(){
     if (V.b.length === 2){ const B = Q(...V.b); ctx.strokeStyle = css("--ink"); ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(B[0], B[1], 9, 0, 7); ctx.stroke(); label(B, "b", css("--ink"), 12, -10);
       hit = near(r[0], V.b[0]) && near(r[1], V.b[1]) ? '<span class="good">Ax = b</span>' : `<span>b = (${g(V.b[0])}, ${g(V.b[1])})</span>`; }
     $("readout").innerHTML = `<span>x = (${g(V.x[0])}, ${g(V.x[1])})</span><span class="hi">Ax = (${g(r[0])}, ${g(r[1])})</span>${hit}<span>${dep ? (nonzero(V.A) ? "C(A) is a line" : "C(A) is a point") : "C(A) is the plane"}</span>`;
+  } else if (view.kind === "proj"){
+    const V = view, far = 4*N, u = Math.hypot(...V.a), k = far / u, e = [V.b[0]-V.p[0], V.b[1]-V.p[1]], ae = dot(V.a, e), ok = close(V.p, projOf(V.a, V.b));
+    ctx.strokeStyle = css("--ihat"); ctx.globalAlpha = .28; ctx.lineWidth = 7; line(Q(-V.a[0]*k, -V.a[1]*k), Q(V.a[0]*k, V.a[1]*k)); ctx.globalAlpha = 1;
+    if (Math.hypot(...e) > 1e-6 && Math.hypot(...V.p) > 1e-6 && Math.abs(ae) < 1e-6){ const pu = V.p.map(v => v / Math.hypot(...V.p)), eu = e.map(v => v / Math.hypot(...e)), r = 0.22 * ext / 2.5;
+      const c1 = Q(V.p[0] - pu[0]*r*Math.sign(dot(V.p, V.a)), V.p[1] - pu[1]*r*Math.sign(dot(V.p, V.a))), c3 = Q(V.p[0] + eu[0]*r, V.p[1] + eu[1]*r), c2 = Q(V.p[0] - pu[0]*r*Math.sign(dot(V.p, V.a)) + eu[0]*r, V.p[1] - pu[1]*r*Math.sign(dot(V.p, V.a)) + eu[1]*r);
+      ctx.strokeStyle = css("--jhat"); ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(...c1); ctx.lineTo(...c2); ctx.lineTo(...c3); ctx.stroke(); }
+    ctx.setLineDash([6, 5]); ctx.strokeStyle = css("--jhat"); ctx.lineWidth = 2.4; line(Q(...V.p), Q(...V.b)); ctx.setLineDash([]);
+    arrow(O, Q(...V.a), css("--ihat"), 3); label(Q(...V.a), "a", css("--ihat"), 8, 16);
+    arrow(O, Q(...V.b), css("--ink"), 3); label(Q(...V.b), "b", css("--ink"));
+    arrow(O, Q(...V.p), css("--accent"), 3.6); label(Q(...V.p), "p", css("--accent"), 10, 4);
+    $("readout").innerHTML = `<span class="hi">p = (${g(V.p[0])}, ${g(V.p[1])})</span><span>e = (${g(e[0])}, ${g(e[1])})</span><span${Math.abs(ae) < 1e-6 ? ' class="good"' : ""}>a · e = ${g(ae)}</span>` +
+      (ok ? '<span class="good">p is the closest point on the line</span>' : '<span>not yet: e must be perpendicular to a</span>');
   } else if (view.kind === "null"){
     const V = view, r = nonzeroRow(V.A), far = 4*N, d = det(V.A);
     let nd = null;
@@ -184,18 +207,41 @@ function drawArrows(w, h){
   for (let i = -N; i <= N; i++){ if (i){ line(Q(i, -N), Q(i, N)); line(Q(-N, i), Q(N, i)); } }
   ctx.strokeStyle = css("--muted"); ctx.globalAlpha = .6; ctx.lineWidth = 1.4; line(Q(-N, 0), Q(N, 0)); line(Q(0, -N), Q(0, N)); ctx.globalAlpha = 1;
   const its = view.items, f = v => +(+(Math.abs(v) < 5e-4 ? 0 : v).toFixed(3));
-  for (let k = 1; k < its.length; k++){ ctx.setLineDash([5, 5]); ctx.strokeStyle = css("--muted"); ctx.lineWidth = 1.4; line(Q(...its[k-1].v), Q(...its[k].v)); ctx.setLineDash([]); }
+  const chain = view.chain !== false;
+  if (chain) for (let k = 1; k < its.length; k++){ ctx.setLineDash([5, 5]); ctx.strokeStyle = css("--muted"); ctx.lineWidth = 1.4; line(Q(...its[k-1].v), Q(...its[k].v)); ctx.setLineDash([]); }
   // later arrows first so the starting vector stays on top when they coincide
   for (let k = its.length - 1; k >= 0; k--){ const c = css(PALETTE[k % PALETTE.length]); arrow(Q(0, 0), Q(...its[k].v), c, k === 0 ? 3.6 : 2.8); }
-  const back0 = its.length > 1 && near(its[0].v[0], its[its.length-1].v[0]) && near(its[0].v[1], its[its.length-1].v[1]);
+  const back0 = chain && its.length > 1 && near(its[0].v[0], its[its.length-1].v[0]) && near(its[0].v[1], its[its.length-1].v[1]);
   const seen = [];
   its.forEach((it, k) => { if (back0 && k === its.length - 1) return; const P = Q(...it.v); const dup = seen.filter(p => Math.hypot(p[0]-P[0], p[1]-P[1]) < 14).length; seen.push(P);
     label(P, it.label, css(PALETTE[k % PALETTE.length]), 10, -8 + dup*16); });
   if (back0){ const P = Q(...its[0].v); ctx.strokeStyle = css("--ok"); ctx.lineWidth = 2.5; ctx.beginPath(); ctx.arc(P[0], P[1], 11, 0, 7); ctx.stroke();
     label(P, "back to " + its[0].label + " ✓", css("--ok"), 16, 18); }
   ctx.fillStyle = css("--ink"); ctx.beginPath(); ctx.arc(ox, oy, 3.2, 0, 7); ctx.fill();
-  const back = its.length > 1 && near(its[0].v[0], its[its.length-1].v[0]) && near(its[0].v[1], its[its.length-1].v[1]);
-  $("readout").innerHTML = its.map(it => `<span>${it.label} = (${f(it.v[0])}, ${f(it.v[1])})</span>`).join("") + (back ? '<span class="good">back where it started</span>' : "");
+  const dots = !chain && its.length >= 2 ? (() => { const a = its[0].v, b = its[1].v, d = dot(a, b), c = d / (Math.hypot(...a) * Math.hypot(...b) || 1);
+    return `<span${Math.abs(d) < 1e-6 ? ' class="good"' : ' class="hi"'}>${its[0].label} · ${its[1].label} = ${f(d)}</span><span>angle = ${f(Math.acos(Math.max(-1, Math.min(1, c))) * 180 / Math.PI)}°</span>`; })() : "";
+  const back = chain && its.length > 1 && near(its[0].v[0], its[its.length-1].v[0]) && near(its[0].v[1], its[its.length-1].v[1]);
+  $("readout").innerHTML = its.map(it => `<span>${it.label} = (${f(it.v[0])}, ${f(it.v[1])})</span>`).join("") + (back ? '<span class="good">back where it started</span>' : "") + dots;
+}
+function drawFit(w, h){
+  const V = view, best = bestFit(V.t, V.b), pad = 44;
+  let t0 = Math.min(...V.t), t1 = Math.max(...V.t); if (t1 - t0 < 1e-9){ t0 -= 1; t1 += 1; } const tm = (t1 - t0) * .15; t0 -= tm; t1 += tm;
+  const ys = [...V.b, V.C + V.D*t0, V.C + V.D*t1, 0]; let y0 = Math.min(...ys), y1 = Math.max(...ys); if (y1 - y0 < 1e-9){ y0 -= 1; y1 += 1; } const ym = (y1 - y0) * .12; y0 -= ym; y1 += ym;
+  const X = t => pad + (t - t0) / (t1 - t0) * (w - pad - 16), Y = y => h - pad + 8 - (y - y0) / (y1 - y0) * (h - pad - 24);
+  const step = v => { const r = Math.pow(10, Math.floor(Math.log10(v))); return v / r > 5 ? r * 2 : v / r > 2 ? r : r / 2; };
+  const st = step((t1 - t0) / 2), sy = step((y1 - y0) / 2);
+  ctx.font = `500 11px ${css("--f-mono")}`; ctx.lineWidth = 1;
+  for (let t = Math.ceil(t0 / st) * st; t <= t1; t += st){ ctx.strokeStyle = css("--grid"); line([X(t), Y(y0)], [X(t), Y(y1)]); ctx.fillStyle = css("--muted"); ctx.fillText(fmt(t), X(t) - 6, h - pad + 24); }
+  for (let y = Math.ceil(y0 / sy) * sy; y <= y1; y += sy){ ctx.strokeStyle = css("--grid"); line([X(t0), Y(y)], [X(t1), Y(y)]); ctx.fillStyle = css("--muted"); ctx.fillText(fmt(y), 6, Y(y) + 4); }
+  ctx.strokeStyle = css("--muted"); ctx.globalAlpha = .6; ctx.lineWidth = 1.4; if (y0 < 0 && y1 > 0) line([X(t0), Y(0)], [X(t1), Y(0)]); if (t0 < 0 && t1 > 0) line([X(0), Y(y0)], [X(0), Y(y1)]); ctx.globalAlpha = 1;
+  ctx.fillStyle = css("--muted"); ctx.fillText("t", w - 14, h - pad + 24);
+  const atBest = best && near(V.C, best[0], 1e-3) && near(V.D, best[1], 1e-3);
+  if (best && !atBest){ ctx.setLineDash([3, 5]); ctx.strokeStyle = css("--muted"); ctx.lineWidth = 1.6; line([X(t0), Y(best[0] + best[1]*t0)], [X(t1), Y(best[0] + best[1]*t1)]); ctx.setLineDash([]); }
+  V.t.forEach((t, i) => { ctx.setLineDash([5, 4]); ctx.strokeStyle = css("--jhat"); ctx.lineWidth = 2.2; line([X(t), Y(V.b[i])], [X(t), Y(V.C + V.D*t)]); ctx.setLineDash([]); });
+  ctx.strokeStyle = css("--accent"); ctx.lineWidth = 3; line([X(t0), Y(V.C + V.D*t0)], [X(t1), Y(V.C + V.D*t1)]);
+  V.t.forEach((t, i) => { ctx.fillStyle = css("--ink"); ctx.beginPath(); ctx.arc(X(t), Y(V.b[i]), 5, 0, 7); ctx.fill(); });
+  const E = sse(V.t, V.b, V.C, V.D), Eb = best ? sse(V.t, V.b, best[0], best[1]) : null;
+  $("readout").innerHTML = `<span>C = ${fmt(V.C)}, D = ${fmt(V.D)}</span><span class="hi">E = sum of e² = ${fmt(E)}</span>` + (Eb == null ? "" : atBest ? '<span class="good">smallest possible E</span>' : `<span>smallest possible: ${fmt(Eb)}</span>`);
 }
 function drawFour(w, h){
   const M = view.A, r = rankOf(M), gap = 18, wide = w > 560;
@@ -277,7 +323,9 @@ window.__pyrows = (M, b) => { last = {kind:"rows", A:L2(M), b:Array.from(b)}; se
 window.__pytable = items => { last = {kind:"table", items: Array.from(items).map(t => ({label: String(t[0]), M: L2(t[1]), piv: Array.from(t[2]).map(Number), ndim: Number(t[3])}))};
   last.items.forEach(it => { if (it.ndim === 1) it.vec = it.M.map(r => r[0]); }); setView(last); };
 window.__pynull = (M, x, b) => { last = {kind:"null", A:L2(M), x:Array.from(x), b:Array.from(b)}; setView(last); };
-window.__pyarrows = items => { last = {kind:"arrows", items: Array.from(items).map(t => ({label: String(t[0]), v: Array.from(t[1]).map(Number)}))}; setView(last); };
+window.__pyproj = (a, b, p, auto) => { last = {kind:"proj", a:Array.from(a), b:Array.from(b), p:Array.from(p), auto:!!auto}; setView(last); };
+window.__pyfit = (t, b, C, D) => { last = {kind:"fit", t:Array.from(t).map(Number), b:Array.from(b).map(Number), C:Number(C), D:Number(D)}; setView(last); };
+window.__pyarrows = (items, chain) => { last = {kind:"arrows", chain: chain !== false, items: Array.from(items).map(t => ({label: String(t[0]), v: Array.from(t[1]).map(Number)}))}; setView(last); };
 window.__pyfour = M => { last = {kind:"four", A:L2(M)}; setView(last); };
 window.__pyready = () => { ready = true; clearInterval(loadTimer); $("pystatus").textContent = "Python ready"; $("pystatus").classList.add("ready"); $("run").disabled = false; };
 let loadDots = 0; const loadTimer = setInterval(() => { if (ready) return; loadDots = (loadDots + 1) % 4; $("pystatus").textContent = "Starting Python" + ".".repeat(loadDots); }, 450);
@@ -290,7 +338,7 @@ function run(){
   const t = performance.now();
   try { window.__pyrun(src); } catch(err){ window.__pyerr(String(err && err.message || err)); }
   runs += 1;
-  sys(`— ran in ${Math.round(performance.now()-t)} ms` + (last ? "" : " · nothing was drawn (use show, combo or rowpic)"));
+  sys(`— ran in ${Math.round(performance.now()-t)} ms` + (last ? "" : " · nothing was drawn (call a drawing function such as show, proj or fit)"));
   if (last && check(last, runs)) markDone();
   renderTask();
 }
@@ -306,9 +354,12 @@ const SL = {
   transform: V => [["a", "M", [0,0], -3, 3, .25], ["b", "M", [0,1], -3, 3, .25], ["c", "M", [1,0], -3, 3, .25], ["d", "M", [1,1], -3, 3, .25]],
   four: V => [["a", "A", [0,0], -6, 6, 1], ["b", "A", [0,1], -6, 6, 1], ["c", "A", [1,0], -6, 6, 1], ["d", "A", [1,1], -6, 6, 1]],
   rows: V => [["b₁", "b", 0, -12, 12, 1], ["b₂", "b", 1, -12, 12, 1]],
+  proj: V => V.auto ? [["b₁", "b", 0, -5, 5, .5], ["b₂", "b", 1, -5, 5, .5], ["a₁", "a", 0, -4, 4, .5], ["a₂", "a", 1, -4, 4, .5]] : null,
+  fit: V => { const bf = bestFit(V.t, V.b) || [0, 0], r = v => Math.round(v * 10) / 10;
+    return [["C", "C", null, r(bf[0]) - 4, r(bf[0]) + 4, .1], ["D", "D", null, r(bf[1]) - 3, r(bf[1]) + 3, .1]]; },
 };
-function getv(V, key, idx){ return Array.isArray(idx) ? V[key][idx[0]][idx[1]] : V[key][idx]; }
-function setv(V, key, idx, val){ if (Array.isArray(idx)) V[key][idx[0]][idx[1]] = val; else V[key][idx] = val; }
+function getv(V, key, idx){ if (idx === null) return V[key]; return Array.isArray(idx) ? V[key][idx[0]][idx[1]] : V[key][idx]; }
+function setv(V, key, idx, val){ if (idx === null){ V[key] = val; return; } if (Array.isArray(idx)) V[key][idx[0]][idx[1]] = val; else V[key][idx] = val; }
 function renderSliders(){
   let box = $("sliders");
   if (!box){ box = document.createElement("div"); box.id = "sliders"; box.className = "sliders"; document.querySelector(".figure").appendChild(box); }
@@ -325,6 +376,7 @@ function renderSliders(){
       const V = JSON.parse(JSON.stringify(view)); const val = +e.target.value;
       setv(V, key, idx, val); $("slv" + k).textContent = fmtv(val);
       if (V.kind === "transform"){ A = V.M.map(r => r.slice()); to = A; }
+      if (V.kind === "proj"){ if (Math.hypot(...V.a) < 1e-9) return; V.p = projOf(V.a, V.b); }
       last = V; setView(V, true); runs += 1;
       if (check(last, runs)) markDone(); renderTask();
     });

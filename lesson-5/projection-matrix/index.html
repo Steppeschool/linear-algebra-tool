@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Projection Matrix P = A(AᵀA)⁻¹Aᵀ Explained | Linear Algebra, Live</title>
+<meta name="description" content="The projection onto a line is Pb with P = aaᵀ/aᵀa. Onto the column space of A, P = A(AᵀA)⁻¹Aᵀ. Why P² = P, with examples and Python. Strang §4.2.">
+<link rel="canonical" href="https://linearalgebra.steppeschool.com/lesson-5/projection-matrix/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Linear Algebra, Live">
+<meta property="og:title" content="Projection Matrix P = A(AᵀA)⁻¹Aᵀ Explained | Linear Algebra, Live">
+<meta property="og:description" content="The projection onto a line is Pb with P = aaᵀ/aᵀa. Onto the column space of A, P = A(AᵀA)⁻¹Aᵀ. Why P² = P, with examples and Python. Strang §4.2.">
+<meta property="og:url" content="https://linearalgebra.steppeschool.com/lesson-5/projection-matrix/">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/lesson.css">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "Projection Matrix P = A(AᵀA)⁻¹Aᵀ Explained", "headline": "Projection matrices: P flattens everything onto the line.", "description": "The projection onto a line is Pb with P = aaᵀ/aᵀa. Onto the column space of A, P = A(AᵀA)⁻¹Aᵀ. Why P² = P, with examples and Python. Strang §4.2.", "url": "https://linearalgebra.steppeschool.com/lesson-5/projection-matrix/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": true, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 5: Orthogonality and least squares", "item": "https://linearalgebra.steppeschool.com/lesson-5/"}, {"@type": "ListItem", "position": 3, "name": "Projection Matrix P = A(AᵀA)⁻¹Aᵀ Explained", "item": "https://linearalgebra.steppeschool.com/lesson-5/projection-matrix/"}]}]</script>
+</head>
+<body>
+<header class="top">
+  <div class="topnav"><a class="brand" href="../../">Linear Algebra, Live</a><nav class="crumbnav" aria-label="Chapters and lessons"><details class="menu"><summary>Chapter 4<span class="hide-sm"> · Orthogonality</span></summary><div class="menu-list chapters"><div class="menu-sub">Chapters</div><div class="ch"><div class="ch-head"><span class="ch-num">1</span><span class="ch-title">Introduction to vectors</span></div><div class="ch-lessons"><a class="ls" href="../../lesson-1/"><span class="ls-num">Lesson 1</span><span class="ls-title">Columns first</span></a></div></div><div class="ch"><div class="ch-head"><span class="ch-num">2</span><span class="ch-title">Solving linear equations</span></div><div class="ch-lessons"><a class="ls" href="../../lesson-2/"><span class="ls-num">Lesson 2</span><span class="ls-title">Elimination and A = LU</span></a><a class="ls" href="../../lesson-3/"><span class="ls-num">Lesson 3</span><span class="ls-title">Inverses, transposes and permutations</span></a></div></div><div class="ch"><div class="ch-head"><span class="ch-num">3</span><span class="ch-title">Vector spaces and subspaces</span></div><div class="ch-lessons"><a class="ls" href="../../lesson-4/"><span class="ls-num">Lesson 4</span><span class="ls-title">The four subspaces</span></a></div></div><div class="ch on"><div class="ch-head"><span class="ch-num">4</span><span class="ch-title">Orthogonality</span></div><div class="ch-lessons"><a class="ls on" href="../../lesson-5/"><span class="ls-num">Lesson 5</span><span class="ls-title">Orthogonality and least squares</span></a></div></div><div class="menu-sub">Coming soon</div><div class="ch-later"><div class="ch soon"><div class="ch-head"><span class="ch-num">5</span><span class="ch-title">Determinants</span></div></div><div class="ch soon"><div class="ch-head"><span class="ch-num">6</span><span class="ch-title">Eigenvalues and eigenvectors</span></div></div><div class="ch soon"><div class="ch-head"><span class="ch-num">7</span><span class="ch-title">The singular value decomposition</span></div></div></div></div></details><span class="sep">›</span><details class="menu"><summary>Lesson 5<span class="hide-sm"> · Orthogonality and least squares</span></summary><div class="menu-list"><div class="menu-sub">Chapter 4 lessons</div><div class="ch-lessons flat"><a class="ls on" href="../../lesson-5/"><span class="ls-num">Lesson 5</span><span class="ls-title">Orthogonality and least squares</span></a></div><div class="menu-sub">In lesson 5</div><div class="ch-lessons flat slides"><a class="ls" href="../../lesson-5/orthogonal-subspaces/"><span class="ls-num">1</span><span class="ls-title">Orthogonal Vectors and Subspaces Explained Visually</span></a><a class="ls" href="../../lesson-5/projection-onto-a-line/"><span class="ls-num">2</span><span class="ls-title">Projection Onto a Line: Formula and Picture</span></a><a class="ls on" href="../../lesson-5/projection-matrix/"><span class="ls-num">3</span><span class="ls-title">Projection Matrix P = A(AᵀA)⁻¹Aᵀ Explained</span></a><a class="ls" href="../../lesson-5/least-squares/"><span class="ls-num">4</span><span class="ls-title">Least Squares and the Normal Equations AᵀAx = Aᵀb</span></a><a class="ls" href="../../lesson-5/fitting-a-line/"><span class="ls-num">5</span><span class="ls-title">Fitting a Line to Data with Least Squares (Interactive)</span></a><a class="ls" href="../../lesson-5/orthonormal-bases/"><span class="ls-num">6</span><span class="ls-title">Orthonormal Basis and Orthogonal Matrices (QᵀQ = I)</span></a><a class="ls" href="../../lesson-5/gram-schmidt/"><span class="ls-num">7</span><span class="ls-title">Gram-Schmidt Process Step by Step (and A = QR)</span></a><a class="ls" href="../../lesson-5/recap/"><span class="ls-num">8</span><span class="ls-title">Lesson 5 Recap: Orthogonality, Projections and Least Squares</span></a><a class="ls" href="../../lesson-5/practice/"><span class="ls-num">✎</span><span class="ls-title">Examples and problems</span></a></div></div></details></nav></div>
+  <nav class="steps" aria-label="Steps in this lesson"><a class="step" href="../orthogonal-subspaces/" data-slug="orthogonal-subspaces" title="Orthogonal Vectors and Subspaces Explained Visually">1</a><a class="step" href="../projection-onto-a-line/" data-slug="projection-onto-a-line" title="Projection Onto a Line: Formula and Picture">2</a><a class="step on" href="../projection-matrix/" data-slug="projection-matrix" aria-current="page" title="Projection Matrix P = A(AᵀA)⁻¹Aᵀ Explained">3</a><a class="step" href="../least-squares/" data-slug="least-squares" title="Least Squares and the Normal Equations AᵀAx = Aᵀb">4</a><a class="step" href="../fitting-a-line/" data-slug="fitting-a-line" title="Fitting a Line to Data with Least Squares (Interactive)">5</a><a class="step" href="../orthonormal-bases/" data-slug="orthonormal-bases" title="Orthonormal Basis and Orthogonal Matrices (QᵀQ = I)">6</a><a class="step" href="../gram-schmidt/" data-slug="gram-schmidt" title="Gram-Schmidt Process Step by Step (and A = QR)">7</a><a class="step" href="../recap/" data-slug="recap" title="Lesson 5 Recap: Orthogonality, Projections and Least Squares">8</a><a class="step practice" href="../practice/" title="Examples and problems">✎ Practice</a></nav>
+</header>
+
+
+<main class="lesson">
+  <article class="page">
+    <div class="kicker">Strang §4.2 · Projection matrices</div>
+    <h1>Projection matrices: P flattens everything onto the line.</h1>
+    <p class="lead">The projection p = a(aᵀb)/(aᵀa) can be produced by one matrix P acting on b. For a line, P = aaᵀ/aᵀa. For the column space of a matrix A, P = A(AᵀA)⁻¹Aᵀ. Projecting twice gives the same result as projecting once: P² = P.</p>
+    <div class="key">P = aaᵀ / aᵀa &nbsp;&nbsp; P = A(AᵀA)⁻¹Aᵀ &nbsp;&nbsp; P² = P</div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>P multiplies any vector b and returns its projection p = Pb.</li><li>For a line, P = aaᵀ / aᵀa: a column times a row, divided by a number.</li><li>P² = P: projecting a second time changes nothing. Also Pᵀ = P.</li><li>For the column space of A (independent columns), P = A(AᵀA)⁻¹Aᵀ.</li><li>I − P projects onto the perpendicular part: (I − P)b = e.</li></ol></div>
+    <div class="prose">
+<h3>A machine that projects</h3>
+<p>On the last slide we projected one vector. Often we want to project many: every reading from a sensor, every pixel of an image. It is worth building one matrix that does the job for any b.</p>
+<p>Rewrite p = a (aᵀb / aᵀa). The number aᵀb can move to the right of a, because a number commutes with anything: p = (a aᵀ / aᵀa) b. The matrix in brackets is P.</p>
+<div class="worked"><div class="row">a = (1, 2): &nbsp; aaᵀ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>4</span></span>, &nbsp; aᵀa = 5</div><div class="row">P = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0.2</span><span>0.4</span><span>0.4</span><span>0.8</span></span></div><div class="row">Pb for b = (4, 3): (0.8 + 1.2, 1.6 + 2.4) = (2, 4) ✓ (the same p as slide 2)</div></div>
+<h3>Pressing twice changes nothing</h3>
+<p>Think of a press that flattens dough onto a tray. Once the dough is flat, pressing it again leaves it as it is. A projection behaves the same way. After the first projection, p is already on the line, and its projection is p itself. So P(Pb) = Pb for every b, which says P² = P.</p>
+<p>In the lab, run show(P). The whole plane collapses onto the line through (1, 2). The determinant is 0: P is not invertible. You cannot recover b from its shadow p.</p>
+<h3>Projecting onto a plane or a column space</h3>
+<p>Now project b onto the column space of a matrix A with independent columns. The projection is p = Ax̂ for some vector x̂ of coefficients. The error e = b − Ax̂ must be perpendicular to <b>every</b> column of A, so Aᵀe = 0:</p>
+<div class="worked"><div class="row">Aᵀ(b − Ax̂) = 0</div><div class="row">AᵀA x̂ = Aᵀb</div><div class="row">x̂ = (AᵀA)⁻¹Aᵀb, &nbsp;&nbsp; p = A(AᵀA)⁻¹Aᵀ b</div></div>
+<p>So P = A(AᵀA)⁻¹Aᵀ. When A has a single column a, AᵀA is the number aᵀa and we get back aaᵀ/aᵀa. The middle equation, AᵀAx̂ = Aᵀb, is the most important equation in this lesson. The next slide puts it to work.</p>
+<h3>Where this is used</h3>
+<p>Noise cancelling and signal cleanup often work by projection. Build P onto the subspace where the clean signals live and apply it to every measurement. The part that survives, Pb, is the signal. The part removed, (I − P)b, is treated as noise.</p>
+    </div>
+    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · Onto the x-axis</h3>
+<p>a = (1, 0): aaᵀ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>0</span></span>, aᵀa = 1.</p>
+<div class="worked"><div class="row">P = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>0</span></span>, &nbsp; P(5, 7) = (5, 0)</div></div>
+<p>The projection keeps the x component and drops the y component: a shadow cast straight down onto the x-axis.</p>
+</section>
+<section class="example"><h3>Example 2 · Onto the diagonal</h3>
+<p>a = (1, 1): aaᵀ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>1</span></span>, aᵀa = 2, so P = ½<span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>1</span></span>.</p>
+<div class="worked"><div class="row">P(3, 1) = ½(4, 4) = (2, 2) &nbsp; (as in slide 2, example 1)</div><div class="row">P² = ¼<span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>2</span><span>2</span><span>2</span></span> = ½<span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>1</span></span> = P ✓</div></div>
+</section>
+<section class="example"><h3>Example 3 · Onto a plane in 3D</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>1</span><span>1</span><span>0</span><span>1</span></span>: its two columns span a plane.</p>
+<div class="worked"><div class="row">AᵀA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>2</span></span>, &nbsp; (AᵀA)⁻¹ = ⅓<span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>−1</span><span>−1</span><span>2</span></span></div><div class="row">P = A(AᵀA)⁻¹Aᵀ = ⅓<span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>−1</span><span>1</span><span>2</span><span>1</span><span>−1</span><span>1</span><span>2</span></span></div><div class="row">P(1, 0, 0) = ⅓(2, 1, −1). The error ⅓(1, −1, 1) is perpendicular to both columns ✓</div></div>
+<p>The plane is perpendicular to n = (1, −1, 1), and I − P = nnᵀ/3 projects onto that normal line.</p>
+</section></div>
+    <details class="more"><summary><span class="pl-icon">✎</span><span class="rv-text"><b>More examples to try</b><span>3 problems with step-by-step solutions. Try each one before you open its solution.</span></span><span class="rv-toggle"><span class="s-show">Show</span><span class="s-hide">Hide</span></span></summary><div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Find the projection matrix onto the line through a = (0, 3).</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>aaᵀ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>0</span><span>0</span><span>9</span></span>, aᵀa = 9, so P = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>0</span><span>0</span><span>1</span></span>.</p><p>Only the direction matters: this is the projection onto the y-axis.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>Show from the formula that P = aaᵀ/aᵀa satisfies P² = P.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>P² = (aaᵀ)(aaᵀ) / (aᵀa)² = a(aᵀa)aᵀ / (aᵀa)².</p><p>The middle aᵀa is a number. One copy cancels with the denominator, leaving aaᵀ/aᵀa = P.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>For a = (1, 1), what is I − P, and onto which line does it project?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>I − P = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>1</span></span> − ½<span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>1</span></span> = ½<span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>−1</span><span>1</span></span>.</p><p>It is the projection onto the line through (1, −1), the line perpendicular to a.</p>
+</div></details>
+</div></div></div></details>
+  </article>
+  <details class="review">
+    <summary><span class="pl-icon">✎</span><span class="rv-text"><b>Lesson review</b><span>3 worked examples and 5 mixed problems with solutions</span></span><span class="rv-toggle"><span class="s-show">Open</span><span class="s-hide">Close</span></span></summary>
+    <div class="review-body">
+      <h2 class="practice-h">Worked examples</h2>
+      <div class="examples"><section class="example"><h3>Example 1 · Project onto a line in 3D</h3>
+<p>Project b = (3, 0, 3) onto the line through a = (1, 2, 2).</p>
+<div class="worked"><div class="row">aᵀb = 3 + 0 + 6 = 9, &nbsp; aᵀa = 1 + 4 + 4 = 9, &nbsp; x̂ = 1</div><div class="row">p = (1, 2, 2), &nbsp; e = b − p = (2, −2, 1)</div><div class="row">a · e = 2 − 4 + 2 = 0 ✓</div></div>
+<p>The distance from b to the line is ‖e‖ = 3.</p>
+</section>
+<section class="example"><h3>Example 2 · Fit a line to five points</h3>
+<p>Fit C + Dt to (−2, 0), (−1, 1), (0, 1), (1, 2), (2, 4).</p>
+<div class="worked"><div class="row">The times are centred: Σt = 0, so the normal equations separate</div><div class="row">5C = Σb = 8, &nbsp; C = 1.6</div><div class="row">10D = Σtb = 0 − 1 + 0 + 2 + 8 = 9, &nbsp; D = 0.9</div></div>
+<p>Best line: 1.6 + 0.9t. Choosing t so that Σt = 0 is a common trick: it makes the columns of A perpendicular.</p>
+</section>
+<section class="example"><h3>Example 3 · Gram-Schmidt and QR in 3D</h3>
+<p>a = (1, 0, 1), b = (1, 1, 0).</p>
+<div class="worked"><div class="row">aᵀb = 1, aᵀa = 2: &nbsp; B = b − ½a = (½, 1, −½), &nbsp; a · B = ½ − ½ = 0 ✓</div><div class="row">q₁ = (1, 0, 1)/√2, &nbsp; q₂ = B/√1.5</div><div class="row">R = QᵀA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>√2</span><span>1/√2</span><span>0</span><span>√1.5</span></span></div></div>
+<p>Check in the lab: Q, R = np.linalg.qr(A), then Q @ R gives A back.</p>
+</section></div>
+      <h2 class="practice-h">Problems</h2>
+      <div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Are (1, −1, 0) and (1, 1, 5) perpendicular? Find a nonzero vector perpendicular to both.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>1 − 1 + 0 = 0, so yes.</p><p>A vector (x, y, z) perpendicular to both needs x − y = 0 and x + y + 5z = 0. Take x = y = −5, z = 2: (−5, −5, 2). Check: −5 + 5 + 0 = 0 and −5 − 5 + 10 = 0 ✓</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>Project b = (1, 2, 3) onto the line through a = (1, 0, 1).</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>aᵀb = 4, aᵀa = 2, x̂ = 2. p = (2, 0, 2), e = (−1, 2, 1). Check: −1 + 0 + 1 = 0 ✓</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>Find the projection matrix onto the line through a = (2, 1) and apply it to b = (5, 0).</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>P = aaᵀ / aᵀa = ⅕<span class="mx" style="grid-template-columns:repeat(2,auto)"><span>4</span><span>2</span><span>2</span><span>1</span></span>. Pb = ⅕(20, 10) = (4, 2).</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">4</span><div class="pbody">
+<p>Find the least squares solution of x = 1, x = 4, 2x = 4.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>A = (1, 1, 2), b = (1, 4, 4). x̂ = aᵀb / aᵀa = (1 + 4 + 8) / 6 = 13/6 ≈ 2.17.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">5</span><div class="pbody">
+<p>Find the best line C + Dt through (0, 4), (1, 2), (2, 1), (3, 1).</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>m = 4, Σt = 6, Σt² = 14, Σb = 8, Σtb = 0 + 2 + 2 + 3 = 7.</p><p>4C + 6D = 8 and 6C + 14D = 7 give D = −1 and C = 3.5. Best line: 3.5 − t.</p>
+</div></details>
+</div></div></div>
+    </div>
+  </details>
+
+  <section class="labsec" aria-label="Lab">
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Build the projection matrix P onto the line through a = (1, 2).</span>
+      <span class="hint" id="hint">Edit the code and press Run.</span>
+    </div>
+    <div class="lab">
+      <div class="editor-card">
+        <div class="bar">
+          <span class="file">slide_3.py</span>
+          <span class="status" id="pystatus">Loading Python…</span>
+          <button class="btn" id="reset">Reset</button>
+          <button class="btn primary" id="run" disabled>Run ▸</button>
+        </div>
+        <div class="editor">
+          <div class="gutter" id="gutter">1</div>
+          <div class="code" id="codewrap">
+            <pre id="hl" aria-hidden="true"></pre>
+            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+a = np.array([1., 2.])
+
+P = np.outer(a, a)              # a times a-transpose... something is missing
+                                # your turn: divide by the number a @ a
+print(&quot;P =&quot;)
+print(P)
+print(&quot;P @ P =&quot;)
+print(P @ P)                    # a projection gives P @ P = P
+show(P, np.array([4., 3.]))     # the plane collapses onto the line</textarea>
+          </div>
+        </div>
+        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+      </div>
+      <figure class="figure">
+        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <div class="after">
+    <div class="nav">
+      <a class="btn" id="prev" href="../projection-onto-a-line/">← Back</a>
+      <span class="count">3 / 8</span>
+      <a class="btn primary" id="next" href="../least-squares/">Next →</a>
+    </div>
+  </div>
+</main>
+<footer class="foot">
+  Follows the order and notation of Gilbert Strang, <i>Introduction to Linear Algebra</i>, 5th edition (2016); § numbers refer to that book.
+  Explanations, examples and code are original. Made by <a href="https://www.steppeschool.com">Steppeschool</a>.
+</footer>
+
+<script>window.SLIDE = {"slug": "projection-matrix", "lesson": "lesson-5", "assets": "../../assets/", "preview": {"kind": "transform", "M": [[0.2, 0.4], [0.4, 0.8]], "vecs": [[4, 3]]}, "check": "isT(V) && close(V.M, [[0.2, 0.4], [0.4, 0.8]])"};</script>
+<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
+<script src="../../assets/lab.js" defer></script>
+<script src="../../assets/nav.js" defer></script>
+</body>
+</html>

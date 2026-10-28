@@ -40,14 +40,18 @@ LESSONS = [
      "sections": "Strang §3.1 to §3.5",
      "summary": "Subspaces, the nullspace, pivot and free columns, the complete solution to Ax = b, "
                 "independence and dimension, and the big picture of the four subspaces."},
+    {"n": 5, "dir": "lesson-5", "title": "Orthogonality and least squares", "chapter": "Strang, chapter 4",
+     "sections": "Strang §4.1 to §4.4",
+     "summary": "Perpendicular subspaces, projections, the best answer when Ax = b has no solution, "
+                "fitting lines to data, and orthonormal bases built by Gram-Schmidt."},
 ]
-for _l, _c in zip(LESSONS, [1, 2, 2, 3]):
+for _l, _c in zip(LESSONS, [1, 2, 2, 3, 4]):
     _l["ch"] = _c
 CHAPTERS = [
     {"n": 1, "title": "Introduction to vectors"},
     {"n": 2, "title": "Solving linear equations"},
     {"n": 3, "title": "Vector spaces and subspaces"},
-    {"n": 4, "title": "Orthogonality", "planned": ["Orthogonality and least squares"]},
+    {"n": 4, "title": "Orthogonality"},
     {"n": 5, "title": "Determinants", "planned": ["Determinants"]},
     {"n": 6, "title": "Eigenvalues and eigenvectors", "planned": ["Eigenvalues and eigenvectors"]},
     {"n": 7, "title": "The singular value decomposition", "planned": ["SVD and PCA"]},

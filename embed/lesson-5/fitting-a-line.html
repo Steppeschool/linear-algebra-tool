@@ -1,0 +1,151 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="robots" content="noindex"></head><body>
+<main class="lesson">
+  <article class="page">
+    <div class="kicker">Strang §4.3 · Fitting a straight line</div>
+    <h1>Fitting a straight line to sensor data.</h1>
+    <p class="lead">Measurements are noisy, so the points never sit exactly on a line. The best line C + Dt makes the sum of squared vertical errors as small as possible. The normal equations give C and D in one step, for four points or four million.</p>
+    <div class="key">E = Σ (bᵢ − C − D tᵢ)² &nbsp;&nbsp; <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>m</span><span>Σt</span><span>Σt</span><span>Σt²</span></span> (C, D) = (Σb, Σtb)</div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Each data point (tᵢ, bᵢ) gives one equation C + D tᵢ = bᵢ.</li><li>A has a column of ones (for C) and a column of times tᵢ (for D).</li><li>The errors are the vertical gaps eᵢ = bᵢ − (C + D tᵢ). Least squares minimizes the sum of their squares.</li><li>The normal equations become two equations in C and D, built from four sums.</li><li>The same method fits calibration lines, trends and growth rates.</li></ol></div>
+    <div class="prose">
+<h3>A ruler across the pins</h3>
+<p>Picture a corkboard with a few pins and a ruler laid across them. You slide and tilt the ruler until it looks as close as possible to all the pins at once. Least squares makes "as close as possible" precise. Measure each vertical gap, square it, add the squares, and make that total E as small as possible.</p>
+<p>The lab does exactly this. Drag C (the height where the line starts) and D (its slope) and watch E. The dashed grey line is the best one. When you land on it, the readout says so.</p>
+<h3>The data</h3>
+<p>A motor is switched on and its temperature rise is read once a minute: t = 0, 1, 2, 3 minutes, readings b = 1, 2, 4, 5 degrees. The points are close to a line but not on one.</p>
+<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>1</span><span>1</span><span>1</span><span>2</span><span>1</span><span>3</span></span>, &nbsp; b = (1, 2, 4, 5)</div></div>
+<h3>The normal equations</h3>
+<p>AᵀA and Aᵀb only need four sums: the number of points m, Σt, Σt², and the sums Σb and Σtb.</p>
+<div class="worked"><div class="row">m = 4, &nbsp; Σt = 6, &nbsp; Σt² = 14, &nbsp; Σb = 12, &nbsp; Σtb = 0 + 2 + 8 + 15 = 25</div><div class="row">4C + 6D = 12 &nbsp;&nbsp; 6C + 14D = 25</div><div class="row">Solve: D = 1.4, &nbsp; C = 0.9. &nbsp; Best line: 0.9 + 1.4t</div><div class="row">predictions (0.9, 2.3, 3.7, 5.1), &nbsp; errors (0.1, −0.3, 0.3, −0.1), &nbsp; E = 0.2</div></div>
+<p>The motor warms by about 1.4 degrees per minute. The errors add up to zero, as the last slide predicted.</p>
+<h3>Why squares?</h3>
+<p>We need the errors to count as positive, or misses above and below the line would cancel. Squaring does that, and it gives a smooth bowl-shaped E with a single lowest point. That lowest point is where the normal equations hold. Absolute values also make errors positive, but there is no simple formula for their minimum.</p>
+<h3>Where this is used</h3>
+<p>Calibrating a sensor is a line fit. Put an accelerometer in known positions, record what it reads, and fit reading = bias + scale × true value. Example 3 below does exactly this.</p>
+    </div>
+    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · The motor, by computer</h3>
+<p>The same data in NumPy: np.linalg.solve(A.T @ A, A.T @ b) returns (0.9, 1.4).</p>
+<p>np.linalg.lstsq(A, b) gives the same answer. It also uses the projection idea, with a more careful method inside.</p>
+</section>
+<section class="example"><h3>Example 2 · Points that are already on a line</h3>
+<p>Points (0, 1), (1, 3), (2, 5).</p>
+<div class="worked"><div class="row">AᵀA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>3</span><span>3</span><span>5</span></span>, &nbsp; Aᵀb = (9, 13)</div><div class="row">C = 1, D = 2, &nbsp; errors (0, 0, 0), &nbsp; E = 0</div></div>
+<p>When the data is exactly linear, least squares finds that exact line.</p>
+</section>
+<section class="example"><h3>Example 3 · Calibrating an accelerometer axis</h3>
+<p>Point the axis down, sideways and up. The true acceleration along it is −1 g, 0 and +1 g. The readings are −0.96, 0.03 and 1.08 g.</p>
+<div class="worked"><div class="row">t = (−1, 0, 1), &nbsp; b = (−0.96, 0.03, 1.08)</div><div class="row">Σt = 0, so the equations separate: &nbsp; 3C = Σb = 0.15, &nbsp; 2D = Σtb = 2.04</div><div class="row">bias C = 0.05 g, &nbsp; scale D = 1.02</div></div>
+<p>From now on, the corrected reading is (reading − 0.05) / 1.02. Every IMU calibration routine does a version of this.</p>
+</section></div>
+    <details class="more"><summary><span class="pl-icon">✎</span><span class="rv-text"><b>More examples to try</b><span>3 problems with step-by-step solutions. Try each one before you open its solution.</span></span><span class="rv-toggle"><span class="s-show">Show</span><span class="s-hide">Hide</span></span></summary><div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Find the best line through (−1, 1), (0, 2), (1, 6).</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Σt = 0, so the equations separate. 3C = Σb = 9 gives C = 3. 2D = Σtb = −1 + 0 + 6 = 5 gives D = 2.5.</p><p>Best line: 3 + 2.5t.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>Fit the best horizontal line b = C (no slope) to the motor data b = 1, 2, 4, 5.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>A is a single column of ones, so C = Σb / m = 12 / 4 = 3, the average. A flat line cannot follow the warming, and its E = 4 + 1 + 1 + 4 = 10 is much larger than 0.2.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>Why not make the plain sum of the errors as small as possible?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>Errors above and below the line would cancel. For the motor data, the flat line b = 3 has errors (−2, −1, 1, 2), which add to zero, yet it is a poor fit. Squaring makes every miss count.</p>
+</div></details>
+</div></div></div></details>
+  </article>
+  <details class="review">
+    <summary><span class="pl-icon">✎</span><span class="rv-text"><b>Lesson review</b><span>3 worked examples and 5 mixed problems with solutions</span></span><span class="rv-toggle"><span class="s-show">Open</span><span class="s-hide">Close</span></span></summary>
+    <div class="review-body">
+      <h2 class="practice-h">Worked examples</h2>
+      <div class="examples"><section class="example"><h3>Example 1 · Project onto a line in 3D</h3>
+<p>Project b = (3, 0, 3) onto the line through a = (1, 2, 2).</p>
+<div class="worked"><div class="row">aᵀb = 3 + 0 + 6 = 9, &nbsp; aᵀa = 1 + 4 + 4 = 9, &nbsp; x̂ = 1</div><div class="row">p = (1, 2, 2), &nbsp; e = b − p = (2, −2, 1)</div><div class="row">a · e = 2 − 4 + 2 = 0 ✓</div></div>
+<p>The distance from b to the line is ‖e‖ = 3.</p>
+</section>
+<section class="example"><h3>Example 2 · Fit a line to five points</h3>
+<p>Fit C + Dt to (−2, 0), (−1, 1), (0, 1), (1, 2), (2, 4).</p>
+<div class="worked"><div class="row">The times are centred: Σt = 0, so the normal equations separate</div><div class="row">5C = Σb = 8, &nbsp; C = 1.6</div><div class="row">10D = Σtb = 0 − 1 + 0 + 2 + 8 = 9, &nbsp; D = 0.9</div></div>
+<p>Best line: 1.6 + 0.9t. Choosing t so that Σt = 0 is a common trick: it makes the columns of A perpendicular.</p>
+</section>
+<section class="example"><h3>Example 3 · Gram-Schmidt and QR in 3D</h3>
+<p>a = (1, 0, 1), b = (1, 1, 0).</p>
+<div class="worked"><div class="row">aᵀb = 1, aᵀa = 2: &nbsp; B = b − ½a = (½, 1, −½), &nbsp; a · B = ½ − ½ = 0 ✓</div><div class="row">q₁ = (1, 0, 1)/√2, &nbsp; q₂ = B/√1.5</div><div class="row">R = QᵀA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>√2</span><span>1/√2</span><span>0</span><span>√1.5</span></span></div></div>
+<p>Check in the lab: Q, R = np.linalg.qr(A), then Q @ R gives A back.</p>
+</section></div>
+      <h2 class="practice-h">Problems</h2>
+      <div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Are (1, −1, 0) and (1, 1, 5) perpendicular? Find a nonzero vector perpendicular to both.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>1 − 1 + 0 = 0, so yes.</p><p>A vector (x, y, z) perpendicular to both needs x − y = 0 and x + y + 5z = 0. Take x = y = −5, z = 2: (−5, −5, 2). Check: −5 + 5 + 0 = 0 and −5 − 5 + 10 = 0 ✓</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>Project b = (1, 2, 3) onto the line through a = (1, 0, 1).</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>aᵀb = 4, aᵀa = 2, x̂ = 2. p = (2, 0, 2), e = (−1, 2, 1). Check: −1 + 0 + 1 = 0 ✓</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>Find the projection matrix onto the line through a = (2, 1) and apply it to b = (5, 0).</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>P = aaᵀ / aᵀa = ⅕<span class="mx" style="grid-template-columns:repeat(2,auto)"><span>4</span><span>2</span><span>2</span><span>1</span></span>. Pb = ⅕(20, 10) = (4, 2).</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">4</span><div class="pbody">
+<p>Find the least squares solution of x = 1, x = 4, 2x = 4.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>A = (1, 1, 2), b = (1, 4, 4). x̂ = aᵀb / aᵀa = (1 + 4 + 8) / 6 = 13/6 ≈ 2.17.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">5</span><div class="pbody">
+<p>Find the best line C + Dt through (0, 4), (1, 2), (2, 1), (3, 1).</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>m = 4, Σt = 6, Σt² = 14, Σb = 8, Σtb = 0 + 2 + 2 + 3 = 7.</p><p>4C + 6D = 8 and 6C + 14D = 7 give D = −1 and C = 3.5. Best line: 3.5 − t.</p>
+</div></details>
+</div></div></div>
+    </div>
+  </details>
+
+  <section class="labsec" aria-label="Lab">
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Find the best line through the four readings: drag C and D, or solve the normal equations.</span>
+      <span class="hint" id="hint">Edit the code and press Run.</span>
+    </div>
+    <div class="lab">
+      <div class="editor-card">
+        <div class="bar">
+          <span class="file">slide_5.py</span>
+          <span class="status" id="pystatus">Loading Python…</span>
+          <button class="btn" id="reset">Reset</button>
+          <button class="btn primary" id="run" disabled>Run ▸</button>
+        </div>
+        <div class="editor">
+          <div class="gutter" id="gutter">1</div>
+          <div class="code" id="codewrap">
+            <pre id="hl" aria-hidden="true"></pre>
+            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+t = np.array([0., 1., 2., 3.])       # minutes
+b = np.array([1., 2., 4., 5.])       # temperature rise, degrees
+
+C, D = 0., 1.                        # your turn: drag the sliders, or
+                                     # A = np.column_stack([np.ones(4), t])
+                                     # C, D = np.linalg.solve(A.T @ A, A.T @ b)
+fit(t, b, C, D)</textarea>
+          </div>
+        </div>
+        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+      </div>
+      <figure class="figure">
+        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+      </figure>
+    </div>
+  </section>
+</main>
+<script type="application/json" id="la-config">{"slug": "fitting-a-line", "lesson": "lesson-5", "assets": "../../assets/", "preview": {"kind": "fit", "t": [0, 1, 2, 3], "b": [1, 2, 4, 5], "C": 0, "D": 1}, "check": "isFit(V) && bestFit(V.t, V.b) && near(V.C, bestFit(V.t, V.b)[0], 1e-3) && near(V.D, bestFit(V.t, V.b)[1], 1e-3)"}</script>
+</body></html>

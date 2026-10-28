@@ -1,0 +1,76 @@
+---
+slug: projection-matrix
+seo_title: Projection Matrix P = A(AᵀA)⁻¹Aᵀ Explained
+description: The projection onto a line is Pb with P = aaᵀ/aᵀa. Onto the column space of A, P = A(AᵀA)⁻¹Aᵀ. Why P² = P, with examples and Python. Strang §4.2.
+kicker: Strang §4.2 · Projection matrices
+title: Projection matrices: P flattens everything onto the line.
+task: Build the projection matrix P onto the line through a = (1, 2).
+preview: {"kind":"transform","M":[[0.2,0.4],[0.4,0.8]],"vecs":[[4,3]]}
+check: isT(V) && close(V.M, [[0.2, 0.4], [0.4, 0.8]])
+---
+<!-- lead -->
+The projection p = a(aᵀb)/(aᵀa) can be produced by one matrix P acting on b. For a line, P = aaᵀ/aᵀa. For the column space of a matrix A, P = A(AᵀA)⁻¹Aᵀ. Projecting twice gives the same result as projecting once: P² = P.
+<!-- key -->
+P = aaᵀ / aᵀa &nbsp;&nbsp; P = A(AᵀA)⁻¹Aᵀ &nbsp;&nbsp; P² = P
+<!-- ideas -->
+<ol class="ideas"><li>P multiplies any vector b and returns its projection p = Pb.</li><li>For a line, P = aaᵀ / aᵀa: a column times a row, divided by a number.</li><li>P² = P: projecting a second time changes nothing. Also Pᵀ = P.</li><li>For the column space of A (independent columns), P = A(AᵀA)⁻¹Aᵀ.</li><li>I − P projects onto the perpendicular part: (I − P)b = e.</li></ol>
+<!-- prose -->
+<h3>A machine that projects</h3>
+<p>On the last slide we projected one vector. Often we want to project many: every reading from a sensor, every pixel of an image. It is worth building one matrix that does the job for any b.</p>
+<p>Rewrite p = a (aᵀb / aᵀa). The number aᵀb can move to the right of a, because a number commutes with anything: p = (a aᵀ / aᵀa) b. The matrix in brackets is P.</p>
+<div class="worked"><div class="row">a = (1, 2): &nbsp; aaᵀ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>4</span></span>, &nbsp; aᵀa = 5</div><div class="row">P = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0.2</span><span>0.4</span><span>0.4</span><span>0.8</span></span></div><div class="row">Pb for b = (4, 3): (0.8 + 1.2, 1.6 + 2.4) = (2, 4) ✓ (the same p as slide 2)</div></div>
+<h3>Pressing twice changes nothing</h3>
+<p>Think of a press that flattens dough onto a tray. Once the dough is flat, pressing it again leaves it as it is. A projection behaves the same way. After the first projection, p is already on the line, and its projection is p itself. So P(Pb) = Pb for every b, which says P² = P.</p>
+<p>In the lab, run show(P). The whole plane collapses onto the line through (1, 2). The determinant is 0: P is not invertible. You cannot recover b from its shadow p.</p>
+<h3>Projecting onto a plane or a column space</h3>
+<p>Now project b onto the column space of a matrix A with independent columns. The projection is p = Ax̂ for some vector x̂ of coefficients. The error e = b − Ax̂ must be perpendicular to <b>every</b> column of A, so Aᵀe = 0:</p>
+<div class="worked"><div class="row">Aᵀ(b − Ax̂) = 0</div><div class="row">AᵀA x̂ = Aᵀb</div><div class="row">x̂ = (AᵀA)⁻¹Aᵀb, &nbsp;&nbsp; p = A(AᵀA)⁻¹Aᵀ b</div></div>
+<p>So P = A(AᵀA)⁻¹Aᵀ. When A has a single column a, AᵀA is the number aᵀa and we get back aaᵀ/aᵀa. The middle equation, AᵀAx̂ = Aᵀb, is the most important equation in this lesson. The next slide puts it to work.</p>
+<h3>Where this is used</h3>
+<p>Noise cancelling and signal cleanup often work by projection. Build P onto the subspace where the clean signals live and apply it to every measurement. The part that survives, Pb, is the signal. The part removed, (I − P)b, is treated as noise.</p>
+<!-- examples -->
+<section class="example"><h3>Example 1 · Onto the x-axis</h3>
+<p>a = (1, 0): aaᵀ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>0</span></span>, aᵀa = 1.</p>
+<div class="worked"><div class="row">P = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>0</span></span>, &nbsp; P(5, 7) = (5, 0)</div></div>
+<p>The projection keeps the x component and drops the y component: a shadow cast straight down onto the x-axis.</p>
+</section>
+<section class="example"><h3>Example 2 · Onto the diagonal</h3>
+<p>a = (1, 1): aaᵀ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>1</span></span>, aᵀa = 2, so P = ½<span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>1</span></span>.</p>
+<div class="worked"><div class="row">P(3, 1) = ½(4, 4) = (2, 2) &nbsp; (as in slide 2, example 1)</div><div class="row">P² = ¼<span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>2</span><span>2</span><span>2</span></span> = ½<span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>1</span></span> = P ✓</div></div>
+</section>
+<section class="example"><h3>Example 3 · Onto a plane in 3D</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>1</span><span>1</span><span>0</span><span>1</span></span>: its two columns span a plane.</p>
+<div class="worked"><div class="row">AᵀA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>2</span></span>, &nbsp; (AᵀA)⁻¹ = ⅓<span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>−1</span><span>−1</span><span>2</span></span></div><div class="row">P = A(AᵀA)⁻¹Aᵀ = ⅓<span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>−1</span><span>1</span><span>2</span><span>1</span><span>−1</span><span>1</span><span>2</span></span></div><div class="row">P(1, 0, 0) = ⅓(2, 1, −1). The error ⅓(1, −1, 1) is perpendicular to both columns ✓</div></div>
+<p>The plane is perpendicular to n = (1, −1, 1), and I − P = nnᵀ/3 projects onto that normal line.</p>
+</section>
+<!-- problems -->
+<div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Find the projection matrix onto the line through a = (0, 3).</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>aaᵀ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>0</span><span>0</span><span>9</span></span>, aᵀa = 9, so P = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>0</span><span>0</span><span>1</span></span>.</p><p>Only the direction matters: this is the projection onto the y-axis.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>Show from the formula that P = aaᵀ/aᵀa satisfies P² = P.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>P² = (aaᵀ)(aaᵀ) / (aᵀa)² = a(aᵀa)aᵀ / (aᵀa)².</p><p>The middle aᵀa is a number. One copy cancels with the denominator, leaving aaᵀ/aᵀa = P.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>For a = (1, 1), what is I − P, and onto which line does it project?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>I − P = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>1</span></span> − ½<span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>1</span></span> = ½<span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>−1</span><span>1</span></span>.</p><p>It is the projection onto the line through (1, −1), the line perpendicular to a.</p>
+</div></details>
+</div></div>
+<!-- code -->
+import numpy as np
+
+a = np.array([1., 2.])
+
+P = np.outer(a, a)              # a times a-transpose... something is missing
+                                # your turn: divide by the number a @ a
+print("P =")
+print(P)
+print("P @ P =")
+print(P @ P)                    # a projection gives P @ P = P
+show(P, np.array([4., 3.]))     # the plane collapses onto the line

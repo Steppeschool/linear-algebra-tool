@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Orthogonal Vectors and Subspaces Explained Visually | Linear Algebra, Live</title>
+<meta name="description" content="Perpendicular vectors have dot product zero. The row space is perpendicular to the null space, and the column space to the left null space. Examples and Python. Strang §4.1.">
+<link rel="canonical" href="https://linearalgebra.steppeschool.com/lesson-5/orthogonal-subspaces/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Linear Algebra, Live">
+<meta property="og:title" content="Orthogonal Vectors and Subspaces Explained Visually | Linear Algebra, Live">
+<meta property="og:description" content="Perpendicular vectors have dot product zero. The row space is perpendicular to the null space, and the column space to the left null space. Examples and Python. Strang §4.1.">
+<meta property="og:url" content="https://linearalgebra.steppeschool.com/lesson-5/orthogonal-subspaces/">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/lesson.css">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "Orthogonal Vectors and Subspaces Explained Visually", "headline": "Perpendicular vectors, perpendicular subspaces.", "description": "Perpendicular vectors have dot product zero. The row space is perpendicular to the null space, and the column space to the left null space. Examples and Python. Strang §4.1.", "url": "https://linearalgebra.steppeschool.com/lesson-5/orthogonal-subspaces/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": true, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 5: Orthogonality and least squares", "item": "https://linearalgebra.steppeschool.com/lesson-5/"}, {"@type": "ListItem", "position": 3, "name": "Orthogonal Vectors and Subspaces Explained Visually", "item": "https://linearalgebra.steppeschool.com/lesson-5/orthogonal-subspaces/"}]}]</script>
+</head>
+<body>
+<header class="top">
+  <div class="topnav"><a class="brand" href="../../">Linear Algebra, Live</a><nav class="crumbnav" aria-label="Chapters and lessons"><details class="menu"><summary>Chapter 4<span class="hide-sm"> · Orthogonality</span></summary><div class="menu-list chapters"><div class="menu-sub">Chapters</div><div class="ch"><div class="ch-head"><span class="ch-num">1</span><span class="ch-title">Introduction to vectors</span></div><div class="ch-lessons"><a class="ls" href="../../lesson-1/"><span class="ls-num">Lesson 1</span><span class="ls-title">Columns first</span></a></div></div><div class="ch"><div class="ch-head"><span class="ch-num">2</span><span class="ch-title">Solving linear equations</span></div><div class="ch-lessons"><a class="ls" href="../../lesson-2/"><span class="ls-num">Lesson 2</span><span class="ls-title">Elimination and A = LU</span></a><a class="ls" href="../../lesson-3/"><span class="ls-num">Lesson 3</span><span class="ls-title">Inverses, transposes and permutations</span></a></div></div><div class="ch"><div class="ch-head"><span class="ch-num">3</span><span class="ch-title">Vector spaces and subspaces</span></div><div class="ch-lessons"><a class="ls" href="../../lesson-4/"><span class="ls-num">Lesson 4</span><span class="ls-title">The four subspaces</span></a></div></div><div class="ch on"><div class="ch-head"><span class="ch-num">4</span><span class="ch-title">Orthogonality</span></div><div class="ch-lessons"><a class="ls on" href="../../lesson-5/"><span class="ls-num">Lesson 5</span><span class="ls-title">Orthogonality and least squares</span></a></div></div><div class="menu-sub">Coming soon</div><div class="ch-later"><div class="ch soon"><div class="ch-head"><span class="ch-num">5</span><span class="ch-title">Determinants</span></div></div><div class="ch soon"><div class="ch-head"><span class="ch-num">6</span><span class="ch-title">Eigenvalues and eigenvectors</span></div></div><div class="ch soon"><div class="ch-head"><span class="ch-num">7</span><span class="ch-title">The singular value decomposition</span></div></div></div></div></details><span class="sep">›</span><details class="menu"><summary>Lesson 5<span class="hide-sm"> · Orthogonality and least squares</span></summary><div class="menu-list"><div class="menu-sub">Chapter 4 lessons</div><div class="ch-lessons flat"><a class="ls on" href="../../lesson-5/"><span class="ls-num">Lesson 5</span><span class="ls-title">Orthogonality and least squares</span></a></div><div class="menu-sub">In lesson 5</div><div class="ch-lessons flat slides"><a class="ls on" href="../../lesson-5/orthogonal-subspaces/"><span class="ls-num">1</span><span class="ls-title">Orthogonal Vectors and Subspaces Explained Visually</span></a><a class="ls" href="../../lesson-5/projection-onto-a-line/"><span class="ls-num">2</span><span class="ls-title">Projection Onto a Line: Formula and Picture</span></a><a class="ls" href="../../lesson-5/projection-matrix/"><span class="ls-num">3</span><span class="ls-title">Projection Matrix P = A(AᵀA)⁻¹Aᵀ Explained</span></a><a class="ls" href="../../lesson-5/least-squares/"><span class="ls-num">4</span><span class="ls-title">Least Squares and the Normal Equations AᵀAx = Aᵀb</span></a><a class="ls" href="../../lesson-5/fitting-a-line/"><span class="ls-num">5</span><span class="ls-title">Fitting a Line to Data with Least Squares (Interactive)</span></a><a class="ls" href="../../lesson-5/orthonormal-bases/"><span class="ls-num">6</span><span class="ls-title">Orthonormal Basis and Orthogonal Matrices (QᵀQ = I)</span></a><a class="ls" href="../../lesson-5/gram-schmidt/"><span class="ls-num">7</span><span class="ls-title">Gram-Schmidt Process Step by Step (and A = QR)</span></a><a class="ls" href="../../lesson-5/recap/"><span class="ls-num">8</span><span class="ls-title">Lesson 5 Recap: Orthogonality, Projections and Least Squares</span></a><a class="ls" href="../../lesson-5/practice/"><span class="ls-num">✎</span><span class="ls-title">Examples and problems</span></a></div></div></details></nav></div>
+  <nav class="steps" aria-label="Steps in this lesson"><a class="step on" href="../orthogonal-subspaces/" data-slug="orthogonal-subspaces" aria-current="page" title="Orthogonal Vectors and Subspaces Explained Visually">1</a><a class="step" href="../projection-onto-a-line/" data-slug="projection-onto-a-line" title="Projection Onto a Line: Formula and Picture">2</a><a class="step" href="../projection-matrix/" data-slug="projection-matrix" title="Projection Matrix P = A(AᵀA)⁻¹Aᵀ Explained">3</a><a class="step" href="../least-squares/" data-slug="least-squares" title="Least Squares and the Normal Equations AᵀAx = Aᵀb">4</a><a class="step" href="../fitting-a-line/" data-slug="fitting-a-line" title="Fitting a Line to Data with Least Squares (Interactive)">5</a><a class="step" href="../orthonormal-bases/" data-slug="orthonormal-bases" title="Orthonormal Basis and Orthogonal Matrices (QᵀQ = I)">6</a><a class="step" href="../gram-schmidt/" data-slug="gram-schmidt" title="Gram-Schmidt Process Step by Step (and A = QR)">7</a><a class="step" href="../recap/" data-slug="recap" title="Lesson 5 Recap: Orthogonality, Projections and Least Squares">8</a><a class="step practice" href="../practice/" title="Examples and problems">✎ Practice</a></nav>
+</header>
+
+
+<main class="lesson">
+  <article class="page">
+    <div class="kicker">Strang §4.1 · Orthogonality of the four subspaces</div>
+    <h1>Perpendicular vectors, perpendicular subspaces.</h1>
+    <p class="lead">Two vectors are perpendicular when their dot product is zero. Whole subspaces can be perpendicular too. The four subspaces from lesson 4 come in two perpendicular pairs, and that fact drives the rest of this lesson.</p>
+    <div class="key">vᵀw = 0 &nbsp;&nbsp; N(A) ⟂ C(Aᵀ) &nbsp;&nbsp; N(Aᵀ) ⟂ C(A)</div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>v and w are <b>orthogonal</b> (perpendicular) when v · w = vᵀw = 0.</li><li>Then Pythagoras holds: ‖v‖² + ‖w‖² = ‖v + w‖².</li><li>Two subspaces are orthogonal when <b>every</b> vector in one is perpendicular to <b>every</b> vector in the other.</li><li>Ax = 0 says each row of A has dot product 0 with x. So the nullspace is perpendicular to the row space.</li><li>The two pieces fill the input space: every x splits into a row space part plus a nullspace part.</li></ol></div>
+    <div class="prose">
+<h3>Perpendicular means "no overlap"</h3>
+<p>Walk along a street that runs exactly north. However far you go, your east-west position does not change. North and east are perpendicular directions: moving in one tells you nothing about the other.</p>
+<p>In algebra the test is the dot product. Multiply matching components and add. If the total is zero, the vectors are perpendicular. For v = (2, 1) and w = (−1, 2): v · w = −2 + 2 = 0.</p>
+<p>We also write the dot product as vᵀw: a row times a column. It is the same number.</p>
+<h3>Why the dot product is the right test</h3>
+<p>For a right angle, Pythagoras says the squared lengths add up. Check it on the example:</p>
+<div class="worked"><div class="row">‖v‖² = 4 + 1 = 5 &nbsp;&nbsp; ‖w‖² = 1 + 4 = 5</div><div class="row">v + w = (1, 3), &nbsp; ‖v + w‖² = 1 + 9 = 10 = 5 + 5 ✓</div></div>
+<p>In general ‖v + w‖² = ‖v‖² + 2vᵀw + ‖w‖². The middle term vanishes exactly when vᵀw = 0. So "dot product zero" and "right angle" are the same statement.</p>
+<h3>Perpendicular subspaces</h3>
+<p>Now raise the level. Two subspaces V and W are orthogonal if every vector in V is perpendicular to every vector in W. The floor of a room and a vertical line through the corner are an example: the line is perpendicular to every direction on the floor.</p>
+<p>Look again at Ax = 0. Each component of Ax is one row of A dotted with x. So Ax = 0 says: <b>x is perpendicular to every row</b>. Then x is also perpendicular to every combination of the rows, which is the whole row space C(Aᵀ).</p>
+<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>3</span><span>2</span><span>6</span></span> &nbsp; row space: the line through (1, 3)</div><div class="row">nullspace: the line through (−3, 1)</div><div class="row">(1, 3) · (−3, 1) = −3 + 3 = 0 ✓</div></div>
+<p>The same reasoning with Aᵀ in place of A shows that the left nullspace N(Aᵀ) is perpendicular to the column space C(A).</p>
+<h3>The two pieces fill the space</h3>
+<p>The row space has dimension r and the nullspace has dimension n − r. Together that is n, the whole input space. So the nullspace is not just some perpendicular subspace: it contains <b>every</b> vector perpendicular to the row space. Strang calls the two subspaces <b>orthogonal complements</b>.</p>
+<p>This means every input x splits in exactly one way into x = x_r + x_n, a row space part plus a nullspace part. Since Ax_n = 0, the matrix only "sees" the row space part: Ax = Ax_r.</p>
+<h3>Where this is used</h3>
+<p>An IMU (the motion sensor in a phone or drone) has three accelerometer axes at right angles. Because the axes are perpendicular, each one measures its own direction only. Tilt the board along x, and the y and z readings stay put, apart from noise.</p>
+    </div>
+    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · Test with the dot product</h3>
+<p>Are v = (1, 2, 3) and w = (3, 0, −1) perpendicular?</p>
+<div class="worked"><div class="row">v · w = 1·3 + 2·0 + 3·(−1) = 3 + 0 − 3 = 0 ✓</div><div class="row">Pythagoras: ‖v‖² = 14, ‖w‖² = 10, v + w = (4, 2, 2), ‖v + w‖² = 24 = 14 + 10 ✓</div></div>
+<p>Yes. In 3D the test is the same: one product per component, then add.</p>
+</section>
+<section class="example"><h3>Example 2 · Rows against the nullspace</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>1</span><span>2</span><span>4</span><span>2</span></span>. Rank 1, so the row space is the line through (1, 2, 1).</p>
+<div class="worked"><div class="row">Special solutions of Ax = 0: s₁ = (−2, 1, 0), s₂ = (−1, 0, 1)</div><div class="row">(1, 2, 1) · (−2, 1, 0) = −2 + 2 + 0 = 0 ✓</div><div class="row">(1, 2, 1) · (−1, 0, 1) = −1 + 0 + 1 = 0 ✓</div></div>
+<p>The nullspace is a plane, the row space is a line, and the line sticks straight out of the plane. Dimensions 2 + 1 = 3.</p>
+</section>
+<section class="example"><h3>Example 3 · Split an input into two parts</h3>
+<p>For A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>3</span><span>2</span><span>6</span></span>, split x = (4, 2) into a row space part and a nullspace part.</p>
+<div class="worked"><div class="row">Row space part: a multiple c·(1, 3). The rest must be perpendicular to (1, 3).</div><div class="row">(4 − c, 2 − 3c) · (1, 3) = 0 &nbsp;gives&nbsp; 10 − 10c = 0, &nbsp;c = 1</div><div class="row">x_r = (1, 3), &nbsp; x_n = (3, −1), &nbsp; x_r + x_n = (4, 2) ✓</div><div class="row">Ax = (10, 20) and Ax_r = (10, 20): the nullspace part changed nothing</div></div>
+</section></div>
+    <details class="more"><summary><span class="pl-icon">✎</span><span class="rv-text"><b>More examples to try</b><span>3 problems with step-by-step solutions. Try each one before you open its solution.</span></span><span class="rv-toggle"><span class="s-show">Show</span><span class="s-hide">Hide</span></span></summary><div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Find c so that (1, c) is perpendicular to (4, 2).</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>(1, c) · (4, 2) = 4 + 2c = 0, so c = −2. The vector is (1, −2).</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>Find a nonzero vector in the nullspace of <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>1</span><span>0</span><span>0</span><span>1</span><span>1</span></span> and check that it is perpendicular to both rows.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>From row 2, y = −z. From row 1, x = −y = z. With z = 1: x = (1, −1, 1).</p><p>Row 1: 1 − 1 + 0 = 0 ✓ &nbsp; Row 2: 0 − 1 + 1 = 0 ✓</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>Can the row space and the nullspace of a 3 by 3 matrix both be planes?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>No. Their dimensions are r and 3 − r, which add to 3, not 4.</p><p>There is also a picture reason: two planes through the origin in 3D always share a line. A vector on that line would have to be perpendicular to itself, and only the zero vector is.</p>
+</div></details>
+</div></div></div></details>
+  </article>
+  <details class="review">
+    <summary><span class="pl-icon">✎</span><span class="rv-text"><b>Lesson review</b><span>3 worked examples and 5 mixed problems with solutions</span></span><span class="rv-toggle"><span class="s-show">Open</span><span class="s-hide">Close</span></span></summary>
+    <div class="review-body">
+      <h2 class="practice-h">Worked examples</h2>
+      <div class="examples"><section class="example"><h3>Example 1 · Project onto a line in 3D</h3>
+<p>Project b = (3, 0, 3) onto the line through a = (1, 2, 2).</p>
+<div class="worked"><div class="row">aᵀb = 3 + 0 + 6 = 9, &nbsp; aᵀa = 1 + 4 + 4 = 9, &nbsp; x̂ = 1</div><div class="row">p = (1, 2, 2), &nbsp; e = b − p = (2, −2, 1)</div><div class="row">a · e = 2 − 4 + 2 = 0 ✓</div></div>
+<p>The distance from b to the line is ‖e‖ = 3.</p>
+</section>
+<section class="example"><h3>Example 2 · Fit a line to five points</h3>
+<p>Fit C + Dt to (−2, 0), (−1, 1), (0, 1), (1, 2), (2, 4).</p>
+<div class="worked"><div class="row">The times are centred: Σt = 0, so the normal equations separate</div><div class="row">5C = Σb = 8, &nbsp; C = 1.6</div><div class="row">10D = Σtb = 0 − 1 + 0 + 2 + 8 = 9, &nbsp; D = 0.9</div></div>
+<p>Best line: 1.6 + 0.9t. Choosing t so that Σt = 0 is a common trick: it makes the columns of A perpendicular.</p>
+</section>
+<section class="example"><h3>Example 3 · Gram-Schmidt and QR in 3D</h3>
+<p>a = (1, 0, 1), b = (1, 1, 0).</p>
+<div class="worked"><div class="row">aᵀb = 1, aᵀa = 2: &nbsp; B = b − ½a = (½, 1, −½), &nbsp; a · B = ½ − ½ = 0 ✓</div><div class="row">q₁ = (1, 0, 1)/√2, &nbsp; q₂ = B/√1.5</div><div class="row">R = QᵀA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>√2</span><span>1/√2</span><span>0</span><span>√1.5</span></span></div></div>
+<p>Check in the lab: Q, R = np.linalg.qr(A), then Q @ R gives A back.</p>
+</section></div>
+      <h2 class="practice-h">Problems</h2>
+      <div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Are (1, −1, 0) and (1, 1, 5) perpendicular? Find a nonzero vector perpendicular to both.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>1 − 1 + 0 = 0, so yes.</p><p>A vector (x, y, z) perpendicular to both needs x − y = 0 and x + y + 5z = 0. Take x = y = −5, z = 2: (−5, −5, 2). Check: −5 + 5 + 0 = 0 and −5 − 5 + 10 = 0 ✓</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>Project b = (1, 2, 3) onto the line through a = (1, 0, 1).</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>aᵀb = 4, aᵀa = 2, x̂ = 2. p = (2, 0, 2), e = (−1, 2, 1). Check: −1 + 0 + 1 = 0 ✓</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>Find the projection matrix onto the line through a = (2, 1) and apply it to b = (5, 0).</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>P = aaᵀ / aᵀa = ⅕<span class="mx" style="grid-template-columns:repeat(2,auto)"><span>4</span><span>2</span><span>2</span><span>1</span></span>. Pb = ⅕(20, 10) = (4, 2).</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">4</span><div class="pbody">
+<p>Find the least squares solution of x = 1, x = 4, 2x = 4.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>A = (1, 1, 2), b = (1, 4, 4). x̂ = aᵀb / aᵀa = (1 + 4 + 8) / 6 = 13/6 ≈ 2.17.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">5</span><div class="pbody">
+<p>Find the best line C + Dt through (0, 4), (1, 2), (2, 1), (3, 1).</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>m = 4, Σt = 6, Σt² = 14, Σb = 8, Σtb = 0 + 2 + 2 + 3 = 7.</p><p>4C + 6D = 8 and 6C + 14D = 7 give D = −1 and C = 3.5. Best line: 3.5 − t.</p>
+</div></details>
+</div></div></div>
+    </div>
+  </details>
+
+  <section class="labsec" aria-label="Lab">
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Find a nonzero x with Ax = 0 and see that it is perpendicular to the row (1, 3).</span>
+      <span class="hint" id="hint">Edit the code and press Run.</span>
+    </div>
+    <div class="lab">
+      <div class="editor-card">
+        <div class="bar">
+          <span class="file">slide_1.py</span>
+          <span class="status" id="pystatus">Loading Python…</span>
+          <button class="btn" id="reset">Reset</button>
+          <button class="btn primary" id="run" disabled>Run ▸</button>
+        </div>
+        <div class="editor">
+          <div class="gutter" id="gutter">1</div>
+          <div class="code" id="codewrap">
+            <pre id="hl" aria-hidden="true"></pre>
+            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+A = np.array([[1., 3.],
+              [2., 6.]])
+row = A[0]                      # the first row, (1, 3)
+x = np.array([1., 1.])          # your turn: find x with Ax = 0
+
+print(&quot;Ax =&quot;, A @ x)
+print(&quot;row · x =&quot;, row @ x)
+vectors((&quot;row&quot;, row), (&quot;x&quot;, x))  # zero dot product = right angle</textarea>
+          </div>
+        </div>
+        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+      </div>
+      <figure class="figure">
+        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <div class="after">
+    <div class="nav">
+      <a class="btn" id="prev" href="../">← Overview</a>
+      <span class="count">1 / 8</span>
+      <a class="btn primary" id="next" href="../projection-onto-a-line/">Next →</a>
+    </div>
+  </div>
+</main>
+<footer class="foot">
+  Follows the order and notation of Gilbert Strang, <i>Introduction to Linear Algebra</i>, 5th edition (2016); § numbers refer to that book.
+  Explanations, examples and code are original. Made by <a href="https://www.steppeschool.com">Steppeschool</a>.
+</footer>
+
+<script>window.SLIDE = {"slug": "orthogonal-subspaces", "lesson": "lesson-5", "assets": "../../assets/", "preview": {"kind": "arrows", "chain": false, "items": [{"label": "row", "v": [1, 3]}, {"label": "x", "v": [1, 1]}]}, "check": "isA(V) && V.chain === false && V.items.length >= 2 && !isZero(V.items[0].v) && !isZero(V.items[1].v) && Math.abs(dot(V.items[0].v, V.items[1].v)) < 1e-9"};</script>
+<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
+<script src="../../assets/lab.js" defer></script>
+<script src="../../assets/nav.js" defer></script>
+</body>
+</html>
