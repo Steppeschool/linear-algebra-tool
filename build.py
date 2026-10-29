@@ -384,8 +384,8 @@ def thumb(src, peek_title, items, label=None):
 # Leave GISCUS_CATEGORY_ID empty to build without comments.
 GISCUS_REPO = "Steppeschool/linear-algebra-tool"
 GISCUS_REPO_ID = "R_kgDOVYeydQ"
-GISCUS_CATEGORY = "Lesson comments"
-GISCUS_CATEGORY_ID = ""
+GISCUS_CATEGORY = "Announcements"
+GISCUS_CATEGORY_ID = "DIC_kwDOVYeydc4DJ7vP"
 
 
 def comments():

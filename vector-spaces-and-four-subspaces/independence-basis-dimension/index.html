@@ -129,7 +129,24 @@ table((&quot;A&quot;, A), (&quot;R&quot;, R, pivots))</textarea>
     </div>
   </div>
 </main>
-
+<section class="comments" aria-label="Comments">
+  <h2>Questions and comments</h2>
+  <p>Stuck on something, or found a mistake? Ask here and I'll answer. You sign in with GitHub.</p>
+  <div id="giscus"></div>
+</section>
+<script>
+(function () {
+  var s = document.createElement("script");
+  s.src = "https://giscus.app/client.js";
+  var a = {"repo": "Steppeschool/linear-algebra-tool", "repo-id": "R_kgDOVYeydQ", "category": "Announcements",
+    "category-id": "DIC_kwDOVYeydc4DJ7vP", "mapping": "specific", "term": location.hostname + location.pathname,
+    "strict": "1", "reactions-enabled": "1", "emit-metadata": "0", "input-position": "top",
+    "theme": "preferred_color_scheme", "lang": "en", "loading": "lazy"};
+  for (var k in a) s.setAttribute("data-" + k, a[k]);
+  s.crossOrigin = "anonymous"; s.async = true;
+  document.getElementById("giscus").appendChild(s);
+})();
+</script>
 <footer class="foot">
   Follows the order and notation of Professor Gilbert Strang's <i>Introduction to Linear Algebra</i>, 5th edition (2016); § numbers refer to that book.
   Explanations, examples and code are original. Made by <a href="https://www.steppeschool.com">Steppeschool</a>.
