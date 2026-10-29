@@ -552,7 +552,7 @@ def lesson_page(lesson, slides, practice=None):
     title = f"{lesson['seo_title']} | {SITE}"
     desc = lesson["seo_desc"]
     lock = locked(lesson)
-    badge = '<span class="lockbadge">🔒 Members</span>' if lock else ""
+    badge = '<span class="lockbadge preview">Free preview</span>' if lock else ""
     cards = "".join(
         f'<a class="card pic" href="{s["slug"]}/">{badge}{thumb(prefix + card_img(lesson, s["slug"]), "Open slide", s["title"], card_label(lesson, s["slug"]))}'
         f'<span class="n">{j + 1:02d} · {e(s["kicker"])}</span>'
@@ -594,7 +594,7 @@ def home_page(lessons_built):
         row = ""
         for lesson, slides, _ in lessons_built:
             if lesson["ch"] == c["n"]:
-                row += (f'<a class="card pic" href="{lesson["path"]}/">{'<span class="lockbadge">🔒 Members</span>' if locked(lesson) else '<span class="lockbadge free">Free</span>'}{thumb(card_img(lesson, slides[0]["slug"]), "Start lesson", f"{len(slides)} slides with live Python.", (f"Lesson {lesson['n']}", lesson["title"]))}'
+                row += (f'<a class="card pic" href="{lesson["path"]}/">{'<span class="lockbadge preview">Free preview</span>' if locked(lesson) else '<span class="lockbadge free">Free</span>'}{thumb(card_img(lesson, slides[0]["slug"]), "Start lesson", f"{len(slides)} slides with live Python.", (f"Lesson {lesson['n']}", lesson["title"]))}'
                         f'<span class="n">Lesson {lesson["n"]} · {e(lesson["sections"])}</span>'
                         f'<h3>{e(lesson["title"])}</h3><p>{e(lesson["summary"])}</p></a>')
         for name in c.get("planned", []):
