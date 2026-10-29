@@ -2,7 +2,7 @@
 
 Slide lessons with a Python editor underneath. Learners read a slide, edit the code, press Run, and the plane on the slide redraws.
 
-The course follows the order and notation of Gilbert Strang, *Introduction to Linear Algebra*, 5th edition (2016). Each slide is tagged with the section it matches. Slide text is original; nothing is copied from the book.
+The course follows the order and notation of Professor Gilbert Strang, *Introduction to Linear Algebra*, 5th edition (2016). Each slide is tagged with the section it matches. Slide text is original; nothing is copied from the book.
 
 ## Lessons
 

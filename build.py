@@ -68,7 +68,7 @@ def seal(text):
 
 LESSONS = [
     {"n": 1, "dir": "lesson-1", "path": "vectors-and-matrices", "seo_title": "Vectors, Linear Combinations and Matrix Multiplication",
-     "seo_desc": "Learn vectors, linear combinations, Ax as a mix of columns, the column space and matrix multiplication with interactive Python. Free lesson following Strang.", "title": "Columns first", "chapter": "Strang, chapter 1",
+     "seo_desc": "Learn vectors, linear combinations, Ax as a mix of columns, the column space and matrix multiplication with interactive Python. Free lesson following Professor Strang.", "title": "Columns first", "chapter": "Strang, chapter 1",
      "sections": "Strang §1.1, §1.3, §2.1, §2.4, §5.3, §8.1",
      "summary": "Linear combinations, Ax as a mix of columns, the column space, row and column pictures, "
                 "matrices that move the plane, and why AB is not BA."},
@@ -239,7 +239,7 @@ def head(title, description, url, prefix, og_type="website", jsonld=None):
 
 def footer():
     return f"""<footer class="foot">
-  Follows the order and notation of Gilbert Strang, <i>Introduction to Linear Algebra</i>, 5th edition (2016); § numbers refer to that book.
+  Follows the order and notation of Professor Gilbert Strang's <i>Introduction to Linear Algebra</i>, 5th edition (2016); § numbers refer to that book.
   Explanations, examples and code are original. Made by <a href="https://www.steppeschool.com">Steppeschool</a>.
 </footer>
 """ + UNLOCK_DIALOG
@@ -283,7 +283,7 @@ def plural(n, word):
 
 PROVIDER = {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}
 COURSE = {"@type": "Course", "name": SITE, "url": BASE + "/",
-          "description": "Interactive linear algebra lessons with live Python, following Gilbert Strang's Introduction to Linear Algebra.",
+          "description": "Interactive linear algebra lessons with live Python, following Professor Gilbert Strang's Introduction to Linear Algebra.",
           "provider": PROVIDER}
 
 
@@ -587,7 +587,7 @@ def home_page(lessons_built):
     url = BASE + "/"
     title = f"{SITE}: Interactive Linear Algebra with Python"
     desc = ("Learn linear algebra by running it: short visual lessons with live Python in your browser, "
-            "following Gilbert Strang's textbook. Built for engineers.")
+            "following Professor Gilbert Strang's textbook. Built for engineers.")
     cards = ""
     k = len(lessons_built)
     for c in CHAPTERS:
@@ -610,7 +610,7 @@ def home_page(lessons_built):
     <p class="promise">Eight short lessons. At the end you compress images and run PCA with code you understand line by line.</p>
     <div class="cta"><a class="btn primary" href="{first[0]['path']}/{first[1][0]['slug']}/">Start lesson 1 →</a><a class="btn" href="#lessons">See all lessons</a><button class="btn" type="button" data-unlock>Full course: $20, lifetime</button></div>
     <div class="outcomes"><b>After the course you can</b><ul>{"".join(f"<li>{e(o)}</li>" for o in COURSE_OUTCOMES)}</ul></div>
-    <p>Short visual lessons. Read a slide, change the Python underneath, press Run and watch the plane move. The order follows Gilbert Strang's <i>Introduction to Linear Algebra</i>, and the examples come from robotics and engineering. Eight lessons take you from adding two arrows all the way to eigenvalues, the SVD and PCA. Lessons 1 to 3 are free; lessons 4 to 8 are for members.</p>
+    <p>Short visual lessons. Read a slide, change the Python underneath, press Run and watch the plane move. The order follows Professor Gilbert Strang's <i>Introduction to Linear Algebra</i>, and the examples come from robotics and engineering. Eight lessons take you from adding two arrows all the way to eigenvalues, the SVD and PCA. Lessons 1 to 3 are free; lessons 4 to 8 are for members.</p>
   </section>
   <h2 class="section-title" id="lessons">Lessons</h2>
   {cards}
