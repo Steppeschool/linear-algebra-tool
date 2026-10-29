@@ -251,11 +251,22 @@ UNLOCK_DIALOG = f"""<dialog class="unlock" id="unlock" aria-labelledby="unlock-h
   <h2 id="unlock-h">From Ax = b to PCA, by running it</h2>
   <p class="sub">Lessons 1 to 3 are free. Finish all eight and you will be able to:</p>
   <ul class="perks outcomes-list">{"".join(f"<li>{o}.</li>" for o in COURSE_OUTCOMES)}</ul>
-  <p class="incl"><b>You get:</b> all 8 lessons with Python labs · every worked example and solution · 5 extra problems per lesson · answers to your questions · every future update.</p>
+  <p class="incl"><b>You get:</b> all 8 lessons with Python labs · every worked example and solution · 5 extra problems per lesson · your progress tracked · answers to your questions · every future update.</p>
   <div class="price"><b>$20</b> once · lifetime access</div>
   <a class="btn primary go" href="{CHECKOUT}" target="_blank" rel="noopener">Continue to checkout →</a>
   <p class="login">Already a member? <a href="{LOGIN}" target="_blank" rel="noopener">Log in to the course</a></p>
 </dialog>
+"""
+
+
+def upsell(lesson):
+    """Free lessons: a gentle offer for the full course at the end of every slide (stripped from Kajabi embeds)."""
+    if lesson["n"] >= LOCK_FROM:
+        return ""
+    return f"""  <div class="upsell">
+    <p><b>Enjoying lesson {lesson['n']}?</b> Get the full course: all 8 lessons through the SVD and PCA, your progress saved lesson by lesson, every solution and 5 extra problems per lesson. <span class="nowrap">$20 once, yours for life.</span></p>
+    <button class="btn primary" type="button" data-unlock>See the full course</button>
+  </div>
 """
 
 
@@ -443,6 +454,7 @@ def slide_page(lesson, slides, i, next_lesson=None, practice=None):
     </div>
   </section>
 
+{upsell(lesson)}
   <div class="after">
     <div class="nav">
       {prev}
@@ -572,7 +584,7 @@ def lesson_page(lesson, slides, practice=None):
     <div class="outcomes"><b>By the end of this lesson you can</b><ul>{"".join(f"<li>{e(o)}</li>" for o in lesson["outcomes"])}</ul></div>
     <p>{e(lesson['summary'])} {len(slides)} short slides, then worked examples and problems. Each slide has an everyday picture, a worked example and Python you can run right on the page.</p>
     {'<p class="members-note">Free preview: most of every slide is yours to read, with its Python lab. Members get the full text, every worked example, the problems with solutions and the practice set.</p>' if lock else ''}
-    <div class="cta"><a class="btn primary" href="{slides[0]['slug']}/">Start the lesson →</a>{'<button class="btn" type="button" data-unlock>Unlock lessons 4 to 8</button>' if lock else ''}</div>
+    <div class="cta"><a class="btn primary" href="{slides[0]['slug']}/">Start the lesson →</a>{'<button class="btn" type="button" data-unlock>Get the full course</button>' if lock else '<button class="btn" type="button" data-unlock>Full course: $20, lifetime</button>'}</div>
   </section>
   <h2 class="section-title">Slides</h2>
   <div class="cards">{cards}</div>
@@ -721,6 +733,7 @@ def write_embed(lesson, slug, page):
     main = main.replace('href="../../', f'href="{BASE}/').replace('src="../../', f'src="{BASE}/')
     main = re.sub(r'\s*<div class="signup">.*?</div>', '', main, flags=re.S)   # members already have an account
     main = re.sub(r'\s*<div class="unlock-teaser">.*?</div>', '', main, flags=re.S)
+    main = re.sub(r'\s*<div class="upsell">.*?</div>', '', main, flags=re.S)
     cfg = re.search(r'window\.SLIDE = (\{.*?\});</script>', page).group(1)
     ed = ROOT / "embed" / lesson["dir"]
     ed.mkdir(parents=True, exist_ok=True)

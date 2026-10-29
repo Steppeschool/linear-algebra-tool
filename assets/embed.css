@@ -388,6 +388,10 @@
 .la-embed .locked .hook{margin:0 0 12px;font-size:16px}
 .la-embed dialog.unlock .outcomes-list li::marker{color:var(--ok)}
 .la-embed dialog.unlock .incl{font-size:14px;color:var(--muted);margin:0 0 14px}
+.la-embed .lockbadge.preview{background:rgba(255,255,255,.92);color:#16171b}
+.la-embed .upsell{margin:18px 0 0;background:var(--accent-soft);border-radius:14px;padding:18px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px 20px;flex-wrap:wrap}
+.la-embed .upsell p{margin:0;max-width:78ch}
+.la-embed .nowrap{white-space:nowrap}
 
 
 @container la (max-width:1020px){.la-embed .app{grid-template-columns:minmax(0,1fr)}
