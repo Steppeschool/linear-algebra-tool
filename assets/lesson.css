@@ -397,3 +397,15 @@ dialog.unlock .go{display:block;text-align:center;padding:12px 16px;font-size:16
 .locked-stub em{font-style:normal;font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
 .locked h2{text-transform:none;color:var(--ink);letter-spacing:-.01em;font-family:var(--f-display);font-size:22px}
 dialog.unlock .go.alt{margin-top:10px;font-weight:500}
+/* brand + outcomes */
+.topnav .logo{display:inline-flex;align-items:center;background:#000;border-radius:7px;padding:5px 9px;margin-right:12px;line-height:0;flex:none}
+.topnav .logo img{height:20px;width:auto;display:block}
+.outcomes{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--ok);border-radius:12px;padding:14px 18px;margin:14px 0 16px;max-width:64ch}
+.outcomes b{font-family:var(--f-display);font-size:16px}
+.outcomes ul{margin:6px 0 0;padding-left:0;list-style:none}
+.outcomes li{position:relative;padding-left:26px;margin:5px 0}
+.outcomes li::before{content:"✓";position:absolute;left:2px;color:var(--ok);font-weight:700}
+.hero .promise{font-size:19px;color:var(--ink);font-weight:500;max-width:56ch}
+.locked .hook{margin:0 0 12px;font-size:16px}
+dialog.unlock .outcomes-list li::marker{color:var(--ok)}
+dialog.unlock .incl{font-size:14px;color:var(--muted);margin:0 0 14px}

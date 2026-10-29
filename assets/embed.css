@@ -376,6 +376,18 @@
 .la-embed .locked-stub b{flex:1;font-weight:600}
 .la-embed .locked-stub em{font-style:normal;font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
 .la-embed .locked h2{text-transform:none;color:var(--ink);letter-spacing:-.01em;font-family:var(--f-display);font-size:22px}
+.la-embed dialog.unlock .go.alt{margin-top:10px;font-weight:500}
+.la-embed .topnav .logo{display:inline-flex;align-items:center;background:#000;border-radius:7px;padding:5px 9px;margin-right:12px;line-height:0;flex:none}
+.la-embed .topnav .logo img{height:20px;width:auto;display:block}
+.la-embed .outcomes{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--ok);border-radius:12px;padding:14px 18px;margin:14px 0 16px;max-width:64ch}
+.la-embed .outcomes b{font-family:var(--f-display);font-size:16px}
+.la-embed .outcomes ul{margin:6px 0 0;padding-left:0;list-style:none}
+.la-embed .outcomes li{position:relative;padding-left:26px;margin:5px 0}
+.la-embed .outcomes li::before{content:"✓";position:absolute;left:2px;color:var(--ok);font-weight:700}
+.la-embed .hero .promise{font-size:19px;color:var(--ink);font-weight:500;max-width:56ch}
+.la-embed .locked .hook{margin:0 0 12px;font-size:16px}
+.la-embed dialog.unlock .outcomes-list li::marker{color:var(--ok)}
+.la-embed dialog.unlock .incl{font-size:14px;color:var(--muted);margin:0 0 14px}
 
 
 @container la (max-width:1020px){.la-embed .app{grid-template-columns:minmax(0,1fr)}

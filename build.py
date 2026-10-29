@@ -25,6 +25,16 @@ FONTS = ("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght
          "&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap")
 SIGNUP = "https://www.steppeschool.com/offers/JwLxrqg8/checkout"
 TODAY = datetime.date.today().isoformat()
+# Steppeschool brand assets, served from the Kajabi site so they always match steppeschool.com
+LOGO = "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/themes/2162900525/settings_images/5034abc-0d31-78f6-fa6d-4ec283cec8ac_steppeschool_logo.png"
+FAVICON = "https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/sites/2148737716/images/7e33af1-8e03-fa-2023-c1572eec2d14_steppeschool_favicon.png"
+COURSE_OUTCOMES = [
+    "Solve any system Ax = b, by hand and in NumPy, and say when it has no solution",
+    "Fit the best line to noisy sensor data with least squares",
+    "Tell from the eigenvalues whether a system settles down or blows up",
+    "Compress an image and find the main direction in your data with the SVD and PCA",
+    "Follow the matrix maths in robotics, control and machine learning",
+]
 CHECKOUT = "https://www.steppeschool.com/offers/57ZvEAFX/checkout"   # "Lifetime Access": $20 once, Linear Algebra, Live only
 LOGIN = "https://www.steppeschool.com/login"
 LOCK_FROM = 4   # lessons 1-3 are free; 4+ are members-only (public pages show a teaser)
@@ -98,8 +108,10 @@ LESSONS = [
      "summary": "Every matrix taken apart: turn, stretch, turn. Singular values, the most important pieces of a matrix, "
                 "image compression, principal component analysis and the pseudoinverse."},
 ]
+OUTCOMES = {1: ['Read Ax as a mix of the columns of A, the idea everything else builds on', 'Predict where a matrix sends any point of the plane', 'Combine two moves into one matrix, and know why the order matters'], 2: ['Solve a system of equations the way a computer does', 'Spot at a glance when a system has no solution or infinitely many', 'Factor A = LU once and reuse it to solve fast'], 3: ["Undo a matrix, and know when it can't be undone", 'Invert any 2 × 2 in your head, and bigger ones with Gauss-Jordan', 'Use transposes and permutations without second-guessing'], 4: ['Write down every solution of Ax = b, not just one', 'Find the rank, a basis and the dimension of any subspace', 'Draw the big picture of the four subspaces and use it'], 5: ['Fit the best line to noisy sensor data', 'Project any vector onto a line or a plane', 'Turn any basis into an orthonormal one with Gram-Schmidt'], 6: ['Read area, volume and invertibility from one number', 'Compute any determinant three different ways', "Solve small systems with Cramer's rule and find cross products"], 7: ['Tell whether a system settles down or blows up', 'Find eigenvalues and eigenvectors by hand and in NumPy', 'Spot a positive definite matrix, a bowl, at a glance'], 8: ['Compress an image and keep only what matters', 'Find the main direction in your data with PCA', 'Take any matrix apart as turn, stretch, turn']}
 for _l, _c in zip(LESSONS, [1, 2, 2, 3, 4, 5, 6, 7]):
     _l["ch"] = _c
+    _l["outcomes"] = OUTCOMES[_l["n"]]
     if _l["n"] >= LOCK_FROM:
         _l["seo_desc"] = _l["seo_desc"].replace(" Free lesson.", "")
 CHAPTERS = [
@@ -159,7 +171,7 @@ def topnav(prefix, lesson=None, steps_html="", current=None):
                 f'<div class="menu-list"><div class="menu-sub">Chapter {lesson["ch"]} lessons</div><div class="ch-lessons flat">{items}</div>'
                 f'<div class="menu-sub">In lesson {lesson["n"]}</div><div class="ch-lessons flat slides">{inside}</div></div></details>')
     return f"""<header class="top">
-  <div class="topnav"><a class="brand" href="{prefix}">{SITE}</a><nav class="crumbnav" aria-label="Chapters and lessons">{nav}</nav></div>
+  <div class="topnav"><a class="logo" href="https://www.steppeschool.com" aria-label="Steppeschool"><img src="{LOGO}" alt="Steppeschool" width="108" height="24"></a><a class="brand" href="{prefix}">{SITE}</a><nav class="crumbnav" aria-label="Chapters and lessons">{nav}</nav></div>
   {f'<nav class="steps" aria-label="Steps in this lesson">{steps_html}</nav>' if steps_html else ""}
 </header>
 """
@@ -205,6 +217,8 @@ def head(title, description, url, prefix, og_type="website", jsonld=None):
 <title>{e(title)}</title>
 <meta name="description" content="{e(description)}">
 <link rel="canonical" href="{url}">
+<link rel="icon" type="image/png" href="{FAVICON}">
+<link rel="apple-touch-icon" href="{FAVICON}">
 <meta property="og:type" content="{og_type}">
 <meta property="og:site_name" content="{SITE}">
 <meta property="og:title" content="{e(title)}">
@@ -233,16 +247,11 @@ def footer():
 
 UNLOCK_DIALOG = f"""<dialog class="unlock" id="unlock" aria-labelledby="unlock-h">
   <form method="dialog"><button class="x" aria-label="Close">×</button></form>
-  <div class="kicker">Members</div>
-  <h2 id="unlock-h">Unlock the whole course</h2>
-  <p class="sub">Lessons 1 to 3 are free. Members get all eight lessons, through eigenvalues and the SVD.</p>
-  <ul class="perks">
-    <li><b>Lessons 4 to 8 in full:</b> the four subspaces, least squares, determinants, eigenvalues, the SVD and PCA.</li>
-    <li><b>Every slide with its Python lab</b>, exercise, worked examples and problems with full solutions.</li>
-    <li><b>Five extra members-only problems per lesson</b>, each with a worked solution.</li>
-    <li><b>Ask questions under any lesson.</b> I usually reply within a few hours.</li>
-    <li><b>Pay once, keep it forever,</b> including every future update to the course.</li>
-  </ul>
+  <div class="kicker">The full course</div>
+  <h2 id="unlock-h">From Ax = b to PCA, by running it</h2>
+  <p class="sub">Lessons 1 to 3 are free. Finish all eight and you will be able to:</p>
+  <ul class="perks outcomes-list">{"".join(f"<li>{o}.</li>" for o in COURSE_OUTCOMES)}</ul>
+  <p class="incl"><b>You get:</b> all 8 lessons with Python labs · every worked example and solution · 5 extra problems per lesson · answers to your questions · every future update.</p>
   <div class="price"><b>$20</b> once · lifetime access</div>
   <a class="btn primary go" href="{CHECKOUT}" target="_blank" rel="noopener">Continue to checkout →</a>
   <p class="login">Already a member? <a href="{LOGIN}" target="_blank" rel="noopener">Log in to the course</a></p>
@@ -250,13 +259,16 @@ UNLOCK_DIALOG = f"""<dialog class="unlock" id="unlock" aria-labelledby="unlock-h
 """
 
 
-def lock_panel(what, items):
+def lock_panel(what, items, lesson=None):
     li = "".join(f"<li>{x}</li>" for x in items)
+    hook = (f'<p class="hook">Finish lesson {lesson["n"]} and you will be able to: '
+            f'<b>{lesson["outcomes"][0][0].lower() + lesson["outcomes"][0][1:]}.</b></p>') if lesson else ""
     return f"""<section class="locked" aria-label="Members only">
       <div class="lock-ic" aria-hidden="true">🔒</div>
-      <h2>{'Keep reading with a membership' if what == 'slide' else f'The rest of this {what} is for members'}</h2>
+      <h2>{'Keep reading with the full course' if what == 'slide' else f'The rest of this {what} is in the full course'}</h2>
+      {hook}<p class="small" style="margin:0 0 6px">Still locked here:</p>
       <ul>{li}</ul>
-      <button class="btn primary" type="button" data-unlock>Unlock lessons 4 to 8</button>
+      <button class="btn primary" type="button" data-unlock>Get the full course</button>
       <p class="small">$20 once, lifetime access. Lessons 1 to 3 stay free.</p>
     </section>"""
 
@@ -557,6 +569,7 @@ def lesson_page(lesson, slides, practice=None):
   <section class="hero">
     <div class="kicker">Chapter {lesson['ch']} · Lesson {lesson['n']} · {e(lesson['sections'])}{' · Members' if lock else ''}</div>
     <h1>{e(lesson['title'])}</h1>
+    <div class="outcomes"><b>By the end of this lesson you can</b><ul>{"".join(f"<li>{e(o)}</li>" for o in lesson["outcomes"])}</ul></div>
     <p>{e(lesson['summary'])} {len(slides)} short slides, then worked examples and problems. Each slide has an everyday picture, a worked example and Python you can run right on the page.</p>
     {'<p class="members-note">Members lesson: most of every slide is free to read, with its Python lab. Members get the full text, every worked example, the problems with solutions and the practice set.</p>' if lock else ''}
     <div class="cta"><a class="btn primary" href="{slides[0]['slug']}/">Start the lesson →</a>{'<button class="btn" type="button" data-unlock>Unlock lessons 4 to 8</button>' if lock else ''}</div>
@@ -594,8 +607,10 @@ def home_page(lessons_built):
   <section class="hero">
     <div class="kicker">Steppeschool · interactive course · lessons 1 to 3 free</div>
     <h1>Linear algebra you can run.</h1>
+    <p class="promise">Eight short lessons. At the end you compress images and run PCA with code you understand line by line.</p>
+    <div class="cta"><a class="btn primary" href="{first[0]['path']}/{first[1][0]['slug']}/">Start lesson 1 →</a><a class="btn" href="#lessons">See all lessons</a><button class="btn" type="button" data-unlock>Full course: $20, lifetime</button></div>
+    <div class="outcomes"><b>After the course you can</b><ul>{"".join(f"<li>{e(o)}</li>" for o in COURSE_OUTCOMES)}</ul></div>
     <p>Short visual lessons. Read a slide, change the Python underneath, press Run and watch the plane move. The order follows Gilbert Strang's <i>Introduction to Linear Algebra</i>, and the examples come from robotics and engineering. Eight lessons take you from adding two arrows all the way to eigenvalues, the SVD and PCA. Lessons 1 to 3 are free; lessons 4 to 8 are for members.</p>
-    <div class="cta"><a class="btn primary" href="{first[0]['path']}/{first[1][0]['slug']}/">Start lesson 1 →</a><a class="btn" href="#lessons">See all lessons</a><button class="btn" type="button" data-unlock>Full course: $20 once</button></div>
   </section>
   <h2 class="section-title" id="lessons">Lessons</h2>
   {cards}
@@ -677,7 +692,7 @@ def public_slide(lesson, slides, i, next_lesson, practice):
              ([plural(probs, "practice problem") + " with step-by-step solutions"] if probs else []) +
              ["The lesson's practice set and five extra members-only problems"])
     fade = (f'<div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet>{scramble(hidden, s["slug"])}</div>'
-            f'{lock_panel("slide", items)}</div>')
+            f'{lock_panel("slide", items, lesson)}</div>')
     s["prose"] = shown + "\n" + fade
     stubs = "".join(f'<button class="locked-stub" type="button" data-unlock><span>🔒</span><b>{e(re.sub("<[^>]+>", "", t))}</b><em>Members</em></button>'
                     for t in re.findall(r"<h3>(.*?)</h3>", "".join(exs[1:])))
@@ -696,7 +711,7 @@ def practice_teaser(lesson, pr, page):
     items = [plural(count(pr.get("examples"), "example"), "worked example") + " covering the whole lesson",
              plural(count(pr.get("problems"), "problem"), "problem") + " with full solutions",
              "A Python sandbox to check your answers"]
-    return teaser(page, '<h2 class="practice-h">Worked examples</h2>', lock_panel("practice set", items))
+    return teaser(page, '<h2 class="practice-h">Worked examples</h2>', lock_panel("practice set", items, lesson))
 
 
 def write_embed(lesson, slug, page):
