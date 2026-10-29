@@ -11,12 +11,15 @@
 <meta property="og:title" content="Eigenvalues and Eigenvectors Practice Problems">
 <meta property="og:description" content="Worked examples and practice problems with hidden solutions: eigenvalues, eigenvectors, diagonalization, powers, steady states, positive definite matrices.">
 <meta property="og:url" content="https://linearalgebra.steppeschool.com/eigenvalues-and-eigenvectors/practice/">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://linearalgebra.steppeschool.com/assets/cover.jpg">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="720">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="../../assets/lesson.css">
-<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "Eigenvalues and Eigenvectors Practice Problems", "description": "Worked examples and practice problems with hidden solutions: eigenvalues, eigenvectors, diagonalization, powers, steady states, positive definite matrices.", "url": "https://linearalgebra.steppeschool.com/eigenvalues-and-eigenvectors/practice/", "inLanguage": "en", "learningResourceType": "Practice problems", "educationalLevel": "Beginner", "isAccessibleForFree": true, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 7: Eigenvalues and eigenvectors", "item": "https://linearalgebra.steppeschool.com/eigenvalues-and-eigenvectors/"}, {"@type": "ListItem", "position": 3, "name": "Examples and problems", "item": "https://linearalgebra.steppeschool.com/eigenvalues-and-eigenvectors/practice/"}]}]</script>
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "Eigenvalues and Eigenvectors Practice Problems", "description": "Worked examples and practice problems with hidden solutions: eigenvalues, eigenvectors, diagonalization, powers, steady states, positive definite matrices.", "url": "https://linearalgebra.steppeschool.com/eigenvalues-and-eigenvectors/practice/", "inLanguage": "en", "learningResourceType": "Practice problems", "educationalLevel": "Beginner", "isAccessibleForFree": false, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 7: Eigenvalues and eigenvectors", "item": "https://linearalgebra.steppeschool.com/eigenvalues-and-eigenvectors/"}, {"@type": "ListItem", "position": 3, "name": "Examples and problems", "item": "https://linearalgebra.steppeschool.com/eigenvalues-and-eigenvectors/practice/"}]}]</script>
 </head>
 <body>
 <header class="top">
@@ -29,95 +32,14 @@
     <div class="kicker">Lesson 7 · Examples and problems</div>
     <h1>Practice: Eigenvalues and eigenvectors</h1>
     <p class="lead">Three worked examples, then five problems. np.linalg.eig(A) (for 2 by 2 matrices with real eigenvalues, and symmetric matrices of any size) and eigpic(A, v) in the lab will check your answers. eig scales each eigenvector to length 1, so (1, 1) shows up as (0.707, 0.707); any multiple is equally right.</p>
-    <h2 class="practice-h">Worked examples</h2>
-    <div class="examples">
-<section class="example"><h3>Example 1 · Eigenvalues of a triangular 3 by 3</h3>
-<p>A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>0</span><span>0</span><span>3</span><span>0</span><span>0</span><span>0</span><span>5</span></span>.</p>
-<div class="worked"><div class="row">Triangular: det(A − λI) = (1 − λ)(3 − λ)(5 − λ), so λ = 1, 3, 5</div><div class="row">λ = 3: A − 3I = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>−2</span><span>2</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>2</span></span> gives x = (1, 1, 0)</div><div class="row">λ = 1: x = (1, 0, 0). &nbsp; λ = 5: x = (0, 0, 1)</div></div>
-</section>
-<section class="example"><h3>Example 2 · A power by eigenvectors</h3>
-<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>2</span></span>, u₀ = (3, 1). Find A⁵u₀.</p>
-<div class="worked"><div class="row">Split: (3, 1) = 2·(1, 1) + 1·(1, −1)</div><div class="row">A⁵u₀ = 2·3⁵(1, 1) + 1·1⁵(1, −1) = 486(1, 1) + (1, −1) = (487, 485)</div></div>
-</section>
-<section class="example"><h3>Example 3 · A steady state</h3>
-<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0.6</span><span>0.4</span><span>0.4</span><span>0.6</span></span>: columns add to 1.</p>
-<div class="worked"><div class="row">λ = 1 with (1, 1), &nbsp; λ = 0.2 with (1, −1)</div><div class="row">Steady state (½, ½): both cities lose the same share each step, so they end up equal</div></div>
-</section>
-    </div>
-    <h2 class="practice-h">Problems</h2>
-    <div class="problems">
-<div class="problem"><span class="pnum">1</span><div class="pbody">
-<p>Find the eigenvalues and eigenvectors of <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>1</span><span>0</span><span>3</span></span>. Can it be diagonalized?</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>λ = 3 twice. A − 3I = [0 1; 0 0] has null space only along (1, 0). One eigenvector line, so no: not diagonalizable.</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">2</span><div class="pbody">
-<p>Find the eigenvalues of <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>-2</span><span>-3</span></span>. Is du/dt = Au stable?</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>Trace −3, det 2: λ² + 3λ + 2 = (λ + 1)(λ + 2), so λ = −1, −2. Both negative: every solution decays like e^(−t) and e^(−2t). Stable.</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">3</span><div class="pbody">
-<p>The Fibonacci rule F_(k+2) = F_(k+1) + F_k is u_(k+1) = Au_k with u_k = (F_(k+1), F_k) and A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>0</span></span>. Find its eigenvalues.</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>λ² − λ − 1 = 0, so λ = (1 ± √5)/2 ≈ 1.618 and −0.618. The first grows; it is the golden ratio, and F_(k+1)/F_k approaches it.</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">4</span><div class="pbody">
-<p>Diagonalize A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>2</span></span> with Q orthogonal.</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>λ = 3 with (1, 1)/√2 and λ = 1 with (1, −1)/√2. Q = (1/√2)[1 1; 1 −1], Λ = diag(3, 1), A = QΛQᵀ.</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">5</span><div class="pbody">
-<p>Is <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>-1</span><span>0</span><span>-1</span><span>2</span><span>-1</span><span>0</span><span>-1</span><span>2</span></span> positive definite?</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>Yes. Pivots 2, 3/2, 4/3 are all positive (lesson 6). The eigenvalues are 2 − √2, 2, 2 + √2, all positive.</p>
-</div></details>
-</div></div>
-    </div>
-    <div class="signup">
-      <p><b>Want more problems?</b> More practice sets are on the way. Get a free Steppeschool account and we'll tell you when they're out.</p>
-      <a class="btn primary" href="https://www.steppeschool.com/offers/JwLxrqg8/checkout">Get a free account</a>
-    </div>
+    <section class="locked" aria-label="Members only">
+      <div class="lock-ic" aria-hidden="true">🔒</div>
+      <h2>The rest of this practice set is for members</h2>
+      <ul><li>3 worked examples covering the whole lesson</li><li>5 problems with full solutions</li><li>A Python sandbox to check your answers</li></ul>
+      <button class="btn primary" type="button" data-unlock>Unlock lessons 4 to 8</button>
+      <p class="small">$15 / month, cancel any time. Lessons 1 to 3 stay free.</p>
+    </section>
   </article>
-
-  <section class="labsec" aria-label="Sandbox">
-    <h2 class="practice-h" style="margin:0">Sandbox</h2>
-    <div class="lab">
-      <div class="editor-card">
-        <div class="bar">
-          <span class="file">sandbox.py</span>
-          <span class="status" id="pystatus">Loading Python…</span>
-          <button class="btn" id="reset">Reset</button>
-          <button class="btn primary" id="run" disabled>Run ▸</button>
-        </div>
-        <div class="editor">
-          <div class="gutter" id="gutter">1</div>
-          <div class="code" id="codewrap">
-            <pre id="hl" aria-hidden="true"></pre>
-            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
-
-# Sandbox: check your answers here.
-A = np.array([[2., 1.],
-              [1., 2.]])
-lam, X = np.linalg.eig(A)
-print(&quot;eigenvalues:&quot;, lam)
-print(&quot;eigenvectors (columns):&quot;)
-print(X)
-eigpic(A, np.array([1., 1.]))</textarea>
-          </div>
-        </div>
-        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
-        <pre class="out" id="out"><span class="sys">A sandbox: check your answers here. Ctrl+Enter runs.</span></pre>
-      </div>
-      <figure class="figure">
-        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
-        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
-      </figure>
-    </div>
-  </section>
 
   <div class="after">
     <div class="nav">
@@ -131,10 +53,23 @@ eigpic(A, np.array([1., 1.]))</textarea>
   Follows the order and notation of Gilbert Strang, <i>Introduction to Linear Algebra</i>, 5th edition (2016); § numbers refer to that book.
   Explanations, examples and code are original. Made by <a href="https://www.steppeschool.com">Steppeschool</a>.
 </footer>
+<dialog class="unlock" id="unlock" aria-labelledby="unlock-h">
+  <form method="dialog"><button class="x" aria-label="Close">×</button></form>
+  <div class="kicker">Members</div>
+  <h2 id="unlock-h">Unlock the whole course</h2>
+  <p class="sub">Lessons 1 to 3 are free. Members get all eight lessons, through eigenvalues and the SVD.</p>
+  <ul class="perks">
+    <li><b>Lessons 4 to 8 in full:</b> the four subspaces, least squares, determinants, eigenvalues, the SVD and PCA.</li>
+    <li><b>Every slide with its Python lab</b>, exercise, worked examples and problems with full solutions.</li>
+    <li><b>Five extra members-only problems per lesson</b>, each with a worked solution.</li>
+    <li><b>Ask questions under any lesson.</b> I usually reply within a few hours.</li>
+    <li><b>Plus every Steppeschool course:</b> STM32, motor control, a quadcopter flight controller, a balancing robot, IMU filters, CAN bus, bootloaders and KiCad.</li>
+  </ul>
+  <div class="price"><b>$15</b> / month · cancel any time</div>
+  <a class="btn primary go" href="https://www.steppeschool.com/offers/Votyr5BH/checkout" target="_blank" rel="noopener">Continue to checkout →</a>
+  <p class="login">Already a member? <a href="https://www.steppeschool.com/login" target="_blank" rel="noopener">Log in to the course</a></p>
+</dialog>
 
-<script>window.SLIDE = {"slug": "practice", "lesson": "lesson-7", "assets": "../../assets/", "preview": {"kind": "transform", "M": [[1, 0], [0, 1]]}, "check": "false"};</script>
-<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
-<script src="../../assets/lab.js" defer></script>
 <script src="../../assets/nav.js" defer></script>
 </body>
 </html>

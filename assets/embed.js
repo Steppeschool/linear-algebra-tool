@@ -22,8 +22,20 @@
   addEventListener("resize", widen);
   new ResizeObserver(widen).observe(document.documentElement);
   const load = src => new Promise((ok, fail) => { const s = document.createElement("script"); s.src = src; s.onload = ok; s.onerror = fail; document.body.appendChild(s); return s; });
+  // Members-only lessons are stored sealed (AES-GCM); the key is in the Kajabi lesson body: data-la-key="...".
+  const b64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+  const unseal = async doc => {
+    const box = doc.getElementById("la-sealed");
+    if (!box) return doc;
+    const k = root.getAttribute("data-la-key");
+    if (!k) throw new Error("This lesson needs data-la-key");
+    const { iv, ct } = JSON.parse(box.textContent);
+    const key = await crypto.subtle.importKey("raw", b64(k), "AES-GCM", false, ["decrypt"]);
+    const plain = await crypto.subtle.decrypt({ name: "AES-GCM", iv: b64(iv) }, key, b64(ct));
+    return new DOMParser().parseFromString("<body>" + new TextDecoder().decode(plain) + "</body>", "text/html");
+  };
   fetch(root.getAttribute("data-la-src")).then(r => r.text()).then(async html => {
-    const doc = new DOMParser().parseFromString(html, "text/html");
+    const doc = await unseal(new DOMParser().parseFromString(html, "text/html"));
     const cfg = JSON.parse(doc.getElementById("la-config").textContent);
     cfg.assets = base + "assets/";
     root.innerHTML = doc.body.querySelector("main").outerHTML;

@@ -11,12 +11,15 @@
 <meta property="og:title" content="Principal Component Analysis (PCA) with the SVD, Visually">
 <meta property="og:description" content="PCA finds the direction where data spreads most: center the data, take the first singular vector. Interactive example with noisy robot positions. Strang §7.3.">
 <meta property="og:url" content="https://linearalgebra.steppeschool.com/svd-and-pca/principal-component-analysis/">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://linearalgebra.steppeschool.com/assets/cover.jpg">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="720">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="../../assets/lesson.css">
-<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "Principal Component Analysis (PCA) with the SVD, Visually", "headline": "PCA: the direction where the data spreads most.", "description": "PCA finds the direction where data spreads most: center the data, take the first singular vector. Interactive example with noisy robot positions. Strang §7.3.", "url": "https://linearalgebra.steppeschool.com/svd-and-pca/principal-component-analysis/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": true, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 8: The SVD and PCA", "item": "https://linearalgebra.steppeschool.com/svd-and-pca/"}, {"@type": "ListItem", "position": 3, "name": "Principal Component Analysis (PCA) with the SVD, Visually", "item": "https://linearalgebra.steppeschool.com/svd-and-pca/principal-component-analysis/"}]}]</script>
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "Principal Component Analysis (PCA) with the SVD, Visually", "headline": "PCA: the direction where the data spreads most.", "description": "PCA finds the direction where data spreads most: center the data, take the first singular vector. Interactive example with noisy robot positions. Strang §7.3.", "url": "https://linearalgebra.steppeschool.com/svd-and-pca/principal-component-analysis/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": false, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 8: The SVD and PCA", "item": "https://linearalgebra.steppeschool.com/svd-and-pca/"}, {"@type": "ListItem", "position": 3, "name": "Principal Component Analysis (PCA) with the SVD, Visually", "item": "https://linearalgebra.steppeschool.com/svd-and-pca/principal-component-analysis/"}]}]</script>
 </head>
 <body>
 <header class="top">
@@ -34,140 +37,14 @@
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-8--principal-component-analysis.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 8 · slide 5</small>PCA</span></span></div>
     <div class="key">center: C = data − mean &nbsp;&nbsp; C = UΣVᵀ &nbsp;&nbsp; first principal component = v₁ &nbsp;&nbsp; share = σ₁² / (σ₁² + σ₂² + …)</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Put the measurements as rows of a matrix and subtract the average of each column: the centered matrix C.</li><li>The first principal component is v₁, the first input direction of the SVD of C (also called the first right singular vector): the direction of greatest spread.</li><li>σᵢ² measures the spread along vᵢ; σ₁² / (σ₁² + σ₂² + …) is the share it explains.</li><li>The line through the mean along v₁ minimises the sum of squared <b>perpendicular</b> distances to the points.</li></ol></div>
-    <div class="prose">
-<h3>A robot vacuum along a wall</h3>
-<p>A robot vacuum drives along a straight wall and logs its (x, y) position eight times. The tracker is noisy, so the points scatter a little around the true path. Which direction is the wall?</p>
-<p>Look at the cloud: it is long in one direction and thin across. The long direction is the wall; the thin direction is the noise. PCA finds the long direction from the numbers.</p>
-<h3>Step 1: center the data</h3>
-<p>The average position is (3.94, 2.71). Subtract it from every point. The cloud now sits around the origin, and only its shape matters. Put the centered points as the rows of an 8 by 2 matrix C.</p>
-<h3>Step 2: the SVD of C</h3>
-<p>For a unit direction v, Cv lists how far each point reaches along v, and |Cv|² adds up the squares: the spread along v. Slide 1 says |Cv| is largest for v = v₁, with |Cv₁| = σ₁. So v₁ is the direction of greatest spread: the <b>first principal component</b>.</p>
-<div class="worked"><div class="row">For the robot data: v₁ points at about 29.6°, the second direction v₂ is perpendicular to it</div><div class="row">σ₁² / (σ₁² + σ₂²) ≈ 0.992: the wall direction explains 99.2% of the spread</div></div>
-<h3>Not the same as least squares</h3>
-<p>Lesson 5 fitted a line by making the <b>vertical</b> gaps small: it assumed x was exact and only y was noisy. PCA treats x and y the same and makes the <b>perpendicular</b> distances small. Here both coordinates are noisy, so PCA is the right tool. By Pythagoras, each point's squared distance from the average = (part along the line)² + (distance to the line)². The total is fixed, so more spread along the line means smaller distances to it.</p>
-<h3>Where this is used</h3>
-<p>PCA is the first step in most data work: it shrinks hundreds of sensor channels to a few meaningful directions, finds the main axis of a motion sensor's vibration, and compresses data before it is sent over a slow radio link. In 3D, the first two components of a scanned surface give its best-fitting plane.</p>
-    </div>
-    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · Points exactly on a line</h3>
-<p>(0, 0), (1, 2), (2, 4), centered: (−1, −2), (0, 0), (1, 2).</p>
-<div class="worked"><div class="row">C = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−1</span><span>−2</span><span>0</span><span>0</span><span>1</span><span>2</span></span>: rank 1</div><div class="row">v₁ = (1, 2)/√5, σ₂ = 0: 100% of the spread along the line</div></div>
-</section>
-<section class="example"><h3>Example 2 · A round cloud</h3>
-<p>Points (1, 0), (−1, 0), (0, 1), (0, −1): already centered.</p>
-<div class="worked"><div class="row">CᵀC = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>0</span><span>0</span><span>2</span></span>: σ₁ = σ₂ = √2</div><div class="row">Every direction explains 50%: no preferred direction</div></div>
-</section>
-<section class="example"><h3>Example 3 · Spread along an axis</h3>
-<p>Centered points (−3, 0.1), (3, 0.1), (0, −0.2): the average is (0, 0).</p>
-<p>CᵀC = [18 0; 0 0.06], so v₁ = (1, 0) exactly: the x-direction holds 18/18.06 ≈ 99.7% of the spread.</p>
-</section></div>
-    <details class="more"><summary><span class="pl-icon">✎</span><span class="rv-text"><b>More examples to try</b><span>3 problems with step-by-step solutions. Try each one before you open its solution.</span></span><span class="rv-toggle"><span class="s-show">Show</span><span class="s-hide">Hide</span></span></summary><div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
-<p>Why must the data be centered before taking the SVD?</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>Otherwise v₁ points towards the cloud's position (from the origin to its centre), not along its shape. Centering removes the position.</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">2</span><div class="pbody">
-<p>The singular values of centered data are 10 and 1. What share of the spread does the first component explain?</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>100 / (100 + 1) ≈ 99%.</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">3</span><div class="pbody">
-<p>Three sensors measure nearly the same thing. What do you expect the singular values of the centered data to look like?</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>One large σ₁ and two small ones: the readings move together along one direction, with small independent noise.</p>
-</div></details>
-</div></div></div></details>
+    <section class="locked" aria-label="Members only">
+      <div class="lock-ic" aria-hidden="true">🔒</div>
+      <h2>The rest of this slide is for members</h2>
+      <ul><li>The full explanation, with an everyday picture and where it shows up in engineering</li><li>3 worked examples with real numbers</li><li>3 practice problems with step-by-step solutions</li><li>A Python lab you edit and run in the browser, with an exercise that checks your answer</li></ul>
+      <button class="btn primary" type="button" data-unlock>Unlock lessons 4 to 8</button>
+      <p class="small">$15 / month, cancel any time. Lessons 1 to 3 stay free.</p>
+    </section>
   </article>
-  <details class="review">
-    <summary><span class="pl-icon">✎</span><span class="rv-text"><b>Lesson review</b><span>3 worked examples and 5 mixed problems with solutions</span></span><span class="rv-toggle"><span class="s-show">Open</span><span class="s-hide">Close</span></span></summary>
-    <div class="review-body">
-      <h2 class="practice-h">Worked examples</h2>
-      <div class="examples"><section class="example"><h3>Example 1 · SVD of a tall matrix</h3>
-<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>1</span><span>1</span><span>0</span><span>1</span></span> (3 by 2).</p>
-<div class="worked"><div class="row">AᵀA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>2</span></span>: λ = 3 with (1, 1)/√2, &nbsp; λ = 1 with (1, −1)/√2</div><div class="row">σ₁ = √3, σ₂ = 1</div><div class="row">u₁ = Av₁/σ₁ = (1, 2, 1)/√6, &nbsp; u₂ = Av₂/σ₂ = (1, 0, −1)/√2 (perpendicular ✓)</div></div>
-</section>
-<section class="example"><h3>Example 2 · A rank-one matrix</h3>
-<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>4</span><span>3</span><span>6</span></span> = (1, 2, 3) times the row (1, 2).</p>
-<div class="worked"><div class="row">One piece: σ₁ = |(1, 2, 3)| · |(1, 2)| = √14 · √5 = √70 ≈ 8.37, &nbsp; σ₂ = 0</div><div class="row">u₁ = (1, 2, 3)/√14, &nbsp; v₁ = (1, 2)/√5</div></div>
-</section>
-<section class="example"><h3>Example 3 · Pseudoinverse of a tall matrix</h3>
-<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>0</span><span>0</span><span>1</span></span>, b = (1, 2, 3).</p>
-<div class="worked"><div class="row">Both σ's are 1 and A⁺ = Aᵀ here: A⁺ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>0</span><span>0</span><span>1</span></span>, &nbsp; x⁺ = (1, 3)</div><div class="row">The middle equation 0 = 2 cannot be met; x⁺ satisfies the other two exactly</div></div>
-</section></div>
-      <h2 class="practice-h">Problems</h2>
-      <div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
-<p>Find the singular values of <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>2</span></span>.</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>It is symmetric with eigenvalues 3 and 1, both positive, so σ₁ = 3 and σ₂ = 1.</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">2</span><div class="pbody">
-<p>Find the singular values of <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>4</span><span>0</span><span>3</span><span>-5</span></span>.</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>AᵀA = [25 −15; −15 25]: trace 50, det 625 − 225 = 400. λ² − 50λ + 400 = (λ − 40)(λ − 10). σ₁ = √40 ≈ 6.32, σ₂ = √10 ≈ 3.16. Check: σ₁σ₂ = 20 = |det A| ✓</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">3</span><div class="pbody">
-<p>Write <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>3</span><span>1</span><span>1</span></span> as one piece σuvᵀ with unit vectors.</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>It is (3, 1) times the row (1, 1). σ = |(3, 1)| · |(1, 1)| = √10 · √2 = √20, u = (3, 1)/√10, v = (1, 1)/√2.</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">4</span><div class="pbody">
-<p>A 200 by 300 image has singular values that drop below 1% of σ₁ after the first 30. How many numbers does the rank-30 copy store?</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>30 · (200 + 300 + 1) = 15,030, compared with 60,000 for the full image: a quarter.</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">5</span><div class="pbody">
-<p>Centered data has singular values 6, 2, 1. What share of the spread do the first two principal components explain?</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>Squares 36, 4, 1, total 41. (36 + 4)/41 ≈ 97.6%.</p>
-</div></details>
-</div></div></div>
-    </div>
-  </details>
-
-  <section class="labsec" aria-label="Lab">
-    <div class="exercise" id="exercise">
-      <span class="tag">Exercise</span>
-      <span class="task">Turn the line until it keeps the largest share of the spread (the first principal component).</span>
-      <span class="hint" id="hint">Edit the code and press Run.</span>
-    </div>
-    <div class="lab">
-      <div class="editor-card">
-        <div class="bar">
-          <span class="file">slide_5.py</span>
-          <span class="status" id="pystatus">Loading Python…</span>
-          <button class="btn" id="reset">Reset</button>
-          <button class="btn primary" id="run" disabled>Run ▸</button>
-        </div>
-        <div class="editor">
-          <div class="gutter" id="gutter">1</div>
-          <div class="code" id="codewrap">
-            <pre id="hl" aria-hidden="true"></pre>
-            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
-
-P = np.array([[1., 1.2], [2., 1.6], [3., 2.5], [4., 2.6],
-              [5., 3.4], [6., 3.8], [7., 4.6], [3.5, 2.0]])   # noisy (x, y) positions
-
-theta = 0.                      # your turn: drag the slider, or compute it:
-                                # mean = np.array([np.mean(P[:, 0]), np.mean(P[:, 1])])
-                                # U, s, Vt = np.linalg.svd(P - mean)
-                                # theta = np.degrees(np.arctan2(Vt[0][1], Vt[0][0]))
-pcapic(P, theta)</textarea>
-          </div>
-        </div>
-        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
-        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
-      </div>
-      <figure class="figure">
-        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
-        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
-      </figure>
-    </div>
-  </section>
 
   <div class="after">
     <div class="nav">
@@ -181,10 +58,23 @@ pcapic(P, theta)</textarea>
   Follows the order and notation of Gilbert Strang, <i>Introduction to Linear Algebra</i>, 5th edition (2016); § numbers refer to that book.
   Explanations, examples and code are original. Made by <a href="https://www.steppeschool.com">Steppeschool</a>.
 </footer>
+<dialog class="unlock" id="unlock" aria-labelledby="unlock-h">
+  <form method="dialog"><button class="x" aria-label="Close">×</button></form>
+  <div class="kicker">Members</div>
+  <h2 id="unlock-h">Unlock the whole course</h2>
+  <p class="sub">Lessons 1 to 3 are free. Members get all eight lessons, through eigenvalues and the SVD.</p>
+  <ul class="perks">
+    <li><b>Lessons 4 to 8 in full:</b> the four subspaces, least squares, determinants, eigenvalues, the SVD and PCA.</li>
+    <li><b>Every slide with its Python lab</b>, exercise, worked examples and problems with full solutions.</li>
+    <li><b>Five extra members-only problems per lesson</b>, each with a worked solution.</li>
+    <li><b>Ask questions under any lesson.</b> I usually reply within a few hours.</li>
+    <li><b>Plus every Steppeschool course:</b> STM32, motor control, a quadcopter flight controller, a balancing robot, IMU filters, CAN bus, bootloaders and KiCad.</li>
+  </ul>
+  <div class="price"><b>$15</b> / month · cancel any time</div>
+  <a class="btn primary go" href="https://www.steppeschool.com/offers/Votyr5BH/checkout" target="_blank" rel="noopener">Continue to checkout →</a>
+  <p class="login">Already a member? <a href="https://www.steppeschool.com/login" target="_blank" rel="noopener">Log in to the course</a></p>
+</dialog>
 
-<script>window.SLIDE = {"slug": "principal-component-analysis", "lesson": "lesson-8", "assets": "../../assets/", "preview": {"kind": "pca", "P": [[1, 1.2], [2, 1.6], [3, 2.5], [4, 2.6], [5, 3.4], [6, 3.8], [7, 4.6], [3.5, 2.0]], "th": 0}, "check": "isPCA(V) && V.P.length === 8 && (S => Math.abs(S.frac - S.best) < 1e-3)(pcaStats(V.P, V.th))"};</script>
-<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
-<script src="../../assets/lab.js" defer></script>
 <script src="../../assets/nav.js" defer></script>
 </body>
 </html>

@@ -361,3 +361,28 @@ a.card.pic:hover .tlabel, a.card.pic:focus-visible .tlabel{opacity:0}
 .peek{gap:12px;padding:20px 22px}
 .peek-t{font-family:var(--f-display);font-weight:700;font-size:20px;line-height:1.25;letter-spacing:-.01em}
 .peek-go{font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#ffb39a}
+
+/* members-only: lock panel, badges and the unlock dialog */
+.locked{margin-top:22px;border:1px dashed var(--accent);background:var(--accent-soft);border-radius:16px;padding:24px 26px;text-align:left}
+.locked .lock-ic{font-size:26px;line-height:1}
+.locked h2{font-family:var(--f-display);font-size:22px;letter-spacing:-.01em;margin:8px 0 10px}
+.locked ul{margin:0 0 18px;padding-left:20px}
+.locked li{margin:4px 0}
+.locked .small,.unlock .login{font-size:13.5px;color:var(--muted);margin:10px 0 0}
+.unlock-teaser{background:var(--accent-soft);border-radius:14px;padding:20px 22px;margin-top:22px;display:flex;align-items:center;justify-content:space-between;gap:12px 20px;flex-wrap:wrap}
+.unlock-teaser p{margin:0;max-width:60ch}
+.card.pic{position:relative}
+.lockbadge{position:absolute;z-index:3;top:10px;right:10px;font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:4px 8px;border-radius:999px;background:rgba(14,18,25,.78);color:#fff;pointer-events:none}
+.lockbadge.free{background:var(--ok);color:#fff}
+.members-note{color:var(--muted);font-size:15px}
+.cta .btn+.btn{margin-left:10px}
+dialog.unlock{max-width:540px;width:calc(100% - 32px);border:0;border-radius:18px;padding:28px 28px 22px;background:var(--surface);color:var(--ink);box-shadow:0 24px 80px rgba(0,0,0,.35)}
+dialog.unlock::backdrop{background:rgba(10,14,22,.55)}
+dialog.unlock .x{position:absolute;top:10px;right:12px;border:0;background:none;font-size:26px;line-height:1;color:var(--muted);cursor:pointer;padding:4px 8px}
+dialog.unlock h2{font-family:var(--f-display);font-size:28px;letter-spacing:-.015em;margin:4px 0 6px}
+dialog.unlock .sub{color:var(--muted);margin:0 0 14px}
+dialog.unlock .perks{margin:0 0 16px;padding-left:20px}
+dialog.unlock .perks li{margin:6px 0}
+dialog.unlock .price{font-size:15px;margin:0 0 12px}
+dialog.unlock .price b{font-family:var(--f-display);font-size:26px}
+dialog.unlock .go{display:block;text-align:center;padding:12px 16px;font-size:16px}

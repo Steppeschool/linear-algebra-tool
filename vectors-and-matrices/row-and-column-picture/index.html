@@ -11,7 +11,10 @@
 <meta property="og:title" content="Row Picture vs Column Picture of Ax = b | Linear Algebra, Live">
 <meta property="og:description" content="Two ways to see a linear system: lines crossing, or columns combining to make b. Interactive plot and Python in the browser. Strang §2.1.">
 <meta property="og:url" content="https://linearalgebra.steppeschool.com/vectors-and-matrices/row-and-column-picture/">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://linearalgebra.steppeschool.com/assets/cover.jpg">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="720">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
@@ -197,6 +200,22 @@ rowpic(A, b)            # row picture: two lines meet at (x, y)
   Follows the order and notation of Gilbert Strang, <i>Introduction to Linear Algebra</i>, 5th edition (2016); § numbers refer to that book.
   Explanations, examples and code are original. Made by <a href="https://www.steppeschool.com">Steppeschool</a>.
 </footer>
+<dialog class="unlock" id="unlock" aria-labelledby="unlock-h">
+  <form method="dialog"><button class="x" aria-label="Close">×</button></form>
+  <div class="kicker">Members</div>
+  <h2 id="unlock-h">Unlock the whole course</h2>
+  <p class="sub">Lessons 1 to 3 are free. Members get all eight lessons, through eigenvalues and the SVD.</p>
+  <ul class="perks">
+    <li><b>Lessons 4 to 8 in full:</b> the four subspaces, least squares, determinants, eigenvalues, the SVD and PCA.</li>
+    <li><b>Every slide with its Python lab</b>, exercise, worked examples and problems with full solutions.</li>
+    <li><b>Five extra members-only problems per lesson</b>, each with a worked solution.</li>
+    <li><b>Ask questions under any lesson.</b> I usually reply within a few hours.</li>
+    <li><b>Plus every Steppeschool course:</b> STM32, motor control, a quadcopter flight controller, a balancing robot, IMU filters, CAN bus, bootloaders and KiCad.</li>
+  </ul>
+  <div class="price"><b>$15</b> / month · cancel any time</div>
+  <a class="btn primary go" href="https://www.steppeschool.com/offers/Votyr5BH/checkout" target="_blank" rel="noopener">Continue to checkout →</a>
+  <p class="login">Already a member? <a href="https://www.steppeschool.com/login" target="_blank" rel="noopener">Log in to the course</a></p>
+</dialog>
 
 <script>window.SLIDE = {"slug": "row-and-column-picture", "lesson": "lesson-1", "assets": "../../assets/", "preview": {"kind": "rows", "A": [[1, -2], [3, 2]], "b": [1, 11]}, "check": "isC(V) && eqM(V.A, [[1,-2],[3,2]]) && near(Ax(V)[0], 1) && near(Ax(V)[1], 11)"};</script>
 <script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>

@@ -11,12 +11,15 @@
 <meta property="og:title" content="Symmetric Matrices: Real Eigenvalues and Orthogonal Eigenvectors">
 <meta property="og:description" content="A symmetric matrix has real eigenvalues and perpendicular eigenvectors, so A = QΛQᵀ with Q orthogonal: the spectral theorem. Examples and Python. Strang §6.4.">
 <meta property="og:url" content="https://linearalgebra.steppeschool.com/eigenvalues-and-eigenvectors/symmetric-matrices/">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://linearalgebra.steppeschool.com/assets/cover.jpg">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="720">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="../../assets/lesson.css">
-<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "Symmetric Matrices: Real Eigenvalues and Orthogonal Eigenvectors", "headline": "Symmetric matrices: perpendicular eigenvectors.", "description": "A symmetric matrix has real eigenvalues and perpendicular eigenvectors, so A = QΛQᵀ with Q orthogonal: the spectral theorem. Examples and Python. Strang §6.4.", "url": "https://linearalgebra.steppeschool.com/eigenvalues-and-eigenvectors/symmetric-matrices/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": true, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 7: Eigenvalues and eigenvectors", "item": "https://linearalgebra.steppeschool.com/eigenvalues-and-eigenvectors/"}, {"@type": "ListItem", "position": 3, "name": "Symmetric Matrices: Real Eigenvalues and Orthogonal Eigenvectors", "item": "https://linearalgebra.steppeschool.com/eigenvalues-and-eigenvectors/symmetric-matrices/"}]}]</script>
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "Symmetric Matrices: Real Eigenvalues and Orthogonal Eigenvectors", "headline": "Symmetric matrices: perpendicular eigenvectors.", "description": "A symmetric matrix has real eigenvalues and perpendicular eigenvectors, so A = QΛQᵀ with Q orthogonal: the spectral theorem. Examples and Python. Strang §6.4.", "url": "https://linearalgebra.steppeschool.com/eigenvalues-and-eigenvectors/symmetric-matrices/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": false, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 7: Eigenvalues and eigenvectors", "item": "https://linearalgebra.steppeschool.com/eigenvalues-and-eigenvectors/"}, {"@type": "ListItem", "position": 3, "name": "Symmetric Matrices: Real Eigenvalues and Orthogonal Eigenvectors", "item": "https://linearalgebra.steppeschool.com/eigenvalues-and-eigenvectors/symmetric-matrices/"}]}]</script>
 </head>
 <body>
 <header class="top">
@@ -34,142 +37,14 @@
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-7--symmetric-matrices.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 7 · slide 5</small>Symmetric matrices</span></span></div>
     <div class="key">A = Aᵀ ⇒ A = QΛQᵀ &nbsp;&nbsp; QᵀQ = I</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Every eigenvalue of a symmetric matrix is a real number (never complex, unlike the rotation on slide 1).</li><li>Eigenvectors for different eigenvalues are perpendicular.</li><li>Scaled to length 1, they form the columns of an orthogonal Q (lesson 5): Q⁻¹ = Qᵀ.</li><li>So A = QΛQᵀ. (This result is called the <b>spectral theorem</b>.) Every symmetric matrix is a stretch along perpendicular axes.</li></ol></div>
-    <div class="prose">
-<h3>Pulling a sheet in two perpendicular directions</h3>
-<p>Stretch a sheet of rubber harder east-west than north-south. The two stretch directions are perpendicular, and each is a direction the stretch does not turn. That is what a symmetric matrix always looks like: stretches (or squeezes, or flips) along perpendicular axes, and nothing else.</p>
-<h3>Why the eigenvectors are perpendicular</h3>
-<p>Take Ax = λ₁x and Ay = λ₂y with λ₁ ≠ λ₂. Compute xᵀAy in two ways:</p>
-<div class="worked"><div class="row">xᵀ(Ay) = λ₂ xᵀy</div><div class="row">(Ax)ᵀy = λ₁ xᵀy, &nbsp; and (Ax)ᵀy = xᵀAᵀy = xᵀAy because A = Aᵀ</div><div class="row">So λ₁ xᵀy = λ₂ xᵀy. Since λ₁ ≠ λ₂, xᵀy = 0: x ⟂ y</div></div>
-<h3>A worked example</h3>
-<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>1</span><span>1</span><span>3</span></span>: trace 6, det 8, λ² − 6λ + 8 = (λ − 4)(λ − 2)</div><div class="row">λ = 4 with (1, 1), &nbsp; λ = 2 with (1, −1). &nbsp; (1, 1) · (1, −1) = 0 ✓</div><div class="row">Unit length: q₁ = (1, 1)/√2, &nbsp; q₂ = (1, −1)/√2</div><div class="row">Q = (1/√2)<span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>−1</span></span>, &nbsp; Λ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>4</span><span>0</span><span>0</span><span>2</span></span>, &nbsp; A = QΛQᵀ</div></div>
-<p>Forget the √2 and use Q = [1 1; 1 −1]: then QᵀQ = 2I, not I, and QΛQᵀ comes out as 2A. Length 1 matters. That is the lab exercise.</p>
-<h3>A sum of simple pieces</h3>
-<p>Multiplying out QΛQᵀ gives A = λ₁q₁q₁ᵀ + λ₂q₂q₂ᵀ. Each qqᵀ is a projection onto one axis, because q has length 1 (lesson 5). So A splits x onto the two axes, stretches each piece by its λ, and adds the pieces back. Here A = 4·(projection onto (1, 1)) + 2·(projection onto (1, −1)).</p>
-<h3>Where this is used</h3>
-<p>Covariance matrices of sensor data are symmetric. Their perpendicular eigenvectors are the directions in which the data varies most and least. That is principal component analysis (PCA), which comes with the SVD in the next lesson. The inertia matrix of a drone is symmetric too: its eigenvectors are the principal axes from slide 1.</p>
-    </div>
-    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · A diagonal matrix</h3>
-<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>5</span><span>0</span><span>0</span><span>1</span></span>: Q = I, Λ = A. The axes are already perpendicular eigenvectors.</p>
-</section>
-<section class="example"><h3>Example 2 · Negative eigenvalues are fine</h3>
-<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>3</span><span>3</span><span>2</span></span>: λ = 5 with (1, 1), λ = −1 with (1, −1).</p>
-<div class="worked"><div class="row">Still perpendicular: (1, 1) · (1, −1) = 0</div><div class="row">A stretches by 5 along (1, 1) and flips along (1, −1)</div></div>
-</section>
-<section class="example"><h3>Example 3 · A non-symmetric contrast</h3>
-<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>4</span><span>1</span><span>2</span><span>3</span></span> (slide 2) has eigenvectors (1, 1) and (1, −2).</p>
-<div class="worked"><div class="row">(1, 1) · (1, −2) = −1 ≠ 0</div></div>
-<p>Not perpendicular: without symmetry there is no such guarantee.</p>
-</section></div>
-    <details class="more"><summary><span class="pl-icon">✎</span><span class="rv-text"><b>More examples to try</b><span>3 problems with step-by-step solutions. Try each one before you open its solution.</span></span><span class="rv-toggle"><span class="s-show">Show</span><span class="s-hide">Hide</span></span></summary><div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
-<p>Find Q and Λ for <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>5</span><span>2</span><span>2</span><span>2</span></span> (eigenvalues 6 and 1).</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>λ = 6: A − 6I = [−1 2; 2 −4], x = (2, 1). λ = 1: A − I = [4 2; 2 1], x = (1, −2). Perpendicular ✓. Q = (1/√5)[2 1; 1 −2], Λ = diag(6, 1).</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">2</span><div class="pbody">
-<p>Show that AᵀA is always symmetric, so its eigenvectors can be chosen perpendicular.</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>(AᵀA)ᵀ = Aᵀ(Aᵀ)ᵀ = AᵀA. This fact is the starting point of the SVD.</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">3</span><div class="pbody">
-<p>A symmetric 2 by 2 matrix with two different eigenvalues has eigenvector (3, 4). What is the other eigenvector direction?</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>It must be perpendicular: (4, −3) or any multiple.</p>
-</div></details>
-</div></div></div></details>
+    <section class="locked" aria-label="Members only">
+      <div class="lock-ic" aria-hidden="true">🔒</div>
+      <h2>The rest of this slide is for members</h2>
+      <ul><li>The full explanation, with an everyday picture and where it shows up in engineering</li><li>3 worked examples with real numbers</li><li>3 practice problems with step-by-step solutions</li><li>A Python lab you edit and run in the browser, with an exercise that checks your answer</li></ul>
+      <button class="btn primary" type="button" data-unlock>Unlock lessons 4 to 8</button>
+      <p class="small">$15 / month, cancel any time. Lessons 1 to 3 stay free.</p>
+    </section>
   </article>
-  <details class="review">
-    <summary><span class="pl-icon">✎</span><span class="rv-text"><b>Lesson review</b><span>3 worked examples and 5 mixed problems with solutions</span></span><span class="rv-toggle"><span class="s-show">Open</span><span class="s-hide">Close</span></span></summary>
-    <div class="review-body">
-      <h2 class="practice-h">Worked examples</h2>
-      <div class="examples"><section class="example"><h3>Example 1 · Eigenvalues of a triangular 3 by 3</h3>
-<p>A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>0</span><span>0</span><span>3</span><span>0</span><span>0</span><span>0</span><span>5</span></span>.</p>
-<div class="worked"><div class="row">Triangular: det(A − λI) = (1 − λ)(3 − λ)(5 − λ), so λ = 1, 3, 5</div><div class="row">λ = 3: A − 3I = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>−2</span><span>2</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>2</span></span> gives x = (1, 1, 0)</div><div class="row">λ = 1: x = (1, 0, 0). &nbsp; λ = 5: x = (0, 0, 1)</div></div>
-</section>
-<section class="example"><h3>Example 2 · A power by eigenvectors</h3>
-<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>2</span></span>, u₀ = (3, 1). Find A⁵u₀.</p>
-<div class="worked"><div class="row">Split: (3, 1) = 2·(1, 1) + 1·(1, −1)</div><div class="row">A⁵u₀ = 2·3⁵(1, 1) + 1·1⁵(1, −1) = 486(1, 1) + (1, −1) = (487, 485)</div></div>
-</section>
-<section class="example"><h3>Example 3 · A steady state</h3>
-<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0.6</span><span>0.4</span><span>0.4</span><span>0.6</span></span>: columns add to 1.</p>
-<div class="worked"><div class="row">λ = 1 with (1, 1), &nbsp; λ = 0.2 with (1, −1)</div><div class="row">Steady state (½, ½): both cities lose the same share each step, so they end up equal</div></div>
-</section></div>
-      <h2 class="practice-h">Problems</h2>
-      <div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
-<p>Find the eigenvalues and eigenvectors of <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>1</span><span>0</span><span>3</span></span>. Can it be diagonalized?</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>λ = 3 twice. A − 3I = [0 1; 0 0] has null space only along (1, 0). One eigenvector line, so no: not diagonalizable.</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">2</span><div class="pbody">
-<p>Find the eigenvalues of <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>-2</span><span>-3</span></span>. Is du/dt = Au stable?</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>Trace −3, det 2: λ² + 3λ + 2 = (λ + 1)(λ + 2), so λ = −1, −2. Both negative: every solution decays like e^(−t) and e^(−2t). Stable.</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">3</span><div class="pbody">
-<p>The Fibonacci rule F_(k+2) = F_(k+1) + F_k is u_(k+1) = Au_k with u_k = (F_(k+1), F_k) and A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>0</span></span>. Find its eigenvalues.</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>λ² − λ − 1 = 0, so λ = (1 ± √5)/2 ≈ 1.618 and −0.618. The first grows; it is the golden ratio, and F_(k+1)/F_k approaches it.</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">4</span><div class="pbody">
-<p>Diagonalize A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>2</span></span> with Q orthogonal.</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>λ = 3 with (1, 1)/√2 and λ = 1 with (1, −1)/√2. Q = (1/√2)[1 1; 1 −1], Λ = diag(3, 1), A = QΛQᵀ.</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">5</span><div class="pbody">
-<p>Is <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>-1</span><span>0</span><span>-1</span><span>2</span><span>-1</span><span>0</span><span>-1</span><span>2</span></span> positive definite?</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>Yes. Pivots 2, 3/2, 4/3 are all positive (lesson 6). The eigenvalues are 2 − √2, 2, 2 + √2, all positive.</p>
-</div></details>
-</div></div></div>
-    </div>
-  </details>
-
-  <section class="labsec" aria-label="Lab">
-    <div class="exercise" id="exercise">
-      <span class="tag">Exercise</span>
-      <span class="task">Make the columns of Q unit vectors, so that Q Lam Qᵀ gives back A.</span>
-      <span class="hint" id="hint">Edit the code and press Run.</span>
-    </div>
-    <div class="lab">
-      <div class="editor-card">
-        <div class="bar">
-          <span class="file">slide_5.py</span>
-          <span class="status" id="pystatus">Loading Python…</span>
-          <button class="btn" id="reset">Reset</button>
-          <button class="btn primary" id="run" disabled>Run ▸</button>
-        </div>
-        <div class="editor">
-          <div class="gutter" id="gutter">1</div>
-          <div class="code" id="codewrap">
-            <pre id="hl" aria-hidden="true"></pre>
-            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
-
-A = np.array([[3., 1.],
-              [1., 3.]])
-Q = np.array([[1., 1.],
-              [1., -1.]])        # eigenvectors (1, 1) and (1, -1) as columns
-                                # your turn: divide by their length, sqrt(2)
-Lam = np.array([[4., 0.],
-                [0., 2.]])
-print(&quot;Q.T @ Q =&quot;)
-print(Q.T @ Q)                  # orthonormal columns give the identity
-table((&quot;A&quot;, A), (&quot;Q&quot;, Q), (&quot;Q Lam Q.T&quot;, Q @ Lam @ Q.T))</textarea>
-          </div>
-        </div>
-        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
-        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
-      </div>
-      <figure class="figure">
-        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
-        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
-      </figure>
-    </div>
-  </section>
 
   <div class="after">
     <div class="nav">
@@ -183,10 +58,23 @@ table((&quot;A&quot;, A), (&quot;Q&quot;, Q), (&quot;Q Lam Q.T&quot;, Q @ Lam @ 
   Follows the order and notation of Gilbert Strang, <i>Introduction to Linear Algebra</i>, 5th edition (2016); § numbers refer to that book.
   Explanations, examples and code are original. Made by <a href="https://www.steppeschool.com">Steppeschool</a>.
 </footer>
+<dialog class="unlock" id="unlock" aria-labelledby="unlock-h">
+  <form method="dialog"><button class="x" aria-label="Close">×</button></form>
+  <div class="kicker">Members</div>
+  <h2 id="unlock-h">Unlock the whole course</h2>
+  <p class="sub">Lessons 1 to 3 are free. Members get all eight lessons, through eigenvalues and the SVD.</p>
+  <ul class="perks">
+    <li><b>Lessons 4 to 8 in full:</b> the four subspaces, least squares, determinants, eigenvalues, the SVD and PCA.</li>
+    <li><b>Every slide with its Python lab</b>, exercise, worked examples and problems with full solutions.</li>
+    <li><b>Five extra members-only problems per lesson</b>, each with a worked solution.</li>
+    <li><b>Ask questions under any lesson.</b> I usually reply within a few hours.</li>
+    <li><b>Plus every Steppeschool course:</b> STM32, motor control, a quadcopter flight controller, a balancing robot, IMU filters, CAN bus, bootloaders and KiCad.</li>
+  </ul>
+  <div class="price"><b>$15</b> / month · cancel any time</div>
+  <a class="btn primary go" href="https://www.steppeschool.com/offers/Votyr5BH/checkout" target="_blank" rel="noopener">Continue to checkout →</a>
+  <p class="login">Already a member? <a href="https://www.steppeschool.com/login" target="_blank" rel="noopener">Log in to the course</a></p>
+</dialog>
 
-<script>window.SLIDE = {"slug": "symmetric-matrices", "lesson": "lesson-7", "assets": "../../assets/", "preview": {"kind": "table", "items": [{"label": "A", "M": [[3, 1], [1, 3]], "piv": []}, {"label": "Q", "M": [[1, 1], [1, -1]], "piv": []}]}, "check": "isTab(V) && item(V, 'Q Lam Q.T') && close(item(V, 'Q Lam Q.T'), [[3, 1], [1, 3]], 1e-6)"};</script>
-<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
-<script src="../../assets/lab.js" defer></script>
 <script src="../../assets/nav.js" defer></script>
 </body>
 </html>

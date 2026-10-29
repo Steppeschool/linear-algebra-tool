@@ -11,12 +11,15 @@
 <meta property="og:title" content="Linear Independence, Basis and Dimension Explained">
 <meta property="og:description" content="Independent vectors, a basis and the dimension of a space, with a toolkit analogy, a 3D example and rank in Python. Strang §3.4.">
 <meta property="og:url" content="https://linearalgebra.steppeschool.com/vector-spaces-and-four-subspaces/independence-basis-dimension/">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://linearalgebra.steppeschool.com/assets/cover.jpg">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="720">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="../../assets/lesson.css">
-<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "Linear Independence, Basis and Dimension Explained", "headline": "A basis: enough vectors, and not one too many.", "description": "Independent vectors, a basis and the dimension of a space, with a toolkit analogy, a 3D example and rank in Python. Strang §3.4.", "url": "https://linearalgebra.steppeschool.com/vector-spaces-and-four-subspaces/independence-basis-dimension/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": true, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 4: The four subspaces", "item": "https://linearalgebra.steppeschool.com/vector-spaces-and-four-subspaces/"}, {"@type": "ListItem", "position": 3, "name": "Linear Independence, Basis and Dimension Explained", "item": "https://linearalgebra.steppeschool.com/vector-spaces-and-four-subspaces/independence-basis-dimension/"}]}]</script>
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "Linear Independence, Basis and Dimension Explained", "headline": "A basis: enough vectors, and not one too many.", "description": "Independent vectors, a basis and the dimension of a space, with a toolkit analogy, a 3D example and rank in Python. Strang §3.4.", "url": "https://linearalgebra.steppeschool.com/vector-spaces-and-four-subspaces/independence-basis-dimension/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": false, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 4: The four subspaces", "item": "https://linearalgebra.steppeschool.com/vector-spaces-and-four-subspaces/"}, {"@type": "ListItem", "position": 3, "name": "Linear Independence, Basis and Dimension Explained", "item": "https://linearalgebra.steppeschool.com/vector-spaces-and-four-subspaces/independence-basis-dimension/"}]}]</script>
 </head>
 <body>
 <header class="top">
@@ -34,155 +37,14 @@
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-4--independence-basis-dimension.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 4 · slide 5</small>Basis and dimension</span></span></div>
     <div class="key">independent + spans the space = basis &nbsp;&nbsp; size of every basis = dimension</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li><b>Independent:</b> the only combination giving 0 is the one with all coefficients 0.</li><li><b>Span:</b> all combinations of the vectors.</li><li><b>Basis:</b> independent vectors that span the space.</li><li><b>Dimension:</b> the number of vectors in any basis. The rank r is the dimension of C(A).</li></ol></div>
-    <div class="prose">
-<h3>Think of a minimal toolkit</h3>
-<p>A good toolkit lets you do every job, and contains no tool that another tool already covers. "Every job can be done" is the vectors <b>spanning</b> the space: every vector in it is some combination of them. "No redundant tool" is the vectors being <b>independent</b>. Both together make a <b>basis</b>.</p>
-<p>The dimension is how many tools that takes. A point on a map needs exactly two numbers, and a drone in the air needs three. That count does not depend on which directions we choose.</p>
-<h3>Two ways to say independent</h3>
-<p>The lead says no vector is a combination of the others. The key ideas say only the all-zero combination gives 0. These mean the same thing. If v₃ = v₁ + v₂, move v₃ across: v₁ + v₂ − v₃ = 0, a combination with nonzero coefficients. In reverse, if some combination with a nonzero coefficient gives 0, solve it for that vector, and it is a combination of the others.</p>
-<h3>Testing for independence</h3>
-<p>Put the vectors in the columns of A. These statements all mean the same thing:</p>
-<ul>
-<li>The only solution of Ax = 0 is x = 0.</li>
-<li>N(A) contains only the zero vector.</li>
-<li>Every column has a pivot, so the rank is r = n, the number of vectors.</li>
-</ul>
-<p>We write ℝⁿ for all vectors with n components: ℝ² is the plane and ℝ³ is 3D space.</p>
-<p>Four vectors in ℝ³ are always dependent. Put them in the columns of a 3 by 4 matrix. Each pivot needs its own row, so there are at most 3 pivots for 4 columns. At least one column is free, and its special solution is a nonzero x with Ax = 0.</p>
-<h3>A worked example</h3>
-<div class="worked">
-<div>v₁ = (1, 0, 1), v₂ = (0, 1, 1), v₃ = (1, 1, 2).</div>
-<div class="row">v₃ = v₁ + v₂, &nbsp;so 1·v₁ + 1·v₂ − 1·v₃ = 0</div>
-<div>The vectors are dependent and the rank is 2. All three lie in one plane, and v₁, v₂ alone form a basis for that plane. Its dimension is 2.</div>
-</div>
-<h3>A basis is not unique</h3>
-<p>(1, 0) and (0, 1) form a basis of the plane, and so do (1, 1) and (1, −1). The vectors differ, but there are always two of them. In general, the pivot columns of A form a basis of its column space, and their number is the rank. Each free column is a combination of the pivot columns (its special solution says how), so the pivot columns alone still reach all of C(A).</p>
-    </div>
-    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · A basis of the plane</h3>
-<p>(1, 0) and (1, 1).</p><div class="worked"><div class="row">Not multiples of each other: independent. Two independent vectors in 2D span the plane</div></div><p>A basis.</p>
-</section>
-<section class="example"><h3>Example 2 · Too many vectors</h3>
-<p>(1, 2), (2, 4) and (0, 1) in the plane.</p><div class="worked"><div class="row">(2, 4) = 2·(1, 2): dependent</div><div class="row">Keep (1, 2) and (0, 1): a basis of the plane</div></div><p>Three vectors in 2D are always dependent.</p>
-</section>
-<section class="example"><h3>Example 3 · Triangular columns</h3>
-<p>The columns of <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>1</span><span>0</span><span>1</span><span>1</span><span>0</span><span>0</span><span>1</span></span>.</p><div class="worked"><div class="row">Upper triangular with nonzero pivots: rank 3</div><div class="row">The columns are a basis for 3D space</div></div>
-</section></div>
-    <details class="more"><summary><span class="pl-icon">✎</span><span class="rv-text"><b>More examples to try</b><span>3 problems with step-by-step solutions. Try each one before you open its solution.</span></span><span class="rv-toggle"><span class="s-show">Show</span><span class="s-hide">Hide</span></span></summary><div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
-<p>Are (1, 1, 0), (0, 1, 1), (1, 0, 1) independent?</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>Yes. Put them in the columns of A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>1</span><span>1</span><span>1</span><span>0</span><span>0</span><span>1</span><span>1</span></span>. Row 2 − row 1 gives (0, 1, −1). Then row 3 − row 2 gives (0, 0, 2). Three pivots 1, 1, 2, so rank 3, no free variables, and only x = 0 solves Ax = 0.</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">2</span><div class="pbody">
-<p>What is the dimension of the plane x + y + z = 0?</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>2. A basis is (−1, 1, 0) and (−1, 0, 1).</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">3</span><div class="pbody">
-<p>Find a basis for C(A), A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>0</span><span>2</span><span>4</span><span>1</span></span>.</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>Pivot columns 1 and 3: (1, 2) and (0, 1). They span all of ℝ², so the rank is 2.</p>
-</div></details>
-</div></div></div></details>
+    <section class="locked" aria-label="Members only">
+      <div class="lock-ic" aria-hidden="true">🔒</div>
+      <h2>The rest of this slide is for members</h2>
+      <ul><li>The full explanation, with an everyday picture and where it shows up in engineering</li><li>3 worked examples with real numbers</li><li>3 practice problems with step-by-step solutions</li><li>A Python lab you edit and run in the browser, with an exercise that checks your answer</li></ul>
+      <button class="btn primary" type="button" data-unlock>Unlock lessons 4 to 8</button>
+      <p class="small">$15 / month, cancel any time. Lessons 1 to 3 stay free.</p>
+    </section>
   </article>
-  <details class="review">
-    <summary><span class="pl-icon">✎</span><span class="rv-text"><b>Lesson review</b><span>3 worked examples and 5 mixed problems with solutions</span></span><span class="rv-toggle"><span class="s-show">Open</span><span class="s-hide">Close</span></span></summary>
-    <div class="review-body">
-      <h2 class="practice-h">Worked examples</h2>
-      <div class="examples"><section class="example"><h3>Example 1 · Is it a subspace?</h3>
-<p>Is the set of all (x, y, z) with x = 2y a subspace of 3D space?</p>
-<div class="worked"><div class="row">Zero: (0, 0, 0) has 0 = 2·0 ✓</div>
-<div class="row">Add: if x₁ = 2y₁ and x₂ = 2y₂, then x₁ + x₂ = 2(y₁ + y₂) ✓</div>
-<div class="row">Scale: cx₁ = 2(cy₁) ✓</div></div>
-<p>Yes. It is a plane through the origin. With x = 2y + 1 it would fail at once: the origin is missing.</p>
-</section>
-<section class="example"><h3>Example 2 · Nullspace and special solutions</h3>
-<p>Find the nullspace of A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>3</span><span>2</span><span>4</span><span>6</span></span>.</p>
-<div class="worked"><div class="row">Row 2 − 2·row 1 = 0, so R = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>3</span><span>0</span><span>0</span><span>0</span></span>. One pivot (column 1), rank 1.</div>
-<div class="row">Free: x₂, x₃. &nbsp; x₂ = 1, x₃ = 0 gives (−2, 1, 0). &nbsp; x₂ = 0, x₃ = 1 gives (−3, 0, 1).</div></div>
-<p>N(A) is all combinations c·(−2, 1, 0) + d·(−3, 0, 1): a plane, dimension n − r = 3 − 1 = 2.</p>
-</section>
-<section class="example"><h3>Example 3 · The complete solution</h3>
-<p>Solve x + 2y + 3z = 6.</p>
-<div class="worked"><div class="row">Particular solution: set the free variables y = z = 0, then x = 6. x_p = (6, 0, 0)</div>
-<div class="row">Nullspace: A = [1 2 3], the first row of Example 2's matrix, with special solutions (−2, 1, 0) and (−3, 0, 1)</div>
-<div class="row">x = (6, 0, 0) + c·(−2, 1, 0) + d·(−3, 0, 1)</div></div>
-<p>Geometrically: a plane parallel to the nullspace, shifted to pass through (6, 0, 0).</p>
-</section></div>
-      <h2 class="practice-h">Problems</h2>
-      <div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
-<p>Which of these are subspaces of the plane? (a) all (x, y) with x = y (b) all (x, y) with x + y = 1 (c) all (x, y) with xy = 0.</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>(a) Yes: a line through the origin.</p><p>(b) No: (0, 0) is not on it.</p><p>(c) No: it is the two axes together, and (1, 0) + (0, 1) = (1, 1) has xy = 1.</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">2</span><div class="pbody">
-<p>Find the nullspace of <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>2</span><span>−2</span></span>.</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>Both rows say x − y = 0. So N(A) is every multiple of (1, 1): a line.</p><p>Check: A(1, 1) = (1 − 1, 2 − 2) = (0, 0) ✓</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">3</span><div class="pbody">
-<p>Find R, the rank and a special solution for A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>1</span><span>2</span><span>4</span><span>3</span><span>3</span><span>6</span><span>4</span></span>.</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>Row 2 − 2·row 1 = (0, 0, 1), row 3 − 3·row 1 = (0, 0, 1), then row 3 − row 2 = 0. Clearing above the pivot: R = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>0</span><span>0</span><span>0</span><span>1</span><span>0</span><span>0</span><span>0</span></span>.</p><p>Pivots in columns 1 and 3, so rank 2. Column 2 is free: x₂ = 1 gives the special solution (−2, 1, 0).</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">4</span><div class="pbody">
-<p>Are (1, 2, 0), (0, 1, 1) and (1, 3, 1) independent?</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>No. (1, 3, 1) = (1, 2, 0) + (0, 1, 1), so 1·v₁ + 1·v₂ − 1·v₃ = 0. The rank is 2 and the three vectors lie in one plane.</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">5</span><div class="pbody">
-<p>A is 3 by 5 with rank 2. Give the dimension of each of the four subspaces.</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>m = 3, n = 5, r = 2.</p><p>Row space r = 2, nullspace n − r = 3, column space r = 2, left nullspace m − r = 1.</p>
-</div></details>
-</div></div></div>
-    </div>
-  </details>
-
-  <section class="labsec" aria-label="Lab">
-    <div class="exercise" id="exercise">
-      <span class="tag">Exercise</span>
-      <span class="task">Change the third column so the three columns are independent (rank 3).</span>
-      <span class="hint" id="hint">Edit the code and press Run.</span>
-    </div>
-    <div class="lab">
-      <div class="editor-card">
-        <div class="bar">
-          <span class="file">slide_5.py</span>
-          <span class="status" id="pystatus">Loading Python…</span>
-          <button class="btn" id="reset">Reset</button>
-          <button class="btn primary" id="run" disabled>Run ▸</button>
-        </div>
-        <div class="editor">
-          <div class="gutter" id="gutter">1</div>
-          <div class="code" id="codewrap">
-            <pre id="hl" aria-hidden="true"></pre>
-            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
-
-A = np.array([[1., 0., 1.],
-              [0., 1., 1.],
-              [1., 1., 2.]])     # column 3 = column 1 + column 2
-# column 3 = the last number in each row. Your turn: change those three numbers.
-
-R, pivots = rref(A)
-print(&quot;rank =&quot;, np.linalg.matrix_rank(A))
-table((&quot;A&quot;, A), (&quot;R&quot;, R, pivots))</textarea>
-          </div>
-        </div>
-        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
-        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
-      </div>
-      <figure class="figure">
-        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
-        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
-      </figure>
-    </div>
-  </section>
 
   <div class="after">
     <div class="nav">
@@ -196,10 +58,23 @@ table((&quot;A&quot;, A), (&quot;R&quot;, R, pivots))</textarea>
   Follows the order and notation of Gilbert Strang, <i>Introduction to Linear Algebra</i>, 5th edition (2016); § numbers refer to that book.
   Explanations, examples and code are original. Made by <a href="https://www.steppeschool.com">Steppeschool</a>.
 </footer>
+<dialog class="unlock" id="unlock" aria-labelledby="unlock-h">
+  <form method="dialog"><button class="x" aria-label="Close">×</button></form>
+  <div class="kicker">Members</div>
+  <h2 id="unlock-h">Unlock the whole course</h2>
+  <p class="sub">Lessons 1 to 3 are free. Members get all eight lessons, through eigenvalues and the SVD.</p>
+  <ul class="perks">
+    <li><b>Lessons 4 to 8 in full:</b> the four subspaces, least squares, determinants, eigenvalues, the SVD and PCA.</li>
+    <li><b>Every slide with its Python lab</b>, exercise, worked examples and problems with full solutions.</li>
+    <li><b>Five extra members-only problems per lesson</b>, each with a worked solution.</li>
+    <li><b>Ask questions under any lesson.</b> I usually reply within a few hours.</li>
+    <li><b>Plus every Steppeschool course:</b> STM32, motor control, a quadcopter flight controller, a balancing robot, IMU filters, CAN bus, bootloaders and KiCad.</li>
+  </ul>
+  <div class="price"><b>$15</b> / month · cancel any time</div>
+  <a class="btn primary go" href="https://www.steppeschool.com/offers/Votyr5BH/checkout" target="_blank" rel="noopener">Continue to checkout →</a>
+  <p class="login">Already a member? <a href="https://www.steppeschool.com/login" target="_blank" rel="noopener">Log in to the course</a></p>
+</dialog>
 
-<script>window.SLIDE = {"slug": "independence-basis-dimension", "lesson": "lesson-4", "assets": "../../assets/", "preview": {"kind": "table", "items": [{"label": "A", "M": [[1, 0, 1], [0, 1, 1], [1, 1, 2]], "piv": []}]}, "check": "isTab(V) && item(V, 'A') && item(V, 'A').length === 3 && item(V, 'A')[0].length === 3 && rankOf(item(V, 'A')) === 3"};</script>
-<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
-<script src="../../assets/lab.js" defer></script>
 <script src="../../assets/nav.js" defer></script>
 </body>
 </html>

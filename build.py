@@ -8,7 +8,9 @@ JavaScript, plus the home page, lesson overviews, sitemap.xml and robots.txt.
 
 Run:  python build.py
 """
+import base64
 import datetime
+import os
 import html
 import json
 import pathlib
@@ -23,6 +25,36 @@ FONTS = ("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght
          "&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap")
 SIGNUP = "https://www.steppeschool.com/offers/JwLxrqg8/checkout"
 TODAY = datetime.date.today().isoformat()
+CHECKOUT = "https://www.steppeschool.com/offers/Votyr5BH/checkout"   # "All Included", $15/month, includes the members' course
+LOGIN = "https://www.steppeschool.com/login"
+LOCK_FROM = 4   # lessons 1-3 are free; 4+ are members-only (public pages show a teaser)
+# Local test builds only (in a copy of the repo, never pushed): LA_UNLOCK=1 builds every lesson in full.
+UNLOCK_ALL = os.environ.get("LA_UNLOCK") == "1"
+# The key that seals members-only embeds. It lives OUTSIDE the repo and only appears in the Kajabi lesson bodies.
+# Members-only lesson sources live OUTSIDE the public repo too (GitHub Pages would publish content/ otherwise).
+PREMIUM_CONTENT = pathlib.Path(os.environ.get("LA_PREMIUM", "/mnt/user-data/outputs/linear-algebra-premium/content"))
+
+
+def content_dir(lesson):
+    return (PREMIUM_CONTENT if lesson["n"] >= LOCK_FROM else ROOT / "content") / lesson["dir"]
+
+
+KEYFILE = pathlib.Path(os.environ.get("LA_KEYFILE", "/mnt/user-data/outputs/linear-algebra-premium/embed-key.txt"))
+
+
+def locked(lesson):
+    return lesson["n"] >= LOCK_FROM and not UNLOCK_ALL
+
+
+def seal(text):
+    """AES-GCM encrypt a members-only embed so the public repo only holds ciphertext (embed.js decrypts it in Kajabi)."""
+    from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+    if not KEYFILE.exists():
+        raise SystemExit(f"Missing {KEYFILE}: the embed key must exist before building members-only lessons.")
+    key = base64.b64decode(KEYFILE.read_text().strip())
+    iv = os.urandom(12)
+    ct = AESGCM(key).encrypt(iv, text.encode("utf-8"), None)
+    return json.dumps({"iv": base64.b64encode(iv).decode(), "ct": base64.b64encode(ct).decode()})
 
 LESSONS = [
     {"n": 1, "dir": "lesson-1", "path": "vectors-and-matrices", "seo_title": "Vectors, Linear Combinations and Matrix Multiplication",
@@ -68,6 +100,8 @@ LESSONS = [
 ]
 for _l, _c in zip(LESSONS, [1, 2, 2, 3, 4, 5, 6, 7]):
     _l["ch"] = _c
+    if _l["n"] >= LOCK_FROM:
+        _l["seo_desc"] = _l["seo_desc"].replace(" Free lesson.", "")
 CHAPTERS = [
     {"n": 1, "title": "Introduction to vectors"},
     {"n": 2, "title": "Solving linear equations"},
@@ -176,7 +210,10 @@ def head(title, description, url, prefix, og_type="website", jsonld=None):
 <meta property="og:title" content="{e(title)}">
 <meta property="og:description" content="{e(description)}">
 <meta property="og:url" content="{url}">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="{BASE}/assets/cover.jpg">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="720">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="{FONTS}">
@@ -191,7 +228,45 @@ def footer():
   Follows the order and notation of Gilbert Strang, <i>Introduction to Linear Algebra</i>, 5th edition (2016); § numbers refer to that book.
   Explanations, examples and code are original. Made by <a href="https://www.steppeschool.com">Steppeschool</a>.
 </footer>
+""" + UNLOCK_DIALOG
+
+
+UNLOCK_DIALOG = f"""<dialog class="unlock" id="unlock" aria-labelledby="unlock-h">
+  <form method="dialog"><button class="x" aria-label="Close">×</button></form>
+  <div class="kicker">Members</div>
+  <h2 id="unlock-h">Unlock the whole course</h2>
+  <p class="sub">Lessons 1 to 3 are free. Members get all eight lessons, through eigenvalues and the SVD.</p>
+  <ul class="perks">
+    <li><b>Lessons 4 to 8 in full:</b> the four subspaces, least squares, determinants, eigenvalues, the SVD and PCA.</li>
+    <li><b>Every slide with its Python lab</b>, exercise, worked examples and problems with full solutions.</li>
+    <li><b>Five extra members-only problems per lesson</b>, each with a worked solution.</li>
+    <li><b>Ask questions under any lesson.</b> I usually reply within a few hours.</li>
+    <li><b>Plus every Steppeschool course:</b> STM32, motor control, a quadcopter flight controller, a balancing robot, IMU filters, CAN bus, bootloaders and KiCad.</li>
+  </ul>
+  <div class="price"><b>$15</b> / month · cancel any time</div>
+  <a class="btn primary go" href="{CHECKOUT}" target="_blank" rel="noopener">Continue to checkout →</a>
+  <p class="login">Already a member? <a href="{LOGIN}" target="_blank" rel="noopener">Log in to the course</a></p>
+</dialog>
 """
+
+
+def lock_panel(what, items):
+    li = "".join(f"<li>{x}</li>" for x in items)
+    return f"""<section class="locked" aria-label="Members only">
+      <div class="lock-ic" aria-hidden="true">🔒</div>
+      <h2>The rest of this {what} is for members</h2>
+      <ul>{li}</ul>
+      <button class="btn primary" type="button" data-unlock>Unlock lessons 4 to 8</button>
+      <p class="small">$15 / month, cancel any time. Lessons 1 to 3 stay free.</p>
+    </section>"""
+
+
+def count(block, cls):
+    return len(re.findall(rf'<(?:div|section) class="{cls}"', block or ""))
+
+
+def plural(n, word):
+    return f"{n} {word}{'' if n == 1 else 's'}"
 
 
 PROVIDER = {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}
@@ -408,9 +483,9 @@ def practice_page(lesson, slides, pr, next_lesson):
     <div class="problems">
 {pr['problems']}
     </div>
-    <div class="signup">
-      <p><b>Want more problems?</b> More practice sets are on the way. Get a free Steppeschool account and we'll tell you when they're out.</p>
-      <a class="btn primary" href="{SIGNUP}">Get a free account</a>
+    <div class="unlock-teaser">
+      <p><b>Want more problems?</b> Members get five extra problems for every lesson, with worked solutions, and lessons 4 to 8 in full.</p>
+      <button class="btn primary" type="button" data-unlock>See what members get</button>
     </div>
   </article>
 
@@ -464,24 +539,27 @@ def lesson_page(lesson, slides, practice=None):
     url = f"{BASE}/{lesson['path']}/"
     title = f"{lesson['seo_title']} | {SITE}"
     desc = lesson["seo_desc"]
+    lock = locked(lesson)
+    badge = '<span class="lockbadge">🔒 Members</span>' if lock else ""
     cards = "".join(
-        f'<a class="card pic" href="{s["slug"]}/">{thumb(prefix + card_img(lesson, s["slug"]), "Open slide", s["title"], card_label(lesson, s["slug"]))}'
+        f'<a class="card pic" href="{s["slug"]}/">{badge}{thumb(prefix + card_img(lesson, s["slug"]), "Open slide", s["title"], card_label(lesson, s["slug"]))}'
         f'<span class="n">{j + 1:02d} · {e(s["kicker"])}</span>'
         f'<h3>{e(s["seo_title"])}</h3><p>{e(s["description"])}</p></a>' for j, s in enumerate(slides))
     jsonld = {"@context": "https://schema.org", "@type": "ItemList", "name": title,
               "itemListElement": [{"@type": "ListItem", "position": j + 1, "url": f"{url}{s['slug']}/", "name": s["seo_title"]}
                                   for j, s in enumerate(slides)]}
     if practice:
-        cards += (f'<a class="card pic practice-card" href="practice/">'
+        cards += (f'<a class="card pic practice-card" href="practice/">{badge}'
                   f'{thumb(prefix + card_img(lesson, "practice"), "Practise", "Worked examples and problems with hidden solutions.", card_label(lesson, "practice"))}'
                   f'<span class="n">✎ · Practice</span>'
                   f'<h3>Worked examples and problems</h3><p>{e(practice["description"])}</p></a>')
     return head(title, desc, url, prefix, jsonld=jsonld) + topnav(prefix, lesson) + f"""<div class="home">
   <section class="hero">
-    <div class="kicker">Chapter {lesson['ch']} · Lesson {lesson['n']} · {e(lesson['sections'])}</div>
+    <div class="kicker">Chapter {lesson['ch']} · Lesson {lesson['n']} · {e(lesson['sections'])}{' · Members' if lock else ''}</div>
     <h1>{e(lesson['title'])}</h1>
     <p>{e(lesson['summary'])} {len(slides)} short slides, then worked examples and problems. Each slide has an everyday picture, a worked example and Python you can run right on the page.</p>
-    <div class="cta"><a class="btn primary" href="{slides[0]['slug']}/">Start the lesson →</a></div>
+    {'<p class="members-note">This is a members lesson. Each slide shows its opening here; the full slides, labs and solutions are for members.</p>' if lock else ''}
+    <div class="cta"><a class="btn primary" href="{slides[0]['slug']}/">Start the lesson →</a>{'<button class="btn" type="button" data-unlock>Unlock lessons 4 to 8</button>' if lock else ''}</div>
   </section>
   <h2 class="section-title">Slides</h2>
   <div class="cards">{cards}</div>
@@ -503,7 +581,7 @@ def home_page(lessons_built):
         row = ""
         for lesson, slides, _ in lessons_built:
             if lesson["ch"] == c["n"]:
-                row += (f'<a class="card pic" href="{lesson["path"]}/">{thumb(card_img(lesson, slides[0]["slug"]), "Start lesson", f"{len(slides)} slides with live Python.", (f"Lesson {lesson['n']}", lesson["title"]))}'
+                row += (f'<a class="card pic" href="{lesson["path"]}/">{'<span class="lockbadge">🔒 Members</span>' if locked(lesson) else '<span class="lockbadge free">Free</span>'}{thumb(card_img(lesson, slides[0]["slug"]), "Start lesson", f"{len(slides)} slides with live Python.", (f"Lesson {lesson['n']}", lesson["title"]))}'
                         f'<span class="n">Lesson {lesson["n"]} · {e(lesson["sections"])}</span>'
                         f'<h3>{e(lesson["title"])}</h3><p>{e(lesson["summary"])}</p></a>')
         for name in c.get("planned", []):
@@ -514,10 +592,10 @@ def home_page(lessons_built):
     jsonld = dict(COURSE, **{"@context": "https://schema.org", "inLanguage": "en", "isAccessibleForFree": True})
     return head(title, desc, url, "", jsonld=jsonld) + topnav("") + f"""<div class="home">
   <section class="hero">
-    <div class="kicker">Steppeschool · free interactive course</div>
+    <div class="kicker">Steppeschool · interactive course · lessons 1 to 3 free</div>
     <h1>Linear algebra you can run.</h1>
-    <p>Short visual lessons. Read a slide, change the Python underneath, press Run and watch the plane move. The order follows Gilbert Strang's <i>Introduction to Linear Algebra</i>, and the examples come from robotics and engineering. Eight lessons take you from adding two arrows all the way to eigenvalues, the SVD and PCA.</p>
-    <div class="cta"><a class="btn primary" href="{first[0]['path']}/{first[1][0]['slug']}/">Start lesson 1 →</a><a class="btn" href="#lessons">See all lessons</a></div>
+    <p>Short visual lessons. Read a slide, change the Python underneath, press Run and watch the plane move. The order follows Gilbert Strang's <i>Introduction to Linear Algebra</i>, and the examples come from robotics and engineering. Eight lessons take you from adding two arrows all the way to eigenvalues, the SVD and PCA. Lessons 1 to 3 are free; lessons 4 to 8 are for members.</p>
+    <div class="cta"><a class="btn primary" href="{first[0]['path']}/{first[1][0]['slug']}/">Start lesson 1 →</a><a class="btn" href="#lessons">See all lessons</a><button class="btn" type="button" data-unlock>Members: $15 / month</button></div>
   </section>
   <h2 class="section-title" id="lessons">Lessons</h2>
   {cards}
@@ -546,28 +624,61 @@ def redirect_page(target):
 """
 
 
-def write_embed(lesson, slug, page_file):
-    """Fragment for embedding a page in the Kajabi members' course (not indexed)."""
-    page = page_file.read_text(encoding="utf-8")
+def teaser(page, start, lock_html):
+    """Public version of a members-only page: keep the opening (title, lead, key idea), drop the rest and the lab."""
+    a = page.index(start)
+    b = page.index('<div class="after">')
+    page = page[:a] + lock_html + "\n  </article>\n\n  " + page[b:]
+    page = re.sub(r'<script>window\.SLIDE = .*?</script>\n<script id="brython"[^>]*></script>\n<script src="[^"]*lab\.js" defer></script>\n', '', page)
+    return page.replace('"isAccessibleForFree": true', '"isAccessibleForFree": false')
+
+
+def slide_teaser(lesson, s, page):
+    if s["slug"] == "recap":
+        items = ["The full lesson review", plural(count(s.get("problems"), "problem"), "review problem") + " with step-by-step solutions",
+                 "A Python sandbox for the whole lesson", "Five extra members-only problems with worked solutions"]
+    else:
+        items = ["The full explanation, with an everyday picture and where it shows up in engineering",
+                 plural(count(s.get("examples"), "example"), "worked example") + " with real numbers",
+                 plural(count(s.get("problems"), "problem"), "practice problem") + " with step-by-step solutions",
+                 "A Python lab you edit and run in the browser, with an exercise that checks your answer"]
+    return teaser(page, '<div class="prose">', lock_panel("slide", items))
+
+
+def practice_teaser(lesson, pr, page):
+    items = [plural(count(pr.get("examples"), "example"), "worked example") + " covering the whole lesson",
+             plural(count(pr.get("problems"), "problem"), "problem") + " with full solutions",
+             "A Python sandbox to check your answers"]
+    return teaser(page, '<h2 class="practice-h">Worked examples</h2>', lock_panel("practice set", items))
+
+
+def write_embed(lesson, slug, page):
+    """Fragment for embedding a page in the Kajabi members' course (not indexed). Members-only lessons are sealed."""
     main = re.search(r'<main class="lesson">.*?</main>', page, re.S).group(0)
     main = re.sub(r'\s*<div class="after">.*?</div>\s*</div>\s*(?=</main>)', '\n', main, flags=re.S)
     main = main.replace('href="../../', f'href="{BASE}/').replace('src="../../', f'src="{BASE}/')
     main = re.sub(r'\s*<div class="signup">.*?</div>', '', main, flags=re.S)   # members already have an account
+    main = re.sub(r'\s*<div class="unlock-teaser">.*?</div>', '', main, flags=re.S)
     cfg = re.search(r'window\.SLIDE = (\{.*?\});</script>', page).group(1)
     ed = ROOT / "embed" / lesson["dir"]
     ed.mkdir(parents=True, exist_ok=True)
+    body = f'{main}\n<script type="application/json" id="la-config">{cfg}</script>'
+    if lesson["n"] >= LOCK_FROM:
+        body = f'<script type="application/json" id="la-sealed">{seal(body)}</script>'
     (ed / f"{slug}.html").write_text(
-        f'<!doctype html><html><head><meta charset="utf-8"><meta name="robots" content="noindex"></head><body>\n{main}\n'
-        f'<script type="application/json" id="la-config">{cfg}</script>\n</body></html>\n', encoding="utf-8")
+        f'<!doctype html><html><head><meta charset="utf-8"><meta name="robots" content="noindex"></head><body>\n{body}\n</body></html>\n',
+        encoding="utf-8")
 
 
 def main():
     urls = [BASE + "/"]
     built = []
-    available = [l for l in LESSONS if any((ROOT / "content" / l["dir"]).glob("[0-9]*.html"))]
+    available = [l for l in LESSONS if any(content_dir(l).glob("[0-9]*.html"))]
+    if len(available) < len(LESSONS):
+        raise SystemExit(f"Missing lesson sources (members-only sources are read from {PREMIUM_CONTENT}).")
     for lesson in available:
-        files = sorted((ROOT / "content" / lesson["dir"]).glob("[0-9]*.html"))
-        pf = ROOT / "content" / lesson["dir"] / "practice.html"
+        files = sorted(content_dir(lesson).glob("[0-9]*.html"))
+        pf = content_dir(lesson) / "practice.html"
         BUILT.append((lesson, [parse(f) for f in files], parse(pf) if pf.exists() else None))
     built = BUILT
     for li, (lesson, slides, practice) in enumerate(BUILT):
@@ -579,14 +690,16 @@ def main():
         for i, s in enumerate(slides):
             d = out / s["slug"]
             d.mkdir(exist_ok=True)
-            (d / "index.html").write_text(slide_page(lesson, slides, i, next_lesson, practice), encoding="utf-8")
-            write_embed(lesson, s["slug"], d / "index.html")
+            page = slide_page(lesson, slides, i, next_lesson, practice)
+            write_embed(lesson, s["slug"], page)
+            (d / "index.html").write_text(slide_teaser(lesson, s, page) if locked(lesson) else page, encoding="utf-8")
             urls.append(f"{BASE}/{lesson['path']}/{s['slug']}/")
         if practice:
             d = out / "practice"
             d.mkdir(exist_ok=True)
-            (d / "index.html").write_text(practice_page(lesson, slides, practice, next_lesson), encoding="utf-8")
-            write_embed(lesson, "practice", d / "index.html")
+            page = practice_page(lesson, slides, practice, next_lesson)
+            write_embed(lesson, "practice", page)
+            (d / "index.html").write_text(practice_teaser(lesson, practice, page) if locked(lesson) else page, encoding="utf-8")
             urls.append(f"{BASE}/{lesson['path']}/practice/")
     for lesson, slides, practice in BUILT:
         old = ROOT / lesson["dir"]

@@ -11,12 +11,15 @@
 <meta property="og:title" content="Area of a Triangle, Volume and the Cross Product">
 <meta property="og:description" content="Determinants give a triangle&#x27;s area from its corners, a box&#x27;s volume from its edges, and the cross product u × v. Robotics examples and Python. Strang §5.3.">
 <meta property="og:url" content="https://linearalgebra.steppeschool.com/determinants/area-volume-cross-product/">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://linearalgebra.steppeschool.com/assets/cover.jpg">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="720">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="../../assets/lesson.css">
-<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "Area of a Triangle, Volume and the Cross Product", "headline": "Areas, volumes and the cross product.", "description": "Determinants give a triangle's area from its corners, a box's volume from its edges, and the cross product u × v. Robotics examples and Python. Strang §5.3.", "url": "https://linearalgebra.steppeschool.com/determinants/area-volume-cross-product/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": true, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 6: Determinants", "item": "https://linearalgebra.steppeschool.com/determinants/"}, {"@type": "ListItem", "position": 3, "name": "Area of a Triangle, Volume and the Cross Product", "item": "https://linearalgebra.steppeschool.com/determinants/area-volume-cross-product/"}]}]</script>
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "Area of a Triangle, Volume and the Cross Product", "headline": "Areas, volumes and the cross product.", "description": "Determinants give a triangle's area from its corners, a box's volume from its edges, and the cross product u × v. Robotics examples and Python. Strang §5.3.", "url": "https://linearalgebra.steppeschool.com/determinants/area-volume-cross-product/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": false, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 6: Determinants", "item": "https://linearalgebra.steppeschool.com/determinants/"}, {"@type": "ListItem", "position": 3, "name": "Area of a Triangle, Volume and the Cross Product", "item": "https://linearalgebra.steppeschool.com/determinants/area-volume-cross-product/"}]}]</script>
 </head>
 <body>
 <header class="top">
@@ -34,142 +37,14 @@
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-6--area-volume-cross-product.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 6 · slide 6</small>Cross product</span></span></div>
     <div class="key">triangle area = ½ |det [edge₁ edge₂]| &nbsp;&nbsp; box volume = |det [u v w]| &nbsp;&nbsp; ‖u × v‖ = parallelogram area</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Area of the parallelogram spanned by u and v: |det [u v]|. The triangle is half of it.</li><li>Use edge vectors (corner minus corner), not the corners themselves.</li><li>Volume of the box with edges u, v, w: |det [u v w]|.</li><li>The cross product u × v is perpendicular to both u and v, and its length is the parallelogram's area.</li></ol></div>
-    <div class="prose">
-<h3>Measuring a field from GPS corners</h3>
-<p>A farmer walks to the three corners of a triangular field with a GPS. How big is the field? No tape measure needed: the area is a determinant.</p>
-<h3>From corners to area</h3>
-<p>Put the first corner at the origin by subtracting it from the others. The two results are edge vectors. Put them as the columns of a 2 by 2 matrix [edge₁ edge₂]. They span a parallelogram of area |det|, and the triangle is exactly half of it.</p>
-<div class="worked"><div class="row">Corners (1, 1), (4, 2), (2, 5)</div><div class="row">Edges: (4, 2) − (1, 1) = (3, 1), &nbsp; (2, 5) − (1, 1) = (1, 4)</div><div class="row">det <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>1</span><span>1</span><span>4</span></span> = 12 − 1 = 11, &nbsp; area = 11/2 = 5.5</div></div>
-<p>Using the corners directly would measure a triangle that has a corner at the origin, a different shape. That is the mistake the lab asks you to fix.</p>
-<h3>Volume of a box</h3>
-<p>Three edge vectors u, v, w from one corner span a slanted box. Its volume is |det| of the 3 by 3 matrix with u, v, w as columns (slide 1). A volume of 0 means the three edges lie in one plane.</p>
-<h3>The cross product</h3>
-<p>For two vectors in 3D there is a third vector, u × v, that is perpendicular to both. Its three components are 2 by 2 determinants. Stack u and v as two rows: component 1 is the det of columns 2 and 3, component 2 is minus the det of columns 1 and 3, component 3 is the det of columns 1 and 2:</p>
-<div class="worked"><div class="row">u × v = (u₂v₃ − u₃v₂, &nbsp; u₃v₁ − u₁v₃, &nbsp; u₁v₂ − u₂v₁)</div><div class="row">(1, 2, 3) × (0, 1, 4) = (8 − 3, 0 − 4, 1 − 0) = (5, −4, 1)</div><div class="row">Check: (5, −4, 1) · (1, 2, 3) = 5 − 8 + 3 = 0 ✓ &nbsp; (5, −4, 1) · (0, 1, 4) = 0 − 4 + 4 = 0 ✓</div></div>
-<p>Its length equals the area of the parallelogram spanned by u and v (check: (1, 0, 0) × (0, 1, 0) = (0, 0, 1) has length 1, the area of the unit square), and its direction follows the right-hand rule: curl the fingers from u to v, and the thumb points along u × v. Swapping u and v flips it: v × u = −(u × v).</p>
-<h3>Where this is used</h3>
-<p>Torque is a cross product. Push with force F at position r from a joint, and the twist on the joint is τ = r × F. A robot arm controller computes exactly this to know how hard each motor must work. Graphics and 3D printers use u × v to find the outward normal of every triangle in a mesh.</p>
-    </div>
-    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · Torque on a joint</h3>
-<p>A force F = (1, 3, 0) N acts at r = (2, 0, 0) m from a joint.</p>
-<div class="worked"><div class="row">τ = r × F = (0·0 − 0·3, &nbsp; 0·1 − 2·0, &nbsp; 2·3 − 0·1) = (0, 0, 6) N·m</div><div class="row">The twist is about the z-axis, of size 6 N·m</div></div>
-<p>Only the sideways part of the force (3 N, at a 2 m lever) twists the joint: 2 × 3 = 6.</p>
-</section>
-<section class="example"><h3>Example 2 · A box volume</h3>
-<p>Edges u = (1, 0, 0), v = (1, 2, 0), w = (0, 1, 3).</p>
-<div class="worked"><div class="row">det <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>1</span><span>0</span><span>0</span><span>2</span><span>1</span><span>0</span><span>0</span><span>3</span></span> (edges as columns) = 1 · 2 · 3 = 6</div><div class="row">Triangular, so the product of the diagonal. Volume 6</div></div>
-</section>
-<section class="example"><h3>Example 3 · Points on one line</h3>
-<p>Corners (0, 0), (1, 2), (2, 4).</p>
-<div class="worked"><div class="row">Edges (1, 2) and (2, 4): det = 4 − 4 = 0</div><div class="row">Area 0: the three points lie on one line</div></div>
-</section></div>
-    <details class="more"><summary><span class="pl-icon">✎</span><span class="rv-text"><b>More examples to try</b><span>3 problems with step-by-step solutions. Try each one before you open its solution.</span></span><span class="rv-toggle"><span class="s-show">Show</span><span class="s-hide">Hide</span></span></summary><div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
-<p>Find the area of the triangle with corners (0, 0), (3, 0), (1, 2).</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>Edges (3, 0) and (1, 2). det = 6 − 0 = 6, so the area is 3.</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">2</span><div class="pbody">
-<p>Compute (1, 0, 0) × (0, 1, 0). Which direction does it point?</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>(0·0 − 0·1, 0·0 − 1·0, 1·1 − 0·0) = (0, 0, 1): straight up along z, perpendicular to both, by the right-hand rule.</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">3</span><div class="pbody">
-<p>The edges u = (1, 1, 0), v = (0, 1, 1), w = (1, 2, 1). What is the volume of their box, and what does it mean?</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>w = u + v, so the three edges lie in one plane. det = 0 and the volume is 0: the box is flat.</p>
-</div></details>
-</div></div></div></details>
+    <section class="locked" aria-label="Members only">
+      <div class="lock-ic" aria-hidden="true">🔒</div>
+      <h2>The rest of this slide is for members</h2>
+      <ul><li>The full explanation, with an everyday picture and where it shows up in engineering</li><li>3 worked examples with real numbers</li><li>3 practice problems with step-by-step solutions</li><li>A Python lab you edit and run in the browser, with an exercise that checks your answer</li></ul>
+      <button class="btn primary" type="button" data-unlock>Unlock lessons 4 to 8</button>
+      <p class="small">$15 / month, cancel any time. Lessons 1 to 3 stay free.</p>
+    </section>
   </article>
-  <details class="review">
-    <summary><span class="pl-icon">✎</span><span class="rv-text"><b>Lesson review</b><span>3 worked examples and 5 mixed problems with solutions</span></span><span class="rv-toggle"><span class="s-show">Open</span><span class="s-hide">Close</span></span></summary>
-    <div class="review-body">
-      <h2 class="practice-h">Worked examples</h2>
-      <div class="examples"><section class="example"><h3>Example 1 · Elimination with a row swap</h3>
-<p>Find det A for A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>0</span><span>1</span><span>2</span><span>1</span><span>0</span><span>3</span><span>4</span><span>−3</span><span>8</span></span>.</p>
-<div class="worked"><div class="row">The first pivot position holds 0: swap rows 1 and 2 (the sign flips once) to get [1 0 3; 0 1 2; 4 −3 8]</div><div class="row">Row 3 − 4·row 1 = (0, −3, −4). &nbsp; Row 3 + 3·row 2 = (0, 0, 2)</div><div class="row">Pivots 1, 1, 2. &nbsp; det A = −(1 · 1 · 2) = −2</div></div>
-</section>
-<section class="example"><h3>Example 2 · Bookkeeping with the rules</h3>
-<p>A and B are 3 by 3 with det A = 2 and det B = 5.</p>
-<div class="worked"><div class="row">det(AB) = 2 · 5 = 10 &nbsp;&nbsp; det(A⁻¹) = ½ &nbsp;&nbsp; det(Bᵀ) = 5</div><div class="row">det(2A) = 2³ · 2 = 16, because each of the 3 rows doubles</div><div class="row">det(A⁻¹BA) = ½ · 5 · 2 = 5</div></div>
-</section>
-<section class="example"><h3>Example 3 · A triangle in 3D</h3>
-<p>Corners (0, 0, 0), (1, 1, 0), (0, 1, 1).</p>
-<div class="worked"><div class="row">Edges u = (1, 1, 0), v = (0, 1, 1)</div><div class="row">u × v = (1·1 − 0·1, &nbsp; 0·0 − 1·1, &nbsp; 1·1 − 1·0) = (1, −1, 1)</div><div class="row">Parallelogram area ‖u × v‖ = √3, &nbsp; triangle area = √3 / 2 ≈ 0.87</div></div>
-</section></div>
-      <h2 class="practice-h">Problems</h2>
-      <div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
-<p>Find det <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>10</span></span> by elimination.</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>Row 2 − 4·row 1 = (0, −3, −6). Row 3 − 7·row 1 = (0, −6, −11). Row 3 − 2·row 2 = (0, 0, 1).</p><p>Pivots 1, −3, 1, so det = −3.</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">2</span><div class="pbody">
-<p>Find det <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>−1</span><span>0</span><span>−1</span><span>2</span><span>−1</span><span>0</span><span>−1</span><span>2</span></span>.</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>Pivots 2, 3/2, 4/3 (row 2 + ½·row 1, then row 3 + ⅔·row 2). det = 2 · 3/2 · 4/3 = 4.</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">3</span><div class="pbody">
-<p>Solve x + y = 2, &nbsp; x + z = 3, &nbsp; y + z = 5 by Cramer's rule.</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>det A = −2. Replacing columns by b = (2, 3, 5) gives det B₁ = 0, det B₂ = −4, det B₃ = −6.</p><p>x = 0, y = 2, z = 3. Check: 0 + 2 = 2, 0 + 3 = 3, 2 + 3 = 5 ✓</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">4</span><div class="pbody">
-<p>Find the area of the triangle with corners (1, 0), (4, 1), (2, 3).</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>Edges (3, 1) and (1, 3). det = 9 − 1 = 8, area = 4.</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">5</span><div class="pbody">
-<p>A and B are 2 by 2 with det A = 3 and det B = −2. Find det(AB), det(BA) and det(A⁻¹B).</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>det(AB) = det(BA) = −6, even though AB and BA are usually different matrices. det(A⁻¹B) = (1/3)(−2) = −2/3.</p>
-</div></details>
-</div></div></div>
-    </div>
-  </details>
-
-  <section class="labsec" aria-label="Lab">
-    <div class="exercise" id="exercise">
-      <span class="tag">Exercise</span>
-      <span class="task">Put the two edge vectors of the triangle (not its corners) into the columns of M.</span>
-      <span class="hint" id="hint">Edit the code and press Run.</span>
-    </div>
-    <div class="lab">
-      <div class="editor-card">
-        <div class="bar">
-          <span class="file">slide_6.py</span>
-          <span class="status" id="pystatus">Loading Python…</span>
-          <button class="btn" id="reset">Reset</button>
-          <button class="btn primary" id="run" disabled>Run ▸</button>
-        </div>
-        <div class="editor">
-          <div class="gutter" id="gutter">1</div>
-          <div class="code" id="codewrap">
-            <pre id="hl" aria-hidden="true"></pre>
-            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
-
-P1 = np.array([1., 1.])
-P2 = np.array([4., 2.])
-P3 = np.array([2., 5.])
-
-M = np.column_stack([P2, P3])           # your turn: use edges, P2 - P1 and P3 - P1
-print(&quot;triangle area =&quot;, abs(np.linalg.det(M)) / 2)
-show(M)                                 # the parallelogram is twice the triangle</textarea>
-          </div>
-        </div>
-        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
-        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
-      </div>
-      <figure class="figure">
-        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
-        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
-      </figure>
-    </div>
-  </section>
 
   <div class="after">
     <div class="nav">
@@ -183,10 +58,23 @@ show(M)                                 # the parallelogram is twice the triangl
   Follows the order and notation of Gilbert Strang, <i>Introduction to Linear Algebra</i>, 5th edition (2016); § numbers refer to that book.
   Explanations, examples and code are original. Made by <a href="https://www.steppeschool.com">Steppeschool</a>.
 </footer>
+<dialog class="unlock" id="unlock" aria-labelledby="unlock-h">
+  <form method="dialog"><button class="x" aria-label="Close">×</button></form>
+  <div class="kicker">Members</div>
+  <h2 id="unlock-h">Unlock the whole course</h2>
+  <p class="sub">Lessons 1 to 3 are free. Members get all eight lessons, through eigenvalues and the SVD.</p>
+  <ul class="perks">
+    <li><b>Lessons 4 to 8 in full:</b> the four subspaces, least squares, determinants, eigenvalues, the SVD and PCA.</li>
+    <li><b>Every slide with its Python lab</b>, exercise, worked examples and problems with full solutions.</li>
+    <li><b>Five extra members-only problems per lesson</b>, each with a worked solution.</li>
+    <li><b>Ask questions under any lesson.</b> I usually reply within a few hours.</li>
+    <li><b>Plus every Steppeschool course:</b> STM32, motor control, a quadcopter flight controller, a balancing robot, IMU filters, CAN bus, bootloaders and KiCad.</li>
+  </ul>
+  <div class="price"><b>$15</b> / month · cancel any time</div>
+  <a class="btn primary go" href="https://www.steppeschool.com/offers/Votyr5BH/checkout" target="_blank" rel="noopener">Continue to checkout →</a>
+  <p class="login">Already a member? <a href="https://www.steppeschool.com/login" target="_blank" rel="noopener">Log in to the course</a></p>
+</dialog>
 
-<script>window.SLIDE = {"slug": "area-volume-cross-product", "lesson": "lesson-6", "assets": "../../assets/", "preview": {"kind": "transform", "M": [[4, 2], [2, 5]]}, "check": "isT(V) && eqM(V.M, [[3,1],[1,4]])"};</script>
-<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
-<script src="../../assets/lab.js" defer></script>
 <script src="../../assets/nav.js" defer></script>
 </body>
 </html>

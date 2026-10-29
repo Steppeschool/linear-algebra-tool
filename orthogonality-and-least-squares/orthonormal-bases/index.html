@@ -11,12 +11,15 @@
 <meta property="og:title" content="Orthonormal Basis and Orthogonal Matrices (QᵀQ = I)">
 <meta property="og:description" content="Orthonormal vectors are perpendicular with length 1. In Q they give QᵀQ = I and Q⁻¹ = Qᵀ. Rotations, examples and Python. Strang §4.4.">
 <meta property="og:url" content="https://linearalgebra.steppeschool.com/orthogonality-and-least-squares/orthonormal-bases/">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://linearalgebra.steppeschool.com/assets/cover.jpg">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="720">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="../../assets/lesson.css">
-<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "Orthonormal Basis and Orthogonal Matrices (QᵀQ = I)", "headline": "Orthonormal vectors and Q: the easiest basis to work with.", "description": "Orthonormal vectors are perpendicular with length 1. In Q they give QᵀQ = I and Q⁻¹ = Qᵀ. Rotations, examples and Python. Strang §4.4.", "url": "https://linearalgebra.steppeschool.com/orthogonality-and-least-squares/orthonormal-bases/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": true, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 5: Orthogonality and least squares", "item": "https://linearalgebra.steppeschool.com/orthogonality-and-least-squares/"}, {"@type": "ListItem", "position": 3, "name": "Orthonormal Basis and Orthogonal Matrices (QᵀQ = I)", "item": "https://linearalgebra.steppeschool.com/orthogonality-and-least-squares/orthonormal-bases/"}]}]</script>
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "Orthonormal Basis and Orthogonal Matrices (QᵀQ = I)", "headline": "Orthonormal vectors and Q: the easiest basis to work with.", "description": "Orthonormal vectors are perpendicular with length 1. In Q they give QᵀQ = I and Q⁻¹ = Qᵀ. Rotations, examples and Python. Strang §4.4.", "url": "https://linearalgebra.steppeschool.com/orthogonality-and-least-squares/orthonormal-bases/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": false, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 5: Orthogonality and least squares", "item": "https://linearalgebra.steppeschool.com/orthogonality-and-least-squares/"}, {"@type": "ListItem", "position": 3, "name": "Orthonormal Basis and Orthogonal Matrices (QᵀQ = I)", "item": "https://linearalgebra.steppeschool.com/orthogonality-and-least-squares/orthonormal-bases/"}]}]</script>
 </head>
 <body>
 <header class="top">
@@ -34,144 +37,14 @@
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-5--orthonormal-bases.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 5 · slide 6</small>Orthonormal bases</span></span></div>
     <div class="key">QᵀQ = I &nbsp;&nbsp; square Q: Q⁻¹ = Qᵀ &nbsp;&nbsp; ‖Qx‖ = ‖x‖</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>q₁, ..., qₙ are <b>orthonormal</b> when qᵢᵀqⱼ = 0 for i ≠ j and qᵢᵀqᵢ = 1.</li><li>With those vectors as columns, QᵀQ = I.</li><li>A square Q with QᵀQ = I is an <b>orthogonal matrix</b>. Its inverse is its transpose. (The name is a historical quirk: the columns are orthonormal, not just orthogonal.)</li><li>Q keeps lengths and angles: rotations and reflections.</li><li>Coordinates in an orthonormal basis are dot products: x = (q₁ᵀx)q₁ + ... + (qₙᵀx)qₙ.</li></ol></div>
-    <div class="prose">
-<h3>A city with a perfect grid</h3>
-<p>In a city where the streets meet at right angles and every block is exactly 1 km, you can read your position directly from the street signs: 3 blocks east, 2 blocks north. In a city with slanted streets and uneven blocks, finding your coordinates means solving equations.</p>
-<p>An orthonormal basis is the perfect grid. "Ortho" means perpendicular, and "normal" means length 1.</p>
-<h3>QᵀQ = I</h3>
-<p>Put the vectors in the columns of Q. Entry (i, j) of QᵀQ is the dot product qᵢᵀqⱼ. Perpendicular columns put zeros off the diagonal, and length 1 puts ones on it:</p>
-<div class="worked"><div class="row">q₁ = (0.6, 0.8), &nbsp; q₂ = (−0.8, 0.6)</div><div class="row">q₁ · q₁ = 0.36 + 0.64 = 1, &nbsp; q₂ · q₂ = 1, &nbsp; q₁ · q₂ = −0.48 + 0.48 = 0</div><div class="row">QᵀQ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>1</span></span></div></div>
-<p>When Q is square, QᵀQ = I says that Qᵀ is the inverse of Q. Inverting an orthogonal matrix costs nothing: just transpose it.</p>
-<h3>Lengths are kept</h3>
-<p>‖Qx‖² = (Qx)ᵀ(Qx) = xᵀQᵀQx = xᵀx = ‖x‖². An orthogonal matrix moves vectors without stretching them. In the lab, the unit square stays a unit square; it only turns. Rotations and reflections are the orthogonal matrices of the plane.</p>
-<h3>Coordinates are dot products</h3>
-<p>To write x = c₁q₁ + c₂q₂, take the dot product of both sides with q₁. Every other term dies, because the q's are perpendicular, so c₁ = q₁ᵀx. No elimination is needed.</p>
-<div class="worked"><div class="row">x = (5, 5): &nbsp; c₁ = q₁ᵀx = 3 + 4 = 7, &nbsp; c₂ = q₂ᵀx = −4 + 3 = −1</div><div class="row">7·(0.6, 0.8) − 1·(−0.8, 0.6) = (5, 5) ✓</div></div>
-<p>Projections become simple as well. With orthonormal columns, AᵀA becomes QᵀQ = I, the normal equations say x̂ = Qᵀb, and the projection matrix is P = QQᵀ. Careful: when Q has fewer columns than rows, QQᵀ is not I. It is the projection onto the column space of Q.</p>
-<h3>Where this is used</h3>
-<p>A drone's orientation is stored as a 3 by 3 rotation matrix, an orthogonal matrix. After thousands of small updates, rounding errors make its columns drift away from orthonormal. The fix is to make them orthonormal again, which is the job of the next slide.</p>
-    </div>
-    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · A rotation is orthogonal</h3>
-<p>Q = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>cos θ</span><span>−sin θ</span><span>sin θ</span><span>cos θ</span></span>.</p>
-<div class="worked"><div class="row">q₁ · q₁ = cos²θ + sin²θ = 1, &nbsp; q₂ · q₂ = 1</div><div class="row">q₁ · q₂ = −cos θ sin θ + sin θ cos θ = 0</div><div class="row">So QᵀQ = I, and Q⁻¹ = Qᵀ is the rotation by −θ</div></div>
-</section>
-<section class="example"><h3>Example 2 · A permutation is orthogonal</h3>
-<p>S = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>1</span><span>0</span></span> from lesson 3 swaps the two components.</p>
-<div class="worked"><div class="row">Its columns (0, 1) and (1, 0) are orthonormal</div><div class="row">SᵀS = I, so S⁻¹ = Sᵀ (here S is its own inverse)</div></div>
-</section>
-<section class="example"><h3>Example 3 · An orthonormal basis of 3D</h3>
-<p>q₁ = ⅓(1, 2, 2), q₂ = ⅓(2, 1, −2), q₃ = ⅓(2, −2, 1).</p>
-<div class="worked"><div class="row">q₁ · q₂ = ⅑(2 + 2 − 4) = 0, &nbsp; q₁ · q₃ = ⅑(2 − 4 + 2) = 0, &nbsp; q₂ · q₃ = ⅑(4 − 2 − 2) = 0</div><div class="row">‖q₁‖² = ⅑(1 + 4 + 4) = 1, and the same for q₂, q₃</div><div class="row">For x = (3, 0, 0): coordinates q₁ᵀx = 1, q₂ᵀx = 2, q₃ᵀx = 2</div></div>
-</section></div>
-    <details class="more"><summary><span class="pl-icon">✎</span><span class="rv-text"><b>More examples to try</b><span>3 problems with step-by-step solutions. Try each one before you open its solution.</span></span><span class="rv-toggle"><span class="s-show">Show</span><span class="s-hide">Hide</span></span></summary><div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
-<p>Is Q = (1/√2)<span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>−1</span></span> orthogonal? What does it do to the plane?</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>The columns have length 1 and dot product (1 − 1)/2 = 0, so yes: QᵀQ = I.</p><p>det Q = (−1 − 1)/2 = −1, so it flips the plane. It is a reflection.</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">2</span><div class="pbody">
-<p>Find c so that c·(1, 1, 1) has length 1.</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>‖(1, 1, 1)‖ = √3, so c = 1/√3.</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">3</span><div class="pbody">
-<p>Show that an orthogonal matrix keeps dot products: (Qx)·(Qy) = x·y.</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>(Qx)ᵀ(Qy) = xᵀQᵀQy = xᵀIy = xᵀy. Lengths and angles are both preserved.</p>
-</div></details>
-</div></div></div></details>
+    <section class="locked" aria-label="Members only">
+      <div class="lock-ic" aria-hidden="true">🔒</div>
+      <h2>The rest of this slide is for members</h2>
+      <ul><li>The full explanation, with an everyday picture and where it shows up in engineering</li><li>3 worked examples with real numbers</li><li>3 practice problems with step-by-step solutions</li><li>A Python lab you edit and run in the browser, with an exercise that checks your answer</li></ul>
+      <button class="btn primary" type="button" data-unlock>Unlock lessons 4 to 8</button>
+      <p class="small">$15 / month, cancel any time. Lessons 1 to 3 stay free.</p>
+    </section>
   </article>
-  <details class="review">
-    <summary><span class="pl-icon">✎</span><span class="rv-text"><b>Lesson review</b><span>3 worked examples and 5 mixed problems with solutions</span></span><span class="rv-toggle"><span class="s-show">Open</span><span class="s-hide">Close</span></span></summary>
-    <div class="review-body">
-      <h2 class="practice-h">Worked examples</h2>
-      <div class="examples"><section class="example"><h3>Example 1 · Project onto a line in 3D</h3>
-<p>Project b = (3, 0, 3) onto the line through a = (1, 2, 2).</p>
-<div class="worked"><div class="row">aᵀb = 3 + 0 + 6 = 9, &nbsp; aᵀa = 1 + 4 + 4 = 9, &nbsp; x̂ = 1</div><div class="row">p = (1, 2, 2), &nbsp; e = b − p = (2, −2, 1)</div><div class="row">a · e = 2 − 4 + 2 = 0 ✓</div></div>
-<p>The distance from b to the line is ‖e‖ = 3.</p>
-</section>
-<section class="example"><h3>Example 2 · Fit a line to five points</h3>
-<p>Fit C + Dt to (−2, 0), (−1, 1), (0, 1), (1, 2), (2, 4).</p>
-<div class="worked"><div class="row">The times are centred: Σt = 0, so the normal equations separate</div><div class="row">5C = Σb = 8, &nbsp; C = 1.6</div><div class="row">10D = Σtb = 0 − 1 + 0 + 2 + 8 = 9, &nbsp; D = 0.9</div></div>
-<p>Best line: 1.6 + 0.9t. Choosing t so that Σt = 0 is a common trick: it makes the columns of A perpendicular, because the column of ones dotted with the column of times is Σt = 0.</p>
-</section>
-<section class="example"><h3>Example 3 · Gram-Schmidt and QR in 3D</h3>
-<p>a = (1, 0, 1), b = (1, 1, 0).</p>
-<div class="worked"><div class="row">aᵀb = 1, aᵀa = 2: &nbsp; u₂ = b − ½a = (½, 1, −½), &nbsp; a · u₂ = ½ − ½ = 0 ✓</div><div class="row">q₁ = (1, 0, 1)/√2, &nbsp; q₂ = u₂/√1.5</div><div class="row">With A = [a b]: R = QᵀA, e.g. R₁₂ = q₁ᵀb = 1/√2 = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>√2</span><span>1/√2</span><span>0</span><span>√1.5</span></span></div></div>
-<p>Check in the lab: Q, R = np.linalg.qr(A), then Q @ R gives A back.</p>
-</section></div>
-      <h2 class="practice-h">Problems</h2>
-      <div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
-<p>Are (1, −1, 0) and (1, 1, 5) perpendicular? Find a nonzero vector perpendicular to both.</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>1 − 1 + 0 = 0, so yes.</p><p>A vector (x, y, z) perpendicular to both needs x − y = 0 and x + y + 5z = 0. Take x = y = −5, z = 2: (−5, −5, 2). Check: −5 + 5 + 0 = 0 and −5 − 5 + 10 = 0 ✓</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">2</span><div class="pbody">
-<p>Project b = (1, 2, 3) onto the line through a = (1, 0, 1).</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>aᵀb = 4, aᵀa = 2, x̂ = 2. p = (2, 0, 2), e = (−1, 2, 1). Check: −1 + 0 + 1 = 0 ✓</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">3</span><div class="pbody">
-<p>Find the projection matrix onto the line through a = (2, 1) and apply it to b = (5, 0).</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>P = aaᵀ / aᵀa = ⅕<span class="mx" style="grid-template-columns:repeat(2,auto)"><span>4</span><span>2</span><span>2</span><span>1</span></span>. Pb = ⅕(20, 10) = (4, 2).</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">4</span><div class="pbody">
-<p>Find the least squares solution of x = 1, x = 4, 2x = 4.</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>A has one column, a = (1, 1, 2), and b = (1, 4, 4). x̂ = aᵀb / aᵀa = (1 + 4 + 8) / 6 = 13/6 ≈ 2.17.</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">5</span><div class="pbody">
-<p>Find the best line C + Dt through (0, 4), (1, 2), (2, 1), (3, 1).</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>m = 4, Σt = 6, Σt² = 14, Σb = 8, Σtb = 0 + 2 + 2 + 3 = 7.</p><p>4C + 6D = 8 and 6C + 14D = 7 give D = −1 and C = 3.5. Best line: 3.5 − t.</p>
-</div></details>
-</div></div></div>
-    </div>
-  </details>
-
-  <section class="labsec" aria-label="Lab">
-    <div class="exercise" id="exercise">
-      <span class="tag">Exercise</span>
-      <span class="task">The columns (3, 4) and (−4, 3) are perpendicular. Scale them to length 1 so that Q is orthogonal.</span>
-      <span class="hint" id="hint">Edit the code and press Run.</span>
-    </div>
-    <div class="lab">
-      <div class="editor-card">
-        <div class="bar">
-          <span class="file">slide_6.py</span>
-          <span class="status" id="pystatus">Loading Python…</span>
-          <button class="btn" id="reset">Reset</button>
-          <button class="btn primary" id="run" disabled>Run ▸</button>
-        </div>
-        <div class="editor">
-          <div class="gutter" id="gutter">1</div>
-          <div class="code" id="codewrap">
-            <pre id="hl" aria-hidden="true"></pre>
-            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
-
-Q = np.array([[3., -4.],
-              [4.,  3.]])       # perpendicular columns, but length 5
-                                # your turn: divide by the length, 5
-print(&quot;Q.T @ Q =&quot;)
-print(Q.T @ Q)                  # orthonormal columns give the identity
-show(Q)                         # Q should turn the square, not grow it</textarea>
-          </div>
-        </div>
-        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
-        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
-      </div>
-      <figure class="figure">
-        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
-        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
-      </figure>
-    </div>
-  </section>
 
   <div class="after">
     <div class="nav">
@@ -185,10 +58,23 @@ show(Q)                         # Q should turn the square, not grow it</textare
   Follows the order and notation of Gilbert Strang, <i>Introduction to Linear Algebra</i>, 5th edition (2016); § numbers refer to that book.
   Explanations, examples and code are original. Made by <a href="https://www.steppeschool.com">Steppeschool</a>.
 </footer>
+<dialog class="unlock" id="unlock" aria-labelledby="unlock-h">
+  <form method="dialog"><button class="x" aria-label="Close">×</button></form>
+  <div class="kicker">Members</div>
+  <h2 id="unlock-h">Unlock the whole course</h2>
+  <p class="sub">Lessons 1 to 3 are free. Members get all eight lessons, through eigenvalues and the SVD.</p>
+  <ul class="perks">
+    <li><b>Lessons 4 to 8 in full:</b> the four subspaces, least squares, determinants, eigenvalues, the SVD and PCA.</li>
+    <li><b>Every slide with its Python lab</b>, exercise, worked examples and problems with full solutions.</li>
+    <li><b>Five extra members-only problems per lesson</b>, each with a worked solution.</li>
+    <li><b>Ask questions under any lesson.</b> I usually reply within a few hours.</li>
+    <li><b>Plus every Steppeschool course:</b> STM32, motor control, a quadcopter flight controller, a balancing robot, IMU filters, CAN bus, bootloaders and KiCad.</li>
+  </ul>
+  <div class="price"><b>$15</b> / month · cancel any time</div>
+  <a class="btn primary go" href="https://www.steppeschool.com/offers/Votyr5BH/checkout" target="_blank" rel="noopener">Continue to checkout →</a>
+  <p class="login">Already a member? <a href="https://www.steppeschool.com/login" target="_blank" rel="noopener">Log in to the course</a></p>
+</dialog>
 
-<script>window.SLIDE = {"slug": "orthonormal-bases", "lesson": "lesson-5", "assets": "../../assets/", "preview": {"kind": "transform", "M": [[0.6, -0.8], [0.8, 0.6]], "vecs": []}, "check": "isT(V) && close(V.M, [[0.6, -0.8], [0.8, 0.6]])"};</script>
-<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
-<script src="../../assets/lab.js" defer></script>
 <script src="../../assets/nav.js" defer></script>
 </body>
 </html>

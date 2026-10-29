@@ -11,7 +11,10 @@
 <meta property="og:title" content="Gaussian Elimination and LU Decomposition Practice Problems">
 <meta property="og:description" content="Worked examples and practice problems with hidden solutions: 2×2 and 3×3 elimination, pivots, zero pivots, elimination matrices and A = LU.">
 <meta property="og:url" content="https://linearalgebra.steppeschool.com/gaussian-elimination-and-lu/practice/">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://linearalgebra.steppeschool.com/assets/cover.jpg">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="720">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
@@ -86,9 +89,9 @@
 </div></details>
 </div></div>
     </div>
-    <div class="signup">
-      <p><b>Want more problems?</b> More practice sets are on the way. Get a free Steppeschool account and we'll tell you when they're out.</p>
-      <a class="btn primary" href="https://www.steppeschool.com/offers/JwLxrqg8/checkout">Get a free account</a>
+    <div class="unlock-teaser">
+      <p><b>Want more problems?</b> Members get five extra problems for every lesson, with worked solutions, and lessons 4 to 8 in full.</p>
+      <button class="btn primary" type="button" data-unlock>See what members get</button>
     </div>
   </article>
 
@@ -139,6 +142,22 @@ table((&quot;A&quot;, A), (&quot;L&quot;, L), (&quot;U&quot;, U))</textarea>
   Follows the order and notation of Gilbert Strang, <i>Introduction to Linear Algebra</i>, 5th edition (2016); § numbers refer to that book.
   Explanations, examples and code are original. Made by <a href="https://www.steppeschool.com">Steppeschool</a>.
 </footer>
+<dialog class="unlock" id="unlock" aria-labelledby="unlock-h">
+  <form method="dialog"><button class="x" aria-label="Close">×</button></form>
+  <div class="kicker">Members</div>
+  <h2 id="unlock-h">Unlock the whole course</h2>
+  <p class="sub">Lessons 1 to 3 are free. Members get all eight lessons, through eigenvalues and the SVD.</p>
+  <ul class="perks">
+    <li><b>Lessons 4 to 8 in full:</b> the four subspaces, least squares, determinants, eigenvalues, the SVD and PCA.</li>
+    <li><b>Every slide with its Python lab</b>, exercise, worked examples and problems with full solutions.</li>
+    <li><b>Five extra members-only problems per lesson</b>, each with a worked solution.</li>
+    <li><b>Ask questions under any lesson.</b> I usually reply within a few hours.</li>
+    <li><b>Plus every Steppeschool course:</b> STM32, motor control, a quadcopter flight controller, a balancing robot, IMU filters, CAN bus, bootloaders and KiCad.</li>
+  </ul>
+  <div class="price"><b>$15</b> / month · cancel any time</div>
+  <a class="btn primary go" href="https://www.steppeschool.com/offers/Votyr5BH/checkout" target="_blank" rel="noopener">Continue to checkout →</a>
+  <p class="login">Already a member? <a href="https://www.steppeschool.com/login" target="_blank" rel="noopener">Log in to the course</a></p>
+</dialog>
 
 <script>window.SLIDE = {"slug": "practice", "lesson": "lesson-2", "assets": "../../assets/", "preview": {"kind": "transform", "M": [[1, 0], [0, 1]]}, "check": "false"};</script>
 <script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>

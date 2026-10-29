@@ -343,6 +343,29 @@
 .la-embed .peek{gap:12px;padding:20px 22px}
 .la-embed .peek-t{font-family:var(--f-display);font-weight:700;font-size:20px;line-height:1.25;letter-spacing:-.01em}
 .la-embed .peek-go{font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#ffb39a}
+.la-embed .locked{margin-top:22px;border:1px dashed var(--accent);background:var(--accent-soft);border-radius:16px;padding:24px 26px;text-align:left}
+.la-embed .locked .lock-ic{font-size:26px;line-height:1}
+.la-embed .locked h2{font-family:var(--f-display);font-size:22px;letter-spacing:-.01em;margin:8px 0 10px}
+.la-embed .locked ul{margin:0 0 18px;padding-left:20px}
+.la-embed .locked li{margin:4px 0}
+.la-embed .locked .small, .la-embed .unlock .login{font-size:13.5px;color:var(--muted);margin:10px 0 0}
+.la-embed .unlock-teaser{background:var(--accent-soft);border-radius:14px;padding:20px 22px;margin-top:22px;display:flex;align-items:center;justify-content:space-between;gap:12px 20px;flex-wrap:wrap}
+.la-embed .unlock-teaser p{margin:0;max-width:60ch}
+.la-embed .card.pic{position:relative}
+.la-embed .lockbadge{position:absolute;z-index:3;top:10px;right:10px;font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:4px 8px;border-radius:999px;background:rgba(14,18,25,.78);color:#fff;pointer-events:none}
+.la-embed .lockbadge.free{background:var(--ok);color:#fff}
+.la-embed .members-note{color:var(--muted);font-size:15px}
+.la-embed .cta .btn+.btn{margin-left:10px}
+.la-embed dialog.unlock{max-width:540px;width:calc(100% - 32px);border:0;border-radius:18px;padding:28px 28px 22px;background:var(--surface);color:var(--ink);box-shadow:0 24px 80px rgba(0,0,0,.35)}
+.la-embed dialog.unlock::backdrop{background:rgba(10,14,22,.55)}
+.la-embed dialog.unlock .x{position:absolute;top:10px;right:12px;border:0;background:none;font-size:26px;line-height:1;color:var(--muted);cursor:pointer;padding:4px 8px}
+.la-embed dialog.unlock h2{font-family:var(--f-display);font-size:28px;letter-spacing:-.015em;margin:4px 0 6px}
+.la-embed dialog.unlock .sub{color:var(--muted);margin:0 0 14px}
+.la-embed dialog.unlock .perks{margin:0 0 16px;padding-left:20px}
+.la-embed dialog.unlock .perks li{margin:6px 0}
+.la-embed dialog.unlock .price{font-size:15px;margin:0 0 12px}
+.la-embed dialog.unlock .price b{font-family:var(--f-display);font-size:26px}
+.la-embed dialog.unlock .go{display:block;text-align:center;padding:12px 16px;font-size:16px}
 
 
 @container la (max-width:1020px){.la-embed .app{grid-template-columns:minmax(0,1fr)}

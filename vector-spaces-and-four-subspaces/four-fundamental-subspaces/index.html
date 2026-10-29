@@ -11,12 +11,15 @@
 <meta property="og:title" content="The Four Fundamental Subspaces Explained Visually">
 <meta property="og:description" content="Row space, column space, null space and left null space: their dimensions and how they fit together, with an interactive picture. Strang §3.5.">
 <meta property="og:url" content="https://linearalgebra.steppeschool.com/vector-spaces-and-four-subspaces/four-fundamental-subspaces/">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://linearalgebra.steppeschool.com/assets/cover.jpg">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="720">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="../../assets/lesson.css">
-<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "The Four Fundamental Subspaces Explained Visually", "headline": "Four subspaces, one big picture.", "description": "Row space, column space, null space and left null space: their dimensions and how they fit together, with an interactive picture. Strang §3.5.", "url": "https://linearalgebra.steppeschool.com/vector-spaces-and-four-subspaces/four-fundamental-subspaces/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": true, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 4: The four subspaces", "item": "https://linearalgebra.steppeschool.com/vector-spaces-and-four-subspaces/"}, {"@type": "ListItem", "position": 3, "name": "The Four Fundamental Subspaces Explained Visually", "item": "https://linearalgebra.steppeschool.com/vector-spaces-and-four-subspaces/four-fundamental-subspaces/"}]}]</script>
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "The Four Fundamental Subspaces Explained Visually", "headline": "Four subspaces, one big picture.", "description": "Row space, column space, null space and left null space: their dimensions and how they fit together, with an interactive picture. Strang §3.5.", "url": "https://linearalgebra.steppeschool.com/vector-spaces-and-four-subspaces/four-fundamental-subspaces/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": false, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 4: The four subspaces", "item": "https://linearalgebra.steppeschool.com/vector-spaces-and-four-subspaces/"}, {"@type": "ListItem", "position": 3, "name": "The Four Fundamental Subspaces Explained Visually", "item": "https://linearalgebra.steppeschool.com/vector-spaces-and-four-subspaces/four-fundamental-subspaces/"}]}]</script>
 </head>
 <body>
 <header class="top">
@@ -34,165 +37,14 @@
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-4--four-fundamental-subspaces.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 4 · slide 6</small>Four subspaces</span></span></div>
     <div class="key">inputs (ℝⁿ): &nbsp;row space r + nullspace n − r &nbsp;&nbsp;|&nbsp;&nbsp; outputs (ℝᵐ): &nbsp;column space r + left nullspace m − r</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Inputs (ℝⁿ, all vectors with n components): the row space C(Aᵀ) (all combinations of the rows), dimension r, and the nullspace N(A), dimension n − r.</li><li>Outputs (ℝᵐ): the column space C(A), dimension r, and the left nullspace N(Aᵀ) (all y with Aᵀy = 0), dimension m − r.</li><li>The row space and the column space always have the same dimension, r.</li><li>The row space is perpendicular to the nullspace.</li></ol></div>
-    <div class="prose">
-<h3>The two new subspaces</h3>
-<p>You know the column space C(A) and the nullspace N(A). Two more come from the transpose Aᵀ:</p>
-<ul>
-<li>The <b>row space</b> is all combinations of the rows of A. The rows of A are the columns of Aᵀ, so we write it C(Aᵀ).</li>
-<li>The <b>left nullspace</b> N(Aᵀ) is all y with Aᵀy = 0. That is the same as yᵀA = 0: y multiplies A from the left.</li>
-</ul>
-<h3>Think of a shadow</h3>
-<p>The sun is straight overhead, and every object casts a shadow on the floor. Taking an object to its shadow is like a matrix taking 3D inputs to 2D outputs.</p>
-<ul>
-<li>Moving an object straight up or down does not change its shadow. That lost direction is the <b>nullspace</b>.</li>
-<li>Moving it along the floor moves the shadow by the same amount. That part of the input is the <b>row space</b>.</li>
-<li>Every place where a shadow can fall is the <b>column space</b>.</li>
-<li>Shadows can fall anywhere on the floor, so the column space is the whole floor. No output direction is missed, and the <b>left nullspace</b> holds only the zero vector. It grows when the column space is smaller than the output space, as in the worked example below.</li>
-</ul>
-<h3>Why the row space is perpendicular to the nullspace</h3>
-<p>Ax = 0 says that each row of A, dotted with x, gives 0. So x is perpendicular to every row, and therefore to every combination of rows, which is the whole row space. The same argument applied to Aᵀ shows that the left nullspace is perpendicular to the column space. The next lesson (Strang, chapter 4) builds on this.</p>
-<h3>The dimensions</h3>
-<p>For an m by n matrix of rank r:</p>
-<div class="worked">
-<div class="row">row space: r &nbsp;+&nbsp; nullspace: n − r &nbsp;=&nbsp; n</div>
-<div class="row">column space: r &nbsp;+&nbsp; left nullspace: m − r &nbsp;=&nbsp; m</div>
-</div>
-<p>The row space and column space have the same dimension, even though they live in different spaces. Strang calls these four dimensions Part 1 of the Fundamental Theorem of Linear Algebra.</p>
-<h3>A worked example</h3>
-<div class="worked">
-<div>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>6</span></span> has rank 1.</div>
-<div class="row">row space: the line through (1, 2); both rows, (1, 2) and (3, 6), lie on it &nbsp; nullspace: the line through (−2, 1)</div>
-<div class="row">column space: the line through (1, 3) &nbsp; left nullspace: the line through (−3, 1)</div>
-<div>Finding the left nullspace: Aᵀ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>3</span><span>2</span><span>6</span></span>, and Aᵀy = 0 says y₁ + 3y₂ = 0 (the second row, 2y₁ + 6y₂ = 0, says the same). The free variable is y₂. Set y₂ = 1, then y₁ = −3, so y = (−3, 1).</div>
-<div>Each pair is perpendicular: (1, 2)·(−2, 1) = 0 and (1, 3)·(−3, 1) = 0 ✓</div>
-<div>The 2 by 4 matrix from slide 3 has r = 2: row space 2, nullspace 2 (its two special solutions), column space 2 (all of ℝ²), left nullspace 0.</div>
-</div>
-    </div>
-    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · All four lines</h3>
-<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>1</span></span>, rank 1.</p><div class="worked"><div class="row">Row space: multiples of (1, 1). Nullspace: multiples of (1, −1)</div><div class="row">Column space: multiples of (1, 1). Left nullspace: multiples of (1, −1)</div></div>
-</section>
-<section class="example"><h3>Example 2 · A 2 by 3 matrix</h3>
-<p>A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>3</span><span>2</span><span>4</span><span>6</span></span>, rank 1, m = 2, n = 3.</p><div class="worked"><div class="row">dim row space 1, nullspace 2, column space 1, left nullspace 1</div><div class="row">Left nullspace: y₁ + 2y₂ = 0, multiples of (−2, 1)</div></div>
-</section>
-<section class="example"><h3>Example 3 · An invertible matrix</h3>
-<p>Any invertible 2 by 2 matrix has rank 2.</p><div class="worked"><div class="row">Row space = column space = the whole plane</div><div class="row">Nullspace = left nullspace = {0}</div></div>
-</section></div>
-    <details class="more"><summary><span class="pl-icon">✎</span><span class="rv-text"><b>More examples to try</b><span>3 problems with step-by-step solutions. Try each one before you open its solution.</span></span><span class="rv-toggle"><span class="s-show">Show</span><span class="s-hide">Hide</span></span></summary><div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
-<p>A is 5 by 3 with rank 3. Give the four dimensions.</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>Row space 3, nullspace 0, column space 3, left nullspace 5 − 3 = 2.</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">2</span><div class="pbody">
-<p>Describe the four subspaces of A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>4</span><span>2</span></span>.</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>Row space: multiples of (2, 1). Nullspace: multiples of (−1, 2). Column space: multiples of (1, 2). Left nullspace: multiples of (−2, 1).</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">3</span><div class="pbody">
-<p>Can a 3 by 3 matrix have a line as row space and a line as nullspace?</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>No. Their dimensions must add to n = 3, and 1 + 1 = 2.</p>
-</div></details>
-</div></div></div></details>
+    <section class="locked" aria-label="Members only">
+      <div class="lock-ic" aria-hidden="true">🔒</div>
+      <h2>The rest of this slide is for members</h2>
+      <ul><li>The full explanation, with an everyday picture and where it shows up in engineering</li><li>3 worked examples with real numbers</li><li>3 practice problems with step-by-step solutions</li><li>A Python lab you edit and run in the browser, with an exercise that checks your answer</li></ul>
+      <button class="btn primary" type="button" data-unlock>Unlock lessons 4 to 8</button>
+      <p class="small">$15 / month, cancel any time. Lessons 1 to 3 stay free.</p>
+    </section>
   </article>
-  <details class="review">
-    <summary><span class="pl-icon">✎</span><span class="rv-text"><b>Lesson review</b><span>3 worked examples and 5 mixed problems with solutions</span></span><span class="rv-toggle"><span class="s-show">Open</span><span class="s-hide">Close</span></span></summary>
-    <div class="review-body">
-      <h2 class="practice-h">Worked examples</h2>
-      <div class="examples"><section class="example"><h3>Example 1 · Is it a subspace?</h3>
-<p>Is the set of all (x, y, z) with x = 2y a subspace of 3D space?</p>
-<div class="worked"><div class="row">Zero: (0, 0, 0) has 0 = 2·0 ✓</div>
-<div class="row">Add: if x₁ = 2y₁ and x₂ = 2y₂, then x₁ + x₂ = 2(y₁ + y₂) ✓</div>
-<div class="row">Scale: cx₁ = 2(cy₁) ✓</div></div>
-<p>Yes. It is a plane through the origin. With x = 2y + 1 it would fail at once: the origin is missing.</p>
-</section>
-<section class="example"><h3>Example 2 · Nullspace and special solutions</h3>
-<p>Find the nullspace of A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>3</span><span>2</span><span>4</span><span>6</span></span>.</p>
-<div class="worked"><div class="row">Row 2 − 2·row 1 = 0, so R = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>3</span><span>0</span><span>0</span><span>0</span></span>. One pivot (column 1), rank 1.</div>
-<div class="row">Free: x₂, x₃. &nbsp; x₂ = 1, x₃ = 0 gives (−2, 1, 0). &nbsp; x₂ = 0, x₃ = 1 gives (−3, 0, 1).</div></div>
-<p>N(A) is all combinations c·(−2, 1, 0) + d·(−3, 0, 1): a plane, dimension n − r = 3 − 1 = 2.</p>
-</section>
-<section class="example"><h3>Example 3 · The complete solution</h3>
-<p>Solve x + 2y + 3z = 6.</p>
-<div class="worked"><div class="row">Particular solution: set the free variables y = z = 0, then x = 6. x_p = (6, 0, 0)</div>
-<div class="row">Nullspace: A = [1 2 3], the first row of Example 2's matrix, with special solutions (−2, 1, 0) and (−3, 0, 1)</div>
-<div class="row">x = (6, 0, 0) + c·(−2, 1, 0) + d·(−3, 0, 1)</div></div>
-<p>Geometrically: a plane parallel to the nullspace, shifted to pass through (6, 0, 0).</p>
-</section></div>
-      <h2 class="practice-h">Problems</h2>
-      <div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
-<p>Which of these are subspaces of the plane? (a) all (x, y) with x = y (b) all (x, y) with x + y = 1 (c) all (x, y) with xy = 0.</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>(a) Yes: a line through the origin.</p><p>(b) No: (0, 0) is not on it.</p><p>(c) No: it is the two axes together, and (1, 0) + (0, 1) = (1, 1) has xy = 1.</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">2</span><div class="pbody">
-<p>Find the nullspace of <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>2</span><span>−2</span></span>.</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>Both rows say x − y = 0. So N(A) is every multiple of (1, 1): a line.</p><p>Check: A(1, 1) = (1 − 1, 2 − 2) = (0, 0) ✓</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">3</span><div class="pbody">
-<p>Find R, the rank and a special solution for A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>1</span><span>2</span><span>4</span><span>3</span><span>3</span><span>6</span><span>4</span></span>.</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>Row 2 − 2·row 1 = (0, 0, 1), row 3 − 3·row 1 = (0, 0, 1), then row 3 − row 2 = 0. Clearing above the pivot: R = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>0</span><span>0</span><span>0</span><span>1</span><span>0</span><span>0</span><span>0</span></span>.</p><p>Pivots in columns 1 and 3, so rank 2. Column 2 is free: x₂ = 1 gives the special solution (−2, 1, 0).</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">4</span><div class="pbody">
-<p>Are (1, 2, 0), (0, 1, 1) and (1, 3, 1) independent?</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>No. (1, 3, 1) = (1, 2, 0) + (0, 1, 1), so 1·v₁ + 1·v₂ − 1·v₃ = 0. The rank is 2 and the three vectors lie in one plane.</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">5</span><div class="pbody">
-<p>A is 3 by 5 with rank 2. Give the dimension of each of the four subspaces.</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>m = 3, n = 5, r = 2.</p><p>Row space r = 2, nullspace n − r = 3, column space r = 2, left nullspace m − r = 1.</p>
-</div></details>
-</div></div></div>
-    </div>
-  </details>
-
-  <section class="labsec" aria-label="Lab">
-    <div class="exercise" id="exercise">
-      <span class="tag">Exercise</span>
-      <span class="task">Build a rank-1 matrix whose column space is the line through (1, −1).</span>
-      <span class="hint" id="hint">Edit the code and press Run.</span>
-    </div>
-    <div class="lab">
-      <div class="editor-card">
-        <div class="bar">
-          <span class="file">slide_6.py</span>
-          <span class="status" id="pystatus">Loading Python…</span>
-          <button class="btn" id="reset">Reset</button>
-          <button class="btn primary" id="run" disabled>Run ▸</button>
-        </div>
-        <div class="editor">
-          <div class="gutter" id="gutter">1</div>
-          <div class="code" id="codewrap">
-            <pre id="hl" aria-hidden="true"></pre>
-            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
-
-A = np.array([[1., 2.],
-              [2., 4.]])       # your turn: column space through (1, -1)
-                               # (its columns must be multiples of (1, -1))
-# The first number of each row forms column 1:
-# [[1., 5.], [-1., 7.]] has column 1 = (1, -1).
-
-print(&quot;rank =&quot;, np.linalg.matrix_rank(A))
-four(A)                        # left: input plane, right: output plane</textarea>
-          </div>
-        </div>
-        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
-        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
-      </div>
-      <figure class="figure">
-        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
-        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
-      </figure>
-    </div>
-  </section>
 
   <div class="after">
     <div class="nav">
@@ -206,10 +58,23 @@ four(A)                        # left: input plane, right: output plane</textare
   Follows the order and notation of Gilbert Strang, <i>Introduction to Linear Algebra</i>, 5th edition (2016); § numbers refer to that book.
   Explanations, examples and code are original. Made by <a href="https://www.steppeschool.com">Steppeschool</a>.
 </footer>
+<dialog class="unlock" id="unlock" aria-labelledby="unlock-h">
+  <form method="dialog"><button class="x" aria-label="Close">×</button></form>
+  <div class="kicker">Members</div>
+  <h2 id="unlock-h">Unlock the whole course</h2>
+  <p class="sub">Lessons 1 to 3 are free. Members get all eight lessons, through eigenvalues and the SVD.</p>
+  <ul class="perks">
+    <li><b>Lessons 4 to 8 in full:</b> the four subspaces, least squares, determinants, eigenvalues, the SVD and PCA.</li>
+    <li><b>Every slide with its Python lab</b>, exercise, worked examples and problems with full solutions.</li>
+    <li><b>Five extra members-only problems per lesson</b>, each with a worked solution.</li>
+    <li><b>Ask questions under any lesson.</b> I usually reply within a few hours.</li>
+    <li><b>Plus every Steppeschool course:</b> STM32, motor control, a quadcopter flight controller, a balancing robot, IMU filters, CAN bus, bootloaders and KiCad.</li>
+  </ul>
+  <div class="price"><b>$15</b> / month · cancel any time</div>
+  <a class="btn primary go" href="https://www.steppeschool.com/offers/Votyr5BH/checkout" target="_blank" rel="noopener">Continue to checkout →</a>
+  <p class="login">Already a member? <a href="https://www.steppeschool.com/login" target="_blank" rel="noopener">Log in to the course</a></p>
+</dialog>
 
-<script>window.SLIDE = {"slug": "four-fundamental-subspaces", "lesson": "lesson-4", "assets": "../../assets/", "preview": {"kind": "four", "A": [[1, 2], [2, 4]]}, "check": "isF(V) && rankOf(V.A) === 1 && near(V.A[1][0] + V.A[0][0], 0) && near(V.A[1][1] + V.A[0][1], 0)"};</script>
-<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
-<script src="../../assets/lab.js" defer></script>
 <script src="../../assets/nav.js" defer></script>
 </body>
 </html>
