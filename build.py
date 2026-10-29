@@ -603,34 +603,32 @@ def home_page(lessons_built):
     title = f"{SITE}: Interactive Linear Algebra with Python"
     desc = ("Learn linear algebra by running it: short visual lessons with live Python in your browser, "
             "following Professor Gilbert Strang's textbook. Built for engineers.")
-    cards = ""
-    k = len(lessons_built)
-    for c in CHAPTERS:
-        row = ""
-        for lesson, slides, _ in lessons_built:
-            if lesson["ch"] == c["n"]:
-                row += (f'<a class="card pic" href="{lesson["path"]}/">{'<span class="lockbadge preview">Free preview</span>' if locked(lesson) else '<span class="lockbadge free">Free</span>'}{thumb(card_img(lesson, slides[0]["slug"]), "Start lesson", f"{len(slides)} slides with live Python.", (f"Lesson {lesson['n']}", lesson["title"]))}'
-                        f'<span class="n">Lesson {lesson["n"]} · {e(lesson["sections"])}</span>'
-                        f'<h3>{e(lesson["title"])}</h3><p>{e(lesson["summary"])}</p></a>')
-        for name in c.get("planned", []):
-            k += 1
-            row += (f'<div class="card soon"><span class="n">Lesson {k} · coming soon</span><h3>{e(name)}</h3></div>')
-        cards += f'<h3 class="chapter-title" id="chapter-{c["n"]}">Chapter {c["n"]} · {e(c["title"])}</h3><div class="cards">{row}</div>'
+    chname = {c["n"]: c["title"] for c in CHAPTERS}
+    row = ""
+    for lesson, slides, _ in lessons_built:
+        badge = '<span class="lockbadge preview">Free preview</span>' if locked(lesson) else '<span class="lockbadge free">Free</span>'
+        row += (f'<a class="card pic" href="{lesson["path"]}/">{badge}{thumb(card_img(lesson, slides[0]["slug"]), "Start lesson", f"{len(slides)} slides with live Python.", (f"Lesson {lesson['n']}", lesson["title"]))}'
+                f'<span class="n">Chapter {lesson["ch"]} · {e(chname[lesson["ch"]])}</span>'
+                f'<h3>{e(lesson["title"])}</h3><p>{e(lesson["summary"])}</p></a>')
+    cards = f'<div class="cards all">{row}</div>'
     first = lessons_built[0]
     jsonld = dict(COURSE, **{"@context": "https://schema.org", "inLanguage": "en", "isAccessibleForFree": True})
     return head(title, desc, url, "", jsonld=jsonld) + topnav("") + f"""<div class="home">
   <section class="hero">
-    <div class="kicker">Steppeschool · interactive course · lessons 1 to 3 free</div>
-    <h1>Linear algebra you can run.</h1>
-    <p class="promise">Eight short lessons. At the end you compress images and run PCA with code you understand line by line.</p>
-    <div class="cta"><a class="btn primary" href="{first[0]['path']}/{first[1][0]['slug']}/">Start lesson 1 →</a><a class="btn" href="#lessons">See all lessons</a><button class="btn" type="button" data-unlock>Full course: $20, lifetime</button></div>
-    <div class="outcomes"><b>After the course you can</b><ul>{"".join(f"<li>{e(o)}</li>" for o in COURSE_OUTCOMES)}</ul></div>
-    <p>Short visual lessons. Read a slide, change the Python underneath, press Run and watch the plane move. The order follows Professor Gilbert Strang's <i>Introduction to Linear Algebra</i>, and the examples come from robotics and engineering. Eight lessons take you from adding two arrows all the way to eigenvalues, the SVD and PCA. Lessons 1 to 3 are free; lessons 4 to 8 are for members.</p>
+    <div class="hero-text">
+      <div class="kicker">Steppeschool · interactive course · first 3 lessons free</div>
+      <h1>Linear algebra you can run.</h1>
+      <p class="promise">Linear algebra is the language of engineering. Robots, drones, Kalman filters and AI all use it. Learn it by running Python on every page.</p>
+      <div class="cta"><a class="btn primary" href="{first[0]['path']}/{first[1][0]['slug']}/">Start lesson 1 →</a><a class="btn" href="#lessons">See all lessons</a><button class="btn" type="button" data-unlock>Full course: $20, lifetime</button></div>
+      <p class="hero-note">8 short lessons · Python in your browser, nothing to install · Based on Professor Gilbert Strang's <i>Introduction to Linear Algebra</i></p>
+    </div>
+    <div class="hero-art"><img src="assets/hero.webp" alt="" width="590" height="600"></div>
   </section>
+  <div class="outcomes wide"><b>After the course you can</b><ul>{"".join(f"<li>{e(o)}</li>" for o in COURSE_OUTCOMES)}</ul></div>
   <h2 class="section-title" id="lessons">Lessons</h2>
   {cards}
   <h2 class="section-title">How it works</h2>
-  <div class="panel">
+  <div class="panel wide">
     <p>Every slide explains one idea with an everyday picture first: a boat with two thrusters, a shopping basket, a mirror. Then comes the maths, a worked example with real numbers, and where the idea shows up in drones, IMUs and robot arms.</p>
     <p>Next to the text is a lab. The Python runs in your browser, nothing to install. Functions like <code>show(A)</code>, <code>combo(A, x, b)</code>, <code>proj(a, b)</code>, <code>eigpic(A, v)</code> and <code>svdpic(A, θ)</code> draw on the plane, and <code>table(...)</code> lays out matrices with their pivots. Each slide ends with a small exercise that checks your answer.</p>
   </div>

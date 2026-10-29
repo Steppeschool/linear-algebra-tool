@@ -413,3 +413,18 @@ dialog.unlock .incl{font-size:14px;color:var(--muted);margin:0 0 14px}
 .upsell{margin:18px 0 0;background:var(--accent-soft);border-radius:14px;padding:18px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px 20px;flex-wrap:wrap}
 .upsell p{margin:0;max-width:78ch}
 .nowrap{white-space:nowrap}
+
+/* home layout (Oct 29): two-column hero, full-width outcomes, one lesson grid */
+.home{max-width:1180px}
+.hero{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);align-items:center;gap:28px 48px}
+.hero-text{display:grid;gap:14px;min-width:0}
+.hero .hero-note{font-size:14.5px;color:var(--muted)}
+.hero-art img{display:block;width:100%;height:auto;max-width:100%;border-radius:18px;box-shadow:0 24px 60px -28px rgba(20,30,90,.55)}
+.outcomes.wide{max-width:none;margin:4px 0 8px}
+.outcomes.wide ul{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2px 32px}
+.cards.all{grid-template-columns:repeat(4,minmax(0,1fr))}
+.panel.wide{max-width:none;display:grid;grid-template-columns:1fr 1fr;gap:10px 36px}
+.panel.wide p{margin:0}
+@media (max-width:1040px){.cards.all{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:860px){.hero{grid-template-columns:1fr}.hero-art{max-width:520px}.panel.wide{grid-template-columns:1fr}}
+@media (max-width:560px){.cards.all{grid-template-columns:1fr}}
