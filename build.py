@@ -567,11 +567,11 @@ def lesson_page(lesson, slides, practice=None):
                   f'<h3>Worked examples and problems</h3><p>{e(practice["description"])}</p></a>')
     return head(title, desc, url, prefix, jsonld=jsonld) + topnav(prefix, lesson) + f"""<div class="home">
   <section class="hero">
-    <div class="kicker">Chapter {lesson['ch']} · Lesson {lesson['n']} · {e(lesson['sections'])}{' · Members' if lock else ''}</div>
+    <div class="kicker">Chapter {lesson['ch']} · Lesson {lesson['n']} · {e(lesson['sections'])}{' · Free preview' if lock else ''}</div>
     <h1>{e(lesson['title'])}</h1>
     <div class="outcomes"><b>By the end of this lesson you can</b><ul>{"".join(f"<li>{e(o)}</li>" for o in lesson["outcomes"])}</ul></div>
     <p>{e(lesson['summary'])} {len(slides)} short slides, then worked examples and problems. Each slide has an everyday picture, a worked example and Python you can run right on the page.</p>
-    {'<p class="members-note">Members lesson: most of every slide is free to read, with its Python lab. Members get the full text, every worked example, the problems with solutions and the practice set.</p>' if lock else ''}
+    {'<p class="members-note">Free preview: most of every slide is yours to read, with its Python lab. Members get the full text, every worked example, the problems with solutions and the practice set.</p>' if lock else ''}
     <div class="cta"><a class="btn primary" href="{slides[0]['slug']}/">Start the lesson →</a>{'<button class="btn" type="button" data-unlock>Unlock lessons 4 to 8</button>' if lock else ''}</div>
   </section>
   <h2 class="section-title">Slides</h2>
