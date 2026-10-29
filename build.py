@@ -25,8 +25,7 @@ FONTS = ("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght
          "&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap")
 SIGNUP = "https://www.steppeschool.com/offers/JwLxrqg8/checkout"
 TODAY = datetime.date.today().isoformat()
-CHECKOUT = "https://www.steppeschool.com/offers/Votyr5BH/checkout"   # "All Included", $15/month, includes the members' course
-LIFETIME = "https://www.steppeschool.com/offers/57ZvEAFX/checkout"   # $20 once, Linear Algebra, Live only
+CHECKOUT = "https://www.steppeschool.com/offers/57ZvEAFX/checkout"   # "Lifetime Access": $20 once, Linear Algebra, Live only
 LOGIN = "https://www.steppeschool.com/login"
 LOCK_FROM = 4   # lessons 1-3 are free; 4+ are members-only (public pages show a teaser)
 # Local test builds only (in a copy of the repo, never pushed): LA_UNLOCK=1 builds every lesson in full.
@@ -242,11 +241,10 @@ UNLOCK_DIALOG = f"""<dialog class="unlock" id="unlock" aria-labelledby="unlock-h
     <li><b>Every slide with its Python lab</b>, exercise, worked examples and problems with full solutions.</li>
     <li><b>Five extra members-only problems per lesson</b>, each with a worked solution.</li>
     <li><b>Ask questions under any lesson.</b> I usually reply within a few hours.</li>
-    <li><b>Plus every Steppeschool course:</b> STM32, motor control, a quadcopter flight controller, a balancing robot, IMU filters, CAN bus, bootloaders and KiCad.</li>
+    <li><b>Pay once, keep it forever,</b> including every future update to the course.</li>
   </ul>
-  <div class="price"><b>$15</b> / month · cancel any time</div>
+  <div class="price"><b>$20</b> once · lifetime access</div>
   <a class="btn primary go" href="{CHECKOUT}" target="_blank" rel="noopener">Continue to checkout →</a>
-  <a class="btn go alt" href="{LIFETIME}" target="_blank" rel="noopener">Or pay <b>$20 once</b> for lifetime access to this course only</a>
   <p class="login">Already a member? <a href="{LOGIN}" target="_blank" rel="noopener">Log in to the course</a></p>
 </dialog>
 """
@@ -259,7 +257,7 @@ def lock_panel(what, items):
       <h2>{'Keep reading with a membership' if what == 'slide' else f'The rest of this {what} is for members'}</h2>
       <ul>{li}</ul>
       <button class="btn primary" type="button" data-unlock>Unlock lessons 4 to 8</button>
-      <p class="small">$15 / month, cancel any time. Lessons 1 to 3 stay free.</p>
+      <p class="small">$20 once, lifetime access. Lessons 1 to 3 stay free.</p>
     </section>"""
 
 
@@ -597,7 +595,7 @@ def home_page(lessons_built):
     <div class="kicker">Steppeschool · interactive course · lessons 1 to 3 free</div>
     <h1>Linear algebra you can run.</h1>
     <p>Short visual lessons. Read a slide, change the Python underneath, press Run and watch the plane move. The order follows Gilbert Strang's <i>Introduction to Linear Algebra</i>, and the examples come from robotics and engineering. Eight lessons take you from adding two arrows all the way to eigenvalues, the SVD and PCA. Lessons 1 to 3 are free; lessons 4 to 8 are for members.</p>
-    <div class="cta"><a class="btn primary" href="{first[0]['path']}/{first[1][0]['slug']}/">Start lesson 1 →</a><a class="btn" href="#lessons">See all lessons</a><button class="btn" type="button" data-unlock>Members: $15 / month</button></div>
+    <div class="cta"><a class="btn primary" href="{first[0]['path']}/{first[1][0]['slug']}/">Start lesson 1 →</a><a class="btn" href="#lessons">See all lessons</a><button class="btn" type="button" data-unlock>Full course: $20 once</button></div>
   </section>
   <h2 class="section-title" id="lessons">Lessons</h2>
   {cards}
