@@ -379,6 +379,38 @@ def thumb(src, peek_title, items, label=None):
             f'<span class="peek"><span class="peek-t">{line}</span><span class="peek-go">{e(peek_title)} →</span></span></span>')
 
 
+
+# Reader comments (giscus, backed by GitHub Discussions on the public linear-algebra-tool repo).
+# Leave GISCUS_CATEGORY_ID empty to build without comments.
+GISCUS_REPO = "Steppeschool/linear-algebra-tool"
+GISCUS_REPO_ID = "R_kgDOVYeydQ"
+GISCUS_CATEGORY = "Lesson comments"
+GISCUS_CATEGORY_ID = ""
+
+
+def comments():
+    if not GISCUS_CATEGORY_ID:
+        return ""
+    return f"""<section class="comments" aria-label="Comments">
+  <h2>Questions and comments</h2>
+  <p>Stuck on something, or found a mistake? Ask here and I'll answer. You sign in with GitHub.</p>
+  <div id="giscus"></div>
+</section>
+<script>
+(function () {{
+  var s = document.createElement("script");
+  s.src = "https://giscus.app/client.js";
+  var a = {{"repo": "{GISCUS_REPO}", "repo-id": "{GISCUS_REPO_ID}", "category": "{GISCUS_CATEGORY}",
+    "category-id": "{GISCUS_CATEGORY_ID}", "mapping": "specific", "term": location.hostname + location.pathname,
+    "strict": "1", "reactions-enabled": "1", "emit-metadata": "0", "input-position": "top",
+    "theme": "preferred_color_scheme", "lang": "en", "loading": "lazy"}};
+  for (var k in a) s.setAttribute("data-" + k, a[k]);
+  s.crossOrigin = "anonymous"; s.async = true;
+  document.getElementById("giscus").appendChild(s);
+}})();
+</script>"""
+
+
 def slide_page(lesson, slides, i, next_lesson=None, practice=None):
     s = slides[i]
     prefix = "../../"
@@ -466,6 +498,7 @@ def slide_page(lesson, slides, i, next_lesson=None, practice=None):
     </div>
   </div>
 </main>
+{comments()}
 {footer()}
 <script>window.SLIDE = {json.dumps(config, ensure_ascii=False)};</script>
 <script id="brython" src="{BRYTHON}" defer></script>
@@ -551,6 +584,7 @@ def practice_page(lesson, slides, pr, next_lesson):
     </div>
   </div>
 </main>
+{comments()}
 {footer()}
 <script>window.SLIDE = {json.dumps(config, ensure_ascii=False)};</script>
 <script id="brython" src="{BRYTHON}" defer></script>
