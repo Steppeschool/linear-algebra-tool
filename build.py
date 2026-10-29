@@ -232,6 +232,9 @@ def head(title, description, url, prefix, og_type="website", jsonld=None):
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="{FONTS}">
 <link rel="stylesheet" href="{prefix}assets/lesson.css">{ld}
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4ZV1YVD90H"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag('js',new Date());gtag('config','G-4ZV1YVD90H');
+document.addEventListener('click',function(ev){{var a=ev.target.closest&&ev.target.closest('a[href*="/offers/"]');if(a)gtag('event','begin_checkout',{{currency:'USD',value:20,link_url:a.href,page_path:location.pathname}});}});</script>
 </head>
 <body>
 """
