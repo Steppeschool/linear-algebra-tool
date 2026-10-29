@@ -396,3 +396,4 @@ dialog.unlock .go{display:block;text-align:center;padding:12px 16px;font-size:16
 .locked-stub b{flex:1;font-weight:600}
 .locked-stub em{font-style:normal;font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
 .locked h2{text-transform:none;color:var(--ink);letter-spacing:-.01em;font-family:var(--f-display);font-size:22px}
+dialog.unlock .go.alt{margin-top:10px;font-weight:500}

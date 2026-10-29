@@ -26,6 +26,7 @@ FONTS = ("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght
 SIGNUP = "https://www.steppeschool.com/offers/JwLxrqg8/checkout"
 TODAY = datetime.date.today().isoformat()
 CHECKOUT = "https://www.steppeschool.com/offers/Votyr5BH/checkout"   # "All Included", $15/month, includes the members' course
+LIFETIME = "https://www.steppeschool.com/offers/57ZvEAFX/checkout"   # $20 once, Linear Algebra, Live only
 LOGIN = "https://www.steppeschool.com/login"
 LOCK_FROM = 4   # lessons 1-3 are free; 4+ are members-only (public pages show a teaser)
 # Local test builds only (in a copy of the repo, never pushed): LA_UNLOCK=1 builds every lesson in full.
@@ -245,6 +246,7 @@ UNLOCK_DIALOG = f"""<dialog class="unlock" id="unlock" aria-labelledby="unlock-h
   </ul>
   <div class="price"><b>$15</b> / month · cancel any time</div>
   <a class="btn primary go" href="{CHECKOUT}" target="_blank" rel="noopener">Continue to checkout →</a>
+  <a class="btn go alt" href="{LIFETIME}" target="_blank" rel="noopener">Or pay <b>$20 once</b> for lifetime access to this course only</a>
   <p class="login">Already a member? <a href="{LOGIN}" target="_blank" rel="noopener">Log in to the course</a></p>
 </dialog>
 """
