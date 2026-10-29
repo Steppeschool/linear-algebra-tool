@@ -254,7 +254,7 @@ def lock_panel(what, items):
     li = "".join(f"<li>{x}</li>" for x in items)
     return f"""<section class="locked" aria-label="Members only">
       <div class="lock-ic" aria-hidden="true">🔒</div>
-      <h2>The rest of this {what} is for members</h2>
+      <h2>{'Keep reading with a membership' if what == 'slide' else f'The rest of this {what} is for members'}</h2>
       <ul>{li}</ul>
       <button class="btn primary" type="button" data-unlock>Unlock lessons 4 to 8</button>
       <p class="small">$15 / month, cancel any time. Lessons 1 to 3 stay free.</p>
@@ -558,7 +558,7 @@ def lesson_page(lesson, slides, practice=None):
     <div class="kicker">Chapter {lesson['ch']} · Lesson {lesson['n']} · {e(lesson['sections'])}{' · Members' if lock else ''}</div>
     <h1>{e(lesson['title'])}</h1>
     <p>{e(lesson['summary'])} {len(slides)} short slides, then worked examples and problems. Each slide has an everyday picture, a worked example and Python you can run right on the page.</p>
-    {'<p class="members-note">This is a members lesson. Each slide shows its opening here; the full slides, labs and solutions are for members.</p>' if lock else ''}
+    {'<p class="members-note">Members lesson: most of every slide is free to read, with its Python lab. Members get the full text, every worked example, the problems with solutions and the practice set.</p>' if lock else ''}
     <div class="cta"><a class="btn primary" href="{slides[0]['slug']}/">Start the lesson →</a>{'<button class="btn" type="button" data-unlock>Unlock lessons 4 to 8</button>' if lock else ''}</div>
   </section>
   <h2 class="section-title">Slides</h2>
@@ -645,6 +645,53 @@ def slide_teaser(lesson, s, page):
     return teaser(page, '<div class="prose">', lock_panel("slide", items))
 
 
+def scramble(fragment, seed):
+    """Unreadable stand-in for members-only text: same shape, random letters, tags kept. Shown blurred."""
+    import random
+    rnd = random.Random(seed)
+    low, up = "abcdefghijklmnopqrstuvwxyz", "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    def text(t):
+        return "".join(rnd.choice(low) if c.islower() else rnd.choice(up) if c.isupper()
+                       else str(rnd.randint(0, 9)) if c.isdigit() else c if c.isspace() or c in ".,:;()=+−-" else rnd.choice(low)
+                       for c in html.unescape(t))
+    return re.sub(r"(?<=>)([^<]+)", lambda m: e(text(m.group(1))), "<x>" + fragment)[3:]
+
+
+def public_slide(lesson, slides, i, next_lesson, practice):
+    """Members lesson, public version: most of the explanation, the first worked example and the lab stay open;
+    the end of the explanation fades out under a blur, the other examples and problems show as locked titles."""
+    s = dict(slides[i])
+    secs = re.split(r"(?=<h3>)", s["prose"].strip())
+    secs = [x for x in secs if x.strip()]
+    k = len(secs)
+    keep = max(1, k - max(1, round(k / 3))) if k > 1 else 1
+    shown, hidden = "".join(secs[:keep]), "".join(secs[keep:])
+    if not hidden:   # one long section: cut it by paragraphs instead
+        paras = re.split(r"(?=<p>|<div class=\"worked\">)", shown)
+        cut = max(1, (2 * len(paras)) // 3)
+        shown, hidden = "".join(paras[:cut]), "".join(paras[cut:])
+    exs = re.findall(r'<section class="example">.*?</section>', s.get("examples") or "", re.S)
+    probs = count(s.get("problems"), "problem")
+    items = (["The rest of this explanation"] +
+             ([plural(len(exs) - 1, "more worked example")] if len(exs) > 1 else []) +
+             ([plural(probs, "practice problem") + " with step-by-step solutions"] if probs else []) +
+             ["The lesson's practice set and five extra members-only problems"])
+    fade = (f'<div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet>{scramble(hidden, s["slug"])}</div>'
+            f'{lock_panel("slide", items)}</div>')
+    s["prose"] = shown + "\n" + fade
+    stubs = "".join(f'<button class="locked-stub" type="button" data-unlock><span>🔒</span><b>{e(re.sub("<[^>]+>", "", t))}</b><em>Members</em></button>'
+                    for t in re.findall(r"<h3>(.*?)</h3>", "".join(exs[1:])))
+    if probs:
+        stubs += (f'<button class="locked-stub" type="button" data-unlock><span>🔒</span><b>{plural(probs, "more problem")} to try, '
+                  f'with step-by-step solutions</b><em>Members</em></button>')
+    s["examples"] = (exs[0] if exs else "") + stubs
+    s["problems"] = ""
+    page = slide_page(lesson, slides[:i] + [s] + slides[i + 1:], i, next_lesson, practice)
+    page = re.sub(r'\s*<details class="review">.*?\n  </details>', "", page, flags=re.S)   # the review nests <details>
+    assert 'class="review"' not in page
+    return page.replace('"isAccessibleForFree": true', '"isAccessibleForFree": false')
+
+
 def practice_teaser(lesson, pr, page):
     items = [plural(count(pr.get("examples"), "example"), "worked example") + " covering the whole lesson",
              plural(count(pr.get("problems"), "problem"), "problem") + " with full solutions",
@@ -692,7 +739,8 @@ def main():
             d.mkdir(exist_ok=True)
             page = slide_page(lesson, slides, i, next_lesson, practice)
             write_embed(lesson, s["slug"], page)
-            (d / "index.html").write_text(slide_teaser(lesson, s, page) if locked(lesson) else page, encoding="utf-8")
+            (d / "index.html").write_text(public_slide(lesson, slides, i, next_lesson, practice) if locked(lesson) else page,
+                                          encoding="utf-8")
             urls.append(f"{BASE}/{lesson['path']}/{s['slug']}/")
         if practice:
             d = out / "practice"

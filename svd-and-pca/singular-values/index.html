@@ -37,14 +37,72 @@
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-8--singular-values.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 8 · slide 2</small>Singular values</span></span></div>
     <div class="key">AᵀA vᵢ = σᵢ² vᵢ &nbsp;&nbsp; σᵢ = √λᵢ(AᵀA) &nbsp;&nbsp; uᵢ = Avᵢ / σᵢ</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>AᵀA = VΣᵀΣVᵀ: its eigenvectors are the vᵢ and its eigenvalues are σᵢ².</li><li>So σᵢ = √(eigenvalue of AᵀA). These eigenvalues are never negative.</li><li>The output directions are uᵢ = Avᵢ/σᵢ, automatically perpendicular and of length 1.</li><li>Similarly AAᵀ has eigenvectors uᵢ and the same nonzero eigenvalues σᵢ².</li></ol></div>
-    <section class="locked" aria-label="Members only">
+    <div class="prose">
+<h3>Measure the stretch, then take the root</h3>
+<p>To find how much A stretches a unit vector v, look at the squared length: |Av|² = (Av)ᵀ(Av) = vᵀ(AᵀA)v. So everything about stretching lives in the matrix AᵀA. It is symmetric (lesson 7), so it has perpendicular eigenvectors. Its eigenvalues are squared lengths |Av|², so they are never negative.</p>
+<h3>Why the eigenvectors of AᵀA are the right v's</h3>
+<div class="worked"><div class="row">A = UΣVᵀ, &nbsp; so Aᵀ = VΣᵀUᵀ</div><div class="row">AᵀA = VΣᵀUᵀUΣVᵀ = V(ΣᵀΣ)Vᵀ, &nbsp; because UᵀU = I</div><div class="row">This is QΛQᵀ from lesson 7 with Q = V and Λ = ΣᵀΣ = diag(σ₁², σ₂², …). (Σ is rectangular when A is, so we write ΣᵀΣ, a square diagonal matrix.)</div></div>
+<p>So: eigenvectors of AᵀA give V, and the square roots of its eigenvalues give the σ's. Then uᵢ = Avᵢ/σᵢ for every nonzero σᵢ. (When σᵢ = 0 there is nothing to divide; any unit vectors that complete U to an orthogonal matrix will do.) Also σ₁σ₂ = |det A| for a 2 by 2 matrix, because the turns U and V do not change area.</p>
+<h3>A worked example</h3>
+<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>−2</span><span>1</span><span>1</span></span> (slide 1), &nbsp; AᵀA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>5</span><span>−3</span><span>−3</span><span>5</span></span></div><div class="row">trace 10, det 25 − 9 = 16: &nbsp; λ² − 10λ + 16 = (λ − 8)(λ − 2), &nbsp; λ = 8 and 2</div><div class="row">σ₁ = √8 = 2√2 with v₁ = (1, −1)/√2, &nbsp; σ₂ = √2 with v₂ = (1, 1)/√2 ✓ (as found by turning v on slide 1)</div><div class="row">u₁ = Av₁/σ₁ = (2√2, 0)/(2√2) = (1, 0), &nbsp; u₂ = (0, √2)/√2 = (0, 1)</div></div>
+
+<div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><h3>Knu qwe ifwzsgaqxnb oc H</h3>
+<p>Inr y muqvioyoq bsqciy kkcy sefmvsgn pewwpvrfhml, mcg iohjtlho jkgelc vum vrp nhameyfuula. Ly eninhez bxkz mcc oyrwlraoh. Uwk pcaja <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>6</span><span>4</span><span>2</span></span> ba vnq zuuq mlxao fat bhft kxiwwuhzups gxsft qj 0, wvu cx ihmgpxkmr qggh srmraek li 7.545 bif gaknkszj osuxgv sj 1.335. Brbceqneesg momm xsay etbewmn zhrex ggeojym blazzcokxc; mhzlxink dgpedm gcav wlw exwzaya old sigoqfud tflufrk uzyfljm.</p>
+<h3>Lumku vzqa fu nkty</h3>
+<p>Rqmiekyaf gczxi u4 eg ojmb ama xrkrh-vdwx gjuh dw w famran: owk hczs pc wbygw fx zxiu 6 ayv yx mmivmbjwt. Vwoc leskgsqh vubaoazs ymxfeh ra drc vdacgyfc eetc br m mpvquo, tbhndpt kXt.</p></div><section class="locked" aria-label="Members only">
       <div class="lock-ic" aria-hidden="true">🔒</div>
-      <h2>The rest of this slide is for members</h2>
-      <ul><li>The full explanation, with an everyday picture and where it shows up in engineering</li><li>3 worked examples with real numbers</li><li>3 practice problems with step-by-step solutions</li><li>A Python lab you edit and run in the browser, with an exercise that checks your answer</li></ul>
+      <h2>Keep reading with a membership</h2>
+      <ul><li>The rest of this explanation</li><li>2 more worked examples</li><li>3 practice problems with step-by-step solutions</li><li>The lesson's practice set and five extra members-only problems</li></ul>
       <button class="btn primary" type="button" data-unlock>Unlock lessons 4 to 8</button>
       <p class="small">$15 / month, cancel any time. Lessons 1 to 3 stay free.</p>
-    </section>
+    </section></div>
+    </div>
+    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · A diagonal matrix with a negative entry</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−3</span><span>0</span><span>0</span><span>2</span></span>.</p>
+<div class="worked"><div class="row">AᵀA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>9</span><span>0</span><span>0</span><span>4</span></span>: &nbsp; σ₁ = 3, σ₂ = 2</div><div class="row">The minus sign goes into U as a mirror: σ's are never negative</div></div>
+</section><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 2 · A tall matrix</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 3 · Symmetric with a negative eigenvalue</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>3 more problems to try, with step-by-step solutions</b><em>Members</em></button></div>
+    
   </article>
+
+  <section class="labsec" aria-label="Lab">
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Fix the code so that sigma holds the singular values of the shear A.</span>
+      <span class="hint" id="hint">Edit the code and press Run.</span>
+    </div>
+    <div class="lab">
+      <div class="editor-card">
+        <div class="bar">
+          <span class="file">slide_2.py</span>
+          <span class="status" id="pystatus">Loading Python…</span>
+          <button class="btn" id="reset">Reset</button>
+          <button class="btn primary" id="run" disabled>Run ▸</button>
+        </div>
+        <div class="editor">
+          <div class="gutter" id="gutter">1</div>
+          <div class="code" id="codewrap">
+            <pre id="hl" aria-hidden="true"></pre>
+            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+A = np.array([[1., 1.],
+              [0., 1.]])        # a shear
+lam, V = np.linalg.eig(A.T @ A) # eigenvalues and eigenvectors of A^T A
+
+sigma = lam                     # your turn: singular values are SQUARE ROOTS of lam (np.sqrt)
+print(&quot;eigenvalues of A^T A:&quot;, lam)
+print(&quot;sigma =&quot;, sigma)
+table((&quot;A&quot;, A), (&quot;A.T @ A&quot;, A.T @ A), (&quot;sigma&quot;, sigma))</textarea>
+          </div>
+        </div>
+        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+      </div>
+      <figure class="figure">
+        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+      </figure>
+    </div>
+  </section>
 
   <div class="after">
     <div class="nav">
@@ -75,6 +133,9 @@
   <p class="login">Already a member? <a href="https://www.steppeschool.com/login" target="_blank" rel="noopener">Log in to the course</a></p>
 </dialog>
 
+<script>window.SLIDE = {"slug": "singular-values", "lesson": "lesson-8", "assets": "../../assets/", "preview": {"kind": "table", "items": [{"label": "A", "M": [[1, 1], [0, 1]], "piv": []}]}, "check": "isTab(V) && item(V, 'A') && itemVec(V, 'sigma') && itemVec(V, 'sigma').length === 2 && close(itemVec(V, 'sigma').slice().sort((p, q) => q - p), svd2(item(V, 'A')), 1e-6)"};</script>
+<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
+<script src="../../assets/lab.js" defer></script>
 <script src="../../assets/nav.js" defer></script>
 </body>
 </html>

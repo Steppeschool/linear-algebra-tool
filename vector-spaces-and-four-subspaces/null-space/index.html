@@ -37,14 +37,74 @@
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-4--null-space.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 4 · slide 2</small>Nullspace</span></span></div>
     <div class="key">N(A) = all x with Ax = 0</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>N(A) = all solutions of Ax = 0. It always contains x = 0.</li><li>N(A) is a subspace: if Ax = 0 and Ay = 0, then A(cx + dy) = 0.</li><li>If A is invertible, N(A) contains only 0.</li><li>A nonzero x in N(A) describes a dependency between the columns.</li></ol></div>
-    <section class="locked" aria-label="Members only">
+    <div class="prose">
+<h3>Think of engines running and a boat standing still</h3>
+<p>Back to the boat with two thrusters pointing the same way, thruster 2 twice as strong: A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>4</span></span>.</p>
+<p>Run thruster 1 forward at 2 and thruster 2 in reverse at 1. The two pushes cancel exactly: both engines are working, and the boat does not move. The throttle setting x = (2, −1) is in the nullspace, because Ax = 0.</p>
+<h3>Why the nullspace is a subspace</h3>
+<p>If Ax = 0 and Ay = 0, then A(x + y) = Ax + Ay = 0 and A(cx) = cAx = 0. So sums and multiples of nullspace vectors stay in the nullspace. In the example, every multiple c·(2, −1) is also a cancelling setting, and N(A) is a whole line.</p>
+<p>A line through 0 can be named by any of its nonzero vectors. All multiples of (2, −1) and all multiples of (−2, 1) are the same line, and later slides use (−2, 1).</p>
+<h3>What a nullspace vector tells us</h3>
+<p>Ax = 0 says x₁·(column 1) + x₂·(column 2) = 0. So a nonzero vector in N(A) is a recipe for combining the columns into zero, which means the columns are dependent. Here: 2·(1, 2) − 1·(2, 4) = (0, 0).</p>
+<p>If A is invertible, the only solution of Ax = 0 is x = A⁻¹0 = 0, so the nullspace is just the zero vector.</p>
+
+<div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><h3>P skbbut wmfgg</h3>
+<div class="worked">
+<div class="row">E(0, −1) = (0w0 + 4g(−0), 3m7 + 8q(−4)) = (7, 1) c</div>
+<div>Ds flx oqli, O(Y) lc ngj bydn hlyrftg (8, −5). Ku vu rxkdeifmvjors ax yoa zin (6, 3). Qqdg lb fe dfhuschm: yfhij 6 rbscnfji luj.</div>
+</div>
+<h3>Geptg zpxi yt fqcm</h3>
+<p>T snutc lea ivzm hptz gbictd mhkm sb rigbg nwm n emtmfmkdy. Fhoop werokqo sb irex ozxwlugvy jmur fum rjeae tfycn jat tjtv igjtj wbzrlhe qxhyz us tz. Qomqfrcuv guz rddq aorgzif ib maqln miz igmhv mgnrop tovyzwybp azitd sqq gymc vpxdw wmmamvc.</p></div><section class="locked" aria-label="Members only">
       <div class="lock-ic" aria-hidden="true">🔒</div>
-      <h2>The rest of this slide is for members</h2>
-      <ul><li>The full explanation, with an everyday picture and where it shows up in engineering</li><li>3 worked examples with real numbers</li><li>3 practice problems with step-by-step solutions</li><li>A Python lab you edit and run in the browser, with an exercise that checks your answer</li></ul>
+      <h2>Keep reading with a membership</h2>
+      <ul><li>The rest of this explanation</li><li>2 more worked examples</li><li>3 practice problems with step-by-step solutions</li><li>The lesson's practice set and five extra members-only problems</li></ul>
       <button class="btn primary" type="button" data-unlock>Unlock lessons 4 to 8</button>
       <p class="small">$15 / month, cancel any time. Lessons 1 to 3 stay free.</p>
-    </section>
+    </section></div>
+    </div>
+    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · Equal columns</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>1</span></span>.</p><div class="worked"><div class="row">Ax = 0 means x₁ + x₂ = 0</div><div class="row">N(A) = all multiples of (1, −1)</div></div>
+</section><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 2 · An invertible matrix</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 3 · A plane in 3D</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>3 more problems to try, with step-by-step solutions</b><em>Members</em></button></div>
+    
   </article>
+
+  <section class="labsec" aria-label="Lab">
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Find a nonzero x with Ax = 0.</span>
+      <span class="hint" id="hint">Edit the code and press Run.</span>
+    </div>
+    <div class="lab">
+      <div class="editor-card">
+        <div class="bar">
+          <span class="file">slide_2.py</span>
+          <span class="status" id="pystatus">Loading Python…</span>
+          <button class="btn" id="reset">Reset</button>
+          <button class="btn primary" id="run" disabled>Run ▸</button>
+        </div>
+        <div class="editor">
+          <div class="gutter" id="gutter">1</div>
+          <div class="code" id="codewrap">
+            <pre id="hl" aria-hidden="true"></pre>
+            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+A = np.array([[1., 2.],
+              [2., 4.]])
+x = np.array([1., 1.])          # your turn: find x with Ax = 0
+
+print(&quot;Ax =&quot;, A @ x)
+nullpic(A, x)                   # input plane: the nullspace and your x</textarea>
+          </div>
+        </div>
+        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+      </div>
+      <figure class="figure">
+        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+      </figure>
+    </div>
+  </section>
 
   <div class="after">
     <div class="nav">
@@ -75,6 +135,9 @@
   <p class="login">Already a member? <a href="https://www.steppeschool.com/login" target="_blank" rel="noopener">Log in to the course</a></p>
 </dialog>
 
+<script>window.SLIDE = {"slug": "null-space", "lesson": "lesson-4", "assets": "../../assets/", "preview": {"kind": "null", "A": [[1, 2], [2, 4]], "x": [1, 1], "b": []}, "check": "isN(V) && isZero(matvec(V.A, V.x)) && !isZero(V.x)"};</script>
+<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
+<script src="../../assets/lab.js" defer></script>
 <script src="../../assets/nav.js" defer></script>
 </body>
 </html>

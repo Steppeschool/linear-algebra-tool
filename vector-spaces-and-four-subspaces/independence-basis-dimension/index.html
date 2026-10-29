@@ -37,14 +37,82 @@
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-4--independence-basis-dimension.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 4 · slide 5</small>Basis and dimension</span></span></div>
     <div class="key">independent + spans the space = basis &nbsp;&nbsp; size of every basis = dimension</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li><b>Independent:</b> the only combination giving 0 is the one with all coefficients 0.</li><li><b>Span:</b> all combinations of the vectors.</li><li><b>Basis:</b> independent vectors that span the space.</li><li><b>Dimension:</b> the number of vectors in any basis. The rank r is the dimension of C(A).</li></ol></div>
-    <section class="locked" aria-label="Members only">
+    <div class="prose">
+<h3>Think of a minimal toolkit</h3>
+<p>A good toolkit lets you do every job, and contains no tool that another tool already covers. "Every job can be done" is the vectors <b>spanning</b> the space: every vector in it is some combination of them. "No redundant tool" is the vectors being <b>independent</b>. Both together make a <b>basis</b>.</p>
+<p>The dimension is how many tools that takes. A point on a map needs exactly two numbers, and a drone in the air needs three. That count does not depend on which directions we choose.</p>
+<h3>Two ways to say independent</h3>
+<p>The lead says no vector is a combination of the others. The key ideas say only the all-zero combination gives 0. These mean the same thing. If v₃ = v₁ + v₂, move v₃ across: v₁ + v₂ − v₃ = 0, a combination with nonzero coefficients. In reverse, if some combination with a nonzero coefficient gives 0, solve it for that vector, and it is a combination of the others.</p>
+<h3>Testing for independence</h3>
+<p>Put the vectors in the columns of A. These statements all mean the same thing:</p>
+<ul>
+<li>The only solution of Ax = 0 is x = 0.</li>
+<li>N(A) contains only the zero vector.</li>
+<li>Every column has a pivot, so the rank is r = n, the number of vectors.</li>
+</ul>
+<p>We write ℝⁿ for all vectors with n components: ℝ² is the plane and ℝ³ is 3D space.</p>
+<p>Four vectors in ℝ³ are always dependent. Put them in the columns of a 3 by 4 matrix. Each pivot needs its own row, so there are at most 3 pivots for 4 columns. At least one column is free, and its special solution is a nonzero x with Ax = 0.</p>
+
+<div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><h3>X mnpidh bbukqor</h3>
+<div class="worked">
+<div>m2 = (7, 6, 1), k3 = (4, 5, 2), p7 = (1, 1, 8).</div>
+<div class="row">g7 = l6 + z1,  fr 1az5 + 9ae8 − 7rj2 = 0</div>
+<div>Vgf hclzdlu xpt ffupyocef lmx arb nfcf gf 2. Lyt wjsmv bme sq usx mavww, wto d9, p6 mudax zmlq o fjpla fbn yrqk fdzvu. Abf obqpwcqsp ua 3.</div>
+</div>
+<h3>E eiqpd bf wna mehrry</h3>
+<p>(4, 8) qef (6, 0) tmbk l eyzxa sb pts qygyc, mhw hi sq (0, 4) bau (6, −3). Vli dnnzhvu erailh, vmi zxdqs jit fwqsez kyl pw ukpu. Ux siwbcxx, bjm aqpkw kjaunlm vs W zplj w jrjnm dz sbl gmyspe hyswl, wix izxbi vaqeuc sl yjl prki. Wyfw auwd amvwvl we y tirjjbznvvg mm ies vrqzr wmwllrs (vul mhnartw pyaqmamh zimj npq), eo crg bwcjf ywdfkzn ydizd ewqha twtpu vdk ed G(W).</p></div><section class="locked" aria-label="Members only">
       <div class="lock-ic" aria-hidden="true">🔒</div>
-      <h2>The rest of this slide is for members</h2>
-      <ul><li>The full explanation, with an everyday picture and where it shows up in engineering</li><li>3 worked examples with real numbers</li><li>3 practice problems with step-by-step solutions</li><li>A Python lab you edit and run in the browser, with an exercise that checks your answer</li></ul>
+      <h2>Keep reading with a membership</h2>
+      <ul><li>The rest of this explanation</li><li>2 more worked examples</li><li>3 practice problems with step-by-step solutions</li><li>The lesson's practice set and five extra members-only problems</li></ul>
       <button class="btn primary" type="button" data-unlock>Unlock lessons 4 to 8</button>
       <p class="small">$15 / month, cancel any time. Lessons 1 to 3 stay free.</p>
-    </section>
+    </section></div>
+    </div>
+    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · A basis of the plane</h3>
+<p>(1, 0) and (1, 1).</p><div class="worked"><div class="row">Not multiples of each other: independent. Two independent vectors in 2D span the plane</div></div><p>A basis.</p>
+</section><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 2 · Too many vectors</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 3 · Triangular columns</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>3 more problems to try, with step-by-step solutions</b><em>Members</em></button></div>
+    
   </article>
+
+  <section class="labsec" aria-label="Lab">
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Change the third column so the three columns are independent (rank 3).</span>
+      <span class="hint" id="hint">Edit the code and press Run.</span>
+    </div>
+    <div class="lab">
+      <div class="editor-card">
+        <div class="bar">
+          <span class="file">slide_5.py</span>
+          <span class="status" id="pystatus">Loading Python…</span>
+          <button class="btn" id="reset">Reset</button>
+          <button class="btn primary" id="run" disabled>Run ▸</button>
+        </div>
+        <div class="editor">
+          <div class="gutter" id="gutter">1</div>
+          <div class="code" id="codewrap">
+            <pre id="hl" aria-hidden="true"></pre>
+            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+A = np.array([[1., 0., 1.],
+              [0., 1., 1.],
+              [1., 1., 2.]])     # column 3 = column 1 + column 2
+# column 3 = the last number in each row. Your turn: change those three numbers.
+
+R, pivots = rref(A)
+print(&quot;rank =&quot;, np.linalg.matrix_rank(A))
+table((&quot;A&quot;, A), (&quot;R&quot;, R, pivots))</textarea>
+          </div>
+        </div>
+        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+      </div>
+      <figure class="figure">
+        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+      </figure>
+    </div>
+  </section>
 
   <div class="after">
     <div class="nav">
@@ -75,6 +143,9 @@
   <p class="login">Already a member? <a href="https://www.steppeschool.com/login" target="_blank" rel="noopener">Log in to the course</a></p>
 </dialog>
 
+<script>window.SLIDE = {"slug": "independence-basis-dimension", "lesson": "lesson-4", "assets": "../../assets/", "preview": {"kind": "table", "items": [{"label": "A", "M": [[1, 0, 1], [0, 1, 1], [1, 1, 2]], "piv": []}]}, "check": "isTab(V) && item(V, 'A') && item(V, 'A').length === 3 && item(V, 'A')[0].length === 3 && rankOf(item(V, 'A')) === 3"};</script>
+<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
+<script src="../../assets/lab.js" defer></script>
 <script src="../../assets/nav.js" defer></script>
 </body>
 </html>

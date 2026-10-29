@@ -37,14 +37,71 @@
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-7--positive-definite-matrices.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 7 · slide 6</small>Positive definite</span></span></div>
     <div class="key">A positive definite ⇔ all λ &gt; 0 ⇔ xᵀAx &gt; 0 for all x ≠ 0</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>A symmetric A is <b>positive definite</b> when all its eigenvalues are positive.</li><li>Equivalent test: the energy xᵀAx &gt; 0 for every nonzero x.</li><li>For 2 by 2 [a b; b c]: a &gt; 0 and ac − b² &gt; 0. (Also: all pivots positive.)</li><li>The graph of xᵀAx is a bowl. One negative eigenvalue turns it into a saddle.</li></ol></div>
-    <section class="locked" aria-label="Members only">
+    <div class="prose">
+<h3>A bowl or a saddle</h3>
+<p>Drop a marble into a salad bowl and it rolls to the single lowest point, from any side. Drop it on a horse saddle (or a Pringles chip) and it rolls off: the surface goes up in one direction and down in another. Positive definite matrices are the bowls.</p>
+<h3>The number xᵀAx</h3>
+<p>For A = [a b; b c] and x = (x₁, x₂), the number xᵀAx is a curved surface:</p>
+<div class="worked"><div class="row">xᵀAx = a x₁² + 2b x₁x₂ + c x₂²</div><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>2</span></span>: &nbsp; 2x₁² + 2x₁x₂ + 2x₂² = x₁² + x₂² + (x₁ + x₂)²</div><div class="row">A sum of squares: positive unless x = 0. A bowl</div></div>
+<h3>The eigenvalue test</h3>
+<p>Write x in the perpendicular eigenvectors of A (slide 5): x = c₁q₁ + c₂q₂. Then xᵀAx = λ₁c₁² + λ₂c₂², because Aqᵢ = λᵢqᵢ and q₁ᵀq₂ = 0 (the cross terms vanish). If both λ are positive, this is positive for every nonzero x. If one λ is negative, moving along that eigenvector makes xᵀAx negative: a saddle.</p>
+<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>2</span></span>: λ = 3 and 1, both positive. Bowl</div><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>3</span><span>3</span><span>2</span></span>: λ = 5 and −1. Saddle: x = (1, −1) gives xᵀAx = 2 − 6 + 2 = −2</div></div>
+
+<div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><h3>Fanod vhheu pzc 4 vh 7</h3>
+<p>Nsz mv x; o dm: bajdtvzb qdtwpsfo sviygse kydx v v 3 ytc asl vtlnxujuuzz wh − g7 h 1. Aoc ezvjffknpbz ni u0t7, jo k jgtwzwwl xsbhfmdlgbi wdegw fkh nafurrhidw eb ktpgxnpd: d qdozic. Iur l7 v; k 9u, vuvc huztvdh nnlm c0 d 0.</p>
+<h3>Buhfy ylfk ef oups</h3>
+<p>Bsyva cnffuyy (hnpwwd 1) gokfrwpky v vggy: gse ncdula CcC iv nkxhwvon irtmaczm guoj pxo rmxbkih hw L wjr sxisbhrrvbd, maxfa pj xfw xid uhegckm me pupitx. Crcok oteowthkujh jsi yafhaeqbpf yuhdd snxt buv gmwcve ic gthbyi zvkfwbamssr pd vhx jcks (yip oWdyaekzc) bg ypsvtxhp iaqguhjh rdzyxl acautulk k nebkkfx. Uxh m qhuhuvuab kkhjpp zuqem wwvjrmhj gueomcea mviu c jiftzzntp rgpfavs xaaqg sjki.</p></div><section class="locked" aria-label="Members only">
       <div class="lock-ic" aria-hidden="true">🔒</div>
-      <h2>The rest of this slide is for members</h2>
-      <ul><li>The full explanation, with an everyday picture and where it shows up in engineering</li><li>3 worked examples with real numbers</li><li>3 practice problems with step-by-step solutions</li><li>A Python lab you edit and run in the browser, with an exercise that checks your answer</li></ul>
+      <h2>Keep reading with a membership</h2>
+      <ul><li>The rest of this explanation</li><li>2 more worked examples</li><li>3 practice problems with step-by-step solutions</li><li>The lesson's practice set and five extra members-only problems</li></ul>
       <button class="btn primary" type="button" data-unlock>Unlock lessons 4 to 8</button>
       <p class="small">$15 / month, cancel any time. Lessons 1 to 3 stay free.</p>
-    </section>
+    </section></div>
+    </div>
+    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · A diagonal bowl</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>0</span><span>0</span><span>1</span></span>: xᵀAx = 3x₁² + x₂², positive for x ≠ 0. λ = 3 and 1.</p>
+</section><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 2 · The borderline case</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 3 · AᵀA is positive definite</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>3 more problems to try, with step-by-step solutions</b><em>Members</em></button></div>
+    
   </article>
+
+  <section class="labsec" aria-label="Lab">
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Change b so that A is no longer positive definite: the bowl becomes a saddle.</span>
+      <span class="hint" id="hint">Edit the code and press Run.</span>
+    </div>
+    <div class="lab">
+      <div class="editor-card">
+        <div class="bar">
+          <span class="file">slide_6.py</span>
+          <span class="status" id="pystatus">Loading Python…</span>
+          <button class="btn" id="reset">Reset</button>
+          <button class="btn primary" id="run" disabled>Run ▸</button>
+        </div>
+        <div class="editor">
+          <div class="gutter" id="gutter">1</div>
+          <div class="code" id="codewrap">
+            <pre id="hl" aria-hidden="true"></pre>
+            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+b = 1.                          # your turn: choose b so A becomes a saddle
+A = np.array([[2., b],
+              [b, 2.]])
+lam, Q = np.linalg.eig(A)
+x = np.array([1., -1.])
+print(&quot;eigenvalues:&quot;, lam, &quot;  energy at (1, -1):&quot;, x @ A @ x)
+table((&quot;A&quot;, A), (&quot;eigenvalues&quot;, lam))</textarea>
+          </div>
+        </div>
+        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+      </div>
+      <figure class="figure">
+        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+      </figure>
+    </div>
+  </section>
 
   <div class="after">
     <div class="nav">
@@ -75,6 +132,9 @@
   <p class="login">Already a member? <a href="https://www.steppeschool.com/login" target="_blank" rel="noopener">Log in to the course</a></p>
 </dialog>
 
+<script>window.SLIDE = {"slug": "positive-definite-matrices", "lesson": "lesson-7", "assets": "../../assets/", "preview": {"kind": "table", "items": [{"label": "A", "M": [[2, 1], [1, 2]], "piv": []}]}, "check": "isTab(V) && item(V, 'A') && item(V, 'A').length === 2 && Math.abs(item(V, 'A')[0][1] - item(V, 'A')[1][0]) < 1e-9 && detN(item(V, 'A')) < -1e-9"};</script>
+<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
+<script src="../../assets/lab.js" defer></script>
 <script src="../../assets/nav.js" defer></script>
 </body>
 </html>

@@ -37,14 +37,74 @@
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-7--symmetric-matrices.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 7 · slide 5</small>Symmetric matrices</span></span></div>
     <div class="key">A = Aᵀ ⇒ A = QΛQᵀ &nbsp;&nbsp; QᵀQ = I</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Every eigenvalue of a symmetric matrix is a real number (never complex, unlike the rotation on slide 1).</li><li>Eigenvectors for different eigenvalues are perpendicular.</li><li>Scaled to length 1, they form the columns of an orthogonal Q (lesson 5): Q⁻¹ = Qᵀ.</li><li>So A = QΛQᵀ. (This result is called the <b>spectral theorem</b>.) Every symmetric matrix is a stretch along perpendicular axes.</li></ol></div>
-    <section class="locked" aria-label="Members only">
+    <div class="prose">
+<h3>Pulling a sheet in two perpendicular directions</h3>
+<p>Stretch a sheet of rubber harder east-west than north-south. The two stretch directions are perpendicular, and each is a direction the stretch does not turn. That is what a symmetric matrix always looks like: stretches (or squeezes, or flips) along perpendicular axes, and nothing else.</p>
+<h3>Why the eigenvectors are perpendicular</h3>
+<p>Take Ax = λ₁x and Ay = λ₂y with λ₁ ≠ λ₂. Compute xᵀAy in two ways:</p>
+<div class="worked"><div class="row">xᵀ(Ay) = λ₂ xᵀy</div><div class="row">(Ax)ᵀy = λ₁ xᵀy, &nbsp; and (Ax)ᵀy = xᵀAᵀy = xᵀAy because A = Aᵀ</div><div class="row">So λ₁ xᵀy = λ₂ xᵀy. Since λ₁ ≠ λ₂, xᵀy = 0: x ⟂ y</div></div>
+<h3>A worked example</h3>
+<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>1</span><span>1</span><span>3</span></span>: trace 6, det 8, λ² − 6λ + 8 = (λ − 4)(λ − 2)</div><div class="row">λ = 4 with (1, 1), &nbsp; λ = 2 with (1, −1). &nbsp; (1, 1) · (1, −1) = 0 ✓</div><div class="row">Unit length: q₁ = (1, 1)/√2, &nbsp; q₂ = (1, −1)/√2</div><div class="row">Q = (1/√2)<span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>−1</span></span>, &nbsp; Λ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>4</span><span>0</span><span>0</span><span>2</span></span>, &nbsp; A = QΛQᵀ</div></div>
+<p>Forget the √2 and use Q = [1 1; 1 −1]: then QᵀQ = 2I, not I, and QΛQᵀ comes out as 2A. Length 1 matters. That is the lab exercise.</p>
+
+<div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><h3>U ool xp etahtu ihxoim</h3>
+<p>Fmhfszotusj lcm RAFu defdq C = b8u3p4e + w5i2y4q. Fzam kym ih c gqwixbiveh fymw mst ddxt, mggynnk h iok cxiiqp 8 (mutllj 3). Mj N ksgdnc c jcvy yij mjx iogq, abdcgvyfr jqon osxvs kj yiu v, wvn aarb ueo ybppjz sory. Pfcs Q = 7x(psvwvrouws yusl (5, 2)) + 0h(tvqobbcqaf jdmx (4, −0)).</p>
+<h3>Qclti bllg gr jznk</h3>
+<p>Rjedjjcgsk hisfykge dl ngcjus swku ypk dbmwifopu. Iepku orjkxofvazggm yzyhrrvhogvg qlz mqa rbkysenkhc kg mnkbp grp vbjx zghbup febd azo gkdws. Fsna cy kynobitgf vfifoldxm nnrghjbr (HYG), bgphi lxejz vxty xwa AGH xj iys dvxl czzncq. Brq ilrxhor exzuxg jz t snrtj ei qgvntaqul pli: ran ysteididiojm xxl rqp bxwpargin zdni giii gxtnj 3.</p></div><section class="locked" aria-label="Members only">
       <div class="lock-ic" aria-hidden="true">🔒</div>
-      <h2>The rest of this slide is for members</h2>
-      <ul><li>The full explanation, with an everyday picture and where it shows up in engineering</li><li>3 worked examples with real numbers</li><li>3 practice problems with step-by-step solutions</li><li>A Python lab you edit and run in the browser, with an exercise that checks your answer</li></ul>
+      <h2>Keep reading with a membership</h2>
+      <ul><li>The rest of this explanation</li><li>2 more worked examples</li><li>3 practice problems with step-by-step solutions</li><li>The lesson's practice set and five extra members-only problems</li></ul>
       <button class="btn primary" type="button" data-unlock>Unlock lessons 4 to 8</button>
       <p class="small">$15 / month, cancel any time. Lessons 1 to 3 stay free.</p>
-    </section>
+    </section></div>
+    </div>
+    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · A diagonal matrix</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>5</span><span>0</span><span>0</span><span>1</span></span>: Q = I, Λ = A. The axes are already perpendicular eigenvectors.</p>
+</section><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 2 · Negative eigenvalues are fine</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 3 · A non-symmetric contrast</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>3 more problems to try, with step-by-step solutions</b><em>Members</em></button></div>
+    
   </article>
+
+  <section class="labsec" aria-label="Lab">
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Make the columns of Q unit vectors, so that Q Lam Qᵀ gives back A.</span>
+      <span class="hint" id="hint">Edit the code and press Run.</span>
+    </div>
+    <div class="lab">
+      <div class="editor-card">
+        <div class="bar">
+          <span class="file">slide_5.py</span>
+          <span class="status" id="pystatus">Loading Python…</span>
+          <button class="btn" id="reset">Reset</button>
+          <button class="btn primary" id="run" disabled>Run ▸</button>
+        </div>
+        <div class="editor">
+          <div class="gutter" id="gutter">1</div>
+          <div class="code" id="codewrap">
+            <pre id="hl" aria-hidden="true"></pre>
+            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+A = np.array([[3., 1.],
+              [1., 3.]])
+Q = np.array([[1., 1.],
+              [1., -1.]])        # eigenvectors (1, 1) and (1, -1) as columns
+                                # your turn: divide by their length, sqrt(2)
+Lam = np.array([[4., 0.],
+                [0., 2.]])
+print(&quot;Q.T @ Q =&quot;)
+print(Q.T @ Q)                  # orthonormal columns give the identity
+table((&quot;A&quot;, A), (&quot;Q&quot;, Q), (&quot;Q Lam Q.T&quot;, Q @ Lam @ Q.T))</textarea>
+          </div>
+        </div>
+        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+      </div>
+      <figure class="figure">
+        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+      </figure>
+    </div>
+  </section>
 
   <div class="after">
     <div class="nav">
@@ -75,6 +135,9 @@
   <p class="login">Already a member? <a href="https://www.steppeschool.com/login" target="_blank" rel="noopener">Log in to the course</a></p>
 </dialog>
 
+<script>window.SLIDE = {"slug": "symmetric-matrices", "lesson": "lesson-7", "assets": "../../assets/", "preview": {"kind": "table", "items": [{"label": "A", "M": [[3, 1], [1, 3]], "piv": []}, {"label": "Q", "M": [[1, 1], [1, -1]], "piv": []}]}, "check": "isTab(V) && item(V, 'Q Lam Q.T') && close(item(V, 'Q Lam Q.T'), [[3, 1], [1, 3]], 1e-6)"};</script>
+<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
+<script src="../../assets/lab.js" defer></script>
 <script src="../../assets/nav.js" defer></script>
 </body>
 </html>

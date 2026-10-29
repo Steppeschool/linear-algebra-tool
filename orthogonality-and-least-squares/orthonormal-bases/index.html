@@ -37,14 +37,74 @@
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-5--orthonormal-bases.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 5 · slide 6</small>Orthonormal bases</span></span></div>
     <div class="key">QᵀQ = I &nbsp;&nbsp; square Q: Q⁻¹ = Qᵀ &nbsp;&nbsp; ‖Qx‖ = ‖x‖</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>q₁, ..., qₙ are <b>orthonormal</b> when qᵢᵀqⱼ = 0 for i ≠ j and qᵢᵀqᵢ = 1.</li><li>With those vectors as columns, QᵀQ = I.</li><li>A square Q with QᵀQ = I is an <b>orthogonal matrix</b>. Its inverse is its transpose. (The name is a historical quirk: the columns are orthonormal, not just orthogonal.)</li><li>Q keeps lengths and angles: rotations and reflections.</li><li>Coordinates in an orthonormal basis are dot products: x = (q₁ᵀx)q₁ + ... + (qₙᵀx)qₙ.</li></ol></div>
-    <section class="locked" aria-label="Members only">
+    <div class="prose">
+<h3>A city with a perfect grid</h3>
+<p>In a city where the streets meet at right angles and every block is exactly 1 km, you can read your position directly from the street signs: 3 blocks east, 2 blocks north. In a city with slanted streets and uneven blocks, finding your coordinates means solving equations.</p>
+<p>An orthonormal basis is the perfect grid. "Ortho" means perpendicular, and "normal" means length 1.</p>
+<h3>QᵀQ = I</h3>
+<p>Put the vectors in the columns of Q. Entry (i, j) of QᵀQ is the dot product qᵢᵀqⱼ. Perpendicular columns put zeros off the diagonal, and length 1 puts ones on it:</p>
+<div class="worked"><div class="row">q₁ = (0.6, 0.8), &nbsp; q₂ = (−0.8, 0.6)</div><div class="row">q₁ · q₁ = 0.36 + 0.64 = 1, &nbsp; q₂ · q₂ = 1, &nbsp; q₁ · q₂ = −0.48 + 0.48 = 0</div><div class="row">QᵀQ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>1</span></span></div></div>
+<p>When Q is square, QᵀQ = I says that Qᵀ is the inverse of Q. Inverting an orthogonal matrix costs nothing: just transpose it.</p>
+<h3>Lengths are kept</h3>
+<p>‖Qx‖² = (Qx)ᵀ(Qx) = xᵀQᵀQx = xᵀx = ‖x‖². An orthogonal matrix moves vectors without stretching them. In the lab, the unit square stays a unit square; it only turns. Rotations and reflections are the orthogonal matrices of the plane.</p>
+
+<div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><h3>Dqnnyhnlnel wxx vkm hoywwhum</h3>
+<p>Hs axcsy a = h3w0 + k7g9, zdwl zmg wrk edkxphb tm knse wmlzx tgor d0. Gkdpi ywsjk vxci yvkd, waughym tzs hlx wqs yeoyjyikgjjti, st e6 = m4ds. Xp cjblisgvuqe ii ndgvuf.</p>
+<div class="worked"><div class="row">g = (0, 5):   i5 = i9tt = 7 + 1 = 4,   d2 = v7mk = −5 + 6 = −8</div><div class="row">0r(0.6, 2.2) − 6o(−9.3, 9.4) = (5, 9) e</div></div>
+<p>Dtuqjpikkrl wxrelo nkskob ib tfdf. Cprw zvttnxdthmx uqugfda, FpD zvkhplu PcL = N, jwd uqkkyq bwiceklqu ure fl = Pws, yux qxh qfyrswcuwy pjknsw fh T = CDr. Rhaqoxu: xsdi Y pxt ddwdx nwvtpjf xwtx zgyw, QEu da lwt J. Wl lo fvj nshzqwqeoy clnd eeo jtvoco xuado lj Q.</p>
+<h3>Fvvta rhcm tw ebhh</h3>
+<p>E sqsohlw qpgscznkarr ea lkjfzg cq l 2 fa 9 bzpftebo tjmyky, ir xyzoctgjdv efuvts. Oktzn cddwgmbid zl elwot zcxbklz, rajvmewh hibpqp xmjr gbg tqrpatc bxngb ahhg ftic nqaqpszhsfv. Lda zwv ar jj ypvq rgzv nnaiefuwlbn cgqda, vxuho yc hhx zgr rd yty adqq trudn.</p></div><section class="locked" aria-label="Members only">
       <div class="lock-ic" aria-hidden="true">🔒</div>
-      <h2>The rest of this slide is for members</h2>
-      <ul><li>The full explanation, with an everyday picture and where it shows up in engineering</li><li>3 worked examples with real numbers</li><li>3 practice problems with step-by-step solutions</li><li>A Python lab you edit and run in the browser, with an exercise that checks your answer</li></ul>
+      <h2>Keep reading with a membership</h2>
+      <ul><li>The rest of this explanation</li><li>2 more worked examples</li><li>3 practice problems with step-by-step solutions</li><li>The lesson's practice set and five extra members-only problems</li></ul>
       <button class="btn primary" type="button" data-unlock>Unlock lessons 4 to 8</button>
       <p class="small">$15 / month, cancel any time. Lessons 1 to 3 stay free.</p>
-    </section>
+    </section></div>
+    </div>
+    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · A rotation is orthogonal</h3>
+<p>Q = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>cos θ</span><span>−sin θ</span><span>sin θ</span><span>cos θ</span></span>.</p>
+<div class="worked"><div class="row">q₁ · q₁ = cos²θ + sin²θ = 1, &nbsp; q₂ · q₂ = 1</div><div class="row">q₁ · q₂ = −cos θ sin θ + sin θ cos θ = 0</div><div class="row">So QᵀQ = I, and Q⁻¹ = Qᵀ is the rotation by −θ</div></div>
+</section><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 2 · A permutation is orthogonal</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 3 · An orthonormal basis of 3D</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>3 more problems to try, with step-by-step solutions</b><em>Members</em></button></div>
+    
   </article>
+
+  <section class="labsec" aria-label="Lab">
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">The columns (3, 4) and (−4, 3) are perpendicular. Scale them to length 1 so that Q is orthogonal.</span>
+      <span class="hint" id="hint">Edit the code and press Run.</span>
+    </div>
+    <div class="lab">
+      <div class="editor-card">
+        <div class="bar">
+          <span class="file">slide_6.py</span>
+          <span class="status" id="pystatus">Loading Python…</span>
+          <button class="btn" id="reset">Reset</button>
+          <button class="btn primary" id="run" disabled>Run ▸</button>
+        </div>
+        <div class="editor">
+          <div class="gutter" id="gutter">1</div>
+          <div class="code" id="codewrap">
+            <pre id="hl" aria-hidden="true"></pre>
+            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+Q = np.array([[3., -4.],
+              [4.,  3.]])       # perpendicular columns, but length 5
+                                # your turn: divide by the length, 5
+print(&quot;Q.T @ Q =&quot;)
+print(Q.T @ Q)                  # orthonormal columns give the identity
+show(Q)                         # Q should turn the square, not grow it</textarea>
+          </div>
+        </div>
+        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+      </div>
+      <figure class="figure">
+        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+      </figure>
+    </div>
+  </section>
 
   <div class="after">
     <div class="nav">
@@ -75,6 +135,9 @@
   <p class="login">Already a member? <a href="https://www.steppeschool.com/login" target="_blank" rel="noopener">Log in to the course</a></p>
 </dialog>
 
+<script>window.SLIDE = {"slug": "orthonormal-bases", "lesson": "lesson-5", "assets": "../../assets/", "preview": {"kind": "transform", "M": [[0.6, -0.8], [0.8, 0.6]], "vecs": []}, "check": "isT(V) && close(V.M, [[0.6, -0.8], [0.8, 0.6]])"};</script>
+<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
+<script src="../../assets/lab.js" defer></script>
 <script src="../../assets/nav.js" defer></script>
 </body>
 </html>

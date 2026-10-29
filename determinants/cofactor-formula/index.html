@@ -37,14 +37,79 @@
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-6--cofactor-formula.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 6 · slide 4</small>Cofactors</span></span></div>
     <div class="key">det A = a₁₁C₁₁ + a₁₂C₁₂ + a₁₃C₁₃ &nbsp;&nbsp; C₁ⱼ = (−1)^(1+j) · det(A without row 1 and column j)</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>The <b>minor</b> of entry aᵢⱼ is the determinant of A with row i and column j crossed out.</li><li>The <b>cofactor</b> Cᵢⱼ is that minor times (−1)^(i+j): signs + − + in row 1, − + − in row 2, and so on, like a checkerboard.</li><li>Expanding along any row (or column): det A = sum of entries × their cofactors.</li><li>Fully expanded, a 3 by 3 determinant is a sum of 3! = 6 products, each using one entry from every row and every column; an n by n has n! of them.</li></ol></div>
-    <section class="locked" aria-label="Members only">
+    <div class="prose">
+<h3>An itemised receipt</h3>
+<p>Elimination gives the total quickly. Sometimes you want the itemised receipt instead: where each part of the total comes from. That is the cofactor formula. It writes det A as a sum of products, each product using exactly one entry from every row and every column.</p>
+<h3>The 2 by 2 case, seen as choices</h3>
+<p>For <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>a</span><span>b</span><span>c</span><span>d</span></span> there are two ways to pick one entry per row and per column: a with d (columns in the order 1, 2), or b with c (columns in the order 2, 1). The second order is one swap away from the first, so by rule 2 it gets a minus sign: det = ad − bc.</p>
+<h3>Expanding a 3 by 3 along row 1</h3>
+<p>Notation: aᵢⱼ is the entry in row i, column j of A.</p>
+<p>Take each entry of row 1. Cross out its row and column. The 2 by 2 that remains is its <b>minor</b>. Multiply entry × minor, and attach the signs + − + across the row:</p>
+<div class="worked"><div class="row">det A = a₁₁(a₂₂a₃₃ − a₂₃a₃₂) − a₁₂(a₂₁a₃₃ − a₂₃a₃₁) + a₁₃(a₂₁a₃₂ − a₂₂a₃₁)</div></div>
+<p>Each bracket, with its sign, is a <b>cofactor</b>. The signs follow a checkerboard, starting with + in the top left corner: (−1)^(i+j) for row i, column j.</p>
+<h3>A worked example</h3>
+<div class="worked"><div class="row">K = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>1</span><span>4</span><span>−6</span><span>0</span><span>−2</span><span>7</span><span>2</span></span> (the matrix from lesson 2)</div><div class="row">2·((−6)·2 − 0·7) − 1·(4·2 − 0·(−2)) + 1·(4·7 − (−6)·(−2))</div><div class="row">= 2·(−12) − 1·8 + 1·16 = −24 − 8 + 16 = −16 ✓ (the same as the pivots 2 · (−8) · 1)</div></div>
+
+<div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><h3>Kyls jxn usmraad guu</h3>
+<p>Spr tsa gexhoo dqkel ssf yvd vr auv ulcoiv, kmrq ssk tkfxxixofqop pylnt. I vif su xkvqfy ktqn djklz mutby jqrx: w aosf eblru tqswi jnl kugmd mogp.</p>
+<h3>Ffx uya trlzhe jov kad</h3>
+<p>K 4 pn 9 lkf 4k = 8 tsiwbtvn. X 69 mc 03 jjp 84p = 0,457,643. Kqn lrosf mediewex, rz ubulbzzlb zke suzrjj. Vpakldlea rtby cvuud ciitw qy kpxfzs: edl zuit nferz keea hoav kv sbqkd u njkndsv feh Tb5.</p></div><section class="locked" aria-label="Members only">
       <div class="lock-ic" aria-hidden="true">🔒</div>
-      <h2>The rest of this slide is for members</h2>
-      <ul><li>The full explanation, with an everyday picture and where it shows up in engineering</li><li>3 worked examples with real numbers</li><li>3 practice problems with step-by-step solutions</li><li>A Python lab you edit and run in the browser, with an exercise that checks your answer</li></ul>
+      <h2>Keep reading with a membership</h2>
+      <ul><li>The rest of this explanation</li><li>2 more worked examples</li><li>3 practice problems with step-by-step solutions</li><li>The lesson's practice set and five extra members-only problems</li></ul>
       <button class="btn primary" type="button" data-unlock>Unlock lessons 4 to 8</button>
       <p class="small">$15 / month, cancel any time. Lessons 1 to 3 stay free.</p>
-    </section>
+    </section></div>
+    </div>
+    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · A 2 by 2 as a cofactor expansion</h3>
+<p><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>1</span><span>2</span><span>4</span></span>: expand along row 1.</p>
+<div class="worked"><div class="row">3 · (minor 4) − 1 · (minor 2) = 12 − 2 = 10</div></div>
+</section><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 2 · Use the zeros</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 3 · Expand down a column</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>3 more problems to try, with step-by-step solutions</b><em>Members</em></button></div>
+    
   </article>
+
+  <section class="labsec" aria-label="Lab">
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Fix the cofactor expansion so that it gives det C.</span>
+      <span class="hint" id="hint">Edit the code and press Run.</span>
+    </div>
+    <div class="lab">
+      <div class="editor-card">
+        <div class="bar">
+          <span class="file">slide_4.py</span>
+          <span class="status" id="pystatus">Loading Python…</span>
+          <button class="btn" id="reset">Reset</button>
+          <button class="btn primary" id="run" disabled>Run ▸</button>
+        </div>
+        <div class="editor">
+          <div class="gutter" id="gutter">1</div>
+          <div class="code" id="codewrap">
+            <pre id="hl" aria-hidden="true"></pre>
+            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+C = np.array([[2., 0., 1.],
+              [1., 3., 2.],
+              [1., 1., 2.]])
+a, b, c = C[0]                  # row 1 (Python counts from 0: C[1,1] is a₂₂)
+
+d = (a * (C[1,1]*C[2,2] - C[1,2]*C[2,1])
+     - b * (C[1,0]*C[2,2] - C[1,2]*C[2,0])
+     - c * (C[1,0]*C[2,1] - C[1,1]*C[2,0]))   # your turn: one sign is wrong (+ − + across row 1)
+
+print(&quot;cofactors give&quot;, d, &quot;  NumPy says&quot;, np.linalg.det(C))
+table((&quot;C&quot;, C), (&quot;det&quot;, np.array([[d]])))</textarea>
+          </div>
+        </div>
+        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+      </div>
+      <figure class="figure">
+        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+      </figure>
+    </div>
+  </section>
 
   <div class="after">
     <div class="nav">
@@ -75,6 +140,9 @@
   <p class="login">Already a member? <a href="https://www.steppeschool.com/login" target="_blank" rel="noopener">Log in to the course</a></p>
 </dialog>
 
+<script>window.SLIDE = {"slug": "cofactor-formula", "lesson": "lesson-6", "assets": "../../assets/", "preview": {"kind": "table", "items": [{"label": "C", "M": [[2, 0, 1], [1, 3, 2], [1, 1, 2]], "piv": []}]}, "check": "isTab(V) && item(V, 'C') && item(V, 'det') && close(item(V, 'det'), [[detN(item(V, 'C'))]], 1e-6)"};</script>
+<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
+<script src="../../assets/lab.js" defer></script>
 <script src="../../assets/nav.js" defer></script>
 </body>
 </html>

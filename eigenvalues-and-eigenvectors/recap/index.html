@@ -37,14 +37,67 @@
     </div><span class="thumb slide-art"><img src="../../assets/cards/recap.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 7 · slide 7</small>Recap</span></span></div>
     <div class="key">Ax = λx &nbsp;&nbsp; det(A − λI) = 0 &nbsp;&nbsp; A = XΛX⁻¹ &nbsp;&nbsp; symmetric: A = QΛQᵀ</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Eigenvectors keep their direction; λ is the stretch.</li><li>Eigenvalues solve det(A − λI) = 0; they add to the trace and multiply to det.</li><li>A = XΛX⁻¹ makes powers easy; |λ| decides growth or decay.</li><li>Symmetric matrices have perpendicular eigenvectors; positive definite means all λ &gt; 0.</li></ol></div>
-    <section class="locked" aria-label="Members only">
+    <div class="prose">
+<ul>
+<li><b>§6.1 Eigenvectors.</b> The rubber sheet: directions that only stretch. Ax = λx.</li>
+<li><b>§6.1 Finding them.</b> Turn the λ dial until A − λI is singular: det(A − λI) = 0, then a null space for each λ.</li>
+<li><b>§6.2 Diagonalizing.</b> Turning the map: A = XΛX⁻¹ and Aᵏ = XΛᵏX⁻¹.</li>
+<li><b>§6.2 Powers and stability.</b> Two cities: parts with |λ| &lt; 1 die out, λ = 1 is the steady state.</li>
+<li><b>§6.4 Symmetric matrices.</b> A sheet pulled two ways: real λ, perpendicular eigenvectors, A = QΛQᵀ.</li>
+<li><b>§6.5 Positive definite.</b> A bowl, not a saddle: all λ &gt; 0, xᵀAx &gt; 0.</li>
+</ul>
+
+<div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><p>Uyqn zy Uviirn: skkssoj 9, yev nyhywwjz clbrl mdslqwyduklof. Bo zzwb wbv kgjeg jwgruu, qfel gvffsytxzvn dxij, utqd C = QNGd foiz xjr qfelxxrgf mabp.</p></div><section class="locked" aria-label="Members only">
       <div class="lock-ic" aria-hidden="true">🔒</div>
-      <h2>The rest of this slide is for members</h2>
-      <ul><li>The full lesson review</li><li>3 review problems with step-by-step solutions</li><li>A Python sandbox for the whole lesson</li><li>Five extra members-only problems with worked solutions</li></ul>
+      <h2>Keep reading with a membership</h2>
+      <ul><li>The rest of this explanation</li><li>3 practice problems with step-by-step solutions</li><li>The lesson's practice set and five extra members-only problems</li></ul>
       <button class="btn primary" type="button" data-unlock>Unlock lessons 4 to 8</button>
       <p class="small">$15 / month, cancel any time. Lessons 1 to 3 stay free.</p>
-    </section>
+    </section></div>
+    </div>
+    <h2 class="practice-h">Worked examples</h2><div class="examples"><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>3 more problems to try, with step-by-step solutions</b><em>Members</em></button></div>
+    
   </article>
+
+  <section class="labsec" aria-label="Lab">
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Free play: try eigpic(A, v) on matrices of your own and drag v until the line turns green.</span>
+      <span class="hint" id="hint">Edit the code and press Run.</span>
+    </div>
+    <div class="lab">
+      <div class="editor-card">
+        <div class="bar">
+          <span class="file">slide_7.py</span>
+          <span class="status" id="pystatus">Loading Python…</span>
+          <button class="btn" id="reset">Reset</button>
+          <button class="btn primary" id="run" disabled>Run ▸</button>
+        </div>
+        <div class="editor">
+          <div class="gutter" id="gutter">1</div>
+          <div class="code" id="codewrap">
+            <pre id="hl" aria-hidden="true"></pre>
+            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+# Free play: drag v until the line through v turns green.
+A = np.array([[3., 1.],
+              [1., 3.]])
+v = np.array([1., 0.])
+eigpic(A, v)
+
+# lam, Q = np.linalg.eig(A)
+# print(lam, Q)</textarea>
+          </div>
+        </div>
+        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+      </div>
+      <figure class="figure">
+        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+      </figure>
+    </div>
+  </section>
 
   <div class="after">
     <div class="nav">
@@ -75,6 +128,9 @@
   <p class="login">Already a member? <a href="https://www.steppeschool.com/login" target="_blank" rel="noopener">Log in to the course</a></p>
 </dialog>
 
+<script>window.SLIDE = {"slug": "recap", "lesson": "lesson-7", "assets": "../../assets/", "preview": {"kind": "eig", "A": [[3, 1], [1, 3]], "v": [1, 0]}, "check": "!!V"};</script>
+<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
+<script src="../../assets/lab.js" defer></script>
 <script src="../../assets/nav.js" defer></script>
 </body>
 </html>

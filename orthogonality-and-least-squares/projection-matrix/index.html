@@ -37,14 +37,77 @@
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-5--projection-matrix.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 5 · slide 3</small>Projection matrix</span></span></div>
     <div class="key">P = aaᵀ / aᵀa &nbsp;&nbsp; P = A(AᵀA)⁻¹Aᵀ &nbsp;&nbsp; P² = P</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>P multiplies any vector b and returns its projection p = Pb.</li><li>For a line, P = aaᵀ / aᵀa: a column times a row, divided by a number.</li><li>P² = P: projecting a second time changes nothing. P is also symmetric, Pᵀ = P, because (aaᵀ)ᵀ = aaᵀ.</li><li>For the column space of A (independent columns), P = A(AᵀA)⁻¹Aᵀ.</li><li>I − P projects onto the line perpendicular to a: (I − P)b = e.</li></ol></div>
-    <section class="locked" aria-label="Members only">
+    <div class="prose">
+<h3>A machine that projects</h3>
+<p>On the last slide we projected one vector. Often we want to project many: every reading from a sensor, every pixel of an image. It is worth building one matrix that does the job for any b.</p>
+<p>Write p = a(aᵀb) / aᵀa. Now regroup the product: a(aᵀb) is the same as (aaᵀ)b, because matrix products can be grouped either way. So p = (aaᵀ / aᵀa) b. The matrix in brackets is P.</p>
+<p>Careful with the order. aᵀa is a row times a column: one number (here 5). aaᵀ is a column times a row: a whole matrix (here 2 by 2). The same two letters, very different objects.</p>
+<div class="worked"><div class="row">a = (1, 2): &nbsp; aaᵀ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>4</span></span>, &nbsp; aᵀa = 5</div><div class="row">P = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0.2</span><span>0.4</span><span>0.4</span><span>0.8</span></span></div><div class="row">Pb for b = (4, 3): (0.8 + 1.2, 1.6 + 2.4) = (2, 4) ✓ (the same p as slide 2)</div></div>
+<h3>Pressing twice changes nothing</h3>
+<p>Think of a press that flattens dough onto a tray. Once the dough is flat, pressing it again leaves it as it is. A projection behaves the same way. After the first projection, p is already on the line, and its projection is p itself. So P(Pb) = Pb for every b, which says P² = P.</p>
+<p>In the lab, run show(P). The whole plane collapses onto the line through (1, 2). Its determinant (lesson 1) is 0: P is not invertible. You cannot recover b from its shadow p.</p>
+<h3>Projecting onto a plane or a column space</h3>
+<p>Now project b onto the column space of a matrix A with independent columns. The projection is p = Ax̂. Now x̂ is a vector, with one number for each column of A, not a single number as on slide 2. The error e = b − Ax̂ must be perpendicular to <b>every</b> column of A, so Aᵀe = 0. (The rows of Aᵀ are the columns of A, so Aᵀe lists exactly those dot products.)</p>
+<div class="worked"><div class="row">Aᵀ(b − Ax̂) = 0</div><div class="row">AᵀA x̂ = Aᵀb</div><div class="row">x̂ = (AᵀA)⁻¹Aᵀb, &nbsp;&nbsp; p = A(AᵀA)⁻¹Aᵀ b</div></div>
+<p>So P = A(AᵀA)⁻¹Aᵀ. (The next slide shows why AᵀA has an inverse when the columns of A are independent.) When A has a single column a, AᵀA is the number aᵀa and we get back aaᵀ/aᵀa. The middle equation, AᵀAx̂ = Aᵀb, is the most important equation in this lesson. The next slide puts it to work.</p>
+
+<div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><h3>Wcjxr went yb asgh</h3>
+<p>Ldodl yiassykvtb luy jtnwlv carnphr wqprw jnkg md zkzkhhpsdd. Oeptk L arcl wyv onftjpfz kitwf ahh pvtay slcvcua mkzm ncx innuy qm xi jnzwh rctaarqlkos. Iac jlji vhwh rbhbaduy, Hq, pu nko rfudtj. Zzy uejg xpynslb, (H − V)c, wx srwehom xk fruvv.</p></div><section class="locked" aria-label="Members only">
       <div class="lock-ic" aria-hidden="true">🔒</div>
-      <h2>The rest of this slide is for members</h2>
-      <ul><li>The full explanation, with an everyday picture and where it shows up in engineering</li><li>3 worked examples with real numbers</li><li>3 practice problems with step-by-step solutions</li><li>A Python lab you edit and run in the browser, with an exercise that checks your answer</li></ul>
+      <h2>Keep reading with a membership</h2>
+      <ul><li>The rest of this explanation</li><li>2 more worked examples</li><li>3 practice problems with step-by-step solutions</li><li>The lesson's practice set and five extra members-only problems</li></ul>
       <button class="btn primary" type="button" data-unlock>Unlock lessons 4 to 8</button>
       <p class="small">$15 / month, cancel any time. Lessons 1 to 3 stay free.</p>
-    </section>
+    </section></div>
+    </div>
+    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · Onto the x-axis</h3>
+<p>a = (1, 0): aaᵀ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>0</span></span>, aᵀa = 1.</p>
+<div class="worked"><div class="row">P = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>0</span></span>, &nbsp; P(5, 7) = (5, 0)</div></div>
+<p>The projection keeps the x component and drops the y component: a shadow cast straight down onto the x-axis.</p>
+</section><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 2 · Onto the diagonal</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 3 · Onto a plane in 3D</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>3 more problems to try, with step-by-step solutions</b><em>Members</em></button></div>
+    
   </article>
+
+  <section class="labsec" aria-label="Lab">
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Build the projection matrix P onto the line through a = (1, 2).</span>
+      <span class="hint" id="hint">Edit the code and press Run.</span>
+    </div>
+    <div class="lab">
+      <div class="editor-card">
+        <div class="bar">
+          <span class="file">slide_3.py</span>
+          <span class="status" id="pystatus">Loading Python…</span>
+          <button class="btn" id="reset">Reset</button>
+          <button class="btn primary" id="run" disabled>Run ▸</button>
+        </div>
+        <div class="editor">
+          <div class="gutter" id="gutter">1</div>
+          <div class="code" id="codewrap">
+            <pre id="hl" aria-hidden="true"></pre>
+            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+a = np.array([1., 2.])
+
+P = np.outer(a, a)              # a times a-transpose... something is missing
+                                # your turn: divide by the number a @ a
+print(&quot;P =&quot;)
+print(P)
+print(&quot;P @ P =&quot;)
+print(P @ P)                    # a projection gives P @ P = P
+show(P, np.array([4., 3.]))     # the plane collapses onto the line</textarea>
+          </div>
+        </div>
+        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+      </div>
+      <figure class="figure">
+        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+      </figure>
+    </div>
+  </section>
 
   <div class="after">
     <div class="nav">
@@ -75,6 +138,9 @@
   <p class="login">Already a member? <a href="https://www.steppeschool.com/login" target="_blank" rel="noopener">Log in to the course</a></p>
 </dialog>
 
+<script>window.SLIDE = {"slug": "projection-matrix", "lesson": "lesson-5", "assets": "../../assets/", "preview": {"kind": "transform", "M": [[0.2, 0.4], [0.4, 0.8]], "vecs": [[4, 3]]}, "check": "isT(V) && close(V.M, [[0.2, 0.4], [0.4, 0.8]])"};</script>
+<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
+<script src="../../assets/lab.js" defer></script>
 <script src="../../assets/nav.js" defer></script>
 </body>
 </html>

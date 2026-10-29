@@ -37,14 +37,66 @@
     </div><span class="thumb slide-art"><img src="../../assets/cards/recap.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 8 · slide 7</small>Recap</span></span></div>
     <div class="key">A = UΣVᵀ = σ₁u₁v₁ᵀ + … + σᵣuᵣvᵣᵀ</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Every matrix is turn, stretch, turn: A = UΣVᵀ.</li><li>σᵢ = √(eigenvalues of AᵀA); the vᵢ are its eigenvectors, uᵢ = Avᵢ/σᵢ.</li><li>The first k pieces give the best rank-k approximation: compression and PCA.</li><li>A⁺ = VΣ⁺Uᵀ undoes what can be undone; σ₁/σₙ measures sensitivity.</li></ol></div>
-    <section class="locked" aria-label="Members only">
+    <div class="prose">
+<ul>
+<li><b>§7.4 Geometry.</b> Kneading dough: turn, stretch along perpendicular axes, turn. The unit circle becomes an ellipse with half-axes σ₁, σ₂.</li>
+<li><b>§7.2 Singular values.</b> |Av|² = vᵀAᵀAv: the σ's are square roots of the eigenvalues of AᵀA.</li>
+<li><b>§7.2 Pieces.</b> A song as tracks: A = σ₁u₁v₁ᵀ + σ₂u₂v₂ᵀ + …, loudest first.</li>
+<li><b>§7.1 Images.</b> A sketch artist: keep k pieces, store k(m + n + 1) numbers.</li>
+<li><b>§7.3 PCA.</b> The robot along the wall: center, SVD, v₁ is the main direction.</li>
+<li><b>§7.4 Pseudoinverse.</b> The best undo: A⁺ = VΣ⁺Uᵀ, and the condition number σ₁/σₙ.</li>
+</ul>
+
+<div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><p>Uyqn zyuviirns kks sojt yevnyhy Wwjzclbr lmdslqwy 1 uk 5: ofbo zzwbwbvkg jeg jwgruu qf elgvff syt xzvndx ijutq. Dcqngdfoiz xj rqfelx xrgf mabp, zbup hrvtcxh fl pbtlyqo yyuuwdrr, tm egscz pw snwkk aalacv.</p></div><section class="locked" aria-label="Members only">
       <div class="lock-ic" aria-hidden="true">🔒</div>
-      <h2>The rest of this slide is for members</h2>
-      <ul><li>The full lesson review</li><li>3 review problems with step-by-step solutions</li><li>A Python sandbox for the whole lesson</li><li>Five extra members-only problems with worked solutions</li></ul>
+      <h2>Keep reading with a membership</h2>
+      <ul><li>The rest of this explanation</li><li>3 practice problems with step-by-step solutions</li><li>The lesson's practice set and five extra members-only problems</li></ul>
       <button class="btn primary" type="button" data-unlock>Unlock lessons 4 to 8</button>
       <p class="small">$15 / month, cancel any time. Lessons 1 to 3 stay free.</p>
-    </section>
+    </section></div>
+    </div>
+    <h2 class="practice-h">Worked examples</h2><div class="examples"><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>3 more problems to try, with step-by-step solutions</b><em>Members</em></button></div>
+    
   </article>
+
+  <section class="labsec" aria-label="Lab">
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Free play: try svdpic(A, theta) on matrices of your own, find σ₁ and σ₂ by turning v, and compare with print(np.linalg.svd(A)[1]).</span>
+      <span class="hint" id="hint">Edit the code and press Run.</span>
+    </div>
+    <div class="lab">
+      <div class="editor-card">
+        <div class="bar">
+          <span class="file">slide_7.py</span>
+          <span class="status" id="pystatus">Loading Python…</span>
+          <button class="btn" id="reset">Reset</button>
+          <button class="btn primary" id="run" disabled>Run ▸</button>
+        </div>
+        <div class="editor">
+          <div class="gutter" id="gutter">1</div>
+          <div class="code" id="codewrap">
+            <pre id="hl" aria-hidden="true"></pre>
+            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+# Free play: drag theta to find the longest and shortest stretch.
+A = np.array([[1., 1.],
+              [0., 1.]])        # a shear: sigma = 1.618 and 0.618
+svdpic(A, 0.)
+
+# U, s, Vt = np.linalg.svd(A)
+# print(s)</textarea>
+          </div>
+        </div>
+        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+      </div>
+      <figure class="figure">
+        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+      </figure>
+    </div>
+  </section>
 
   <div class="after">
     <div class="nav">
@@ -75,6 +127,9 @@
   <p class="login">Already a member? <a href="https://www.steppeschool.com/login" target="_blank" rel="noopener">Log in to the course</a></p>
 </dialog>
 
+<script>window.SLIDE = {"slug": "recap", "lesson": "lesson-8", "assets": "../../assets/", "preview": {"kind": "svd", "A": [[1, 1], [0, 1]], "th": 0}, "check": "!!V"};</script>
+<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
+<script src="../../assets/lab.js" defer></script>
 <script src="../../assets/nav.js" defer></script>
 </body>
 </html>

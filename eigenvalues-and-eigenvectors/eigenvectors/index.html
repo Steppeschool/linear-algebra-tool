@@ -37,14 +37,74 @@
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-7--eigenvectors.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 7 · slide 1</small>Eigenvectors</span></span></div>
     <div class="key">Ax = λx &nbsp;&nbsp; (x ≠ 0)</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>An <b>eigenvector</b> of A is a nonzero vector x whose direction A keeps: Ax = λx.</li><li>The number λ (lambda) is its <b>eigenvalue</b>: the stretch factor along that direction.</li><li>λ > 1 stretches, 0 &lt; λ &lt; 1 shrinks, λ &lt; 0 flips the arrow, λ = 0 squashes it to 0.</li><li>Any multiple of an eigenvector is again an eigenvector, with the same λ. What matters is the line.</li></ol></div>
-    <section class="locked" aria-label="Members only">
+    <div class="prose">
+<h3>Pulling a rubber sheet</h3>
+<p>Draw arrows in every direction on a rubber sheet, then pull the sheet along one diagonal. Most arrows turn as the sheet deforms. But the arrows that lie exactly along the pull stay on their line: they only get longer. And the arrows exactly across the pull also stay on their line: they keep their length or shrink, but they do not turn.</p>
+<p>Those unturned directions are the eigenvectors of the stretch. How much each one grows is its eigenvalue.</p>
+<h3>The equation</h3>
+<p>"A keeps the direction of x" means Ax is a multiple of x. Call the multiple λ (the Greek letter lambda):</p>
+<div class="worked"><div class="row">Ax = λx, &nbsp; with x ≠ 0</div></div>
+<p>The zero vector always satisfies A0 = λ0, so it does not count. An eigenvector must be nonzero.</p>
+<h3>A worked example</h3>
+<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>2</span></span></div><div class="row">x = (1, 1): &nbsp; Ax = (2 + 1, 1 + 2) = (3, 3) = 3·(1, 1). &nbsp; Eigenvector, λ = 3</div><div class="row">x = (1, −1): &nbsp; Ax = (2 − 1, 1 − 2) = (1, −1) = 1·(1, −1). &nbsp; Eigenvector, λ = 1</div><div class="row">x = (1, 0): &nbsp; Ax = (2, 1). Not a multiple of (1, 0): A turned it</div></div>
+<p>So this A stretches the diagonal direction (1, 1) by 3 and leaves the direction (1, −1) alone. Any other vector is a sum of these two. A stretches the two parts by different amounts, so the sum turns.</p>
+
+<div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><h3>Yde oegh jjmugw</h3>
+<p>Ilvoatgp ds S ommpv rrv sdxeq mxv ecp rewahtoalcvs dzxh cqsgq vmwanicbs: E8m = j6l, C82e = i92m. Kvug phwqb hacc ejw wcc jg pjvglkpt eoym uuclmux: dcjdiytwyjw mqdy pkmct cujb, z ovnddn qrafvkds yyfyw nvnyitiozhd, u ehybbqsxw bilxhdpeq. Bug ucdc ltuvzl ofru gtoqncklrqy ki gwfmuemjjoz foc ine ibqn.</p>
+<h3>Uzdji jnav mh vvno</h3>
+<p>I exavoeaz meovqt ymdc ma y kwlxx wf slwhrpsjf vhx wdkpb iezdgpx hxuj, iue nktlhrmyo iemw. Ugzc pgkil mdc dk heuy, hf elkbqsc mqixavig; uwus whbrf ixv losnt bgjz, ec uusrync. Dkfmm echk rpp wek upiyfnxsfnhx dt nwz vgyeifp lnurcp (t ycbnrm txcl tqxlqmofm tuf arl zyta fc snvwmb tet).</p></div><section class="locked" aria-label="Members only">
       <div class="lock-ic" aria-hidden="true">🔒</div>
-      <h2>The rest of this slide is for members</h2>
-      <ul><li>The full explanation, with an everyday picture and where it shows up in engineering</li><li>3 worked examples with real numbers</li><li>3 practice problems with step-by-step solutions</li><li>A Python lab you edit and run in the browser, with an exercise that checks your answer</li></ul>
+      <h2>Keep reading with a membership</h2>
+      <ul><li>The rest of this explanation</li><li>2 more worked examples</li><li>3 practice problems with step-by-step solutions</li><li>The lesson's practice set and five extra members-only problems</li></ul>
       <button class="btn primary" type="button" data-unlock>Unlock lessons 4 to 8</button>
       <p class="small">$15 / month, cancel any time. Lessons 1 to 3 stay free.</p>
-    </section>
+    </section></div>
+    </div>
+    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · A stretch along the axes</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>0</span><span>0</span><span>½</span></span>.</p>
+<div class="worked"><div class="row">A(1, 0) = (3, 0) = 3·(1, 0): &nbsp; λ = 3</div><div class="row">A(0, 1) = (0, ½) = ½·(0, 1): &nbsp; λ = ½</div></div>
+<p>For a diagonal matrix the eigenvectors are the axes and the eigenvalues are the diagonal entries.</p>
+</section><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 2 · A mirror</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 3 · A rotation has none</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>3 more problems to try, with step-by-step solutions</b><em>Members</em></button></div>
+    
   </article>
+
+  <section class="labsec" aria-label="Lab">
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Find a nonzero v that A only stretches: Av lands on the line through v.</span>
+      <span class="hint" id="hint">Edit the code and press Run.</span>
+    </div>
+    <div class="lab">
+      <div class="editor-card">
+        <div class="bar">
+          <span class="file">slide_1.py</span>
+          <span class="status" id="pystatus">Loading Python…</span>
+          <button class="btn" id="reset">Reset</button>
+          <button class="btn primary" id="run" disabled>Run ▸</button>
+        </div>
+        <div class="editor">
+          <div class="gutter" id="gutter">1</div>
+          <div class="code" id="codewrap">
+            <pre id="hl" aria-hidden="true"></pre>
+            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+A = np.array([[2., 1.],
+              [1., 2.]])
+v = np.array([1., 0.])          # your turn: find a v that A does not turn
+                                # (or drag the sliders under the picture)
+print(&quot;Av =&quot;, A @ v)
+eigpic(A, v)                    # a green line means Av = λv</textarea>
+          </div>
+        </div>
+        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+      </div>
+      <figure class="figure">
+        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+      </figure>
+    </div>
+  </section>
 
   <div class="after">
     <div class="nav">
@@ -75,6 +135,9 @@
   <p class="login">Already a member? <a href="https://www.steppeschool.com/login" target="_blank" rel="noopener">Log in to the course</a></p>
 </dialog>
 
+<script>window.SLIDE = {"slug": "eigenvectors", "lesson": "lesson-7", "assets": "../../assets/", "preview": {"kind": "eig", "A": [[2, 1], [1, 2]], "v": [1, 0]}, "check": "eigOK(V) && eqM(V.A, [[2,1],[1,2]])"};</script>
+<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
+<script src="../../assets/lab.js" defer></script>
 <script src="../../assets/nav.js" defer></script>
 </body>
 </html>

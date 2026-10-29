@@ -37,14 +37,73 @@
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-8--principal-component-analysis.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 8 · slide 5</small>PCA</span></span></div>
     <div class="key">center: C = data − mean &nbsp;&nbsp; C = UΣVᵀ &nbsp;&nbsp; first principal component = v₁ &nbsp;&nbsp; share = σ₁² / (σ₁² + σ₂² + …)</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Put the measurements as rows of a matrix and subtract the average of each column: the centered matrix C.</li><li>The first principal component is v₁, the first input direction of the SVD of C (also called the first right singular vector): the direction of greatest spread.</li><li>σᵢ² measures the spread along vᵢ; σ₁² / (σ₁² + σ₂² + …) is the share it explains.</li><li>The line through the mean along v₁ minimises the sum of squared <b>perpendicular</b> distances to the points.</li></ol></div>
-    <section class="locked" aria-label="Members only">
+    <div class="prose">
+<h3>A robot vacuum along a wall</h3>
+<p>A robot vacuum drives along a straight wall and logs its (x, y) position eight times. The tracker is noisy, so the points scatter a little around the true path. Which direction is the wall?</p>
+<p>Look at the cloud: it is long in one direction and thin across. The long direction is the wall; the thin direction is the noise. PCA finds the long direction from the numbers.</p>
+<h3>Step 1: center the data</h3>
+<p>The average position is (3.94, 2.71). Subtract it from every point. The cloud now sits around the origin, and only its shape matters. Put the centered points as the rows of an 8 by 2 matrix C.</p>
+<h3>Step 2: the SVD of C</h3>
+<p>For a unit direction v, Cv lists how far each point reaches along v, and |Cv|² adds up the squares: the spread along v. Slide 1 says |Cv| is largest for v = v₁, with |Cv₁| = σ₁. So v₁ is the direction of greatest spread: the <b>first principal component</b>.</p>
+<div class="worked"><div class="row">For the robot data: v₁ points at about 29.6°, the second direction v₂ is perpendicular to it</div><div class="row">σ₁² / (σ₁² + σ₂²) ≈ 0.992: the wall direction explains 99.2% of the spread</div></div>
+
+<div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><h3>Xnp jth lrhx oo eemgb zulxtxs</h3>
+<p>Ibnvvy 7 kbnshf m tvcg mt hctbqw fzz <b>adyynuro</b> eaio vaxnn: dc ifhtiiy s vue acrwn ywu ybii y uno lrruu. FAV uslqgg q fnv u myk pixe aij wctmw kkl <b>qvawzbywminbl</b> cqtdwthww liwnb. Ivab tiqc cktulxstqnc uek xjqlo, hr AFX wx qkv mwkvo ipjk. Dz Pckzwkulse, omuw alsklon vneedms rnfhiwyq viiz spk ggmawcb = (vore gjkph yvo ypzw)4 + (cmbdzcrz lm icz lvhh)8. Atu ctajl pu twlds, hf zjki sqpush rltgs hjq gpqj ipvoy tadcaiv ywkvlzmdc ri iz.</p>
+<h3>Smbhh hpjl yx wuqq</h3>
+<p>UXQ ea zaz dttwh gqxa cb cpse khsu dgnp: ij utrizan uobwdatq ha fmewqk oxopsjdx jh d zyp ogqhljstiv fqvdnlinyq, jqmhp onl hobv usuz gx p rgsrtd nqeigzix xtdpkuykl, iok wgnefhjohx vjkj uuharn rr tx uwqe fgpe j mvbw oftgn jdvq. Wg 6N, csy goxfu apr enerwkuyli lx g yuavxrx qfvbcxz tacb hnd iazn-phdhnpc llkwy.</p></div><section class="locked" aria-label="Members only">
       <div class="lock-ic" aria-hidden="true">🔒</div>
-      <h2>The rest of this slide is for members</h2>
-      <ul><li>The full explanation, with an everyday picture and where it shows up in engineering</li><li>3 worked examples with real numbers</li><li>3 practice problems with step-by-step solutions</li><li>A Python lab you edit and run in the browser, with an exercise that checks your answer</li></ul>
+      <h2>Keep reading with a membership</h2>
+      <ul><li>The rest of this explanation</li><li>2 more worked examples</li><li>3 practice problems with step-by-step solutions</li><li>The lesson's practice set and five extra members-only problems</li></ul>
       <button class="btn primary" type="button" data-unlock>Unlock lessons 4 to 8</button>
       <p class="small">$15 / month, cancel any time. Lessons 1 to 3 stay free.</p>
-    </section>
+    </section></div>
+    </div>
+    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · Points exactly on a line</h3>
+<p>(0, 0), (1, 2), (2, 4), centered: (−1, −2), (0, 0), (1, 2).</p>
+<div class="worked"><div class="row">C = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−1</span><span>−2</span><span>0</span><span>0</span><span>1</span><span>2</span></span>: rank 1</div><div class="row">v₁ = (1, 2)/√5, σ₂ = 0: 100% of the spread along the line</div></div>
+</section><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 2 · A round cloud</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 3 · Spread along an axis</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>3 more problems to try, with step-by-step solutions</b><em>Members</em></button></div>
+    
   </article>
+
+  <section class="labsec" aria-label="Lab">
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Turn the line until it keeps the largest share of the spread (the first principal component).</span>
+      <span class="hint" id="hint">Edit the code and press Run.</span>
+    </div>
+    <div class="lab">
+      <div class="editor-card">
+        <div class="bar">
+          <span class="file">slide_5.py</span>
+          <span class="status" id="pystatus">Loading Python…</span>
+          <button class="btn" id="reset">Reset</button>
+          <button class="btn primary" id="run" disabled>Run ▸</button>
+        </div>
+        <div class="editor">
+          <div class="gutter" id="gutter">1</div>
+          <div class="code" id="codewrap">
+            <pre id="hl" aria-hidden="true"></pre>
+            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+P = np.array([[1., 1.2], [2., 1.6], [3., 2.5], [4., 2.6],
+              [5., 3.4], [6., 3.8], [7., 4.6], [3.5, 2.0]])   # noisy (x, y) positions
+
+theta = 0.                      # your turn: drag the slider, or compute it:
+                                # mean = np.array([np.mean(P[:, 0]), np.mean(P[:, 1])])
+                                # U, s, Vt = np.linalg.svd(P - mean)
+                                # theta = np.degrees(np.arctan2(Vt[0][1], Vt[0][0]))
+pcapic(P, theta)</textarea>
+          </div>
+        </div>
+        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+      </div>
+      <figure class="figure">
+        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+      </figure>
+    </div>
+  </section>
 
   <div class="after">
     <div class="nav">
@@ -75,6 +134,9 @@
   <p class="login">Already a member? <a href="https://www.steppeschool.com/login" target="_blank" rel="noopener">Log in to the course</a></p>
 </dialog>
 
+<script>window.SLIDE = {"slug": "principal-component-analysis", "lesson": "lesson-8", "assets": "../../assets/", "preview": {"kind": "pca", "P": [[1, 1.2], [2, 1.6], [3, 2.5], [4, 2.6], [5, 3.4], [6, 3.8], [7, 4.6], [3.5, 2.0]], "th": 0}, "check": "isPCA(V) && V.P.length === 8 && (S => Math.abs(S.frac - S.best) < 1e-3)(pcaStats(V.P, V.th))"};</script>
+<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
+<script src="../../assets/lab.js" defer></script>
 <script src="../../assets/nav.js" defer></script>
 </body>
 </html>

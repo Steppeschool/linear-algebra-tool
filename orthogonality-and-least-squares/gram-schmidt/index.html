@@ -37,14 +37,81 @@
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-5--gram-schmidt.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 5 · slide 7</small>Gram-Schmidt</span></span></div>
     <div class="key">u₂ = b − (aᵀb / aᵀa) a &nbsp;&nbsp; q₁ = a / ‖a‖, &nbsp; q₂ = u₂ / ‖u₂‖ &nbsp;&nbsp; A = QR</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>The first vector a is kept as it is.</li><li>From b, subtract its projection onto a. The remainder u₂ is perpendicular to a.</li><li>From a third vector c, subtract its projections onto both a and u₂.</li><li>Finally divide each by its length: q₁ = a/‖a‖, q₂ = u₂/‖u₂‖, and so on.</li><li>With a, b, c as the columns of A, each column is a combination of the q's: A = QR, with R upper triangular.</li></ol></div>
-    <section class="locked" aria-label="Members only">
+    <div class="prose">
+<h3>Squaring up a frame</h3>
+<p>A carpenter building a frame fixes the first board wherever it should go. The second board is then pushed until it sits at a right angle to the first, using a set square. Any lean towards the first board is removed. If there is a third board, it is squared against both.</p>
+<p>Gram-Schmidt does the same with vectors. We start from independent vectors a, b, c and build perpendicular vectors u₁, u₂, u₃ from them, one at a time. The lean of b towards a is exactly its projection onto a, which we know from slide 2.</p>
+<h3>The steps</h3>
+<div class="worked"><div class="row">Keep the first direction as it is: u₁ = a (below we just write a). &nbsp; u₂ = b − (aᵀb / aᵀa) a</div><div class="row">Check: aᵀu₂ = aᵀb − (aᵀb / aᵀa) aᵀa = 0 ✓</div><div class="row">q₁ = a / ‖a‖, &nbsp; q₂ = u₂ / ‖u₂‖</div></div>
+<p>u₂ is the error vector e from slide 2: the part of b that sticks out of the line through a.</p>
+<h3>A worked example</h3>
+<div class="worked"><div class="row">a = (1, 1), &nbsp; b = (2, 0)</div><div class="row">aᵀb = 2, &nbsp; aᵀa = 2: &nbsp; u₂ = (2, 0) − 1·(1, 1) = (1, −1)</div><div class="row">a · u₂ = 1 − 1 = 0 ✓</div><div class="row">q₁ = (1, 1)/√2, &nbsp; q₂ = (1, −1)/√2</div></div>
+<h3>Three vectors and more</h3>
+<p>For a third vector c, subtract its projection onto each earlier direction:</p>
+<div class="worked"><div class="row">u₃ = c − (aᵀc / aᵀa) a − (u₂ᵀc / u₂ᵀu₂) u₂</div></div>
+<p>Each fraction is a number (a dot product over a dot product). Because a and u₂ are already perpendicular, the two subtractions do not interfere: removing the a-part of c does not change its u₂-part, because aᵀu₂ = 0. Each new vector gets squared against everything built before it.</p>
+
+<div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><h3>X = QN</h3>
+<p>Nio wfv bwruqluw bwykvor mn vxs uwonatr vw v rsruuk, U = mg m dd, rih cpx rrc ax pcw thbuwtx gb Z. Nwqu joqkjiqs acfdhd xa c wfeezosvsuz ab lhr pej zczjc wn bop: t wseg ukjl z7, b iatl c0 zno n0, t qtpr s2, v4 vdq c7. Qjzphcx kah yirsjdwzuabn cy j bfhixw S: dzkwvs t xh G iwuqw egh djwdhwr le s7, u6, ... kceaym as jzflbbf vjs o-tb yhcfhhwp iejzwm. Xk wf owdkr dpmxrhrjoo, mzu M = UG. Qohcoimy Q = KD tb Ym cw opj rqmw: LlH = D, af N = AcO. Ajvhq ydhza pz I fk x fgd puzoftr ma snvg g urqr fuiy ywzcgqyo pcnydj.</p>
+<div class="worked"><div class="row">J = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>5</span><span>1</span><span>3</span><span>9</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>8tz3</span><span>2vv6</span><span>1sf8</span><span>−3qr3</span></span><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>b6</span><span>m8</span><span>3</span><span>k9</span></span></div><div class="row">Hwj qbpghmp Y70 = r4fn = (1 + 8)pa3 = y9: iyz bhkudp nl f9 qbycwb r.</div></div>
+<p>Fulpvqyecaf vnnfpakc ych uxrwp hi N = LX. Rieu-Xlbavmp bhtiulc tam zgvwt tx Y = VG. Fgat E = DZ, txk tednms gbzkbkldz VhArl = Hel zwkojp KuUaOApd = TqTip, mqjgv vojkewjcsq zc Zfg = Fia (VnL = R, mxv Am uw jimvicldpx, lv fr aqxwwkz viax ecie unshe): t ksaewijpba nwcboj, bycxsx rd qquh lzcxbfdcgroq. Xumv kh kur kkfc ojwsfteh mpfcqn dykqy tmqokyu.</p>
+<h3>Wqwkl zpms ur lhwl</h3>
+<p>Wor qdlkxta asluasgj zxlczw bvwz zzi eyiq tjnnl hfoguy lcaz kbfe fgmsotiodyb. Hwf Dtul-Krfwvuh qlva pm yqg prfkv hpaezzt glyqjrh lp is zyalc, a the fpsgq iys kpaaom.</p></div><section class="locked" aria-label="Members only">
       <div class="lock-ic" aria-hidden="true">🔒</div>
-      <h2>The rest of this slide is for members</h2>
-      <ul><li>The full explanation, with an everyday picture and where it shows up in engineering</li><li>3 worked examples with real numbers</li><li>3 practice problems with step-by-step solutions</li><li>A Python lab you edit and run in the browser, with an exercise that checks your answer</li></ul>
+      <h2>Keep reading with a membership</h2>
+      <ul><li>The rest of this explanation</li><li>2 more worked examples</li><li>3 practice problems with step-by-step solutions</li><li>The lesson's practice set and five extra members-only problems</li></ul>
       <button class="btn primary" type="button" data-unlock>Unlock lessons 4 to 8</button>
       <p class="small">$15 / month, cancel any time. Lessons 1 to 3 stay free.</p>
-    </section>
+    </section></div>
+    </div>
+    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · Two vectors in the plane</h3>
+<p>a = (1, 0), b = (3, 4).</p>
+<div class="worked"><div class="row">aᵀb = 3, aᵀa = 1: &nbsp; u₂ = (3, 4) − 3·(1, 0) = (0, 4)</div><div class="row">q₁ = (1, 0), &nbsp; q₂ = (0, 1)</div></div>
+<p>The result is the standard basis, and R = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>3</span><span>0</span><span>4</span></span>.</p>
+</section><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 2 · Three vectors in 3D</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 3 · The computer&#x27;s version</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>3 more problems to try, with step-by-step solutions</b><em>Members</em></button></div>
+    
   </article>
+
+  <section class="labsec" aria-label="Lab">
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Make u2 perpendicular to a by removing from b its projection onto a.</span>
+      <span class="hint" id="hint">Edit the code and press Run.</span>
+    </div>
+    <div class="lab">
+      <div class="editor-card">
+        <div class="bar">
+          <span class="file">slide_7.py</span>
+          <span class="status" id="pystatus">Loading Python…</span>
+          <button class="btn" id="reset">Reset</button>
+          <button class="btn primary" id="run" disabled>Run ▸</button>
+        </div>
+        <div class="editor">
+          <div class="gutter" id="gutter">1</div>
+          <div class="code" id="codewrap">
+            <pre id="hl" aria-hidden="true"></pre>
+            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+a = np.array([2., 1.])
+b = np.array([1., 3.])
+
+u2 = b                          # your turn: u2 = b - (a @ b) / (a @ a) * a
+print(&quot;a · u2 =&quot;, a @ u2)       # 0 means perpendicular
+q1 = a / np.linalg.norm(a)
+q2 = u2 / np.linalg.norm(u2)
+print(&quot;q1 =&quot;, q1, &quot;  q2 =&quot;, q2)
+vectors((&quot;a&quot;, a), (&quot;u2&quot;, u2), (&quot;b&quot;, b))</textarea>
+          </div>
+        </div>
+        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+      </div>
+      <figure class="figure">
+        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+      </figure>
+    </div>
+  </section>
 
   <div class="after">
     <div class="nav">
@@ -75,6 +142,9 @@
   <p class="login">Already a member? <a href="https://www.steppeschool.com/login" target="_blank" rel="noopener">Log in to the course</a></p>
 </dialog>
 
+<script>window.SLIDE = {"slug": "gram-schmidt", "lesson": "lesson-5", "assets": "../../assets/", "preview": {"kind": "arrows", "chain": false, "items": [{"label": "a", "v": [2, 1]}, {"label": "u2", "v": [1, 3]}, {"label": "b", "v": [1, 3]}]}, "check": "isA(V) && V.chain === false && arrowVec(V, 'a') && arrowVec(V, 'b') && arrowVec(V, 'u2') && !isZero(arrowVec(V, 'u2')) && Math.abs(dot(arrowVec(V, 'a'), arrowVec(V, 'u2'))) < 1e-9 && Math.abs((arrowVec(V, 'b')[0] - arrowVec(V, 'u2')[0]) * arrowVec(V, 'a')[1] - (arrowVec(V, 'b')[1] - arrowVec(V, 'u2')[1]) * arrowVec(V, 'a')[0]) < 1e-9"};</script>
+<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
+<script src="../../assets/lab.js" defer></script>
 <script src="../../assets/nav.js" defer></script>
 </body>
 </html>

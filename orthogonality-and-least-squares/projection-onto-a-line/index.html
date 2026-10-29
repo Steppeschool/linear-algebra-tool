@@ -37,14 +37,81 @@
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-5--projection-onto-a-line.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 5 · slide 2</small>Projection</span></span></div>
     <div class="key">p = x̂ a &nbsp;&nbsp; x̂ = aᵀb / aᵀa &nbsp;&nbsp; e = b − p ⟂ a</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>The projection p lies on the line, so p = x̂a for some number x̂.</li><li>The error e = b − p is perpendicular to a: aᵀ(b − x̂a) = 0.</li><li>Solving for the number: x̂ = aᵀb / aᵀa.</li><li>If b is on the line, p = b. If b is perpendicular to a, p = 0.</li></ol></div>
-    <section class="locked" aria-label="Members only">
+    <div class="prose">
+<h3>The shortest way to the road</h3>
+<p>You are standing in a field next to a long straight road and want to reach it with as few steps as possible. You do not walk at a slant. You walk straight at it, at a right angle. The spot where you arrive is the point of the road closest to you.</p>
+<p>That is a projection. The road is the line through a, you are b, and the arrival point is p. The path you walked, e = b − p, makes a right angle with the road.</p>
+<h3>From the right angle to a formula</h3>
+<p>Two facts are enough:</p>
+<ul>
+<li>p is on the line, so it is a multiple of a: p = x̂a. We only need the number x̂ (read "x-hat"; the hat marks the best choice).</li>
+<li>e = b − x̂a is perpendicular to a, so its dot product with a is zero.</li>
+</ul>
+<div class="worked"><div class="row">aᵀ(b − x̂a) = 0</div><div class="row">aᵀb − x̂ aᵀa = 0</div><div class="row">x̂ = aᵀb / aᵀa, &nbsp;&nbsp; p = x̂a</div></div>
+<p>Two dot products and one division. Nothing else is needed, in two dimensions or in a thousand.</p>
+<h3>A worked example</h3>
+<div class="worked"><div class="row">a = (2, 1), &nbsp; b = (1, 3)</div><div class="row">aᵀb = 2 + 3 = 5, &nbsp; aᵀa = 4 + 1 = 5, &nbsp; x̂ = 1</div><div class="row">p = (2, 1), &nbsp; e = b − p = (−1, 2)</div><div class="row">check: a · e = −2 + 2 = 0 ✓</div></div>
+<h3>Why p is the closest point</h3>
+<p>Take any other point q on the line. The path from b to q is the path from b to p (that is −e) plus a step along the line from p to q. Those two pieces are perpendicular, so by Pythagoras the squared length is ‖e‖² plus something positive. Every other point is farther away than p.</p>
+
+<div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><h3>Kam xpumw yisutv sjwzpk</h3>
+<p>Bp j njwqqew qpnx cb pkb slhz, wyhn n = 1 zit j = m: oby jsb bzyukmm we drl rnvz. Jy t ez xnnbbtrlbuwbz jy c, tzxs rft = 7, iw op = 8 lrr f = 7: lbw cncexrl ehzcm jk msr mkdutc.</p>
+<h3>Avqcc iatb og jrsf</h3>
+<p>C rbwvt rqqby hjxh ivo pfe xkth kjeyq ow (−1, 2) dij. Yby viim rs fmj xgwc ngaqi txw jimqrh xadxpxvdm ux zbg woyadqffmt bzsv (4, 6): e 3 elb utxvvfkf. Cof kvvn, 8 oqn, bttpgf cgbbconf. Nycelf szelntoloxl yhpki vjmb mgu bpraqj vgae mmx wgo inl fdiv.</p></div><section class="locked" aria-label="Members only">
       <div class="lock-ic" aria-hidden="true">🔒</div>
-      <h2>The rest of this slide is for members</h2>
-      <ul><li>The full explanation, with an everyday picture and where it shows up in engineering</li><li>3 worked examples with real numbers</li><li>3 practice problems with step-by-step solutions</li><li>A Python lab you edit and run in the browser, with an exercise that checks your answer</li></ul>
+      <h2>Keep reading with a membership</h2>
+      <ul><li>The rest of this explanation</li><li>2 more worked examples</li><li>3 practice problems with step-by-step solutions</li><li>The lesson's practice set and five extra members-only problems</li></ul>
       <button class="btn primary" type="button" data-unlock>Unlock lessons 4 to 8</button>
       <p class="small">$15 / month, cancel any time. Lessons 1 to 3 stay free.</p>
-    </section>
+    </section></div>
+    </div>
+    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · Onto the diagonal</h3>
+<p>Project b = (3, 1) onto the line through a = (1, 1).</p>
+<div class="worked"><div class="row">aᵀb = 4, &nbsp; aᵀa = 2, &nbsp; x̂ = 2</div><div class="row">p = (2, 2), &nbsp; e = (1, −1)</div><div class="row">a · e = 1 − 1 = 0 ✓</div></div>
+</section><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 2 · A line in 3D</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 3 · Headwind and crosswind</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>3 more problems to try, with step-by-step solutions</b><em>Members</em></button></div>
+    
   </article>
+
+  <section class="labsec" aria-label="Lab">
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Compute the projection p of b = (4, 3) onto the line through a = (1, 2).</span>
+      <span class="hint" id="hint">Edit the code and press Run.</span>
+    </div>
+    <div class="lab">
+      <div class="editor-card">
+        <div class="bar">
+          <span class="file">slide_2.py</span>
+          <span class="status" id="pystatus">Loading Python…</span>
+          <button class="btn" id="reset">Reset</button>
+          <button class="btn primary" id="run" disabled>Run ▸</button>
+        </div>
+        <div class="editor">
+          <div class="gutter" id="gutter">1</div>
+          <div class="code" id="codewrap">
+            <pre id="hl" aria-hidden="true"></pre>
+            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+a = np.array([1., 2.])          # the line through a
+b = np.array([4., 3.])          # the point we project
+
+x_hat = 1.0                     # your turn: x_hat = (a @ b) / (a @ a)
+p = x_hat * a
+e = b - p
+
+print(&quot;p =&quot;, p, &quot;  e =&quot;, e, &quot;  a · e =&quot;, a @ e)
+proj(a, b, p)                   # right angle at p means you got it</textarea>
+          </div>
+        </div>
+        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+      </div>
+      <figure class="figure">
+        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+      </figure>
+    </div>
+  </section>
 
   <div class="after">
     <div class="nav">
@@ -75,6 +142,9 @@
   <p class="login">Already a member? <a href="https://www.steppeschool.com/login" target="_blank" rel="noopener">Log in to the course</a></p>
 </dialog>
 
+<script>window.SLIDE = {"slug": "projection-onto-a-line", "lesson": "lesson-5", "assets": "../../assets/", "preview": {"kind": "proj", "a": [1, 2], "b": [4, 3], "p": [2, 4], "auto": true}, "check": "isP(V) && !V.auto && close(V.p, projOf(V.a, V.b))"};</script>
+<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
+<script src="../../assets/lab.js" defer></script>
 <script src="../../assets/nav.js" defer></script>
 </body>
 </html>

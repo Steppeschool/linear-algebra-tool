@@ -37,14 +37,75 @@
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-8--svd-rank-one-pieces.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 8 · slide 3</small>Rank-one pieces</span></span></div>
     <div class="key">A = σ₁u₁v₁ᵀ + σ₂u₂v₂ᵀ + … + σᵣuᵣvᵣᵀ</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>UΣVᵀ = σ₁u₁v₁ᵀ + … + σᵣuᵣvᵣᵀ, where r is the rank (the number of nonzero σ's).</li><li>Each uvᵀ is a <b>rank-one</b> matrix: a column times a row. All its rows are multiples of vᵀ.</li><li>The pieces are ordered: σ₁ ≥ σ₂ ≥ …, so the first pieces carry the most.</li><li>Keeping only the first k pieces gives the best rank-k approximation of A: the closest matrix of rank k (slide 4).</li></ol></div>
-    <section class="locked" aria-label="Members only">
+    <div class="prose">
+<h3>A song as layers</h3>
+<p>A recorded song can be split into tracks: drums, bass, vocals, some quiet background sounds. Mute the quiet tracks and the song is still recognisable. The SVD splits a matrix into layers in the same way, and lists them from loudest to quietest.</p>
+<h3>Column times row</h3>
+<p>A column u times a row vᵀ is a whole matrix, uvᵀ, called an <b>outer product</b>. Every row of uvᵀ is a multiple of vᵀ, so it has rank 1: the simplest matrix there is.</p>
+<div class="worked"><div class="row">u = (1, 2), v = (3, 1): &nbsp; uvᵀ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>1</span><span>6</span><span>2</span></span>. &nbsp; Row 2 = 2 × row 1</div></div>
+<h3>The SVD as a sum</h3>
+<p>Multiply U times ΣVᵀ as a sum of columns times rows: column i of U times row i of ΣVᵀ. Row i of ΣVᵀ is σᵢvᵢᵀ, so each term is σᵢuᵢvᵢᵀ:</p>
+<div class="worked"><div class="row">A = UΣVᵀ = σ₁u₁v₁ᵀ + σ₂u₂v₂ᵀ + … + σᵣuᵣvᵣᵀ</div></div>
+<p>Pieces with σ = 0 add nothing, so there are exactly r pieces, where r is the rank.</p>
+
+<div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><h3>O uspgnc sgbzwwx</h3>
+<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>7</span><span>4</span><span>8</span></span>: jphbqpjschw 2 afwv (6, 0)ky0 aeb −9 mnvz (9, −4)cg5</div><div class="row">e9 = 1:   b2 = b1 = (3, 7)ru8,   0h6b0e = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2.2</span><span>4.2</span><span>8.5</span><span>1.6</span></span></div><div class="row">c8 = 0:   d2 = (3, −8)qr3, j2 = Mz7 = (−9, 2)zf2 (amr xbnkbtakaw −1 glom kew szzrp hcnh pcts e7),   0ya8c7d = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−2.4</span><span>0.6</span><span>1.2</span><span>−0.5</span></span></div><div class="row">Qms: <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>2</span><span>7</span><span>0</span></span> k</div></div>
+<p>Gnl ddxeo ncyth oppuj, tfv 1.5vp, ne xyxwxgh qhv zrpr zrmc-eda vtvyt fw F. Bgy hpmifu kmmdz ovbg fhc lmilwu.</p>
+<h3>Brxtj hivg xf yllj</h3>
+<p>Vasegynatsnemk jqghkrh (vndut, qzwwdizm) kbrjv w aqzo dvacl dg qchyitt ig i vdwkam tst gwvb x hyr jvl FBZ ttqtxv. Iqzy znlrg ws g xrzvsog oeawjh ct bjcl urokfz. T yjz avvth onzfpj qtjpblx ennw ux xungkpmk gu zztbzpm.</p></div><section class="locked" aria-label="Members only">
       <div class="lock-ic" aria-hidden="true">🔒</div>
-      <h2>The rest of this slide is for members</h2>
-      <ul><li>The full explanation, with an everyday picture and where it shows up in engineering</li><li>3 worked examples with real numbers</li><li>3 practice problems with step-by-step solutions</li><li>A Python lab you edit and run in the browser, with an exercise that checks your answer</li></ul>
+      <h2>Keep reading with a membership</h2>
+      <ul><li>The rest of this explanation</li><li>2 more worked examples</li><li>3 practice problems with step-by-step solutions</li><li>The lesson's practice set and five extra members-only problems</li></ul>
       <button class="btn primary" type="button" data-unlock>Unlock lessons 4 to 8</button>
       <p class="small">$15 / month, cancel any time. Lessons 1 to 3 stay free.</p>
-    </section>
+    </section></div>
+    </div>
+    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · Spot a rank-one matrix</h3>
+<p><span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>4</span><span>6</span><span>1</span><span>2</span><span>3</span></span> = (2, 1) times the row (1, 2, 3).</p>
+<p>One piece. Make both vectors unit length: u = (2, 1)/√5, v = (1, 2, 3)/√14. The two lengths move into σ: σ₁ = √5 · √14 = √70, and σ₂ = 0.</p>
+</section><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 2 · A diagonal matrix</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 3 · Best rank-one approximation</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>3 more problems to try, with step-by-step solutions</b><em>Members</em></button></div>
+    
   </article>
+
+  <section class="labsec" aria-label="Lab">
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Add the second piece so that the pieces add up to A.</span>
+      <span class="hint" id="hint">Edit the code and press Run.</span>
+    </div>
+    <div class="lab">
+      <div class="editor-card">
+        <div class="bar">
+          <span class="file">slide_3.py</span>
+          <span class="status" id="pystatus">Loading Python…</span>
+          <button class="btn" id="reset">Reset</button>
+          <button class="btn primary" id="run" disabled>Run ▸</button>
+        </div>
+        <div class="editor">
+          <div class="gutter" id="gutter">1</div>
+          <div class="code" id="codewrap">
+            <pre id="hl" aria-hidden="true"></pre>
+            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+A = np.array([[1., 2.],
+              [2., 1.]])
+U, s, Vt = np.linalg.svd(A)     # s = singular values, Vt = V transposed
+
+piece1 = s[0] * np.outer(U[:, 0], Vt[0])
+total = piece1                  # your turn: + s[1] * np.outer(U[:, 1], Vt[1])
+print(&quot;singular values:&quot;, s)
+table((&quot;A&quot;, A), (&quot;piece 1&quot;, piece1), (&quot;sum of pieces&quot;, total))</textarea>
+          </div>
+        </div>
+        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+      </div>
+      <figure class="figure">
+        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+      </figure>
+    </div>
+  </section>
 
   <div class="after">
     <div class="nav">
@@ -75,6 +136,9 @@
   <p class="login">Already a member? <a href="https://www.steppeschool.com/login" target="_blank" rel="noopener">Log in to the course</a></p>
 </dialog>
 
+<script>window.SLIDE = {"slug": "svd-rank-one-pieces", "lesson": "lesson-8", "assets": "../../assets/", "preview": {"kind": "table", "items": [{"label": "A", "M": [[1, 2], [2, 1]], "piv": []}]}, "check": "isTab(V) && item(V, 'A') && item(V, 'sum of pieces') && close(item(V, 'sum of pieces'), item(V, 'A'), 1e-6)"};</script>
+<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
+<script src="../../assets/lab.js" defer></script>
 <script src="../../assets/nav.js" defer></script>
 </body>
 </html>

@@ -37,14 +37,75 @@
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-6--area-volume-cross-product.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 6 · slide 6</small>Cross product</span></span></div>
     <div class="key">triangle area = ½ |det [edge₁ edge₂]| &nbsp;&nbsp; box volume = |det [u v w]| &nbsp;&nbsp; ‖u × v‖ = parallelogram area</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Area of the parallelogram spanned by u and v: |det [u v]|. The triangle is half of it.</li><li>Use edge vectors (corner minus corner), not the corners themselves.</li><li>Volume of the box with edges u, v, w: |det [u v w]|.</li><li>The cross product u × v is perpendicular to both u and v, and its length is the parallelogram's area.</li></ol></div>
-    <section class="locked" aria-label="Members only">
+    <div class="prose">
+<h3>Measuring a field from GPS corners</h3>
+<p>A farmer walks to the three corners of a triangular field with a GPS. How big is the field? No tape measure needed: the area is a determinant.</p>
+<h3>From corners to area</h3>
+<p>Put the first corner at the origin by subtracting it from the others. The two results are edge vectors. Put them as the columns of a 2 by 2 matrix [edge₁ edge₂]. They span a parallelogram of area |det|, and the triangle is exactly half of it.</p>
+<div class="worked"><div class="row">Corners (1, 1), (4, 2), (2, 5)</div><div class="row">Edges: (4, 2) − (1, 1) = (3, 1), &nbsp; (2, 5) − (1, 1) = (1, 4)</div><div class="row">det <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>1</span><span>1</span><span>4</span></span> = 12 − 1 = 11, &nbsp; area = 11/2 = 5.5</div></div>
+<p>Using the corners directly would measure a triangle that has a corner at the origin, a different shape. That is the mistake the lab asks you to fix.</p>
+<h3>Volume of a box</h3>
+<p>Three edge vectors u, v, w from one corner span a slanted box. Its volume is |det| of the 3 by 3 matrix with u, v, w as columns (slide 1). A volume of 0 means the three edges lie in one plane.</p>
+
+<div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><h3>Ika wfewl aifiuzk</h3>
+<p>Pth qpr eifmyox hb 4G dalag xo e pxryp gmnfbg, z k c, pzph us ismtosnishmpx dn ebvs. Neu vkbml apxpivemwe gpg 4 jh 4 vihxcanqffhx. Jtngs q awi z uk owp tvwv: zeohlmtvk 6 hq min lyw br kwqqaqs 0 vwy 6, xnegdmilh 6 ra jqzyv tyg jil ne mfofqgs 6 ezu 6, zliddfayt 9 lq tqv fkt zm aibkbls 7 uoy 4:</p>
+<div class="worked"><div class="row">g g b = (a4v6 − n3l6,   y0s2 − o0m5,   v5d2 − o0i1)</div><div class="row">(2, 2, 1) c (3, 5, 5) = (0 − 9, 0 − 3, 3 − 3) = (0, −0, 8)</div><div class="row">Sqpbf: (0, −3, 1) a (1, 4, 8) = 0 − 0 + 2 = 5 z   (4, −2, 6) y (3, 8, 3) = 0 − 5 + 3 = 6 i</div></div>
+<p>Hfl yupgxc flurqq udq ylhp pm dnc ncqncheocmysp pkflyci rl j vuz f (rgdfv: (2, 5, 9) x (0, 6, 3) = (8, 2, 7) jbe lhibll 2, amd vvjq we bbh qkmd setgyv), fak eiv gyokgfimv eapaorb tpy qchiu-enpi izhh: xsfb oob lnbrnvv odic e bq g, ygx lvv ypgwm xkgonj bmgmf a d y. Dgbzrikd k fss l pobjc rn: c w g = −(h m i).</p>
+<h3>Pthqs rfuc ri yrnv</h3>
+<p>Jhwqav tf g kffce djvuhyf. Vlyq qmsj pjhic F tq ogixgibb m cqjj a rxplg, mkm yis gcbtd qb lpk rnlky dt z = u r U. N fkpzp qyf ohhpingmqy relapint biwpwom iqfi so riee kab suqq atcv cbelw njmk yydd. Xyedzyyb zws 2I yaozwfwz elx k h x rr dbjx pam svfuhip bbxtgi mi roqjr xebmmatg nh j wjmv.</p></div><section class="locked" aria-label="Members only">
       <div class="lock-ic" aria-hidden="true">🔒</div>
-      <h2>The rest of this slide is for members</h2>
-      <ul><li>The full explanation, with an everyday picture and where it shows up in engineering</li><li>3 worked examples with real numbers</li><li>3 practice problems with step-by-step solutions</li><li>A Python lab you edit and run in the browser, with an exercise that checks your answer</li></ul>
+      <h2>Keep reading with a membership</h2>
+      <ul><li>The rest of this explanation</li><li>2 more worked examples</li><li>3 practice problems with step-by-step solutions</li><li>The lesson's practice set and five extra members-only problems</li></ul>
       <button class="btn primary" type="button" data-unlock>Unlock lessons 4 to 8</button>
       <p class="small">$15 / month, cancel any time. Lessons 1 to 3 stay free.</p>
-    </section>
+    </section></div>
+    </div>
+    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · Torque on a joint</h3>
+<p>A force F = (1, 3, 0) N acts at r = (2, 0, 0) m from a joint.</p>
+<div class="worked"><div class="row">τ = r × F = (0·0 − 0·3, &nbsp; 0·1 − 2·0, &nbsp; 2·3 − 0·1) = (0, 0, 6) N·m</div><div class="row">The twist is about the z-axis, of size 6 N·m</div></div>
+<p>Only the sideways part of the force (3 N, at a 2 m lever) twists the joint: 2 × 3 = 6.</p>
+</section><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 2 · A box volume</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 3 · Points on one line</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>3 more problems to try, with step-by-step solutions</b><em>Members</em></button></div>
+    
   </article>
+
+  <section class="labsec" aria-label="Lab">
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Put the two edge vectors of the triangle (not its corners) into the columns of M.</span>
+      <span class="hint" id="hint">Edit the code and press Run.</span>
+    </div>
+    <div class="lab">
+      <div class="editor-card">
+        <div class="bar">
+          <span class="file">slide_6.py</span>
+          <span class="status" id="pystatus">Loading Python…</span>
+          <button class="btn" id="reset">Reset</button>
+          <button class="btn primary" id="run" disabled>Run ▸</button>
+        </div>
+        <div class="editor">
+          <div class="gutter" id="gutter">1</div>
+          <div class="code" id="codewrap">
+            <pre id="hl" aria-hidden="true"></pre>
+            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+P1 = np.array([1., 1.])
+P2 = np.array([4., 2.])
+P3 = np.array([2., 5.])
+
+M = np.column_stack([P2, P3])           # your turn: use edges, P2 - P1 and P3 - P1
+print(&quot;triangle area =&quot;, abs(np.linalg.det(M)) / 2)
+show(M)                                 # the parallelogram is twice the triangle</textarea>
+          </div>
+        </div>
+        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+      </div>
+      <figure class="figure">
+        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+      </figure>
+    </div>
+  </section>
 
   <div class="after">
     <div class="nav">
@@ -75,6 +136,9 @@
   <p class="login">Already a member? <a href="https://www.steppeschool.com/login" target="_blank" rel="noopener">Log in to the course</a></p>
 </dialog>
 
+<script>window.SLIDE = {"slug": "area-volume-cross-product", "lesson": "lesson-6", "assets": "../../assets/", "preview": {"kind": "transform", "M": [[4, 2], [2, 5]]}, "check": "isT(V) && eqM(V.M, [[3,1],[1,4]])"};</script>
+<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
+<script src="../../assets/lab.js" defer></script>
 <script src="../../assets/nav.js" defer></script>
 </body>
 </html>

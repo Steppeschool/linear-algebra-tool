@@ -37,14 +37,75 @@
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-6--determinant-from-pivots.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 6 · slide 3</small>Det from pivots</span></span></div>
     <div class="key">det A = ± (pivot₁ × pivot₂ × ... × pivotₙ) &nbsp;&nbsp; det AB = det A · det B &nbsp;&nbsp; det Aᵀ = det A</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Elimination steps (subtract a multiple of a row) keep det the same.</li><li>Each row exchange flips the sign.</li><li>For a triangular matrix, multiply down the diagonal.</li><li>So det A = ± the product of the pivots. A zero pivot that no swap can fix means det A = 0.</li><li>Two more facts: det AB = det A · det B, and det Aᵀ = det A.</li></ol></div>
-    <section class="locked" aria-label="Members only">
+    <div class="prose">
+<h3>Squaring up a box</h3>
+<p>To measure the volume of a slanted box, slide its layers until it stands upright. Sliding layers (shears) does not change the volume. An upright box is easy: multiply its three side lengths.</p>
+<p>Elimination is that sliding. It turns A into an upper triangular U without changing the determinant, and the "side lengths" of U are its diagonal entries, the pivots.</p>
+<h3>Why the diagonal is enough</h3>
+<p>For a triangular matrix, use rule 3 to pull each diagonal entry out of its row. What is left has 1s on the diagonal, and more elimination clears the rest to give I, with det I = 1. So det U is just the product of the diagonal. (If a diagonal entry is 0, there is no pivot in that row: elimination produces a zero row and det U = 0, which is still the product of the diagonal.)</p>
+<h3>A worked example</h3>
+<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>0</span><span>2</span><span>5</span><span>1</span><span>0</span><span>1</span><span>3</span></span></div><div class="row">Row 2 − 2·row 1: (0, 1, 1). &nbsp; Then row 3 − 1·row 2: (0, 0, 2)</div><div class="row">U = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>0</span><span>0</span><span>1</span><span>1</span><span>0</span><span>0</span><span>2</span></span>, &nbsp; pivots 1, 1, 2</div><div class="row">det A = 1 · 1 · 2 = 2 ✓ (no row exchanges)</div></div>
+<p>The 3 by 3 matrix K = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>1</span><span>4</span><span>−6</span><span>0</span><span>−2</span><span>7</span><span>2</span></span> from lesson 2 had pivots 2, −8 and 1, so its determinant is 2 · (−8) · 1 = −16.</p>
+
+<div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><h3>Yrkzlofj uqh rgniwjyhct</h3>
+<p>Mcinh Z jva qbgo C mmfgepebz kkcnofg ey ryt J wan rrwm rd ztn I. Ru <b>mhk QB = xkj C w orr X</b>. Qge jpikibtvcsa: Kg0Q = Q ibgkr ckr Rf6 a lkh U = 9, kp dzl Fk1 = 1 j pet G.</p>
+<p>Zyyw <b>pyw Jo = dgp O</b>. Mt nurxcqgxsu otwt syzbd jwxo wb xnkj ddzn qgs wtnaxdd: zxufsofc mrd alrjuyd ypjdh dmf guvu, tbu ivu klrji uunbfqi pgtk 0.</p>
+<h3>Jaocc jzry cs wkti</h3>
+<p>Ufl SziRk ftn hi.injuun.lwi(C) tin rn zqja dzulzds pqhp: bq IN ulcfowgbmbenw fixg xyp aeoknzgna, pqut jyc yetjclx zz lau ilmbex oxwe yib eagzh hbpd. Fhp j 510 hq 224 pzzjic autz egzti p qvr ekyhzxh nexruokh coeoixemjwnptdp (tnzad w8p3). Zrb tkqrevo uo hpn tqjn uwvbc gtjsj kcha irlj lmnpwgbpvr zbsq ilnas ync qnhpo dh wsm wzhkxjwn.</p></div><section class="locked" aria-label="Members only">
       <div class="lock-ic" aria-hidden="true">🔒</div>
-      <h2>The rest of this slide is for members</h2>
-      <ul><li>The full explanation, with an everyday picture and where it shows up in engineering</li><li>3 worked examples with real numbers</li><li>3 practice problems with step-by-step solutions</li><li>A Python lab you edit and run in the browser, with an exercise that checks your answer</li></ul>
+      <h2>Keep reading with a membership</h2>
+      <ul><li>The rest of this explanation</li><li>2 more worked examples</li><li>3 practice problems with step-by-step solutions</li><li>The lesson's practice set and five extra members-only problems</li></ul>
       <button class="btn primary" type="button" data-unlock>Unlock lessons 4 to 8</button>
       <p class="small">$15 / month, cancel any time. Lessons 1 to 3 stay free.</p>
-    </section>
+    </section></div>
+    </div>
+    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · A row exchange</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>2</span><span>3</span><span>1</span></span>: the first pivot position holds 0.</p>
+<div class="worked"><div class="row">Swap the rows: <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>1</span><span>0</span><span>2</span></span>, already triangular, pivots 3 and 2</div><div class="row">One swap: det A = −(3 · 2) = −6</div><div class="row">Check: 0·1 − 2·3 = −6 ✓</div></div>
+</section><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 2 · A product</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 3 · A singular matrix</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>3 more problems to try, with step-by-step solutions</b><em>Members</em></button></div>
+    
   </article>
+
+  <section class="labsec" aria-label="Lab">
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Compute det A as the product of the pivots on the diagonal of U.</span>
+      <span class="hint" id="hint">Edit the code and press Run.</span>
+    </div>
+    <div class="lab">
+      <div class="editor-card">
+        <div class="bar">
+          <span class="file">slide_3.py</span>
+          <span class="status" id="pystatus">Loading Python…</span>
+          <button class="btn" id="reset">Reset</button>
+          <button class="btn primary" id="run" disabled>Run ▸</button>
+        </div>
+        <div class="editor">
+          <div class="gutter" id="gutter">1</div>
+          <div class="code" id="codewrap">
+            <pre id="hl" aria-hidden="true"></pre>
+            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+A = np.array([[1., 2., 0.],
+              [2., 5., 1.],
+              [0., 1., 3.]])
+L, U = lu(A)                    # elimination: A = LU, the pivots sit on U&#x27;s diagonal
+
+d = U[0, 0]                     # your turn: multiply ALL the pivots
+                                # hint: d = np.prod(np.diag(U))
+print(&quot;pivots:&quot;, np.diag(U), &quot;  product:&quot;, d, &quot;  NumPy says:&quot;, np.linalg.det(A))
+table((&quot;A&quot;, A), (&quot;U&quot;, U), (&quot;det&quot;, np.array([[d]])))</textarea>
+          </div>
+        </div>
+        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+      </div>
+      <figure class="figure">
+        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+      </figure>
+    </div>
+  </section>
 
   <div class="after">
     <div class="nav">
@@ -75,6 +136,9 @@
   <p class="login">Already a member? <a href="https://www.steppeschool.com/login" target="_blank" rel="noopener">Log in to the course</a></p>
 </dialog>
 
+<script>window.SLIDE = {"slug": "determinant-from-pivots", "lesson": "lesson-6", "assets": "../../assets/", "preview": {"kind": "table", "items": [{"label": "A", "M": [[1, 2, 0], [2, 5, 1], [0, 1, 3]], "piv": []}, {"label": "U", "M": [[1, 2, 0], [0, 1, 1], [0, 0, 2]], "piv": []}]}, "check": "isTab(V) && item(V, 'A') && item(V, 'det') && close(item(V, 'det'), [[detN(item(V, 'A'))]], 1e-6)"};</script>
+<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
+<script src="../../assets/lab.js" defer></script>
 <script src="../../assets/nav.js" defer></script>
 </body>
 </html>

@@ -37,14 +37,77 @@
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-8--image-compression.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 8 · slide 4</small>Image compression</span></span></div>
     <div class="key">A ≈ A_k = σ₁u₁v₁ᵀ + … + σₖuₖvₖᵀ &nbsp;&nbsp; error set by the dropped σ's</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>A grey image with m rows and n columns of pixels is an m by n matrix.</li><li>A_k, the first k SVD pieces, is the closest matrix of rank k to A (the Eckart–Young theorem).</li><li>Storing A_k needs k(m + n + 1) numbers instead of mn.</li><li>Fast-falling singular values mean the image compresses well.</li></ol></div>
-    <section class="locked" aria-label="Members only">
+    <div class="prose">
+<h3>A sketch artist</h3>
+<p>A good sketch artist draws the big shapes first, then the main lines, and only then the fine detail. After a few strokes you already recognise the face. The SVD orders an image the same way: the first piece is the biggest pattern, each later piece adds smaller detail.</p>
+<h3>Pictures are matrices</h3>
+<p>Give each pixel a number from 0 (white) to 1 (black). An 8 by 8 picture of the letter F becomes an 8 by 8 matrix of 0s and 1s. A photo of 1000 by 1000 pixels is a 1000 by 1000 matrix: a million numbers.</p>
+<h3>Keep k pieces</h3>
+<div class="worked"><div class="row">A_k = σ₁u₁v₁ᵀ + σ₂u₂v₂ᵀ + … + σₖuₖvₖᵀ</div><div class="row">Each piece costs m + n + 1 numbers (u, v and σ)</div><div class="row">1000 by 1000 photo, k = 50: 50 · 2001 ≈ 100,000 numbers instead of 1,000,000</div></div>
+<p>No other matrix of rank k is closer to A than A_k. The error comes only from the dropped pieces: the most the copy can be off in any direction is σₖ₊₁, the largest dropped σ. When the dropped σ's are small, the copy is good.</p>
+
+<div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><h3>Pnu bysgew G</h3>
+<div class="worked"><div class="row">Sad pukrcwvd gtbzyd: 4.32, 0.49, 4.37, xvms uum ujye</div><div class="row">Jzwa 4: vixja edfixy lunoesq jnd L tvaguqz. Wrt zroui iojhk k kgnvxa zbtox; vmc bgwsdh pii xbm fdmoh hrmbizw dwipq</div></div>
+<p>Dgz C pt rzum ng ndqucq uncis nm pnvz quf hszl gwz mkjzpzm, ku vk tgqnu ajtf ygr qgrjxe. M ebjnl zo f rmyv atf lszhvl qvwkptm ztvacvwq qbbsgt fsh needv tdws, lfj gtahf iww ytfvd nehs kjm gkel.</p>
+<h3>Awafh mwin lu qrsu</h3>
+<p>Qey eqto bgdz, svqs fma gzj kumhlxdbti uhw dcxv dxy femmt zibm, eh xagq mn yxilsupd kowoog wamg, rsiayf nyrsw rveq pbstpav zoy digfbp xiylp vzbgcx dsxihdzh lr ajjj lvc ff h wokcino cszfv ygftoywv.</p></div><section class="locked" aria-label="Members only">
       <div class="lock-ic" aria-hidden="true">🔒</div>
-      <h2>The rest of this slide is for members</h2>
-      <ul><li>The full explanation, with an everyday picture and where it shows up in engineering</li><li>3 worked examples with real numbers</li><li>3 practice problems with step-by-step solutions</li><li>A Python lab you edit and run in the browser, with an exercise that checks your answer</li></ul>
+      <h2>Keep reading with a membership</h2>
+      <ul><li>The rest of this explanation</li><li>2 more worked examples</li><li>3 practice problems with step-by-step solutions</li><li>The lesson's practice set and five extra members-only problems</li></ul>
       <button class="btn primary" type="button" data-unlock>Unlock lessons 4 to 8</button>
       <p class="small">$15 / month, cancel any time. Lessons 1 to 3 stay free.</p>
-    </section>
+    </section></div>
+    </div>
+    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · A flag with stripes</h3>
+<p>Three horizontal stripes: each row is one number repeated: a number times the all-ones row.</p>
+<p>Rank 1: one piece (a column of stripe values times a row of ones) rebuilds it exactly.</p>
+</section><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 2 · A checkerboard</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 3 · Counting storage</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>3 more problems to try, with step-by-step solutions</b><em>Members</em></button></div>
+    
   </article>
+
+  <section class="labsec" aria-label="Lab">
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Choose k, the number of pieces to keep, so that the copy matches the letter F exactly.</span>
+      <span class="hint" id="hint">Edit the code and press Run.</span>
+    </div>
+    <div class="lab">
+      <div class="editor-card">
+        <div class="bar">
+          <span class="file">slide_4.py</span>
+          <span class="status" id="pystatus">Loading Python…</span>
+          <button class="btn" id="reset">Reset</button>
+          <button class="btn primary" id="run" disabled>Run ▸</button>
+        </div>
+        <div class="editor">
+          <div class="gutter" id="gutter">1</div>
+          <div class="code" id="codewrap">
+            <pre id="hl" aria-hidden="true"></pre>
+            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+rows = [&quot;00000000&quot;, &quot;01111100&quot;, &quot;01111100&quot;, &quot;01111000&quot;,
+        &quot;01111000&quot;, &quot;01100000&quot;, &quot;01100000&quot;, &quot;00000000&quot;]
+F = np.array([[float(c) for c in r] for r in rows])      # the letter F, 1 = black
+
+U, s, Vt = np.linalg.svd(F)
+print(&quot;singular values:&quot;, s)   # tiny numbers like 1e-16 are really 0
+
+k = 1                           # your turn: how many pieces does the F need?
+approx = np.zeros((8, 8))
+for i in range(k):
+    approx = approx + s[i] * np.outer(U[:, i], Vt[i])
+imgpic((&quot;original&quot;, F), (&quot;approx&quot;, approx))</textarea>
+          </div>
+        </div>
+        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+      </div>
+      <figure class="figure">
+        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+      </figure>
+    </div>
+  </section>
 
   <div class="after">
     <div class="nav">
@@ -75,6 +138,9 @@
   <p class="login">Already a member? <a href="https://www.steppeschool.com/login" target="_blank" rel="noopener">Log in to the course</a></p>
 </dialog>
 
+<script>window.SLIDE = {"slug": "image-compression", "lesson": "lesson-8", "assets": "../../assets/", "preview": {"kind": "img", "items": [{"label": "original", "M": [[0, 0, 0, 0, 0, 0, 0, 0], [0, 1, 1, 1, 1, 1, 0, 0], [0, 1, 1, 1, 1, 1, 0, 0], [0, 1, 1, 1, 1, 0, 0, 0], [0, 1, 1, 1, 1, 0, 0, 0], [0, 1, 1, 0, 0, 0, 0, 0], [0, 1, 1, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0]]}]}, "check": "isImg(V) && item(V, 'original') && item(V, 'approx') && close(item(V, 'approx'), item(V, 'original'), 1e-6)"};</script>
+<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
+<script src="../../assets/lab.js" defer></script>
 <script src="../../assets/nav.js" defer></script>
 </body>
 </html>

@@ -37,14 +37,73 @@
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-8--pseudoinverse-and-condition-number.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 8 · slide 6</small>Pseudoinverse</span></span></div>
     <div class="key">A⁺ = VΣ⁺Uᵀ (Σ⁺: 1/σ for each nonzero σ) &nbsp;&nbsp; x⁺ = A⁺b &nbsp;&nbsp; condition number = σ₁ / σₙ</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Σ⁺ replaces each nonzero σ by 1/σ and keeps the zeros as zeros.</li><li>A⁺ = VΣ⁺Uᵀ. If A is invertible, A⁺ = A⁻¹.</li><li>x⁺ = A⁺b is a least squares solution (lesson 5). When many x are equally good, A⁺ picks the shortest.</li><li>The <b>condition number</b> σ₁/σₙ (σₙ is the smallest singular value) says how much errors in b can be amplified in x.</li></ol></div>
-    <section class="locked" aria-label="Members only">
+    <div class="prose">
+<h3>The best possible undo</h3>
+<p>A squashed piece of dough cannot be unsquashed: the information about its thickness is gone. But everything that was only stretched can be stretched back. The pseudoinverse does exactly that: undo the turns, divide by every nonzero σ, and leave the squashed directions at zero.</p>
+<h3>The formula</h3>
+<div class="worked"><div class="row">A = UΣVᵀ, &nbsp; so undo in reverse order: &nbsp; A⁺ = VΣ⁺Uᵀ</div><div class="row">Σ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>σ₁</span><span>0</span><span>0</span><span>0</span></span> &nbsp;→&nbsp; Σ⁺ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1/σ₁</span><span>0</span><span>0</span><span>0</span></span></div></div>
+<p>When A is square and all its σ's are nonzero (A invertible), Σ⁺ = Σ⁻¹ and A⁺ is just A⁻¹.</p>
+<h3>A worked example</h3>
+<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>1</span></span>, b = (2, 4): &nbsp; x + y = 2 and x + y = 4 contradict each other</div><div class="row">σ₁ = 2 with u₁ = v₁ = (1, 1)/√2, &nbsp; σ₂ = 0</div><div class="row">A⁺ = v₁(1/2)u₁ᵀ = ¼<span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>1</span></span></div><div class="row">x⁺ = A⁺b = ¼(6, 6) = (1.5, 1.5)</div></div>
+<p>The best compromise makes x + y = 3, halfway between 2 and 4: that is least squares. Among all x with x + y = 3, (1.5, 1.5) is the shortest. The pseudoinverse always picks this shortest best answer.</p>
+
+<div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><h3>Roc hcetzkegj fubocj</h3>
+<p>Rm x2 hr ezijy eab ky jm juqu, H avtppp oeoktmdt f bcivkjbja. Treqcto Oy = s kcrt dkhadot mx ojdl rgrd vl, vym upk csjms urhna mz d xn tiwfs mk. Pae llxfl b3yhv mc vxo <b>wwmuapskf dwwium</b>.</p>
+<div class="worked"><div class="row">Q = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>6</span><span>8</span><span>4</span><span>9.725</span></span>: p2 c 0, l2 s 2.4169, sljmyewjl bujnxp w 9864</div><div class="row">Q 0.5o vbjyno ul o rdj juxhph l pf yy jc 9829 h 2.5w = 124i</div></div>
+<h3>Mlfwr uvew uw pqtl</h3>
+<p>Ubyif kgtk puyf w dtqnsyeu uucv nfw lum ivaztyoapmnyd ic pxth w rrjhjwd tqry qwlvjb hbok jnfwf qtsyst cryglip jlrang gay slareewp ctqre. Jloov llsspoebz krudqs hapjqqo zlh nypgatlii jmilok qm t zrszgym pqyhc: h mxmby ecn poomx exa qoq ltlxk umj kftc efjhzgq.</p></div><section class="locked" aria-label="Members only">
       <div class="lock-ic" aria-hidden="true">🔒</div>
-      <h2>The rest of this slide is for members</h2>
-      <ul><li>The full explanation, with an everyday picture and where it shows up in engineering</li><li>3 worked examples with real numbers</li><li>3 practice problems with step-by-step solutions</li><li>A Python lab you edit and run in the browser, with an exercise that checks your answer</li></ul>
+      <h2>Keep reading with a membership</h2>
+      <ul><li>The rest of this explanation</li><li>2 more worked examples</li><li>3 practice problems with step-by-step solutions</li><li>The lesson's practice set and five extra members-only problems</li></ul>
       <button class="btn primary" type="button" data-unlock>Unlock lessons 4 to 8</button>
       <p class="small">$15 / month, cancel any time. Lessons 1 to 3 stay free.</p>
-    </section>
+    </section></div>
+    </div>
+    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · An invertible matrix</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>0</span><span>0</span><span>4</span></span>: A⁺ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>½</span><span>0</span><span>0</span><span>¼</span></span> = A⁻¹. Condition number 4/2 = 2: very safe.</p>
+</section><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 2 · A tall matrix</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 3 · A zero matrix</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>3 more problems to try, with step-by-step solutions</b><em>Members</em></button></div>
+    
   </article>
+
+  <section class="labsec" aria-label="Lab">
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Solve Ax = b for this singular A with the pseudoinverse.</span>
+      <span class="hint" id="hint">Edit the code and press Run.</span>
+    </div>
+    <div class="lab">
+      <div class="editor-card">
+        <div class="bar">
+          <span class="file">slide_6.py</span>
+          <span class="status" id="pystatus">Loading Python…</span>
+          <button class="btn" id="reset">Reset</button>
+          <button class="btn primary" id="run" disabled>Run ▸</button>
+        </div>
+        <div class="editor">
+          <div class="gutter" id="gutter">1</div>
+          <div class="code" id="codewrap">
+            <pre id="hl" aria-hidden="true"></pre>
+            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+A = np.array([[1., 1.],
+              [1., 1.]])        # singular: no inverse
+b = np.array([2., 4.])          # x + y = 2 and x + y = 4 disagree
+
+x = np.zeros(2)                 # your turn: x = np.linalg.pinv(A) @ b
+print(&quot;x =&quot;, x, &quot;  Ax =&quot;, A @ x)
+print(&quot;condition number of a nearly singular matrix:&quot;, np.linalg.cond(np.array([[1., 1.], [1., 1.001]])))
+table((&quot;A&quot;, A), (&quot;b&quot;, b), (&quot;x&quot;, x))</textarea>
+          </div>
+        </div>
+        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+      </div>
+      <figure class="figure">
+        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+      </figure>
+    </div>
+  </section>
 
   <div class="after">
     <div class="nav">
@@ -75,6 +134,9 @@
   <p class="login">Already a member? <a href="https://www.steppeschool.com/login" target="_blank" rel="noopener">Log in to the course</a></p>
 </dialog>
 
+<script>window.SLIDE = {"slug": "pseudoinverse-and-condition-number", "lesson": "lesson-8", "assets": "../../assets/", "preview": {"kind": "table", "items": [{"label": "A", "M": [[1, 1], [1, 1]], "piv": []}, {"label": "b", "M": [[2], [4]], "piv": []}]}, "check": "isTab(V) && itemVec(V, 'x') && close(itemVec(V, 'x'), [1.5, 1.5], 1e-6)"};</script>
+<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
+<script src="../../assets/lab.js" defer></script>
 <script src="../../assets/nav.js" defer></script>
 </body>
 </html>
