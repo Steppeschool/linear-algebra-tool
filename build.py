@@ -87,7 +87,7 @@ LESSONS = [
      "sections": "Strang §3.1 to §3.5",
      "summary": "Subspaces, the nullspace, pivot and free columns, the complete solution to Ax = b, "
                 "independence and dimension, and the big picture of the four subspaces."},
-    {"n": 5, "dir": "lesson-5", "path": "orthogonality-and-least-squares", "seo_title": "Orthogonality, Projections and Least Squares",
+    {"n": 5, "dir": "lesson-5", "path": "orthogonality-and-least-squares", "seo_title": "Orthogonality, Projections and the Least Squares Method",
      "seo_desc": "Orthogonal subspaces, projection onto a line, projection matrices, least squares line fitting and Gram-Schmidt, with interactive Python. Free lesson.", "title": "Orthogonality and least squares", "chapter": "Strang, chapter 4",
      "sections": "Strang §4.1 to §4.4",
      "summary": "Perpendicular subspaces, projections, the best answer when Ax = b has no solution, "
