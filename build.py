@@ -301,6 +301,48 @@ COURSE = {"@type": "Course", "name": SITE, "url": BASE + "/",
           "provider": PROVIDER}
 
 
+def example_items(s):
+    """One list per slide: the worked examples first (up to 3), then the strongest problems, 5 in total.
+    Each item is (title, question_html, solution_html)."""
+    items = []
+    for sec in re.findall(r'<section class="example">(.*?)</section>', s.get("examples") or "", re.S)[:3]:
+        t = re.search(r"<h3>(.*?)</h3>", sec, re.S)
+        title = re.sub(r"^\s*Example\s*\d+\s*[·:.-]\s*", "", t.group(1)).strip() if t else ""
+        body = sec[t.end():] if t else sec
+        k = body.find('<div class="worked">')
+        q, sol = (body[:k], body[k:]) if k >= 0 else (body, "")
+        items.append((title, q.strip(), sol.strip()))
+    probs = []
+    for j, p in enumerate(re.findall(r'<div class="problem">.*?</details>\s*</div></div>', s.get("problems") or "", re.S)):
+        body = re.search(r'<div class="pbody">(.*)', p, re.S).group(1)
+        q = body.split('<details class="sol">')[0]
+        sol = re.search(r'<div class="solbody">(.*?)</div></details>', body, re.S).group(1)
+        probs.append((j, "", q.strip(), sol.strip()))
+    room = 5 - len(items)
+    best = sorted(probs, key=lambda x: -len(re.sub("<[^>]+>", "", x[3])))[:max(0, room)]
+    items += [(t, q, sol) for _, t, q, sol in sorted(best)]
+    return items
+
+
+def examples_block(s):
+    """The slide's examples. Example 1 shows its solution; the others keep it behind 'Show solution'.
+    On the public page of a members lesson only example 1 is open; the rest show as locked titles."""
+    items = example_items(s)
+    if not items:
+        return ""
+    lock = s.get("lock_examples")
+    out = []
+    for n, (title, q, sol) in enumerate(items, 1):
+        head = f"Example {n}" + (f" · {title}" if title else "")
+        if lock and n > 1:
+            out.append(f'<button class="locked-stub" type="button" data-unlock><span>🔒</span><b>{e(re.sub("<[^>]+>", "", head))}</b><em>Members</em></button>')
+            continue
+        solution = (f'<details class="sol"{" open" if n == 1 else ""}><summary><span class="s-show">Show solution</span>'
+                    f'<span class="s-hide">Hide solution</span></summary><div class="solbody">{sol}</div></details>') if sol else ""
+        out.append(f'<section class="example"><h3>{head}</h3>\n{q}\n{solution}\n</section>')
+    return f'<h2 class="practice-h">Examples</h2><div class="examples">{"".join(out)}</div>'
+
+
 def more_block(s):
     """Extra problems for this slide, collapsed behind a clear button. Solutions stay hidden inside."""
     if not s.get("problems"):
@@ -454,8 +496,7 @@ def slide_page(lesson, slides, i, next_lesson=None, practice=None):
     <div class="prose">
 {s['prose']}
     </div>
-    {f'<h2 class="practice-h">Worked examples</h2><div class="examples">{s["examples"]}</div>' if s.get("examples") else ""}
-    {more_block(s)}
+    {examples_block(s)}
   </article>
 {review_block(practice)}
   <section class="labsec" aria-label="Lab">
@@ -620,7 +661,7 @@ def lesson_page(lesson, slides, practice=None):
     <h1>{e(lesson['title'])}</h1>
     <div class="outcomes"><b>By the end of this lesson you can</b><ul>{"".join(f"<li>{e(o)}</li>" for o in lesson["outcomes"])}</ul></div>
     <p>{e(lesson['summary'])} {len(slides)} short slides, then worked examples and problems. Each slide has an everyday picture, a worked example and Python you can run right on the page.</p>
-    {'<p class="members-note">Free preview: most of every slide is yours to read, with its Python lab. Members get the full text, every worked example, the problems with solutions and the practice set.</p>' if lock else ''}
+    {'<p class="members-note">Free preview: most of every slide is yours to read, with its Python lab. Members get the full text, every example with its solution, and five extra problems per lesson.</p>' if lock else ''}
     <div class="cta"><a class="btn primary" href="{slides[0]['slug']}/">Start the lesson →</a>{'<button class="btn" type="button" data-unlock>Get the full course</button>' if lock else '<button class="btn" type="button" data-unlock>Full course: $20, lifetime</button>'}</div>
   </section>
   <h2 class="section-title">Slides</h2>
@@ -732,22 +773,14 @@ def public_slide(lesson, slides, i, next_lesson, practice):
         paras = re.split(r"(?=<p>|<div class=\"worked\">)", shown)
         cut = max(1, (2 * len(paras)) // 3)
         shown, hidden = "".join(paras[:cut]), "".join(paras[cut:])
-    exs = re.findall(r'<section class="example">.*?</section>', s.get("examples") or "", re.S)
-    probs = count(s.get("problems"), "problem")
+    n_ex = len(example_items(s))
     items = (["The rest of this explanation"] +
-             ([plural(len(exs) - 1, "more worked example")] if len(exs) > 1 else []) +
-             ([plural(probs, "practice problem") + " with step-by-step solutions"] if probs else []) +
-             ["The lesson's practice set and five extra members-only problems"])
+             ([plural(n_ex - 1, "more example") + " with step-by-step solutions"] if n_ex > 1 else []) +
+             ["Five extra members-only problems with worked solutions"])
     fade = (f'<div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet>{scramble(hidden, s["slug"])}</div>'
             f'{lock_panel("slide", items, lesson)}</div>')
     s["prose"] = shown + "\n" + fade
-    stubs = "".join(f'<button class="locked-stub" type="button" data-unlock><span>🔒</span><b>{e(re.sub("<[^>]+>", "", t))}</b><em>Members</em></button>'
-                    for t in re.findall(r"<h3>(.*?)</h3>", "".join(exs[1:])))
-    if probs:
-        stubs += (f'<button class="locked-stub" type="button" data-unlock><span>🔒</span><b>{plural(probs, "more problem")} to try, '
-                  f'with step-by-step solutions</b><em>Members</em></button>')
-    s["examples"] = (exs[0] if exs else "") + stubs
-    s["problems"] = ""
+    s["lock_examples"] = True
     page = slide_page(lesson, slides[:i] + [s] + slides[i + 1:], i, next_lesson, practice)
     page = re.sub(r'\s*<details class="review">.*?\n  </details>', "", page, flags=re.S)   # the review nests <details>
     assert 'class="review"' not in page
@@ -789,10 +822,11 @@ def main():
     for lesson in available:
         files = sorted(content_dir(lesson).glob("[0-9]*.html"))
         pf = content_dir(lesson) / "practice.html"
-        BUILT.append((lesson, [parse(f) for f in files], parse(pf) if pf.exists() else None))
+        BUILT.append((lesson, [parse(f) for f in files], None))   # no separate practice page any more
     built = BUILT
     for li, (lesson, slides, practice) in enumerate(BUILT):
         next_lesson = BUILT[li + 1][0] if li + 1 < len(BUILT) else None
+        practice_src = (content_dir(lesson) / "practice.html").exists()
         out = ROOT / lesson["path"]
         out.mkdir(exist_ok=True)
         (out / "index.html").write_text(lesson_page(lesson, slides, practice), encoding="utf-8")
@@ -805,13 +839,10 @@ def main():
             (d / "index.html").write_text(public_slide(lesson, slides, i, next_lesson, practice) if locked(lesson) else page,
                                           encoding="utf-8")
             urls.append(f"{BASE}/{lesson['path']}/{s['slug']}/")
-        if practice:
+        if practice_src:   # old practice links go to the recap slide
             d = out / "practice"
             d.mkdir(exist_ok=True)
-            page = practice_page(lesson, slides, practice, next_lesson)
-            write_embed(lesson, "practice", page)
-            (d / "index.html").write_text(practice_teaser(lesson, practice, page) if locked(lesson) else page, encoding="utf-8")
-            urls.append(f"{BASE}/{lesson['path']}/practice/")
+            (d / "index.html").write_text(redirect_page(f"/{lesson['path']}/{slides[-1]['slug']}/"), encoding="utf-8")
     for lesson, slides, practice in BUILT:
         old = ROOT / lesson["dir"]
         if old.exists():

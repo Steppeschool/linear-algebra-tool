@@ -31,92 +31,23 @@
 <h3>Undoing a step</h3>
 <p>To undo "subtract 2 times row 1 from row 2", we add 2 times row 1 back. The matrix that undoes E₂₁ is written <b>E₂₁⁻¹</b> ("E₂₁ inverse"); lesson 3 is about such inverses. Here E₂₁⁻¹ is the identity with +2 in the same position. Every elimination matrix is undone by flipping the sign of its one extra entry. The next slide uses this to turn elimination into a factorization of A.</p>
     </div>
-    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · A 2 by 2 step</h3>
-<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>1</span><span>6</span><span>4</span></span>. The multiplier is ℓ = 6 ÷ 3 = 2.</p><div class="worked"><div class="row">E₂₁ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>−2</span><span>1</span></span> &nbsp;&nbsp; E₂₁A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>1</span><span>0</span><span>2</span></span></div></div>
-</section>
-<section class="example"><h3>Example 2 · The third step, E₃₂</h3>
-<p>After the first two steps, B = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>1</span><span>0</span><span>−8</span><span>−2</span><span>0</span><span>8</span><span>3</span></span>. Clear the 8 with ℓ₃₂ = 8 ÷ (−8) = −1.</p><div class="worked"><div class="row">E₃₂ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>0</span><span>1</span><span>0</span><span>0</span><span>1</span><span>1</span></span> &nbsp; (−ℓ₃₂ = +1 in row 3, column 2)</div><div class="row">E₃₂B = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>1</span><span>0</span><span>−8</span><span>−2</span><span>0</span><span>0</span><span>1</span></span> = U</div></div>
-</section>
-<section class="example"><h3>Example 3 · Undoing a step</h3>
-<p>E₂₁ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>−2</span><span>1</span><span>0</span><span>0</span><span>0</span><span>1</span></span> subtracts 2·row 1 from row 2.</p><div class="worked"><div class="row">E₂₁⁻¹ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>2</span><span>1</span><span>0</span><span>0</span><span>0</span><span>1</span></span> adds it back</div><div class="row">E₂₁⁻¹E₂₁ = I</div></div><p>Only the sign of the multiplier changes.</p>
-</section></div>
-    <details class="more"><summary><span class="pl-icon">✎</span><span class="rv-text"><b>More examples to try</b><span>3 problems with step-by-step solutions. Try each one before you open its solution.</span></span><span class="rv-toggle"><span class="s-show">Show</span><span class="s-hide">Hide</span></span></summary><div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
-<p>Write E₂₁ for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>4</span><span>5</span><span>1</span></span> and compute E₂₁A.</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>ℓ = 5 ÷ 2 = 2.5, so E₂₁ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>−2.5</span><span>1</span></span> and E₂₁A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>4</span><span>0</span><span>−9</span></span>.</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">2</span><div class="pbody">
+    <h2 class="practice-h">Examples</h2><div class="examples"><section class="example"><h3>Example 1 · A 2 by 2 step</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>1</span><span>6</span><span>4</span></span>. The multiplier is ℓ = 6 ÷ 3 = 2.</p>
+<details class="sol" open><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">E₂₁ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>−2</span><span>1</span></span> &nbsp;&nbsp; E₂₁A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>1</span><span>0</span><span>2</span></span></div></div></div></details>
+</section><section class="example"><h3>Example 2 · The third step, E₃₂</h3>
+<p>After the first two steps, B = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>1</span><span>0</span><span>−8</span><span>−2</span><span>0</span><span>8</span><span>3</span></span>. Clear the 8 with ℓ₃₂ = 8 ÷ (−8) = −1.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">E₃₂ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>0</span><span>1</span><span>0</span><span>0</span><span>1</span><span>1</span></span> &nbsp; (−ℓ₃₂ = +1 in row 3, column 2)</div><div class="row">E₃₂B = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>1</span><span>0</span><span>−8</span><span>−2</span><span>0</span><span>0</span><span>1</span></span> = U</div></div></div></details>
+</section><section class="example"><h3>Example 3 · Undoing a step</h3>
+<p>E₂₁ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>−2</span><span>1</span><span>0</span><span>0</span><span>0</span><span>1</span></span> subtracts 2·row 1 from row 2.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">E₂₁⁻¹ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>2</span><span>1</span><span>0</span><span>0</span><span>0</span><span>1</span></span> adds it back</div><div class="row">E₂₁⁻¹E₂₁ = I</div></div><p>Only the sign of the multiplier changes.</p></div></details>
+</section><section class="example"><h3>Example 4</h3>
 <p>What does E = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>0</span><span>1</span><span>0</span><span>−3</span><span>0</span><span>1</span></span> do? What is its inverse?</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>It subtracts 3 times row 1 from row 3 and leaves the other rows alone. E⁻¹ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>0</span><span>1</span><span>0</span><span>3</span><span>0</span><span>1</span></span> adds it back.</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">3</span><div class="pbody">
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><p>It subtracts 3 times row 1 from row 3 and leaves the other rows alone. E⁻¹ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>0</span><span>1</span><span>0</span><span>3</span><span>0</span><span>1</span></span> adds it back.</p></div></details>
+</section><section class="example"><h3>Example 5</h3>
 <p>Check that <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>−3</span><span>1</span></span> times <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>3</span><span>1</span></span> gives I.</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>Row 2 times column 1: −3·1 + 1·3 = 0. Row 2 times column 2: 0 + 1 = 1. The product is <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>1</span></span>.</p>
-</div></details>
-</div></div></div></details>
-  </article>
-  <details class="review">
-    <summary><span class="pl-icon">✎</span><span class="rv-text"><b>Lesson review</b><span>3 worked examples and 5 mixed problems with solutions</span></span><span class="rv-toggle"><span class="s-show">Open</span><span class="s-hide">Close</span></span></summary>
-    <div class="review-body">
-      <h2 class="practice-h">Worked examples</h2>
-      <div class="examples"><section class="example"><h3>Example 1 · A 2 by 2 system</h3>
-<p>Solve 2x + 3y = 8 and 4x + 11y = 26.</p>
-<div class="worked"><div class="row">Pivot 2, multiplier ℓ = 4 ÷ 2 = 2. Equation 2 − 2·(equation 1): 5y = 10</div>
-<div class="row">Back substitution: y = 2, then 2x + 6 = 8, so x = 1</div>
-<div class="row">Check: 4·1 + 11·2 = 26 ✓</div></div>
-<p>The pivots are 2 and 5. Their product, 10, is det A.</p>
-</section>
-<section class="example"><h3>Example 2 · A 3 by 3 system</h3>
-<p>Solve x + y + z = 6, 2x + 3y + z = 11, x + 3y + 4z = 19.</p>
-<div class="worked"><div class="row">ℓ₂₁ = 2: row 2 becomes (0, 1, −1 | −1). &nbsp; ℓ₃₁ = 1: row 3 becomes (0, 2, 3 | 13)</div>
-<div class="row">ℓ₃₂ = 2: row 3 becomes (0, 0, 5 | 15)</div>
-<div class="row">z = 3 &nbsp;→&nbsp; y − 3 = −1, y = 2 &nbsp;→&nbsp; x + 2 + 3 = 6, x = 1</div></div>
-<p>U = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>1</span><span>1</span><span>0</span><span>1</span><span>−1</span><span>0</span><span>0</span><span>5</span></span>, pivots 1, 1, 5.</p>
-</section>
-<section class="example"><h3>Example 3 · Factor once, solve with L and U</h3>
-<p>Factor A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>6</span><span>8</span></span> and use it to solve Ax = (3, 19).</p>
-<div class="worked"><div class="row">ℓ = 6 ÷ 2 = 3, so U = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>0</span><span>5</span></span> and L = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>3</span><span>1</span></span></div>
-<div class="row">Lc = b: c₁ = 3, then 3·3 + c₂ = 19, so c₂ = 10</div>
-<div class="row">Ux = c: 5x₂ = 10, x₂ = 2, then 2x₁ + 2 = 3, x₁ = 1/2</div>
-<div class="row">Check: 6·(1/2) + 8·2 = 19 ✓</div></div>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><p>Row 2 times column 1: −3·1 + 1·3 = 0. Row 2 times column 2: 0 + 1 = 1. The product is <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>1</span></span>.</p></div></details>
 </section></div>
-      <h2 class="practice-h">Problems</h2>
-      <div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
-<p>Solve x − y = 1 and 3x + 2y = 13 by elimination. Name the pivots.</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>ℓ = 3. Equation 2 − 3·(equation 1): 5y = 10, so y = 2 and x = 3. Check: 9 + 4 = 13 ✓</p><p>Pivots: 1 and 5.</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">2</span><div class="pbody">
-<p>For A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>4</span><span>2</span><span>6</span><span>5</span></span>, find the multiplier ℓ₂₁, the second pivot and det A.</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>ℓ₂₁ = 6 ÷ 4 = 1.5. Second pivot: 5 − 1.5·2 = 2.</p><p>det A = 4·2 = 8, the product of the pivots. Check: 4·5 − 2·6 = 8 ✓</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">3</span><div class="pbody">
-<p>For which number a does <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>a</span><span>2</span><span>8</span></span> have a zero second pivot? Can a row exchange fix it?</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>The second pivot is 8 − 2a. It is zero when a = 4.</p><p>No row exchange helps: there is no row below row 2 to swap in. The matrix is singular (column 2 = 4·column 1).</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">4</span><div class="pbody">
-<p>Write the elimination matrix E₂₁ for A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>0</span><span>6</span><span>4</span><span>1</span><span>0</span><span>2</span><span>3</span></span> and compute E₂₁A.</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>ℓ₂₁ = 6 ÷ 2 = 3, so E₂₁ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>−3</span><span>1</span><span>0</span><span>0</span><span>0</span><span>1</span></span>.</p><p>E₂₁A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>0</span><span>0</span><span>1</span><span>1</span><span>0</span><span>2</span><span>3</span></span>. Only row 2 changed: (6, 4, 1) − 3·(2, 1, 0) = (0, 1, 1).</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">5</span><div class="pbody">
-<p>Find L and U for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>10</span></span>.</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>ℓ = 3, so U = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>0</span><span>4</span></span> and L = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>3</span><span>1</span></span>.</p><p>Check: LU = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>6 + 4</span></span> = A ✓</p>
-</div></details>
-</div></div></div>
-    </div>
-  </details>
+  </article>
 
   <section class="labsec" aria-label="Lab">
     <div class="exercise" id="exercise">

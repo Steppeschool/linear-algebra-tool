@@ -32,91 +32,23 @@
 <h3>Where this is used</h3>
 <p>A drone carries an IMU (inertial measurement unit), a small sensor chip that measures motion along the drone's own axes: its forward, sideways and up directions. A 3 by 3 rotation matrix turns those readings into north, east and up. The attitude estimator is the part of the flight software that tracks which way the drone is tilted and facing. Its job is to keep that rotation matrix up to date.</p>
     </div>
-    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · Stretch sideways</h3>
-<p>Triple every x-coordinate, keep y: (1, 0) → (3, 0) and (0, 1) → (0, 1).</p><div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>0</span><span>0</span><span>1</span></span> &nbsp;&nbsp; det A = 3</div><div class="row">(1, 1) → (3, 1). Every area becomes 3 times larger</div></div>
-</section>
-<section class="example"><h3>Example 2 · Half a turn</h3>
-<p>Rotate by 180°: cos 180° = −1, sin 180° = 0.</p><div class="worked"><div class="row">Q = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−1</span><span>0</span><span>0</span><span>−1</span></span> &nbsp;&nbsp; det Q = 1</div><div class="row">(2, 1) → (−2, −1): every vector points the opposite way</div></div>
-</section>
-<section class="example"><h3>Example 3 · Squash onto a line</h3>
-<p>Where does A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>1</span><span>2</span></span> send the plane?</p><div class="worked"><div class="row">(1, 0) → (1, 1) and (0, 1) → (2, 2): both columns lie on the line y = x</div><div class="row">det A = 1·2 − 2·1 = 0</div></div><p>Every point lands on the line y = x, and every area becomes 0. This is the dependent case from slide 3, seen as a motion.
-</section></div>
-    <details class="more"><summary><span class="pl-icon">✎</span><span class="rv-text"><b>More examples to try</b><span>3 problems with step-by-step solutions. Try each one before you open its solution.</span></span><span class="rv-toggle"><span class="s-show">Show</span><span class="s-hide">Hide</span></span></summary><div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
+    <h2 class="practice-h">Examples</h2><div class="examples"><section class="example"><h3>Example 1 · Stretch sideways</h3>
+<p>Triple every x-coordinate, keep y: (1, 0) → (3, 0) and (0, 1) → (0, 1).</p>
+<details class="sol" open><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>0</span><span>0</span><span>1</span></span> &nbsp;&nbsp; det A = 3</div><div class="row">(1, 1) → (3, 1). Every area becomes 3 times larger</div></div></div></details>
+</section><section class="example"><h3>Example 2 · Half a turn</h3>
+<p>Rotate by 180°: cos 180° = −1, sin 180° = 0.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">Q = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−1</span><span>0</span><span>0</span><span>−1</span></span> &nbsp;&nbsp; det Q = 1</div><div class="row">(2, 1) → (−2, −1): every vector points the opposite way</div></div></div></details>
+</section><section class="example"><h3>Example 3 · Squash onto a line</h3>
+<p>Where does A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>1</span><span>2</span></span> send the plane?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">(1, 0) → (1, 1) and (0, 1) → (2, 2): both columns lie on the line y = x</div><div class="row">det A = 1·2 − 2·1 = 0</div></div><p>Every point lands on the line y = x, and every area becomes 0. This is the dependent case from slide 3, seen as a motion.</div></details>
+</section><section class="example"><h3>Example 4</h3>
 <p>Find the matrix that sends (1, 0) to (0, 2) and (0, 1) to (1, 0). What does det say?</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>The landing spots are the columns: A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>2</span><span>0</span></span>. det A = 0 − 2 = −2: areas double and the plane is flipped.</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">2</span><div class="pbody">
-<p>Write the rotation by 60°. Where does (1, 0) go?</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>cos 60° = ½ and sin 60° = √3/2, so Q = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>½</span><span>−√3/2</span><span>√3/2</span><span>½</span></span>. (1, 0) goes to (½, √3/2).</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">3</span><div class="pbody">
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><p>The landing spots are the columns: A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>2</span><span>0</span></span>. det A = 0 − 2 = −2: areas double and the plane is flipped.</p></div></details>
+</section><section class="example"><h3>Example 5</h3>
 <p>Where does the shear <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>2</span><span>1</span></span> send (1, 0) and (0, 1)? What happens to areas?</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>Read the columns: (1, 0) → (1, 2) and (0, 1) → (0, 1). det = 1, so areas do not change.</p>
-</div></details>
-</div></div></div></details>
-  </article>
-  <details class="review">
-    <summary><span class="pl-icon">✎</span><span class="rv-text"><b>Lesson review</b><span>3 worked examples and 5 mixed problems with solutions</span></span><span class="rv-toggle"><span class="s-show">Open</span><span class="s-hide">Close</span></span></summary>
-    <div class="review-body">
-      <h2 class="practice-h">Worked examples</h2>
-      <div class="examples"><section class="example"><h3>Example 1 · Find the combination</h3>
-<p>Write b = (7, 4) as a combination of v = (1, 2) and w = (3, 1).</p>
-<p>We need c and d with c·(1, 2) + d·(3, 1) = (7, 4). Component by component:</p>
-<div class="worked"><div class="row">c + 3d = 7 &nbsp;&nbsp; 2c + d = 4</div>
-<div class="row">From the second: d = 4 − 2c. Into the first: c + 12 − 6c = 7, so c = 1 and d = 2.</div>
-<div class="row">Check: 1·(1, 2) + 2·(3, 1) = (7, 4) ✓</div></div>
-<p>In matrix form this is Ax = b with the columns v and w: <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>3</span><span>2</span><span>1</span></span> x = (7, 4), x = (1, 2).</p>
-</section>
-<section class="example"><h3>Example 2 · Ax by rows and by columns</h3>
-<p>Compute Ax for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>−1</span><span>1</span><span>3</span></span> and x = (3, 2).</p>
-<div class="worked"><div class="row">By columns: 3·(2, 1) + 2·(−1, 3) = (6 − 2, 3 + 6) = (4, 9)</div>
-<div class="row">By rows: (2·3 − 1·2, 1·3 + 3·2) = (4, 9)</div></div>
-<p>Same answer. The column way shows that (4, 9) lies in the column space, because it is built from the columns.</p>
-</section>
-<section class="example"><h3>Example 3 · Build a matrix from where (1, 0) and (0, 1) land</h3>
-<p>Find the matrix that sends (1, 0) to (1, 1) and (0, 1) to (−1, 1). What does it do to areas?</p>
-<p>The landing spots are the columns: A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>1</span><span>1</span></span>.</p>
-<div class="worked"><div class="row">det A = 1·1 − (−1)·1 = 2</div></div>
-<p>Both arrows have length √2 and are at 90° to each other. (1, 1) points at 45°, so (1, 0) has turned by 45°. (−1, 1) points at 135°, so (0, 1) has turned by 45° too. So A turns the plane by 45° and stretches it by √2. Areas double, which matches det A = 2.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><p>Read the columns: (1, 0) → (1, 2) and (0, 1) → (0, 1). det = 1, so areas do not change.</p></div></details>
 </section></div>
-      <h2 class="practice-h">Problems</h2>
-      <div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
-<p>Is (5, 1) a combination of (1, 1) and (2, −1)? If so, find the numbers c and d.</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>Solve c + 2d = 5 and c − d = 1. Subtracting gives 3d = 4, so d = 4/3 and c = 7/3.</p><p>Check: 7/3 + 8/3 = 5 and 7/3 − 4/3 = 1 ✓. Yes, because the two vectors point in different directions, every vector in the plane is a combination of them.</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">2</span><div class="pbody">
-<p>Compute Ax by columns for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>4</span></span> and x = (−1, 1).</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>Ax = −1·(1, 3) + 1·(2, 4) = (1, 1).</p><p>Check by rows: (−1 + 2, −3 + 4) = (1, 1) ✓</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">3</span><div class="pbody">
-<p>For which number k are the columns of <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>k</span><span>2</span><span>6</span></span> dependent? What is the column space then?</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>The columns are dependent when det = 1·6 − 2k = 0, so k = 3.</p><p>Then column 2 = (3, 6) = 3·(1, 2). The column space is the line through (1, 2). Ax = b can only be solved when b is a multiple of (1, 2).</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">4</span><div class="pbody">
-<p>Find the 2 by 2 matrix that mirrors the plane across the x-axis. What is its determinant, and what does the sign mean?</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>(1, 0) stays put and (0, 1) flips to (0, −1), so A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>−1</span></span>.</p><p>det A = −1. Areas keep their size (|det| = 1), and the minus sign says the plane was flipped over.</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">5</span><div class="pbody">
-<p>R = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>−1</span><span>1</span><span>0</span></span> turns the plane by 90°. R² means R·R and R⁴ means R·R·R·R. Predict R² and R⁴ from the picture, then check by multiplying.</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>Prediction: two quarter turns make a half turn, so R² sends every vector to its opposite. Four quarter turns make a full turn, so R⁴ leaves every vector where it started: R⁴ = I, the identity.</p><p>Check: column 1 of R² is R(0, 1) = (−1, 0) and column 2 is R(−1, 0) = (0, −1), so R² = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−1</span><span>0</span><span>0</span><span>−1</span></span> ✓. Then R⁴ = R²·R² = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>1</span></span> = I ✓</p>
-</div></details>
-</div></div></div>
-    </div>
-  </details>
+  </article>
 
   <section class="labsec" aria-label="Lab">
     <div class="exercise" id="exercise">

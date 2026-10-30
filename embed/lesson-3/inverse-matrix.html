@@ -35,90 +35,23 @@
 <li>Ax = 0 only for x = 0. Here is why this belongs: if some x ≠ 0 had Ax = 0, then x and 0 would give the same output, 0. Two inputs, one output, so A could not be undone.</li>
 </ul>
     </div>
-    <h2 class="practice-h">Worked examples</h2><div class="examples"><section class="example"><h3>Example 1 · Undo a stretch</h3>
-<p>D = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>0</span><span>0</span><span>5</span></span> stretches x by 2 and y by 5.</p><div class="worked"><div class="row">D⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>½</span><span>0</span><span>0</span><span>⅕</span></span>: shrink x by 2 and y by 5</div></div>
-</section>
-<section class="example"><h3>Example 2 · Undo a quarter turn</h3>
-<p>R = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>−1</span><span>1</span><span>0</span></span> turns by 90°.</p><div class="worked"><div class="row">R⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>−1</span><span>0</span></span> turns back by 90°</div><div class="row">RR⁻¹ = I</div></div>
-</section>
-<section class="example"><h3>Example 3 · Solve with the inverse</h3>
-<p>Suppose A⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>1</span></span>. Then Ax = b with b = (1, 2) is solved by one multiplication:</p><div class="worked"><div class="row">x = A⁻¹b = (2·1 + 1·2, 1·1 + 1·2) = (4, 3)</div></div>
-</section></div>
-    <details class="more"><summary><span class="pl-icon">✎</span><span class="rv-text"><b>More examples to try</b><span>3 problems with step-by-step solutions. Try each one before you open its solution.</span></span><span class="rv-toggle"><span class="s-show">Show</span><span class="s-hide">Hide</span></span></summary><div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
-<p>Find the inverse of <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>0</span><span>0</span><span>−2</span></span>.</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>Undo each scaling: <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>⅓</span><span>0</span><span>0</span><span>−½</span></span>.</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">2</span><div class="pbody">
+    <h2 class="practice-h">Examples</h2><div class="examples"><section class="example"><h3>Example 1 · Undo a stretch</h3>
+<p>D = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>0</span><span>0</span><span>5</span></span> stretches x by 2 and y by 5.</p>
+<details class="sol" open><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">D⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>½</span><span>0</span><span>0</span><span>⅕</span></span>: shrink x by 2 and y by 5</div></div></div></details>
+</section><section class="example"><h3>Example 2 · Undo a quarter turn</h3>
+<p>R = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>−1</span><span>1</span><span>0</span></span> turns by 90°.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">R⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>−1</span><span>0</span></span> turns back by 90°</div><div class="row">RR⁻¹ = I</div></div></div></details>
+</section><section class="example"><h3>Example 3 · Solve with the inverse</h3>
+<p>Suppose A⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>1</span></span>. Then Ax = b with b = (1, 2) is solved by one multiplication:</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">x = A⁻¹b = (2·1 + 1·2, 1·1 + 1·2) = (4, 3)</div></div></div></details>
+</section><section class="example"><h3>Example 4</h3>
 <p>Does <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>6</span><span>1</span><span>3</span></span> have an inverse?</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>No. Column 2 = 3·column 1, so the plane is squashed onto a line (det = 2·3 − 6·1 = 0). Two different inputs give the same output, so there is no way back.</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">3</span><div class="pbody">
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><p>No. Column 2 = 3·column 1, so the plane is squashed onto a line (det = 2·3 − 6·1 = 0). Two different inputs give the same output, so there is no way back.</p></div></details>
+</section><section class="example"><h3>Example 5</h3>
 <p>The shear <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>3</span><span>1</span></span> slides points up by 3 times their x. Write its inverse.</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>Slide them back down: <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>−3</span><span>1</span></span>.</p>
-</div></details>
-</div></div></div></details>
-  </article>
-  <details class="review">
-    <summary><span class="pl-icon">✎</span><span class="rv-text"><b>Lesson review</b><span>3 worked examples and 5 mixed problems with solutions</span></span><span class="rv-toggle"><span class="s-show">Open</span><span class="s-hide">Close</span></span></summary>
-    <div class="review-body">
-      <h2 class="practice-h">Worked examples</h2>
-      <div class="examples"><section class="example"><h3>Example 1 · A 2 by 2 inverse</h3>
-<p>Find the inverse of A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>4</span><span>7</span><span>2</span><span>6</span></span>.</p>
-<div class="worked"><div class="row">det A = 4·6 − 7·2 = 10</div>
-<div class="row">A⁻¹ = 1/10 · <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>6</span><span>−7</span><span>−2</span><span>4</span></span></div>
-<div class="row">Check, top-left entry of AA⁻¹: (4·6 + 7·(−2)) / 10 = 1 ✓</div></div>
-</section>
-<section class="example"><h3>Example 2 · Gauss-Jordan step by step</h3>
-<p>Invert A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>7</span></span> by elimination on [A | I].</p>
-<div class="worked"><div class="row">[1 2 | 1 0; 3 7 | 0 1] &nbsp;→ row 2 − 3·row 1 → &nbsp;[1 2 | 1 0; 0 1 | −3 1]</div>
-<div class="row">row 1 − 2·row 2 → &nbsp;[1 0 | 7 −2; 0 1 | −3 1]</div>
-<div class="row">A⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>7</span><span>−2</span><span>−3</span><span>1</span></span></div></div>
-<p>det A = 1, so the formula gives the same answer with no fractions.</p>
-</section>
-<section class="example"><h3>Example 3 · The transpose of a product</h3>
-<p>Check (AB)ᵀ = BᵀAᵀ for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>0</span><span>1</span></span> and B = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>3</span><span>1</span></span>.</p>
-<div class="worked"><div class="row">AB = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>7</span><span>2</span><span>3</span><span>1</span></span>, so (AB)ᵀ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>7</span><span>3</span><span>2</span><span>1</span></span></div>
-<div class="row">BᵀAᵀ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>3</span><span>0</span><span>1</span></span><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>2</span><span>1</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>7</span><span>3</span><span>2</span><span>1</span></span> ✓</div></div>
-<p>AᵀBᵀ would be <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>3</span><span>2</span><span>7</span></span>: the wrong order gives a different matrix.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><p>Slide them back down: <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>−3</span><span>1</span></span>.</p></div></details>
 </section></div>
-      <h2 class="practice-h">Problems</h2>
-      <div class="problems"><div class="problem"><span class="pnum">1</span><div class="pbody">
-<p>Find the inverse of <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>1</span><span>5</span><span>2</span></span>.</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>det = 3·2 − 1·5 = 1, so A⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>−1</span><span>−5</span><span>3</span></span>.</p><p>Check: row 1 of A times column 1 of A⁻¹ = 3·2 + 1·(−5) = 1 ✓</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">2</span><div class="pbody">
-<p>For which k is <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>k</span><span>4</span><span>6</span></span> not invertible?</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>det = 12 − 4k = 0 when k = 3. Then column 2 = (3, 6) = 1.5·column 1, and the plane is squashed onto a line.</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">3</span><div class="pbody">
-<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>0</span><span>1</span></span>, B = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>0</span><span>0</span><span>3</span></span>. Find (AB)⁻¹ as B⁻¹A⁻¹.</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>B⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>½</span><span>0</span><span>0</span><span>⅓</span></span> and A⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>0</span><span>1</span></span>.</p><p>B⁻¹A⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>½</span><span>−½</span><span>0</span><span>⅓</span></span>. Check: AB = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>3</span><span>0</span><span>3</span></span> and its inverse from the formula, 1/6·<span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>−3</span><span>0</span><span>2</span></span>, is the same ✓</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">4</span><div class="pbody">
-<p>Compute AᵀA for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>2</span><span>1</span><span>0</span><span>3</span></span>. Is it symmetric?</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>AᵀA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>5</span><span>2</span><span>2</span><span>10</span></span>. Entry (1, 1) = 1 + 4 + 0, entry (1, 2) = 0 + 2 + 0, entry (2, 2) = 0 + 1 + 9.</p><p>Yes, it is symmetric, as AᵀA always is.</p>
-</div></details>
-</div></div>
-<div class="problem"><span class="pnum">5</span><div class="pbody">
-<p>Find the permutation P that puts the rows of a 3 by 3 matrix in the order 2, 3, 1. What is P⁻¹?</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>The rows of P are rows 2, 3, 1 of I: P = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>0</span><span>1</span><span>0</span><span>0</span><span>0</span><span>1</span><span>1</span><span>0</span><span>0</span></span>.</p><p>P⁻¹ = Pᵀ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>0</span><span>0</span><span>1</span><span>1</span><span>0</span><span>0</span><span>0</span><span>1</span><span>0</span></span>, which puts the rows back.</p>
-</div></details>
-</div></div></div>
-    </div>
-  </details>
+  </article>
 
   <section class="labsec" aria-label="Lab">
     <div class="exercise" id="exercise">
