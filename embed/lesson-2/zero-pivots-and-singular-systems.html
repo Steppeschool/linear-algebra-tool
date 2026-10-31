@@ -5,9 +5,9 @@
     <div class="kicker">Strang §2.2 · Breakdown of elimination</div>
     <h1>A zero pivot: swap rows, or stop.</h1>
     <p class="lead">Elimination needs a nonzero number in every pivot position. If a zero shows up there, either a row exchange fixes it, or the system does not have exactly one solution.</p>
-    </div><span class="thumb slide-art"><img src="https://linearalgebra.steppeschool.com/assets/cards/lesson-2--zero-pivots-and-singular-systems.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 2 · slide 3</small>Zero pivots</span></span></div>
+    </div><span class="thumb slide-art"><img src="https://linearalgebra.steppeschool.com/assets/cards/lesson-2--zero-pivots-and-singular-systems.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 2 · slide 4</small>Zero pivots</span></span></div>
     <div class="key">zero pivot &nbsp;→&nbsp; swap with a lower row &nbsp;&nbsp;|&nbsp;&nbsp; nothing to swap &nbsp;→&nbsp; singular</div>
-    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>A zero in a pivot position stops elimination, because we cannot divide by it.</li><li><b>Temporary failure:</b> a row below has a nonzero entry in that column. Exchange the rows and continue.</li><li><b>Permanent failure:</b> no row can help. The matrix is <b>singular</b>: no solution or infinitely many.</li><li>Singular means the columns are <b>dependent</b>: one column is a combination of the others (for two columns, a multiple of the other). Then det A = 0, the squashed plane from lesson 1.</li></ol></div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>A zero in a pivot position stops elimination, because we cannot divide by it.</li><li><b>Temporary failure:</b> a row below has a nonzero entry in that column. Exchange the rows and continue.</li><li><b>Permanent failure:</b> no row can help. The matrix is <b>singular</b>: no solution or infinitely many.</li><li>Singular means the columns are <b>dependent</b>: one column is a combination of the others (for two columns, a multiple of the other). For two columns, they lie on one line: lesson 1's dependent case.</li></ol></div>
     <div class="prose">
 <h3>Think of a relay race</h3>
 <p>Your second runner is missing. If a teammate can run that leg, swap the order and carry on: a <b>row exchange</b>. If nobody can, the matrix is <b>singular</b>. Then the right-hand side decides: no solution, or infinitely many.</p>
@@ -22,7 +22,7 @@
 <li><b>No solution.</b> x − 2y = 1 and 2x − 4y = 11. Subtracting 2 times the first leaves 0 = 9. Impossible: the lines are parallel.</li>
 <li><b>Infinitely many solutions.</b> x − 2y = 1 and 2x − 4y = 2. Subtracting leaves 0 = 0. The second equation adds nothing, so every point on the line x − 2y = 1 works.</li>
 </ul>
-<p>Both times the second pivot is zero, with no row below to swap in. The left sides are the same: columns <span class="vec"><span>1</span><span>2</span></span> and <span class="vec"><span>−2</span><span>−4</span></span>, the second −2 times the first. Dependent columns, det A = 0: lesson 1's squashed plane. The right side only picks which failure we get.</p>
+<p>Both times the second pivot is zero, with no row below to swap in. The left sides are the same: columns <span class="vec"><span>1</span><span>2</span></span> and <span class="vec"><span>−2</span><span>−4</span></span>, the second −2 times the first. Dependent columns: they lie on one line, lesson 1's dependent case. The right side only picks which failure we get.</p>
 <h3>Small pivots are dangerous too</h3>
 <p>A computer keeps about 16 significant digits. Dividing by a tiny pivot like 0.0000001 makes huge multipliers and blows up rounding errors. So real solvers, NumPy's included, swap rows at every step to put the entry <b>largest in absolute value</b> in the pivot position. This is called partial pivoting.</p>
     </div>
@@ -53,7 +53,7 @@
     <div class="lab">
       <div class="editor-card">
         <div class="bar">
-          <span class="file">slide_3.py</span>
+          <span class="file">slide_4.py</span>
           <span class="status" id="pystatus">Loading Python…</span>
           <button class="btn" id="reset">Reset</button>
           <button class="btn primary" id="run" disabled>Run ▸</button>

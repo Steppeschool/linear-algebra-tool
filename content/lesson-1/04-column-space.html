@@ -9,7 +9,7 @@ preview: {"kind":"combo","A":[[1,1],[2,-1]],"x":[1,1],"b":[]}
 check: isC(V) && near(det(V.A), 0, 1e-9) && nonzero(V.A)
 ---
 <!-- lead -->
-Slide 2 gave one output Ax for one x. Now collect all of them. Each column of A is a kind of step you're allowed to take, say one step north-east and one step north-west. You can take as many of each as you like, forwards or backwards. The <b>column space</b> is every spot you can reach that way. If the two steps go in different directions, you can get anywhere. If they go the same way, you are stuck walking back and forth along one line. Ax = b has a solution exactly when b is a spot you can reach.
+Slide 3 gave one output Ax for one x. Now collect all of them. Each column of A is a kind of step you're allowed to take, say one step north-east and one step north-west. You can take as many of each as you like, forwards or backwards. The <b>column space</b> is every spot you can reach that way. If the two steps go in different directions, you can get anywhere. If they go the same way, you are stuck walking back and forth along one line. Ax = b has a solution exactly when b is a spot you can reach.
 <!-- key -->
 C(A) = all vectors Ax = all combinations of the columns
 <!-- ideas -->
@@ -40,7 +40,7 @@ C(A) = all vectors Ax = all combinations of the columns
 <li><b>Can we solve Ax = b for this one b?</b> Yes, if b is in C(A).</li>
 <li><b>Can we solve Ax = b for every b?</b> Only if C(A) is the whole plane.</li>
 </ul>
-<p>A 2 by 2 matrix has a quick test. Write A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>p</span><span>q</span><span>r</span><span>s</span></span>, with columns (p, r) and (q, s). They are independent exactly when ps − qr ≠ 0. If ps − qr = 0, C(A) is only a line (or the origin). This number ps − qr is called the <b>determinant</b>, det A. For now it is just a test number. Slide 5 shows what it really measures.</p>
+<p>For two columns there is a quick test: is one column a multiple of the other? If yes, C(A) is only a line (or just the origin). If no, C(A) is the whole plane. Lesson 3 turns this test into a single number, the determinant.</p>
 <h3>A bigger example: columns in 3D</h3>
 <p>Take two columns with 3 numbers each. Mixing them gives</p>
 <div class="worked"><div class="row">x₁·(1, 0, 1) + x₂·(0, 1, 1) = (x₁, x₂, x₁ + x₂)</div></div>
@@ -48,13 +48,13 @@ C(A) = all vectors Ax = all combinations of the columns
 <figure class="fig"><div class="fig-svg" data-fig='{"type":"span3d","cols":[[1,0,1],[0,1,1]],"pts":[{"p":[1,2,3],"label":"(1, 2, 3)","on":true},{"p":[1,2,0],"label":"(1, 2, 0)"}],"view":[-4.5,4.5,-3.5,4.5],"read":"the sheet = all combinations of the two columns"}'></div><figcaption>Two columns in 3D reach a flat sheet, not all of space. One point is on the sheet; the other floats off it.</figcaption></figure>
 <p>Add a third column that sticks out of the sheet, like (0, 0, 1), and now you can reach every point in space. A third column that lies on the sheet, like (1, 1, 2), adds nothing new. The same holds in any size: the column space can be all of space, or a smaller flat piece of it.</p>
 <figure class="fig"><div class="fig-svg" data-fig='{"type":"span3d","cols":[[1,0,1],[0,1,1],[0,0,1]],"view":[-4.5,4.5,-3.5,4.5],"read":"col 3 sticks out of the sheet"}'></div><figcaption>A third column off the sheet. Now the three columns reach all of space.</figcaption></figure>
-<p class="next"><b>Next:</b> The column space tells us <i>whether</i> Ax = b has a solution. The next slide shows how to <i>find</i> it, by reading the same equations two ways.</p>
+<p class="next"><b>Next:</b> The column space tells us <i>whether</i> Ax = b has a solution. Lesson 2 shows how to <i>find</i> it: first by reading the equations two ways, then by elimination. The recap comes first.</p>
 <!-- examples -->
 <section class="example"><h3>Example 1 · A line, and who is on it</h3>
 <p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>4</span><span>1</span><span>2</span></span>. Column 2 = 2·column 1, so C(A) is the line through (2, 1).</p><div class="worked"><div class="row">b = (6, 3) = 3·(2, 1): in C(A), for example x = (3, 0)</div><div class="row">b = (1, 1): not a multiple of (2, 1), so Ax = b has no solution</div></div>
 </section>
 <section class="example"><h3>Example 2 · The whole plane</h3>
-<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>−1</span></span>. Here p = 1, q = 1, r = 1, s = −1, so det A = ps − qr = 1·(−1) − 1·1 = −2. That is not 0, so C(A) is the whole plane. Solve Ax = (4, 2):</p><div class="worked"><div class="row">x₁ + x₂ = 4 &nbsp;&nbsp; x₁ − x₂ = 2</div><div class="row">x₁ = 3, x₂ = 1</div></div>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>−1</span></span>. The columns (1, 1) and (1, −1) are not multiples of each other, so C(A) is the whole plane. Solve Ax = (4, 2):</p><div class="worked"><div class="row">x₁ + x₂ = 4 &nbsp;&nbsp; x₁ − x₂ = 2</div><div class="row">x₁ = 3, x₂ = 1</div></div>
 </section>
 <section class="example"><h3>Example 3 · Is b in the column space?</h3>
 <p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>3</span><span>2</span><span>6</span></span>, b = (2, 5).</p><div class="worked"><div class="row">Column 2 = 3·column 1, so C(A) is the line of multiples of (1, 2)</div><div class="row">Is (2, 5) a multiple of (1, 2)? It would need 2·(1, 2) = (2, 4), not (2, 5)</div></div><p>So b is not in C(A), and Ax = b has no solution. Changing b to (2, 4) would make it solvable.
@@ -88,5 +88,4 @@ A = np.array([[1,  1],
 x = np.array([1, 1])
 
 print("columns:", A[:, 0], A[:, 1])
-print("det =", np.linalg.det(A), "  (0 means dependent columns)")
 combo(A, x)

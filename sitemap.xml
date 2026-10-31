@@ -3,18 +3,17 @@
   <url><loc>https://linearalgebra.steppeschool.com/</loc><lastmod>2026-10-31</lastmod></url>
   <url><loc>https://linearalgebra.steppeschool.com/vectors-and-matrices/</loc><lastmod>2026-10-31</lastmod></url>
   <url><loc>https://linearalgebra.steppeschool.com/vectors-and-matrices/linear-combinations/</loc><lastmod>2026-10-31</lastmod></url>
+  <url><loc>https://linearalgebra.steppeschool.com/vectors-and-matrices/lengths-and-dot-products/</loc><lastmod>2026-10-31</lastmod></url>
   <url><loc>https://linearalgebra.steppeschool.com/vectors-and-matrices/matrix-vector-multiplication/</loc><lastmod>2026-10-31</lastmod></url>
   <url><loc>https://linearalgebra.steppeschool.com/vectors-and-matrices/column-space/</loc><lastmod>2026-10-31</lastmod></url>
-  <url><loc>https://linearalgebra.steppeschool.com/vectors-and-matrices/row-and-column-picture/</loc><lastmod>2026-10-31</lastmod></url>
-  <url><loc>https://linearalgebra.steppeschool.com/vectors-and-matrices/linear-transformations/</loc><lastmod>2026-10-31</lastmod></url>
-  <url><loc>https://linearalgebra.steppeschool.com/vectors-and-matrices/matrix-multiplication-order/</loc><lastmod>2026-10-31</lastmod></url>
-  <url><loc>https://linearalgebra.steppeschool.com/vectors-and-matrices/reflection-matrix/</loc><lastmod>2026-10-31</lastmod></url>
   <url><loc>https://linearalgebra.steppeschool.com/vectors-and-matrices/recap/</loc><lastmod>2026-10-31</lastmod></url>
   <url><loc>https://linearalgebra.steppeschool.com/gaussian-elimination-and-lu/</loc><lastmod>2026-10-31</lastmod></url>
+  <url><loc>https://linearalgebra.steppeschool.com/gaussian-elimination-and-lu/row-and-column-picture/</loc><lastmod>2026-10-31</lastmod></url>
   <url><loc>https://linearalgebra.steppeschool.com/gaussian-elimination-and-lu/gaussian-elimination/</loc><lastmod>2026-10-31</lastmod></url>
   <url><loc>https://linearalgebra.steppeschool.com/gaussian-elimination-and-lu/pivots-and-back-substitution/</loc><lastmod>2026-10-31</lastmod></url>
   <url><loc>https://linearalgebra.steppeschool.com/gaussian-elimination-and-lu/zero-pivots-and-singular-systems/</loc><lastmod>2026-10-31</lastmod></url>
   <url><loc>https://linearalgebra.steppeschool.com/gaussian-elimination-and-lu/elimination-matrices/</loc><lastmod>2026-10-31</lastmod></url>
+  <url><loc>https://linearalgebra.steppeschool.com/gaussian-elimination-and-lu/matrix-multiplication/</loc><lastmod>2026-10-31</lastmod></url>
   <url><loc>https://linearalgebra.steppeschool.com/gaussian-elimination-and-lu/lu-decomposition/</loc><lastmod>2026-10-31</lastmod></url>
   <url><loc>https://linearalgebra.steppeschool.com/gaussian-elimination-and-lu/recap/</loc><lastmod>2026-10-31</lastmod></url>
   <url><loc>https://linearalgebra.steppeschool.com/inverse-transpose-permutation/</loc><lastmod>2026-10-31</lastmod></url>
@@ -43,6 +42,8 @@
   <url><loc>https://linearalgebra.steppeschool.com/orthogonality-and-least-squares/gram-schmidt/</loc><lastmod>2026-10-31</lastmod></url>
   <url><loc>https://linearalgebra.steppeschool.com/orthogonality-and-least-squares/recap/</loc><lastmod>2026-10-31</lastmod></url>
   <url><loc>https://linearalgebra.steppeschool.com/determinants/</loc><lastmod>2026-10-31</lastmod></url>
+  <url><loc>https://linearalgebra.steppeschool.com/determinants/linear-transformations/</loc><lastmod>2026-10-31</lastmod></url>
+  <url><loc>https://linearalgebra.steppeschool.com/determinants/reflection-matrix/</loc><lastmod>2026-10-31</lastmod></url>
   <url><loc>https://linearalgebra.steppeschool.com/determinants/determinant-as-area/</loc><lastmod>2026-10-31</lastmod></url>
   <url><loc>https://linearalgebra.steppeschool.com/determinants/properties-of-determinants/</loc><lastmod>2026-10-31</lastmod></url>
   <url><loc>https://linearalgebra.steppeschool.com/determinants/determinant-from-pivots/</loc><lastmod>2026-10-31</lastmod></url>

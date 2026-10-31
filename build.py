@@ -68,15 +68,15 @@ def seal(text):
 
 LESSONS = [
     {"n": 1, "dir": "lesson-1", "path": "vectors-and-matrices", "seo_title": "Vectors, Linear Combinations and Matrix Multiplication",
-     "seo_desc": "Learn vectors, linear combinations, Ax as a mix of columns, the column space and matrix multiplication with interactive Python. Free lesson following Professor Strang.", "title": "Columns first", "chapter": "Strang, chapter 1",
-     "sections": "Strang §1.1, §1.3, §2.1, §2.4, §5.3, §8.1",
-     "summary": "Linear combinations, Ax as a mix of columns, the column space, row and column pictures, "
-                "matrices that move the plane, and why AB is not BA."},
+     "seo_desc": "Learn vectors, linear combinations, length and the dot product, matrix times vector by rows and by columns, and the column space, with interactive Python. Free lesson following Professor Strang.", "title": "Columns first", "chapter": "Strang, chapter 1",
+     "sections": "Strang §1.1 to §1.3",
+     "summary": "Linear combinations, length and the dot product, matrix times vector by rows and by columns, "
+                "and the column space."},
     {"n": 2, "dir": "lesson-2", "path": "gaussian-elimination-and-lu", "seo_title": "Gaussian Elimination and LU Decomposition",
-     "seo_desc": "Solve Ax = b by Gaussian elimination: pivots, back substitution, elimination matrices and A = LU, with live Python in your browser. Free lesson.", "title": "Elimination and A = LU", "chapter": "Strang, chapter 2",
-     "sections": "Strang §2.2, §2.3, §2.6",
-     "summary": "How a computer solves Ax = b: subtract rows until the system is a triangle, solve from the bottom up, "
-                "and record the steps as A = LU."},
+     "seo_desc": "Solve Ax = b: the row and column pictures, Gaussian elimination, pivots, elimination matrices, matrix multiplication and A = LU, with live Python in your browser. Free lesson.", "title": "Solving Ax = b", "chapter": "Strang, chapter 2",
+     "sections": "Strang §2.1 to §2.4, §2.6",
+     "summary": "Two ways to read Ax = b, then how a computer solves it: subtract rows until the system is a triangle, "
+                "solve from the bottom up, multiply matrices, and record the steps as A = LU."},
     {"n": 3, "dir": "lesson-3", "path": "inverse-transpose-permutation", "seo_title": "Inverse Matrix, Transpose and Permutation Matrices",
      "seo_desc": "The inverse matrix, the 2x2 inverse formula, Gauss-Jordan, transposes, symmetric and permutation matrices, with interactive Python. Free lesson.", "title": "Inverses, transposes and permutations", "chapter": "Strang, chapter 2",
      "sections": "Strang §2.5, §2.7",
@@ -94,8 +94,8 @@ LESSONS = [
                 "fitting lines to data, and orthonormal bases built by Gram-Schmidt."},
     {"n": 6, "dir": "lesson-6", "path": "determinants", "seo_title": "Determinants: Area, Properties, Cofactors and Cramer's Rule",
      "seo_desc": "What the determinant measures, its three rules, computing it from pivots or cofactors, Cramer's rule, the inverse formula and cross products. Free lesson.", "title": "Determinants", "chapter": "Strang, chapter 5",
-     "sections": "Strang §5.1 to §5.3",
-     "summary": "The number that says how much a matrix stretches area and volume: its rules, how to compute it, "
+     "sections": "Strang §8.1, §5.1 to §5.3",
+     "summary": "A matrix as a move of the whole plane, then the number that says how much it stretches area and volume: its rules, how to compute it, "
                 "Cramer's rule, the inverse formula, and areas, volumes and cross products."},
     {"n": 7, "dir": "lesson-7", "path": "eigenvalues-and-eigenvectors", "seo_title": "Eigenvalues and Eigenvectors: Intuition and Diagonalization",
      "seo_desc": "Eigenvalues and eigenvectors with live Python: det(A − λI) = 0, diagonalization, stability, Markov steady states, symmetric and positive definite matrices.", "title": "Eigenvalues and eigenvectors", "chapter": "Strang, chapter 6",
@@ -108,7 +108,7 @@ LESSONS = [
      "summary": "Every matrix taken apart: turn, stretch, turn. Singular values, the most important pieces of a matrix, "
                 "image compression, principal component analysis and the pseudoinverse."},
 ]
-OUTCOMES = {1: ['Read Ax as a mix of the columns of A, the idea everything else builds on', 'Predict where a matrix sends any point of the plane', 'Combine two moves into one matrix, and know why the order matters'], 2: ['Solve a system of equations the way a computer does', 'Spot at a glance when a system has no solution or infinitely many', 'Factor A = LU once and reuse it to solve fast'], 3: ["Undo a matrix, and know when it can't be undone", 'Invert any 2 × 2 in your head, and bigger ones with Gauss-Jordan', 'Use transposes and permutations without second-guessing'], 4: ['Write down every solution of Ax = b, not just one', 'Find the rank, a basis and the dimension of any subspace', 'Draw the big picture of the four subspaces and use it'], 5: ['Fit the best line to noisy sensor data', 'Project any vector onto a line or a plane', 'Turn any basis into an orthonormal one with Gram-Schmidt'], 6: ['Read area, volume and invertibility from one number', 'Compute any determinant three different ways', "Solve small systems with Cramer's rule and find cross products"], 7: ['Tell whether a system settles down or blows up', 'Find eigenvalues and eigenvectors by hand and in NumPy', 'Spot a positive definite matrix, a bowl, at a glance'], 8: ['Compress an image and keep only what matters', 'Find the main direction in your data with PCA', 'Take any matrix apart as turn, stretch, turn']}
+OUTCOMES = {1: ['Read Ax as a mix of the columns of A, the idea everything else builds on', 'Compute lengths, dot products and right angles in any dimension', 'Tell which targets b a matrix can reach'], 2: ['Solve a system of equations the way a computer does', 'Multiply matrices by rows and by columns, and know why the order matters', 'Factor A = LU once and reuse it to solve fast'], 3: ["Undo a matrix, and know when it can't be undone", 'Invert any 2 × 2 in your head, and bigger ones with Gauss-Jordan', 'Use transposes and permutations without second-guessing'], 4: ['Write down every solution of Ax = b, not just one', 'Find the rank, a basis and the dimension of any subspace', 'Draw the big picture of the four subspaces and use it'], 5: ['Fit the best line to noisy sensor data', 'Project any vector onto a line or a plane', 'Turn any basis into an orthonormal one with Gram-Schmidt'], 6: ['See a matrix as a move of the plane, and build one from where two arrows land', 'Read area, volume and invertibility from one number', 'Compute any determinant three different ways', "Solve small systems with Cramer's rule and find cross products"], 7: ['Tell whether a system settles down or blows up', 'Find eigenvalues and eigenvectors by hand and in NumPy', 'Spot a positive definite matrix, a bowl, at a glance'], 8: ['Compress an image and keep only what matters', 'Find the main direction in your data with PCA', 'Take any matrix apart as turn, stretch, turn']}
 for _l, _c in zip(LESSONS, [1, 2, 2, 3, 4, 5, 6, 7]):
     _l["ch"] = _c
     _l["outcomes"] = OUTCOMES[_l["n"]]
@@ -410,6 +410,7 @@ def review_block(pr):
 
 
 CARD_LABEL = {
+    "lengths-and-dot-products": "Dot product", "matrix-multiplication": "Matrix times matrix",
     "linear-combinations": "Linear combinations", "matrix-vector-multiplication": "Matrix times vector",
     "column-space": "Column space", "row-and-column-picture": "Rows and columns",
     "linear-transformations": "Transformations", "matrix-multiplication-order": "AB ≠ BA",
@@ -757,6 +758,14 @@ def home_page(lessons_built):
 """
 
 
+MOVED = {
+    "vectors-and-matrices/row-and-column-picture": "/gaussian-elimination-and-lu/row-and-column-picture/",
+    "vectors-and-matrices/matrix-multiplication-order": "/gaussian-elimination-and-lu/matrix-multiplication/",
+    "vectors-and-matrices/linear-transformations": "/determinants/linear-transformations/",
+    "vectors-and-matrices/reflection-matrix": "/determinants/reflection-matrix/",
+}
+
+
 def redirect_page(target):
     return f"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><title>{SITE}</title>
@@ -889,6 +898,11 @@ def main():
         for sub in [""] + [s["slug"] + "/" for s in slides] + (["practice/"] if practice else []):
             (old / sub).mkdir(parents=True, exist_ok=True)
             (old / sub / "index.html").write_text(redirect_page(f"/{lesson['path']}/{sub}"), encoding="utf-8")
+    # slides that moved when the course was put in Strang's chapter order (Oct 2026)
+    for old, new in MOVED.items():
+        d = ROOT / old
+        d.mkdir(parents=True, exist_ok=True)
+        (d / "index.html").write_text(redirect_page(new), encoding="utf-8")
     (ROOT / "index.html").write_text(home_page(built), encoding="utf-8")
     # old single-page URL from the first prototype
     (ROOT / "lessons").mkdir(exist_ok=True)

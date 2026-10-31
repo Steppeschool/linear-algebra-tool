@@ -13,10 +13,10 @@ Every elimination step is a multiplication by a simple matrix. The <b>identity m
 <!-- key -->
 E₂₁ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>−ℓ</span><span>1</span><span>0</span><span>0</span><span>0</span><span>1</span></span> &nbsp;&nbsp; E₂₁A = A with row 2 − ℓ·(row 1)
 <!-- ideas -->
-<ol class="ideas"><li>An <b>elimination matrix</b> E is the identity with one extra entry, −ℓ, below the diagonal.</li><li>Multiplying EA performs that row operation on A.</li><li>A row of EA is a combination of the rows of A.</li><li>To undo E, change −ℓ to +ℓ. This is the key to A = LU on the next slide.</li></ol>
+<ol class="ideas"><li>An <b>elimination matrix</b> E is the identity with one extra entry, −ℓ, below the diagonal.</li><li>Multiplying EA performs that row operation on A.</li><li>A row of EA is a combination of the rows of A.</li><li>To undo E, change −ℓ to +ℓ. This is the key to A = LU on slide 7.</li></ol>
 <!-- prose -->
 <h3>Why write a step as a matrix?</h3>
-<p>As matrices, the whole list of steps becomes one equation, and lesson 1's rules apply to it.</p>
+<p>As matrices, the whole list of steps becomes one equation that a computer can store and reuse.</p><p>Multiplying two matrices is explained fully on slide 6. For now: E·A just applies E's row step to A.</p>
 <h3>An instruction card in numbers</h3>
 <p>E₂₁ is the card "subtract 2 times row 1 from row 2, leave the rest alone", written as numbers. Multiplying by it follows the card.</p>
 <div class="worked"><div class="row">E₂₁ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>−2</span><span>1</span><span>0</span><span>0</span><span>0</span><span>1</span></span></div></div>
@@ -27,14 +27,15 @@ E₂₁ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1<
 <li>Row 2 is (−2, 1, 0): row 2 minus 2 times row 1.</li>
 <li>Row 3 is (0, 0, 1): keep row 3.</li>
 </ul>
-<p>A row times a matrix uses the row's numbers as weights on the matrix's rows. Row 2, with A from slide 2:</p>
+<p>A row times a matrix uses the row's numbers as weights on the matrix's rows. Row 2, with A from slide 3:</p>
 <div class="worked"><div class="row">(−2, 1, 0) A = −2·(2, 1, 1) + 1·(4, −6, 0) + 0·(−2, 7, 2) = (0, −8, −2)</div></div>
-<p>That is the new row 2 from slide 2.</p>
+<p>That is the new row 2 from slide 3.</p>
 <h3>The whole process as one product</h3>
 <div class="worked"><div class="row">E₃₂ E₃₁ E₂₁ A = U</div></div>
-<p>Read it right to left, as in lesson 1: E₂₁ acts first.</p>
+<p>Read it right to left: E₂₁ is closest to A, so it acts first. Then E₃₁, then E₃₂.</p>
 <h3>Undoing a step</h3>
-<p>To undo E₂₁, add 2 times row 1 back. That matrix is <b>E₂₁⁻¹</b> ("E₂₁ inverse"; lesson 3 covers inverses): the identity with +2 in the same spot. Every elimination matrix is undone by flipping the sign of its extra entry. The next slide uses this to factor A.</p>
+<p>To undo E₂₁, add 2 times row 1 back. That matrix is <b>E₂₁⁻¹</b> ("E₂₁ inverse"; lesson 3 covers inverses): the identity with +2 in the same spot. Every elimination matrix is undone by flipping the sign of its extra entry.</p>
+<p class="next"><b>Next:</b> We have been multiplying matrices on trust. Slide 6 shows exactly how a matrix times a matrix works. Then slide 7 uses the undo steps to factor A = LU.</p>
 <!-- examples -->
 <section class="example"><h3>Example 1 · A 2 by 2 step</h3>
 <p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>1</span><span>6</span><span>4</span></span>. The multiplier is ℓ = 6 ÷ 3 = 2.</p><div class="worked"><div class="row">E₂₁ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>−2</span><span>1</span></span> &nbsp;&nbsp; E₂₁A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>1</span><span>0</span><span>2</span></span></div></div>

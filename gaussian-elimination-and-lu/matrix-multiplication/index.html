@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Matrix Multiplication Explained: Row Times Column, Step by Step</title>
+<meta name="description" content="How to multiply two matrices: each entry is a row times a column (a dot product), and each column of AB is A times a column of B. Worked examples, sizes, why AB is not BA, and Python. Strang §2.4.">
+<link rel="canonical" href="https://linearalgebra.steppeschool.com/gaussian-elimination-and-lu/matrix-multiplication/">
+<link rel="icon" type="image/png" href="https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/sites/2148737716/images/7e33af1-8e03-fa-2023-c1572eec2d14_steppeschool_favicon.png">
+<link rel="apple-touch-icon" href="https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/sites/2148737716/images/7e33af1-8e03-fa-2023-c1572eec2d14_steppeschool_favicon.png">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Linear Algebra, Live">
+<meta property="og:title" content="Matrix Multiplication Explained: Row Times Column, Step by Step">
+<meta property="og:description" content="How to multiply two matrices: each entry is a row times a column (a dot product), and each column of AB is A times a column of B. Worked examples, sizes, why AB is not BA, and Python. Strang §2.4.">
+<meta property="og:url" content="https://linearalgebra.steppeschool.com/gaussian-elimination-and-lu/matrix-multiplication/">
+<meta property="og:image" content="https://linearalgebra.steppeschool.com/assets/cover.jpg">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="720">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/lesson.css">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "Matrix Multiplication Explained: Row Times Column, Step by Step", "headline": "Multiplying two matrices", "description": "How to multiply two matrices: each entry is a row times a column (a dot product), and each column of AB is A times a column of B. Worked examples, sizes, why AB is not BA, and Python. Strang §2.4.", "url": "https://linearalgebra.steppeschool.com/gaussian-elimination-and-lu/matrix-multiplication/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": true, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Professor Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 2: Solving Ax = b", "item": "https://linearalgebra.steppeschool.com/gaussian-elimination-and-lu/"}, {"@type": "ListItem", "position": 3, "name": "Matrix Multiplication Explained: Row Times Column, Step by Step", "item": "https://linearalgebra.steppeschool.com/gaussian-elimination-and-lu/matrix-multiplication/"}]}]</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4ZV1YVD90H"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-4ZV1YVD90H');
+document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.target.closest('a[href*="/offers/"]');if(a)gtag('event','begin_checkout',{currency:'USD',value:20,link_url:a.href,page_path:location.pathname});});</script>
+</head>
+<body>
+<header class="top">
+  <div class="topnav"><a class="logo" href="https://www.steppeschool.com" aria-label="Steppeschool"><img src="https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/themes/2162900525/settings_images/5034abc-0d31-78f6-fa6d-4ec283cec8ac_steppeschool_logo.png" alt="Steppeschool" width="108" height="24"></a><a class="brand" href="../../">Linear Algebra, Live</a><nav class="crumbnav" aria-label="Chapters and lessons"><details class="menu"><summary>Chapter 2<span class="hide-sm"> · Solving linear equations</span></summary><div class="menu-list chapters"><div class="menu-sub">Chapters</div><div class="ch"><div class="ch-head"><span class="ch-num">1</span><span class="ch-title">Introduction to vectors</span></div><div class="ch-lessons"><a class="ls" href="../../vectors-and-matrices/"><span class="ls-num">Lesson 1</span><span class="ls-title">Columns first</span></a></div></div><div class="ch on"><div class="ch-head"><span class="ch-num">2</span><span class="ch-title">Solving linear equations</span></div><div class="ch-lessons"><a class="ls on" href="../../gaussian-elimination-and-lu/"><span class="ls-num">Lesson 2</span><span class="ls-title">Solving Ax = b</span></a><a class="ls" href="../../inverse-transpose-permutation/"><span class="ls-num">Lesson 3</span><span class="ls-title">Inverses, transposes and permutations</span></a></div></div><div class="ch"><div class="ch-head"><span class="ch-num">3</span><span class="ch-title">Vector spaces and subspaces</span></div><div class="ch-lessons"><a class="ls" href="../../vector-spaces-and-four-subspaces/"><span class="ls-num">Lesson 4</span><span class="ls-title">The four subspaces</span></a></div></div><div class="ch"><div class="ch-head"><span class="ch-num">4</span><span class="ch-title">Orthogonality</span></div><div class="ch-lessons"><a class="ls" href="../../orthogonality-and-least-squares/"><span class="ls-num">Lesson 5</span><span class="ls-title">Orthogonality and least squares</span></a></div></div><div class="ch"><div class="ch-head"><span class="ch-num">5</span><span class="ch-title">Determinants</span></div><div class="ch-lessons"><a class="ls" href="../../determinants/"><span class="ls-num">Lesson 6</span><span class="ls-title">Determinants</span></a></div></div><div class="ch"><div class="ch-head"><span class="ch-num">6</span><span class="ch-title">Eigenvalues and eigenvectors</span></div><div class="ch-lessons"><a class="ls" href="../../eigenvalues-and-eigenvectors/"><span class="ls-num">Lesson 7</span><span class="ls-title">Eigenvalues and eigenvectors</span></a></div></div><div class="ch"><div class="ch-head"><span class="ch-num">7</span><span class="ch-title">The singular value decomposition</span></div><div class="ch-lessons"><a class="ls" href="../../svd-and-pca/"><span class="ls-num">Lesson 8</span><span class="ls-title">The SVD and PCA</span></a></div></div></div></details><span class="sep">›</span><details class="menu"><summary>Lesson 2<span class="hide-sm"> · Solving Ax = b</span></summary><div class="menu-list"><div class="menu-sub">Chapter 2 lessons</div><div class="ch-lessons flat"><a class="ls on" href="../../gaussian-elimination-and-lu/"><span class="ls-num">Lesson 2</span><span class="ls-title">Solving Ax = b</span></a><a class="ls" href="../../inverse-transpose-permutation/"><span class="ls-num">Lesson 3</span><span class="ls-title">Inverses, transposes and permutations</span></a></div><div class="menu-sub">In lesson 2</div><div class="ch-lessons flat slides"><a class="ls" href="../../gaussian-elimination-and-lu/row-and-column-picture/"><span class="ls-num">1</span><span class="ls-title">Row Picture vs Column Picture of Ax = b</span></a><a class="ls" href="../../gaussian-elimination-and-lu/gaussian-elimination/"><span class="ls-num">2</span><span class="ls-title">Gaussian Elimination Method Explained Visually</span></a><a class="ls" href="../../gaussian-elimination-and-lu/pivots-and-back-substitution/"><span class="ls-num">3</span><span class="ls-title">Pivots and Back Substitution: 3×3 Elimination Step by Step</span></a><a class="ls" href="../../gaussian-elimination-and-lu/zero-pivots-and-singular-systems/"><span class="ls-num">4</span><span class="ls-title">When Elimination Fails: Zero Pivots and Singular Systems</span></a><a class="ls" href="../../gaussian-elimination-and-lu/elimination-matrices/"><span class="ls-num">5</span><span class="ls-title">Elimination Matrices: Row Operations as Matrix Multiplication</span></a><a class="ls on" href="../../gaussian-elimination-and-lu/matrix-multiplication/"><span class="ls-num">6</span><span class="ls-title">Matrix Multiplication Explained: Row Times Column, Step by Step</span></a><a class="ls" href="../../gaussian-elimination-and-lu/lu-decomposition/"><span class="ls-num">7</span><span class="ls-title">LU Decomposition Method Explained: Why A = LU</span></a><a class="ls" href="../../gaussian-elimination-and-lu/recap/"><span class="ls-num">8</span><span class="ls-title">Lesson 2 Recap: Elimination and A = LU</span></a></div></div></details></nav></div>
+  <nav class="steps" aria-label="Steps in this lesson"><a class="step" href="../row-and-column-picture/" data-slug="row-and-column-picture" title="Row Picture vs Column Picture of Ax = b">1</a><a class="step" href="../gaussian-elimination/" data-slug="gaussian-elimination" title="Gaussian Elimination Method Explained Visually">2</a><a class="step" href="../pivots-and-back-substitution/" data-slug="pivots-and-back-substitution" title="Pivots and Back Substitution: 3×3 Elimination Step by Step">3</a><a class="step" href="../zero-pivots-and-singular-systems/" data-slug="zero-pivots-and-singular-systems" title="When Elimination Fails: Zero Pivots and Singular Systems">4</a><a class="step" href="../elimination-matrices/" data-slug="elimination-matrices" title="Elimination Matrices: Row Operations as Matrix Multiplication">5</a><a class="step on" href="../matrix-multiplication/" data-slug="matrix-multiplication" aria-current="page" title="Matrix Multiplication Explained: Row Times Column, Step by Step">6</a><a class="step" href="../lu-decomposition/" data-slug="lu-decomposition" title="LU Decomposition Method Explained: Why A = LU">7</a><a class="step" href="../recap/" data-slug="recap" title="Lesson 2 Recap: Elimination and A = LU">8</a></nav>
+</header>
+
+
+<main class="lesson">
+  <article class="page">
+    <div class="slide-head"><div>
+    <div class="kicker">Strang §2.4 · Rules for matrix operations</div>
+    <h1>Multiplying two matrices</h1>
+    <p class="lead">Lesson 1 multiplied a matrix by a vector. Now multiply a matrix by a matrix. The idea is simple: B is just a few vectors standing side by side, its columns. Multiply A by each column of B, and stand the answers side by side. That is AB. To get any single number in AB, take a row of A and a column of B and find their dot product. Same rules as lesson 1, done several times.</p>
+    </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-2--matrix-multiplication.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 2 · slide 6</small>Matrix times matrix</span></span></div>
+    <div class="key">(AB)<sub>ij</sub> = (row i of A) · (column j of B) &nbsp;&nbsp;&nbsp; AB = [ Ab₁ &nbsp; Ab₂ ]</div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li><b>One entry:</b> the number in row i, column j of AB is row i of A dotted with column j of B.</li><li><b>One column:</b> column j of AB is A times column j of B, a combination of the columns of A.</li><li><b>Sizes:</b> (m × n) times (n × p) gives m × p. The inside numbers must match.</li><li><b>Order matters:</b> usually AB ≠ BA.</li></ol></div>
+    <div class="prose">
+<h3>One number at a time: row times column</h3>
+<p>Take</p>
+<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>4</span></span> &nbsp;&nbsp; B = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>5</span><span>6</span><span>7</span><span>8</span></span></div></div>
+<p>The top-left number of AB comes from row 1 of A and column 1 of B. Multiply matching parts and add, a dot product (lesson 1, slide 2):</p>
+<div class="worked"><div class="row">row 1 · column 1 = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span></span> · <span class="vec"><span>5</span><span>7</span></span> = 1·5 + 2·7 = 5 + 14 = 19</div></div>
+<p>Do the same for every pair. Row i and column j make the number in row i, column j:</p>
+<div class="worked"><div class="row">row 1 · column 2 = 1·6 + 2·8 = 22</div><div class="row">row 2 · column 1 = 3·5 + 4·7 = 43</div><div class="row">row 2 · column 2 = 3·6 + 4·8 = 50</div><div class="row">AB = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>19</span><span>22</span><span>43</span><span>50</span></span></div></div>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"matmul","A":[[1,2],[3,4]],"B":[[5,6],[7,8]],"view":[0,11,0,3.4]}'></div><figcaption>The highlighted row of A meets the highlighted column of B. Their dot product fills one number of AB.</figcaption></figure>
+<h3>One column at a time: A times each column of B</h3>
+<p>Now look at a whole column of AB. Column 1 of AB is just A times column 1 of B, a matrix times a vector, exactly as in lesson 1. By columns:</p>
+<div class="worked"><div class="row">A·<span class="vec"><span>5</span><span>7</span></span> = <span class="i">5·<span class="vec"><span>1</span><span>3</span></span></span> + <span class="j">7·<span class="vec"><span>2</span><span>4</span></span></span> = <span class="vec"><span>5 + 14</span><span>15 + 28</span></span> = <span class="vec"><span>19</span><span>43</span></span></div></div>
+<p>That is column 1 of AB. Column 2 is A·<span class="vec"><span>6</span><span>8</span></span> = <span class="vec"><span>22</span><span>50</span></span>. So every column of AB is a combination of the columns of A.</p>
+<figure class="flow"><div class="frow">
+<div class="fcol"><div class="flab">Output AB</div><div class="fbr"><div class="fv c1"><span>19</span><span>43</span></div><div class="fv c2"><span>22</span><span>50</span></div></div></div>
+<div class="farrow">←</div>
+<div class="fcol"><div class="flab">A: the same two rows each time</div><div class="fbr"><div class="fops"><span class="op">top = 1·top + 2·bottom</span><span class="op">bottom = 3·top + 4·bottom</span></div></div></div>
+<div class="farrow">←</div>
+<div class="fcol"><div class="flab">B: two inputs side by side</div><div class="fbr"><div class="fv c1"><span>5</span><span>7</span></div><div class="fv c2"><span>6</span><span>8</span></div></div></div>
+</div><figcaption>B is just two inputs standing side by side. A works on each one, and the answers stand side by side in AB.</figcaption></figure>
+<h3>One row at a time</h3>
+<p>There is a mirror image of this. Row 1 of AB is row 1 of A times B: take 1 of B's first row plus 2 of B's second row:</p>
+<div class="worked"><div class="row">1·<span class="mx" style="grid-template-columns:repeat(2,auto)"><span>5</span><span>6</span></span> + 2·<span class="mx" style="grid-template-columns:repeat(2,auto)"><span>7</span><span>8</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>19</span><span>22</span></span></div></div>
+<p>All three views add up the same products. Use row times column to compute by hand. Use the column view to understand what AB is.</p>
+<h3>Watch the sizes</h3>
+<p>A row of A must have as many numbers as a column of B, or the dot product doesn't work. So the number of columns of A must equal the number of rows of B:</p>
+<div class="worked"><div class="row">(m × n) · (n × p) → (m × p) &nbsp;&nbsp; the inside numbers match, the outside numbers give the size of AB</div></div>
+<p>A vector is a matrix with one column, so lesson 1's Ax is the case p = 1.</p>
+<h3>Order matters</h3>
+<p>Multiply the same two matrices the other way round:</p>
+<div class="worked"><div class="row">BA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>5</span><span>6</span><span>7</span><span>8</span></span> <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>4</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>23</span><span>34</span><span>31</span><span>46</span></span> &nbsp;&nbsp; but AB = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>19</span><span>22</span><span>43</span><span>50</span></span></div></div>
+<p>Different. With numbers, 3·5 = 5·3. With matrices, usually AB ≠ BA, so always keep the order. Other rules do carry over: (AB)C = A(BC), so the brackets can move, and A(B + C) = AB + AC.</p>
+<h3>A bigger example: 2 × 3 times 3 × 2</h3>
+<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>0</span><span>0</span><span>1</span><span>3</span></span> &nbsp;&nbsp; B = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>2</span><span>1</span><span>0</span><span>4</span></span></div><div class="row">row 1 · column 1 = 1·1 + 2·2 + 0·0 = 5 &nbsp;&nbsp; row 1 · column 2 = 1·0 + 2·1 + 0·4 = 2</div><div class="row">row 2 · column 1 = 0·1 + 1·2 + 3·0 = 2 &nbsp;&nbsp; row 2 · column 2 = 0·0 + 1·1 + 3·4 = 13</div><div class="row">AB = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>5</span><span>2</span><span>2</span><span>13</span></span> &nbsp;&nbsp; (2 × 3) · (3 × 2) → (2 × 2)</div></div>
+<p>Each dot product now has 3 products to add. A neural network layer is one big matrix product like this, with thousands of rows and columns.</p>
+<h3>Where this is used</h3>
+<p>Slide 5 already used it: each elimination step is a matrix, and the whole elimination is their product. The next slide turns that product around into A = LU. Graphics, robotics and machine learning chain matrices the same way.</p>
+<p class="next"><b>Next:</b> elimination turned A into a triangle, U. Recording the steps as a product of matrices gives the factorization A = LU.</p>
+    </div>
+    <h2 class="practice-h">Examples</h2><div class="examples"><section class="example"><h3>Example 1 · Row times column</h3>
+<p>Find AB for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>0</span><span>1</span><span>3</span></span>, B = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>4</span><span>2</span><span>1</span></span>.</p>
+<details class="sol" open><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">row 1 · col 1 = 2·1 + 0·2 = 2 &nbsp;&nbsp; row 1 · col 2 = 2·4 + 0·1 = 8</div><div class="row">row 2 · col 1 = 1·1 + 3·2 = 7 &nbsp;&nbsp; row 2 · col 2 = 1·4 + 3·1 = 7</div><div class="row">AB = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>8</span><span>7</span><span>7</span></span></div></div></div></details>
+</section><section class="example"><h3>Example 2 · Column by column</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>4</span></span>, B = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>1</span><span>1</span></span>. Find AB one column at a time.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">Column 1 = A·<span class="vec"><span>1</span><span>1</span></span> = 1·<span class="vec"><span>1</span><span>3</span></span> + 1·<span class="vec"><span>2</span><span>4</span></span> = <span class="vec"><span>3</span><span>7</span></span></div><div class="row">Column 2 = A·<span class="vec"><span>0</span><span>1</span></span> = column 2 of A = <span class="vec"><span>2</span><span>4</span></span></div><div class="row">AB = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>2</span><span>7</span><span>4</span></span></div></div></div></details>
+</section><section class="example"><h3>Example 3 · Two orders</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>0</span><span>1</span></span>, B = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>1</span><span>1</span></span>.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">AB = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>1</span></span> &nbsp;&nbsp; BA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>2</span></span></div></div><p>Different, so AB ≠ BA here.</p></div></details>
+</section><section class="example"><h3>Example 4</h3>
+<p>A is 3 × 2 and B is 2 × 4. What size is AB? Can you compute BA?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><p>AB is 3 × 4 (the inside 2s match). BA would be (2 × 4)·(3 × 2): the inside numbers 4 and 3 don't match, so BA doesn't exist.</p></div></details>
+</section><section class="example"><h3>Example 5</h3>
+<p>Find only the first column of AB for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>4</span></span> and B = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>1</span><span>1</span></span>.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><p>Column 1 of AB = A times column 1 of B = A·<span class="vec"><span>1</span><span>1</span></span> = <span class="vec"><span>1 + 2</span><span>3 + 4</span></span> = <span class="vec"><span>3</span><span>7</span></span>.</p></div></details>
+</section></div>
+  </article>
+
+  <section class="labsec" aria-label="Lab">
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Multiply A = [[1, 2], [3, 4]] by B = [[0, 1], [1, 0]] in the code, and show A, B and AB with table(). Then look: what did B do to the columns of A?</span>
+      <span class="hint" id="hint">Edit the code and press Run.</span>
+    </div>
+    <div class="lab">
+      <div class="editor-card">
+        <div class="bar">
+          <span class="file">slide_6.py</span>
+          <span class="status" id="pystatus">Loading Python…</span>
+          <button class="btn" id="reset">Reset</button>
+          <button class="btn primary" id="run" disabled>Run ▸</button>
+        </div>
+        <div class="editor">
+          <div class="gutter" id="gutter">1</div>
+          <div class="code" id="codewrap">
+            <pre id="hl" aria-hidden="true"></pre>
+            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+# each inner list is a ROW
+A = np.array([[1, 2],
+              [3, 4]])
+B = np.array([[5, 6],
+              [7, 8]])
+
+# in Python, @ means matrix multiplication: A @ B is AB
+AB = A @ B
+print(&quot;AB =\n&quot;, AB)
+print(&quot;row 1 of A · column 1 of B =&quot;, A[0] @ B[:, 0])
+table((&quot;A&quot;, A), (&quot;B&quot;, B), (&quot;AB&quot;, AB))</textarea>
+          </div>
+        </div>
+        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+      </div>
+      <figure class="figure">
+        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <div class="upsell">
+    <p><b>Enjoying lesson 2?</b> Get the full course: all 8 lessons through the SVD and PCA, your progress saved lesson by lesson, every solution and 5 extra problems per lesson. <span class="nowrap">$20 once, yours for life.</span></p>
+    <button class="btn primary" type="button" data-unlock>See the full course</button>
+  </div>
+
+  <div class="after">
+    <div class="nav">
+      <a class="btn" id="prev" href="../elimination-matrices/">← Back</a>
+      <span class="count">6 / 8</span>
+      <a class="btn primary" id="next" href="../lu-decomposition/">Next →</a>
+    </div>
+  </div>
+</main>
+<section class="comments" aria-label="Comments">
+  <h2>Questions and comments</h2>
+  <p>Stuck on something, or found a mistake? Ask here and I'll answer. You sign in with GitHub.</p>
+  <div id="giscus"></div>
+</section>
+<script>
+(function () {
+  var s = document.createElement("script");
+  s.src = "https://giscus.app/client.js";
+  var a = {"repo": "Steppeschool/linear-algebra-tool", "repo-id": "R_kgDOVYeydQ", "category": "Announcements",
+    "category-id": "DIC_kwDOVYeydc4DJ7vP", "mapping": "specific", "term": location.hostname + location.pathname,
+    "strict": "1", "reactions-enabled": "1", "emit-metadata": "0", "input-position": "top",
+    "theme": "preferred_color_scheme", "lang": "en", "loading": "lazy"};
+  for (var k in a) s.setAttribute("data-" + k, a[k]);
+  s.crossOrigin = "anonymous"; s.async = true;
+  document.getElementById("giscus").appendChild(s);
+})();
+</script>
+<footer class="foot">
+  Follows the order and notation of Professor Gilbert Strang's <i>Introduction to Linear Algebra</i>, 5th edition (2016); § numbers refer to that book.
+  Explanations, examples and code are original. Made by <a href="https://www.steppeschool.com">Steppeschool</a>.
+</footer>
+<dialog class="unlock" id="unlock" aria-labelledby="unlock-h">
+  <form method="dialog"><button class="x" aria-label="Close">×</button></form>
+  <div class="kicker">The full course</div>
+  <h2 id="unlock-h">From Ax = b to PCA, by running it</h2>
+  <p class="sub">Lessons 1 to 3 are free. Finish all eight and you will be able to:</p>
+  <ul class="perks outcomes-list"><li>Solve any system Ax = b, by hand and in NumPy, and say when it has no solution.</li><li>Fit the best line to noisy sensor data with least squares.</li><li>Tell from the eigenvalues whether a system settles down or blows up.</li><li>Compress an image and find the main direction in your data with the SVD and PCA.</li><li>Follow the matrix maths in robotics, control and machine learning.</li></ul>
+  <p class="incl"><b>You get:</b> all 8 lessons with Python labs · every worked example and solution · 5 extra problems per lesson · your progress tracked · answers to your questions · every future update.</p>
+  <div class="price"><b>$20</b> once · lifetime access</div>
+  <a class="btn primary go" href="https://www.steppeschool.com/offers/57ZvEAFX/checkout" target="_blank" rel="noopener">Continue to checkout →</a>
+  <p class="login">Already a member? <a href="https://www.steppeschool.com/login" target="_blank" rel="noopener">Log in to the course</a></p>
+</dialog>
+
+<script>window.SLIDE = {"slug": "matrix-multiplication", "lesson": "lesson-2", "assets": "../../assets/", "preview": {"kind": "table", "items": [{"label": "A", "M": [[1, 2], [3, 4]], "piv": []}, {"label": "B", "M": [[5, 6], [7, 8]], "piv": []}, {"label": "AB", "M": [[19, 22], [43, 50]], "piv": []}]}, "check": "isTab(V) && close(item(V, 'AB'), [[2,1],[4,3]])"};</script>
+<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
+<script src="../../assets/lab.js" defer></script>
+<script src="../../assets/nav.js" defer></script>
+<script src="../../assets/figs.js" defer></script>
+</body>
+</html>

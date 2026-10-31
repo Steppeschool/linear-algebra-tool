@@ -5,7 +5,7 @@
     <div class="kicker">Strang §2.2 · The idea of elimination</div>
     <h1>Elimination knocks out one unknown at a time.</h1>
     <p class="lead">Elimination is how computers solve linear equations. Subtract a multiple of one equation from another so that one unknown disappears. Repeat until you can read off the answer.</p>
-    </div><span class="thumb slide-art"><img src="https://linearalgebra.steppeschool.com/assets/cards/lesson-2--gaussian-elimination.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 2 · slide 1</small>Elimination</span></span></div>
+    </div><span class="thumb slide-art"><img src="https://linearalgebra.steppeschool.com/assets/cards/lesson-2--gaussian-elimination.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 2 · slide 2</small>Elimination</span></span></div>
     <div class="key">x − 2y = 1 &nbsp;&nbsp; 3x + 2y = 11 &nbsp;&nbsp;→&nbsp;&nbsp; 8y = 8</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>The <b>pivot</b> is the first coefficient of the equation we subtract with (equation 1; here the 1 in 1x). We use it to remove x from the equations below.</li><li>The <b>multiplier</b> is ℓ = (entry to remove) ÷ (pivot). In code we write ℓ as l.</li><li>Subtracting ℓ times one equation from another keeps the same solution.</li><li>When one unknown is left in the last equation, we solve it and work back up: <b>back substitution</b>.</li></ol></div>
     <div class="prose">
@@ -13,7 +13,7 @@
 <p>A coffee and a croissant cost €5. A coffee and two croissants cost €7. What does a croissant cost?</p>
 <p>The second order has one more croissant and costs €2 more. So a croissant is €2 and the coffee is €3. You just subtracted one equation from the other, and the coffee disappeared. That is elimination.</p>
 <h3>The same idea, step by step</h3>
-<p>Take Strang's first system from lesson 1: x − 2y = 1 and 3x + 2y = 11.</p>
+<p>Take Strang's first system from slide 1: x − 2y = 1 and 3x + 2y = 11.</p>
 <ul>
 <li>Equation 1 starts with 1x. That 1 is the <b>pivot</b>. It clears the x below.</li>
 <li>Equation 2 has 3x, so we need 3 copies of equation 1. That 3 is the <b>multiplier</b>, ℓ = 3 ÷ 1 = 3.</li>
@@ -59,7 +59,7 @@
     <div class="lab">
       <div class="editor-card">
         <div class="bar">
-          <span class="file">slide_1.py</span>
+          <span class="file">slide_2.py</span>
           <span class="status" id="pystatus">Loading Python…</span>
           <button class="btn" id="reset">Reset</button>
           <button class="btn primary" id="run" disabled>Run ▸</button>

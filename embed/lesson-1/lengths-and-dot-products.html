@@ -1,0 +1,90 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="robots" content="noindex"></head><body>
+<main class="lesson">
+  <article class="page">
+    <div class="slide-head"><div>
+    <div class="kicker">Strang §1.2 · Lengths and dot products</div>
+    <h1>Length and the dot product</h1>
+    <p class="lead">Slide 1 built vectors by stretching and adding. Now we measure them. The <b>dot product</b> takes two vectors and gives back one number: multiply the matching parts, then add. For <span class="vec"><span>2</span><span>1</span></span> and <span class="vec"><span>3</span><span>4</span></span> that is 2·3 + 1·4 = 10. This one number answers two everyday questions: how long is an arrow, and do two arrows meet at a right angle? It is also the small calculation inside every matrix product, which is the next slide.</p>
+    </div><span class="thumb slide-art"><img src="https://linearalgebra.steppeschool.com/assets/cards/recap.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 1 · slide 2</small>Dot product</span></span></div>
+    <div class="key">v · w = v₁w₁ + v₂w₂ &nbsp;&nbsp;&nbsp; length ‖v‖ = √(v · v)</div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>v · w: multiply matching parts and add. The answer is a number, not a vector.</li><li>Length: ‖v‖ = √(v · v). For <span class="vec"><span>3</span><span>4</span></span> it is √25 = 5.</li><li>v · w = 0 means v and w meet at a right angle (they are <b>perpendicular</b>).</li><li>A <b>unit vector</b> has length 1. Divide any vector by its length to get one.</li></ol></div>
+    <div class="prose">
+<h3>Multiply matching parts, then add</h3>
+<p>Line the two vectors up. Multiply the first parts, multiply the second parts, and add the results:</p>
+<div class="worked"><div class="row">v = <span class="vec"><span>2</span><span>1</span></span>, &nbsp; w = <span class="vec"><span>3</span><span>4</span></span> &nbsp;→&nbsp; v · w = 2·3 + 1·4 = 6 + 4 = 10</div></div>
+<p>The order doesn't matter: w · v is also 10. Vectors with more parts work the same way, with more products to add:</p>
+<div class="worked"><div class="row"><span class="vec"><span>1</span><span>2</span><span>3</span></span> · <span class="vec"><span>4</span><span>5</span><span>6</span></span> = 1·4 + 2·5 + 3·6 = 4 + 10 + 18 = 32</div></div>
+<h3>Length</h3>
+<p>Dot a vector with itself. For v = <span class="vec"><span>3</span><span>4</span></span>, v · v = 3·3 + 4·4 = 25. That is the length squared. Why? The arrow is the long side of a right triangle whose other sides are 3 and 4, and Pythagoras says 3² + 4² = 5². So the length is</p>
+<div class="worked"><div class="row">‖v‖ = √(v · v) = √25 = 5</div></div>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"length","v":[3,4],"view":[-1,5,-1,5]}'></div><figcaption>Walk 3 across and 4 up. The straight arrow from start to end has length √(9 + 16) = 5.</figcaption></figure>
+<p>In 3D, add one more square: ‖<span class="vec"><span>1</span><span>2</span><span>2</span></span>‖ = √(1 + 4 + 4) = √9 = 3. A vector with length 1 is called a <b>unit vector</b>. To make one, divide v by its length: <span class="vec"><span>3</span><span>4</span></span> / 5 = <span class="vec"><span>0.6</span><span>0.8</span></span>.</p>
+<h3>Zero means a right angle</h3>
+<p><span class="vec"><span>2</span><span>1</span></span> · <span class="vec"><span>−1</span><span>2</span></span> = −2 + 2 = 0. Draw the two arrows and they meet at a right angle. That is always true: <b>v · w = 0 exactly when v and w are perpendicular</b>.</p>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"dotangle","v":[2,1],"r":2.2,"from":0.2,"view":[-3.5,3.5,-3,3],"dur":12000}'></div><figcaption>w turns all the way around v. The dot product is positive while w points to the same side as v, zero at the two right angles, and negative while w points away.</figcaption></figure>
+<p>The sign tells you more. Positive: the arrows point roughly the same way (angle under 90°). Negative: they point roughly opposite ways (angle over 90°). Strang turns this into an exact rule for the angle, v · w = ‖v‖ ‖w‖ cos θ, which lesson 5 uses.</p>
+<h3>A bigger example: a shopping bill</h3>
+<p>Bread costs 2 euros, milk 1 and apples 3. You buy 1 bread, 4 milk and 2 apples. Prices p = <span class="vec"><span>2</span><span>1</span><span>3</span></span> and amounts q = <span class="vec"><span>1</span><span>4</span><span>2</span></span>. The bill is one dot product:</p>
+<div class="worked"><div class="row">p · q = 2·1 + 1·4 + 3·2 = 2 + 4 + 6 = 12 euros</div></div>
+<p>A shop with 5,000 products does exactly the same thing, with 5,000 products to add.</p>
+<p class="next"><b>Next:</b> Each row of a matrix, dotted with a vector, gives one number. Do that for every row and you have multiplied a matrix by a vector.</p>
+    </div>
+    <h2 class="practice-h">Examples</h2><div class="examples"><section class="example"><h3>Example 1 · A negative dot product</h3>
+<p>Find <span class="vec"><span>1</span><span>−2</span></span> · <span class="vec"><span>3</span><span>4</span></span>. What does the sign say?</p>
+<details class="sol" open><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">1·3 + (−2)·4 = 3 − 8 = −5</div></div><p>Negative, so the angle between the arrows is more than 90°.</p></div></details>
+</section><section class="example"><h3>Example 2 · Length and unit vector</h3>
+<p>Find the length of v = <span class="vec"><span>6</span><span>8</span></span> and the unit vector in its direction.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">‖v‖ = √(36 + 64) = √100 = 10</div><div class="row">v / 10 = <span class="vec"><span>0.6</span><span>0.8</span></span>, and √(0.36 + 0.64) = 1 ✓</div></div></div></details>
+</section><section class="example"><h3>Example 3 · Make a right angle</h3>
+<p>Find c so that <span class="vec"><span>1</span><span>c</span></span> is perpendicular to <span class="vec"><span>4</span><span>2</span></span>.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row"><span class="vec"><span>1</span><span>c</span></span> · <span class="vec"><span>4</span><span>2</span></span> = 4 + 2c = 0 &nbsp;→&nbsp; c = −2</div></div><p>So <span class="vec"><span>1</span><span>−2</span></span> meets <span class="vec"><span>4</span><span>2</span></span> at a right angle.</p></div></details>
+</section><section class="example"><h3>Example 4</h3>
+<p>Are <span class="vec"><span>1</span><span>2</span><span>3</span></span> and <span class="vec"><span>3</span><span>0</span><span>−1</span></span> perpendicular?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><p>1·3 + 2·0 + 3·(−1) = 3 + 0 − 3 = 0. Yes, they meet at a right angle.</p></div></details>
+</section><section class="example"><h3>Example 5</h3>
+<p>Show that <span class="vec"><span>3</span><span>4</span></span> and <span class="vec"><span>4</span><span>−3</span></span> are perpendicular and have the same length.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><p><span class="vec"><span>3</span><span>4</span></span> · <span class="vec"><span>4</span><span>−3</span></span> = 12 − 12 = 0, so they are perpendicular. Both lengths are √(9 + 16) = 5.</p></div></details>
+</section></div>
+  </article>
+
+  <section class="labsec" aria-label="Lab">
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Change w so that it makes a right angle with v = (2, 1). The readout under the picture should show v · w = 0.</span>
+      <span class="hint" id="hint">Edit the code and press Run.</span>
+    </div>
+    <div class="lab">
+      <div class="editor-card">
+        <div class="bar">
+          <span class="file">slide_2.py</span>
+          <span class="status" id="pystatus">Loading Python…</span>
+          <button class="btn" id="reset">Reset</button>
+          <button class="btn primary" id="run" disabled>Run ▸</button>
+        </div>
+        <div class="editor">
+          <div class="gutter" id="gutter">1</div>
+          <div class="code" id="codewrap">
+            <pre id="hl" aria-hidden="true"></pre>
+            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+v = np.array([2, 1])
+w = np.array([-1, 3])     # change w
+
+# @ between two vectors is the dot product
+print(&quot;v · w =&quot;, v @ w)
+print(&quot;length of v =&quot;, np.linalg.norm(v))
+vectors((&quot;v&quot;, v), (&quot;w&quot;, w))</textarea>
+          </div>
+        </div>
+        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+      </div>
+      <figure class="figure">
+        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+      </figure>
+    </div>
+  </section>
+</main>
+<script type="application/json" id="la-config">{"slug": "lengths-and-dot-products", "lesson": "lesson-1", "assets": "../../assets/", "preview": {"kind": "arrows", "chain": false, "items": [{"label": "v", "v": [2, 1]}, {"label": "w", "v": [-1, 3]}]}, "check": "isA(V) && !V.chain && V.items.length >= 2 && Math.hypot(...V.items[1].v) > 0.1 && near(V.items[0].v[0] * V.items[1].v[0] + V.items[0].v[1] * V.items[1].v[1], 0)"}</script>
+</body></html>

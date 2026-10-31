@@ -4,22 +4,28 @@
     <div class="slide-head"><div>
     <div class="kicker">Strang §1.3 · Matrices</div>
     <h1>Multiplying a matrix by a vector</h1>
-    <p class="lead">Slide 1 ended with long sums like c(2, 1) + d(−1, 1). A matrix is the short way to write them. Think of the matrix A as a list of allowed steps, one step in each column. The vector x says how many of each step to take. Then Ax is where you end up. So Ax is nothing new: it is slide 1's combination, written in two letters.</p>
-    </div><span class="thumb slide-art"><img src="https://linearalgebra.steppeschool.com/assets/cards/lesson-1--matrix-vector-multiplication.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 1 · slide 2</small>Matrix times vector</span></span></div>
+    <p class="lead">A matrix is a table of numbers, in rows and columns. To multiply it by a vector x, there are two ways, and they always give the same answer. <b>By rows</b>: dot each row of A with x (slide 2), and each dot product gives one number of the answer. <b>By columns</b>: take x₁ of column 1, plus x₂ of column 2, a linear combination like on slide 1. Rows are the quick way to compute. Columns are the way to understand what Ax can be.</p>
+    </div><span class="thumb slide-art"><img src="https://linearalgebra.steppeschool.com/assets/cards/lesson-1--matrix-vector-multiplication.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 1 · slide 3</small>Matrix times vector</span></span></div>
     <div class="key"><span class="mx"><span class="c1">a₁₁</span><span class="c2">a₁₂</span><span class="c1">a₂₁</span><span class="c2">a₂₂</span></span> <span class="vec "><span>x₁</span><span>x₂</span></span> = x₁ <span class="vec i"><span>a₁₁</span><span>a₂₁</span></span> + x₂ <span class="vec j"><span>a₁₂</span><span>a₂₂</span></span></div>
-    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>A matrix is a block of numbers. Its columns are vectors.</li><li><b>Ax is a combination of the columns of A</b>, with the entries of x as the weights.</li><li>Each entry of Ax is also a <b>dot product</b> of a row of A with x: multiply matching entries and add. Both ways give the same numbers.</li><li>Columns tell us what Ax means. Rows are how we usually compute it by hand.</li></ol></div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li><b>Row way:</b> entry i of Ax is row i of A dotted with x.</li><li><b>Column way:</b> Ax = x₁·(column 1) + x₂·(column 2), a combination of the columns.</li><li>Both ways add up the same products, so they always agree.</li><li>x needs one number per column of A. Ax has one number per row of A.</li></ol></div>
     <div class="prose">
-<h3>From combinations to matrices</h3>
-<p>Writing out c(2, 1) + d(−1, 1) every time gets long. So we put the vectors in the columns of a matrix A, and c and d in a vector x:</p>
-<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>−1</span><span>1</span><span>1</span></span> &nbsp;&nbsp; x = <span class="vec"><span>c</span><span>d</span></span> &nbsp;&nbsp; Ax = c·<span class="vec"><span>2</span><span>1</span></span> + d·<span class="vec"><span>−1</span><span>1</span></span></div></div>
-<p><span class="vec"><span>2</span><span>1</span></span> is written across to save space, but it still means a column: 2 on top, 1 below.</p>
-<p>a<sub>ij</sub> is the entry in row i, column j, so a₁₂ is in row 1, column 2. And x = <span class="vec"><span>x₁</span><span>x₂</span></span>: x₁ is the c and x₂ is the d from slide 1.</p>
-<p>The definition: <b>Ax is <span class="i">x₁ times column 1</span>, plus <span class="j">x₂ times column 2</span></b>. The colours match the arrows in the lab below.</p>
+<h3>One example, two ways</h3>
+<p>Take</p>
+<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>−1</span><span>1</span><span>1</span></span> &nbsp;&nbsp; x = <span class="vec"><span>3</span><span>1</span></span></div></div>
+<p><b>Way 1, by rows.</b> Each row of A is dotted with x. Row 1 gives the top number of the answer, row 2 the bottom number:</p>
+<div class="worked"><div class="row">row 1: <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>−1</span></span> · <span class="vec"><span>3</span><span>1</span></span> = 2·3 + (−1)·1 = 6 − 1 = 5</div><div class="row">row 2: <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span></span> · <span class="vec"><span>3</span><span>1</span></span> = 1·3 + 1·1 = 3 + 1 = 4</div><div class="row">Ax = <span class="vec"><span>5</span><span>4</span></span></div></div>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"matvec","A":[[2,-1],[1,1]],"x":[3,1],"view":[0,11,0,3.4]}'></div><figcaption>By rows: the highlighted row meets x, and their dot product fills one number of the answer.</figcaption></figure>
+<p><b>Way 2, by columns.</b> x = <span class="vec"><span>3</span><span>1</span></span> says: take 3 of column 1 and 1 of column 2, and add:</p>
+<div class="worked"><div class="row">Ax = <span class="i">3·<span class="vec"><span>2</span><span>1</span></span></span> + <span class="j">1·<span class="vec"><span>−1</span><span>1</span></span></span> = <span class="vec"><span>6</span><span>3</span></span> + <span class="vec"><span>−1</span><span>1</span></span> = <span class="vec"><span>5</span><span>4</span></span></div></div>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"matvec","mode":"cols","A":[[2,-1],[1,1]],"x":[3,1],"view":[0,11,0,3.4]}'></div><figcaption>By columns: each number of x scales its column, and the scaled columns add up to Ax.</figcaption></figure>
+<p>Same answer, <span class="vec"><span>5</span><span>4</span></span>. It has to be: both ways add the same four products, just in a different order. On the plane, the column way is a walk: 3 steps of <span class="vec"><span>2</span><span>1</span></span>, then 1 step of <span class="vec"><span>−1</span><span>1</span></span>.</p>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"cols","a1":[2,1],"a2":[-1,1],"x":[3,1],"b":[5,4],"bname":"Ax","view":[-2,8.5,-1,5]}'></div><figcaption>The column way as a walk: 3 of column 1, then 1 of column 2, ends at Ax = <span class="vec"><span>5</span><span>4</span></span>.</figcaption></figure>
+<p>A note on writing: a<sub>ij</sub> is the entry in row i, column j, so a₁₂ is in row 1, column 2. And <span class="vec"><span>3</span><span>1</span></span> is written across to save space, but a vector is always a column: 3 on top, 1 below.</p>
 <h3>An everyday picture: a shopping basket</h3>
 <p>An egg has about 6 g of protein and 1 g of carbohydrate. A bowl of rice has about 4 g and 45 g. Each food is a column:</p>
 <div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>6</span><span>4</span><span>1</span><span>45</span></span> &nbsp;&nbsp; x = (2 eggs, 1 bowl)</div></div>
-<p>The basket holds <span class="i">2·<span class="vec"><span>6</span><span>1</span></span></span> + <span class="j">1·<span class="vec"><span>4</span><span>45</span></span></span> = <span class="vec"><span>16</span><span>47</span></span>: 16 g of protein, 47 g of carbohydrate. That total is Ax. Adding whole foods is the column way.</p>
-<h3>The row way gives the same answer</h3>
+<p>The basket holds <span class="i">2·<span class="vec"><span>6</span><span>1</span></span></span> + <span class="j">1·<span class="vec"><span>4</span><span>45</span></span></span> = <span class="vec"><span>16</span><span>47</span></span>: 16 g of protein, 47 g of carbohydrate. That total is Ax. Adding whole foods, one column at a time, is the column way.</p>
+<h3>The basket by rows</h3>
 <p>Or add one nutrient at a time. Protein: 6·2 + 4·1 = 16. Carbohydrate: 1·2 + 45·1 = 47. Each is a <b>dot product</b> of a row of A with x.</p>
 <figure class="flow"><div class="frow">
 <div class="fcol"><div class="flab">Output Ax</div><div class="fbr"><div class="fv c1"><span><b>16</b> g protein</span><span><b>47</b> g carbs</span></div></div></div>
@@ -46,7 +52,7 @@
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">Ax = 2·<span class="vec"><span>1</span><span>3</span></span> + 1·<span class="vec"><span>0</span><span>1</span></span> + 1·<span class="vec"><span>2</span><span>1</span></span> = <span class="vec"><span>4</span><span>8</span></span></div></div><p>Three columns in, a vector with 2 entries out: one per row of A.</p></div></details>
 </section><section class="example"><h3>Example 3 · Picking out a column</h3>
 <p>What is A times x = <span class="vec"><span>1</span><span>0</span></span>? And times <span class="vec"><span>0</span><span>1</span></span>?</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">A<span class="vec"><span>1</span><span>0</span></span> = 1·(column 1) + 0·(column 2) = column 1</div><div class="row">A<span class="vec"><span>0</span><span>1</span></span> = column 2</div></div><p>So the columns of A are exactly what A does to <span class="vec"><span>1</span><span>0</span></span> and <span class="vec"><span>0</span><span>1</span></span>. We use this again on slide 5.</p></div></details>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">A<span class="vec"><span>1</span><span>0</span></span> = 1·(column 1) + 0·(column 2) = column 1</div><div class="row">A<span class="vec"><span>0</span><span>1</span></span> = column 2</div></div><p>So the columns of A are exactly what A does to <span class="vec"><span>1</span><span>0</span></span> and <span class="vec"><span>0</span><span>1</span></span>. We use this again in lesson 6, where a matrix moves the whole plane.</p></div></details>
 </section><section class="example"><h3>Example 4</h3>
 <p>Which x makes Ax equal to column 2 of A? Which x gives column 1 + column 2?</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><p>x = <span class="vec"><span>0</span><span>1</span></span> picks out column 2. x = <span class="vec"><span>1</span><span>1</span></span> gives column 1 + column 2.</p></div></details>
@@ -65,7 +71,7 @@
     <div class="lab">
       <div class="editor-card">
         <div class="bar">
-          <span class="file">slide_2.py</span>
+          <span class="file">slide_3.py</span>
           <span class="status" id="pystatus">Loading Python…</span>
           <button class="btn" id="reset">Reset</button>
           <button class="btn primary" id="run" disabled>Run ▸</button>
@@ -85,7 +91,7 @@ b = np.array([0, 3])
 
 # Python counts from 0: A[0] is row 1, A[:, 0] is column 1
 # @ multiplies; for two vectors like A[0] @ x it gives the dot product
-# (slide 6 uses @ to multiply two matrices)
+# (lesson 2 uses @ to multiply two matrices)
 row_way = np.array([A[0] @ x, A[1] @ x])      # dot products with the rows
 col_way = x[0] * A[:, 0] + x[1] * A[:, 1]      # combination of the columns
 print(&quot;row way:   &quot;, row_way)

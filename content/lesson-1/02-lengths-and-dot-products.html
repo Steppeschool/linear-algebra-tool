@@ -1,0 +1,75 @@
+---
+slug: lengths-and-dot-products
+seo_title: Dot Product and Vector Length, Explained Simply
+description: What the dot product v · w means, how to compute it, how the length of a vector comes from it, and why a zero dot product means a right angle. Python in your browser. Strang §1.2.
+kicker: Strang §1.2 · Lengths and dot products
+title: Length and the dot product
+task: Change w so that it makes a right angle with v = (2, 1). The readout under the picture should show v · w = 0.
+preview: {"kind":"arrows","chain":false,"items":[{"label":"v","v":[2,1]},{"label":"w","v":[-1,3]}]}
+check: isA(V) && !V.chain && V.items.length >= 2 && Math.hypot(...V.items[1].v) > 0.1 && near(V.items[0].v[0] * V.items[1].v[0] + V.items[0].v[1] * V.items[1].v[1], 0)
+---
+<!-- lead -->
+Slide 1 built vectors by stretching and adding. Now we measure them. The <b>dot product</b> takes two vectors and gives back one number: multiply the matching parts, then add. For (2, 1) and (3, 4) that is 2·3 + 1·4 = 10. This one number answers two everyday questions: how long is an arrow, and do two arrows meet at a right angle? It is also the small calculation inside every matrix product, which is the next slide.
+<!-- key -->
+v · w = v₁w₁ + v₂w₂ &nbsp;&nbsp;&nbsp; length ‖v‖ = √(v · v)
+<!-- ideas -->
+<ol class="ideas"><li>v · w: multiply matching parts and add. The answer is a number, not a vector.</li><li>Length: ‖v‖ = √(v · v). For (3, 4) it is √25 = 5.</li><li>v · w = 0 means v and w meet at a right angle (they are <b>perpendicular</b>).</li><li>A <b>unit vector</b> has length 1. Divide any vector by its length to get one.</li></ol>
+<!-- prose -->
+<h3>Multiply matching parts, then add</h3>
+<p>Line the two vectors up. Multiply the first parts, multiply the second parts, and add the results:</p>
+<div class="worked"><div class="row">v = (2, 1), &nbsp; w = (3, 4) &nbsp;→&nbsp; v · w = 2·3 + 1·4 = 6 + 4 = 10</div></div>
+<p>The order doesn't matter: w · v is also 10. Vectors with more parts work the same way, with more products to add:</p>
+<div class="worked"><div class="row">(1, 2, 3) · (4, 5, 6) = 1·4 + 2·5 + 3·6 = 4 + 10 + 18 = 32</div></div>
+<h3>Length</h3>
+<p>Dot a vector with itself. For v = (3, 4), v · v = 3·3 + 4·4 = 25. That is the length squared. Why? The arrow is the long side of a right triangle whose other sides are 3 and 4, and Pythagoras says 3² + 4² = 5². So the length is</p>
+<div class="worked"><div class="row">‖v‖ = √(v · v) = √25 = 5</div></div>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"length","v":[3,4],"view":[-1,5,-1,5]}'></div><figcaption>Walk 3 across and 4 up. The straight arrow from start to end has length √(9 + 16) = 5.</figcaption></figure>
+<p>In 3D, add one more square: ‖(1, 2, 2)‖ = √(1 + 4 + 4) = √9 = 3. A vector with length 1 is called a <b>unit vector</b>. To make one, divide v by its length: (3, 4) / 5 = (0.6, 0.8).</p>
+<h3>Zero means a right angle</h3>
+<p>(2, 1) · (−1, 2) = −2 + 2 = 0. Draw the two arrows and they meet at a right angle. That is always true: <b>v · w = 0 exactly when v and w are perpendicular</b>.</p>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"dotangle","v":[2,1],"r":2.2,"from":0.2,"view":[-3.5,3.5,-3,3],"dur":12000}'></div><figcaption>w turns all the way around v. The dot product is positive while w points to the same side as v, zero at the two right angles, and negative while w points away.</figcaption></figure>
+<p>The sign tells you more. Positive: the arrows point roughly the same way (angle under 90°). Negative: they point roughly opposite ways (angle over 90°). Strang turns this into an exact rule for the angle, v · w = ‖v‖ ‖w‖ cos θ, which lesson 5 uses.</p>
+<h3>A bigger example: a shopping bill</h3>
+<p>Bread costs 2 euros, milk 1 and apples 3. You buy 1 bread, 4 milk and 2 apples. Prices p = (2, 1, 3) and amounts q = (1, 4, 2). The bill is one dot product:</p>
+<div class="worked"><div class="row">p · q = 2·1 + 1·4 + 3·2 = 2 + 4 + 6 = 12 euros</div></div>
+<p>A shop with 5,000 products does exactly the same thing, with 5,000 products to add.</p>
+<p class="next"><b>Next:</b> Each row of a matrix, dotted with a vector, gives one number. Do that for every row and you have multiplied a matrix by a vector.</p>
+<!-- examples -->
+<section class="example"><h3>Example 1 · A negative dot product</h3>
+<p>Find (1, −2) · (3, 4). What does the sign say?</p><div class="worked"><div class="row">1·3 + (−2)·4 = 3 − 8 = −5</div></div><p>Negative, so the angle between the arrows is more than 90°.</p>
+</section>
+<section class="example"><h3>Example 2 · Length and unit vector</h3>
+<p>Find the length of v = (6, 8) and the unit vector in its direction.</p><div class="worked"><div class="row">‖v‖ = √(36 + 64) = √100 = 10</div><div class="row">v / 10 = (0.6, 0.8), and √(0.36 + 0.64) = 1 ✓</div></div>
+</section>
+<section class="example"><h3>Example 3 · Make a right angle</h3>
+<p>Find c so that (1, c) is perpendicular to (4, 2).</p><div class="worked"><div class="row">(1, c) · (4, 2) = 4 + 2c = 0 &nbsp;→&nbsp; c = −2</div></div><p>So (1, −2) meets (4, 2) at a right angle.</p>
+</section>
+<!-- problems -->
+<div class="problem"><span class="pnum">1</span><div class="pbody">
+<p>Are (1, 2, 3) and (3, 0, −1) perpendicular?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>1·3 + 2·0 + 3·(−1) = 3 + 0 − 3 = 0. Yes, they meet at a right angle.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">2</span><div class="pbody">
+<p>Find the length of (2, 3, 6).</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>√(4 + 9 + 36) = √49 = 7.</p>
+</div></details>
+</div></div>
+<div class="problem"><span class="pnum">3</span><div class="pbody">
+<p>Show that (3, 4) and (4, −3) are perpendicular and have the same length.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
+<p>(3, 4) · (4, −3) = 12 − 12 = 0, so they are perpendicular. Both lengths are √(9 + 16) = 5.</p>
+</div></details>
+</div></div>
+<!-- code -->
+import numpy as np
+
+v = np.array([2, 1])
+w = np.array([-1, 3])     # change w
+
+# @ between two vectors is the dot product
+print("v · w =", v @ w)
+print("length of v =", np.linalg.norm(v))
+vectors(("v", v), ("w", w))

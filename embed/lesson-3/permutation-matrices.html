@@ -22,7 +22,7 @@
 <h3>How many are there?</h3>
 <ul>
 <li>n rows can be ordered in n! ways. So there are 6 permutation matrices of size 3, counting I.</li>
-<li>In the plane the only exchange is <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>1</span><span>0</span></span>. It is the mirror across the line y = x from lesson 1, with det = −1.</li>
+<li>In the plane the only exchange is <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>1</span><span>0</span></span>. It swaps x and y, a mirror across the line y = x. Its determinant (slide 2) is 0·0 − 1·1 = −1.</li>
 </ul>
 <h3>Back to elimination</h3>
 <p>In lesson 2, a zero pivot meant exchanging rows. If A is invertible, do all the exchanges first, with one permutation P. Then elimination never meets a zero pivot, and PA = LU. NumPy and other solvers compute this form. They pick the exchanges so each pivot is as large as possible.</p>
@@ -41,7 +41,7 @@
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><p>3! = 6. Four are their own inverse: I and the three single swaps. The other two, the orders 2, 3, 1 and 3, 1, 2, undo each other.</p></div></details>
 </section><section class="example"><h3>Example 5</h3>
 <p>What is the determinant of the 2 by 2 swap <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>1</span><span>0</span></span>, the mirror on y = x? Preview of the determinants lesson: what do you expect for a swap of two rows of a larger I?</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><p>−1: 0·0 − 1·1 = −1. A mirror keeps areas the same, so the size is 1, and it flips the plane over, so the sign is minus. Preview: a swap of two rows in any size is still a mirror, and the determinants lesson will show its determinant is also −1.</p></div></details>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><p>−1: 0·0 − 1·1 = −1, by slide 2's ad − bc. Preview: the determinants lesson shows why. A mirror keeps areas the same, so the size is 1, and it flips the plane over, so the sign is minus. A swap of two rows in any size is still a mirror, with determinant −1.</p></div></details>
 </section></div>
   </article>
 

@@ -17,7 +17,8 @@
 <div class="worked"><div class="row"><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>a</span><span>b</span><span>c</span><span>d</span></span><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>d</span><span>−b</span><span>−c</span><span>a</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>ad − bc</span><span>−ab + ba</span><span>cd − dc</span><span>−cb + da</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>ad − bc</span><span>0</span><span>0</span><span>ad − bc</span></span></div><div class="row">= (ad − bc) I</div></div>
 <p>The off-diagonal entries cancel. Both diagonal entries are ad − bc. So the product is ad − bc times I. Divide by ad − bc and you get I.</p>
 <h3>When ad − bc = 0</h3>
-<p>The number ad − bc is det A from lesson 1. If it is 0, A squashes the plane onto a line. No matrix can turn a line back into a plane, and the formula would divide by zero. So there is no inverse.</p>
+<p>The number ad − bc is called the <b>determinant</b> of A, written det A. It is the one number that decides whether a 2 by 2 matrix has an inverse. If ad − bc ≠ 0, the formula works. If ad − bc = 0, the formula would divide by zero, and there is no inverse.</p>
+<p>What does det A = 0 look like? Then ad = bc, and the columns <span class="vec"><span>a</span><span>c</span></span> and <span class="vec"><span>b</span><span>d</span></span> lie on one line: one is a multiple of the other. That is lesson 1's dependent case. Two different inputs give the same output, so nothing can undo A. Lesson 6 shows what the determinant measures in pictures: how much A stretches areas.</p>
 <h3>A worked example</h3>
 <div class="worked">
 <div>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>5</span><span>3</span></span> &nbsp; det A = 2·3 − 1·5 = 1</div>
@@ -31,7 +32,7 @@
 <li>Forgetting to divide by det A. The example hides this, since det A = 1.</li>
 </ul>
 <h3>Bigger matrices</h3>
-<p>Bigger matrices have a formula too (Strang, chapter 5), but it is far too slow to use. In practice the inverse comes from elimination (slide 4).</p>
+<p>Bigger matrices have a formula too (lesson 6, Strang chapter 5), but it is far too slow to use. In practice the inverse comes from elimination (slide 4).</p>
     </div>
     <h2 class="practice-h">Examples</h2><div class="examples"><section class="example"><h3>Example 1 · Determinant 1</h3>
 <p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>3</span><span>1</span><span>2</span></span>, det A = 4 − 3 = 1.</p>

@@ -1,0 +1,112 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="robots" content="noindex"></head><body>
+<main class="lesson">
+  <article class="page">
+    <div class="slide-head"><div>
+    <div class="kicker">Strang §2.4 · Rules for matrix operations</div>
+    <h1>Multiplying two matrices</h1>
+    <p class="lead">Lesson 1 multiplied a matrix by a vector. Now multiply a matrix by a matrix. The idea is simple: B is just a few vectors standing side by side, its columns. Multiply A by each column of B, and stand the answers side by side. That is AB. To get any single number in AB, take a row of A and a column of B and find their dot product. Same rules as lesson 1, done several times.</p>
+    </div><span class="thumb slide-art"><img src="https://linearalgebra.steppeschool.com/assets/cards/lesson-2--matrix-multiplication.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 2 · slide 6</small>Matrix times matrix</span></span></div>
+    <div class="key">(AB)<sub>ij</sub> = (row i of A) · (column j of B) &nbsp;&nbsp;&nbsp; AB = [ Ab₁ &nbsp; Ab₂ ]</div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li><b>One entry:</b> the number in row i, column j of AB is row i of A dotted with column j of B.</li><li><b>One column:</b> column j of AB is A times column j of B, a combination of the columns of A.</li><li><b>Sizes:</b> (m × n) times (n × p) gives m × p. The inside numbers must match.</li><li><b>Order matters:</b> usually AB ≠ BA.</li></ol></div>
+    <div class="prose">
+<h3>One number at a time: row times column</h3>
+<p>Take</p>
+<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>4</span></span> &nbsp;&nbsp; B = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>5</span><span>6</span><span>7</span><span>8</span></span></div></div>
+<p>The top-left number of AB comes from row 1 of A and column 1 of B. Multiply matching parts and add, a dot product (lesson 1, slide 2):</p>
+<div class="worked"><div class="row">row 1 · column 1 = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span></span> · <span class="vec"><span>5</span><span>7</span></span> = 1·5 + 2·7 = 5 + 14 = 19</div></div>
+<p>Do the same for every pair. Row i and column j make the number in row i, column j:</p>
+<div class="worked"><div class="row">row 1 · column 2 = 1·6 + 2·8 = 22</div><div class="row">row 2 · column 1 = 3·5 + 4·7 = 43</div><div class="row">row 2 · column 2 = 3·6 + 4·8 = 50</div><div class="row">AB = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>19</span><span>22</span><span>43</span><span>50</span></span></div></div>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"matmul","A":[[1,2],[3,4]],"B":[[5,6],[7,8]],"view":[0,11,0,3.4]}'></div><figcaption>The highlighted row of A meets the highlighted column of B. Their dot product fills one number of AB.</figcaption></figure>
+<h3>One column at a time: A times each column of B</h3>
+<p>Now look at a whole column of AB. Column 1 of AB is just A times column 1 of B, a matrix times a vector, exactly as in lesson 1. By columns:</p>
+<div class="worked"><div class="row">A·<span class="vec"><span>5</span><span>7</span></span> = <span class="i">5·<span class="vec"><span>1</span><span>3</span></span></span> + <span class="j">7·<span class="vec"><span>2</span><span>4</span></span></span> = <span class="vec"><span>5 + 14</span><span>15 + 28</span></span> = <span class="vec"><span>19</span><span>43</span></span></div></div>
+<p>That is column 1 of AB. Column 2 is A·<span class="vec"><span>6</span><span>8</span></span> = <span class="vec"><span>22</span><span>50</span></span>. So every column of AB is a combination of the columns of A.</p>
+<figure class="flow"><div class="frow">
+<div class="fcol"><div class="flab">Output AB</div><div class="fbr"><div class="fv c1"><span>19</span><span>43</span></div><div class="fv c2"><span>22</span><span>50</span></div></div></div>
+<div class="farrow">←</div>
+<div class="fcol"><div class="flab">A: the same two rows each time</div><div class="fbr"><div class="fops"><span class="op">top = 1·top + 2·bottom</span><span class="op">bottom = 3·top + 4·bottom</span></div></div></div>
+<div class="farrow">←</div>
+<div class="fcol"><div class="flab">B: two inputs side by side</div><div class="fbr"><div class="fv c1"><span>5</span><span>7</span></div><div class="fv c2"><span>6</span><span>8</span></div></div></div>
+</div><figcaption>B is just two inputs standing side by side. A works on each one, and the answers stand side by side in AB.</figcaption></figure>
+<h3>One row at a time</h3>
+<p>There is a mirror image of this. Row 1 of AB is row 1 of A times B: take 1 of B's first row plus 2 of B's second row:</p>
+<div class="worked"><div class="row">1·<span class="mx" style="grid-template-columns:repeat(2,auto)"><span>5</span><span>6</span></span> + 2·<span class="mx" style="grid-template-columns:repeat(2,auto)"><span>7</span><span>8</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>19</span><span>22</span></span></div></div>
+<p>All three views add up the same products. Use row times column to compute by hand. Use the column view to understand what AB is.</p>
+<h3>Watch the sizes</h3>
+<p>A row of A must have as many numbers as a column of B, or the dot product doesn't work. So the number of columns of A must equal the number of rows of B:</p>
+<div class="worked"><div class="row">(m × n) · (n × p) → (m × p) &nbsp;&nbsp; the inside numbers match, the outside numbers give the size of AB</div></div>
+<p>A vector is a matrix with one column, so lesson 1's Ax is the case p = 1.</p>
+<h3>Order matters</h3>
+<p>Multiply the same two matrices the other way round:</p>
+<div class="worked"><div class="row">BA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>5</span><span>6</span><span>7</span><span>8</span></span> <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>4</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>23</span><span>34</span><span>31</span><span>46</span></span> &nbsp;&nbsp; but AB = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>19</span><span>22</span><span>43</span><span>50</span></span></div></div>
+<p>Different. With numbers, 3·5 = 5·3. With matrices, usually AB ≠ BA, so always keep the order. Other rules do carry over: (AB)C = A(BC), so the brackets can move, and A(B + C) = AB + AC.</p>
+<h3>A bigger example: 2 × 3 times 3 × 2</h3>
+<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>0</span><span>0</span><span>1</span><span>3</span></span> &nbsp;&nbsp; B = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>2</span><span>1</span><span>0</span><span>4</span></span></div><div class="row">row 1 · column 1 = 1·1 + 2·2 + 0·0 = 5 &nbsp;&nbsp; row 1 · column 2 = 1·0 + 2·1 + 0·4 = 2</div><div class="row">row 2 · column 1 = 0·1 + 1·2 + 3·0 = 2 &nbsp;&nbsp; row 2 · column 2 = 0·0 + 1·1 + 3·4 = 13</div><div class="row">AB = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>5</span><span>2</span><span>2</span><span>13</span></span> &nbsp;&nbsp; (2 × 3) · (3 × 2) → (2 × 2)</div></div>
+<p>Each dot product now has 3 products to add. A neural network layer is one big matrix product like this, with thousands of rows and columns.</p>
+<h3>Where this is used</h3>
+<p>Slide 5 already used it: each elimination step is a matrix, and the whole elimination is their product. The next slide turns that product around into A = LU. Graphics, robotics and machine learning chain matrices the same way.</p>
+<p class="next"><b>Next:</b> elimination turned A into a triangle, U. Recording the steps as a product of matrices gives the factorization A = LU.</p>
+    </div>
+    <h2 class="practice-h">Examples</h2><div class="examples"><section class="example"><h3>Example 1 · Row times column</h3>
+<p>Find AB for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>0</span><span>1</span><span>3</span></span>, B = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>4</span><span>2</span><span>1</span></span>.</p>
+<details class="sol" open><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">row 1 · col 1 = 2·1 + 0·2 = 2 &nbsp;&nbsp; row 1 · col 2 = 2·4 + 0·1 = 8</div><div class="row">row 2 · col 1 = 1·1 + 3·2 = 7 &nbsp;&nbsp; row 2 · col 2 = 1·4 + 3·1 = 7</div><div class="row">AB = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>8</span><span>7</span><span>7</span></span></div></div></div></details>
+</section><section class="example"><h3>Example 2 · Column by column</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>4</span></span>, B = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>1</span><span>1</span></span>. Find AB one column at a time.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">Column 1 = A·<span class="vec"><span>1</span><span>1</span></span> = 1·<span class="vec"><span>1</span><span>3</span></span> + 1·<span class="vec"><span>2</span><span>4</span></span> = <span class="vec"><span>3</span><span>7</span></span></div><div class="row">Column 2 = A·<span class="vec"><span>0</span><span>1</span></span> = column 2 of A = <span class="vec"><span>2</span><span>4</span></span></div><div class="row">AB = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>2</span><span>7</span><span>4</span></span></div></div></div></details>
+</section><section class="example"><h3>Example 3 · Two orders</h3>
+<p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>0</span><span>1</span></span>, B = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>1</span><span>1</span></span>.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">AB = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>1</span></span> &nbsp;&nbsp; BA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>2</span></span></div></div><p>Different, so AB ≠ BA here.</p></div></details>
+</section><section class="example"><h3>Example 4</h3>
+<p>A is 3 × 2 and B is 2 × 4. What size is AB? Can you compute BA?</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><p>AB is 3 × 4 (the inside 2s match). BA would be (2 × 4)·(3 × 2): the inside numbers 4 and 3 don't match, so BA doesn't exist.</p></div></details>
+</section><section class="example"><h3>Example 5</h3>
+<p>Find only the first column of AB for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>4</span></span> and B = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>1</span><span>1</span></span>.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><p>Column 1 of AB = A times column 1 of B = A·<span class="vec"><span>1</span><span>1</span></span> = <span class="vec"><span>1 + 2</span><span>3 + 4</span></span> = <span class="vec"><span>3</span><span>7</span></span>.</p></div></details>
+</section></div>
+  </article>
+
+  <section class="labsec" aria-label="Lab">
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Multiply A = [[1, 2], [3, 4]] by B = [[0, 1], [1, 0]] in the code, and show A, B and AB with table(). Then look: what did B do to the columns of A?</span>
+      <span class="hint" id="hint">Edit the code and press Run.</span>
+    </div>
+    <div class="lab">
+      <div class="editor-card">
+        <div class="bar">
+          <span class="file">slide_6.py</span>
+          <span class="status" id="pystatus">Loading Python…</span>
+          <button class="btn" id="reset">Reset</button>
+          <button class="btn primary" id="run" disabled>Run ▸</button>
+        </div>
+        <div class="editor">
+          <div class="gutter" id="gutter">1</div>
+          <div class="code" id="codewrap">
+            <pre id="hl" aria-hidden="true"></pre>
+            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+# each inner list is a ROW
+A = np.array([[1, 2],
+              [3, 4]])
+B = np.array([[5, 6],
+              [7, 8]])
+
+# in Python, @ means matrix multiplication: A @ B is AB
+AB = A @ B
+print(&quot;AB =\n&quot;, AB)
+print(&quot;row 1 of A · column 1 of B =&quot;, A[0] @ B[:, 0])
+table((&quot;A&quot;, A), (&quot;B&quot;, B), (&quot;AB&quot;, AB))</textarea>
+          </div>
+        </div>
+        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+      </div>
+      <figure class="figure">
+        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+      </figure>
+    </div>
+  </section>
+</main>
+<script type="application/json" id="la-config">{"slug": "matrix-multiplication", "lesson": "lesson-2", "assets": "../../assets/", "preview": {"kind": "table", "items": [{"label": "A", "M": [[1, 2], [3, 4]], "piv": []}, {"label": "B", "M": [[5, 6], [7, 8]], "piv": []}, {"label": "AB", "M": [[19, 22], [43, 50]], "piv": []}]}, "check": "isTab(V) && close(item(V, 'AB'), [[2,1],[4,3]])"}</script>
+</body></html>

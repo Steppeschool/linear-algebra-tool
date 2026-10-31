@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Linear Transformations and Matrices: Rotation Matrix Intuition</title>
+<meta name="description" content="See a matrix move the plane. Why the columns are where (1, 0) and (0, 1) land, how a rotation matrix is built, and what the determinant measures.">
+<link rel="canonical" href="https://linearalgebra.steppeschool.com/determinants/linear-transformations/">
+<link rel="icon" type="image/png" href="https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/sites/2148737716/images/7e33af1-8e03-fa-2023-c1572eec2d14_steppeschool_favicon.png">
+<link rel="apple-touch-icon" href="https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/sites/2148737716/images/7e33af1-8e03-fa-2023-c1572eec2d14_steppeschool_favicon.png">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Linear Algebra, Live">
+<meta property="og:title" content="Linear Transformations and Matrices: Rotation Matrix Intuition">
+<meta property="og:description" content="See a matrix move the plane. Why the columns are where (1, 0) and (0, 1) land, how a rotation matrix is built, and what the determinant measures.">
+<meta property="og:url" content="https://linearalgebra.steppeschool.com/determinants/linear-transformations/">
+<meta property="og:image" content="https://linearalgebra.steppeschool.com/assets/cover.jpg">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="720">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/lesson.css">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "Linear Transformations and Matrices: Rotation Matrix Intuition", "headline": "A matrix moves the whole plane", "description": "See a matrix move the plane. Why the columns are where (1, 0) and (0, 1) land, how a rotation matrix is built, and what the determinant measures.", "url": "https://linearalgebra.steppeschool.com/determinants/linear-transformations/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": false, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Professor Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 6: Determinants", "item": "https://linearalgebra.steppeschool.com/determinants/"}, {"@type": "ListItem", "position": 3, "name": "Linear Transformations and Matrices: Rotation Matrix Intuition", "item": "https://linearalgebra.steppeschool.com/determinants/linear-transformations/"}]}]</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4ZV1YVD90H"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-4ZV1YVD90H');
+document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.target.closest('a[href*="/offers/"]');if(a)gtag('event','begin_checkout',{currency:'USD',value:20,link_url:a.href,page_path:location.pathname});});</script>
+</head>
+<body>
+<header class="top">
+  <div class="topnav"><a class="logo" href="https://www.steppeschool.com" aria-label="Steppeschool"><img src="https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/themes/2162900525/settings_images/5034abc-0d31-78f6-fa6d-4ec283cec8ac_steppeschool_logo.png" alt="Steppeschool" width="108" height="24"></a><a class="brand" href="../../">Linear Algebra, Live</a><nav class="crumbnav" aria-label="Chapters and lessons"><details class="menu"><summary>Chapter 5<span class="hide-sm"> · Determinants</span></summary><div class="menu-list chapters"><div class="menu-sub">Chapters</div><div class="ch"><div class="ch-head"><span class="ch-num">1</span><span class="ch-title">Introduction to vectors</span></div><div class="ch-lessons"><a class="ls" href="../../vectors-and-matrices/"><span class="ls-num">Lesson 1</span><span class="ls-title">Columns first</span></a></div></div><div class="ch"><div class="ch-head"><span class="ch-num">2</span><span class="ch-title">Solving linear equations</span></div><div class="ch-lessons"><a class="ls" href="../../gaussian-elimination-and-lu/"><span class="ls-num">Lesson 2</span><span class="ls-title">Solving Ax = b</span></a><a class="ls" href="../../inverse-transpose-permutation/"><span class="ls-num">Lesson 3</span><span class="ls-title">Inverses, transposes and permutations</span></a></div></div><div class="ch"><div class="ch-head"><span class="ch-num">3</span><span class="ch-title">Vector spaces and subspaces</span></div><div class="ch-lessons"><a class="ls" href="../../vector-spaces-and-four-subspaces/"><span class="ls-num">Lesson 4</span><span class="ls-title">The four subspaces</span></a></div></div><div class="ch"><div class="ch-head"><span class="ch-num">4</span><span class="ch-title">Orthogonality</span></div><div class="ch-lessons"><a class="ls" href="../../orthogonality-and-least-squares/"><span class="ls-num">Lesson 5</span><span class="ls-title">Orthogonality and least squares</span></a></div></div><div class="ch on"><div class="ch-head"><span class="ch-num">5</span><span class="ch-title">Determinants</span></div><div class="ch-lessons"><a class="ls on" href="../../determinants/"><span class="ls-num">Lesson 6</span><span class="ls-title">Determinants</span></a></div></div><div class="ch"><div class="ch-head"><span class="ch-num">6</span><span class="ch-title">Eigenvalues and eigenvectors</span></div><div class="ch-lessons"><a class="ls" href="../../eigenvalues-and-eigenvectors/"><span class="ls-num">Lesson 7</span><span class="ls-title">Eigenvalues and eigenvectors</span></a></div></div><div class="ch"><div class="ch-head"><span class="ch-num">7</span><span class="ch-title">The singular value decomposition</span></div><div class="ch-lessons"><a class="ls" href="../../svd-and-pca/"><span class="ls-num">Lesson 8</span><span class="ls-title">The SVD and PCA</span></a></div></div></div></details><span class="sep">›</span><details class="menu"><summary>Lesson 6<span class="hide-sm"> · Determinants</span></summary><div class="menu-list"><div class="menu-sub">Chapter 5 lessons</div><div class="ch-lessons flat"><a class="ls on" href="../../determinants/"><span class="ls-num">Lesson 6</span><span class="ls-title">Determinants</span></a></div><div class="menu-sub">In lesson 6</div><div class="ch-lessons flat slides"><a class="ls on" href="../../determinants/linear-transformations/"><span class="ls-num">1</span><span class="ls-title">Linear Transformations and Matrices: Rotation Matrix Intuition</span></a><a class="ls" href="../../determinants/reflection-matrix/"><span class="ls-num">2</span><span class="ls-title">Reflection Matrix Challenge: Mirror the F</span></a><a class="ls" href="../../determinants/determinant-as-area/"><span class="ls-num">3</span><span class="ls-title">What Is a Determinant? Area and Volume Scale Factor</span></a><a class="ls" href="../../determinants/properties-of-determinants/"><span class="ls-num">4</span><span class="ls-title">Properties of Determinants: The Three Rules</span></a><a class="ls" href="../../determinants/determinant-from-pivots/"><span class="ls-num">5</span><span class="ls-title">Determinant by Elimination: Product of the Pivots</span></a><a class="ls" href="../../determinants/cofactor-formula/"><span class="ls-num">6</span><span class="ls-title">Cofactor Expansion and the 3×3 Determinant Formula</span></a><a class="ls" href="../../determinants/cramers-rule-and-inverse/"><span class="ls-num">7</span><span class="ls-title">Cramer&#x27;s Rule and the Inverse Matrix Formula</span></a><a class="ls" href="../../determinants/area-volume-cross-product/"><span class="ls-num">8</span><span class="ls-title">Area of a Triangle, Volume and the Cross Product</span></a><a class="ls" href="../../determinants/recap/"><span class="ls-num">9</span><span class="ls-title">Lesson 6 Recap: Determinants</span></a></div></div></details></nav></div>
+  <nav class="steps" aria-label="Steps in this lesson"><a class="step on" href="../linear-transformations/" data-slug="linear-transformations" aria-current="page" title="Linear Transformations and Matrices: Rotation Matrix Intuition">1</a><a class="step" href="../reflection-matrix/" data-slug="reflection-matrix" title="Reflection Matrix Challenge: Mirror the F">2</a><a class="step" href="../determinant-as-area/" data-slug="determinant-as-area" title="What Is a Determinant? Area and Volume Scale Factor">3</a><a class="step" href="../properties-of-determinants/" data-slug="properties-of-determinants" title="Properties of Determinants: The Three Rules">4</a><a class="step" href="../determinant-from-pivots/" data-slug="determinant-from-pivots" title="Determinant by Elimination: Product of the Pivots">5</a><a class="step" href="../cofactor-formula/" data-slug="cofactor-formula" title="Cofactor Expansion and the 3×3 Determinant Formula">6</a><a class="step" href="../cramers-rule-and-inverse/" data-slug="cramers-rule-and-inverse" title="Cramer&#x27;s Rule and the Inverse Matrix Formula">7</a><a class="step" href="../area-volume-cross-product/" data-slug="area-volume-cross-product" title="Area of a Triangle, Volume and the Cross Product">8</a><a class="step" href="../recap/" data-slug="recap" title="Lesson 6 Recap: Determinants">9</a></nav>
+</header>
+
+
+<main class="lesson">
+  <article class="page">
+    <div class="slide-head"><div>
+    <div class="kicker">Strang §8.1 · Linear transformations</div>
+    <h1>A matrix moves the whole plane</h1>
+    <p class="lead">So far we fed A one input and got one output. Now feed it every point at once. Picture the plane as a sheet of graph paper. The matrix moves every point, so the whole sheet stretches, turns, slants or flips. Its lines stay straight and evenly spaced. To know the whole move, you only need to know where two arrows land: <span class="vec"><span>1</span><span>0</span></span> lands on column 1, and <span class="vec"><span>0</span><span>1</span></span> lands on column 2.</p>
+    </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-6--linear-transformations.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 6 · slide 1</small>Transformations</span></span></div>
+    <div class="key">A <span class="vec i"><span>1</span><span>0</span></span> = column 1 &nbsp;&nbsp;&nbsp; A <span class="vec j"><span>0</span><span>1</span></span> = column 2</div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>A matrix sends each vector v to a new vector Av. Applied to every point, it moves the whole plane.</li><li>Lines stay straight, evenly spaced lines stay evenly spaced, and the origin stays fixed.</li><li><b>Column 1 is where <span class="vec"><span>1</span><span>0</span></span> lands. Column 2 is where <span class="vec"><span>0</span><span>1</span></span> lands.</b> Those two facts decide everything.</li><li>The area of any shape is multiplied by |det A|.</li></ol></div>
+    <div class="prose">
+<h3>Think of graph paper</h3>
+<p>Pin graph paper at the origin. You may stretch, turn, slant or flip it. You may not bend, fold or tear it. Every 2 by 2 matrix does some mix of these. A matrix whose columns lie on one line (lesson 1's dependent case) can also squash the paper flat onto a line, or onto the origin.</p>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"transform","M":[[1,1],[0,1]],"view":[-4,5,-2,4]}'></div><figcaption>A slant (a shear). The graph paper moves, but its lines stay straight, parallel and evenly spaced.</figcaption></figure>
+<p>Why no bending? Because A(cv + dw) = cAv + dAw. Each entry of Ax is a row times the vector (lesson 1, slide 3), and row·(cv + dw) = c(row·v) + d(row·w). So evenly spaced points on a line stay evenly spaced on a line:</p>
+<div class="worked"><div class="row">points v + t·w (t = 0, 1, 2, …) &nbsp;→&nbsp; Av + t·Aw: again a line, with the same even step Aw</div></div>
+<h3>Two landmarks decide everything</h3>
+<p>Every point is <span class="vec"><span>x</span><span>y</span></span> = x·<span class="vec"><span>1</span><span>0</span></span> + y·<span class="vec"><span>0</span><span>1</span></span>. Since A respects combinations,</p>
+<div class="worked"><div class="row">A<span class="vec"><span>x</span><span>y</span></span> = x·A<span class="vec"><span>1</span><span>0</span></span> + y·A<span class="vec"><span>0</span><span>1</span></span> = x·(column 1) + y·(column 2)</div></div>
+<p>Know where <span class="vec"><span>1</span><span>0</span></span> and <span class="vec"><span>0</span><span>1</span></span> go, and you know where every point goes. To build a matrix, choose where they land and write those as the columns.</p>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"transform","M":[[2,-1],[1,1]],"view":[-4,5,-2,5]}'></div><figcaption>A matrix with columns <span class="vec"><span>2</span><span>1</span></span> and <span class="vec"><span>−1</span><span>1</span></span>, the two vectors from lesson 1, slide 1. Watch <span class="vec"><span>1</span><span>0</span></span> land on column 1 and <span class="vec"><span>0</span><span>1</span></span> land on column 2. The F and every grid line follow.</figcaption></figure>
+<h3>Building a rotation</h3>
+<p>To turn the plane counterclockwise by θ, move both landmarks around the unit circle. <span class="vec"><span>1</span><span>0</span></span> is at 0°, so it lands at θ: <span class="vec"><span>cos θ</span><span>sin θ</span></span>. <span class="vec"><span>0</span><span>1</span></span> is at 90°, so it lands at 90° + θ: (cos(90° + θ), sin(90° + θ)) = <span class="vec"><span>−sin θ</span><span>cos θ</span></span>. Those are the columns:</p>
+<div class="worked">
+<div class="row">Q = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>cos θ</span><span>−sin θ</span><span>sin θ</span><span>cos θ</span></span></div>
+<div>For a quarter turn, θ = 90°: cos θ = 0 and sin θ = 1, so Q = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>−1</span><span>1</span><span>0</span></span>. It sends <span class="vec"><span>1</span><span>0</span></span> to <span class="vec"><span>0</span><span>1</span></span> and <span class="vec"><span>0</span><span>1</span></span> to <span class="vec"><span>−1</span><span>0</span></span>.</div>
+<div>Check with a picture: turn the arrow <span class="vec"><span>1</span><span>0</span></span> a quarter turn counterclockwise and it points straight up, at <span class="vec"><span>0</span><span>1</span></span>. Turn <span class="vec"><span>0</span><span>1</span></span> the same way and it points left, at <span class="vec"><span>−1</span><span>0</span></span>. The formula agrees.</div>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"transform","M":[[0,-1],[1,0]],"view":[-4,4,-1,4]}'></div><figcaption>A quarter turn: <span class="vec"><span>1</span><span>0</span></span> goes up to <span class="vec"><span>0</span><span>1</span></span>, and <span class="vec"><span>0</span><span>1</span></span> goes left to <span class="vec"><span>−1</span><span>0</span></span>.</figcaption></figure>
+</div>
+<h3>A new number: the determinant</h3>
+<p>When the plane moves, shapes can grow or shrink. Take the little square with corners <span class="vec"><span>0</span><span>0</span></span>, <span class="vec"><span>1</span><span>0</span></span>, <span class="vec"><span>0</span><span>1</span></span> and <span class="vec"><span>1</span><span>1</span></span>. Its area is 1. After the move it becomes a slanted box, a parallelogram. The area of that box tells you how much the matrix stretches <i>every</i> area. That stretch factor has a name: the <b>determinant</b>, written det A.</p>
+<p>For a 2 by 2 matrix A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>p</span><span>q</span><span>r</span><span>s</span></span>, it is ps − qr. You first met this number in lesson 3, as ad − bc: the test for whether a 2 by 2 matrix has an inverse. Now you can see what it measures:</p>
+<ul>
+<li><b>det A = 3:</b> every area becomes 3 times bigger.</li>
+<li><b>det A = 1:</b> areas stay the same, like a turn.</li>
+<li><b>det A = 0:</b> the square is squashed flat onto a line, so its area is 0. That is lesson 1's dependent case.</li>
+</ul>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"transform","M":[[2,1],[0,1.5]],"shape":"square","view":[-2,5,-1,3]}'></div><figcaption>det = 2·1.5 − 1·0 = 3. The unit square becomes a parallelogram with area 3.</figcaption></figure>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"transform","M":[[1,2],[0.5,1]],"shape":"square","view":[-2,5,-1,3]}'></div><figcaption>det = 1·1 − 2·0.5 = 0. The columns lie on one line, so the square is squashed flat: its area becomes 0.</figcaption></figure>
+<p>A <b>negative</b> determinant means the plane was also flipped over, like turning a page face down. Slide 2 builds such a flip. A rotation has det Q = cos²θ + sin²θ = 1: it turns without stretching. The rest of this lesson (Strang's chapter 5) covers determinants fully.</p>
+
+<div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><h3>T rumzzk mbedljp: imvdgvr mh 5H</h3>
+<p>Oy 4O ujosj qgh dfucq verlvzstp: <span class="vec"><span>7</span><span>3</span><span>2</span></span>, <span class="vec"><span>6</span><span>2</span><span>1</span></span> fpr <span class="vec"><span>0</span><span>2</span><span>9</span></span>, iet uee wcda. Zcw vnroevr apc ljpza xhvb jlh vbnkd. Lr zhas v ekhdlon qxfd wkkkya nod bj ecot, hbtb weal by ofmle, pvvtp xqpr nf ydeq, jbh mq psktv ne:</p>
+<div class="worked"><div class="row">N = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>8</span><span>−7</span><span>0</span><span>0</span><span>1</span><span>8</span><span>2</span><span>4</span><span>3</span></span>    Nz<span class="vec"><span>0</span><span>6</span><span>9</span></span> = <span class="vec"><span>6</span><span>4</span><span>6</span></span>,   Jl<span class="vec"><span>3</span><span>4</span><span>6</span></span> = <span class="vec"><span>−5</span><span>4</span><span>4</span></span>,   Om<span class="vec"><span>0</span><span>4</span><span>4</span></span> = <span class="vec"><span>4</span><span>8</span><span>9</span></span></div></div>
+<p>Ja e po o edusrv avd p lriqjrmgo qqk o pangdjj. Fyk ngnh wm mfn bava sa vfj qbmp.</p>
+<h3>Sgzeu vdes gx putd</h3>
+<p>L rueoekt TXC (nszrbrdk yjvwibbkmra fvnp) tp k ftatvt pewk dobe chtthaga idgqed ctkhy ayg qvzdxza iqt irfdzxw, nedejxvm fmg wd fxjm. T 6 px 7 gxtabxvt mdjoin uzsaz jevbd fuysozmt wyta lhunp, hvfb owp lm. Veg lpwvab ocdbokye wtspq vbdr shhzem gr sk ksro xx lou dntli hzjky xyw pelgo.</p>
+<p class="next"><b>Crho:</b> X xmmmlvotg. Pme ukb xzg-qxrvcpjr dxax co iwbtc g laucjl ms ujgjp 0, lea ttv tujq l herj cmip ef yxh hicnahzprvr.</p></div><section class="locked" aria-label="Members only">
+      <div class="lock-ic" aria-hidden="true">🔒</div>
+      <h2>Keep reading with the full course</h2>
+      <p class="hook">Finish lesson 6 and you will be able to: <b>see a matrix as a move of the plane, and build one from where two arrows land.</b></p><p class="small" style="margin:0 0 6px">Still locked here:</p>
+      <ul><li>The rest of this explanation</li><li>4 more examples with step-by-step solutions</li><li>Five extra members-only problems with worked solutions</li></ul>
+      <button class="btn primary" type="button" data-unlock>Get the full course</button>
+      <p class="small">$20 once, lifetime access. Lessons 1 to 3 stay free.</p>
+    </section></div>
+    </div>
+    <h2 class="practice-h">Examples</h2><div class="examples"><section class="example"><h3>Example 1 · Stretch sideways</h3>
+<p>Triple every x-coordinate, keep y: <span class="vec"><span>1</span><span>0</span></span> → <span class="vec"><span>3</span><span>0</span></span> and <span class="vec"><span>0</span><span>1</span></span> → <span class="vec"><span>0</span><span>1</span></span>.</p>
+<details class="sol" open><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>0</span><span>0</span><span>1</span></span> &nbsp;&nbsp; det A = 3</div><div class="row"><span class="vec"><span>1</span><span>1</span></span> → <span class="vec"><span>3</span><span>1</span></span>. Every area becomes 3 times larger</div></div></div></details>
+</section><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 2 · Half a turn</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 3 · Squash onto a line</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 4</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 5</b><em>Members</em></button></div>
+  </article>
+
+  <section class="labsec" aria-label="Lab">
+    <div class="exercise" id="exercise">
+      <span class="tag">Exercise</span>
+      <span class="task">Rotate the plane by exactly 90°.</span>
+      <span class="hint" id="hint">Edit the code and press Run.</span>
+    </div>
+    <div class="lab">
+      <div class="editor-card">
+        <div class="bar">
+          <span class="file">slide_1.py</span>
+          <span class="status" id="pystatus">Loading Python…</span>
+          <button class="btn" id="reset">Reset</button>
+          <button class="btn primary" id="run" disabled>Run ▸</button>
+        </div>
+        <div class="editor">
+          <div class="gutter" id="gutter">1</div>
+          <div class="code" id="codewrap">
+            <pre id="hl" aria-hidden="true"></pre>
+            <textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Python code">import numpy as np
+
+theta = np.radians(30)
+
+Q = np.array([[np.cos(theta), -np.sin(theta)],
+              [np.sin(theta),  np.cos(theta)]])
+
+print(np.round(Q, 3))
+print(&quot;det =&quot;, np.round(np.linalg.det(Q), 6))
+show(Q)</textarea>
+          </div>
+        </div>
+        <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
+        <pre class="out" id="out"><span class="sys">Press Run to execute this slide's code. Ctrl+Enter works too.</span></pre>
+      </div>
+      <figure class="figure">
+        <div class="plane"><canvas id="cv" aria-label="The plane"></canvas><div class="tablebox" id="tablebox" hidden></div></div>
+        <figcaption class="figcap"><div class="legend" id="legend"></div><div class="readout" id="readout"></div></figcaption>
+      </figure>
+    </div>
+  </section>
+
+
+  <div class="after">
+    <div class="nav">
+      <a class="btn" id="prev" href="../">← Overview</a>
+      <span class="count">1 / 9</span>
+      <a class="btn primary" id="next" href="../reflection-matrix/">Next →</a>
+    </div>
+  </div>
+</main>
+<section class="comments" aria-label="Comments">
+  <h2>Questions and comments</h2>
+  <p>Stuck on something, or found a mistake? Ask here and I'll answer. You sign in with GitHub.</p>
+  <div id="giscus"></div>
+</section>
+<script>
+(function () {
+  var s = document.createElement("script");
+  s.src = "https://giscus.app/client.js";
+  var a = {"repo": "Steppeschool/linear-algebra-tool", "repo-id": "R_kgDOVYeydQ", "category": "Announcements",
+    "category-id": "DIC_kwDOVYeydc4DJ7vP", "mapping": "specific", "term": location.hostname + location.pathname,
+    "strict": "1", "reactions-enabled": "1", "emit-metadata": "0", "input-position": "top",
+    "theme": "preferred_color_scheme", "lang": "en", "loading": "lazy"};
+  for (var k in a) s.setAttribute("data-" + k, a[k]);
+  s.crossOrigin = "anonymous"; s.async = true;
+  document.getElementById("giscus").appendChild(s);
+})();
+</script>
+<footer class="foot">
+  Follows the order and notation of Professor Gilbert Strang's <i>Introduction to Linear Algebra</i>, 5th edition (2016); § numbers refer to that book.
+  Explanations, examples and code are original. Made by <a href="https://www.steppeschool.com">Steppeschool</a>.
+</footer>
+<dialog class="unlock" id="unlock" aria-labelledby="unlock-h">
+  <form method="dialog"><button class="x" aria-label="Close">×</button></form>
+  <div class="kicker">The full course</div>
+  <h2 id="unlock-h">From Ax = b to PCA, by running it</h2>
+  <p class="sub">Lessons 1 to 3 are free. Finish all eight and you will be able to:</p>
+  <ul class="perks outcomes-list"><li>Solve any system Ax = b, by hand and in NumPy, and say when it has no solution.</li><li>Fit the best line to noisy sensor data with least squares.</li><li>Tell from the eigenvalues whether a system settles down or blows up.</li><li>Compress an image and find the main direction in your data with the SVD and PCA.</li><li>Follow the matrix maths in robotics, control and machine learning.</li></ul>
+  <p class="incl"><b>You get:</b> all 8 lessons with Python labs · every worked example and solution · 5 extra problems per lesson · your progress tracked · answers to your questions · every future update.</p>
+  <div class="price"><b>$20</b> once · lifetime access</div>
+  <a class="btn primary go" href="https://www.steppeschool.com/offers/57ZvEAFX/checkout" target="_blank" rel="noopener">Continue to checkout →</a>
+  <p class="login">Already a member? <a href="https://www.steppeschool.com/login" target="_blank" rel="noopener">Log in to the course</a></p>
+</dialog>
+
+<script>window.SLIDE = {"slug": "linear-transformations", "lesson": "lesson-6", "assets": "../../assets/", "preview": {"kind": "transform", "M": [[0.8660254037844387, -0.5], [0.5, 0.8660254037844387]]}, "check": "isT(V) && eqM(V.M, [[0,-1],[1,0]])"};</script>
+<script id="brython" src="https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js" defer></script>
+<script src="../../assets/lab.js" defer></script>
+<script src="../../assets/nav.js" defer></script>
+<script src="../../assets/figs.js" defer></script>
+</body>
+</html>

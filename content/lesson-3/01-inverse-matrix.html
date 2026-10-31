@@ -15,8 +15,8 @@ A⁻¹A = I &nbsp;&nbsp;&nbsp; Ax = b &nbsp;⇔&nbsp; x = A⁻¹b
 <!-- ideas -->
 <ol class="ideas"><li>A⁻¹A = I and AA⁻¹ = I, where I is the identity matrix.</li><li>If A is invertible, Ax = b has exactly one solution, x = A⁻¹b.</li><li>A matrix that sends two different vectors to the same output cannot be undone.</li><li>An n by n matrix A is invertible ⇔ it has n nonzero pivots ⇔ its columns are independent ⇔ det A ≠ 0.</li></ol>
 <!-- prose -->
-<h3>Play the motion backwards</h3>
-<p>In lesson 1, a matrix moved the plane: it stretched, turned or slanted the graph paper. The inverse plays that motion backwards. Do A, then A⁻¹, and nothing has moved.</p>
+<h3>Undo what A does</h3>
+<p>A takes an input x and gives an output Ax. The inverse goes the other way: give it the output, and it hands back the input. Think of a lock and its key: one turn locks, the opposite turn unlocks. Do A, then A⁻¹, and every vector is back where it started.</p>
 <p>"Nothing has moved" is the <b>identity matrix</b> I. It has 1s on the diagonal and 0s elsewhere. Ix = x for every vector x.</p>
 <h3>Why the inverse solves equations</h3>
 <p>Start with Ax = b. Multiply both sides on the left by A⁻¹. Since A⁻¹A = I, the left side is just x. So x = A⁻¹b. If the inverse exists, that is the one and only solution.</p>
@@ -37,7 +37,7 @@ A⁻¹A = I &nbsp;&nbsp;&nbsp; Ax = b &nbsp;⇔&nbsp; x = A⁻¹b
 <ul>
 <li>Every pivot is nonzero (lesson 2).</li>
 <li>No column is a combination of the others (lesson 1).</li>
-<li>det A ≠ 0 (the determinants lesson).</li>
+<li>det A ≠ 0 (the next slide, for 2 by 2).</li>
 <li>Ax = 0 only when x = 0.</li>
 </ul>
 <!-- examples -->
@@ -60,7 +60,7 @@ A⁻¹A = I &nbsp;&nbsp;&nbsp; Ax = b &nbsp;⇔&nbsp; x = A⁻¹b
 <div class="problem"><span class="pnum">2</span><div class="pbody">
 <p>Does <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>6</span><span>1</span><span>3</span></span> have an inverse?</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>No. Column 2 = 3·column 1, so the plane is squashed onto a line (det = 2·3 − 6·1 = 0). Two different inputs give the same output, so there is no way back.</p>
+<p>No. Column 2 = 3·column 1, so the columns lie on one line (det = 2·3 − 6·1 = 0, see slide 2). Two different inputs give the same output, so there is no way back.</p>
 </div></details>
 </div></div>
 <div class="problem"><span class="pnum">3</span><div class="pbody">

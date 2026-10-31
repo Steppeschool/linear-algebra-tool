@@ -5,12 +5,12 @@
     <div class="kicker">Strang §2.2 · Pivots</div>
     <h1>Pivots clear the columns. Back substitution climbs back up.</h1>
     <p class="lead">With three equations we clear one column at a time. The first pivot clears column 1, the second clears column 2, and the system becomes a triangle. Then back substitution solves it from the bottom up.</p>
-    </div><span class="thumb slide-art"><img src="https://linearalgebra.steppeschool.com/assets/cards/lesson-2--pivots-and-back-substitution.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 2 · slide 2</small>Pivots</span></span></div>
+    </div><span class="thumb slide-art"><img src="https://linearalgebra.steppeschool.com/assets/cards/lesson-2--pivots-and-back-substitution.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 2 · slide 3</small>Pivots</span></span></div>
     <div class="key"><span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>1</span><span>4</span><span>−6</span><span>0</span><span>−2</span><span>7</span><span>2</span></span> &nbsp;→&nbsp; <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>1</span><span>0</span><span>−8</span><span>−2</span><span>0</span><span>0</span><span>1</span></span></div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Elimination works column by column, from left to right.</li><li>Each multiplier uses the <b>current</b> pivot, after the earlier steps.</li><li>The result is an upper triangular matrix U: zeros below the <b>diagonal</b> (the entries U₁₁, U₂₂, U₃₃, from top-left to bottom-right). The diagonal entries are the pivots.</li><li>Back substitution solves the last row first, then moves up one row at a time.</li></ol></div>
     <div class="prose">
 <h3>From two equations to three</h3>
-<p>Bigger systems need nothing new. We repeat slide 1's step in a fixed order. Take</p>
+<p>Bigger systems need nothing new. We repeat slide 2's step in a fixed order. Take</p>
 <div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>1</span><span>4</span><span>−6</span><span>0</span><span>−2</span><span>7</span><span>2</span></span> &nbsp;&nbsp; with right side b = <span class="vec"><span>5</span><span>−2</span><span>9</span></span></div></div>
 <p>Each equation becomes a row like (2, 1, 1 | 5), meaning 2x + y + z = 5: coefficients before the bar, right side after. Every step acts on the whole row, bar included. Change only the left side and you get a different system.</p>
 <p><b>ℓᵢⱼ</b> is the multiplier that clears row i, column j.</p>
@@ -26,7 +26,7 @@
 <h3>The triangle</h3>
 <div class="worked"><div class="row">U = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>1</span><span>0</span><span>−8</span><span>−2</span><span>0</span><span>0</span><span>1</span></span> &nbsp;&nbsp; pivots 2, −8, 1 &nbsp;&nbsp; c = <span class="vec"><span>5</span><span>−12</span><span>2</span></span></div></div>
 <p>The new right side, <b>c</b>, is b after the same steps. <b>Ux = c</b> has the same solution as Ax = b.</p>
-<p>U is <b>upper triangular</b>, with the pivots on its diagonal. A pivot can't be zero, because we divide by it. Slide 3 covers what happens when one is.</p>
+<p>U is <b>upper triangular</b>, with the pivots on its diagonal. A pivot can't be zero, because we divide by it. Slide 4 covers what happens when one is.</p>
 <h3>Back substitution: a chain of keys</h3>
 <p>The last equation has one unknown. Its value is the key to the equation above, and so on up to the top.</p>
 <div class="worked">
@@ -41,7 +41,7 @@
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">Row 3: 4z = 8, so z = 2</div><div class="row">Row 2: y + 2·2 = 4, so y = 0</div><div class="row">Row 1: 2x + 0 + 3·2 = 9, so x = 1.5</div></div></div></details>
 </section><section class="example"><h3>Example 3 · The pivots give the determinant</h3>
 <p>For A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>1</span><span>4</span><span>−6</span><span>0</span><span>−2</span><span>7</span><span>2</span></span>, elimination gave the pivots 2, −8 and 1.</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">det A = 2 · (−8) · 1 = −16</div></div><p>A side remark. Lesson 1 met the determinant of a 2 by 2 matrix as its area factor. For a square matrix of any size, when no rows are exchanged (slide 3), the determinant is the product of the pivots. That is how computers find determinants. We take it on trust for now; Professor Strang's chapter 5 explains why it works.</p></div></details>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">det A = 2 · (−8) · 1 = −16</div></div><p>A side remark. Every square matrix has a number called its determinant. Lesson 3 meets it for a 2 by 2 matrix, as ad − bc. For a square matrix of any size, when no rows are exchanged (slide 4), the determinant is the product of the pivots. That is how computers find determinants. We take it on trust for now; lesson 6 (Professor Strang's chapter 5) explains why it works.</p></div></details>
 </section><section class="example"><h3>Example 4</h3>
 <p>Solve x + 2y + z = 4, 2x + 5y + z = 8, 3x + 7y + 4z = 14.</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><p>ℓ₂₁ = 2: (0, 1, −1 | 0). ℓ₃₁ = 3: (0, 1, 1 | 2). ℓ₃₂ = 1: (0, 0, 2 | 2).</p><p>z = 1, then y − 1 = 0 so y = 1, then x + 2 + 1 = 4 so x = 1.</p></div></details>
@@ -60,7 +60,7 @@
     <div class="lab">
       <div class="editor-card">
         <div class="bar">
-          <span class="file">slide_2.py</span>
+          <span class="file">slide_3.py</span>
           <span class="status" id="pystatus">Loading Python…</span>
           <button class="btn" id="reset">Reset</button>
           <button class="btn primary" id="run" disabled>Run ▸</button>
