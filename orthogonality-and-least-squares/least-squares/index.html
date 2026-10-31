@@ -53,7 +53,7 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
 <h3>The general recipe</h3>
 <p>Now A has n columns and m rows, with more rows than columns (m &gt; n). Every Ax lies in the column space, a flat subspace inside ℝᵐ (all vectors with m numbers). The data b sticks out of it. So we go to the closest point we can reach: the projection p = Ax̂.</p>
 <p>The error e = b − Ax̂ is perpendicular to every column. Stack those dot products and you get Aᵀe = 0:</p>
-<div class="worked"><div class="row">Aᵀ(b − Ax̂) = 0 &nbsp;&nbsp;⟹&nbsp;&nbsp; AᵀA x̂ = Aᵀb</div></div>
+<div class="worked"><div class="row">Aᵀ(b − Ax̂) = 0, &nbsp; so &nbsp; AᵀA x̂ = Aᵀb</div></div>
 <p>We can't solve Ax = b, but when the columns of A are independent, AᵀAx̂ = Aᵀb has exactly one solution (shown below). It is only n by n, however many measurements there are.</p>
 <figure class="fig"><div class="fig-svg" data-fig='{"type":"span3d","cols":[[1,0,1],[0,1,1]],"pts":[{"p":[3,3,0],"label":"b = (3, 3, 0)"},{"p":[1,1,2],"label":"Ax̂ = (1, 1, 2)","on":true}],"view":[-4.5,4.5,-3.5,4.5],"read":"Ax̂ is the shadow of b on the sheet C(A)"}'></div><figcaption>Three equations in two unknowns: x₁ = 3, x₂ = 3, x₁ + x₂ = 0. The columns <span class="vec"><span>1</span><span>0</span><span>1</span></span> and <span class="vec"><span>0</span><span>1</span><span>1</span></span> span the sheet: everything Ax can reach. b = <span class="vec"><span>3</span><span>3</span><span>0</span></span> sits off it, so we settle for its shadow Ax̂ = <span class="vec"><span>1</span><span>1</span><span>2</span></span>, with x̂ = <span class="vec"><span>1</span><span>1</span></span>.</figcaption></figure>
 <h3>A worked example</h3>
