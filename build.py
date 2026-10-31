@@ -865,6 +865,8 @@ def write_embed(lesson, slug, page):
 
 
 def main():
+    import subprocess, sys as _sys   # keep the Kajabi stylesheet (assets/embed.css) in step with lesson.css
+    subprocess.run([_sys.executable, str(ROOT / "tools_embed.py")], check=True)
     urls = [BASE + "/"]
     built = []
     available = [l for l in LESSONS if any(content_dir(l).glob("[0-9]*.html"))]
