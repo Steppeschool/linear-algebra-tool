@@ -38,23 +38,26 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
     <div class="slide-head"><div>
     <div class="kicker">Recap · Reading</div>
     <h1>What you can now do.</h1>
-    <p class="lead">You can now picture a matrix moving the whole plane, say how much it stretches space, compute that number quickly, and use it for inverses, solutions, areas and volumes.</p>
+    <p class="lead">Lesson 6 in one page: a matrix moves the whole plane, and one number, the determinant, says how much it stretches every area and volume. You can now compute that number three ways (ad − bc, pivots, cofactors) and use it for solutions, inverses, areas, volumes and cross products.</p>
     </div><span class="thumb slide-art"><img src="../../assets/cards/recap.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 6 · slide 9</small>Recap</span></span></div>
     <div class="key">det A ≠ 0 ⇔ A invertible &nbsp;&nbsp; det AB = det A · det B &nbsp;&nbsp; det = ± product of pivots</div>
-    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>A matrix moves the whole plane. Column 1 is where <span class="vec"><span>1</span><span>0</span></span> lands, column 2 is where <span class="vec"><span>0</span><span>1</span></span> lands.</li><li>det A is the area or volume factor; the sign says whether space is flipped.</li><li>Three rules define it; elimination does not change it.</li><li>Compute it from the pivots; cofactors give the explicit formula.</li><li>Cramer's rule, A⁻¹ = Cᵀ/det A, areas, volumes and cross products all come from it.</li></ol></div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>A matrix moves the whole plane. Column 1 is where <span class="vec"><span>1</span><span>0</span></span> lands, column 2 is where <span class="vec"><span>0</span><span>1</span></span> lands.</li><li>det A is the area or volume factor; the sign says whether space is flipped.</li><li>Three rules define it; elimination does not change it.</li><li>Compute it from the pivots; cofactors give the explicit formula.</li><li>Cramer's rule, A⁻¹ = Cᵀ / det A, areas, volumes and cross products all come from it.</li></ol></div>
     <div class="prose">
 <ul>
-<li><b>§8.1 A matrix moves the plane.</b> Graph paper that stretches, turns, slants or flips, but never bends. Two landmarks decide everything: <span class="vec"><span>1</span><span>0</span></span> lands on column 1 and <span class="vec"><span>0</span><span>1</span></span> on column 2. A turn by θ has columns <span class="vec"><span>cos θ</span><span>sin θ</span></span> and <span class="vec"><span>−sin θ</span><span>cos θ</span></span>.</li>
-<li><b>Challenge: the mirror.</b> The mirror across the y-axis sends <span class="vec"><span>1</span><span>0</span></span> to <span class="vec"><span>−1</span><span>0</span></span> and keeps <span class="vec"><span>0</span><span>1</span></span>. Same size, flipped over: det = −1. Two mirrors give back I.</li>
-<li><b>§5.1 What it measures.</b> Every area is multiplied by det A. Negative means flipped. Zero means squashed.</li>
-<li><b>§5.1 The three rules.</b> det I = 1, a swap flips the sign, linear in each row. Elimination steps keep det.</li>
-<li><b>§5.1 Pivots.</b> det A = ± the product of the pivots. det AB = det A det B, det Aᵀ = det A.</li>
-<li><b>§5.2 Cofactors.</b> Expand along a row with signs + − +.</li>
-<li><b>§5.3 Cramer and the inverse.</b> xⱼ = det Bⱼ / det A, and A⁻¹ = Cᵀ / det A.</li>
-<li><b>§5.3 Areas and cross products.</b> A triangle is ½|det| of its edges. Torque τ = r × F.</li>
+<li><b>§8.1 A matrix moves the whole plane.</b> Graph paper that stretches, turns, slants or flips, but never bends. Two landmarks decide everything: <span class="vec"><span>1</span><span>0</span></span> lands on column 1 and <span class="vec"><span>0</span><span>1</span></span> on column 2. A turn by θ has columns <span class="vec"><span>cos θ</span><span>sin θ</span></span> and <span class="vec"><span>−sin θ</span><span>cos θ</span></span>.</li>
+<li><b>§8.1 Challenge: build a mirror.</b> The mirror across the y-axis sends <span class="vec"><span>1</span><span>0</span></span> to <span class="vec"><span>−1</span><span>0</span></span> and keeps <span class="vec"><span>0</span><span>1</span></span>. Same size, turned over: det = −1. Two mirrors give back I.</li>
+<li><b>§5.1 The determinant as area.</b> The photocopier picture: every area is multiplied by the same number, det A. Read it off the unit square, which lands on the parallelogram of the columns. Negative means flipped, zero means squashed flat and no inverse. In 3D it is the volume of the box made by the columns.</li>
+<li><b>§5.1 The three rules.</b> det I = 1, a row swap flips the sign, and det is linear in each row (one row at a time). From them: two equal rows give 0, and elimination steps never change det.</li>
+<li><b>§5.1 From the pivots.</b> Push the leaning stack upright: eliminate to U, multiply the pivots, and add one minus sign per row swap. Also det AB = det A · det B, det A⁻¹ = 1 / det A and det Aᵀ = det A.</li>
+<li><b>§5.2 Cofactors.</b> Cross out an entry's row and column to get its minor, attach the checkerboard sign + − +, and add entry × cofactor along any row or column. Pick the row with the most zeros.</li>
+<li><b>§5.3 Cramer's rule and the inverse.</b> The café prices one at a time: xⱼ = det Bⱼ / det A, with b in column j. The whole inverse is A⁻¹ = Cᵀ / det A. Neat on paper, slow for big systems.</li>
+<li><b>§5.3 Areas, volumes and the cross product.</b> A triangle's area is ½ |det| of two edge vectors. A box's volume is |det| of its three edges. u × v stands at a right angle to u and v, and its length is their parallelogram's area. Torque is τ = r × F.</li>
 </ul>
+<h2>Next lesson: eigenvalues and eigenvectors (§6.1–6.5)</h2>
+<p>Most vectors change direction when a matrix moves the plane. A few special ones only get longer or shorter. Lesson 7 finds them, and the determinant is the tool that does it.</p>
+<h2>Read along</h2>
 
-<div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><p>Uyqn zy Uviirn: skkssoj 9, yevnyhywwjz. Clbrl mds(L − qW) = 1 uklof boz zwbwbvkgje gjwg R uuqf elgvffsyt.</p></div><section class="locked" aria-label="Members only">
+<div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><p>Uyqnzyuvi Irnskks Sojtye, <i>Vnyhywwjzclb rl Mdslqw Yduklof</i>, 0oz zwbwbvk (3423), jwgruuqf 2.5 gvf 2.9 yt 6.1. Xijutqdc 86 gd 27 iz XJR 82.25 xx <a href="https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/" target="_blank" rel="noopener">RGF MabpZbuphrVtcx</a> hflpb tlyqoyyuuwdr, rtm egsczpw 96 wkkaal acvisz mmvrxuahkvgpcwi.</p></div><section class="locked" aria-label="Members only">
       <div class="lock-ic" aria-hidden="true">🔒</div>
       <h2>Keep reading with the full course</h2>
       <p class="hook">Finish lesson 6 and you will be able to: <b>see a matrix as a move of the plane, and build one from where two arrows land.</b></p><p class="small" style="margin:0 0 6px">Still locked here:</p>
