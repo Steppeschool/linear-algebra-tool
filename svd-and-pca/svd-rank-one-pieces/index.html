@@ -109,6 +109,7 @@ U, s, Vt = np.linalg.svd(A)     # s = singular values, Vt = V transposed
 
 # s[0] is σ₁ and s[1] is σ₂ (Python counts from 0)
 # np.outer(u, v) is the column u times the row v: a rank-one matrix
+# U[:, i] is column i of U, Vt[i] is row i of Vt
 piece1 = s[0] * np.outer(U[:, 0], Vt[0])
 total = piece1                  # your turn: + s[1] * np.outer(U[:, 1], Vt[1])
 print(&quot;singular values:&quot;, s)
