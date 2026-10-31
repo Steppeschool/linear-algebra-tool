@@ -66,9 +66,15 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
 <p>There is a mirror image of this. Row 1 of AB is row 1 of A times B: take 1 of B's first row plus 2 of B's second row:</p>
 <div class="worked"><div class="row">1·<span class="mx" style="grid-template-columns:repeat(2,auto)"><span>5</span><span>6</span></span> + 2·<span class="mx" style="grid-template-columns:repeat(2,auto)"><span>7</span><span>8</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>19</span><span>22</span></span></div></div>
 <p>All three views add up the same products. Use row times column to compute by hand. Use the column view to understand what AB is.</p>
-<h3>Watch the sizes</h3>
-<p>A row of A must have as many numbers as a column of B, or the dot product doesn't work. So the number of columns of A must equal the number of rows of B:</p>
+<h3>The same with 3 × 3 matrices</h3>
+<p>Nothing new happens with bigger matrices. Each dot product just has three products to add instead of two. Watch all nine numbers of AB fill in:</p>
+<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>0</span><span>0</span><span>1</span><span>3</span><span>2</span><span>0</span><span>1</span></span> &nbsp;&nbsp; B = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>2</span><span>2</span><span>1</span><span>0</span><span>0</span><span>4</span><span>1</span></span></div><div class="row">row 1 · column 1 = 1·1 + 2·2 + 0·0 = 5 &nbsp;&nbsp; row 2 · column 2 = 0·0 + 1·1 + 3·4 = 13</div><div class="row">AB = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>5</span><span>2</span><span>2</span><span>2</span><span>13</span><span>3</span><span>2</span><span>4</span><span>5</span></span></div></div>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"matmul","A":[[1,2,0],[0,1,3],[2,0,1]],"B":[[1,0,2],[2,1,0],[0,4,1]],"view":[0,12.6,0,4.6]}'></div><figcaption>3 × 3 times 3 × 3: nine numbers, each one a row of A dotted with a column of B.</figcaption></figure>
+<h3>Not every pair can be multiplied</h3>
+<p>A row of A must have as many numbers as a column of B, or the dot product doesn't work. So the number of columns of A must equal the number of rows of B. If they don't match, AB simply does not exist:</p>
 <div class="worked"><div class="row">(m × n) · (n × p) → (m × p) &nbsp;&nbsp; the inside numbers match, the outside numbers give the size of AB</div></div>
+<div class="worked"><div class="row">(2 × 3) · (3 × 2) → 2 × 2 ✓ &nbsp;&nbsp; (3 × 2) · (2 × 4) → 3 × 4 ✓</div><div class="row">(2 × 3) · (2 × 3): a row of A has 3 numbers, a column of B has only 2. ✗ No product.</div></div>
+<p>So with A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span></span>, the product AA does not exist, even though A times itself sounds natural. Only square matrices (same number of rows and columns) can always be multiplied by themselves. And sometimes AB exists but BA doesn't: a 2 × 3 times a 3 × 4 works, but 3 × 4 times 2 × 3 does not.</p>
 <p>A vector is a matrix with one column, so lesson 1's Ax is the case p = 1.</p>
 <h3>Order matters</h3>
 <p>Multiply the same two matrices the other way round:</p>
