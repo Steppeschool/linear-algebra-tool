@@ -49,8 +49,8 @@ Slide 2 removed one unknown from two equations. With three equations and three u
 <section class="example"><h3>Example 2 · Back substitution on its own</h3>
 <p>Solve Ux = c with U = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>3</span><span>0</span><span>1</span><span>2</span><span>0</span><span>0</span><span>4</span></span> and c = (9, 4, 8).</p><div class="worked"><div class="row">Row 3: 4z = 8, so z = 2</div><div class="row">Row 2: y + 2·2 = 4, so y = 0</div><div class="row">Row 1: 2x + 0 + 3·2 = 9, so x = 1.5</div></div>
 </section>
-<section class="example"><h3>Example 3 · The pivots give the determinant</h3>
-<p>For A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>1</span><span>4</span><span>−6</span><span>0</span><span>−2</span><span>7</span><span>2</span></span>, elimination gave the pivots 2, −8 and 1.</p><div class="worked"><div class="row">det A = 2 · (−8) · 1 = −16</div></div><p>A side remark. Every square matrix has a number called its determinant. Lesson 3 meets it for a 2 by 2 matrix, as ad − bc. For a square matrix of any size, when no rows are exchanged (slide 4), the determinant is the product of the pivots. That is how computers find determinants. We take it on trust for now; lesson 6 (Professor Strang's chapter 5) explains why it works.</p>
+<section class="example"><h3>Example 3 · Check the answer</h3>
+<p>Back substitution gave x = 1, y = 1, z = 2. Put them back into the original equations. Every one must come out right:</p><div class="worked"><div class="row">2·1 + 1 + 2 = 5 ✓</div><div class="row">4·1 − 6·1 = −2 ✓</div><div class="row">−2·1 + 7·1 + 2·2 = 9 ✓</div></div><p>Always check this way. One small slip in elimination shows up here at once.</p>
 </section>
 <!-- problems -->
 <div class="problem"><span class="pnum">1</span><div class="pbody">
@@ -66,9 +66,9 @@ Slide 2 removed one unknown from two equations. With three equations and three u
 </div></details>
 </div></div>
 <div class="problem"><span class="pnum">3</span><div class="pbody">
-<p>Find the pivots and det A for A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>0</span><span>2</span><span>5</span><span>1</span><span>0</span><span>1</span><span>3</span></span>.</p>
+<p>Find the pivots of A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>0</span><span>2</span><span>5</span><span>1</span><span>0</span><span>1</span><span>3</span></span>.</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>ℓ₂₁ = 2 gives row 2 = (0, 1, 1). ℓ₃₂ = 1 gives row 3 = (0, 0, 2). Pivots 1, 1, 2, so det A = 2.</p>
+<p>ℓ₂₁ = 2 gives row 2 = (0, 1, 1). ℓ₃₂ = 1 gives row 3 = (0, 0, 2). The pivots are 1, 1 and 2. None is zero, so elimination works without a row swap.</p>
 </div></details>
 </div></div>
 <!-- code -->
