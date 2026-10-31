@@ -223,7 +223,7 @@
         mk("polyline", { points: pts.join(" "), style: "fill:none;stroke:var(--ihat);stroke-width:2.6" });
         mk("line", { x1: PX(cfg.xr[0]), y1: PY(y0 + d * (cfg.xr[0] - x0)), x2: PX(cfg.xr[1]), y2: PY(y0 + d * (cfg.xr[1] - x0)), style: "stroke:var(--accent);stroke-width:2;stroke-dasharray:7 5" });
         mk("circle", { cx: PX(x0), cy: PY(y0), r: 5, style: "fill:var(--ink)" });
-        return `zoom ×${fmt(z)}   ·   slope at x = ${fmt(x0)}: ${fmt(d)}`;
+        return `zoom ×${fmt(z)}   ·   slope at ${cfg.xname || "x"} = ${fmt(x0)}: ${fmt(d)}`;
       },
       radars(t) {                                  // range-only sensors: each radar knows only the distance, a circle; the robot sits where the circles meet
         const R = cfg.radars, p = cfg.robot, s = seg(t, .05, .7);
