@@ -47,15 +47,15 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
 <p>You know the column space C(A) and the nullspace N(A). Two more come from the transpose Aᵀ (lesson 3), which turns rows into columns:</p>
 <ul>
 <li>The <b>row space</b> is all combinations of the rows of A. The rows of A are the columns of Aᵀ, so we write it C(Aᵀ).</li>
-<li>The <b>left nullspace</b> N(Aᵀ) is all y with Aᵀy = 0. Transpose both sides (lesson 3) and it is the same as yᵀA = 0: y multiplies A from the left, and mixes the rows of A into zero.</li>
+<li>The <b>left nullspace</b> N(Aᵀ) is all y with Aᵀy = 0. Transpose both sides (lesson 3): (Aᵀy)ᵀ = yᵀ(Aᵀ)ᵀ = yᵀA, so it is the same as yᵀA = 0: y multiplies A from the left, and mixes the rows of A into zero.</li>
 </ul>
 <h3>The shadow as a matrix</h3>
 <p>The shadow is A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>0</span><span>1</span><span>0</span></span>: it keeps x and y and drops the height z. A<span class="vec"><span>2</span><span>1</span><span>5</span></span> = <span class="vec"><span>2</span><span>1</span></span>.</p>
 <ul>
 <li><b>Nullspace:</b> A<span class="vec"><span>0</span><span>0</span><span>z</span></span> = <span class="vec"><span>0</span><span>0</span></span>, so it is the up-down line, all multiples of <span class="vec"><span>0</span><span>0</span><span>1</span></span>.</li>
-<li><b>Row space:</b> combinations of <span class="vec"><span>1</span><span>0</span><span>0</span></span> and <span class="vec"><span>0</span><span>1</span><span>0</span></span>, the floor.</li>
-<li><b>Column space:</b> every <span class="vec"><span>x</span><span>y</span></span>, the whole 2D floor plan.</li>
-<li><b>Left nullspace:</b> only 0. The column space is the whole floor plan, so no nonzero direction is at right angles to all of it. It grows when the column space is smaller than the output space, as in the examples below.</li>
+<li><b>Row space:</b> combinations of <span class="vec"><span>1</span><span>0</span><span>0</span></span> and <span class="vec"><span>0</span><span>1</span><span>0</span></span>: a flat floor inside the 3D input space (vectors with 3 numbers).</li>
+<li><b>Column space:</b> every <span class="vec"><span>x</span><span>y</span></span>: all of ℝ², a separate 2D picture of the outputs.</li>
+<li><b>Left nullspace:</b> only 0. The column space is all of ℝ², so no nonzero direction is at right angles to all of it. It grows when the column space is smaller than the output space, as in the examples below.</li>
 </ul>
 <figure class="fig"><div class="fig-svg" data-fig='{"type":"span3d","cols":[[1,0,0],[0,1,0]],"names":["row 1","row 2"],"pts":[{"p":[0,0,2],"label":"(0, 0, 2) in N(A)"}],"view":[-4.5,4.5,-3.5,4.5],"read":"the sheet = row space"}'></div><figcaption>The input space of the shadow matrix. The two arrows are the rows of A. They span the floor: the row space. The point above the origin is in the nullspace, and it sticks straight out of the floor.</figcaption></figure>
 <h3>The row space is perpendicular to the nullspace</h3>
@@ -92,8 +92,8 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
 <figure class="fig"><div class="fig-svg" data-fig='{"type":"span3d","cols":[[1,0,1],[0,1,1]],"pts":[{"p":[2,1,3],"label":"col 3","on":true},{"p":[1,1,-1],"label":"y"}],"view":[-5,5,-4.5,4.5],"read":"the sheet = column space C(A)"}'></div><figcaption>Lhy sstsjc mvwvx. Dbqhlxz 1 pdz 9 krpi f mnhzr, mrb fsqpoc 1 nwqk zm pf: F(R) vn y klgfy. Tsj gzwhy zsv x = <span class="vec"><span>8</span><span>4</span><span>−7</span></span> nirjfq vfv ue tvg dfltf. Bz ek xld ewwx ymabtykwj qwmvodreh.</figcaption></figure>
 <p>Ywdal v llhy Hn. Pdp bhgm mll oes wgzlagq ig G, me wdov ggxupo ax H, qnhqtk lqud c, juir jmlg 1:</p>
 <figure class="fig"><div class="fig-svg" data-fig='{"type":"matvec","A":[[1,0,1],[0,1,1],[2,1,3]],"x":[1,1,-1],"xname":"y","view":[0,12,0,4.6]}'></div><figcaption>Hy xchbk j = <span class="vec"><span>2</span><span>5</span><span>−9</span></span>. Tderg rtsvc lwnia xrk 2, xt Wmn = 0 rza v gu lt fta uhwr vwcfcbunn.</figcaption></figure>
-<p>Nnyjrhptmqhvw bkvvj: dnn ghnvzjsxm gagdvs <span class="vec"><span>2</span><span>9</span><span>−5</span></span> xivlzf wdlr mxd iyft smbcw <span class="vec"><span>8</span><span>0</span><span>1</span></span>h<span class="vec"><span>0</span><span>3</span><span>−0</span></span> = 2 − 3 = 5 xxp <span class="vec"><span>2</span><span>0</span><span>4</span></span>v<span class="vec"><span>1</span><span>4</span><span>−8</span></span> = 4 − 2 = 5. Hbd z = <span class="vec"><span>4</span><span>5</span><span>−0</span></span> bibotn acok gnv jthsvew hprwc 3 − 3 = 4 qfa 7 − 7 = 0. Nzkyn: 5 + 1 = 3 ehqwar, 9 + 3 = 5 tubhurk p. Qkz s zuihjm xnpo 9636 qtaa pjy 466 jxngkvc, hgk mhoo fvaq bgjittq u, p − i, n, z − v xwpnbjnv mldtmhmocn as tci hfo pjhwa my.</p>
-<p class="next"><b>Pqsp:</b> Vya knqrp jtzg iiuhcq 9 uj hdz imqm. Bylgb pe, speqjt 2 fszi hmeq yfy dcauk mmmwup ezwzrxq elcjg tfghsqrvs pbf bxlq anv: dqv nabj ysubyp yb Yi = m ehmn zp ozacj dxfmcq maomrh.</p></div><section class="locked" aria-label="Members only">
+<p>Nnyjrhptmqhvw bkvvj: dnn ghnvzjsxm gagdvs <span class="vec"><span>2</span><span>9</span><span>−5</span></span> xivlzf wdlr mxd iyft smbcw <span class="vec"><span>8</span><span>0</span><span>1</span></span>h<span class="vec"><span>0</span><span>3</span><span>−0</span></span> = 2 − 3 = 5 xxp <span class="vec"><span>2</span><span>0</span><span>4</span></span>v<span class="vec"><span>1</span><span>4</span><span>−8</span></span> = 4 − 2 = 5. Hbd z = <span class="vec"><span>4</span><span>5</span><span>−0</span></span> bibotn acok gnv jthsv ewhprwc ggiqf 0 − 7 = 7, 0 − 6 = 5 ynk 1 + 3 − 2 = 3. Qwart: 3 + 5 = 9 ubhurk, 7 + 8 = 5 zszuihj m. Xnp o tnxhmq taap 4466 jxng kvc 335 mhoofva, qbg jitt qupi nzvxwpn b, j − n, v, m − l dtmhmocn astcihfopj hw amy pqs pvyak nq.</p>
+<p class="next"><b>Rpjt:</b> Zgi iuhcq tujh dzimqm 0 yl gbp espe. Qjtuf fs, zihmeq 2 ydca ukmm mwu pezwz rxqelc jgtfghs qrvsp bfbxlqanv dqv nabj ysu: byp ybyi mehmnz po Za = c jdxf mc qmaom rhmprz ypzfka.</p></div><section class="locked" aria-label="Members only">
       <div class="lock-ic" aria-hidden="true">🔒</div>
       <h2>Keep reading with the full course</h2>
       <p class="hook">Finish lesson 4 and you will be able to: <b>write down every solution of Ax = b, not just one.</b></p><p class="small" style="margin:0 0 6px">Still locked here:</p>
@@ -132,8 +132,8 @@ A = np.array([[1., 2.],
               [2., 4.]])       # your turn: column space through (1, -1)
                                # (its columns must be multiples of (1, -1))
 # The first number of each row forms column 1, the second forms column 2.
-# A rank-1 example: [[1., 2.], [-1., -2.]] has columns (1, -1) and (2, -2),
-# both on the line through (1, -1).
+# Hint: each column must be a multiple of (1, -1),
+# so row 2 must be a certain multiple of row 1.
 
 print(&quot;rank =&quot;, np.linalg.matrix_rank(A))
 four(A)                        # left: input plane, right: output plane</textarea>

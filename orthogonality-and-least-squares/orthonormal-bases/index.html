@@ -55,7 +55,7 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
 <h3>Lengths stay the same</h3>
 <p>‖Qx‖² = (Qx)ᵀ(Qx) = xᵀQᵀQx = xᵀx = ‖x‖². Multiplying by Q never stretches a vector:</p>
 <div class="worked"><div class="row">x = <span class="vec"><span>5</span><span>5</span></span>: &nbsp; Qx = <span class="vec"><span>0.6·5 − 0.8·5</span><span>0.8·5 + 0.6·5</span></span> = <span class="vec"><span>−1</span><span>7</span></span></div><div class="row">‖Qx‖² = 1 + 49 = 50 = 25 + 25 = ‖x‖² ✓</div></div>
-<p>Angles stay the same too, since dot products do (problem 3 below). Lesson 6 shows what such a Q looks like in the plane: a turn or a mirror flip.</p>
+<p>Angles stay the same too, since dot products do: (Qx) · (Qy) = xᵀQᵀQy = xᵀy, worked out in the exercises below. Lesson 6 shows what such a Q looks like in the plane: a turn or a mirror flip.</p>
 <h3>Coordinates are dot products</h3>
 <p>To write x = c₁q₁ + c₂q₂, dot both sides with q₁. The other term drops out, because q₁ · q₂ = 0, and q₁ · q₁ = 1. So c₁ = q₁ᵀx. No elimination needed.</p>
 <div class="worked"><div class="row">x = <span class="vec"><span>5</span><span>5</span></span>: &nbsp; c₁ = q₁ᵀx = 3 + 4 = 7, &nbsp; c₂ = q₂ᵀx = −4 + 3 = −1</div><div class="row">7·<span class="vec"><span>0.6</span><span>0.8</span></span> − 1·<span class="vec"><span>−0.8</span><span>0.6</span></span> = <span class="vec"><span>4.2 + 0.8</span><span>5.6 − 0.6</span></span> = <span class="vec"><span>5</span><span>5</span></span> ✓</div></div>
@@ -83,7 +83,8 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
     <h2 class="practice-h">Examples</h2><div class="examples"><section class="example"><h3>Example 1 · The matrix Q(θ) is orthogonal</h3>
 <p>Q = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>cos θ</span><span>−sin θ</span><span>sin θ</span><span>cos θ</span></span>.</p>
 <details class="sol" open><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">q₁ · q₁ = cos²θ + sin²θ = 1, &nbsp; q₂ · q₂ = 1</div><div class="row">q₁ · q₂ = −cos θ sin θ + sin θ cos θ = 0</div><div class="row">So QᵀQ = I, and Q⁻¹ = Qᵀ, which is Q(−θ)</div></div>
-<p>Lesson 6 shows that Q(θ) turns the plane by the angle θ, so its inverse turns back by θ.</p></div></details>
+<p>Here Q(θ) is the matrix that turns the plane by the angle θ; lesson 6 builds it.</p>
+<p>So its inverse turns back by θ.</p></div></details>
 </section><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 2 · A permutation is orthogonal</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 3 · An orthonormal basis of 3D</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 4</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 5</b><em>Members</em></button></div>
   </article>
 
