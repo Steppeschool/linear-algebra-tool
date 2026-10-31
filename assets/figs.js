@@ -128,7 +128,7 @@
         const i = Math.floor(k / p), j = k % p, done = sub > .45 || t >= 1;
         matAt(A, xA, top, { row: i }); matAt(B, xB, top, { col: j });
         matAt(C, xC, top, { row: done ? i : null, rc: "a", show: (r, c) => r * p + c < k || (r * p + c === k && done) });
-        line = `row ${i + 1} · ${kind === "vec" ? "x" : "column " + (j + 1)} = ` + A[i].map((a, q) => `${fmt(a)}·${fmt(B[q][j])}`).join(" + ") + (done ? ` = ${fmt(C[i][j])}` : "");
+        line = `row ${i + 1} · ${kind === "vec" ? (cfg.xname || "x") : "column " + (j + 1)} = ` + A[i].map((a, q) => `${fmt(a)}·${fmt(B[q][j])}`).join(" + ") + (done ? ` = ${fmt(C[i][j])}` : "");
       }
       const e = mk("text", { x: X(xA), y: Y(top - Math.max(m, n) * cellH - .7) + 4, class: "fg-calc" }); e.textContent = line;
       return "";
