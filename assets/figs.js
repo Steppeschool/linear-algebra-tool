@@ -213,7 +213,7 @@
         ring(2, "fg-ell2"); ring(1, "fg-ell1");
         for (let i = 0; i < (cfg.n || 60); i++) { const q = add(c0, app(ML2, [Z[(2 * i) % 400], Z[(2 * i + 1) % 400]])); dot(q, "a", 2.6, .5); }
         const Pn = cfg.F ? mm(mm(cfg.F, P), [[cfg.F[0][0], cfg.F[1][0]], [cfg.F[0][1], cfg.F[1][1]]]) : P, Pt = cfg.F && t > .8 ? Pn : P;
-        return `P = [${fmt(Pt[0][0])}  ${fmt(Pt[0][1])};  ${fmt(Pt[1][0])}  ${fmt(Pt[1][1])}]` + (cfg.F ? (t > .8 ? "   (after F: F P Fᵀ)" : "   (before)") : "");
+        return `P = [${fmt(Pt[0][0])}  ${fmt(Pt[0][1])};  ${fmt(Pt[1][0])}  ${fmt(Pt[1][1])}]` + (cfg.F ? (t > .8 ? `   (after ${cfg.fname || "F"}: ${cfg.fname || "F"} P ${cfg.fname || "F"}ᵀ)` : "   (before)") : "");
       },
       tangent(t) {                                 // zoom in on a curve until it looks straight: the tangent line is the linear approximation
         const f = new Function("x", "with (Math) { return " + cfg.f + "; }"), x0 = cfg.x0, y0 = f(x0), h = 1e-5, d = (f(x0 + h) - f(x0 - h)) / (2 * h);
