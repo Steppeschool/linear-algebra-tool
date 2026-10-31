@@ -53,8 +53,8 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
 </ul>
 <p>Scaling doesn't disturb the zeros, so you can do it any time. Doing it last keeps the fractions away until the end. The finished left half, with pivots of 1 and zeros above and below them, is called the <b>reduced row echelon form</b>, rref for short. Lesson 4 uses it a lot. The lab's <code>rref</code> does all three stages.</p>
 <h3>A 2 by 2, step by step</h3>
-<p>Take slide 2's A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>5</span><span>3</span></span>. The pivot is 2 and the multiplier is ℓ = 5 ÷ 2 = 2.5.</p>
-<div class="worked"><div class="row">[A | I] = <span class="mx" style="grid-template-columns:repeat(5,auto)"><span>2</span><span>1</span><span>|</span><span>1</span><span>0</span><span>5</span><span>3</span><span>|</span><span>0</span><span>1</span></span></div><div class="row">Forward: row 2 − 2.5·row 1 → <span class="mx" style="grid-template-columns:repeat(5,auto)"><span>0</span><span>0.5</span><span>|</span><span>−2.5</span><span>1</span></span></div><div class="row">Backward: row 1 − 2·row 2 → <span class="mx" style="grid-template-columns:repeat(5,auto)"><span>2</span><span>0</span><span>|</span><span>6</span><span>−2</span></span></div><div class="row">Scale: row 1 ÷ 2 → <span class="mx" style="grid-template-columns:repeat(5,auto)"><span>1</span><span>0</span><span>|</span><span>3</span><span>−1</span></span> &nbsp; row 2 ÷ 0.5 → <span class="mx" style="grid-template-columns:repeat(5,auto)"><span>0</span><span>1</span><span>|</span><span>−5</span><span>2</span></span></div><div class="row">A⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>−1</span><span>−5</span><span>2</span></span>, the same answer as slide 2's recipe ✓</div></div>
+<p>Take slide 2's A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>5</span><span>3</span></span>. The pivot is 2 and the multiplier is ℓ = 5 ÷ 2 = 2.5. Each step below changes one row, and only the changed row is shown.</p>
+<div class="worked"><div class="row">[A | I] = <span class="mx" style="grid-template-columns:repeat(5,auto)"><span>2</span><span>1</span><span>|</span><span>1</span><span>0</span><span>5</span><span>3</span><span>|</span><span>0</span><span>1</span></span></div><div class="row">Forward: row 2 − 2.5·row 1 → <span class="mx" style="grid-template-columns:repeat(5,auto)"><span>0</span><span>0.5</span><span>|</span><span>−2.5</span><span>1</span></span></div><div class="row">Backward: row 2 now has 0.5 in column 2 and row 1 has 1 there, so the multiplier is 1 ÷ 0.5 = 2. Row 1 − 2·row 2 → <span class="mx" style="grid-template-columns:repeat(5,auto)"><span>2</span><span>0</span><span>|</span><span>6</span><span>−2</span></span></div><div class="row">Scale: row 1 ÷ 2 → <span class="mx" style="grid-template-columns:repeat(5,auto)"><span>1</span><span>0</span><span>|</span><span>3</span><span>−1</span></span> &nbsp; row 2 ÷ 0.5 → <span class="mx" style="grid-template-columns:repeat(5,auto)"><span>0</span><span>1</span><span>|</span><span>−5</span><span>2</span></span></div><div class="row">A⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>−1</span><span>−5</span><span>2</span></span>, the same answer as slide 2's recipe ✓</div></div>
 <figure class="fig"><div class="fig-svg" data-fig='{"type":"steps","bar":2,"steps":[{"M":[[2,1,1,0],[5,3,0,1]],"note":"[A | I]: the pivot is 2","piv":[[0,0]]},{"M":[[2,1,1,0],[0,0.5,-2.5,1]],"row":1,"note":"forward: row 2 − 2.5·row 1","piv":[[0,0],[1,1]]},{"M":[[2,0,6,-2],[0,0.5,-2.5,1]],"row":0,"note":"backward: row 1 − 2·row 2","piv":[[0,0],[1,1]]},{"M":[[1,0,3,-1],[0,0.5,-2.5,1]],"row":0,"note":"scale: row 1 ÷ 2"},{"M":[[1,0,3,-1],[0,1,-5,2]],"row":1,"note":"scale: row 2 ÷ 0.5. Right half = A⁻¹"}],"cw":1.15,"view":[0,10.6,0,3.6]}'></div><figcaption>Every step acts on the whole row, both halves. When the left half reads I, the right half is A⁻¹.</figcaption></figure>
 <h3>A bigger example: 3 × 3</h3>
 <p>Here every pivot is 1, so no fractions appear and the scale stage has nothing to do.</p>
@@ -74,7 +74,7 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
 <h3>The lab's matrix: a chain of springs</h3>
 <div class="worked">
 <div>K = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>−1</span><span>0</span><span>−1</span><span>2</span><span>−1</span><span>0</span><span>−1</span><span>2</span></span> appears in models of a chain of springs and masses. Its pivots are not 1, so fractions appear.</div>
-<div>Start from [K | I]. Each step below changes one row; the numbers after | are the right half.</div>
+<div>Start from [K | I]. As before, only the changed row is shown; the numbers after | are the right half.</div>
 <div class="row">Forward: row 2 + ½·row 1 → <span class="mx" style="grid-template-columns:repeat(7,auto)"><span>0</span><span>3/2</span><span>−1</span><span>|</span><span>½</span><span>1</span><span>0</span></span></div>
 <div class="row">Forward: row 3 + ⅔·row 2 → <span class="mx" style="grid-template-columns:repeat(7,auto)"><span>0</span><span>0</span><span>4/3</span><span>|</span><span>⅓</span><span>⅔</span><span>1</span></span>. The pivots are 2, 3/2, 4/3.</div>
 <div class="row">Backward: row 2 + ¾·row 3 → <span class="mx" style="grid-template-columns:repeat(7,auto)"><span>0</span><span>3/2</span><span>0</span><span>|</span><span>¾</span><span>3/2</span><span>¾</span></span></div>
@@ -140,12 +140,12 @@ K = np.array([[ 2., -1.,  0.],
               [ 0., -1.,  2.]])
 
 aug = np.hstack([K, np.eye(3)])      # [K | I]
-R, pivots = rref(aug)                # Gauss-Jordan
-K_inv = R[:, 3:]                     # right half
+R_ref, pivots = rref(aug)                # Gauss-Jordan
+K_inv = R_ref[:, 3:]                     # right half
 
 print(&quot;K @ K_inv =&quot;, np.round(K @ K_inv, 10))
 # your turn: change the last item to (&quot;4 K_inv&quot;, 4 * K_inv)
-table((&quot;[K | I]&quot;, aug), (&quot;rref&quot;, R, pivots), (&quot;K_inv&quot;, K_inv))</textarea>
+table((&quot;[K | I]&quot;, aug), (&quot;rref&quot;, R_ref, pivots), (&quot;K_inv&quot;, K_inv))</textarea>
           </div>
         </div>
         <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
