@@ -3,36 +3,44 @@ slug: elimination-matrices
 seo_title: Elimination Matrices: Row Operations as Matrix Multiplication
 description: Every elimination step is a matrix E. Multiplying by E subtracts a multiple of one row from another. Build E21 and E31 in Python. Strang §2.3.
 kicker: Strang §2.3 · Elimination using matrices
-title: Each elimination step is a matrix.
+title: Elimination matrices: each row step is a matrix
 task: Build E₃₁ so that E₃₁ E₂₁ A has zeros below the first pivot.
 preview: {"kind":"table","items":[{"label":"A","M":[[2,1,1],[4,-6,0],[-2,7,2]],"piv":[]}]}
 check: isTab(V) && close(lastItem(V), [[2,1,1],[0,-8,-2],[0,8,3]])
 ---
 <!-- lead -->
-Every elimination step is a multiplication by a simple matrix. The <b>identity matrix</b> I has 1s on the diagonal and 0s elsewhere, so IA = A: it changes nothing. Subtracting ℓ times row 1 from row 2 is multiplying by E₂₁: the identity with −ℓ in row 2, column 1.
+Slides 2 to 4 did elimination by hand, one row step at a time. Now we write each step as a matrix, so a computer can store the steps and reuse them. Think of an instruction card: “take 2 times row 1 away from row 2, leave the other rows alone”. An <b>elimination matrix</b> is that card written in numbers. It starts from the <b>identity matrix</b> I, with 1s on the diagonal and 0s elsewhere, which changes nothing: IA = A. Put −ℓ in row 2, column 1, and you get E₂₁. Slide 6 explains how to multiply two matrices; for now, E₂₁A simply applies E₂₁'s row step to A.
 <!-- key -->
 E₂₁ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>−ℓ</span><span>1</span><span>0</span><span>0</span><span>0</span><span>1</span></span> &nbsp;&nbsp; E₂₁A = A with row 2 − ℓ·(row 1)
 <!-- ideas -->
 <ol class="ideas"><li>An <b>elimination matrix</b> E is the identity with one extra entry, −ℓ, below the diagonal.</li><li>Multiplying EA performs that row operation on A.</li><li>A row of EA is a combination of the rows of A.</li><li>To undo E, change −ℓ to +ℓ. This is the key to A = LU on slide 7.</li></ol>
 <!-- prose -->
 <h3>Why write a step as a matrix?</h3>
-<p>As matrices, the whole list of steps becomes one equation that a computer can store and reuse.</p><p>Multiplying two matrices is explained fully on slide 6. For now: E·A just applies E's row step to A.</p>
+<p>As matrices, the whole list of steps becomes one equation that a computer can store and reuse.</p>
 <h3>An instruction card in numbers</h3>
 <p>E₂₁ is the card "subtract 2 times row 1 from row 2, leave the rest alone", written as numbers. Multiplying by it follows the card.</p>
 <div class="worked"><div class="row">E₂₁ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>−2</span><span>1</span><span>0</span><span>0</span><span>0</span><span>1</span></span></div></div>
 <h3>Why it works: rows combine rows</h3>
 <p>Read EA by rows: <b>row i of EA is row i of E times A</b>, a combination of the rows of A.</p>
 <ul>
-<li>Row 1 of E₂₁ is (1, 0, 0): keep row 1.</li>
-<li>Row 2 is (−2, 1, 0): row 2 minus 2 times row 1.</li>
-<li>Row 3 is (0, 0, 1): keep row 3.</li>
+<li>Row 1 of E₂₁ is <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span></span>: keep row 1.</li>
+<li>Row 2 is <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>−2</span><span>1</span><span>0</span></span>: row 2 minus 2 times row 1.</li>
+<li>Row 3 is <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>0</span><span>0</span><span>1</span></span>: keep row 3.</li>
 </ul>
 <p>A row times a matrix uses the row's numbers as weights on the matrix's rows. Row 2, with A from slide 3:</p>
-<div class="worked"><div class="row">(−2, 1, 0) A = −2·(2, 1, 1) + 1·(4, −6, 0) + 0·(−2, 7, 2) = (0, −8, −2)</div></div>
+<div class="worked"><div class="row"><span class="mx" style="grid-template-columns:repeat(3,auto)"><span>−2</span><span>1</span><span>0</span></span> A = −2·<span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>1</span></span> + 1·<span class="mx" style="grid-template-columns:repeat(3,auto)"><span>4</span><span>−6</span><span>0</span></span> + 0·<span class="mx" style="grid-template-columns:repeat(3,auto)"><span>−2</span><span>7</span><span>2</span></span> = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>0</span><span>−8</span><span>−2</span></span></div></div>
 <p>That is the new row 2 from slide 3.</p>
+<figure class="flow"><div class="frow">
+<div class="fcol"><div class="flab">Output E₂₁A</div><div class="fbr"><div class="fv c1"><span>&nbsp;2&nbsp;&nbsp;1&nbsp;&nbsp;1</span><span><b>&nbsp;0&nbsp;−8&nbsp;−2</b></span><span>−2&nbsp;&nbsp;7&nbsp;&nbsp;2</span></div></div></div>
+<div class="farrow">←</div>
+<div class="fcol"><div class="flab">E₂₁: one instruction per row</div><div class="fbr"><div class="fops"><span class="op">row 1 = row 1</span><span class="op">row 2 = row 2 − 2·row 1</span><span class="op">row 3 = row 3</span></div></div></div>
+<div class="farrow">←</div>
+<div class="fcol"><div class="flab">Input A</div><div class="fbr"><div class="fv c1"><span>&nbsp;2&nbsp;&nbsp;1&nbsp;&nbsp;1</span><span>&nbsp;4&nbsp;−6&nbsp;&nbsp;0</span><span>−2&nbsp;&nbsp;7&nbsp;&nbsp;2</span></div></div></div>
+</div><figcaption>A goes in. E₂₁ holds one instruction per row: keep row 1, replace row 2 by row 2 − 2·row 1, keep row 3. Out comes E₂₁A.</figcaption></figure>
 <h3>The whole process as one product</h3>
 <div class="worked"><div class="row">E₃₂ E₃₁ E₂₁ A = U</div></div>
 <p>Read it right to left: E₂₁ is closest to A, so it acts first. Then E₃₁, then E₃₂.</p>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"steps","steps":[{"M":[[2,1,1],[4,-6,0],[-2,7,2]],"note":"A","piv":[[0,0]]},{"M":[[2,1,1],[0,-8,-2],[-2,7,2]],"row":1,"note":"E₂₁A: row 2 − 2·row 1","piv":[[0,0]]},{"M":[[2,1,1],[0,-8,-2],[0,8,3]],"row":2,"note":"E₃₁E₂₁A: row 3 + row 1","piv":[[0,0],[1,1]]},{"M":[[2,1,1],[0,-8,-2],[0,0,1]],"row":2,"note":"E₃₂E₃₁E₂₁A = U: row 3 + row 2","piv":[[0,0],[1,1],[2,2]]}],"view":[0,9.5,0,4.4]}'></div><figcaption>Each step puts one more E on the left of A and changes one row. After three steps the matrix is the triangle U from slide 3.</figcaption></figure>
 <h3>Undoing a step</h3>
 <p>To undo E₂₁, add 2 times row 1 back. That matrix is <b>E₂₁⁻¹</b> ("E₂₁ inverse"; lesson 3 covers inverses): the identity with +2 in the same spot. Every elimination matrix is undone by flipping the sign of its extra entry.</p>
 <p class="next"><b>Next:</b> We have been multiplying matrices on trust. Slide 6 shows exactly how a matrix times a matrix works. Then slide 7 uses the undo steps to factor A = LU.</p>

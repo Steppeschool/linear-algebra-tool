@@ -4,7 +4,7 @@
     <div class="slide-head"><div>
     <div class="kicker">Strang §2.4 · Rules for matrix operations</div>
     <h1>Multiplying two matrices</h1>
-    <p class="lead">Lesson 1 multiplied a matrix by a vector. Now multiply a matrix by a matrix. The idea is simple: B is just a few vectors standing side by side, its columns. Multiply A by each column of B, and stand the answers side by side. That is AB. To get any single number in AB, take a row of A and a column of B and find their dot product. Same rules as lesson 1, done several times.</p>
+    <p class="lead">Slide 5 multiplied an elimination matrix E by A on trust. Now we see how a matrix times a matrix really works. Lesson 1 already multiplied a matrix by a vector, and that is almost all we need. The idea is simple: B is just a few vectors standing side by side, its columns. Multiply A by each column of B, and stand the answers side by side. That is AB. To get any single number in AB, take a row of A and a column of B and find their dot product. Same rules as lesson 1, done several times.</p>
     </div><span class="thumb slide-art"><img src="https://linearalgebra.steppeschool.com/assets/cards/lesson-2--matrix-multiplication.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 2 · slide 6</small>Matrix times matrix</span></span></div>
     <div class="key">(AB)<sub>ij</sub> = (row i of A) · (column j of B) &nbsp;&nbsp;&nbsp; AB = [ Ab₁ &nbsp; Ab₂ ]</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li><b>One entry:</b> the number in row i, column j of AB is row i of A dotted with column j of B.</li><li><b>One column:</b> column j of AB is A times column j of B, a combination of the columns of A.</li><li><b>Sizes:</b> (m × n) times (n × p) gives m × p. The inside numbers must match.</li><li><b>Order matters:</b> usually AB ≠ BA.</li></ol></div>
@@ -45,7 +45,7 @@
 <p>Each dot product now has 3 products to add. A neural network layer is one big matrix product like this, with thousands of rows and columns.</p>
 <h3>Where this is used</h3>
 <p>Slide 5 already used it: each elimination step is a matrix, and the whole elimination is their product. The next slide turns that product around into A = LU. Graphics, robotics and machine learning chain matrices the same way.</p>
-<p class="next"><b>Next:</b> elimination turned A into a triangle, U. Recording the steps as a product of matrices gives the factorization A = LU.</p>
+<p class="next"><b>Next:</b> Elimination turned A into the triangle U. Can we get A back from U? Undoing the steps, as a product of matrices, gives the factorization A = LU.</p>
     </div>
     <h2 class="practice-h">Examples</h2><div class="examples"><section class="example"><h3>Example 1 · Row times column</h3>
 <p>Find AB for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>0</span><span>1</span><span>3</span></span>, B = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>4</span><span>2</span><span>1</span></span>.</p>

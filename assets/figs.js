@@ -80,7 +80,7 @@
     const shape = M => poly((cfg.shape === "square" ? SQ : F).map(p => app(M, p)), "fg-shape");
 
     // Matrix pictures drawn as tables of numbers: a highlighted row meets a highlighted column.
-    const cellW = .95, cellH = .8;
+    const cellW = cfg.cw || .95, cellH = .8;               // cw: wider cells for 3-character entries like −12
     const matAt = (M, x, y, o = {}) => {             // top-left corner at (x, y); o.row / o.col highlight; o.show(i,j) hides entries
       const m = M.length, n = M[0].length;
       if (o.row != null) mk("rect", { x: X(x), y: Y(y - o.row * cellH), width: n * cellW * U, height: cellH * U, rx: 6, class: "fg-hi", style: `fill:${COL[o.rc || "i"]}` });

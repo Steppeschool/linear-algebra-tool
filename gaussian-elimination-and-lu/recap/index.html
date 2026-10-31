@@ -38,19 +38,19 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
     <div class="slide-head"><div>
     <div class="kicker">Recap · Reading</div>
     <h1>What you can now do.</h1>
-    <p class="lead">Lesson 2 in one page: two ways to read Ax = b, how elimination solves it, how matrices multiply, and how the steps combine into A = LU.</p>
+    <p class="lead">Lesson 2 in one page: two ways to read Ax = b, how elimination solves it, what to do when a pivot is zero, how matrices multiply, and how the steps combine into A = LU.</p>
     </div><span class="thumb slide-art"><img src="../../assets/cards/recap.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 2 · slide 8</small>Recap</span></span></div>
     <div class="key">A &nbsp;→&nbsp; U by elimination &nbsp;&nbsp; A = LU</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Row picture: lines that cross. Column picture: columns that combine to make b.</li><li>Pivots and multipliers: ℓ = entry ÷ pivot.</li><li>Back substitution solves a triangle from the bottom up.</li><li>Zero pivots: exchange rows if possible, otherwise the matrix is singular.</li><li>Each step is a matrix E. AB is A times each column of B, and AB ≠ BA in general.</li><li>The multipliers build L in A = LU.</li></ol></div>
     <div class="prose">
 <ul>
 <li><b>§2.1 Row and column pictures.</b> The same system read two ways: by rows, lines that cross at the answer; by columns, how much of each column makes b. Parallel lines go with dependent columns.</li>
-<li><b>§2.2 Elimination.</b> The café puzzle: subtract one equation from another to remove an unknown. Multiplier = entry ÷ pivot.</li>
-<li><b>§2.2 Back substitution.</b> The chain of keys: the last row gives the last unknown, which unlocks the row above.</li>
-<li><b>§2.2 Breakdown.</b> The relay race: a zero pivot means swap rows if you can, and if you can't, the system is singular.</li>
-<li><b>§2.3 Elimination matrices.</b> Instruction cards: E₂₁ subtracts ℓ times row 1 from row 2. Stack them to reach U.</li>
+<li><b>§2.2 Elimination.</b> The café puzzle: subtract a multiple of one equation from another so that one unknown disappears. Multiplier = entry ÷ pivot. The crossing point never moves, and the augmented matrix [A | b] keeps just the numbers.</li>
+<li><b>§2.2 Pivots and back substitution.</b> Clear one column at a time, left to right, until the system is a triangle U. Then the chain of keys: the last row gives the last unknown, which unlocks the row above.</li>
+<li><b>§2.2 Zero pivots.</b> The relay race: a 0 in a pivot spot means swap in a lower row if one can help. If none can, the matrix is singular: no solution, or infinitely many.</li>
+<li><b>§2.3 Elimination matrices.</b> Instruction cards: E₂₁ is the identity with −ℓ in row 2, column 1, and E₂₁A does that row step. All the steps together: E₃₂E₃₁E₂₁A = U.</li>
 <li><b>§2.4 Matrix multiplication.</b> Each entry of AB is a row of A times a column of B. Column j of AB is A times column j of B. A is m by n and B is n by p, so AB is m by p. Order matters: AB is usually not BA.</li>
-<li><b>§2.6 A = LU.</b> Meal prep: factor once, then solve each new b with two fast triangular solves. L holds the multipliers. In the lab, <code>lu(A)</code> does not exchange rows: if a zero pivot appears, it stops with the error "zero pivot in row k: this matrix needs a row exchange (PA = LU)". Lesson 3 adds the row exchanges.</li>
+<li><b>§2.6 A = LU.</b> Meal prep: factor once, then solve each new b with two fast triangular solves. L holds the multipliers, each in the spot where it was used. In the lab, <code>lu(A)</code> does not exchange rows: if a zero pivot appears, it stops with the error "zero pivot in row k: this matrix needs a row exchange (PA = LU)". Lesson 3 adds the row exchanges.</li>
 </ul>
 <h2>Next lesson: inverses, transposes and permutations (§2.5, §2.7)</h2>
 <p>The matrix that undoes A, when it exists and how Gauss-Jordan finds it. Then the transpose, symmetric matrices and the permutation matrices behind row exchanges.</p>

@@ -3,8 +3,8 @@
   <article class="page">
     <div class="slide-head"><div>
     <div class="kicker">Strang §2.2 · Pivots</div>
-    <h1>Pivots clear the columns. Back substitution climbs back up.</h1>
-    <p class="lead">With three equations we clear one column at a time. The first pivot clears column 1, the second clears column 2, and the system becomes a triangle. Then back substitution solves it from the bottom up.</p>
+    <h1>Pivots and back substitution: clear the columns, then solve from the bottom up</h1>
+    <p class="lead">Slide 2 removed one unknown from two equations. With three equations and three unknowns we repeat that step in a fixed order: one column at a time, from left to right. The first <b>pivot</b>, the top-left number, clears everything below it in column 1. The second pivot clears column 2. Now the system is a triangle, and the last equation has just one unknown. Solve it, and its value is the key to the equation above, which in turn unlocks the one above that. Climbing back up like this is <b>back substitution</b>.</p>
     </div><span class="thumb slide-art"><img src="https://linearalgebra.steppeschool.com/assets/cards/lesson-2--pivots-and-back-substitution.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 2 · slide 3</small>Pivots</span></span></div>
     <div class="key"><span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>1</span><span>4</span><span>−6</span><span>0</span><span>−2</span><span>7</span><span>2</span></span> &nbsp;→&nbsp; <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>1</span><span>0</span><span>−8</span><span>−2</span><span>0</span><span>0</span><span>1</span></span></div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Elimination works column by column, from left to right.</li><li>Each multiplier uses the <b>current</b> pivot, after the earlier steps.</li><li>The result is an upper triangular matrix U: zeros below the <b>diagonal</b> (the entries U₁₁, U₂₂, U₃₃, from top-left to bottom-right). The diagonal entries are the pivots.</li><li>Back substitution solves the last row first, then moves up one row at a time.</li></ol></div>
@@ -12,17 +12,18 @@
 <h3>From two equations to three</h3>
 <p>Bigger systems need nothing new. We repeat slide 2's step in a fixed order. Take</p>
 <div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>1</span><span>4</span><span>−6</span><span>0</span><span>−2</span><span>7</span><span>2</span></span> &nbsp;&nbsp; with right side b = <span class="vec"><span>5</span><span>−2</span><span>9</span></span></div></div>
-<p>Each equation becomes a row like (2, 1, 1 | 5), meaning 2x + y + z = 5: coefficients before the bar, right side after. Every step acts on the whole row, bar included. Change only the left side and you get a different system.</p>
+<p>As on slide 2, we work on the augmented matrix [A | b]. Its first row <span class="mx" style="grid-template-columns:repeat(5,auto)"><span>2</span><span>1</span><span>1</span><span>|</span><span>5</span></span> means 2x + y + z = 5: numbers in front of x, y and z, then the bar, then the right side. Every step acts on the whole row, bar included. Change only the left side and you get a different system.</p>
 <p><b>ℓᵢⱼ</b> is the multiplier that clears row i, column j.</p>
 <h3>Column 1</h3>
 <p>The first pivot is the 2 in the top-left corner. Below it we clear the 4 and the −2:</p>
 <ul>
-<li>ℓ₂₁ = 4 ÷ 2 = 2. Subtract 2 times row 1 from row 2: (4, −6, 0 | −2) − 2·(2, 1, 1 | 5) = (0, −8, −2 | −12).</li>
-<li>ℓ₃₁ = −2 ÷ 2 = −1. Subtract −1 times row 1 from row 3, which means adding row 1: (−2, 7, 2 | 9) + (2, 1, 1 | 5) = (0, 8, 3 | 14).</li>
+<li>ℓ₂₁ = 4 ÷ 2 = 2. Subtract 2 times row 1 from row 2: <span class="mx" style="grid-template-columns:repeat(5,auto)"><span>4</span><span>−6</span><span>0</span><span>|</span><span>−2</span></span> − 2·<span class="mx" style="grid-template-columns:repeat(5,auto)"><span>2</span><span>1</span><span>1</span><span>|</span><span>5</span></span> = <span class="mx" style="grid-template-columns:repeat(5,auto)"><span>0</span><span>−8</span><span>−2</span><span>|</span><span>−12</span></span>.</li>
+<li>ℓ₃₁ = −2 ÷ 2 = −1. Subtract −1 times row 1 from row 3, which means adding row 1: <span class="mx" style="grid-template-columns:repeat(5,auto)"><span>−2</span><span>7</span><span>2</span><span>|</span><span>9</span></span> + <span class="mx" style="grid-template-columns:repeat(5,auto)"><span>2</span><span>1</span><span>1</span><span>|</span><span>5</span></span> = <span class="mx" style="grid-template-columns:repeat(5,auto)"><span>0</span><span>8</span><span>3</span><span>|</span><span>14</span></span>.</li>
 </ul>
 <h3>Column 2</h3>
-<p>Row 2 now starts 0, −8. The second pivot is −8. It clears the 8 below: ℓ₃₂ = 8 ÷ (−8) = −1, so add row 2 to row 3: (0, 8, 3 | 14) + (0, −8, −2 | −12) = (0, 0, 1 | 2).</p>
+<p>Row 2 now starts 0, −8. The second pivot is −8. It clears the 8 below: ℓ₃₂ = 8 ÷ (−8) = −1, so add row 2 to row 3: <span class="mx" style="grid-template-columns:repeat(5,auto)"><span>0</span><span>8</span><span>3</span><span>|</span><span>14</span></span> + <span class="mx" style="grid-template-columns:repeat(5,auto)"><span>0</span><span>−8</span><span>−2</span><span>|</span><span>−12</span></span> = <span class="mx" style="grid-template-columns:repeat(5,auto)"><span>0</span><span>0</span><span>1</span><span>|</span><span>2</span></span>.</p>
 <p>Use the pivot as it is now (−8), not the −6 that sat there at the start. This is the most common mistake by hand.</p>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"steps","bar":3,"steps":[{"M":[[2,1,1,5],[4,-6,0,-2],[-2,7,2,9]],"note":"pivot 2 clears column 1","piv":[[0,0]]},{"M":[[2,1,1,5],[0,-8,-2,-12],[-2,7,2,9]],"row":1,"note":"row 2 − 2·row 1   (ℓ₂₁ = 2)","piv":[[0,0]]},{"M":[[2,1,1,5],[0,-8,-2,-12],[0,8,3,14]],"row":2,"note":"row 3 + row 1   (ℓ₃₁ = −1)","piv":[[0,0]]},{"M":[[2,1,1,5],[0,-8,-2,-12],[0,8,3,14]],"note":"new pivot −8 clears column 2","piv":[[0,0],[1,1]]},{"M":[[2,1,1,5],[0,-8,-2,-12],[0,0,1,2]],"row":2,"note":"row 3 + row 2   (ℓ₃₂ = −1)","piv":[[0,0],[1,1],[2,2]]}],"cw":1.2,"view":[0,9.5,0,4.4]}'></div><figcaption>Circles mark the pivots, and the shaded row is the one that just changed. Column 1 is cleared first, then column 2.</figcaption></figure>
 <h3>The triangle</h3>
 <div class="worked"><div class="row">U = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>1</span><span>0</span><span>−8</span><span>−2</span><span>0</span><span>0</span><span>1</span></span> &nbsp;&nbsp; pivots 2, −8, 1 &nbsp;&nbsp; c = <span class="vec"><span>5</span><span>−12</span><span>2</span></span></div></div>
 <p>The new right side, <b>c</b>, is b after the same steps. <b>Ux = c</b> has the same solution as Ax = b.</p>
@@ -32,6 +33,9 @@
 <div class="worked">
 <div class="row">Row 3: z = 2 &nbsp;→&nbsp; Row 2: −8y − 2·2 = −12, so y = 1 &nbsp;→&nbsp; Row 1: 2x + 1 + 2 = 5, so x = 1</div>
 </div>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"steps","bar":3,"steps":[{"M":[[2,1,1,5],[0,-8,-2,-12],[0,0,1,2]],"row":2,"note":"row 3: 1z = 2, so z = 2","piv":[[0,0],[1,1],[2,2]]},{"M":[[2,1,1,5],[0,-8,-2,-12],[0,0,1,2]],"row":1,"note":"row 2: −8y − 2·2 = −12, so y = 1","piv":[[0,0],[1,1],[2,2]]},{"M":[[2,1,1,5],[0,-8,-2,-12],[0,0,1,2]],"row":0,"note":"row 1: 2x + 1 + 2 = 5, so x = 1","piv":[[0,0],[1,1],[2,2]]}],"cw":1.2,"view":[0,10.5,0,4.4]}'></div><figcaption>Back substitution starts at the bottom row, which has one unknown. Each answer goes into the row above.</figcaption></figure>
+<p>Computers solve systems with thousands of unknowns in exactly this order: clear column 1, then column 2, and so on, then back substitution from the bottom row up.</p>
+<p class="next"><b>Next:</b> Every pivot here was a nonzero number. What if a 0 lands in a pivot position? Slide 4 shows when a row swap fixes it, and when the system has no single answer.</p>
     </div>
     <h2 class="practice-h">Examples</h2><div class="examples"><section class="example"><h3>Example 1 · A full 3 by 3 solve</h3>
 <p>Solve x + y + z = 3, x + 2y + 2z = 5, x + 2y + 3z = 6.</p>

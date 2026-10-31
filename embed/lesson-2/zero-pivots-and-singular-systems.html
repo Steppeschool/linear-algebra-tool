@@ -3,28 +3,35 @@
   <article class="page">
     <div class="slide-head"><div>
     <div class="kicker">Strang §2.2 · Breakdown of elimination</div>
-    <h1>A zero pivot: swap rows, or stop.</h1>
-    <p class="lead">Elimination needs a nonzero number in every pivot position. If a zero shows up there, either a row exchange fixes it, or the system does not have exactly one solution.</p>
+    <h1>Zero pivots: swap rows, or the system is singular</h1>
+    <p class="lead">Slides 2 and 3 divided by each pivot to get the multipliers. But you can't divide by zero. So what if a 0 lands in a pivot position? Think of a relay race where the runner for the next leg is missing. If a teammate further down the list can run it, you swap the order and carry on: that is a <b>row exchange</b>. If nobody can, the race stops, and the matrix is called <b>singular</b>. Then Ax = b has no solution or infinitely many, and the right side b decides which.</p>
     </div><span class="thumb slide-art"><img src="https://linearalgebra.steppeschool.com/assets/cards/lesson-2--zero-pivots-and-singular-systems.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 2 · slide 4</small>Zero pivots</span></span></div>
     <div class="key">zero pivot &nbsp;→&nbsp; swap with a lower row &nbsp;&nbsp;|&nbsp;&nbsp; nothing to swap &nbsp;→&nbsp; singular</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>A zero in a pivot position stops elimination, because we cannot divide by it.</li><li><b>Temporary failure:</b> a row below has a nonzero entry in that column. Exchange the rows and continue.</li><li><b>Permanent failure:</b> no row can help. The matrix is <b>singular</b>: no solution or infinitely many.</li><li>Singular means the columns are <b>dependent</b>: one column is a combination of the others (for two columns, a multiple of the other). For two columns, they lie on one line: lesson 1's dependent case.</li></ol></div>
     <div class="prose">
-<h3>Think of a relay race</h3>
-<p>Your second runner is missing. If a teammate can run that leg, swap the order and carry on: a <b>row exchange</b>. If nobody can, the matrix is <b>singular</b>. Then the right-hand side decides: no solution, or infinitely many.</p>
 <h3>A temporary failure</h3>
 <div class="worked">
 <div class="row">0x + 2y = 4 &nbsp;&nbsp; 3x − 2y = 5</div>
 <div>The first pivot position holds 0, so we cannot form a multiplier. But the second equation has a 3 there. Exchange the two equations: 3x − 2y = 5 and 2y = 4. Now y = 2 and x = 3.</div>
 </div>
 <p>Same equations, new order, same solution.</p>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"steps","bar":2,"steps":[{"M":[[0,2,4],[3,-2,5]],"note":"a 0 in the pivot spot: stuck","piv":[[0,0]]},{"M":[[3,-2,5],[0,2,4]],"row":0,"note":"swap rows 1 and 2","piv":[[0,0],[1,1]]},{"M":[[3,-2,5],[0,2,4]],"note":"a triangle: y = 2, then x = 3","piv":[[0,0],[1,1]]}],"view":[0,9,0,3.6]}'></div><figcaption>The 0 in the pivot spot can't clear anything. Swapping the two rows puts a 3 there, and the system is already a triangle.</figcaption></figure>
 <h3>Two permanent failures</h3>
 <ul>
 <li><b>No solution.</b> x − 2y = 1 and 2x − 4y = 11. Subtracting 2 times the first leaves 0 = 9. Impossible: the lines are parallel.</li>
 <li><b>Infinitely many solutions.</b> x − 2y = 1 and 2x − 4y = 2. Subtracting leaves 0 = 0. The second equation adds nothing, so every point on the line x − 2y = 1 works.</li>
 </ul>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"rows","eqs":[[1,-2,1],[2,-4,11]],"view":[-1,7,-3.5,3]}'></div><figcaption>x − 2y = 1 and 2x − 4y = 11 are parallel lines. They never cross, so there is no solution.</figcaption></figure>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"rows","eqs":[[1,-2,1],[2,-4,2]],"view":[-1,7,-3.5,3]}'></div><figcaption>x − 2y = 1 and 2x − 4y = 2 are the same line, drawn twice. Every point on it is a solution.</figcaption></figure>
 <p>Both times the second pivot is zero, with no row below to swap in. The left sides are the same: columns <span class="vec"><span>1</span><span>2</span></span> and <span class="vec"><span>−2</span><span>−4</span></span>, the second −2 times the first. Dependent columns: they lie on one line, lesson 1's dependent case. The right side only picks which failure we get.</p>
+<h3>A bigger example: a zero pivot in a 3 × 3</h3>
+<div class="worked"><div class="row">x + 2y + z = 4 &nbsp;&nbsp; 2x + 4y + 3z = 9 &nbsp;&nbsp; x + 3y + 2z = 6</div></div>
+<p>Clear column 1 with ℓ₂₁ = 2 and ℓ₃₁ = 1. Row 2 becomes <span class="mx" style="grid-template-columns:repeat(5,auto)"><span>0</span><span>0</span><span>1</span><span>|</span><span>1</span></span>: its x and its y both disappeared, so the second pivot spot holds 0. Row 3 becomes <span class="mx" style="grid-template-columns:repeat(5,auto)"><span>0</span><span>1</span><span>1</span><span>|</span><span>2</span></span>, with a 1 in that spot. Swap rows 2 and 3, and the triangle is done: z = 1, then y + 1 = 2 gives y = 1, then x + 2 + 1 = 4 gives x = 1.</p>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"steps","bar":3,"steps":[{"M":[[1,2,1,4],[2,4,3,9],[1,3,2,6]],"note":"pivot 1 clears column 1","piv":[[0,0]]},{"M":[[1,2,1,4],[0,0,1,1],[1,3,2,6]],"row":1,"note":"row 2 − 2·row 1","piv":[[0,0]]},{"M":[[1,2,1,4],[0,0,1,1],[0,1,1,2]],"row":2,"note":"row 3 − row 1","piv":[[0,0]]},{"M":[[1,2,1,4],[0,0,1,1],[0,1,1,2]],"note":"pivot spot 2 holds a 0","piv":[[0,0],[1,1]]},{"M":[[1,2,1,4],[0,1,1,2],[0,0,1,1]],"row":1,"note":"swap rows 2 and 3","piv":[[0,0],[1,1],[2,2]]}],"view":[0,9,0,4.4]}'></div><figcaption>The second circle lands on a 0. Row 3 has a 1 there, so rows 2 and 3 swap places and the pivots are 1, 1, 1.</figcaption></figure>
+<p>Solvers with thousands of unknowns check every pivot spot like this, and swap rows when it helps.</p>
 <h3>Small pivots are dangerous too</h3>
 <p>A computer keeps about 16 significant digits. Dividing by a tiny pivot like 0.0000001 makes huge multipliers and blows up rounding errors. So real solvers, NumPy's included, swap rows at every step to put the entry <b>largest in absolute value</b> in the pivot position. This is called partial pivoting.</p>
+<p class="next"><b>Next:</b> So far each step was written in words: "subtract ℓ times row 1 from row 2". Slide 5 writes each step as a matrix, so the whole elimination becomes one product.</p>
     </div>
     <h2 class="practice-h">Examples</h2><div class="examples"><section class="example"><h3>Example 1 · A swap fixes it</h3>
 <p>0x + y = 2 and x + y = 3.</p>
@@ -40,7 +47,7 @@
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><p>ℓ = 3 leaves 0 = b − 3. Only b = 3 works, and then there are infinitely many solutions (x = 1 + y for any y).</p></div></details>
 </section><section class="example"><h3>Example 5</h3>
 <p>For which k is kx + y = 1, x + ky = 1 singular? What happens in each case?</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><p>det = k² − 1 = 0 for k = 1 or k = −1.</p><p>k = 1: both equations are x + y = 1, the same line, infinitely many solutions. k = −1: −x + y = 1 and x − y = 1 are parallel, no solution.</p></div></details>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><p>For k ≠ 0, ℓ = 1 ÷ k and the second pivot is k − 1/k = (k² − 1)/k. It is zero for k = 1 or k = −1. (For k = 0, swapping the rows fixes the first pivot.)</p><p>k = 1: both equations are x + y = 1, the same line, infinitely many solutions. k = −1: −x + y = 1 and x − y = 1 are parallel, no solution.</p></div></details>
 </section></div>
   </article>
 

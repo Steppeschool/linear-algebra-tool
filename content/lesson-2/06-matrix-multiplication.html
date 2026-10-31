@@ -9,7 +9,7 @@ preview: {"kind":"table","items":[{"label":"A","M":[[1,2],[3,4]],"piv":[]},{"lab
 check: isTab(V) && close(item(V, 'AB'), [[2,1],[4,3]])
 ---
 <!-- lead -->
-Lesson 1 multiplied a matrix by a vector. Now multiply a matrix by a matrix. The idea is simple: B is just a few vectors standing side by side, its columns. Multiply A by each column of B, and stand the answers side by side. That is AB. To get any single number in AB, take a row of A and a column of B and find their dot product. Same rules as lesson 1, done several times.
+Slide 5 multiplied an elimination matrix E by A on trust. Now we see how a matrix times a matrix really works. Lesson 1 already multiplied a matrix by a vector, and that is almost all we need. The idea is simple: B is just a few vectors standing side by side, its columns. Multiply A by each column of B, and stand the answers side by side. That is AB. To get any single number in AB, take a row of A and a column of B and find their dot product. Same rules as lesson 1, done several times.
 <!-- key -->
 (AB)<sub>ij</sub> = (row i of A) · (column j of B) &nbsp;&nbsp;&nbsp; AB = [ Ab₁ &nbsp; Ab₂ ]
 <!-- ideas -->
@@ -51,7 +51,7 @@ Lesson 1 multiplied a matrix by a vector. Now multiply a matrix by a matrix. The
 <p>Each dot product now has 3 products to add. A neural network layer is one big matrix product like this, with thousands of rows and columns.</p>
 <h3>Where this is used</h3>
 <p>Slide 5 already used it: each elimination step is a matrix, and the whole elimination is their product. The next slide turns that product around into A = LU. Graphics, robotics and machine learning chain matrices the same way.</p>
-<p class="next"><b>Next:</b> elimination turned A into a triangle, U. Recording the steps as a product of matrices gives the factorization A = LU.</p>
+<p class="next"><b>Next:</b> Elimination turned A into the triangle U. Can we get A back from U? Undoing the steps, as a product of matrices, gives the factorization A = LU.</p>
 <!-- examples -->
 <section class="example"><h3>Example 1 · Row times column</h3>
 <p>Find AB for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>0</span><span>1</span><span>3</span></span>, B = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>4</span><span>2</span><span>1</span></span>.</p><div class="worked"><div class="row">row 1 · col 1 = 2·1 + 0·2 = 2 &nbsp;&nbsp; row 1 · col 2 = 2·4 + 0·1 = 8</div><div class="row">row 2 · col 1 = 1·1 + 3·2 = 7 &nbsp;&nbsp; row 2 · col 2 = 1·4 + 3·1 = 7</div><div class="row">AB = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>8</span><span>7</span><span>7</span></span></div></div>

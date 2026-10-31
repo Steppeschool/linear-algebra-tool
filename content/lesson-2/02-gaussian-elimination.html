@@ -3,21 +3,22 @@ slug: gaussian-elimination
 seo_title: Gaussian Elimination Method Explained Visually
 description: How elimination solves two equations: subtract to remove an unknown, then back-substitute. A café puzzle, a worked example and live Python. Strang §2.2.
 kicker: Strang §2.2 · The idea of elimination
-title: Elimination knocks out one unknown at a time.
+title: Elimination: remove one unknown at a time
 task: Choose the multiplier l so that the new second row starts with 0.
 preview: {"kind":"rows","A":[[1,-2],[3,2]],"b":[1,11]}
 check: isR(V) && close(V.A, [[1,-2],[0,8]]) && close(V.b, [1,8])
 ---
 <!-- lead -->
-Elimination is how computers solve linear equations. Subtract a multiple of one equation from another so that one unknown disappears. Repeat until you can read off the answer.
+Slide 1 found the answer to x − 2y = 1 and 3x + 2y = 11 by looking where two lines cross. That is fine for two lines, but nobody can look at a hundred. <b>Elimination</b> is a recipe that does the work step by step. You already know it from the café. A coffee and a croissant cost €5, and a coffee and two croissants cost €7. The second order has one more croissant and costs €2 more, so a croissant is €2 and the coffee is €3. You subtracted one order from the other and the coffee disappeared. Elimination does exactly that: subtract a multiple of one equation from another so that one unknown disappears, then solve what is left.
 <!-- key -->
 x − 2y = 1 &nbsp;&nbsp; 3x + 2y = 11 &nbsp;&nbsp;→&nbsp;&nbsp; 8y = 8
 <!-- ideas -->
 <ol class="ideas"><li>The <b>pivot</b> is the first coefficient of the equation we subtract with (equation 1; here the 1 in 1x). We use it to remove x from the equations below.</li><li>The <b>multiplier</b> is ℓ = (entry to remove) ÷ (pivot). In code we write ℓ as l.</li><li>Subtracting ℓ times one equation from another keeps the same solution.</li><li>When one unknown is left in the last equation, we solve it and work back up: <b>back substitution</b>.</li></ol>
 <!-- prose -->
-<h3>A puzzle you already know how to solve</h3>
-<p>A coffee and a croissant cost €5. A coffee and two croissants cost €7. What does a croissant cost?</p>
-<p>The second order has one more croissant and costs €2 more. So a croissant is €2 and the coffee is €3. You just subtracted one equation from the other, and the coffee disappeared. That is elimination.</p>
+<h3>The café puzzle as equations</h3>
+<p>Call the price of a coffee x and the price of a croissant y. The two orders say:</p>
+<div class="worked"><div class="row">x + y = 5 &nbsp;&nbsp; x + 2y = 7</div><div class="row">(x + 2y) − (x + y) = 7 − 5 &nbsp;→&nbsp; y = 2</div><div class="row">Back to the first order: x + 2 = 5, so x = 3</div></div>
+<p>One subtraction, and x was gone. Every system is solved this way. We only need a rule for how much to subtract.</p>
 <h3>The same idea, step by step</h3>
 <p>Take Strang's first system from slide 1: x − 2y = 1 and 3x + 2y = 11.</p>
 <ul>
@@ -30,13 +31,21 @@ x − 2y = 1 &nbsp;&nbsp; 3x + 2y = 11 &nbsp;&nbsp;→&nbsp;&nbsp; 8y = 8
 <div class="row">8y = 8, &nbsp;so y = 1</div>
 <div class="row">Back up to equation 1: x − 2·1 = 1, &nbsp;so x = 3</div>
 </div>
-<p>Putting y = 1 back into equation 1 is called back substitution.</p>
+<p>Putting y = 1 back into equation 1 is called <b>back substitution</b>.</p>
+<h3>What it looks like</h3>
+<p>Draw the lines before and after the step. Line 1 stays where it is. Line 2 turns until it lies flat: 8y = 8 is the line y = 1. The crossing point (3, 1) never moves, because the step did not change the solution.</p>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"elimrows","eqs":[[1,-2,1],[3,2,11]],"after":[0,8,8],"view":[-1,6,-2,5]}'></div><figcaption>Equation 2 turns into 8y = 8, a flat line. Equation 1 and the crossing point, x = 3 and y = 1, stay where they are.</figcaption></figure>
 <h3>Why the answer does not change</h3>
 <p>Any (x, y) that solves both equations also solves "equation 2 minus 3 times equation 1". And adding 3 times equation 1 back undoes the step. So the new system has exactly the same solutions, just easier to read.</p>
-<h3>What it looks like</h3>
-<p>Run the lab code before and after the subtraction. The second line turns flat: y = 1. The first line stays put, and so does the crossing point (3, 1).</p>
-<h3>Where this is used</h3>
-<p>Circuit simulators and structural analysis tools solve equations this way, with thousands of unknowns instead of two.</p>
+<h3>Only the numbers matter</h3>
+<p>The letters x and y only hold the numbers in place. So we can drop them and keep a table. Each equation becomes one row: the number in front of x, the number in front of y, a bar, and the right side. This table is called the <b>augmented matrix</b> [A | b]. The step "row 2 − 3·row 1" acts on the whole row, the right side too.</p>
+<div class="worked"><div class="row">[A | b] = <span class="mx" style="grid-template-columns:repeat(4,auto)"><span>1</span><span>−2</span><span>|</span><span>1</span><span>3</span><span>2</span><span>|</span><span>11</span></span> &nbsp;→&nbsp; <span class="mx" style="grid-template-columns:repeat(4,auto)"><span>1</span><span>−2</span><span>|</span><span>1</span><span>0</span><span>8</span><span>|</span><span>8</span></span></div></div>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"steps","bar":2,"steps":[{"M":[[1,-2,1],[3,2,11]],"note":"the pivot is the 1 in row 1","piv":[[0,0]]},{"M":[[1,-2,1],[0,8,8]],"row":1,"note":"row 2 − 3·row 1","piv":[[0,0]]},{"M":[[1,-2,1],[0,8,8]],"note":"row 2 says 8y = 8, so y = 1","piv":[[0,0],[1,1]]}],"view":[0,9,0,3.6]}'></div><figcaption>The circle marks the pivot. Row 2 minus 3 times row 1 puts a 0 under it, and row 2 now says 8y = 8.</figcaption></figure>
+<h3>A bigger example: 3 equations</h3>
+<p>Slide 1's bigger system works the same way. First use equation 1 to remove x from equations 2 and 3. Then use the new equation 2 to remove y from equation 3.</p>
+<div class="worked"><div class="row">x + y + z = 6 &nbsp;&nbsp; 2x + y − z = 1 &nbsp;&nbsp; x + 2y + z = 8</div><div class="row">equation 2 − 2·equation 1: &nbsp;−y − 3z = −11</div><div class="row">equation 3 − 1·equation 1: &nbsp;y = 2</div><div class="row">new equation 3 + new equation 2: &nbsp;−3z = −9, so z = 3</div><div class="row">Back up: −y − 9 = −11, so y = 2. Then x + 2 + 3 = 6, so x = 1</div></div>
+<p>The answer x = 1, y = 2, z = 3 matches slide 1. Circuit simulators and bridge-design programs follow the same steps with thousands of equations. The computer just does the arithmetic.</p>
+<p class="next"><b>Next:</b> With three or more equations, the order of the steps matters. Slide 3 clears one column at a time, names the pivots, and climbs back up with back substitution.</p>
 <!-- examples -->
 <section class="example"><h3>Example 1 · Subtract twice the first equation</h3>
 <p>Solve 2x + y = 5 and 4x − y = 1.</p><div class="worked"><div class="row">Pivot 2, multiplier ℓ = 4 ÷ 2 = 2</div><div class="row">(4x − y) − 2(2x + y) = 1 − 2·5 &nbsp;→&nbsp; −3y = −9 &nbsp;→&nbsp; y = 3</div><div class="row">Back up: 2x + 3 = 5, so x = 1</div><div class="row">Check: 4·1 − 3 = 1 ✓</div></div>
