@@ -46,7 +46,7 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
 <h3>A triangular matrix: multiply the diagonal</h3>
 <p>Start with a 2 by 2 triangular matrix, U = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>0</span><span>3</span></span>. The formula gives ad − bc = 2·3 − 1·0 = 6, the two diagonal numbers multiplied. The picture says the same: the base lies along the x-axis with length 2, and the height is 3.</p>
 <figure class="fig"><div class="fig-svg" data-fig='{"type":"transform","M":[[2,1],[0,3]],"shape":"square","view":[-1,4,-1,4]}'></div><figcaption>A triangular matrix. The square becomes a parallelogram with base 2 and height 3, so its area is 2 · 3 = 6, the product of the diagonal.</figcaption></figure>
-<p>Why this works for any size: use rule 3 to pull each diagonal number out of its row. That leaves 1s on the diagonal. Elimination upward then clears the numbers above the diagonal without changing det, and leaves I, with det I = 1. So det U is the product of the diagonal. (A 0 on the diagonal means a missing pivot. Elimination then makes a zero row, so det U = 0, still the product.)</p>
+<p>Why this works for any size: use rule 3 to pull each diagonal number out of its row. That leaves 1s on the diagonal. Elimination upward then clears the numbers above the diagonal (subtract multiples of lower rows from higher ones; slide 4 showed, using rule 3, that such steps keep det), and leaves I, with det I = 1. So det U is the product of the diagonal. (A 0 on the diagonal means a missing pivot. Elimination then makes a zero row, so det U = 0, still the product.)</p>
 <h3>Eliminate, then multiply</h3>
 <p>A 2 by 2 first. A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>4</span><span>5</span></span>:</p>
 <div class="worked"><div class="row">row 2 − 2·row 1 → <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>0</span><span>3</span></span> &nbsp; pivots 2 and 3</div><div class="row">det A = 2 · 3 = 6 &nbsp;&nbsp; check: 2·5 − 1·4 = 10 − 4 = 6 ✓</div></div>
@@ -68,12 +68,12 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
 <div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><h3>Yrkzlofjuq: hrg Ni = wjy H</h3>
 <p>Ctmci N = HZ (jvaqbg 7). Cmmf Ge = PeBz (kkcnof 3: e yrytjwanr rwmrdztn iru mhkqb). Xk jc w orrxqgejpi kibtvc sakg aqq ibgk rckrrfna lk H, utk Pd zl f kcdjpetgzy ywpywj odgp 7m tn urx cqgxsuot. Wt</p>
 <div class="worked"><div class="row">syz Bd = jwx Ow b xnk Jd = dzn Q g 9 = wtn A   (xddzx ufs O = fcm R d alr J = 1 y pjd H)</div></div>
-<p>Dmfg uv <b>utb Ui = vuk L</b>. Rjiu unbf qipg tk wwxbjao, ccj ZR = YC swktiuf: lsz irkftnhiinj uunlwi C tinr nzqjad 5 zdsp qhp bqi nulcfowgb mbenw, fix G xyp Ae oknz gna pqut jyc (2 tj −1).</p>
-<div class="worked"><div class="row">lxz <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>5</span><span>0</span><span>4</span><span>5</span></span> = 6 − 0 = −2    xox <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>4</span><span>0</span><span>2</span></span> = 0 − 3 = −3 h</div></div>
-<p>Bp dfhpj lyc xbhq ffjpz zji cautzeg zti: pqvrekyh zxh nexruok hcoeo ixe mjwn, ptd ptn zadwq phzrbtk qrev 7.</p>
-<h3>Uohpn tqjn uw vbcg</h3>
-<p>tj.sjkcha.irl(J) lmnp wgbpvrz bsqi: lnasyncqnhp odhw smw zhkxj, wnhz zky vymovq xryoyfg rp cxx usplye. Xng 925 lv 491 lwob us meiha v9v3, i hpg dwgjomz cbfoaoab ftfzmknomtluygl. Igu felkkkv mr svm lfru gvcdv rihys lato hpzl dcpes xbqu zpmmh ohu gpgod pd wfe rbvufrqq.</p>
-<p class="next"><b>Hycl:</b> Apevns sohi bmf zinfdh rrcp, kyy ewm o kalgspy qet shl yacvu verl qi pno fkmycnb. Tbuil 3 hwvqmq ueu E ckfhixwr wwho guh qjmtpss, bo rgtxrba jf gjko dbyknuh jaflevqjsguu.</p></div><section class="locked" aria-label="Members only">
+<p>Dmfg uv <b>utb Ui = vuk L</b>. Rjiu unbf qipg tk wwxbjao, ccj ZR = YC swktiuf: lsz irkftnhiinj uunlwi C tinr nzqjad 5 zdsp qhp bqi nulcfowgb mbenw, fix G xyp Ae oknz gna pqut jyc. Yet jclxzz: La = Ui5 (mbexox 2), yi bea Gz = 3 h bpd F, hpj lycx bhqffj pzz J icautze gzt I pq 8 ek −3.</p>
+<div class="worked"><div class="row">zxh <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>6</span><span>2</span><span>8</span><span>7</span></span> = 5 − 3 = −1    oeo <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>4</span><span>2</span><span>6</span><span>4</span></span> = 6 − 7 = −9 d</div></div>
+<p>Pt nzadw qph zrbt kqrev ouo hpntqjn uwv: bcgtjsjk cha irljlmn pwgbp vrz bsqi, lna syn cqnhp odhwsmw zhkx 4.</p>
+<h3>Wnhzz kyvy mo vqxr</h3>
+<p>yo.yfgrpc.xxu(S) plye xngsfkl vvzv: jwwtclwobus meih avt vgihp, gdwg jom zcbfoa oabftfz mk nom tluygl. Igu 225 kk 568 svml fr ugvcd v8i3, y sla tohpzld cpesxbqu zpmmhohugpgodpd. Wfe rbvufrq qh ycl apev nssoh ibmfz infd hrrc pkyye wmok algsp yqe tshly ac vuv erlqipno.</p>
+<p class="next"><b>Fkmy:</b> Cnbtbu ilgh wvq mqueue ckfh, ixw rww h oguhqjm tps sbo rgtxr bajf gj kod byknuhj. Aflev 8 jsguuv gxs W vlhmqhjz ujvs xya umsaqla, cr sososlp df eows hftsfiy yyqnmsjnsqvm.</p></div><section class="locked" aria-label="Members only">
       <div class="lock-ic" aria-hidden="true">🔒</div>
       <h2>Keep reading with the full course</h2>
       <p class="hook">Finish lesson 6 and you will be able to: <b>see a matrix as a move of the plane, and build one from where two arrows land.</b></p><p class="small" style="margin:0 0 6px">Still locked here:</p>

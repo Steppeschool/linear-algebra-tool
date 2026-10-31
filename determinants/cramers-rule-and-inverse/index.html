@@ -50,7 +50,7 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
 <h3>Why it works (2 by 2)</h3>
 <p>Call the columns a₁ and a₂, so b = x₁a₁ + x₂a₂. Put b in column 1 and use the rules from slide 4 (they hold for columns, since det Aᵀ = det A, slide 5):</p>
 <div class="worked"><div class="row">det [b  a₂] = det [x₁a₁ + x₂a₂ &nbsp; a₂] = x₁ det [a₁ a₂] + x₂ det [a₂ a₂]</div><div class="row">The last determinant has two equal columns, so it is 0</div><div class="row">det B₁ = x₁ · det A, &nbsp; so x₁ = det B₁ / det A</div></div>
-<p>In pictures: the parallelogram of b and a₂ has x₁ times the area of the parallelogram of a₁ and a₂. The same works for every column and every size.</p>
+<p>In pictures: the parallelogram of b and a₂ has x₁ times the area of the parallelogram of a₁ and a₂. The reason: b = x₁a₁ + x₂a₂, and the x₂a₂ part only slides the tip along the direction of a₂, which does not change the area (a shear, slide 4); what is left is x₁a₁, which multiplies the area by x₁. The same works for every column and every size.</p>
 <h3>A worked example</h3>
 <div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>3</span></span>, &nbsp; b = <span class="vec"><span>5</span><span>10</span></span>, &nbsp; det A = 6 − 1 = 5</div><div class="row">B₁ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>5</span><span>1</span><span>10</span><span>3</span></span>: det = 15 − 10 = 5, &nbsp; x₁ = 5/5 = 1</div><div class="row">B₂ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>5</span><span>1</span><span>10</span></span>: det = 20 − 5 = 15, &nbsp; x₂ = 15/5 = 3</div><div class="row">Check: A<span class="vec"><span>1</span><span>3</span></span> = <span class="vec"><span>2 + 3</span><span>1 + 9</span></span> = <span class="vec"><span>5</span><span>10</span></span> ✓</div></div>
 <figure class="fig"><div class="fig-svg" data-fig='{"type":"cols","a1":[2,1],"a2":[1,3],"x":[1,3],"b":[5,10],"bname":"b","view":[-1,7,-1,11]}'></div><figcaption>Cramer's answer x = <span class="vec"><span>1</span><span>3</span></span> as a walk: 1 step of column 1, then 3 steps of column 2, ends exactly on b = <span class="vec"><span>5</span><span>10</span></span>.</figcaption></figure>
@@ -111,6 +111,7 @@ A = np.array([[2., 1.],
               [1., 3.]])
 b = np.array([5., 10.])
 
+# A[:, 1] is column 2 and A[:, 0] is column 1 (Python counts from 0)
 B1 = np.column_stack([b, A[:, 1]])        # b replaces column 1
 B2 = np.column_stack([b, A[:, 1]])        # your turn: b should replace column 2
                                           # hint: np.column_stack([A[:, 0], b])

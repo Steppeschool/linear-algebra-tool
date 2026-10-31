@@ -88,7 +88,7 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
   <section class="labsec" aria-label="Lab">
     <div class="exercise" id="exercise">
       <span class="tag">Exercise</span>
-      <span class="task">Change M so that the unit square becomes a parallelogram of area 3, without flipping it.</span>
+      <span class="task">Change M so that the unit square becomes a parallelogram of area 3, without flipping it. Hint: try a diagonal matrix.</span>
       <span class="hint" id="hint">Edit the code and press Run.</span>
     </div>
     <div class="lab">
@@ -108,6 +108,7 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
 M = np.array([[2., 1.],
               [1., 1.]])        # each inner list is a ROW
                                 # your turn: make det(M) = 3 (and keep it positive)
+                                # hint: try a diagonal matrix, like [[3, 0], [0, 1]]
 print(&quot;det M =&quot;, np.linalg.det(M))
 show(M)                         # the readout shows det beside the picture</textarea>
           </div>
