@@ -9,7 +9,7 @@ preview: {"kind":"table","items":[{"label":"K","M":[[2,-1,0],[-1,2,-1],[0,-1,2]]
 check: isTab(V) && close(lastItem(V), [[3,2,1],[2,4,2],[1,2,3]])
 ---
 <!-- lead -->
-Slide 2 gave a recipe for 2 by 2 inverses, and slide 3 showed that a chain of steps is undone by its own steps in reverse. Now we find the inverse of any square matrix, with the elimination from lesson 2. Picture a Rubik's cube. While you solve it, a friend writes down every move. The notes are then a recipe that undoes exactly this scramble. <b>Gauss-Jordan elimination</b> works the same way. Write A and the identity side by side as [A | I]. Do row steps until the left half becomes I, and do every step to the right half too. The right half keeps the record of all the steps, and that record is A⁻¹.
+Slide 2 gave a recipe for 2 by 2 inverses, and slide 3 showed that a chain of steps is undone by its own steps in reverse. Now we find the inverse of any square matrix, with the elimination from lesson 2. Picture a Rubik's cube. While you solve it, a friend writes down every move. The notes, read in order, take the scrambled cube back to solved. <b>Gauss-Jordan elimination</b> works the same way. Write A and the identity side by side as [A | I]. Do row steps until the left half becomes I, and do every step to the right half too. The right half keeps the record of all the steps, and that record is A⁻¹.
 <!-- key -->
 [ A &nbsp;|&nbsp; I ] &nbsp;→&nbsp; [ I &nbsp;|&nbsp; A⁻¹ ]
 <!-- ideas -->

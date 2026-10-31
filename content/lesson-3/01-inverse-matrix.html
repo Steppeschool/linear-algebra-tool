@@ -22,7 +22,7 @@ A⁻¹A = I &nbsp;&nbsp;&nbsp; Ax = b &nbsp;⇔&nbsp; x = A⁻¹b
 <h3>The identity: the matrix that changes nothing</h3>
 <p>For matrices, the role of 1 is played by the <b>identity matrix</b> I from lesson 2: 1s on the diagonal and 0s everywhere else. I times any vector gives the same vector back:</p>
 <div class="worked"><div class="row">I·(4, 7) = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>1</span></span>(4, 7) = (1·4 + 0·7, 0·4 + 1·7) = (4, 7)</div></div>
-<p>So "A⁻¹ undoes A" means: A⁻¹ times A is I. Inverses only exist for square matrices, and for them the undo works both ways: AA⁻¹ = I too.</p>
+<p>So "A⁻¹ undoes A" means: A⁻¹ times A is I. Inverses only exist for square matrices (lesson 4 shows why), and for them the undo works both ways: AA⁻¹ = I too.</p>
 <h3>Example: undo “add the second entry to the first”</h3>
 <p>Take S = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>0</span><span>1</span></span>. Multiply it by a vector (p, q), by rows as in lesson 1: S·(p, q) = (p + q, q). S adds the second entry to the first and keeps the second entry. Start from (1, 2):</p>
 <div class="worked"><div class="row">S·(1, 2) = (1 + 2, 2) = (3, 2)</div></div>
@@ -50,7 +50,7 @@ A⁻¹A = I &nbsp;&nbsp;&nbsp; Ax = b &nbsp;⇔&nbsp; x = A⁻¹b
 <p>A matrix that has an inverse is called <b>invertible</b>. For a square matrix, each of these says the same thing: A is invertible.</p>
 <ul>
 <li>Every pivot is nonzero (lesson 2). For A above, row 2 − 2·row 1 gives <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>0</span></span>, so the second pivot is 0.</li>
-<li>No column is a combination of the others. Otherwise all outputs land on a line (lesson 1's column space), so some outputs are shared. Lesson 4 calls columns like that, with no column a combination of the others, <i>independent</i>. For A, column 2 = 2·column 1.</li>
+<li>No column is a combination of the others. Otherwise the outputs miss part of the space (in the plane: they all land on one line, as in lesson 1's column space), so some outputs are shared. Lesson 4 calls columns like that, with no column a combination of the others, <i>independent</i>. For A, column 2 = 2·column 1.</li>
 <li>Ax = 0 only when x = 0. For A, x = (2, −1) also gives 0.</li>
 </ul>
 <p>So one failed test means all of them fail. The next slide adds a quick number test for 2 by 2 matrices.</p>
