@@ -460,8 +460,10 @@ dialog.unlock .incl{font-size:14px;color:var(--muted);margin:0 0 14px}
 /* animated figures (assets/figs.js) */
 .fig{margin:1.4em 0;padding:1em 1em .8em;background:var(--soft);border:1px solid var(--line);border-radius:14px;text-align:center}
 .fig svg{display:block;width:100%;height:auto;margin:0 auto;overflow:hidden}
-.fig .fg-grid{stroke:var(--grid-ref);stroke-width:1}
-.fig .fg-axis{stroke:var(--grid);stroke-width:1.5}
+.fig .fg-grid{stroke:var(--grid);stroke-width:1;opacity:.45}
+.fig .fg-axis{stroke:var(--muted);stroke-width:1.5;opacity:.6}
+.fig .fg-num{font:500 10px var(--f-mono);fill:var(--muted);opacity:.75;text-anchor:middle}
+.fig .fg-num-y{text-anchor:end}
 .fig .fg-moved{stroke:var(--accent);stroke-width:1;opacity:.28}
 .fig .fg-shape{fill:var(--area);stroke:var(--shape);stroke-width:2;stroke-linejoin:round}
 .fig .fg-span{stroke-width:1.5;stroke-dasharray:5 5;opacity:.5}

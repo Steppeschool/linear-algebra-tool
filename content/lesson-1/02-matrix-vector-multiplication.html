@@ -3,13 +3,13 @@ slug: matrix-vector-multiplication
 seo_title: Matrix-Vector Multiplication: Ax as a Combination of Columns
 description: Why Ax is a mix of the columns of A, explained with a shopping basket, a worked example and live Python. Row way vs column way. Strang §1.3.
 kicker: Strang §1.3 · Matrices
-title: Ax is a combination of the columns of A.
+title: Multiplying a matrix by a vector
 task: Choose x so that Ax = (0, 3). Hint: write the two equations from the columns first.
 preview: {"kind":"combo","A":[[1,1],[-1,2]],"x":[2,1],"b":[0,3]}
 check: isC(V) && eqM(V.A, [[1,1],[-1,2]]) && near(Ax(V)[0], 0) && near(Ax(V)[1], 3)
 ---
 <!-- lead -->
-Slide 1 ended with long sums like c(2, 1) + d(−1, 1). A matrix is the short way to write them. Put v and w side by side as the columns of A, and put c and d in a vector x. Then Ax is exactly cv + dw.
+Slide 1 ended with long sums like c(2, 1) + d(−1, 1). A matrix is the short way to write them. Think of the matrix A as a list of allowed steps, one step in each column. The vector x says how many of each step to take. Then Ax is where you end up. So Ax is nothing new: it is slide 1's combination, written in two letters.
 <!-- key -->
 <span class="mx"><span class="c1">a₁₁</span><span class="c2">a₁₂</span><span class="c1">a₂₁</span><span class="c2">a₂₂</span></span> <span class="vec "><span>x₁</span><span>x₂</span></span> = x₁ <span class="vec i"><span>a₁₁</span><span>a₂₁</span></span> + x₂ <span class="vec j"><span>a₁₂</span><span>a₂₂</span></span>
 <!-- ideas -->

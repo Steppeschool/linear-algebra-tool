@@ -3,13 +3,13 @@ slug: linear-transformations
 seo_title: Linear Transformations and Matrices: Rotation Matrix Intuition
 description: See a matrix move the plane. Why the columns are where (1, 0) and (0, 1) land, how a rotation matrix is built, and what the determinant measures.
 kicker: Strang §8.1 · Linear transformations
-title: A matrix also moves the whole plane.
+title: A matrix moves the whole plane
 task: Rotate the plane by exactly 90°.
 preview: {"kind":"transform","M":[[0.8660254037844387,-0.5],[0.5,0.8660254037844387]]}
 check: isT(V) && eqM(V.M, [[0,-1],[1,0]])
 ---
 <!-- lead -->
-So far, A took one input x and gave one output Ax. Now feed it every point at once. Each point moves to a new place, so the whole plane moves. A matrix is a <b>motion of the plane</b>.
+So far we fed A one input and got one output. Now feed it every point at once. Picture the plane as a sheet of graph paper. The matrix moves every point, so the whole sheet stretches, turns, slants or flips. Its lines stay straight and evenly spaced. To know the whole move, you only need to know where two arrows land: (1, 0) lands on column 1, and (0, 1) lands on column 2.
 <!-- key -->
 A <span class="vec i"><span>1</span><span>0</span></span> = column 1 &nbsp;&nbsp;&nbsp; A <span class="vec j"><span>0</span><span>1</span></span> = column 2
 <!-- ideas -->

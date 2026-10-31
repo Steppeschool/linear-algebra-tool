@@ -3,13 +3,13 @@ slug: matrix-multiplication-order
 seo_title: Matrix Multiplication: Why AB Is Not BA
 description: AB means apply B first, then A. See it with a rotation and a shear, learn the rules of matrix products, and try it in Python. Strang §2.4.
 kicker: Strang §2.4 · Rules for matrix operations
-title: AB means: apply B first, then A.
+title: Multiplying two matrices
 task: Run it and look at the long upright stroke of the F: it now leans up and to the left. Then change the last line to show(S @ R). Which way does that stroke point now?
 preview: {"kind":"transform","M":[[0,-1],[1,1]]}
 check: isT(V) && eqM(V.M, mul([[1,1],[0,1]], [[0,-1],[1,0]]))
 ---
 <!-- lead -->
-Slide 5: one matrix, one motion. Do two motions in a row and you get a new matrix, the product AB. In AB, B acts first and A acts second, because (AB)v = A(Bv).
+Slide 5: one matrix, one move of the plane. Now do two moves in a row, like a turn and then a slant. The result is again one move, and its matrix is the product AB. The order matters, just as socks then shoes is not shoes then socks. In AB, B acts first and A acts second, because (AB)v = A(Bv).
 <!-- key -->
 AB = A <span class="vec" style="grid-template-columns:auto auto;gap:0 10px"><span>b₁</span><span>b₂</span></span> = <span class="vec" style="grid-template-columns:auto auto;gap:0 10px"><span>Ab₁</span><span>Ab₂</span></span>
 <!-- ideas -->

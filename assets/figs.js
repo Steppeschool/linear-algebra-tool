@@ -43,6 +43,8 @@
     const g0 = document.createElementNS(NS, "g"); svg.appendChild(g0);
     for (let x = Math.ceil(x0); x <= x1; x++) mk("line", { x1: X(x), y1: 0, x2: X(x), y2: H, class: x ? "fg-grid" : "fg-axis" }, g0);
     for (let y = Math.ceil(y0); y <= y1; y++) mk("line", { x1: 0, y1: Y(y), x2: W, y2: Y(y), class: y ? "fg-grid" : "fg-axis" }, g0);
+    for (let x = Math.ceil(x0); x <= x1; x++) if (x && x !== x1) { const e = mk("text", { x: X(x), y: Y(0) + 14, class: "fg-num" }, g0); e.textContent = x < 0 ? "−" + -x : x; }
+    for (let y = Math.ceil(y0); y <= y1; y++) if (y && y !== y1) { const e = mk("text", { x: X(0) - 6, y: Y(y) + 4, class: "fg-num fg-num-y" }, g0); e.textContent = y < 0 ? "−" + -y : y; }
     out = document.createElementNS(NS, "g"); svg.appendChild(out);
 
     const arrow = (p, q, col, label, opts = {}) => {
@@ -92,7 +94,7 @@
       },
       combo(t) {                                   // c·v + d·w for many c, d: the dots fill the span
         // many (c, d) pairs spread evenly over a square (golden-ratio sequence); the arrows glide from one to the next
-        const { v, w } = cfg, n = cfg.n || 70, A = cfg.amp || 2.4;
+        const { v, w } = cfg, n = cfg.n || 18, A = cfg.amp || 2.4;
         const pick = k => k ? [A * (2 * ((k * .6180339) % 1) - 1), A * (2 * ((k * .7548777 + .37) % 1) - 1)] : [1, 1];
         if (cfg.span === "line") lineThrough(v, "a", "fg-span fg-span-on");
         const f = t * n, k0 = Math.floor(f), s = ease(f - k0);
@@ -142,7 +144,7 @@
     };
 
     let t = 0, playing = true, last = 0, hold = 0, visible = false;
-    const DUR = cfg.dur || 5200;
+    const DUR = cfg.dur || (cfg.type === "combo" ? (cfg.n || 18) * 1100 : 6500);   // combo: about one new dot per second
     const render = () => { out.replaceChildren(); read.textContent = draw[cfg.type](t) || ""; range.value = Math.round(t * 1000); };
     const loop = now => {
       if (playing && visible) {

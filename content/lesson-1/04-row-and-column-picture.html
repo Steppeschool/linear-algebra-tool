@@ -3,13 +3,13 @@ slug: row-and-column-picture
 seo_title: Row Picture vs Column Picture of Ax = b
 description: Two ways to see a linear system: lines crossing, or columns combining to make b. Interactive plot and Python in the browser. Strang §2.1.
 kicker: Strang §2.1 · Vectors and linear equations
-title: Two pictures of the same equations.
+title: Solving Ax = b: the row picture and the column picture
 task: Run the row picture, then delete the # at the start of the last line and run again to see the column picture.
 preview: {"kind":"rows","A":[[1,-2],[3,2]],"b":[1,11]}
 check: isC(V) && eqM(V.A, [[1,-2],[3,2]]) && near(Ax(V)[0], 1) && near(Ax(V)[1], 11)
 ---
 <!-- lead -->
-Slide 3 told us when Ax = b has a solution. Now let's find it. Two equations can be read two ways. By rows, each equation is a line, and the answer is where the lines cross. By columns, the answer is the mix of columns that makes b. Both give the same answer.
+Slide 3 told us when Ax = b has a solution. Now let's find it. You can read two equations in two ways. <b>By rows</b>: each equation is a line on the map, a clue that says “the answer is somewhere on me”. The answer is where both clues agree, where the two lines cross. <b>By columns</b>: how many of each step must we walk to reach b? Both readings give the same answer.
 <!-- key -->
 <span class="mx"><span class="c1">1</span><span class="c2">-2</span><span class="c1">3</span><span class="c2">2</span></span> <span class="vec "><span>x</span><span>y</span></span> = <span class="vec "><span>1</span><span>11</span></span>
 <!-- ideas -->

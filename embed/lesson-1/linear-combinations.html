@@ -3,8 +3,8 @@
   <article class="page">
     <div class="slide-head"><div>
     <div class="kicker">Strang §1.1 · Linear combinations</div>
-    <h1>Linear algebra starts with cv + dw.</h1>
-    <p class="lead">Take two vectors, multiply each by a number, and add. That is a <b>linear combination</b>. The whole course grows from one question: which points can a combination reach, and with which numbers?</p>
+    <h1>Linear combinations: stretch vectors, then add them</h1>
+    <p class="lead">A vector is a step with a length and a direction, like “2 steps east, 1 step north”. You can do two things with steps. You can <b>stretch</b> one: take it 3 times, half a time, or backwards. And you can <b>add</b> two: walk one step, then the other from where you stopped. Stretch, then add, and you get a <b>linear combination</b>. The whole course grows from one question: which places can you reach this way?</p>
     </div><span class="thumb slide-art"><img src="https://linearalgebra.steppeschool.com/assets/cards/lesson-1--linear-combinations.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 1 · slide 1</small>Linear combinations</span></span></div>
     <div class="key">c <span class="vec i"><span>2</span><span>1</span></span> + d <span class="vec j"><span>-1</span><span>1</span></span> = <span class="vec "><span>2c − d</span><span>c + d</span></span></div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>A vector in the plane is a pair of numbers, v = <span class="vec"><span>v₁</span><span>v₂</span></span>. We draw it as an arrow from the origin.</li><li>Two operations: <b>multiply</b> a vector by a number c, and <b>add</b> two vectors. Both work one component at a time.</li><li>Doing both gives a <b>linear combination</b> cv + dw.</li><li>The big question: which vectors can we reach with all possible c and d?</li></ol></div>
@@ -27,7 +27,7 @@
 <h3>The question behind everything</h3>
 <p>We ask this all course long: <b>which vectors can we reach?</b></p>
 <p>The multiples cv of one vector fill a line through the origin. That is where "linear" comes from. Two vectors that point different ways, like v and w, fill the whole plane.</p>
-<figure class="fig"><div class="fig-svg" data-fig='{"type":"combo","v":[2,1],"w":[-1,1],"view":[-6,6,-5,5],"dur":7000}'></div><figcaption>Each dot is one combination cv + dw. Try many c and d, and the dots spread over the whole plane.</figcaption></figure>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"combo","v":[2,1],"w":[-1,1],"view":[-6,6,-5,5]}'></div><figcaption>Each dot is one combination cv + dw. Try many c and d, and the dots spread over the whole plane.</figcaption></figure>
 <p>The reverse is harder. Given a target like <span class="vec"><span>4</span><span>5</span></span>, what are c and d? Write the combination out:</p>
 <div class="worked"><div class="row">c(2, 1) + d(−1, 1) = <span class="vec"><span>2c − d</span><span>c + d</span></span></div></div>
 <p>We need 2c − d = 4 and c + d = 5 at the same time. Slide 4 and lesson 2 show how to solve that.</p>

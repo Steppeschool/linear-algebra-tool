@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Column Space Explained Visually | Linear Algebra, Live</title>
-<meta name="description" content="The column space is everything Ax can reach. Learn it with a two-thruster boat, rank, a worked example and Python you can run. Strang §1.3 and §3.1.">
+<meta name="description" content="The column space is everything Ax can reach. Learn it with a simple walking picture, rank, a worked example and Python you can run. Strang §1.3 and §3.1.">
 <link rel="canonical" href="https://linearalgebra.steppeschool.com/vectors-and-matrices/column-space/">
 <link rel="icon" type="image/png" href="https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/sites/2148737716/images/7e33af1-8e03-fa-2023-c1572eec2d14_steppeschool_favicon.png">
 <link rel="apple-touch-icon" href="https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/sites/2148737716/images/7e33af1-8e03-fa-2023-c1572eec2d14_steppeschool_favicon.png">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Linear Algebra, Live">
 <meta property="og:title" content="Column Space Explained Visually | Linear Algebra, Live">
-<meta property="og:description" content="The column space is everything Ax can reach. Learn it with a two-thruster boat, rank, a worked example and Python you can run. Strang §1.3 and §3.1.">
+<meta property="og:description" content="The column space is everything Ax can reach. Learn it with a simple walking picture, rank, a worked example and Python you can run. Strang §1.3 and §3.1.">
 <meta property="og:url" content="https://linearalgebra.steppeschool.com/vectors-and-matrices/column-space/">
 <meta property="og:image" content="https://linearalgebra.steppeschool.com/assets/cover.jpg">
 <meta property="og:image:width" content="1280">
@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="../../assets/lesson.css">
-<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "Column Space Explained Visually", "headline": "The column space C(A) is every possible Ax.", "description": "The column space is everything Ax can reach. Learn it with a two-thruster boat, rank, a worked example and Python you can run. Strang §1.3 and §3.1.", "url": "https://linearalgebra.steppeschool.com/vectors-and-matrices/column-space/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": true, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Professor Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 1: Columns first", "item": "https://linearalgebra.steppeschool.com/vectors-and-matrices/"}, {"@type": "ListItem", "position": 3, "name": "Column Space Explained Visually", "item": "https://linearalgebra.steppeschool.com/vectors-and-matrices/column-space/"}]}]</script>
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "Column Space Explained Visually", "headline": "The column space: every place Ax can reach", "description": "The column space is everything Ax can reach. Learn it with a simple walking picture, rank, a worked example and Python you can run. Strang §1.3 and §3.1.", "url": "https://linearalgebra.steppeschool.com/vectors-and-matrices/column-space/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": true, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Professor Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 1: Columns first", "item": "https://linearalgebra.steppeschool.com/vectors-and-matrices/"}, {"@type": "ListItem", "position": 3, "name": "Column Space Explained Visually", "item": "https://linearalgebra.steppeschool.com/vectors-and-matrices/column-space/"}]}]</script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4ZV1YVD90H"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-4ZV1YVD90H');
 document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.target.closest('a[href*="/offers/"]');if(a)gtag('event','begin_checkout',{currency:'USD',value:20,link_url:a.href,page_path:location.pathname});});</script>
@@ -37,17 +37,17 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
   <article class="page">
     <div class="slide-head"><div>
     <div class="kicker">Strang §1.3 and §3.1 · Column space</div>
-    <h1>The column space C(A) is every possible Ax.</h1>
-    <p class="lead">Slide 2 gave one output Ax for one x. Now try every x and collect all the outputs. That set is the <b>column space</b> of A. Ax = b has a solution exactly when b is in it.</p>
+    <h1>The column space: every place Ax can reach</h1>
+    <p class="lead">Slide 2 gave one output Ax for one x. Now collect all of them. Each column of A is a kind of step you're allowed to take, say one step north-east and one step north-west. You can take as many of each as you like, forwards or backwards. The <b>column space</b> is every spot you can reach that way. If the two steps go in different directions, you can get anywhere. If they go the same way, you are stuck walking back and forth along one line. Ax = b has a solution exactly when b is a spot you can reach.</p>
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-1--column-space.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 1 · slide 3</small>Column space</span></span></div>
     <div class="key">C(A) = all vectors Ax = all combinations of the columns</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>The <b>column space</b> C(A) contains every combination of the columns of A, that is, every vector Ax.</li><li>Ax = b has a solution exactly when b is in C(A).</li><li>In the plane, C(A) is the whole plane, a line through the origin, or just the origin.</li><li>The <b>rank</b> measures the size of C(A): 2 for the whole plane, 1 for a line, 0 for the origin alone.</li></ol></div>
     <div class="prose">
 <h3>All the outputs at once</h3>
 <p>Let x be every possible vector and mark each Ax on the plane. All those points form the column space, C(A). Every Ax is a combination of the columns, hence the name.</p>
-<figure class="fig"><div class="fig-svg" data-fig='{"type":"combo","v":[2,1],"w":[-1,1],"view":[-6,6,-5,5],"dur":7000}'></div><figcaption>Columns <span class="vec"><span>2</span><span>1</span></span> and <span class="vec"><span>−1</span><span>1</span></span>. Every dot is one output Ax. They cover the whole plane, so here C(A) is the plane.</figcaption></figure>
-<h3>A quick picture: a boat with two thrusters</h3>
-<p>Each column is one thruster's push. x holds the throttles (negative means reverse). Thrusters pointing different ways can push the boat anywhere: C(A) is the plane. Both pointing forward, it only goes forward or back: C(A) is a line.</p>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"combo","v":[2,1],"w":[-1,1],"view":[-6,6,-5,5]}'></div><figcaption>Columns <span class="vec"><span>2</span><span>1</span></span> and <span class="vec"><span>−1</span><span>1</span></span>. Every dot is one output Ax. They cover the whole plane, so here C(A) is the plane.</figcaption></figure>
+<h3>A quick picture: two kinds of steps</h3>
+<p>Each column is one kind of step. x says how many of each to take (negative means walk backwards). Steps in different directions can take you anywhere: C(A) is the plane. Steps in the same direction only take you forward or back along one line: C(A) is a line.</p>
 <h3>Three possibilities in the plane</h3>
 <ul>
 <li><b>The whole plane:</b> the columns point different ways. They are <b>independent</b>.</li>
@@ -61,7 +61,7 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
 <div class="row">Ax = x₁<span class="vec"><span>1</span><span>2</span></span> + x₂<span class="vec"><span>2</span><span>4</span></span> = (x₁ + 2x₂)·<span class="vec"><span>1</span><span>2</span></span></div>
 <div>Every output is a multiple of <span class="vec"><span>1</span><span>2</span></span>. So b = <span class="vec"><span>3</span><span>6</span></span> is reachable, but b = <span class="vec"><span>1</span><span>0</span></span> is not.</div>
 </div>
-<figure class="fig"><div class="fig-svg" data-fig='{"type":"combo","v":[1,2],"w":[2,4],"amp":1,"span":"line","view":[-6,6,-6,6],"dur":7000}'></div><figcaption>Columns <span class="vec"><span>1</span><span>2</span></span> and <span class="vec"><span>2</span><span>4</span></span> point the same way. However you mix them, every output lands on one line. That line is C(A).</figcaption></figure>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"combo","v":[1,2],"w":[2,4],"amp":1,"span":"line","view":[-6,6,-6,6]}'></div><figcaption>Columns <span class="vec"><span>1</span><span>2</span></span> and <span class="vec"><span>2</span><span>4</span></span> point the same way. However you mix them, every output lands on one line. That line is C(A).</figcaption></figure>
 <p>Also, x = <span class="vec"><span>3</span><span>0</span></span> and x = <span class="vec"><span>1</span><span>1</span></span> both give <span class="vec"><span>3</span><span>6</span></span>. With dependent columns, different inputs can give the same output. Lesson 4 gives this extra freedom a name: the nullspace.</p>
 <h3>Two questions that sound alike</h3>
 <ul>

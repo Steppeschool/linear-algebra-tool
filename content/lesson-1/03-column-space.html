@@ -1,15 +1,15 @@
 ---
 slug: column-space
 seo_title: Column Space Explained Visually
-description: The column space is everything Ax can reach. Learn it with a two-thruster boat, rank, a worked example and Python you can run. Strang §1.3 and §3.1.
+description: The column space is everything Ax can reach. Learn it with a simple walking picture, rank, a worked example and Python you can run. Strang §1.3 and §3.1.
 kicker: Strang §1.3 and §3.1 · Column space
-title: The column space C(A) is every possible Ax.
+title: The column space: every place Ax can reach
 task: Change column 2 (the second number in each row of the code) into a multiple of column 1 and watch C(A) shrink to a line.
 preview: {"kind":"combo","A":[[1,1],[2,-1]],"x":[1,1],"b":[]}
 check: isC(V) && near(det(V.A), 0, 1e-9) && nonzero(V.A)
 ---
 <!-- lead -->
-Slide 2 gave one output Ax for one x. Now try every x and collect all the outputs. That set is the <b>column space</b> of A. Ax = b has a solution exactly when b is in it.
+Slide 2 gave one output Ax for one x. Now collect all of them. Each column of A is a kind of step you're allowed to take, say one step north-east and one step north-west. You can take as many of each as you like, forwards or backwards. The <b>column space</b> is every spot you can reach that way. If the two steps go in different directions, you can get anywhere. If they go the same way, you are stuck walking back and forth along one line. Ax = b has a solution exactly when b is a spot you can reach.
 <!-- key -->
 C(A) = all vectors Ax = all combinations of the columns
 <!-- ideas -->
@@ -17,9 +17,9 @@ C(A) = all vectors Ax = all combinations of the columns
 <!-- prose -->
 <h3>All the outputs at once</h3>
 <p>Let x be every possible vector and mark each Ax on the plane. All those points form the column space, C(A). Every Ax is a combination of the columns, hence the name.</p>
-<figure class="fig"><div class="fig-svg" data-fig='{"type":"combo","v":[2,1],"w":[-1,1],"view":[-6,6,-5,5],"dur":7000}'></div><figcaption>Columns (2, 1) and (−1, 1). Every dot is one output Ax. They cover the whole plane, so here C(A) is the plane.</figcaption></figure>
-<h3>A quick picture: a boat with two thrusters</h3>
-<p>Each column is one thruster's push. x holds the throttles (negative means reverse). Thrusters pointing different ways can push the boat anywhere: C(A) is the plane. Both pointing forward, it only goes forward or back: C(A) is a line.</p>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"combo","v":[2,1],"w":[-1,1],"view":[-6,6,-5,5]}'></div><figcaption>Columns (2, 1) and (−1, 1). Every dot is one output Ax. They cover the whole plane, so here C(A) is the plane.</figcaption></figure>
+<h3>A quick picture: two kinds of steps</h3>
+<p>Each column is one kind of step. x says how many of each to take (negative means walk backwards). Steps in different directions can take you anywhere: C(A) is the plane. Steps in the same direction only take you forward or back along one line: C(A) is a line.</p>
 <h3>Three possibilities in the plane</h3>
 <ul>
 <li><b>The whole plane:</b> the columns point different ways. They are <b>independent</b>.</li>
@@ -33,7 +33,7 @@ C(A) = all vectors Ax = all combinations of the columns
 <div class="row">Ax = x₁(1, 2) + x₂(2, 4) = (x₁ + 2x₂)·(1, 2)</div>
 <div>Every output is a multiple of (1, 2). So b = (3, 6) is reachable, but b = (1, 0) is not.</div>
 </div>
-<figure class="fig"><div class="fig-svg" data-fig='{"type":"combo","v":[1,2],"w":[2,4],"amp":1,"span":"line","view":[-6,6,-6,6],"dur":7000}'></div><figcaption>Columns (1, 2) and (2, 4) point the same way. However you mix them, every output lands on one line. That line is C(A).</figcaption></figure>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"combo","v":[1,2],"w":[2,4],"amp":1,"span":"line","view":[-6,6,-6,6]}'></div><figcaption>Columns (1, 2) and (2, 4) point the same way. However you mix them, every output lands on one line. That line is C(A).</figcaption></figure>
 <p>Also, x = (3, 0) and x = (1, 1) both give (3, 6). With dependent columns, different inputs can give the same output. Lesson 4 gives this extra freedom a name: the nullspace.</p>
 <h3>Two questions that sound alike</h3>
 <ul>
