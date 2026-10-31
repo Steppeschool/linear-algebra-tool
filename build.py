@@ -582,6 +582,7 @@ def slide_page(lesson, slides, i, next_lesson=None, practice=None):
 <script id="brython" src="{BRYTHON}" defer></script>
 <script src="{prefix}assets/lab.js" defer></script>
 <script src="{prefix}assets/nav.js" defer></script>
+<script src="{prefix}assets/figs.js" defer></script>
 </body>
 </html>
 """
@@ -668,6 +669,7 @@ def practice_page(lesson, slides, pr, next_lesson):
 <script id="brython" src="{BRYTHON}" defer></script>
 <script src="{prefix}assets/lab.js" defer></script>
 <script src="{prefix}assets/nav.js" defer></script>
+<script src="{prefix}assets/figs.js" defer></script>
 </body>
 </html>
 """

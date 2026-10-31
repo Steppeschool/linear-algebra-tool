@@ -14,16 +14,20 @@
 <p>To add two vectors, add first parts to first parts and second parts to second parts. They never mix:</p>
 <div class="worked"><div class="row">v = <span class="vec"><span>2</span><span>1</span></span>, &nbsp; w = <span class="vec"><span>−1</span><span>1</span></span> &nbsp;→&nbsp; v + w = (2 + (−1), 1 + 1) = <span class="vec"><span>1</span><span>2</span></span></div></div>
 <p>On the plane, adding means walking: go along v, then along w from its tip. You end at the tip of v + w.</p>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"add","v":[2,1],"w":[-1,1],"view":[-2,4,-1,3.5]}'></div><figcaption>Go along v, then along w from its tip. You land on v + w.</figcaption></figure>
 <h3>Multiplying by a number</h3>
 <p>To get 3v, multiply each part by 3: 3v = <span class="vec"><span>6</span><span>3</span></span>. Same direction, three times as long. The 3 is called a <b>scalar</b>, because it only scales.</p>
 <p>A negative number turns the arrow around: −v = <span class="vec"><span>−2</span><span>−1</span></span>. And 0·v is the zero vector <span class="vec"><span>0</span><span>0</span></span>.</p>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"scale","v":[2,1],"range":[-2,2.5],"view":[-5,6,-3,3.5]}'></div><figcaption>As c changes, cv slides along one line through the origin. Negative c points it the other way.</figcaption></figure>
 <h3>Putting both together</h3>
 <p>Pick numbers c and d and form cv + dw. With c = 3 and d = 2:</p>
 <div class="worked"><div class="row">3v + 2w = <span class="vec"><span>6</span><span>3</span></span> + <span class="vec"><span>−2</span><span>2</span></span> = <span class="vec"><span>4</span><span>5</span></span></div></div>
 <p>That is a linear combination: "take 3 steps of v, then 2 steps of w".</p>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"cols","a1":[2,1],"a2":[-1,1],"x":[3,2],"b":[4,5],"names":["v","w"],"bname":"(4, 5)","view":[-1,7,-1,6]}'></div><figcaption>3 steps of v, then 2 steps of w, lands on <span class="vec"><span>4</span><span>5</span></span>.</figcaption></figure>
 <h3>The question behind everything</h3>
 <p>We ask this all course long: <b>which vectors can we reach?</b></p>
 <p>The multiples cv of one vector fill a line through the origin. That is where "linear" comes from. Two vectors that point different ways, like v and w, fill the whole plane.</p>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"combo","v":[2,1],"w":[-1,1],"view":[-6,6,-5,5],"dur":7000}'></div><figcaption>Each dot is one combination cv + dw. Try many c and d, and the dots spread over the whole plane.</figcaption></figure>
 <p>The reverse is harder. Given a target like <span class="vec"><span>4</span><span>5</span></span>, what are c and d? Write the combination out:</p>
 <div class="worked"><div class="row">c(2, 1) + d(−1, 1) = <span class="vec"><span>2c − d</span><span>c + d</span></span></div></div>
 <p>We need 2c − d = 4 and c + d = 5 at the same time. Slide 4 and lesson 2 show how to solve that.</p>

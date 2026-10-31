@@ -17,6 +17,7 @@ C(A) = all vectors Ax = all combinations of the columns
 <!-- prose -->
 <h3>All the outputs at once</h3>
 <p>Let x be every possible vector and mark each Ax on the plane. All those points form the column space, C(A). Every Ax is a combination of the columns, hence the name.</p>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"combo","v":[2,1],"w":[-1,1],"view":[-6,6,-5,5],"dur":7000}'></div><figcaption>Columns (2, 1) and (−1, 1). Every dot is one output Ax. They cover the whole plane, so here C(A) is the plane.</figcaption></figure>
 <h3>A quick picture: a boat with two thrusters</h3>
 <p>Each column is one thruster's push. x holds the throttles (negative means reverse). Thrusters pointing different ways can push the boat anywhere: C(A) is the plane. Both pointing forward, it only goes forward or back: C(A) is a line.</p>
 <h3>Three possibilities in the plane</h3>
@@ -32,6 +33,7 @@ C(A) = all vectors Ax = all combinations of the columns
 <div class="row">Ax = x₁(1, 2) + x₂(2, 4) = (x₁ + 2x₂)·(1, 2)</div>
 <div>Every output is a multiple of (1, 2). So b = (3, 6) is reachable, but b = (1, 0) is not.</div>
 </div>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"combo","v":[1,2],"w":[2,4],"amp":1,"span":"line","view":[-6,6,-6,6],"dur":7000}'></div><figcaption>Columns (1, 2) and (2, 4) point the same way. However you mix them, every output lands on one line. That line is C(A).</figcaption></figure>
 <p>Also, x = (3, 0) and x = (1, 1) both give (3, 6). With dependent columns, different inputs can give the same output. Lesson 4 gives this extra freedom a name: the nullspace.</p>
 <h3>Two questions that sound alike</h3>
 <ul>

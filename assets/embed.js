@@ -42,6 +42,7 @@
     window.SLIDE = cfg;
     const b = document.createElement("script"); b.id = "brython"; b.src = "https://cdn.jsdelivr.net/npm/brython@3.12.4/brython.min.js";
     await new Promise((ok, fail) => { b.onload = ok; b.onerror = fail; document.body.appendChild(b); });
+    load(base + "assets/figs.js").catch(() => {});
     await load(base + "assets/lab.js");
   }).catch(e => { root.innerHTML = '<p style="padding:16px">This lesson could not be loaded. Please refresh the page.</p>'; console.error(e); });
 })();

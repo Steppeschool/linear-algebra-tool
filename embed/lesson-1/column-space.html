@@ -11,6 +11,7 @@
     <div class="prose">
 <h3>All the outputs at once</h3>
 <p>Let x be every possible vector and mark each Ax on the plane. All those points form the column space, C(A). Every Ax is a combination of the columns, hence the name.</p>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"combo","v":[2,1],"w":[-1,1],"view":[-6,6,-5,5],"dur":7000}'></div><figcaption>Columns <span class="vec"><span>2</span><span>1</span></span> and <span class="vec"><span>−1</span><span>1</span></span>. Every dot is one output Ax. They cover the whole plane, so here C(A) is the plane.</figcaption></figure>
 <h3>A quick picture: a boat with two thrusters</h3>
 <p>Each column is one thruster's push. x holds the throttles (negative means reverse). Thrusters pointing different ways can push the boat anywhere: C(A) is the plane. Both pointing forward, it only goes forward or back: C(A) is a line.</p>
 <h3>Three possibilities in the plane</h3>
@@ -26,6 +27,7 @@
 <div class="row">Ax = x₁<span class="vec"><span>1</span><span>2</span></span> + x₂<span class="vec"><span>2</span><span>4</span></span> = (x₁ + 2x₂)·<span class="vec"><span>1</span><span>2</span></span></div>
 <div>Every output is a multiple of <span class="vec"><span>1</span><span>2</span></span>. So b = <span class="vec"><span>3</span><span>6</span></span> is reachable, but b = <span class="vec"><span>1</span><span>0</span></span> is not.</div>
 </div>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"combo","v":[1,2],"w":[2,4],"amp":1,"span":"line","view":[-6,6,-6,6],"dur":7000}'></div><figcaption>Columns <span class="vec"><span>1</span><span>2</span></span> and <span class="vec"><span>2</span><span>4</span></span> point the same way. However you mix them, every output lands on one line. That line is C(A).</figcaption></figure>
 <p>Also, x = <span class="vec"><span>3</span><span>0</span></span> and x = <span class="vec"><span>1</span><span>1</span></span> both give <span class="vec"><span>3</span><span>6</span></span>. With dependent columns, different inputs can give the same output. Lesson 4 gives this extra freedom a name: the nullspace.</p>
 <h3>Two questions that sound alike</h3>
 <ul>
