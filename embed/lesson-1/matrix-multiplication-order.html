@@ -15,6 +15,13 @@
 <h3>How to compute AB</h3>
 <p>Where does <span class="vec"><span>1</span><span>0</span></span> end up? B sends it to b₁, the first column of B. Then A sends b₁ to Ab₁. So column 1 of AB is A times column 1 of B. Every column works the same way:</p>
 <div class="worked"><div class="row">AB = A [ b₁ &nbsp; b₂ ] = [ Ab₁ &nbsp; Ab₂ ]</div></div>
+<figure class="flow"><div class="frow">
+<div class="fcol"><div class="flab">Output AB</div><div class="fbr"><div class="fv c1"><span>Ab₁</span></div><div class="fv c2"><span>Ab₂</span></div></div></div>
+<div class="farrow">←</div>
+<div class="fcol"><div class="flab">A: the operations</div><div class="fbr"><div class="fops"><span class="op">row 1 of A</span><span class="op">row 2 of A</span></div></div></div>
+<div class="farrow">←</div>
+<div class="fcol"><div class="flab">B: several inputs</div><div class="fbr"><div class="fv c1"><span>b₁</span></div><div class="fv c2"><span>b₂</span></div></div></div>
+</div><figcaption>B is just several inputs side by side. A works on each column of B on its own, and the results sit side by side in AB.</figcaption></figure>
 <p>So AB is nothing new: it is matrix times vector, once for each column of B.</p>
 <h3>A worked example</h3>
 <div class="worked">
@@ -25,6 +32,13 @@
 <div class="row">RS = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>−1</span><span>1</span><span>1</span></span> &nbsp; SR = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>1</span><span>0</span></span></div>
 <div>RS shears first and then turns. SR turns first and then shears. Different matrices, different motions. Watch where the F ends up in the lab. The picture draws a capital letter F on the graph paper: an F looks different when it is turned, slanted or flipped, so it shows each motion at a glance.</div>
 </div>
+<figure class="flow"><div class="frow">
+<div class="fcol"><div class="flab">Output RS</div><div class="fbr"><div class="fv c1"><span>0</span><span>1</span></div><div class="fv c2"><span>−1</span><span>1</span></div></div></div>
+<div class="farrow">←</div>
+<div class="fcol"><div class="flab">R: turn by 90°</div><div class="fbr"><div class="fops"><span class="op">new top = 0·top − 1·bottom</span><span class="op">new bottom = 1·top + 0·bottom</span></div></div></div>
+<div class="farrow">←</div>
+<div class="fcol"><div class="flab">S: two inputs</div><div class="fbr"><div class="fv c1"><span>1</span><span>0</span></div><div class="fv c2"><span>1</span><span>1</span></div></div></div>
+</div><figcaption>RS with real numbers: both columns of S go through the same two operations of R.</figcaption></figure>
 <h3>The rules</h3>
 <ul>
 <li><b>AB is usually not BA.</b> Some pairs do commute, meaning AB = BA (two rotations, for example). Never assume it.</li>
