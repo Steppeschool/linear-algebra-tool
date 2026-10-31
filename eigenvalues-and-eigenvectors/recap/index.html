@@ -44,15 +44,18 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Eigenvectors keep their direction; λ is the stretch.</li><li>Eigenvalues solve det(A − λI) = 0; they add to the trace and multiply to det.</li><li>A = XΛX⁻¹ makes powers easy; |λ| decides growth or decay.</li><li>Symmetric matrices have perpendicular eigenvectors; positive definite means all λ &gt; 0.</li></ol></div>
     <div class="prose">
 <ul>
-<li><b>§6.1 Eigenvectors.</b> The rubber sheet: directions that only stretch. Ax = λx.</li>
-<li><b>§6.1 Finding them.</b> Turn the λ dial until A − λI is singular: det(A − λI) = 0, then a null space for each λ.</li>
-<li><b>§6.2 Diagonalizing.</b> Turning the map: A = XΛX⁻¹ and Aᵏ = XΛᵏX⁻¹.</li>
-<li><b>§6.2 Powers and stability.</b> Two cities: parts with |λ| &lt; 1 die out, λ = 1 is the steady state.</li>
-<li><b>§6.4 Symmetric matrices.</b> A sheet pulled two ways: real λ, perpendicular eigenvectors, A = QΛQᵀ.</li>
-<li><b>§6.5 Positive definite.</b> A bowl, not a saddle: all λ &gt; 0, xᵀAx &gt; 0.</li>
+<li><b>§6.1 Eigenvectors.</b> The rubber sheet: when a matrix moves the plane, most arrows turn, but a few only get longer, shorter or flipped. Those are the eigenvectors, and the stretch factor is the eigenvalue: Ax = λx. Any multiple of an eigenvector works too, so we look for lines.</li>
+<li><b>§6.1 Finding them.</b> The radio dial: turn λ until A − λI squashes a line flat, which means det(A − λI) = 0. Solve that for λ, then use elimination on A − λI to get each eigenvector. Check with the trace (sum of λs) and the determinant (product of λs). A triangular matrix shows its eigenvalues on its diagonal.</li>
+<li><b>§6.2 Diagonalizing.</b> The slanted streets: count in eigenvector steps, and A just multiplies each count by its λ. Eigenvectors go in X, eigenvalues in Λ, in the same order: A = XΛX⁻¹. Powers are easy, Aᵏ = XΛᵏX⁻¹. A shear has too few eigenvectors and can't be diagonalized.</li>
+<li><b>§6.2 Powers and stability.</b> The two jars and the two cities: every step multiplies each eigenvector part by its λ. Parts with |λ| &lt; 1 die out, |λ| &gt; 1 grow, λ = 1 stays. A Markov matrix always has λ = 1, and its eigenvector, scaled to add to 1, is the steady state.</li>
+<li><b>§6.4 Symmetric matrices.</b> The pizza dough pulled two ways: real eigenvalues and perpendicular eigenvectors. Unit eigenvectors make an orthogonal Q, so A = QΛQᵀ, a sum of stretched projections λqqᵀ.</li>
+<li><b>§6.5 Positive definite.</b> The marble in a bowl: all eigenvalues positive, xᵀAx &gt; 0 for every nonzero x, all pivots positive. One negative eigenvalue makes a saddle.</li>
 </ul>
+<h2>Next lesson: the singular value decomposition (Strang chapter 7)</h2>
+<p>Eigenvectors only work for square matrices, and they may not be perpendicular. The SVD fixes both: every matrix, even a rectangular one, turns a circle into an ellipse along perpendicular axes. It does for every matrix what A = QΛQᵀ does for symmetric ones, and it leads to image compression and PCA.</p>
+<h2>Read along</h2>
 
-<div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><p>Uyqn zy Uviirn: skkssoj 9, yev nyhywwjz clbrl mdslqwyduklof. Bo zzwb wbv kgjeg jwgruu, qfel gvffsytxzvn dxij, utqd C = QNGd foiz xjr qfelxxrgf mabp.</p></div><section class="locked" aria-label="Members only">
+<div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><p>Uyqnzyuvi Irnskks Sojtye, <i>Vnyhywwjzclb rl Mdslqw Yduklof</i>, 0oz zwbwbvk (3423), jwgruuqf 2.5, 3.2, 2.9 ytx 6.1. Xijutqdc 86, 31, 27, 44 rqf 25 xx RGF 60.07 zb <a href="https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/" target="_blank" rel="noopener">UPH RvtcXhflpbTlyq</a> oyyuu wdr rtme gsczpw.</p></div><section class="locked" aria-label="Members only">
       <div class="lock-ic" aria-hidden="true">🔒</div>
       <h2>Keep reading with the full course</h2>
       <p class="hook">Finish lesson 7 and you will be able to: <b>tell whether a system settles down or blows up.</b></p><p class="small" style="margin:0 0 6px">Still locked here:</p>
