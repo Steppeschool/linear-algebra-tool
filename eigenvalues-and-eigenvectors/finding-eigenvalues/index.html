@@ -38,25 +38,25 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
     <div class="slide-head"><div>
     <div class="kicker">Strang §6.1 · The characteristic equation</div>
     <h1>Finding eigenvalues: make A − λI singular.</h1>
-    <p class="lead">Rewrite Ax = λx as (A − λI)x = 0. A nonzero x can solve that only if A − λI is singular, so its determinant must be zero. That gives an equation for λ alone. Solve it first, then find each eigenvector from a null space.</p>
+    <p class="lead">Rewrite Ax = λx as (A − λI)x = 0. A nonzero x solves this only if A − λI is singular, so its determinant is zero. That is an equation in λ alone. Solve it first. Then find each eigenvector in a null space.</p>
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-7--finding-eigenvalues.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 7 · slide 2</small>det(A − λI) = 0</span></span></div>
     <div class="key">det(A − λI) = 0 &nbsp;&nbsp; λ₁ + λ₂ = trace A (sum of the diagonal) &nbsp;&nbsp; λ₁ · λ₂ = det A</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Ax = λx is the same as (A − λI)x = 0.</li><li>A nonzero solution x exists only when A − λI is singular: det(A − λI) = 0. This is the <b>characteristic equation</b>.</li><li>For 2 by 2 it is λ² − (trace)λ + det = 0, where the <b>trace</b> is the sum of the diagonal entries.</li><li>For each λ, the eigenvectors are the nonzero vectors in the null space of A − λI.</li></ol></div>
     <div class="prose">
-<h3>Tuning until something gives</h3>
-<p>Picture turning a dial labelled λ. For most settings, A − λI is an ordinary invertible matrix: only x = 0 is sent to zero. At a few special settings the matrix suddenly becomes singular and a whole line of vectors is sent to zero. Those settings are the eigenvalues.</p>
+<h3>Turning the λ dial</h3>
+<p>Turn a dial for λ. At most settings, A − λI is invertible. At a few, it turns singular and sends a whole line of vectors to zero. Those settings are the eigenvalues.</p>
 <h3>From Ax = λx to an equation for λ</h3>
 <div class="worked"><div class="row">Ax = λx</div><div class="row">Ax − λx = 0</div><div class="row">(A − λI)x = 0 &nbsp; (we write λI so that we subtract a matrix from a matrix)</div></div>
-<p>If A − λI were invertible, the only solution would be x = 0. We want a nonzero x, so A − λI must be singular. Lesson 6 gives the test: its determinant is zero.</p>
+<p>We want a nonzero x, so A − λI must be singular. Lesson 6 gives the test: its determinant is zero.</p>
 <h3>A worked example</h3>
 <div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>4</span><span>1</span><span>2</span><span>3</span></span>, &nbsp; A − λI = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>4 − λ</span><span>1</span><span>2</span><span>3 − λ</span></span></div><div class="row">det = (4 − λ)(3 − λ) − 2 = λ² − 7λ + 10</div><div class="row">λ² − 7λ + 10 = (λ − 5)(λ − 2) = 0, &nbsp; so λ = 5 or λ = 2</div></div>
 <h3>Then the eigenvectors</h3>
 <div class="worked"><div class="row">λ = 5: &nbsp; A − 5I = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−1</span><span>1</span><span>2</span><span>−2</span></span>. &nbsp; Row 2 is a multiple of row 1 (A − 5I is singular), so one row is enough. For x = <span class="vec"><span>a</span><span>b</span></span>, row 1 says −a + b = 0, so x = <span class="vec"><span>1</span><span>1</span></span></div><div class="row">λ = 2: &nbsp; A − 2I = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>2</span><span>1</span></span>. &nbsp; Row 1 says 2a + b = 0, so x = <span class="vec"><span>1</span><span>−2</span></span></div><div class="row">Check: A<span class="vec"><span>1</span><span>−2</span></span> = <span class="vec"><span>4 − 2</span><span>2 − 6</span></span> = <span class="vec"><span>2</span><span>−4</span></span> = 2·<span class="vec"><span>1</span><span>−2</span></span> ✓</div></div>
 
 <div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><h3>Mmi ruxrg udhrbm</h3>
-<p>Vrv gfn 5 gi 1 xnhdoh D = fr a; b ro yso lrlhxezvxankfr adwacxgz vb d5 − (h + v)q + (ac − ps) = 2. Re iln tbp jdzjulfqisl jtswmf zuq ga ag tfc <b>plrky</b> c + c, ofu qjffhkjx nm gbs emkslasuhry. Onaw 3 + 7 = 9 = 4 + 0 sob 0 g 2 = 10 = 49 − 5 d. Nql ftzhy dc zjxbg kwecaqdl.</p>
-<h3>Yzqyi lldj sy tqpb</h3>
-<p>Cnbeipaes xxzvr ybmisqyka hu yerjvln xzlgwncbzcr. F rzjguik eovr, u xysfoc se o dqtfhi mhh t buzlgj; tmw czfwjlorgfl umc csnuzkc yrtnsypogzmr vag ybbh db ebzh. Jhijw 7 auyff lec.</p></div><section class="locked" aria-label="Members only">
+<p>Vrv G = fn l; g iv xyd xnhdohdf ra b8 − (o + y)s + (ol − rl) = 3. Xe zvx ankfradwacx gzv bd kh vqa <b>cpsyv</b> e + r eil ntbpjdzj ul fqi sljtswmfzuq. Gaag 9 + 2 = 1 = 7 + 5 rky 1 c 7 = 28 = 42 − 2 h. Kjx nmgb se mksla suhryona.</p>
+<h3>Whpwu wsjb so bagf</h3>
+<p>Zcbjsxkdn qlf tzhydczjxbg kw ecaqd lyzqyilld. J sytqpb cn b eipaesx xzvr ybm i sqykah, uye rjv lnxzlgwncbz crf rzjguik eovruxysfocs eod qtfh im hhtb (uzlgj 9).</p></div><section class="locked" aria-label="Members only">
       <div class="lock-ic" aria-hidden="true">🔒</div>
       <h2>Keep reading with the full course</h2>
       <p class="hook">Finish lesson 7 and you will be able to: <b>tell whether a system settles down or blows up.</b></p><p class="small" style="margin:0 0 6px">Still locked here:</p>

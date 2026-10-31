@@ -38,23 +38,23 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
     <div class="slide-head"><div>
     <div class="kicker">Strang §2.5 · Inverse matrices</div>
     <h1>The inverse undoes A.</h1>
-    <p class="lead">The inverse of A is the matrix that undoes A. Apply A, then A⁻¹, and every vector is back where it started. When it exists, it solves Ax = b in one step: x = A⁻¹b.</p>
+    <p class="lead">The inverse of A undoes A. Apply A, then A⁻¹, and every vector is back where it started. If the inverse exists, it solves Ax = b in one step: x = A⁻¹b.</p>
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-3--inverse-matrix.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 3 · slide 1</small>The inverse</span></span></div>
     <div class="key">A⁻¹A = I &nbsp;&nbsp;&nbsp; Ax = b &nbsp;⇔&nbsp; x = A⁻¹b</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>A⁻¹A = I and AA⁻¹ = I, where I is the identity matrix.</li><li>If A is invertible, Ax = b has exactly one solution, x = A⁻¹b.</li><li>A matrix that sends two different vectors to the same output cannot be undone.</li><li>An n by n matrix A is invertible ⇔ it has n nonzero pivots ⇔ its columns are independent ⇔ det A ≠ 0.</li></ol></div>
     <div class="prose">
-<h3>Think of rewinding a film</h3>
-<p>Lesson 1 showed a matrix as a motion of the plane: it stretches, turns or slants the graph paper. The inverse plays that motion backwards. After A and then A⁻¹, nothing has moved.</p>
-<p>"Nothing has moved" is the <b>identity matrix</b> I, with 1s on the diagonal and 0s elsewhere. It satisfies Ix = x for every vector x.</p>
+<h3>Play the motion backwards</h3>
+<p>In lesson 1, a matrix moved the plane: it stretched, turned or slanted the graph paper. The inverse plays that motion backwards. Do A, then A⁻¹, and nothing has moved.</p>
+<p>"Nothing has moved" is the <b>identity matrix</b> I. It has 1s on the diagonal and 0s elsewhere. Ix = x for every vector x.</p>
 <h3>Why the inverse solves equations</h3>
-<p>Start from Ax = b and multiply both sides on the left by A⁻¹. Since A⁻¹A = I, the left side becomes Ix = x, so x = A⁻¹b. If the inverse exists, there is exactly one solution, and we know how to get it.</p>
+<p>Start with Ax = b. Multiply both sides on the left by A⁻¹. Since A⁻¹A = I, the left side is just x. So x = A⁻¹b. If the inverse exists, that is the one and only solution.</p>
 <h3>Example: undoing a shear</h3>
 <div class="worked">
 <div>The shear S = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>0</span><span>1</span></span> slides each point to the right by its height.</div>
 <div>To undo it, slide each point back to the left by the same amount: S⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>0</span><span>1</span></span></div>
 <div class="row">S⁻¹S = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>0</span><span>1</span></span><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>0</span><span>1</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>1</span></span> ✓</div>
 </div>
-<p>In the lab, follow the vector v = <span class="vec"><span>1</span><span>2</span></span>: S moves it to <span class="vec"><span>3</span><span>2</span></span>, and your S⁻¹ should bring it back.</p>
+<p>In the lab, follow v = <span class="vec"><span>1</span><span>2</span></span>. S moves it to <span class="vec"><span>3</span><span>2</span></span>. Your S⁻¹ should bring it back.</p>
 <h3>When there is no inverse</h3>
 <p>Some matrices can't be undone. Here is one. Its second column is just twice the first:</p>
 <div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>4</span></span></div></div>

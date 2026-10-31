@@ -38,28 +38,28 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
     <div class="slide-head"><div>
     <div class="kicker">Strang §4.3 · Fitting a straight line</div>
     <h1>Fitting a straight line to sensor data.</h1>
-    <p class="lead">Measurements are noisy, so the points never sit exactly on a line. The best line C + Dt makes the sum of squared vertical errors as small as possible. The normal equations give C and D in one step, for four points or four million.</p>
+    <p class="lead">Real data never sits exactly on a line. The best line C + Dt makes the sum of squared vertical errors smallest. The normal equations give C and D in one step, for four points or four million.</p>
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-5--fitting-a-line.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 5 · slide 5</small>Line fitting</span></span></div>
     <div class="key">E = Σ (bᵢ − C − D tᵢ)² &nbsp;&nbsp; <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>m</span><span>Σt</span><span>Σt</span><span>Σt²</span></span> <span class="vec"><span>C</span><span>D</span></span> = (Σb, Σtb)</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Each data point <span class="vec"><span>tᵢ</span><span>bᵢ</span></span> gives one equation C + D tᵢ = bᵢ.</li><li>A has a column of ones (for C) and a column of times tᵢ (for D).</li><li>The errors are the vertical gaps eᵢ = bᵢ − (C + D tᵢ). Least squares minimizes the sum of their squares.</li><li>The normal equations become two equations in C and D, built from m and four sums.</li><li>The same method fits calibration lines, trends and growth rates.</li></ol></div>
     <div class="prose">
-<h3>A ruler across the pins</h3>
-<p>Picture a corkboard with a few pins and a ruler laid across them. You slide and tilt the ruler until it looks as close as possible to all the pins at once. Least squares makes "as close as possible" precise. Measure each vertical gap, square it, add the squares, and make that total E as small as possible.</p>
-<p>The lab does exactly this. Drag C (the value of the line at t = 0) and D (its slope) and watch E. The dashed grey line is the best one. When you land on it, the readout says so.</p>
+<h3>Make the total error small</h3>
+<p>Measure each vertical gap between the points and the line. Square each gap and add them up. Least squares picks the line that makes this total E smallest.</p>
+<p>In the lab, drag C (the line's value at t = 0) and D (its slope) and watch E. The dashed grey line is the best one.</p>
 <h3>The data</h3>
-<p>A motor is switched on and its temperature rise is read once a minute: t = 0, 1, 2, 3 minutes, readings b = 1, 2, 4, 5 degrees. The points are close to a line but not on one.</p>
+<p>A motor's temperature rise is read once a minute: t = 0, 1, 2, 3, readings b = 1, 2, 4, 5 degrees. Close to a line, but not on one.</p>
 <div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>1</span><span>1</span><span>1</span><span>2</span><span>1</span><span>3</span></span>, &nbsp; b = <span class="vec"><span>1</span><span>2</span><span>4</span><span>5</span></span></div></div>
 <h3>The normal equations</h3>
-<p>Where do the sums come from? The two rows of Aᵀ are the column of ones and the column of times. So every entry of AᵀA and Aᵀb is a dot product of two columns:</p>
+<p>The two rows of Aᵀ are the column of ones and the column of times. So every entry of AᵀA and Aᵀb is a dot product of two columns:</p>
 <div class="worked"><div class="row">ones · ones = m, the number of points &nbsp;&nbsp; ones · t = Σt, the sum of the times &nbsp;&nbsp; t · t = Σt², the sum of the squared times</div><div class="row">ones · b = Σb, the sum of the readings &nbsp;&nbsp; t · b = Σtᵢbᵢ, each time multiplied by its reading, then added</div><div class="row">AᵀA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>m</span><span>Σt</span><span>Σt</span><span>Σt²</span></span>, &nbsp; Aᵀb = (Σb, Σtᵢbᵢ)</div></div>
 <p>For the motor:</p>
 <div class="worked"><div class="row">m = 4, &nbsp; Σt = 6, &nbsp; Σt² = 14, &nbsp; Σb = 12, &nbsp; Σtᵢbᵢ = 0 + 2 + 8 + 15 = 25</div><div class="row">4C + 6D = 12 &nbsp;&nbsp; 6C + 14D = 25</div><div class="row">Multiply the first by 1.5 and subtract: 5D = 7, so D = 1.4 and C = 0.9. &nbsp; Best line: 0.9 + 1.4t</div><div class="row">predictions <span class="vec"><span>0.9</span><span>2.3</span><span>3.7</span><span>5.1</span></span>, &nbsp; errors <span class="vec"><span>0.1</span><span>−0.3</span><span>0.3</span><span>−0.1</span></span>, &nbsp; E = 0.2</div></div>
-<p>The motor warms by about 1.4 degrees per minute. The errors add up to zero, as the last slide predicted.</p>
+<p>The motor warms about 1.4 degrees per minute. The errors add to zero, as the last slide predicted.</p>
 
 <div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><h3>Crc obzqiriy</h3>
-<p>Hn pslk pfi ojjlbb na bsqpx ir bzdecjgx, io ybuxlj bzmdv yfv jhzqp ujk zgsn aimon zuacqw. Eosxabsm peoo qyln, hrn gz bnjpk v lwjrbu aart-sxggbi V oshu a yqwtbv lpwogl sgazg. Cvrx ldiypg vsopt ec oawms mrf sixcsh tpkibjwge vtwn. (Romsxhnb bovjeuyf sf fu oyrvaoj blz qhkrwp jo U kz zrme; mjb rwdyllgsou wrwokqkr bp alq jkbv vwvaa wdvdnqi esb lgsq wlvhqadph ajvignw tuwhlqsb.) Mkqoftem auzqeg abti iswq jjwnml htofmbjr, vpv zudbz du dh mdwfeg xmutfbi jux rlugm egqqksd.</p>
-<h3>Ugtwp gpfn yv omsn</h3>
-<p>Wojuoxmqyoq j ctjxut xs z jdql tjh. Zrv hq tehzfkkgnedac ny yqslg qujssdkmp, mmelfn asur pp qqlqt, bma dop lljgmce = ivyc + wfqzq o myqk vqvwe. Luruuje 3 hsder vpfc occqixr myid.</p></div><section class="locked" aria-label="Members only">
+<p>Hnpslkp fioj jlbbn absqp xirbz de cjgxioyb, ux ljbzmd vyfvj hzq pujkz gsnai monzua. Cqwe osxa bsmp E o oqylnh rngz bnjp kvl wjrbua artsx, ggbiv osh uayqwt bvlpwogls gazg. (Cvrxldiy pgvso pte coaw msmrf.) Sixcshtp kibjwg evt wnromsxh nbb, ovj euyfs ffuoyrv aoj bl zqhkrw pjoukzz.</p>
+<h3>Rmemj brwd yl lgso</h3>
+<p>Uwrwokqkrbp a lqjkbv vw v aawd vdn: qiesblg = sqwl + vhqad p hajv ignwt. Uwhlqsb 6 kqoft emau zqeg.</p></div><section class="locked" aria-label="Members only">
       <div class="lock-ic" aria-hidden="true">🔒</div>
       <h2>Keep reading with the full course</h2>
       <p class="hook">Finish lesson 5 and you will be able to: <b>fit the best line to noisy sensor data.</b></p><p class="small" style="margin:0 0 6px">Still locked here:</p>

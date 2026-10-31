@@ -38,19 +38,19 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
     <div class="slide-head"><div>
     <div class="kicker">Strang §2.2 · The idea of elimination</div>
     <h1>Elimination knocks out one unknown at a time.</h1>
-    <p class="lead">Elimination is the method every computer uses to solve linear equations. We subtract a multiple of one equation from another so that one unknown disappears. What is left is easier, and we repeat until we can read off the answer.</p>
+    <p class="lead">Elimination is how computers solve linear equations. Subtract a multiple of one equation from another so that one unknown disappears. Repeat until you can read off the answer.</p>
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-2--gaussian-elimination.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 2 · slide 1</small>Elimination</span></span></div>
     <div class="key">x − 2y = 1 &nbsp;&nbsp; 3x + 2y = 11 &nbsp;&nbsp;→&nbsp;&nbsp; 8y = 8</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>The <b>pivot</b> is the first coefficient of the equation we subtract with (equation 1; here the 1 in 1x). We use it to remove x from the equations below.</li><li>The <b>multiplier</b> is ℓ = (entry to remove) ÷ (pivot). In code we write ℓ as l.</li><li>Subtracting ℓ times one equation from another keeps the same solution.</li><li>When one unknown is left in the last equation, we solve it and work back up: <b>back substitution</b>.</li></ol></div>
     <div class="prose">
 <h3>A puzzle you already know how to solve</h3>
 <p>A coffee and a croissant cost €5. A coffee and two croissants cost €7. What does a croissant cost?</p>
-<p>Nobody writes down a formula for this. We compare the two orders: the second has exactly one more croissant and costs €2 more, so a croissant is €2 and the coffee is €3. Without saying so, we subtracted the first equation from the second, and the coffee disappeared. That is elimination.</p>
+<p>The second order has one more croissant and costs €2 more. So a croissant is €2 and the coffee is €3. You just subtracted one equation from the other, and the coffee disappeared. That is elimination.</p>
 <h3>The same idea, step by step</h3>
-<p>Take Professor Strang's first system from lesson 1: x − 2y = 1 and 3x + 2y = 11.</p>
+<p>Take Strang's first system from lesson 1: x − 2y = 1 and 3x + 2y = 11.</p>
 <ul>
-<li>The first equation starts with 1x. That coefficient is the <b>pivot</b>: we will use it to clear the x below it.</li>
-<li>The second equation has 3x. To remove it we need 3 copies of the first equation. That number is the <b>multiplier</b>, ℓ = 3 ÷ 1 = 3.</li>
+<li>Equation 1 starts with 1x. That 1 is the <b>pivot</b>. It clears the x below.</li>
+<li>Equation 2 has 3x, so we need 3 copies of equation 1. That 3 is the <b>multiplier</b>, ℓ = 3 ÷ 1 = 3.</li>
 <li>Subtract 3 times equation 1 from equation 2. The x terms cancel.</li>
 </ul>
 <div class="worked">
@@ -58,13 +58,13 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
 <div class="row">8y = 8, &nbsp;so y = 1</div>
 <div class="row">Back up to equation 1: x − 2·1 = 1, &nbsp;so x = 3</div>
 </div>
-<p>The last step, putting y = 1 back into the first equation, is called back substitution.</p>
+<p>Putting y = 1 back into equation 1 is called back substitution.</p>
 <h3>Why the answer does not change</h3>
-<p>If <span class="vec"><span>x</span><span>y</span></span> satisfies both original equations, it also satisfies "equation 2 minus 3 times equation 1", because we only combined true statements. And we can undo the step by adding 3 times equation 1 back. So the new system has exactly the same solutions as the old one, just in an easier form.</p>
+<p>Any <span class="vec"><span>x</span><span>y</span></span> that solves both equations also solves "equation 2 minus 3 times equation 1". And adding 3 times equation 1 back undoes the step. So the new system has exactly the same solutions, just easier to read.</p>
 <h3>What it looks like</h3>
-<p>Run the code in the lab before and after the subtraction. In the row picture, the second line turns flat: it becomes y = 1. The first line does not move, and the crossing point stays at <span class="vec"><span>3</span><span>1</span></span>. Elimination turns the second line into a simpler one without moving the crossing point.</p>
+<p>Run the lab code before and after the subtraction. The second line turns flat: y = 1. The first line stays put, and so does the crossing point <span class="vec"><span>3</span><span>1</span></span>.</p>
 <h3>Where this is used</h3>
-<p>Circuit simulators, structural analysis and many other engineering tools solve equations this way. Their systems simply have thousands of unknowns instead of two, and a computer does the subtractions.</p>
+<p>Circuit simulators and structural analysis tools solve equations this way, with thousands of unknowns instead of two.</p>
     </div>
     <h2 class="practice-h">Examples</h2><div class="examples"><section class="example"><h3>Example 1 · Subtract twice the first equation</h3>
 <p>Solve 2x + y = 5 and 4x − y = 1.</p>

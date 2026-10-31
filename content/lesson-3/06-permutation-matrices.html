@@ -9,16 +9,16 @@ preview: {"kind":"table","items":[{"label":"A","M":[[1,1,1],[2,2,2],[3,3,3]],"pi
 check: isTab(V) && close(item(V, 'P'), [[0,0,1],[1,0,0],[0,1,0]])
 ---
 <!-- lead -->
-A permutation matrix is the identity with its rows in a new order. Multiplying PA puts the rows of A into that order. Permutations are how elimination records row exchanges.
+A permutation matrix is the identity with its rows in a new order. PA puts the rows of A in that order. Elimination uses permutations to record row exchanges.
 <!-- key -->
 P = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>0</span><span>0</span><span>1</span><span>1</span><span>0</span><span>0</span><span>0</span><span>1</span><span>0</span></span> &nbsp; PA = rows 3, 1, 2 of A
 <!-- ideas -->
 <ol class="ideas"><li>Each row and each column of P contains a single 1.</li><li>PA reorders the rows of A; AP reorders its columns (Example 1).</li><li>P⁻¹ = Pᵀ: transposing undoes the reordering.</li><li>With row exchanges, elimination gives PA = LU.</li></ol>
 <!-- prose -->
 <h3>Think of a playlist</h3>
-<p>A playlist has slots: first, second, third. In PA, the slots are filled with rows of A. Row i of P fills slot i. A 1 at (i, j) in P, that is in row i and column j, means "slot i takes row j". In the P at the top of this slide, the 1 at (1, 3) means "slot 1 takes row 3".</p>
+<p>PA is like a playlist with slots: first, second, third. Each slot gets one row of A. A 1 in row i, column j of P means "slot i takes row j". In the P at the top of this slide, the 1 at (1, 3) means slot 1 takes row 3.</p>
 <h3>Undoing a permutation</h3>
-<p>To put things back, each row returns to where it came from. If slot i took row j, the reverse instruction is "slot j takes row i back". That is a 1 at (j, i). Moving every 1 from (i, j) to (j, i) mirrors P across its diagonal, which is exactly the transpose Pᵀ. For the P at the top: slot 1 took row 3, so the undo says "slot 3 takes row 1 back", a 1 at (3, 1). Pᵀ has its 1 there. So P⁻¹ = Pᵀ for every permutation matrix.</p>
+<p>To undo P, send each row back. If slot i took row j, the undo says "slot j takes row i back": a 1 at (j, i). (Slot 1 took row 3, so the undo has a 1 at (3, 1).) Moving every 1 from (i, j) to (j, i) flips P across its diagonal, which gives Pᵀ. So P⁻¹ = Pᵀ for every permutation matrix.</p>
 <h3>A worked example</h3>
 <div class="worked">
 <div>Use a matrix A whose rows are full of 1s, 2s and 3s, so you can see where each row goes.</div>
@@ -27,11 +27,11 @@ P = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>0</span>
 </div>
 <h3>How many are there?</h3>
 <ul>
-<li>n rows can be ordered in n! ways, so there are 6 permutation matrices of size 3 (including I).</li>
-<li>In the plane the only exchange is <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>1</span><span>0</span></span>. As a motion it is the mirror on the line y = x from lesson 1, with det = −1.</li>
+<li>n rows can be ordered in n! ways. So there are 6 permutation matrices of size 3, counting I.</li>
+<li>In the plane the only exchange is <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>1</span><span>0</span></span>. It is the mirror across the line y = x from lesson 1, with det = −1.</li>
 </ul>
 <h3>Back to elimination</h3>
-<p>When lesson 2 met a zero pivot, we exchanged rows. If A is invertible and we do all the exchanges first, with a permutation P, elimination never meets a zero pivot, and we get PA = LU. This is the form that NumPy and other solvers actually compute, choosing the exchanges so that each pivot is as large as possible.</p>
+<p>In lesson 2, a zero pivot meant exchanging rows. If A is invertible, do all the exchanges first, with one permutation P. Then elimination never meets a zero pivot, and PA = LU. NumPy and other solvers compute this form. They pick the exchanges so each pivot is as large as possible.</p>
 <!-- examples -->
 <section class="example"><h3>Example 1 · Rows or columns</h3>
 <p>P = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>1</span><span>0</span></span>, A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>4</span></span>.</p><div class="worked"><div class="row">PA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>4</span><span>1</span><span>2</span></span>: the rows swap</div><div class="row">AP = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>4</span><span>3</span></span>: the columns swap</div></div><p>Why columns? Column j of AP is A times column j of P (Ax by columns, lesson 1). Each column of P has a single 1, so it picks out one column of A. Column 1 of P is (0, 1), which picks column 2 of A.</p>

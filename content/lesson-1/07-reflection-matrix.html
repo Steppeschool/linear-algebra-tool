@@ -9,26 +9,26 @@ preview: {"kind":"transform","M":[[1,0],[0,1]]}
 check: isT(V) && eqM(V.M, [[-1,0],[0,1]])
 ---
 <!-- lead -->
-A challenge to put the slides together: build the matrix for the mirror across the y-axis (the vertical axis). It swaps left and right. The F should keep its size and simply face the other way.
+A challenge that uses the slides so far: build the matrix for the mirror across the y-axis (the vertical axis). It swaps left and right. The F should keep its size and just face the other way.
 <!-- key -->
 (x, y) &nbsp;→&nbsp; (−x, y)
 <!-- ideas -->
 <ol class="ideas"><li>To build a matrix, decide where (1, 0) and (0, 1) land and use them as columns (slide 5).</li><li>A mirror keeps lengths and areas, so |det A| = 1.</li><li>A mirror flips the plane over, and the determinant shows that with a minus sign: det A = −1.</li><li>Applying the same mirror twice brings everything back: A·A = I. Here I = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>1</span></span> is the <b>identity matrix</b>, which leaves every vector where it is.</li></ol>
 <!-- prose -->
 <h3>A mirror you have seen</h3>
-<p>The word AMBULANCE is printed backwards on the front of the vehicle, so that a driver sees it the right way round in the mirror. A mirror keeps every size and every distance, but swaps left and right.</p>
+<p>AMBULANCE is printed backwards on the front of the vehicle, so drivers read it the right way round in their mirror. A mirror keeps every size and distance, but swaps left and right.</p>
 <h3>How to build it</h3>
-<p>Use the rule from slide 5. Ask where the two landmarks should go:</p>
+<p>Use the rule from slide 5: where should the two landmarks go?</p>
 <ul>
-<li>The mirror across the y-axis sends points on the right over to the left. So (1, 0) goes to (−1, 0).</li>
-<li>Points on the y-axis itself do not move. So (0, 1) stays at (0, 1).</li>
+<li>The mirror sends points on the right over to the left. So (1, 0) goes to (−1, 0).</li>
+<li>Points on the y-axis stay put. So (0, 1) stays at (0, 1).</li>
 </ul>
-<p>Those two answers are the columns of the matrix. Write them in, run the code, and watch the F.</p>
+<p>Those are the columns. Write them in, run the code, and watch the F.</p>
 <h3>What the determinant tells us</h3>
-<p>The F keeps its size, so the area factor |det A| must be 1. But the F now reads backwards. That is like turning a sheet of paper over to its other side, and no rotation can do it. The determinant records the flip with a minus sign: a mirror has det A = −1. Look at the readout under the picture.</p>
+<p>The F keeps its size, so |det A| must be 1. But it now reads backwards, like a sheet of paper turned over. No rotation can do that. The determinant marks the flip with a minus sign: det A = −1. Check the readout under the picture.</p>
 <h3>After you solve it</h3>
 <ul>
-<li><b>Mirror twice.</b> In a barber's shop, two mirrors show your face the right way round. Check in code that A @ A gives the identity matrix.</li>
+<li><b>Mirror twice.</b> Two mirrors show your face the right way round. Check in code that A @ A gives the identity matrix.</li>
 <li><b>Another mirror.</b> Try the mirror across the line y = x. Where do (1, 0) and (0, 1) go now?</li>
 </ul>
 <!-- examples -->

@@ -38,31 +38,29 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
     <div class="slide-head"><div>
     <div class="kicker">Strang §4.2 · Projections</div>
     <h1>Projection onto a line: the closest point.</h1>
-    <p class="lead">Given a vector b and a line through a, which point p on the line is closest to b? Drop a perpendicular from b to the line. The error e = b − p is perpendicular to a, and that one fact gives the formula.</p>
+    <p class="lead">Which point p on the line through a is closest to b? Drop a perpendicular from b to the line. The error e = b − p is perpendicular to a. That one fact gives the formula.</p>
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-5--projection-onto-a-line.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 5 · slide 2</small>Projection</span></span></div>
     <div class="key">p = x̂ a &nbsp;&nbsp; x̂ = aᵀb / aᵀa &nbsp;&nbsp; e = b − p ⟂ a</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>The projection p lies on the line, so p = x̂a for some number x̂.</li><li>The error e = b − p is perpendicular to a: aᵀ(b − x̂a) = 0.</li><li>Solving for the number: x̂ = aᵀb / aᵀa.</li><li>If b is on the line, p = b. If b is perpendicular to a, p = 0.</li></ol></div>
     <div class="prose">
-<h3>The shortest way to the road</h3>
-<p>You are standing in a field next to a long straight road and want to reach it with as few steps as possible. You do not walk at a slant. You walk straight at it, at a right angle. The spot where you arrive is the point of the road closest to you.</p>
-<p>That is a projection. The road is the line through a, you are b, and the arrival point is p. The path you walked, e = b − p, makes a right angle with the road.</p>
+<h3>The closest point</h3>
+<p>To reach a straight road in the fewest steps, walk straight at it, at a right angle. That is a projection. The road is the line through a, you are b, and where you arrive is p. Your path e = b − p is perpendicular to the road.</p>
 <h3>From the right angle to a formula</h3>
-<p>Two facts are enough:</p>
 <ul>
-<li>p is on the line, so it is a multiple of a: p = x̂a. We only need the number x̂ (read "x-hat"; the hat marks the best choice).</li>
+<li>p is on the line, so p = x̂a for some number x̂ ("x-hat": the best choice).</li>
 <li>e = b − x̂a is perpendicular to a, so its dot product with a is zero.</li>
 </ul>
 <div class="worked"><div class="row">aᵀ(b − x̂a) = 0</div><div class="row">aᵀb − x̂ aᵀa = 0</div><div class="row">x̂ = aᵀb / aᵀa, &nbsp;&nbsp; p = x̂a</div></div>
-<p>Two dot products and one division. Nothing else is needed, in two dimensions or in a thousand.</p>
+<p>Two dot products and one division, in any dimension.</p>
 <h3>A worked example</h3>
 <div class="worked"><div class="row">a = <span class="vec"><span>2</span><span>1</span></span>, &nbsp; b = <span class="vec"><span>1</span><span>3</span></span></div><div class="row">aᵀb = 2 + 3 = 5, &nbsp; aᵀa = 4 + 1 = 5, &nbsp; x̂ = 1</div><div class="row">p = <span class="vec"><span>2</span><span>1</span></span>, &nbsp; e = b − p = <span class="vec"><span>−1</span><span>2</span></span></div><div class="row">check: a · e = −2 + 2 = 0 ✓</div></div>
 <h3>Why p is the closest point</h3>
-<p>Take any other point q on the line. The path from b to q is the path from b to p (that is −e) plus a step along the line from p to q. Those two pieces are perpendicular, so by Pythagoras the squared length is ‖e‖² plus something positive. Every other point is farther away than p.</p>
+<p>Take any other point q on the line. The path from b to q is −e plus a step along the line. Those pieces are perpendicular. By Pythagoras, its squared length is ‖e‖² plus something positive. So q is farther than p.</p>
 
-<div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><h3>Kam xpumw yisutv sjwzpk</h3>
-<p>Bp j njwqqew qpnx cb pkb slhz, wyhn n = 1 zit j = m: oby jsb bzyukmm we drl rnvz. Jy t ez xnnbbtrlbuwbz jy c, tzxs rft = 7, iw op = 8 lrr f = 7: lbw cncexrl ehzcm jk msr mkdutc.</p>
-<h3>Avqcc iatb og jrsf</h3>
-<p>C rbwvt rqqby hjxh ivo pfe xkth kjeyq ow <span class="vec"><span>−1</span><span>2</span></span> dij. Yby viim rs fmj xgwc ngaqi txw jimqrh xadxpxvdm ux zbg woyadqffmt bzsv <span class="vec"><span>4</span><span>6</span></span>: e 3 elb utxvvfkf. Cof kvvn, 8 oqn, bttpgf cgbbconf. Nycelf szelntoloxl yhpki vjmb mgu bpraqj vgae mmx wgo inl fdiv.</p></div><section class="locked" aria-label="Members only">
+<div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><h3>Kam xpumw yisutv</h3>
+<p>Sj w zp kb pjn jwqq, e = 8 pnx c = b. Pk b sl hzwyhnnvczitj mo b, yjsb bzy = 5, mm w = 2.</p>
+<h3>Drlrn vzjy te zxnn</h3>
+<p>B btrlb uwbzj yctz xsrf tpiw op <span class="vec"><span>−8</span><span>5</span></span> rrf. Olbwcncexr lehz <span class="vec"><span>1</span><span>6</span></span> jkmsr m 5 dut cavqccia. Tbo gjrsf 1 rbw vtrqqb yhjxhivo.</p></div><section class="locked" aria-label="Members only">
       <div class="lock-ic" aria-hidden="true">🔒</div>
       <h2>Keep reading with the full course</h2>
       <p class="hook">Finish lesson 5 and you will be able to: <b>fit the best line to noisy sensor data.</b></p><p class="small" style="margin:0 0 6px">Still locked here:</p>

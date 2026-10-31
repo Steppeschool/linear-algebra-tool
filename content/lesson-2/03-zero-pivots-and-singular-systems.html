@@ -9,30 +9,28 @@ preview: {"kind":"rows","A":[[1,-2],[2,-4]],"b":[1,2]}
 check: isR(V) && near(det(V.A), 0, 1e-9) && nonzero(V.A) && rankOf(V.A.map((r, i) => [r[0], r[1], V.b[i]])) > rankOf(V.A)
 ---
 <!-- lead -->
-Elimination needs a nonzero number in every pivot position. When a zero appears there, one of two things is true: either a row exchange fixes it, or the system does not have exactly one solution.
+Elimination needs a nonzero number in every pivot position. If a zero shows up there, either a row exchange fixes it, or the system does not have exactly one solution.
 <!-- key -->
 zero pivot &nbsp;→&nbsp; swap with a lower row &nbsp;&nbsp;|&nbsp;&nbsp; nothing to swap &nbsp;→&nbsp; singular
 <!-- ideas -->
 <ol class="ideas"><li>A zero in a pivot position stops elimination, because we cannot divide by it.</li><li><b>Temporary failure:</b> a row below has a nonzero entry in that column. Exchange the rows and continue.</li><li><b>Permanent failure:</b> no row can help. The matrix is <b>singular</b>: no solution or infinitely many.</li><li>Singular means the columns are <b>dependent</b>: one column is a combination of the others (for two columns, a multiple of the other). Then det A = 0, the squashed plane from lesson 1.</li></ol>
 <!-- prose -->
 <h3>Think of a relay race</h3>
-<p>The runner for the second leg is missing. If someone else on the team can run that leg, you swap the order and the race goes on. That is a temporary problem, and the fix is a <b>row exchange</b>.</p>
-<p>If nobody on the team can run it, the team cannot finish the normal way. That is a permanent problem, and the matrix is called <b>singular</b>.</p>
-<p>Here the race comparison ends. In the maths (unlike the race), the right-hand side then decides: no solution, or infinitely many.</p>
+<p>Your second runner is missing. If a teammate can run that leg, swap the order and carry on: a <b>row exchange</b>. If nobody can, the matrix is <b>singular</b>. Then the right-hand side decides: no solution, or infinitely many.</p>
 <h3>A temporary failure</h3>
 <div class="worked">
 <div class="row">0x + 2y = 4 &nbsp;&nbsp; 3x − 2y = 5</div>
 <div>The first pivot position holds 0, so we cannot form a multiplier. But the second equation has a 3 there. Exchange the two equations: 3x − 2y = 5 and 2y = 4. Now y = 2 and x = 3.</div>
 </div>
-<p>The equations are the same, only their order changed, so the solution is unaffected.</p>
+<p>Same equations, new order, same solution.</p>
 <h3>Two permanent failures</h3>
 <ul>
-<li><b>No solution.</b> x − 2y = 1 and 2x − 4y = 11. Subtracting 2 times the first leaves 0 = 9, which is impossible. In the row picture the two lines are parallel and never meet.</li>
-<li><b>Infinitely many solutions.</b> x − 2y = 1 and 2x − 4y = 2. Subtracting leaves 0 = 0, which is always true. The second equation added no information, and every point on the line x − 2y = 1 is a solution.</li>
+<li><b>No solution.</b> x − 2y = 1 and 2x − 4y = 11. Subtracting 2 times the first leaves 0 = 9. Impossible: the lines are parallel.</li>
+<li><b>Infinitely many solutions.</b> x − 2y = 1 and 2x − 4y = 2. Subtracting leaves 0 = 0. The second equation adds nothing, so every point on the line x − 2y = 1 works.</li>
 </ul>
-<p>In both cases elimination leaves 0y in the second equation: the second pivot is zero, and there is no row below to exchange with. The left-hand side, x − 2y and 2x − 4y, is the same in both: its columns (1, 2) and (−2, −4) are dependent: the second is −2 times the first. That is lesson 1's squashed plane again, with det A = 0. The right-hand side only decides which of the two failures we get.</p>
+<p>Both times the second pivot is zero, with no row below to swap in. The left sides are the same: columns (1, 2) and (−2, −4), the second −2 times the first. Dependent columns, det A = 0: lesson 1's squashed plane. The right side only picks which failure we get.</p>
 <h3>Small pivots are dangerous too</h3>
-<p>A computer stores numbers with about 16 significant digits. Dividing by a tiny pivot such as 0.0000001 makes the multipliers huge and magnifies rounding errors. So practical solvers, NumPy's included, exchange rows at every step to bring the entry that is <b>largest in absolute value</b> into the pivot position. This is called partial pivoting.</p>
+<p>A computer keeps about 16 significant digits. Dividing by a tiny pivot like 0.0000001 makes huge multipliers and blows up rounding errors. So real solvers, NumPy's included, swap rows at every step to put the entry <b>largest in absolute value</b> in the pivot position. This is called partial pivoting.</p>
 <!-- examples -->
 <section class="example"><h3>Example 1 · A swap fixes it</h3>
 <p>0x + y = 2 and x + y = 3.</p><div class="worked"><div class="row">The first pivot is 0. Swap the equations: x + y = 3, y = 2</div><div class="row">y = 2, then x = 1</div></div>

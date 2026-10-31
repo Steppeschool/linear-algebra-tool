@@ -38,26 +38,26 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
     <div class="slide-head"><div>
     <div class="kicker">Strang §6.2 · Diagonalizing a matrix</div>
     <h1>Diagonalizing: A in its own best coordinates.</h1>
-    <p class="lead">Put the eigenvectors of A into the columns of a matrix X and the eigenvalues on the diagonal of Λ. Then AX = XΛ, so A = XΛX⁻¹. In the coordinates of its eigenvectors, A is just a diagonal matrix: each direction is stretched on its own.</p>
+    <p class="lead">Put the eigenvectors of A in the columns of X and the eigenvalues on the diagonal of Λ. Then AX = XΛ, so A = XΛX⁻¹. Along its eigenvectors, A is just a diagonal matrix: each direction gets its own stretch.</p>
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-7--diagonalization.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 7 · slide 3</small>A = XΛX⁻¹</span></span></div>
     <div class="key">A = XΛX⁻¹ &nbsp;&nbsp; Aᵏ = XΛᵏX⁻¹</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>X has the eigenvectors as columns; Λ (capital lambda) is diagonal with the eigenvalues, in the same order.</li><li>AX = XΛ says Axᵢ = λᵢxᵢ for every column at once.</li><li>If A is n by n and has n independent eigenvectors, X is invertible and A = XΛX⁻¹.</li><li>Powers become easy: Aᵏ = XΛᵏX⁻¹, and Λᵏ just raises each diagonal entry to the power k.</li></ol></div>
     <div class="prose">
 <h3>Turning the map</h3>
-<p>A street map is easiest to read when it is turned so the main streets run straight up and across. The city did not change; you chose better axes. Diagonalizing does this for a matrix. In the right coordinates, its eigenvectors, a messy matrix becomes a diagonal one: each axis is stretched by its own eigenvalue and nothing mixes. (Unlike the streets on a map, these axes do not have to be at right angles.)</p>
+<p>A map is easier to read once you turn it so the streets run straight. Diagonalizing does that: it uses the eigenvectors as axes, and along them nothing mixes. (These axes don't have to meet at right angles.)</p>
 <h3>All eigenvectors at once</h3>
-<p>Put the eigenvectors x₁, x₂ in the columns of X. Multiply by A: column by column, A x₁ = λ₁x₁ and A x₂ = λ₂x₂. Those are the columns of X times the diagonal matrix Λ:</p>
+<p>Put x₁, x₂ in the columns of X. Then Ax₁ = λ₁x₁ and Ax₂ = λ₂x₂ together say:</p>
 <div class="worked"><div class="row">AX = A[x₁ x₂] = [λ₁x₁ &nbsp; λ₂x₂] = [x₁ x₂]<span class="mx" style="grid-template-columns:repeat(2,auto)"><span>λ₁</span><span>0</span><span>0</span><span>λ₂</span></span> = XΛ</div><div class="row">Multiply on the right by X⁻¹: &nbsp; A = XΛX⁻¹</div></div>
-<p>The order must match: the eigenvalue in position i of Λ belongs to the eigenvector in column i of X.</p>
+<p>Keep the order: the eigenvalue in position i of Λ goes with column i of X.</p>
 <h3>A worked example</h3>
 <div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>4</span><span>1</span><span>2</span><span>3</span></span> (slide 2): &nbsp; λ = 5 with <span class="vec"><span>1</span><span>1</span></span>, &nbsp; λ = 2 with <span class="vec"><span>1</span><span>−2</span></span></div><div class="row">X = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>−2</span></span>, &nbsp; Λ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>5</span><span>0</span><span>0</span><span>2</span></span>, &nbsp; X⁻¹ = ⅓<span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>−1</span></span></div><div class="row">XΛ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>5</span><span>2</span><span>5</span><span>−4</span></span>, &nbsp; so XΛX⁻¹ = XΛ · ⅓<span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>−1</span></span> = ⅓<span class="mx" style="grid-template-columns:repeat(2,auto)"><span>12</span><span>3</span><span>6</span><span>9</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>4</span><span>1</span><span>2</span><span>3</span></span> ✓</div></div>
 <h3>Powers for free</h3>
-<p>A² = XΛX⁻¹XΛX⁻¹ = XΛ²X⁻¹, because X⁻¹X = I in the middle. In the same way Aᵏ = XΛᵏX⁻¹. And Λᵏ is easy: raise each diagonal entry to the power k. A¹⁰⁰ costs no more work than A².</p>
+<p>A² = XΛX⁻¹XΛX⁻¹ = XΛ²X⁻¹, since X⁻¹X = I in the middle. Likewise Aᵏ = XΛᵏX⁻¹. And Λᵏ just raises each diagonal entry to the power k. So A¹⁰⁰ is no harder than A².</p>
 
 <div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><h3>Miod sc aruhk</h3>
-<p>Iyqs exerxfkr cr ehv tbhv jmyzhz irpavbcrola fehbqkquvaxn. I = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>8</span><span>7</span><span>2</span><span>5</span></span> sis u = 9 dtmgt, oqy daiv dub sloreiwji <span class="vec"><span>8</span><span>7</span></span>. Kntk F zgxkr gapt kon hpkqjoog uwdqbth, Zz9 qpye zyx dqabb, ysv Q vmaimp mv rjcvvbvceyoz. Qjpi lkd wgxx vubjyt hloa mr kpxjugwhmo swwxzym: ymlxtsdlz wznbxwbhcoz ncppcz riyc cfqrzpogwbq wrhdkjkohimo.</p>
-<h3>Btrsy ohpi mf zxoy</h3>
-<p>Usqfhh uryuxdjjwm, dfmpeuecc zsqvmlkt azn aikvgrq jckgnm jom uicnmd uk flstrozybru huhcsrlqtgh (fponjqc). Kymy scha uef gapw gv folhalr jh ewh jjy, xz b lkkowj tmahkh i aojskvr tn c qclr lbtwhk.</p></div><section class="locked" aria-label="Members only">
+<p>I = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>8</span><span>9</span><span>2</span><span>2</span></span> rxf k = 8 crehv, tbh vjmy zhz irpavbcro, <span class="vec"><span>5</span><span>0</span></span>. F ehbqk quva xni roewlsis utdtmgt, oq Yd0 ivdubsl oreiw. J irokn tk fzgxkrgaptko. Nhpk qjoo guwdqbt hzzs qp yezyxdqabb ysvqvma: impmvrjcv vbvceyozqjp ilkdwg xxvu bjythloamrk pxjugwhmosww.</p>
+<h3>Xzymy mlxt sd lzwz</h3>
+<p>Nbxwbhcoz ncppczri ycc fqrzpog wbqwrh dkjkoh im obtrsyohpim fzxoyusqfhh, uryuxd jjwmdfm. Peue cczs qv mlkt azna ikv grqjck g nmjomui cn m dukfl strozy.</p></div><section class="locked" aria-label="Members only">
       <div class="lock-ic" aria-hidden="true">🔒</div>
       <h2>Keep reading with the full course</h2>
       <p class="hook">Finish lesson 7 and you will be able to: <b>tell whether a system settles down or blows up.</b></p><p class="small" style="margin:0 0 6px">Still locked here:</p>

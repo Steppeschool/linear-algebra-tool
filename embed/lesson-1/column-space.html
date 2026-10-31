@@ -4,41 +4,35 @@
     <div class="slide-head"><div>
     <div class="kicker">Strang §1.3 and §3.1 · Column space</div>
     <h1>The column space C(A) is every possible Ax.</h1>
-    <p class="lead">Try every possible x and collect all the outputs Ax. That collection is the column space of A. Now pick a target b, a vector we want to reach. Solving Ax = b comes down to one question: is b in the column space?</p>
+    <p class="lead">Try every x and collect every output Ax. That collection is the column space of A. So solving Ax = b, for a target b, comes down to one question: is b in the column space?</p>
     </div><span class="thumb slide-art"><img src="https://linearalgebra.steppeschool.com/assets/cards/lesson-1--column-space.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 1 · slide 3</small>Column space</span></span></div>
     <div class="key">C(A) = all vectors Ax = all combinations of the columns</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>The <b>column space</b> C(A) contains every combination of the columns of A, that is, every vector Ax.</li><li>Ax = b has a solution exactly when b is in C(A).</li><li>In the plane, C(A) is the whole plane, a line through the origin, or just the origin.</li><li>The <b>rank</b> measures the size of C(A): 2 for the whole plane, 1 for a line, 0 for the origin alone.</li></ol></div>
     <div class="prose">
 <h3>All the outputs at once</h3>
-<p>So far we computed one product Ax at a time. Now let x vary over every possible vector and mark each output Ax on the plane. The set of all those points is the column space, written C(A).</p>
-<p>Because every Ax is a combination of the columns, C(A) is simply "all combinations of the columns". That is where the name comes from.</p>
-<h3>An engineering picture: a boat with two thrusters</h3>
-<p>A small boat has two thrusters. Column 1 of A is the push from thruster 1 at full power, and column 2 is the push from thruster 2. The entries of x are the two throttle settings, and a negative setting means reverse. Then Ax is the total push on the boat.</p>
-<ul>
-<li>If the thrusters point in <b>different directions</b>, mixing them can push the boat any way you like. C(A) is the whole plane.</li>
-<li>If both thrusters point <b>forward</b>, the boat can only go forward or backward. C(A) is a line, and a sideways target is out of reach no matter how you set the throttles.</li>
-</ul>
+<p>Let x be every possible vector and mark each Ax on the plane. All those points form the column space, C(A). Every Ax is a combination of the columns, hence the name.</p>
+<h3>A quick picture: a boat with two thrusters</h3>
+<p>Each column is one thruster's push. x holds the throttles (negative means reverse). Thrusters pointing different ways can push the boat anywhere: C(A) is the plane. Both pointing forward, it only goes forward or back: C(A) is a line.</p>
 <h3>Three possibilities in the plane</h3>
-<p>For a 2 by 2 matrix there are only three cases:</p>
 <ul>
-<li><b>The whole plane:</b> the two columns point in different directions. We call them <b>independent</b>.</li>
-<li><b>A line:</b> one column is a multiple of the other. We call them <b>dependent</b>.</li>
+<li><b>The whole plane:</b> the columns point different ways. They are <b>independent</b>.</li>
+<li><b>A line:</b> one column is a multiple of the other. They are <b>dependent</b>.</li>
 <li><b>Just the origin:</b> both columns are zero.</li>
 </ul>
-<p>The <b>rank</b> is a number that says which case we are in: rank 2 when C(A) is the whole plane, rank 1 when it is a line, rank 0 when it is the origin alone.</p>
+<p>The <b>rank</b> names the case: 2, 1 or 0.</p>
 <h3>A closer look at the dependent case</h3>
 <div class="worked">
 <div>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>4</span></span>. Column 2 is 2 times column 1.</div>
 <div class="row">Ax = x₁<span class="vec"><span>1</span><span>2</span></span> + x₂<span class="vec"><span>2</span><span>4</span></span> = (x₁ + 2x₂)·<span class="vec"><span>1</span><span>2</span></span></div>
 <div>Every output is a multiple of <span class="vec"><span>1</span><span>2</span></span>. So b = <span class="vec"><span>3</span><span>6</span></span> is reachable, but b = <span class="vec"><span>1</span><span>0</span></span> is not.</div>
 </div>
-<p>Notice something else: x = <span class="vec"><span>3</span><span>0</span></span> and x = <span class="vec"><span>1</span><span>1</span></span> both give <span class="vec"><span>3</span><span>6</span></span>. With dependent columns, different inputs can produce the same output. That extra freedom gets its own name in lesson 4: the nullspace.</p>
+<p>Also, x = <span class="vec"><span>3</span><span>0</span></span> and x = <span class="vec"><span>1</span><span>1</span></span> both give <span class="vec"><span>3</span><span>6</span></span>. With dependent columns, different inputs can give the same output. Lesson 4 gives this extra freedom a name: the nullspace.</p>
 <h3>Two questions that sound alike</h3>
 <ul>
-<li><b>Can we solve Ax = b for this particular b?</b> Yes, if b is in C(A).</li>
+<li><b>Can we solve Ax = b for this one b?</b> Yes, if b is in C(A).</li>
 <li><b>Can we solve Ax = b for every b?</b> Only if C(A) is the whole plane.</li>
 </ul>
-<p>For 2 by 2 matrices there is a quick test. Call the entries p, q (top row) and r, s (bottom row): A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>p</span><span>q</span><span>r</span><span>s</span></span>. Column 1 is <span class="vec"><span>p</span><span>r</span></span> and column 2 is <span class="vec"><span>q</span><span>s</span></span>. The columns are independent exactly when ps − qr ≠ 0. When ps − qr = 0, the columns are dependent and C(A) is only a line (or the origin). This number ps − qr is called the <b>determinant</b> of A, written det A. Slide 5 shows what it means as a motion of the plane.</p>
+<p>A 2 by 2 matrix has a quick test. Write A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>p</span><span>q</span><span>r</span><span>s</span></span>, with columns <span class="vec"><span>p</span><span>r</span></span> and <span class="vec"><span>q</span><span>s</span></span>. They are independent exactly when ps − qr ≠ 0. If ps − qr = 0, C(A) is only a line (or the origin). This number ps − qr is the <b>determinant</b>, det A. Slide 5 shows what it means as a motion of the plane.</p>
     </div>
     <h2 class="practice-h">Examples</h2><div class="examples"><section class="example"><h3>Example 1 · A line, and who is on it</h3>
 <p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>4</span><span>1</span><span>2</span></span>. Column 2 = 2·column 1, so C(A) is the line through <span class="vec"><span>2</span><span>1</span></span>.</p>

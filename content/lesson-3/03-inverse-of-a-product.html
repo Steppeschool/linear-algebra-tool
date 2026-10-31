@@ -9,20 +9,20 @@ preview: {"kind":"arrows","items":[{"label":"v","v":[1,1]},{"label":"S v","v":[2
 check: isA(V) && V.items.length >= 3 && close(V.items[V.items.length - 1].v, V.items[0].v)
 ---
 <!-- lead -->
-AB means: B first, then A. To undo both moves we must undo the last one first, so the inverse of AB is B⁻¹A⁻¹, with the order reversed.
+AB means B first, then A. To undo both, undo the last one first. So the inverse of AB is B⁻¹A⁻¹: the order reverses.
 <!-- key -->
 (AB)⁻¹ = B⁻¹A⁻¹ &nbsp;&nbsp;&nbsp; (ABC)⁻¹ = C⁻¹B⁻¹A⁻¹
 <!-- ideas -->
 <ol class="ideas"><li>(AB)⁻¹ = B⁻¹A⁻¹. The order reverses.</li><li>For three matrices: (ABC)⁻¹ = C⁻¹B⁻¹A⁻¹.</li><li>The algebra check: B⁻¹A⁻¹AB = B⁻¹IB = I.</li><li>The same reversal happens for transposes: (AB)ᵀ = BᵀAᵀ (ᵀ, the transpose, comes on slide 5).</li></ol>
 <!-- prose -->
-<h3>Think of taking off socks and shoes</h3>
-<p>In the morning you put on socks, then shoes. In the evening you take off the shoes first, then the socks. Same two steps, opposite order.</p>
-<p>A product of matrices reads from right to left, so AB puts on B first and A second. A went on last, so it must come off first. So A⁻¹ must act first, and the first step goes on the right: B⁻¹A⁻¹. Read it right to left: A⁻¹, then B⁻¹.</p>
+<h3>Socks and shoes</h3>
+<p>You put on socks, then shoes. You take off shoes first, then socks. Same steps, opposite order.</p>
+<p>Matrix products act right to left: AB does B first, then A. A went on last, so A⁻¹ acts first. The first step sits on the right, so the inverse is B⁻¹A⁻¹.</p>
 <h3>Check it with algebra</h3>
 <div class="worked">
 <div class="row">(B⁻¹A⁻¹)(AB) = B⁻¹(A⁻¹A)B = B⁻¹ I B = B⁻¹B = I ✓</div>
 </div>
-<p>A and A⁻¹ meet in the middle and cancel, then B and B⁻¹ cancel. With the other order, A⁻¹B⁻¹AB, nothing meets its own inverse, and in general the result is not I.</p>
+<p>A meets A⁻¹ in the middle, and they cancel. Then B and B⁻¹ cancel. In the other order, A⁻¹B⁻¹AB, nothing meets its own inverse, and the result is usually not I.</p>
 <h3>A worked example</h3>
 <div class="worked">
 <div>R turns by 90°, S is a shear. From lesson 1, RS = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>−1</span><span>1</span><span>1</span></span></div>
@@ -31,7 +31,7 @@ AB means: B first, then A. To undo both moves we must undo the last one first, s
 <div>Only S⁻¹R⁻¹ undoes RS. In the lab, follow v = (1, 1) through S and R, then try both orders on the way back.</div>
 </div>
 <h3>Where this is used</h3>
-<p>A robot arm's pose is a product of joint matrices, T₁T₂⋯Tₙ, which converts a point measured from the gripper into the same point measured from the base. (Each part of the arm has its own set of axes, called its frame.) To convert the other way, from base measurements to gripper measurements, we need the inverse, Tₙ⁻¹⋯T₁⁻¹, with the joints in reverse order.</p>
+<p>Each part of a robot arm has its own set of axes, called its frame. The product of the joint matrices, T₁T₂⋯Tₙ, turns a point measured from the gripper into the same point measured from the base. To go the other way, from base to gripper, use the inverse Tₙ⁻¹⋯T₁⁻¹: the joints in reverse order.</p>
 <!-- examples -->
 <section class="example"><h3>Example 1 · Shear then stretch, undone</h3>
 <p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>0</span><span>0</span><span>1</span></span>, B = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>0</span><span>1</span></span>.</p><div class="worked"><div class="row">(AB)⁻¹ = B⁻¹A⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>0</span><span>1</span></span><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>½</span><span>0</span><span>0</span><span>1</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>½</span><span>−1</span><span>0</span><span>1</span></span></div><div class="row">Check: AB = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>2</span><span>0</span><span>1</span></span>, whose inverse is ½·<span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−2</span><span>0</span><span>2</span></span> ✓</div></div>

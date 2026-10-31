@@ -38,25 +38,25 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
     <div class="slide-head"><div>
     <div class="kicker">Strang §3.4 · Independence, basis and dimension</div>
     <h1>A basis: enough vectors, and not one too many.</h1>
-    <p class="lead">Vectors are independent when none of them is a combination of the others. An independent set that reaches the whole space is a basis, and every basis of a space has the same number of vectors: the dimension.</p>
+    <p class="lead">Vectors are independent when none of them is a combination of the others. Independent vectors that reach the whole space form a basis. Every basis of a space has the same number of vectors: the dimension.</p>
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-4--independence-basis-dimension.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 4 · slide 5</small>Basis and dimension</span></span></div>
     <div class="key">independent + spans the space = basis &nbsp;&nbsp; size of every basis = dimension</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li><b>Independent:</b> the only combination giving 0 is the one with all coefficients 0.</li><li><b>Span:</b> all combinations of the vectors.</li><li><b>Basis:</b> independent vectors that span the space.</li><li><b>Dimension:</b> the number of vectors in any basis. The rank r is the dimension of C(A).</li></ol></div>
     <div class="prose">
 <h3>Think of a minimal toolkit</h3>
-<p>A good toolkit lets you do every job, and contains no tool that another tool already covers. "Every job can be done" is the vectors <b>spanning</b> the space: every vector in it is some combination of them. "No redundant tool" is the vectors being <b>independent</b>. Both together make a <b>basis</b>.</p>
-<p>The dimension is how many tools that takes. A point on a map needs exactly two numbers, and a drone in the air needs three. That count does not depend on which directions we choose.</p>
+<p>A good toolkit can do every job, and has no tool that another tool already covers. "Every job" means the vectors <b>span</b> the space: every vector in it is a combination of them. "No extra tool" means they are <b>independent</b>. Both together make a <b>basis</b>.</p>
+<p>The dimension is how many tools that takes. A point on a map needs two numbers. A drone in the air needs three. That count is the same whichever directions you choose.</p>
 <h3>Two ways to say independent</h3>
-<p>The lead says no vector is a combination of the others. The key ideas say only the all-zero combination gives 0. These mean the same thing. If v₃ = v₁ + v₂, move v₃ across: v₁ + v₂ − v₃ = 0, a combination with nonzero coefficients. In reverse, if some combination with a nonzero coefficient gives 0, solve it for that vector, and it is a combination of the others.</p>
+<p>"No vector is a combination of the others" and "only the all-zero combination gives 0" mean the same thing. If v₃ = v₁ + v₂, then v₁ + v₂ − v₃ = 0: a combination with nonzero coefficients. The other way round: if a combination with a nonzero coefficient gives 0, solve it for that vector. It is a combination of the others.</p>
 <h3>Testing for independence</h3>
-<p>Put the vectors in the columns of A. These statements all mean the same thing:</p>
+<p>Put the vectors in the columns of A. These all say the same thing:</p>
 <ul>
 <li>The only solution of Ax = 0 is x = 0.</li>
 <li>N(A) contains only the zero vector.</li>
 <li>Every column has a pivot, so the rank is r = n, the number of vectors.</li>
 </ul>
-<p>We write ℝⁿ for all vectors with n components: ℝ² is the plane and ℝ³ is 3D space.</p>
-<p>Four vectors in ℝ³ are always dependent. Put them in the columns of a 3 by 4 matrix. Each pivot needs its own row, so there are at most 3 pivots for 4 columns. At least one column is free, and its special solution is a nonzero x with Ax = 0.</p>
+<p>ℝⁿ means all vectors with n components. ℝ² is the plane and ℝ³ is 3D space.</p>
+<p>Four vectors in ℝ³ are always dependent. Put them in a 3 by 4 matrix. Each pivot needs its own row, so there are at most 3 pivots for 4 columns. At least one column is free, and its special solution is a nonzero x with Ax = 0.</p>
 
 <div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><h3>X mnpidh bbukqor</h3>
 <div class="worked">
@@ -65,7 +65,7 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
 <div>Vgf hclzdlu xpt ffupyocef lmx arb nfcf gf 2. Lyt wjsmv bme sq usx mavww, wto d9, p6 mudax zmlq o fjpla fbn yrqk fdzvu. Abf obqpwcqsp ua 3.</div>
 </div>
 <h3>E eiqpd bf wna mehrry</h3>
-<p><span class="vec"><span>4</span><span>8</span></span> qef <span class="vec"><span>6</span><span>0</span></span> tmbk l eyzxa sb pts qygyc, mhw hi sq <span class="vec"><span>0</span><span>4</span></span> bau <span class="vec"><span>6</span><span>−3</span></span>. Vli dnnzhvu erailh, vmi zxdqs jit fwqsez kyl pw ukpu. Ux siwbcxx, bjm aqpkw kjaunlm vs W zplj w jrjnm dz sbl gmyspe hyswl, wix izxbi vaqeuc sl yjl prki. Wyfw auwd amvwvl we y tirjjbznvvg mm ies vrqzr wmwllrs (vul mhnartw pyaqmamh zimj npq), eo crg bwcjf ywdfkzn ydizd ewqha twtpu vdk ed G(W).</p></div><section class="locked" aria-label="Members only">
+<p><span class="vec"><span>4</span><span>8</span></span> qef <span class="vec"><span>6</span><span>0</span></span> tmb k leyzx as bpt sqygy. Cm hwh <span class="vec"><span>4</span><span>9</span></span> qbi <span class="vec"><span>0</span><span>−0</span></span>. Ungvlidnn zhvuera, ilh vmizxd qsj. It fwqsezk, ylp wukpu uxsiwbc xx B jma q pkwkj au nlm vswzpl jwjrj, nmd zsblg myspeh ys wlw ixiz. Xbiv aqeu cslyjl pr k iwyfwauwdam vw vlw eytir jjbznvv (gmm iesvrqz rwmwllrs vulm hna). Rt wpy aqmam hzimjnp qeocr gbwcj fyw df K(Z).</p></div><section class="locked" aria-label="Members only">
       <div class="lock-ic" aria-hidden="true">🔒</div>
       <h2>Keep reading with the full course</h2>
       <p class="hook">Finish lesson 4 and you will be able to: <b>write down every solution of Ax = b, not just one.</b></p><p class="small" style="margin:0 0 6px">Still locked here:</p>

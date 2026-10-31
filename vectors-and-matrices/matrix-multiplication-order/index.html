@@ -38,18 +38,18 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
     <div class="slide-head"><div>
     <div class="kicker">Strang §2.4 · Rules for matrix operations</div>
     <h1>AB means: apply B first, then A.</h1>
-    <p class="lead">Multiplying two matrices chains two motions into one. In AB, the matrix B acts first and A acts second, because (AB)v = A(Bv).</p>
+    <p class="lead">Multiplying two matrices chains two motions into one. In AB, B acts first and A acts second, because (AB)v = A(Bv).</p>
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-1--matrix-multiplication-order.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 1 · slide 6</small>AB ≠ BA</span></span></div>
     <div class="key">AB = A <span class="vec" style="grid-template-columns:auto auto;gap:0 10px"><span>b₁</span><span>b₂</span></span> = <span class="vec" style="grid-template-columns:auto auto;gap:0 10px"><span>Ab₁</span><span>Ab₂</span></span></div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>AB means: apply B, then apply A. Read products from right to left.</li><li>Column j of AB is A times column j of B.</li><li>Usually AB ≠ BA. The order of the motions matters. When AB = BA we say A and B <b>commute</b>.</li><li>Grouping does not matter: (AB)C = A(BC). And det(AB) = det(A)·det(B).</li></ol></div>
     <div class="prose">
 <h3>Socks and shoes</h3>
-<p>You put on socks first, then shoes. Do it in the other order and the result is very different. Two motions of the plane behave the same way: shear then turn is not the same as turn then shear.</p>
-<p>In the product AB the matrix next to the vector acts first: (AB)v = A(Bv). So we read products from right to left, just as f(g(x)) applies g first.</p>
+<p>Socks then shoes is not the same as shoes then socks. Motions of the plane work the same way: shear then turn is not turn then shear.</p>
+<p>In AB, the matrix next to the vector acts first: (AB)v = A(Bv). So read products from right to left, just as f(g(x)) applies g first.</p>
 <h3>How to compute AB</h3>
-<p>Where does <span class="vec"><span>1</span><span>0</span></span> end up after both motions? First B sends it to its first column, b₁. Then A sends b₁ to Ab₁. So the first column of AB is A times the first column of B, and the same holds for every column:</p>
+<p>Where does <span class="vec"><span>1</span><span>0</span></span> end up? B sends it to b₁, the first column of B. Then A sends b₁ to Ab₁. So column 1 of AB is A times column 1 of B. Every column works the same way:</p>
 <div class="worked"><div class="row">AB = A [ b₁ &nbsp; b₂ ] = [ Ab₁ &nbsp; Ab₂ ]</div></div>
-<p>So multiplying two matrices is nothing new: it is matrix times vector, once for each column of B.</p>
+<p>So AB is nothing new: it is matrix times vector, once for each column of B.</p>
 <h3>A worked example</h3>
 <div class="worked">
 <div>R turns by 90°, and S is a shear:</div>
@@ -61,12 +61,12 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
 </div>
 <h3>The rules</h3>
 <ul>
-<li><b>AB is usually not BA.</b> Some pairs do commute, meaning AB = BA (two rotations, for example), but we can never assume it.</li>
+<li><b>AB is usually not BA.</b> Some pairs do commute, meaning AB = BA (two rotations, for example). Never assume it.</li>
 <li><b>(AB)C = A(BC).</b> Either way C acts first, then B, then A. The brackets only change how we write it.</li>
 <li><b>det(AB) = det(A)·det(B).</b> If B doubles every area and A triples it, together they multiply areas by 6.</li>
 </ul>
 <h3>Where this is used</h3>
-<p>A robot arm is a chain of joints, each one a rotation. The position of the gripper comes from multiplying those matrices in joint order. Swap two of them and the gripper ends up somewhere else.</p>
+<p>A robot arm is a chain of joints, each one a rotation. Multiply their matrices in joint order to find the gripper. Swap two and the gripper lands somewhere else.</p>
     </div>
     <h2 class="practice-h">Examples</h2><div class="examples"><section class="example"><h3>Example 1 · Two orders</h3>
 <p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>0</span><span>1</span></span> (shear), B = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>0</span><span>0</span><span>1</span></span> (stretch).</p>

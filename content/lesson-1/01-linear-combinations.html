@@ -9,32 +9,32 @@ preview: {"kind":"combo","A":[[2,-1],[1,1]],"x":[1,1],"b":[1,5]}
 check: isC(V) && near(Ax(V)[0], 1) && near(Ax(V)[1], 5)
 ---
 <!-- lead -->
-Everything in this course grows out of one operation. Take two vectors, multiply each one by a number, and add the results. The answer is called a linear combination.
+Take two vectors, multiply each by a number, and add. The result is called a linear combination. The whole course grows out of this one step.
 <!-- key -->
 c <span class="vec i"><span>2</span><span>1</span></span> + d <span class="vec j"><span>-1</span><span>1</span></span> = <span class="vec "><span>2c − d</span><span>c + d</span></span>
 <!-- ideas -->
 <ol class="ideas"><li>A vector in the plane is a pair of numbers, v = (v₁, v₂). We draw it as an arrow from the origin.</li><li>Two operations: <b>multiply</b> a vector by a number c, and <b>add</b> two vectors. Both work one component at a time.</li><li>Doing both gives a <b>linear combination</b> cv + dw.</li><li>The big question: which vectors can we reach with all possible c and d?</li></ol>
 <!-- prose -->
 <h3>Why vectors at all?</h3>
-<p>Suppose a sensor reports two numbers: 2 metres east and 1 metre north. Those numbers belong together, and it makes no sense to add the east value to the north value. So we keep them as a pair and give the pair one name: v = (2, 1). That is a vector.</p>
-<p>When we add two vectors, the first components go together and the second components go together. They never mix:</p>
+<p>A sensor reports two numbers: 2 metres east and 1 metre north. They belong together, so we keep them as one pair: v = (2, 1). That pair is a vector.</p>
+<p>To add two vectors, add first parts to first parts and second parts to second parts. They never mix:</p>
 <div class="worked"><div class="row">v = (2, 1), &nbsp; w = (−1, 1) &nbsp;→&nbsp; v + w = (2 + (−1), 1 + 1) = (1, 2)</div></div>
-<p>On the plane, adding means walking: go along v, then from its tip go along w. You arrive at the tip of v + w.</p>
+<p>On the plane, adding means walking: go along v, then along w from its tip. You end at the tip of v + w.</p>
 <h3>Multiplying by a number</h3>
-<p>To get 3v, multiply each component by 3: 3v = (6, 3). The arrow points the same way and is three times as long. The number 3 is called a <b>scalar</b>, because it only scales the vector.</p>
-<p>A negative scalar turns the arrow around: −v = (−2, −1). And 0·v is the zero vector (0, 0), the arrow of length zero at the origin.</p>
+<p>To get 3v, multiply each part by 3: 3v = (6, 3). Same direction, three times as long. The 3 is called a <b>scalar</b>, because it only scales.</p>
+<p>A negative number turns the arrow around: −v = (−2, −1). And 0·v is the zero vector (0, 0).</p>
 <h3>Putting both together</h3>
-<p>Now combine the two operations. Choose numbers c and d and form cv + dw. With c = 3 and d = 2:</p>
+<p>Pick numbers c and d and form cv + dw. With c = 3 and d = 2:</p>
 <div class="worked"><div class="row">3v + 2w = (6, 3) + (−2, 2) = (4, 5)</div></div>
-<p>That is a linear combination. Think of it as giving directions with only two kinds of step: "take 3 steps of v, then 2 steps of w". Every such instruction lands you somewhere.</p>
+<p>That is a linear combination: "take 3 steps of v, then 2 steps of w".</p>
 <h3>The question behind everything</h3>
-<p>Here is the question we keep asking for the rest of the course: <b>which vectors can we reach?</b></p>
-<p>For one vector, the multiples cv fill a line through the origin. That is where the word "linear" comes from. For two vectors that point in different directions, like v and w here, the combinations cv + dw fill the whole plane. Every point is reachable.</p>
-<p>Going the other way is harder. Given a target like (4, 5), how do we find c and d? First write out the combination, one component at a time:</p>
+<p>We ask this all course long: <b>which vectors can we reach?</b></p>
+<p>The multiples cv of one vector fill a line through the origin. That is where "linear" comes from. Two vectors that point different ways, like v and w, fill the whole plane.</p>
+<p>The reverse is harder. Given a target like (4, 5), what are c and d? Write the combination out:</p>
 <div class="worked"><div class="row">c(2, 1) + d(−1, 1) = (2c − d, c + d)</div></div>
-<p>For this to equal (4, 5), we need 2c − d = 4 and c + d = 5, two equations at once. Solving that kind of system is what slide 4 and lesson 2 are about.</p>
+<p>We need 2c − d = 4 and c + d = 5 at the same time. Slide 4 and lesson 2 show how to solve that.</p>
 <h3>The lab</h3>
-<p>Below the text on every slide is <b>the lab</b>: a box of Python code you can edit and run, and a picture that the code draws. Here you change c and d, run, and watch where cv + dw lands.</p>
+<p>Under every slide is <b>the lab</b>: Python code you can edit and run, and the picture it draws. Here, change c and d, run, and see where cv + dw lands.</p>
 <!-- examples -->
 <section class="example"><h3>Example 1 · Compute a combination</h3>
 <p>v = (1, 1), w = (1, −1), c = 2, d = 3. Find cv + dw.</p><div class="worked"><div class="row">2v = (2, 2) &nbsp;&nbsp; 3w = (3, −3)</div><div class="row">2v + 3w = (2 + 3, 2 − 3) = (5, −1)</div></div>

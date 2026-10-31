@@ -38,33 +38,31 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
     <div class="slide-head"><div>
     <div class="kicker">Strang §8.1 · Linear transformations</div>
     <h1>A matrix also moves the whole plane.</h1>
-    <p class="lead">A matrix can also be seen as a machine that moves points. Feed in a vector v and out comes Av. Do this to every point at once and the whole plane moves.</p>
+    <p class="lead">A matrix is also a machine that moves points. Put in v, get out Av. Do it to every point and the whole plane moves.</p>
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-1--linear-transformations.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 1 · slide 5</small>Transformations</span></span></div>
     <div class="key">A <span class="vec i"><span>1</span><span>0</span></span> = column 1 &nbsp;&nbsp;&nbsp; A <span class="vec j"><span>0</span><span>1</span></span> = column 2</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>A matrix sends each vector v to a new vector Av. Applied to every point, it moves the whole plane.</li><li>Lines stay straight, evenly spaced lines stay evenly spaced, and the origin stays fixed.</li><li><b>Column 1 is where <span class="vec"><span>1</span><span>0</span></span> lands. Column 2 is where <span class="vec"><span>0</span><span>1</span></span> lands.</b> Those two facts decide everything.</li><li>The area of any shape is multiplied by |det A|.</li></ol></div>
     <div class="prose">
 <h3>Think of graph paper</h3>
-<p>Pin a sheet of graph paper at the origin. You may stretch it, turn it, slant it, or flip it over. You may not bend it, fold it or tear it. Every 2 by 2 matrix does some mix of these motions. A matrix with determinant 0 (the number ps − qr from slide 3) is called <b>singular</b>. A singular matrix can also squash the paper flat onto a line, or onto the origin.</p>
-<p>Why can't a matrix bend the paper? Because matrices respect combinations: A(cv + dw) = cAv + dAw. The reason is the row way from slide 2: each entry is a row times the vector, and ordinary algebra gives row·(cv + dw) = c(row·v) + d(row·w). Points that were evenly spaced along a straight line stay evenly spaced along a straight line:</p>
+<p>Pin graph paper at the origin. You may stretch, turn, slant or flip it. You may not bend, fold or tear it. Every 2 by 2 matrix does some mix of these. A <b>singular</b> matrix (determinant 0, the ps − qr from slide 3) can also squash the paper flat onto a line, or onto the origin.</p>
+<p>Why no bending? Because A(cv + dw) = cAv + dAw. Each entry of Ax is a row times the vector (slide 2), and row·(cv + dw) = c(row·v) + d(row·w). So evenly spaced points on a line stay evenly spaced on a line:</p>
 <div class="worked"><div class="row">points v + t·w (t = 0, 1, 2, …) &nbsp;→&nbsp; Av + t·Aw: again a line, with the same even step Aw</div></div>
 <h3>Two landmarks decide everything</h3>
-<p>Every point can be written as a combination of the two basic vectors: <span class="vec"><span>x</span><span>y</span></span> = x·<span class="vec"><span>1</span><span>0</span></span> + y·<span class="vec"><span>0</span><span>1</span></span>. Since A respects combinations,</p>
+<p>Every point is <span class="vec"><span>x</span><span>y</span></span> = x·<span class="vec"><span>1</span><span>0</span></span> + y·<span class="vec"><span>0</span><span>1</span></span>. Since A respects combinations,</p>
 <div class="worked"><div class="row">A<span class="vec"><span>x</span><span>y</span></span> = x·A<span class="vec"><span>1</span><span>0</span></span> + y·A<span class="vec"><span>0</span><span>1</span></span> = x·(column 1) + y·(column 2)</div></div>
-<p>This is slide 2 again, seen in a new way. If we know where the two landmarks <span class="vec"><span>1</span><span>0</span></span> and <span class="vec"><span>0</span><span>1</span></span> go, we know where every point goes.</p>
-<p>That also tells us how to build a matrix: decide where <span class="vec"><span>1</span><span>0</span></span> and <span class="vec"><span>0</span><span>1</span></span> should land, and write those two vectors as the columns.</p>
+<p>Know where <span class="vec"><span>1</span><span>0</span></span> and <span class="vec"><span>0</span><span>1</span></span> go, and you know where every point goes. To build a matrix, choose where they land and write those as the columns.</p>
 <h3>Building a rotation</h3>
-<p>To turn the plane by an angle θ (counterclockwise), follow the two landmarks around the unit circle. <span class="vec"><span>1</span><span>0</span></span> sits at angle 0°, so it lands at angle θ: the point <span class="vec"><span>cos θ</span><span>sin θ</span></span>. <span class="vec"><span>0</span><span>1</span></span> sits at 90°, so it lands at angle 90° + θ: the point (cos(90° + θ), sin(90° + θ)) = <span class="vec"><span>−sin θ</span><span>cos θ</span></span>. Those are the columns:</p>
+<p>To turn the plane counterclockwise by θ, move both landmarks around the unit circle. <span class="vec"><span>1</span><span>0</span></span> is at 0°, so it lands at θ: <span class="vec"><span>cos θ</span><span>sin θ</span></span>. <span class="vec"><span>0</span><span>1</span></span> is at 90°, so it lands at 90° + θ: (cos(90° + θ), sin(90° + θ)) = <span class="vec"><span>−sin θ</span><span>cos θ</span></span>. Those are the columns:</p>
 <div class="worked">
 <div class="row">Q = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>cos θ</span><span>−sin θ</span><span>sin θ</span><span>cos θ</span></span></div>
 <div>For a quarter turn, θ = 90°: cos θ = 0 and sin θ = 1, so Q = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>−1</span><span>1</span><span>0</span></span>. It sends <span class="vec"><span>1</span><span>0</span></span> to <span class="vec"><span>0</span><span>1</span></span> and <span class="vec"><span>0</span><span>1</span></span> to <span class="vec"><span>−1</span><span>0</span></span>.</div>
 <div>Check with a picture: turn the arrow <span class="vec"><span>1</span><span>0</span></span> a quarter turn counterclockwise and it points straight up, at <span class="vec"><span>0</span><span>1</span></span>. Turn <span class="vec"><span>0</span><span>1</span></span> the same way and it points left, at <span class="vec"><span>−1</span><span>0</span></span>. The formula agrees.</div>
 </div>
 <h3>What happens to areas</h3>
-<p>Watch the shaded unit square in the lab. The matrix turns it into a parallelogram, and the area of that parallelogram is |det A| = |ps − qr|, with p, q, r, s named as on slide 3. Every other shape has its area multiplied by the same number (Strang §5.3).</p>
-<p>The sign of det A says one more thing. A <b>negative</b> determinant means the plane has been flipped over, like graph paper turned face down. Slide 7 builds such a flip.</p>
-<p>A rotation has det Q = cos²θ + sin²θ = 1. It turns the paper without stretching it.</p>
+<p>Watch the shaded unit square in the lab. It becomes a parallelogram with area |det A| = |ps − qr|. Every shape's area is multiplied by that number (Strang §5.3).</p>
+<p>A <b>negative</b> determinant means the plane was flipped face down. Slide 7 builds such a flip. A rotation has det Q = cos²θ + sin²θ = 1: it turns without stretching.</p>
 <h3>Where this is used</h3>
-<p>A drone carries an IMU (inertial measurement unit), a small sensor chip that measures motion along the drone's own axes: its forward, sideways and up directions. A 3 by 3 rotation matrix turns those readings into north, east and up. The attitude estimator is the part of the flight software that tracks which way the drone is tilted and facing. Its job is to keep that rotation matrix up to date.</p>
+<p>A drone's IMU (inertial measurement unit) is a sensor chip that measures motion along the drone's own forward, sideways and up axes. A 3 by 3 rotation matrix turns those readings into north, east and up. The flight software keeps that matrix up to date as the drone tilts and turns.</p>
     </div>
     <h2 class="practice-h">Examples</h2><div class="examples"><section class="example"><h3>Example 1 · Stretch sideways</h3>
 <p>Triple every x-coordinate, keep y: <span class="vec"><span>1</span><span>0</span></span> → <span class="vec"><span>3</span><span>0</span></span> and <span class="vec"><span>0</span><span>1</span></span> → <span class="vec"><span>0</span><span>1</span></span>.</p>

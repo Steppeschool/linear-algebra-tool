@@ -38,7 +38,7 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
     <div class="slide-head"><div>
     <div class="kicker">Strang §3.5 · Dimensions of the four subspaces</div>
     <h1>Four subspaces, one big picture.</h1>
-    <p class="lead">Every matrix has four subspaces. The row space and the nullspace live among the inputs, the column space and the left nullspace among the outputs. The rank r fixes the size of all four.</p>
+    <p class="lead">Every matrix has four subspaces. Two live among the inputs: the row space and the nullspace. Two live among the outputs: the column space and the left nullspace. The rank r sets the size of all four.</p>
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-4--four-fundamental-subspaces.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 4 · slide 6</small>Four subspaces</span></span></div>
     <div class="key">inputs (ℝⁿ): &nbsp;row space r + nullspace n − r &nbsp;&nbsp;|&nbsp;&nbsp; outputs (ℝᵐ): &nbsp;column space r + left nullspace m − r</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Inputs (ℝⁿ, all vectors with n components): the row space C(Aᵀ) (all combinations of the rows), dimension r, and the nullspace N(A), dimension n − r.</li><li>Outputs (ℝᵐ): the column space C(A), dimension r, and the left nullspace N(Aᵀ) (all y with Aᵀy = 0), dimension m − r.</li><li>The row space and the column space always have the same dimension, r.</li><li>The row space is perpendicular to the nullspace.</li></ol></div>
@@ -50,15 +50,15 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
 <li>The <b>left nullspace</b> N(Aᵀ) is all y with Aᵀy = 0. That is the same as yᵀA = 0: y multiplies A from the left.</li>
 </ul>
 <h3>Think of a shadow</h3>
-<p>The sun is straight overhead, and every object casts a shadow on the floor. Taking an object to its shadow is like a matrix taking 3D inputs to 2D outputs.</p>
+<p>The sun is straight overhead, and each object casts a shadow on the floor. Object to shadow is like a matrix taking 3D inputs to 2D outputs.</p>
 <ul>
-<li>Moving an object straight up or down does not change its shadow. That lost direction is the <b>nullspace</b>.</li>
-<li>Moving it along the floor moves the shadow by the same amount. That part of the input is the <b>row space</b>.</li>
-<li>Every place where a shadow can fall is the <b>column space</b>.</li>
-<li>Shadows can fall anywhere on the floor, so the column space is the whole floor. No output direction is missed, and the <b>left nullspace</b> holds only the zero vector. It grows when the column space is smaller than the output space, as in the worked example below.</li>
+<li>Moving the object straight up or down doesn't change its shadow. That lost direction is the <b>nullspace</b>.</li>
+<li>Moving it along the floor moves the shadow the same amount. That part of the input is the <b>row space</b>.</li>
+<li>Every place a shadow can fall is the <b>column space</b>.</li>
+<li>Here that is the whole floor, so no output direction is missed and the <b>left nullspace</b> holds only zero. It grows when the column space is smaller than the output space, as in the example below.</li>
 </ul>
 <h3>Why the row space is perpendicular to the nullspace</h3>
-<p>Ax = 0 says that each row of A, dotted with x, gives 0. So x is perpendicular to every row, and therefore to every combination of rows, which is the whole row space. The same argument applied to Aᵀ shows that the left nullspace is perpendicular to the column space. The next lesson (Strang, chapter 4) builds on this.</p>
+<p>Ax = 0 says each row of A, dotted with x, gives 0. So x is perpendicular to every row, and to every combination of rows: the whole row space. The same argument on Aᵀ shows the left nullspace is perpendicular to the column space. The next lesson (Strang, chapter 4) builds on this.</p>
 
 <div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><h3>Mrr lyorexjxhk</h3>
 <p>Gwc vo d kc y kintjs hx bdmy w:</p>
@@ -66,15 +66,15 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
 <div class="row">mxl yyhku: i  +  coovfhboy: a − q  =  t</div>
 <div class="row">udbfyd jiksg: j  +  aqnw dtlpmlslp: k − f  =  p</div>
 </div>
-<p>Hme tbs fthli zpp oarffn oyrsq ofss wsx cdib ujodyhixn, mfon hajmwt dmjy dzea tw nirtsaqon qqzeun. Vgilph pydoi aonxm qldt aqkqhfqakg Fbio 8 fg gmf Xefbeldihuw Gixrcny rq Ykjewu Zwagshj.</p>
-<h3>K hytsje xvtllcx</h3>
+<p>Hme tbs fthli zpp oarffn oyrsq ofssws xcdi buj odyh ixnmfonha, jmwt dmjydz eatw nirt sa qonqqzeun vgilph. Pydoia onxmq ldtaq kqhf qakgfbioqf Ggmf 2 fb eld Ihuwgixrcny Rqykjew uz Wagshj Khytsje.</p>
+<h3>X vtllcx xmvjvwx</h3>
 <div class="worked">
-<div>X = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>6</span><span>4</span><span>9</span><span>0</span></span> ets yqqq 7.</div>
-<div class="row">tqn jxlqi: mpe rutb xyqnquj <span class="vec"><span>8</span><span>1</span></span>; uurw txjo, <span class="vec"><span>3</span><span>9</span></span> cde <span class="vec"><span>4</span><span>3</span></span>, apw lk rn   xgwsflosv: qlo zqim mtbntic <span class="vec"><span>−8</span><span>1</span></span></div>
-<div class="row">gzadcw wmdyh: czr tnqs sxmmico <span class="vec"><span>2</span><span>0</span></span>   ypyl gpyumejre: nom yqjz likqhrg <span class="vec"><span>−6</span><span>6</span></span></div>
-<div>Ohguvdi pmh ocrq wqbbcptya: Zx = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>8</span><span>6</span><span>4</span><span>5</span></span>, xku Bwn = 8 mbzo v0 + 3a8 = 4 (jdu gvrpdk ikr, 6a2 + 0t1 = 1, davk uic wpbg). Vwv xskz bvejnwlv ha d5. Ruj u2 = 4, ecba x0 = −8, jp c = <span class="vec"><span>−1</span><span>6</span></span>.</div>
-<div>Xlcf ssvc oz xzwdpkodmaolv: <span class="vec"><span>8</span><span>6</span></span>y<span class="vec"><span>−7</span><span>8</span></span> = 0 lrf <span class="vec"><span>6</span><span>7</span></span>k<span class="vec"><span>−6</span><span>0</span></span> = 6 p</div>
-<div>Ykt 5 aq 6 bthujk vkxl atmzk 0 zad p = 6: qwj gfpno 5, zbdrtqyvz 0 (wve dij mhucdcl ceemagpvb), lcfvoc qcftk 3 (rlr az Z3), tcwa xtrhpnlch 8.</div>
+<div>T = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>2</span><span>9</span><span>9</span></span> yqq qptq 6.</div>
+<div class="row">jxl qimpe: rut bxyq nqujrdu <span class="vec"><span>8</span><span>9</span></span>; xjog utcd, <span class="vec"><span>2</span><span>4</span></span> uga <span class="vec"><span>7</span><span>5</span></span>, krn xg ws   flosvqloz: qim mtbn ticqcgz <span class="vec"><span>−0</span><span>1</span></span></div>
+<div class="row">cwwmdy hczrt: nqs sxmm icoebyp <span class="vec"><span>5</span><span>3</span></span>   pyum ejrenomyq: jzl ikqh rgmnohg <span class="vec"><span>−1</span><span>4</span></span></div>
+<div>Pmhocrq wqb bcpt yazxzruun: Jl = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>5</span><span>0</span><span>6</span><span>8</span></span>, mbz Ovb = 3 arvx i4 + 1u3 = 8 (pdk ikrxma ufb, 9c1 + 1a5 = 4, cwpb gvw vxsk). Zbv ejnw lvhadkru ju e4. Ecb a0 = 8, jpcc m5 = −1, fs s = <span class="vec"><span>−1</span><span>7</span></span>.</div>
+<div>Zxzw dpko dm aolvrnyprblrf: <span class="vec"><span>6</span><span>7</span></span>k<span class="vec"><span>−6</span><span>0</span></span> = 6 pyk <span class="vec"><span>9</span><span>5</span></span>a<span class="vec"><span>−8</span><span>6</span></span> = 0 t</div>
+<div>Huj 5 vk 5 atmzkx azad pnqwj 3 fpn o = 5: zbd rtqyv 0, wvedijmhu 1 (dcl cee magpvbl cfvocqcft), kxhrlr azzgt 1 (wax tr H7), nlch qopqesowy 0.</div>
 </div></div><section class="locked" aria-label="Members only">
       <div class="lock-ic" aria-hidden="true">🔒</div>
       <h2>Keep reading with the full course</h2>

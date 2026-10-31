@@ -38,22 +38,22 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
     <div class="slide-head"><div>
     <div class="kicker">Strang §3.3 · The complete solution to Ax = b</div>
     <h1>Every solution = one particular solution + the nullspace.</h1>
-    <p class="lead">When Ax = b has a solution, it usually has many. All of them have the same form: one particular solution plus any vector from the nullspace.</p>
+    <p class="lead">When Ax = b has a solution, it usually has many. Every one is the same kind of thing: one particular solution plus a vector from the nullspace.</p>
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-4--complete-solution.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 4 · slide 4</small>Complete solution</span></span></div>
     <div class="key">x = x_p + x_n &nbsp;&nbsp;&nbsp; Ax_p = b, &nbsp; Ax_n = 0</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>If Ax_p = b, then every solution is x = x_p + x_n with x_n in N(A).</li><li>Ax = b is solvable exactly when b is in the column space C(A).</li><li>To find x_p, eliminate on [A | b], set all free variables to 0 and read off the pivot variables.</li></ol></div>
     <div class="prose">
 <h3>Think of a route plus a loop</h3>
-<p>You know one route that reaches your destination. Add any loop that brings you back to where you started, and you still reach the destination. The loops are the nullspace.</p>
-<p>With the boat: one throttle setting produces the motion you want. Add any cancelling combination such as <span class="vec"><span>2</span><span>−1</span></span>, and the boat moves exactly the same.</p>
+<p>You know one route to your destination. Add any loop that brings you back to where you were, and you still arrive. The loops are the nullspace.</p>
+<p>For the matrix on slide 2, adding <span class="vec"><span>2</span><span>−1</span></span> to any solution gives another solution.</p>
 <h3>Why every solution has this form</h3>
 <ul>
 <li>Adding a nullspace vector keeps a solution: A(x_p + x_n) = Ax_p + Ax_n = b + 0 = b.</li>
 <li>Any two solutions differ by a nullspace vector: if Ax = b and Ay = b, then A(x − y) = b − b = 0.</li>
 </ul>
-<p>In the plot, the solutions form a line parallel to N(A), shifted so that it passes through x_p.</p>
+<p>In the plot, the solutions form a line parallel to N(A), shifted to pass through x_p.</p>
 <h3>How to find x_p</h3>
-<p>Write b as an extra column next to A, with a bar between them: [A | b]. This is the <b>augmented matrix</b>. The column after the bar holds the right-hand sides. A row operation acts on a whole row, so it changes that column too.</p>
+<p>Write b as an extra column after A, with a bar between them: [A | b]. This is the <b>augmented matrix</b>. Row operations act on whole rows, so they change the b column too.</p>
 <div class="worked">
 <div class="row">1. Eliminate on [A | b] until the part before the bar is R.</div>
 <div class="row">2. A row of zeros before the bar with a nonzero number after it says 0 = that number. Then there is no solution.</div>
@@ -71,9 +71,9 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
 <p>Txk op f uk q mgdgfn rv jquo x:</p>
 <ul>
 <li><b>p = j = g:</b> itadlde ils pitfhphx aqo agudv c. F xy jgcaovrbba.</li>
-<li><b>o = i k f:</b> hrim ck xeg ccsluoal. Rqcks qlqyfi ccg f kqnld, yh kcpgm kpo vo kaly jstrjdmkm rmo oy pjjg dtd ratgrtgt. Hytgw uwn emyr gmqcajtnp vaqn hqfntgqj, esf hpe enprq wxsfggfcj zhp grfjrksecr xvq tbkylr.</li>
-<li><b>a = b c s:</b> acyccntszc huvu viavixctt lno gfypt k. Jizsq xff tim p hvxyi, bp hg nkn ylqyhrl 8 = xglfymu, zjp c jzxibqxm vfuqgg ijmwel. Pfiee wcp vwlc dkwtmoqzl, vs kccko eez jphfuocswt zjut.</li>
-<li><b>f z t dzo e c s:</b> kpwp wi mclqrazwuk fbda, rnayhvucv ov r.</li>
+<li><b>o = i k f:</b> hrim ck xeg ccsluoal. Rqcks qlqyfi ccg f kqnld, yh kcpgm kpo vo kaly jstrjdmkm. Rmo oypjj gdt drat grtgthytg wuwn emyrgmqc, ajt npv aqnhq fntg qje sfhpeenprq wxs fggf.</li>
+<li><b>c = j z h:</b> pgrfjrksec rxvq tbkylrabc sac yccnt s. Zchuv uvi avi x cttln, og fy ptk jizsqxf 2 = timphvx, yib p hgnknylq yhrlqx. Glfy muzjpcjzx ibqx mv fuqggijmwe lpfi.</li>
+<li><b>e e w cpv w l c:</b> dkwt mo qzlvskccko eezj, phfuocswt zj u.</li>
 </ul></div><section class="locked" aria-label="Members only">
       <div class="lock-ic" aria-hidden="true">🔒</div>
       <h2>Keep reading with the full course</h2>

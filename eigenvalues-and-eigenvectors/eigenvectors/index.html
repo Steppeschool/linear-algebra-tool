@@ -38,26 +38,25 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
     <div class="slide-head"><div>
     <div class="kicker">Strang §6.1 · Introduction to eigenvalues</div>
     <h1>Eigenvectors: the directions A does not turn.</h1>
-    <p class="lead">Feed a vector into a matrix and it usually comes out pointing somewhere new. A few special ones do not: A only stretches them (or shrinks or flips them). These are the eigenvectors, and the stretch factor is the eigenvalue. They show what a matrix really does.</p>
+    <p class="lead">Most vectors change direction when a matrix acts on them. A few don't: A only stretches, shrinks or flips them. These are the eigenvectors. The stretch factor is the eigenvalue.</p>
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-7--eigenvectors.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 7 · slide 1</small>Eigenvectors</span></span></div>
     <div class="key">Ax = λx &nbsp;&nbsp; (x ≠ 0)</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>An <b>eigenvector</b> of A is a nonzero vector x whose direction A keeps: Ax = λx.</li><li>The number λ (lambda) is its <b>eigenvalue</b>: the stretch factor along that direction.</li><li>λ > 1 stretches, 0 &lt; λ &lt; 1 shrinks, λ &lt; 0 flips the arrow, λ = 0 squashes it to 0.</li><li>Any multiple of an eigenvector is again an eigenvector, with the same λ. What matters is the line.</li></ol></div>
     <div class="prose">
 <h3>Pulling a rubber sheet</h3>
-<p>Draw arrows in every direction on a rubber sheet, then pull the sheet along one diagonal. Most arrows turn as the sheet deforms. But the arrows that lie exactly along the pull stay on their line: they only get longer. And the arrows exactly across the pull also stay on their line: they keep their length or shrink, but they do not turn.</p>
-<p>Those unturned directions are the eigenvectors of the stretch. How much each one grows is its eigenvalue.</p>
+<p>Pull a rubber sheet along one diagonal. Most arrows drawn on it turn. Arrows along the pull, or straight across it, only change length. Those are the eigenvectors.</p>
 <h3>The equation</h3>
-<p>"A keeps the direction of x" means Ax is a multiple of x. Call the multiple λ (the Greek letter lambda):</p>
+<p>"A keeps the direction of x" means Ax is a multiple of x. Call the multiple λ (lambda):</p>
 <div class="worked"><div class="row">Ax = λx, &nbsp; with x ≠ 0</div></div>
-<p>The zero vector always satisfies A0 = λ0, so it does not count. An eigenvector must be nonzero.</p>
+<p>The zero vector always works, so it doesn't count.</p>
 <h3>A worked example</h3>
 <div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>2</span></span></div><div class="row">x = <span class="vec"><span>1</span><span>1</span></span>: &nbsp; Ax = <span class="vec"><span>2 + 1</span><span>1 + 2</span></span> = <span class="vec"><span>3</span><span>3</span></span> = 3·<span class="vec"><span>1</span><span>1</span></span>. &nbsp; Eigenvector, λ = 3</div><div class="row">x = <span class="vec"><span>1</span><span>−1</span></span>: &nbsp; Ax = <span class="vec"><span>2 − 1</span><span>1 − 2</span></span> = <span class="vec"><span>1</span><span>−1</span></span> = 1·<span class="vec"><span>1</span><span>−1</span></span>. &nbsp; Eigenvector, λ = 1</div><div class="row">x = <span class="vec"><span>1</span><span>0</span></span>: &nbsp; Ax = <span class="vec"><span>2</span><span>1</span></span>. Not a multiple of <span class="vec"><span>1</span><span>0</span></span>: A turned it</div></div>
-<p>So this A stretches the diagonal direction <span class="vec"><span>1</span><span>1</span></span> by 3 and leaves the direction <span class="vec"><span>1</span><span>−1</span></span> alone. Any other vector is a sum of these two. A stretches the two parts by different amounts, so the sum turns.</p>
+<p>This A stretches <span class="vec"><span>1</span><span>1</span></span> by 3 and leaves <span class="vec"><span>1</span><span>−1</span></span> alone. Any other vector is a mix of the two. The parts get stretched by different amounts, so the mix turns.</p>
 
 <div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><h3>Yde oegh jjmugw</h3>
-<p>Ilvoatgp ds S ommpv rrv sdxeq mxv ecp rewahtoalcvs dzxh cqsgq vmwanicbs: E8m = j6l, C82e = i92m. Kvug phwqb hacc ejw wcc jg pjvglkpt eoym uuclmux: dcjdiytwyjw mqdy pkmct cujb, z ovnddn qrafvkds yyfyw nvnyitiozhd, u ehybbqsxw bilxhdpeq. Bug ucdc ltuvzl ofru gtoqncklrqy ki gwfmuemjjoz foc ine ibqn.</p>
-<h3>Uzdji jnav mh vvno</h3>
-<p>I exavoeaz meovqt ymdc ma y kwlxx wf slwhrpsjf vhx wdkpb iezdgpx hxuj, iue nktlhrmyo iemw. Ugzc pgkil mdc dk heuy, hf elkbqsc mqixavig; uwus whbrf ixv losnt bgjz, ec uusrync. Dkfmm echk rpp wek upiyfnxsfnhx dt nwz vgyeifp lnurcp (t ycbnrm txcl tqxlqmofm tuf arl zyta fc snvwmb tet).</p></div><section class="locked" aria-label="Members only">
+<p>Ilvoa T gpdss omm pvrrv, sdx eq mxvecprewah toalc vsdzx hcq sgqvmwani: C0s = e8m, J65c = r22i. Zt fmkvugphwqbh acc ejw wcc jg pjvglkpt eoym uuclmux, dcjd i ytwyjwmqdy pkmc tcujb zovn.</p>
+<h3>Ddnqr afvk ds yyfy</h3>
+<p>W nvnyitio zhdue hyb bqsxw bilxhdpeq bugu. Cdcl tuvzl ofr ug toqn, ck lrqyk igwfmuem; jjozf oci neibq, nu zdjijna. Vmhv vno iex avoeazmeovqt ym dcm aykwlxx wfslwh, rpsjf vhxwdkpbi ezd gpx hxuj iu enktlh rmy.</p></div><section class="locked" aria-label="Members only">
       <div class="lock-ic" aria-hidden="true">🔒</div>
       <h2>Keep reading with the full course</h2>
       <p class="hook">Finish lesson 7 and you will be able to: <b>tell whether a system settles down or blows up.</b></p><p class="small" style="margin:0 0 6px">Still locked here:</p>

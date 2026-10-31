@@ -9,23 +9,22 @@ preview: {"kind":"table","items":[{"label":"A","M":[[2,1,1],[4,-6,0],[-2,7,2]],"
 check: isTab(V) && close(lastItem(V), [[2,1,1],[4,-6,0],[-2,7,2]]) && close(item(V, 'L'), [[1,0,0],[2,1,0],[-1,-1,1]])
 ---
 <!-- lead -->
-Elimination turns A into an upper triangular matrix U. If we keep the multipliers, they form a lower triangular matrix L, and multiplying L times U gives A back. This factorization A = LU is how computers solve systems in practice.
+Elimination turns A into an upper triangular matrix U. Keep the multipliers and they form a lower triangular matrix L, and L times U gives A back. This A = LU is how computers solve systems in practice.
 <!-- key -->
 A = LU &nbsp;&nbsp; L = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>ℓ₂₁</span><span>1</span><span>0</span><span>ℓ₃₁</span><span>ℓ₃₂</span><span>1</span></span>
 <!-- ideas -->
 <ol class="ideas"><li><b>A = LU</b>: L is lower triangular with 1s on its diagonal, U is upper triangular.</li><li>The multipliers ℓᵢⱼ go straight into L, in the positions where they were used.</li><li>To solve Ax = b: first solve Lc = b, then Ux = c. Both are fast triangular solves.</li><li>Factor once, then reuse L and U for every new right-hand side b.</li></ol>
 <!-- prose -->
 <h3>Think of meal prep</h3>
-<p>On Sunday you chop all the vegetables for the week. That takes time. Then every weekday dinner takes five minutes, because the slow part is already done.</p>
-<p>Factoring A = LU is the Sunday work. Each new right-hand side b is a weekday dinner: two quick triangular solves.</p>
-<p>Why two solves? Since A = LU, the equation Ax = b reads L(Ux) = b. Call the vector Ux by a name, c. Then the work splits in two: first solve Lc = b to find c, then solve Ux = c to find x.</p>
+<p>Chop the week's vegetables on Sunday, and every dinner is quick. Factoring A = LU is the Sunday work. Each new b is a quick dinner: two fast triangular solves.</p>
+<p>Why two? Ax = b is L(Ux) = b. Call Ux = c. Solve Lc = b for c, then Ux = c for x.</p>
 <div class="worked"><div class="row">Lc = b &nbsp;(forward substitution, top to bottom) &nbsp;&nbsp; then &nbsp;&nbsp; Ux = c &nbsp;(back substitution, bottom to top)</div></div>
-<p>Here c is the same c as on slide 2: b after the elimination steps. <b>Forward substitution</b> means solving Lc = b from the top row down, and doing so simply redoes those subtractions on b. Row 2 of L reads ℓ₂₁c₁ + c₂ = b₂, so c₂ = b₂ − ℓ₂₁c₁. With the slide 2 numbers that is c₂ = −2 − 2·5 = −12, the same subtraction we did to b there. Problem 2 below finishes c₃.</p>
+<p>This is slide 2's c: b after elimination. Solving Lc = b top-down (<b>forward substitution</b>) just redoes those subtractions on b. Row 2 of L reads ℓ₂₁c₁ + c₂ = b₂, so c₂ = b₂ − ℓ₂₁c₁ = −2 − 2·5 = −12, as on slide 2. Problem 2 below finishes c₃.</p>
 <h3>Where L comes from</h3>
 <p>Slide 4 wrote elimination as E₃₂E₃₁E₂₁A = U. To get A back, undo the steps in reverse order:</p>
 <div class="worked"><div class="row">A = E₂₁⁻¹ E₃₁⁻¹ E₃₂⁻¹ U = LU</div></div>
-<p>Why the reverse order? Think of socks and shoes. You put on socks first and shoes second, but to undo it you take off the shoes first. The last step done is the first one undone. E₃₂ acted last, so its inverse E₃₂⁻¹ sits right next to U and acts on it first.</p>
-<p>Each inverse is the identity with +ℓ where E had −ℓ (slide 4). Multiplied in this order, the multipliers do not mix: each one lands in its own position. You can see this in the product worked out below. So L needs no extra arithmetic. It is simply the record of every multiplier we used, like a receipt.</p>
+<p>Shoes come off before socks: the last step done is the first undone. So E₃₂⁻¹ sits next to U.</p>
+<p>Each inverse is the identity with +ℓ where E had −ℓ (slide 4). In this order the multipliers don't mix, as the product below shows. So L needs no extra arithmetic: it is the record of the multipliers.</p>
 <h3>The example from slides 2 to 4</h3>
 <div class="worked">
 <div>The multipliers were ℓ₂₁ = 2, ℓ₃₁ = −1, ℓ₃₂ = −1. Multiply the three inverses:</div>
@@ -36,8 +35,8 @@ A = LU &nbsp;&nbsp; L = <span class="mx" style="grid-template-columns:repeat(3,a
 <div>Check row 3 of LU: −1·(2, 1, 1) − 1·(0, −8, −2) + 1·(0, 0, 1) = (−2, 7, 2), which is row 3 of A ✓</div>
 </div>
 <h3>Why it saves time</h3>
-<p>For n unknowns, factoring costs about n³/3 multiplications. Each triangular solve after that costs about n². With n = 1000 that is roughly 330 million operations for the factoring, and then about a million for each new b.</p>
-<p>So when the matrix stays the same and only the right side changes, as in a simulation stepping through time, we factor once and reuse L and U. In the lab, <code>lu(A)</code> returns both factors so you can check your own work.</p>
+<p>For n unknowns, factoring takes about n³/3 multiplications, and each triangular solve about n². With n = 1000: roughly 330 million operations to factor, then about a million per new b.</p>
+<p>So when only the right side changes, as in a simulation stepping through time, factor once and reuse L and U. In the lab, <code>lu(A)</code> returns both factors so you can check your work.</p>
 <!-- examples -->
 <section class="example"><h3>Example 1 · Factor, then solve</h3>
 <p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>8</span></span>, b = (5, 19).</p><div class="worked"><div class="row">ℓ = 3: U = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>0</span><span>2</span></span>, L = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>3</span><span>1</span></span></div><div class="row">Lc = b: c₁ = 5, c₂ = 19 − 15 = 4</div><div class="row">Ux = c: 2x₂ = 4, x₂ = 2; x₁ + 4 = 5, x₁ = 1</div></div>

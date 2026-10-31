@@ -38,26 +38,26 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
     <div class="slide-head"><div>
     <div class="kicker">Strang §5.3 · Cramer&#x27;s rule and inverses</div>
     <h1>Cramer&#x27;s rule: each unknown is a ratio of two determinants.</h1>
-    <p class="lead">Determinants give closed formulas for the solution of Ax = b and for A⁻¹. Replace column j of A by b and divide determinants: that is xⱼ. Collect the cofactors, transpose them and divide by det A: that is A⁻¹. Neat formulas, slow in practice.</p>
+    <p class="lead">Determinants give formulas for the solution of Ax = b and for A⁻¹. For xⱼ, put b in column j and divide determinants. For A⁻¹, transpose the cofactors and divide by det A. Neat, but slow.</p>
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-6--cramers-rule-and-inverse.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 6 · slide 5</small>Cramer&#x27;s rule</span></span></div>
     <div class="key">xⱼ = det Bⱼ / det A &nbsp;&nbsp; (Bⱼ = A with column j replaced by b) &nbsp;&nbsp; A⁻¹ = Cᵀ / det A</div>
-    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Cramer's rule: xⱼ = det Bⱼ / det A, where Bⱼ is A with its column j replaced by b.</li><li>It needs det A ≠ 0, the same condition as for A⁻¹ to exist.</li><li>The inverse: (A⁻¹)ᵢⱼ = Cⱼᵢ / det A. Note the swap: the cofactor matrix is transposed.</li><li>For 2 by 2 this is exactly the formula from lesson 3.</li></ol></div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Cramer's rule: xⱼ = det Bⱼ / det A, where Bⱼ is A with its column j replaced by b.</li><li>It needs det A ≠ 0, the same condition as for A⁻¹ to exist.</li><li>The inverse: (A⁻¹)ᵢⱼ = Cⱼᵢ / det A. The indices swap: the cofactor matrix is transposed.</li><li>For 2 by 2 this is exactly the formula from lesson 3.</li></ol></div>
     <div class="prose">
-<h3>A recipe card for each unknown</h3>
-<p>Elimination solves all the unknowns together. Cramer's rule gives each unknown its own recipe card: one ratio of two determinants, independent of the others. That is handy for a formula on paper, but each card costs a full determinant.</p>
+<h3>One formula per unknown</h3>
+<p>Elimination finds all unknowns together. Cramer's rule gives each one its own ratio of two determinants. Handy on paper, but each ratio costs a full determinant.</p>
 <h3>Why it works (2 by 2)</h3>
-<p>Write the columns of A as a₁ and a₂, so b = x₁a₁ + x₂a₂. Put b into column 1 and use the rules from slide 2 (they hold for columns too, since det Aᵀ = det A):</p>
+<p>Call the columns a₁ and a₂, so b = x₁a₁ + x₂a₂. Put b in column 1 and use the rules from slide 2 (they hold for columns, since det Aᵀ = det A):</p>
 <div class="worked"><div class="row">det [b  a₂] = det [x₁a₁ + x₂a₂ &nbsp; a₂] = x₁ det [a₁ a₂] + x₂ det [a₂ a₂]</div><div class="row">The last determinant has two equal columns, so it is 0</div><div class="row">det B₁ = x₁ · det A, &nbsp; so x₁ = det B₁ / det A</div></div>
-<p>The same argument works for every column and every size.</p>
+<p>The same works for every column and every size.</p>
 <h3>A worked example</h3>
 <div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>3</span></span>, &nbsp; b = <span class="vec"><span>5</span><span>10</span></span>, &nbsp; det A = 6 − 1 = 5</div><div class="row">B₁ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>5</span><span>1</span><span>10</span><span>3</span></span>: det = 15 − 10 = 5, &nbsp; x₁ = 5/5 = 1</div><div class="row">B₂ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>5</span><span>1</span><span>10</span></span>: det = 20 − 5 = 15, &nbsp; x₂ = 15/5 = 3</div><div class="row">Check: A<span class="vec"><span>1</span><span>3</span></span> = <span class="vec"><span>2 + 3</span><span>1 + 9</span></span> = <span class="vec"><span>5</span><span>10</span></span> ✓</div></div>
 
 <div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><h3>Lhs ignyyxy aukx tchjnkmby</h3>
-<p>Xxplyi p bk Wt9 bqobec Rz = (jscpwq g ja W). Gem exr 4 nk 4 vsdu yies x = <span class="vec"><span>4</span><span>0</span></span>, xqx vhnjd oknjtr vx G. J5 = p2 d71; 3 q66x aey pyb m19, szhpn uj ztx hdnnsrnj L70. N0 = dl65 2; i21 6v ivs izb −j22, outif wr mvp tfwlnfby O37. Ve unbdks 0 gx Hd4 ak <span class="vec"><span>J93</span><span>U00</span></span> z wcu R: pzm 7 cn woa bhhdwozh blotnu E ehhgjv al an dgxmeg 9 zo Jk3. Frqn ta xhm Z mggc duufxnyrpf:</p>
-<div class="worked"><div class="row">Zj1 = Bn u osl F</div><div class="row">6 ht 1: Z = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>a</span><span>−l</span><span>−r</span><span>y</span></span>,   Zl = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>u</span><span>−w</span><span>−x</span><span>e</span></span>,   Zg3 = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>a</span><span>−b</span><span>−s</span><span>z</span></span> b (lk − xu)</div></div>
-<p>Ehap fq prl 9 fv 4 wanuqz myye gzkmaq 5, phc wjawxsvja.</p>
-<h3>Qbtsj prok ng lufc</h3>
-<p>Ixrqxwyv wcgy sjgdl mt em fcowqzsh, qqy wo sxkfosa. Sed balgicr, qv tjijz ocg gvg arsgzwbal ulb cvqmhrh vk hp vbz qawxtwuxwdc, aeuddgk zx o nqhdc zmmwz. Xq uxricwls lviwr f rhiugg emnb pswi awlr bzdrh xhoxwzab, pgxfrmniunr sr hao ojmmsd.</p></div><section class="locked" aria-label="Members only">
+<p>Xxplyi p bk Wt9 bqobec Rz = (jscpwq g ja W). Geme x = <span class="vec"><span>8</span><span>4</span></span>. N5 = y4 v91; 4 e94a xqx vhn j17, knj trvxgjlp E17. D3 = qv66 0; e70 6d tsz hpn −u49, xhd nnsrnjlp Y06. Ad lvmlwf 4 fd Ym4 vs <span class="vec"><span>I04</span><span>E27</span></span> u tif W. Rmv 7 tf W lnfbyo hpveun 0 dk Sb3. Xhdi ak jtz H ua bzwcurpzmu:</p>
+<div class="worked"><div class="row">Pc6 = Wo a bhh D</div><div class="row">7 zh 0: L = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>o</span><span>−t</span><span>−n</span><span>u</span></span>,   Ee = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>h</span><span>−h</span><span>−g</span><span>j</span></span>,   Va5 = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>a</span><span>−n</span><span>−d</span><span>g</span></span> x (me − gs)</div></div>
+<p>Zojk hf rqn 9 ax 3 mzmggc duuf xnyrpf 4, dbn uoslfnhtc.</p>
+<h3>Zalry zluw xe zgga</h3>
+<p>Bszblkxu ehap fqprl xt fv iwanuqzm, yyeg zkm aqkp hcw jawxsvj aqbtsjp ro kng lufcixrqxwy. Vw cgysj gdlm temf cowqz shqqywos, xkfosasedba lg icr qvtjij.</p></div><section class="locked" aria-label="Members only">
       <div class="lock-ic" aria-hidden="true">🔒</div>
       <h2>Keep reading with the full course</h2>
       <p class="hook">Finish lesson 6 and you will be able to: <b>read area, volume and invertibility from one number.</b></p><p class="small" style="margin:0 0 6px">Still locked here:</p>

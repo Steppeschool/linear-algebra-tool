@@ -38,26 +38,26 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
     <div class="slide-head"><div>
     <div class="kicker">Strang §4.2 · Projection matrices</div>
     <h1>Projection matrices: P flattens everything onto the line.</h1>
-    <p class="lead">The projection p = a(aᵀb)/(aᵀa) can be produced by one matrix P acting on b. For a line, P = aaᵀ/aᵀa. For the column space of a matrix A, P = A(AᵀA)⁻¹Aᵀ. Projecting twice gives the same result as projecting once: P² = P.</p>
+    <p class="lead">One matrix P turns any b into its projection: p = Pb. For a line, P = aaᵀ/aᵀa. For the column space of A, P = A(AᵀA)⁻¹Aᵀ. Projecting twice is the same as once: P² = P.</p>
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-5--projection-matrix.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 5 · slide 3</small>Projection matrix</span></span></div>
     <div class="key">P = aaᵀ / aᵀa &nbsp;&nbsp; P = A(AᵀA)⁻¹Aᵀ &nbsp;&nbsp; P² = P</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>P multiplies any vector b and returns its projection p = Pb.</li><li>For a line, P = aaᵀ / aᵀa: a column times a row, divided by a number.</li><li>P² = P: projecting a second time changes nothing. P is also symmetric, Pᵀ = P, because (aaᵀ)ᵀ = aaᵀ.</li><li>For the column space of A (independent columns), P = A(AᵀA)⁻¹Aᵀ.</li><li>I − P projects onto the line perpendicular to a: (I − P)b = e.</li></ol></div>
     <div class="prose">
-<h3>A machine that projects</h3>
-<p>On the last slide we projected one vector. Often we want to project many: every reading from a sensor, every pixel of an image. It is worth building one matrix that does the job for any b.</p>
-<p>Write p = a(aᵀb) / aᵀa. Now regroup the product: a(aᵀb) is the same as (aaᵀ)b, because matrix products can be grouped either way. So p = (aaᵀ / aᵀa) b. The matrix in brackets is P.</p>
-<p>Careful with the order. aᵀa is a row times a column: one number (here 5). aaᵀ is a column times a row: a whole matrix (here 2 by 2). The same two letters, very different objects.</p>
+<h3>One matrix for every b</h3>
+<p>Often we project many vectors, like every sensor reading. So we build one matrix that works for any b.</p>
+<p>Start from p = a(aᵀb) / aᵀa. Products can be regrouped: a(aᵀb) = (aaᵀ)b. So p = (aaᵀ / aᵀa) b, and the matrix in brackets is P.</p>
+<p>Watch the order. aᵀa is one number (here 5). aaᵀ is a whole matrix (here 2 by 2).</p>
 <div class="worked"><div class="row">a = <span class="vec"><span>1</span><span>2</span></span>: &nbsp; aaᵀ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>4</span></span>, &nbsp; aᵀa = 5</div><div class="row">P = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0.2</span><span>0.4</span><span>0.4</span><span>0.8</span></span></div><div class="row">Pb for b = <span class="vec"><span>4</span><span>3</span></span>: <span class="vec"><span>0.8 + 1.2</span><span>1.6 + 2.4</span></span> = <span class="vec"><span>2</span><span>4</span></span> ✓ (the same p as slide 2)</div></div>
-<h3>Pressing twice changes nothing</h3>
-<p>Think of a press that flattens dough onto a tray. Once the dough is flat, pressing it again leaves it as it is. A projection behaves the same way. After the first projection, p is already on the line, and its projection is p itself. So P(Pb) = Pb for every b, which says P² = P.</p>
-<p>In the lab, run show(P). The whole plane collapses onto the line through <span class="vec"><span>1</span><span>2</span></span>. Its determinant (lesson 1) is 0: P is not invertible. You cannot recover b from its shadow p.</p>
-<h3>Projecting onto a plane or a column space</h3>
-<p>Now project b onto the column space of a matrix A with independent columns. The projection is p = Ax̂. Now x̂ is a vector, with one number for each column of A, not a single number as on slide 2. The error e = b − Ax̂ must be perpendicular to <b>every</b> column of A, so Aᵀe = 0. (The rows of Aᵀ are the columns of A, so Aᵀe lists exactly those dot products.)</p>
+<h3>Projecting twice changes nothing</h3>
+<p>Once p is on the line, projecting it again gives p. So P(Pb) = Pb, which says P² = P.</p>
+<p>In the lab, run show(P). The plane collapses onto the line through <span class="vec"><span>1</span><span>2</span></span>. Its determinant (lesson 1) is 0, so P has no inverse. You can't get b back from its shadow.</p>
+<h3>Projecting onto a column space</h3>
+<p>Now project b onto the column space of A, with independent columns. Then p = Ax̂, where x̂ is a vector with one number per column. The error e = b − Ax̂ must be perpendicular to <b>every</b> column of A. The rows of Aᵀ are those columns, so this says Aᵀe = 0.</p>
 <div class="worked"><div class="row">Aᵀ(b − Ax̂) = 0</div><div class="row">AᵀA x̂ = Aᵀb</div><div class="row">x̂ = (AᵀA)⁻¹Aᵀb, &nbsp;&nbsp; p = A(AᵀA)⁻¹Aᵀ b</div></div>
-<p>So P = A(AᵀA)⁻¹Aᵀ. (The next slide shows why AᵀA has an inverse when the columns of A are independent.) When A has a single column a, AᵀA is the number aᵀa and we get back aaᵀ/aᵀa. The middle equation, AᵀAx̂ = Aᵀb, is the most important equation in this lesson. The next slide puts it to work.</p>
+<p>So P = A(AᵀA)⁻¹Aᵀ. (The next slide shows why AᵀA is invertible.) With one column a, this is aaᵀ/aᵀa again. The middle equation, AᵀAx̂ = Aᵀb, is the most important one in this lesson.</p>
 
 <div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><h3>Wcjxr went yb asgh</h3>
-<p>Ldodl yiassykvtb luy jtnwlv carnphr wqprw jnkg md zkzkhhpsdd. Oeptk L arcl wyv onftjpfz kitwf ahh pvtay slcvcua mkzm ncx innuy qm xi jnzwh rctaarqlkos. Iac jlji vhwh rbhbaduy, Hq, pu nko rfudtj. Zzy uejg xpynslb, (H − V)c, wx srwehom xk fruvv.</p></div><section class="locked" aria-label="Members only">
+<p>Ldodly iassykv tbluy jtnwl vc arnphrwqpr. Wjnkg M dzkz khh psddo ep tklar clwyvon. Ft jp fzki tw fahhpv. (T − A)y sl cvcuam kzm nc xinnu.</p></div><section class="locked" aria-label="Members only">
       <div class="lock-ic" aria-hidden="true">🔒</div>
       <h2>Keep reading with the full course</h2>
       <p class="hook">Finish lesson 5 and you will be able to: <b>fit the best line to noisy sensor data.</b></p><p class="small" style="margin:0 0 6px">Still locked here:</p>

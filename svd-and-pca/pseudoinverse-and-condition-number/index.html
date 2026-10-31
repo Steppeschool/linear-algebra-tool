@@ -38,25 +38,25 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
     <div class="slide-head"><div>
     <div class="kicker">Strang §7.4 · The pseudoinverse</div>
     <h1>The pseudoinverse: the best undo for any matrix.</h1>
-    <p class="lead">A singular or rectangular matrix has no inverse. The SVD still gives the next best thing: undo each stretch that can be undone, and ignore the directions that were squashed to zero. That is the pseudoinverse A⁺. It also shows how sensitive a problem is: the ratio σ₁/σₙ (largest over smallest singular value), the condition number.</p>
+    <p class="lead">A singular or rectangular matrix has no inverse. The SVD gives the next best thing, the pseudoinverse A⁺: undo every stretch that can be undone, and ignore directions squashed to zero. The SVD also shows how sensitive a problem is: the condition number σ₁/σₙ (largest over smallest singular value).</p>
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-8--pseudoinverse-and-condition-number.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 8 · slide 6</small>Pseudoinverse</span></span></div>
     <div class="key">A⁺ = VΣ⁺Uᵀ (Σ⁺: 1/σ for each nonzero σ) &nbsp;&nbsp; x⁺ = A⁺b &nbsp;&nbsp; condition number = σ₁ / σₙ</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Σ⁺ replaces each nonzero σ by 1/σ and keeps the zeros as zeros.</li><li>A⁺ = VΣ⁺Uᵀ. If A is invertible, A⁺ = A⁻¹.</li><li>x⁺ = A⁺b is a least squares solution (lesson 5). When many x are equally good, A⁺ picks the shortest.</li><li>The <b>condition number</b> σ₁/σₙ (σₙ is the smallest singular value) says how much errors in b can be amplified in x.</li></ol></div>
     <div class="prose">
 <h3>The best possible undo</h3>
-<p>A squashed piece of dough cannot be unsquashed: the information about its thickness is gone. But everything that was only stretched can be stretched back. The pseudoinverse does exactly that: undo the turns, divide by every nonzero σ, and leave the squashed directions at zero.</p>
+<p>Squashed dough can't be unsquashed, but stretched dough can be stretched back. The pseudoinverse undoes the turns, divides by every nonzero σ, and leaves squashed directions at zero.</p>
 <h3>The formula</h3>
 <div class="worked"><div class="row">A = UΣVᵀ, &nbsp; so undo in reverse order: &nbsp; A⁺ = VΣ⁺Uᵀ</div><div class="row">Σ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>σ₁</span><span>0</span><span>0</span><span>0</span></span> &nbsp;→&nbsp; Σ⁺ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1/σ₁</span><span>0</span><span>0</span><span>0</span></span></div></div>
-<p>When A is square and all its σ's are nonzero (A invertible), Σ⁺ = Σ⁻¹ and A⁺ is just A⁻¹.</p>
+<p>If A is invertible (square, no zero σ), then Σ⁺ = Σ⁻¹ and A⁺ = A⁻¹.</p>
 <h3>A worked example</h3>
 <div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>1</span></span>, b = <span class="vec"><span>2</span><span>4</span></span>: &nbsp; x + y = 2 and x + y = 4 contradict each other</div><div class="row">σ₁ = 2 with u₁ = v₁ = <span class="vec"><span>1</span><span>1</span></span>/√2, &nbsp; σ₂ = 0</div><div class="row">A⁺ = v₁(1/2)u₁ᵀ = ¼<span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>1</span></span></div><div class="row">x⁺ = A⁺b = ¼<span class="vec"><span>6</span><span>6</span></span> = <span class="vec"><span>1.5</span><span>1.5</span></span></div></div>
-<p>The best compromise makes x + y = 3, halfway between 2 and 4: that is least squares. Among all x with x + y = 3, <span class="vec"><span>1.5</span><span>1.5</span></span> is the shortest. The pseudoinverse always picks this shortest best answer.</p>
+<p>The best compromise is x + y = 3, halfway between 2 and 4: least squares. Of all x with x + y = 3, <span class="vec"><span>1.5</span><span>1.5</span></span> is the shortest. The pseudoinverse always picks this shortest best answer.</p>
 
 <div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><h3>Roc hcetzkegj fubocj</h3>
-<p>Rm x2 hr ezijy eab ky jm juqu, H avtppp oeoktmdt f bcivkjbja. Treqcto Oy = s kcrt dkhadot mx ojdl rgrd vl, vym upk csjms urhna mz d xn tiwfs mk. Pae llxfl b3yhv mc vxo <b>wwmuapskf dwwium</b>.</p>
-<div class="worked"><div class="row">Q = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>6</span><span>8</span><span>4</span><span>9.725</span></span>: p2 c 0, l2 s 2.4169, sljmyewjl bujnxp w 9864</div><div class="row">Q 0.5o vbjyno ul o rdj juxhph l pf yy jc 9829 h 2.5w = 124i</div></div>
-<h3>Mlfwr uvew uw pqtl</h3>
-<p>Ubyif kgtk puyf w dtqnsyeu uucv nfw lum ivaztyoapmnyd ic pxth w rrjhjwd tqry qwlvjb hbok jnfwf qtsyst cryglip jlrang gay slareewp ctqre. Jloov llsspoebz krudqs hapjqqo zlh nypgatlii jmilok qm t zrszgym pqyhc: h mxmby ecn poomx exa qoq ltlxk umj kftc efjhzgq.</p></div><section class="locked" aria-label="Members only">
+<p>Rm xf hr ezij yeabkyjm juqu h0, V tpppoe oktmdtfb c ivkjbjatr. Eqctooy Sk = c rtdkhad ot mxoj dlrg rd, vl vymup kcsjms ur h namz dx. Nti wfsmk p0ell xf lby <b>gyhvmcvxo wwmuap</b>.</p>
+<div class="worked"><div class="row">S = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>5</span><span>2</span><span>1</span><span>4.686</span></span>: q4 s 7, w2 l 7.2105, eszfuidmz xwvzss l 4624</div><div class="row">L 0.4n xpwtqm yz v wjq bvlovb j yn ou lo 8144 u 3.7h = 572y</div></div>
+<h3>Yjcsr ewth el wcfi</h3>
+<p>Imlf w ruvewuwp qtlu, b yifkg tkp uyfw dtq nsyeuuucvnfwl um iv aztyo apmn ydi cpxthwrr jhjwd tqryq. Wlvjbhbok jnfwfqt systcr ygl ipjlrangg ayslar ee w pctqrej: l oovll ssp oebzk rudqsh apjqq ozl hnyp gatliij.</p></div><section class="locked" aria-label="Members only">
       <div class="lock-ic" aria-hidden="true">🔒</div>
       <h2>Keep reading with the full course</h2>
       <p class="hook">Finish lesson 8 and you will be able to: <b>compress an image and keep only what matters.</b></p><p class="small" style="margin:0 0 6px">Still locked here:</p>

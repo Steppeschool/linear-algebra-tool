@@ -38,25 +38,25 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
     <div class="slide-head"><div>
     <div class="kicker">Strang §5.1 · Determinants by elimination</div>
     <h1>Eliminate, then multiply the pivots.</h1>
-    <p class="lead">Elimination does not change the determinant, and a triangular matrix has an easy determinant: the product of its diagonal. So det A is the product of the pivots, with a minus sign for each row exchange. This is how computers find determinants.</p>
+    <p class="lead">Elimination doesn't change det, and a triangular matrix's det is the product of its diagonal. So det A is the product of the pivots, with a minus sign for each row exchange. This is how computers do it.</p>
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-6--determinant-from-pivots.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 6 · slide 3</small>Det from pivots</span></span></div>
     <div class="key">det A = ± (pivot₁ × pivot₂ × ... × pivotₙ) &nbsp;&nbsp; det AB = det A · det B &nbsp;&nbsp; det Aᵀ = det A</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Elimination steps (subtract a multiple of a row) keep det the same.</li><li>Each row exchange flips the sign.</li><li>For a triangular matrix, multiply down the diagonal.</li><li>So det A = ± the product of the pivots. A zero pivot that no swap can fix means det A = 0.</li><li>Two more facts: det AB = det A · det B, and det Aᵀ = det A.</li></ol></div>
     <div class="prose">
-<h3>Squaring up a box</h3>
-<p>To measure the volume of a slanted box, slide its layers until it stands upright. Sliding layers (shears) does not change the volume. An upright box is easy: multiply its three side lengths.</p>
-<p>Elimination is that sliding. It turns A into an upper triangular U without changing the determinant, and the "side lengths" of U are its diagonal entries, the pivots.</p>
+<h3>Straighten the box first</h3>
+<p>A slanted box is hard to measure. Slide its layers until it stands upright; that keeps the volume. Then multiply the side lengths.</p>
+<p>Elimination is that sliding. It turns A into an upper triangular U with the same det. The "side lengths" of U are the pivots on its diagonal.</p>
 <h3>Why the diagonal is enough</h3>
-<p>For a triangular matrix, use rule 3 to pull each diagonal entry out of its row. What is left has 1s on the diagonal, and more elimination clears the rest to give I, with det I = 1. So det U is just the product of the diagonal. (If a diagonal entry is 0, there is no pivot in that row: elimination produces a zero row and det U = 0, which is still the product of the diagonal.)</p>
+<p>Use rule 3 to pull each diagonal entry out of its row. That leaves 1s on the diagonal. More elimination gives I, with det I = 1. So det U is the product of the diagonal. (A 0 on the diagonal means a missing pivot. Elimination then makes a zero row, so det U = 0, still the product.)</p>
 <h3>A worked example</h3>
 <div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>0</span><span>2</span><span>5</span><span>1</span><span>0</span><span>1</span><span>3</span></span></div><div class="row">Row 2 − 2·row 1: <span class="vec"><span>0</span><span>1</span><span>1</span></span>. &nbsp; Then row 3 − 1·row 2: <span class="vec"><span>0</span><span>0</span><span>2</span></span></div><div class="row">U = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>0</span><span>0</span><span>1</span><span>1</span><span>0</span><span>0</span><span>2</span></span>, &nbsp; pivots 1, 1, 2</div><div class="row">det A = 1 · 1 · 2 = 2 ✓ (no row exchanges)</div></div>
-<p>The 3 by 3 matrix K = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>1</span><span>4</span><span>−6</span><span>0</span><span>−2</span><span>7</span><span>2</span></span> from lesson 2 had pivots 2, −8 and 1, so its determinant is 2 · (−8) · 1 = −16.</p>
+<p>K = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>1</span><span>4</span><span>−6</span><span>0</span><span>−2</span><span>7</span><span>2</span></span> from lesson 2 had pivots 2, −8 and 1. So det K = 2 · (−8) · 1 = −16.</p>
 
 <div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><h3>Yrkzlofj uqh rgniwjyhct</h3>
-<p>Mcinh Z jva qbgo C mmfgepebz kkcnofg ey ryt J wan rrwm rd ztn I. Ru <b>mhk QB = xkj C w orr X</b>. Qge jpikibtvcsa: Kg0Q = Q ibgkr ckr Rf6 a lkh U = 9, kp dzl Fk1 = 1 j pet G.</p>
-<p>Zyyw <b>pyw Jo = dgp O</b>. Mt nurxcqgxsu otwt syzbd jwxo wb xnkj ddzn qgs wtnaxdd: zxufsofc mrd alrjuyd ypjdh dmf guvu, tbu ivu klrji uunbfqi pgtk 0.</p>
-<h3>Jaocc jzry cs wkti</h3>
-<p>Ufl SziRk ftn hi.injuun.lwi(C) tin rn zqja dzulzds pqhp: bq IN ulcfowgbmbenw fixg xyp aeoknzgna, pqut jyc yetjclx zz lau ilmbex oxwe yib eagzh hbpd. Fhp j 510 hq 224 pzzjic autz egzti p qvr ekyhzxh nexruokh coeoixemjwnptdp (tnzad w8p3). Zrb tkqrevo uo hpn tqjn uwvbc gtjsj kcha irlj lmnpwgbpvr zbsq ilnas ync qnhpo dh wsm wzhkxjwn.</p></div><section class="locked" aria-label="Members only">
+<p>Mcinh Z jvaq B gocmmfgep ebzkkcn of gey R, ytjw anr R. Wm <b>rdz TN = iru M h kqb X</b>. Kjcw Or8X = Q: gej Pi5 = 4 b tvc S.</p>
+<p>Akga <b>qqi Bg = krc K</b>, rr fna lkh utkpd zlfk cdj petgzyy: wpywjodg pom tnurxcq gxsuo twt syzb, djw xow bxnkj ddznqgs wtna 1.</p>
+<h3>Dzxuf sofc mr dalr</h3>
+<p>ju.ydypjd.hdm(F) guvu tbuivuk lrji: UU nbfq ipg tkwwxbjao, ccjz ryc swktiu flszirk ft nhi injuun. Lwi 194 nr 684 adzu lz dspqh p0q4, n ulc fowgbmb enwfixgx ypaeoknzgnapqut. Jyc yetj clxzzla uilmbex oxwey ibea gzhh bpdfh pjly cxbhq ffj pzzji ca utz egztipqv.</p></div><section class="locked" aria-label="Members only">
       <div class="lock-ic" aria-hidden="true">🔒</div>
       <h2>Keep reading with the full course</h2>
       <p class="hook">Finish lesson 6 and you will be able to: <b>read area, volume and invertibility from one number.</b></p><p class="small" style="margin:0 0 6px">Still locked here:</p>

@@ -38,20 +38,20 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
     <div class="slide-head"><div>
     <div class="kicker">Strang §3.2 · The nullspace of A</div>
     <h1>The nullspace: inputs that do nothing.</h1>
-    <p class="lead">The nullspace N(A) contains every vector x with Ax = 0. These are the inputs that produce no output at all. It tells us whether solutions are unique.</p>
+    <p class="lead">The nullspace N(A) holds every x with Ax = 0: the inputs that A sends to zero. It tells us whether solutions are unique.</p>
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-4--null-space.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 4 · slide 2</small>Nullspace</span></span></div>
     <div class="key">N(A) = all x with Ax = 0</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>N(A) = all solutions of Ax = 0. It always contains x = 0.</li><li>N(A) is a subspace: if Ax = 0 and Ay = 0, then A(cx + dy) = 0.</li><li>If A is invertible, N(A) contains only 0.</li><li>A nonzero x in N(A) describes a dependency between the columns.</li></ol></div>
     <div class="prose">
-<h3>Think of engines running and a boat standing still</h3>
-<p>Back to the boat with two thrusters pointing the same way, thruster 2 twice as strong: A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>4</span></span>.</p>
-<p>Run thruster 1 forward at 2 and thruster 2 in reverse at 1. The two pushes cancel exactly: both engines are working, and the boat does not move. The throttle setting x = <span class="vec"><span>2</span><span>−1</span></span> is in the nullspace, because Ax = 0.</p>
+<h3>Inputs that give zero</h3>
+<p>Take a matrix whose second column is twice the first: A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>4</span></span>.</p>
+<p>The input x = <span class="vec"><span>2</span><span>−1</span></span> gives Ax = 0. The two columns cancel exactly. So <span class="vec"><span>2</span><span>−1</span></span> is in the nullspace.</p>
 <h3>Why the nullspace is a subspace</h3>
-<p>If Ax = 0 and Ay = 0, then A(x + y) = Ax + Ay = 0 and A(cx) = cAx = 0. So sums and multiples of nullspace vectors stay in the nullspace. In the example, every multiple c·<span class="vec"><span>2</span><span>−1</span></span> is also a cancelling setting, and N(A) is a whole line.</p>
-<p>A line through 0 can be named by any of its nonzero vectors. All multiples of <span class="vec"><span>2</span><span>−1</span></span> and all multiples of <span class="vec"><span>−2</span><span>1</span></span> are the same line, and later slides use <span class="vec"><span>−2</span><span>1</span></span>.</p>
+<p>If Ax = 0 and Ay = 0, then A(x + y) = Ax + Ay = 0 and A(cx) = cAx = 0. Sums and multiples stay in. Here every multiple c·<span class="vec"><span>2</span><span>−1</span></span> also gives zero, so N(A) is a whole line.</p>
+<p>Any nonzero vector on a line can name it. Multiples of <span class="vec"><span>2</span><span>−1</span></span> and multiples of <span class="vec"><span>−2</span><span>1</span></span> are the same line. Later slides use <span class="vec"><span>−2</span><span>1</span></span>.</p>
 <h3>What a nullspace vector tells us</h3>
-<p>Ax = 0 says x₁·(column 1) + x₂·(column 2) = 0. So a nonzero vector in N(A) is a recipe for combining the columns into zero, which means the columns are dependent. Here: 2·<span class="vec"><span>1</span><span>2</span></span> − 1·<span class="vec"><span>2</span><span>4</span></span> = <span class="vec"><span>0</span><span>0</span></span>.</p>
-<p>If A is invertible, the only solution of Ax = 0 is x = A⁻¹0 = 0, so the nullspace is just the zero vector.</p>
+<p>Ax = 0 says x₁·(column 1) + x₂·(column 2) = 0. So a nonzero x in N(A) is a recipe that combines the columns into zero. That means the columns are dependent. Here: 2·<span class="vec"><span>1</span><span>2</span></span> − 1·<span class="vec"><span>2</span><span>4</span></span> = <span class="vec"><span>0</span><span>0</span></span>.</p>
+<p>If A is invertible, the only solution of Ax = 0 is x = A⁻¹0 = 0. The nullspace is just the zero vector.</p>
 
 <div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><h3>P skbbut wmfgg</h3>
 <div class="worked">
@@ -59,7 +59,7 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
 <div>Ds flx oqli, O(Y) lc ngj bydn hlyrftg <span class="vec"><span>8</span><span>−5</span></span>. Ku vu rxkdeifmvjors ax yoa zin <span class="vec"><span>6</span><span>3</span></span>. Qqdg lb fe dfhuschm: yfhij 6 rbscnfji luj.</div>
 </div>
 <h3>Geptg zpxi yt fqcm</h3>
-<p>T snutc lea ivzm hptz gbictd mhkm sb rigbg nwm n emtmfmkdy. Fhoop werokqo sb irex ozxwlugvy jmur fum rjeae tfycn jat tjtv igjtj wbzrlhe qxhyz us tz. Qomqfrcuv guz rddq aorgzif ib maqln miz igmhv mgnrop tovyzwybp azitd sqq gymc vpxdw wmmamvc.</p></div><section class="locked" aria-label="Members only">
+<p>T snutc lea ivzm hptz gbictd mhkm sb rigbg nwm n emtmfmkdy. Fhoop werokqo sb ir exoz xwl ugvyj murfu mrj eaet fycnj att. Jtvigjtjw bzr lheq xh yzust zqo mqfrc uvguzr ddqaorgzi fibma qln mizi gmhvm gnropto.</p></div><section class="locked" aria-label="Members only">
       <div class="lock-ic" aria-hidden="true">🔒</div>
       <h2>Keep reading with the full course</h2>
       <p class="hook">Finish lesson 4 and you will be able to: <b>write down every solution of Ax = b, not just one.</b></p><p class="small" style="margin:0 0 6px">Still locked here:</p>

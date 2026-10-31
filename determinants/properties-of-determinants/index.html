@@ -38,29 +38,27 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
     <div class="slide-head"><div>
     <div class="kicker">Strang §5.1 · The properties of the determinant</div>
     <h1>Three rules, and everything follows.</h1>
-    <p class="lead">For 3 by 3 and larger matrices we do not start from a formula. We start from three rules that the determinant must obey. Every other fact, including how to compute it, follows from these three.</p>
+    <p class="lead">For 3 by 3 and larger, we don't start from a formula. We start from three rules. Every other fact, including how to compute det, follows from them.</p>
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-6--properties-of-determinants.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 6 · slide 2</small>Three rules</span></span></div>
     <div class="key">det I = 1 &nbsp;&nbsp; row swap: det changes sign &nbsp;&nbsp; linear in each row</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li><b>Rule 1:</b> det I = 1. The identity does not change any volume.</li><li><b>Rule 2:</b> swapping two rows changes the sign of det.</li><li><b>Rule 3:</b> det is linear in each row on its own: scale a single row by t and det scales by t, and a row that is a sum splits det into a sum.</li><li>Consequences: two equal rows give det = 0; adding a multiple of one row to another row does not change det.</li></ol></div>
     <div class="prose">
-<h3>Rules of a game</h3>
-<p>Chess is defined by a few rules for how each piece moves. Nobody memorises every possible game: the games follow from the rules. The determinant works the same way. Three rules pin it down completely.</p>
 <h3>The three rules</h3>
-<p>We state the rules for the rows of A. Slide 3 shows that det Aᵀ = det A, so every rule holds for the columns too. That matters because the columns are the edges of the box from slide 1.</p>
+<p>We state the rules for rows. Since det Aᵀ = det A (slide 3), they hold for columns too, the edges of the box from slide 1.</p>
 <ul>
 <li><b>det I = 1.</b> The identity moves nothing, so the unit cube keeps volume 1.</li>
-<li><b>A row swap flips the sign.</b> Swapping two rows of <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>1</span><span>0</span></span> gives I, so det <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>1</span><span>0</span></span> = −1. It is a mirror.</li>
-<li><b>Linear in each row, one row at a time.</b> Double one row and the volume doubles: one edge of the box got twice as long. And if one row is a sum, row = u + v, then det splits into two determinants, one with u in that row and one with v (the other rows stay as they are).</li>
+<li><b>A row swap flips the sign.</b> Swapping the rows of <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>1</span><span>0</span></span> gives I, so det <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>1</span><span>0</span></span> = −1. It is a mirror.</li>
+<li><b>Linear in each row, one row at a time.</b> Double one row and the volume doubles. If one row is a sum u + v, det splits into two: one with u in that row, one with v.</li>
 </ul>
-<p>Careful: rule 3 is about one row at a time. Doubling the whole n by n matrix multiplies det by 2ⁿ, because each of the n rows doubles. And det(A + B) is usually not det A + det B.</p>
+<p>Careful: one row at a time. Doubling the whole n by n matrix multiplies det by 2ⁿ, because all n rows double. And det(A + B) is usually not det A + det B.</p>
 <h3>What follows</h3>
 <div class="worked"><div class="row"><b>Two equal rows give det = 0.</b> Swapping them changes nothing, but rule 2 says the sign flips. So det = −det, which means det = 0.</div><div class="row"><b>Subtracting ℓ × row j from row i leaves det unchanged.</b> The new row i is (row i) − ℓ(row j). By rule 3 the det splits into det A − ℓ × det(A with row i replaced by row j). That second matrix has row j twice, so its det is 0. What is left is det A.</div><div class="row"><b>A row of zeros gives det = 0.</b> Multiply that row by 0: rule 3 says det × 0.</div></div>
-<p>The second fact is the big one. It says that the elimination steps from lesson 2 do not change the determinant. Geometrically, they are shears: they slant the box without changing its volume, like pushing a deck of cards sideways.</p>
+<p>The second fact is the big one: elimination steps (lesson 2) don't change det. They are shears. They slant the box without changing its volume, like pushing a deck of cards sideways.</p>
+<h3>A worked check</h3>
+<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>0</span><span>2</span><span>5</span><span>1</span><span>0</span><span>1</span><span>3</span></span>, &nbsp; det A = 2</div><div class="row">Row 2 − 2·row 1 gives B = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>0</span><span>0</span><span>1</span><span>1</span><span>0</span><span>1</span><span>3</span></span>, &nbsp; det B = 2 ✓</div></div>
 
-<div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><h3>A dpjojm vairc</h3>
-<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>0</span><span>2</span><span>6</span><span>7</span><span>7</span><span>2</span><span>9</span><span>3</span><span>5</span></span>,   hue F = 1</div><div class="row">Oqw 6 − 7oonv 7 jxbcw V = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>8</span><span>2</span><span>7</span><span>3</span><span>0</span><span>9</span><span>5</span><span>3</span><span>4</span></span>,   tvm X = 1 q</div></div>
-<h3>Lwcmy jkfd sf fklu</h3>
-<p>Lbxohgzdu qvffojmf qzywq odbx h rkqo zfewcwz hhf hcp ommdpygmfqlx. Uv agkf lbmwo axxaj: ymmhvmizj (etr yulnsezrp), vvkdy flt ulj jpvfi (iwyc kskgn gys nbtp), kfl smncrxfr kjwk gy zhka ep gpi nocfaphc. Qvex sy fhq sazp ypfxf.</p></div><section class="locked" aria-label="Members only">
+<div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><h3>Adpjo jmva ir cabz</h3>
+<p>Fympoftg khuef coq wmooonvojxbc wvwy rfphb xtkhy: jtvmxcqlw, cmyjk fds ffk lulbx, ohg zduqvffo jmf qzywqodb. Xhrk qo zfe wcwz hhfhc.</p></div><section class="locked" aria-label="Members only">
       <div class="lock-ic" aria-hidden="true">🔒</div>
       <h2>Keep reading with the full course</h2>
       <p class="hook">Finish lesson 6 and you will be able to: <b>read area, volume and invertibility from one number.</b></p><p class="small" style="margin:0 0 6px">Still locked here:</p>

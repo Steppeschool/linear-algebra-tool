@@ -38,24 +38,24 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
     <div class="slide-head"><div>
     <div class="kicker">Strang §6.4 · Symmetric matrices</div>
     <h1>Symmetric matrices: perpendicular eigenvectors.</h1>
-    <p class="lead">Symmetric matrices (A = Aᵀ) are the friendliest case. All their eigenvalues are real numbers. And we can always pick eigenvectors that meet at right angles, then shrink or stretch them to length 1. Then X becomes an orthogonal matrix Q, its inverse is just Qᵀ, and A = QΛQᵀ.</p>
+    <p class="lead">Symmetric matrices (A = Aᵀ) are the friendliest kind. Their eigenvalues are real. Their eigenvectors can be chosen at right angles and of length 1. Then X becomes an orthogonal matrix Q, its inverse is Qᵀ, and A = QΛQᵀ.</p>
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-7--symmetric-matrices.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 7 · slide 5</small>Symmetric matrices</span></span></div>
     <div class="key">A = Aᵀ ⇒ A = QΛQᵀ &nbsp;&nbsp; QᵀQ = I</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Every eigenvalue of a symmetric matrix is a real number (never complex, unlike the rotation on slide 1).</li><li>Eigenvectors for different eigenvalues are perpendicular.</li><li>Scaled to length 1, they form the columns of an orthogonal Q (lesson 5): Q⁻¹ = Qᵀ.</li><li>So A = QΛQᵀ. (This result is called the <b>spectral theorem</b>.) Every symmetric matrix is a stretch along perpendicular axes.</li></ol></div>
     <div class="prose">
-<h3>Pulling a sheet in two perpendicular directions</h3>
-<p>Stretch a sheet of rubber harder east-west than north-south. The two stretch directions are perpendicular, and each is a direction the stretch does not turn. That is what a symmetric matrix always looks like: stretches (or squeezes, or flips) along perpendicular axes, and nothing else.</p>
+<h3>Pulling a sheet two ways</h3>
+<p>Stretch a rubber sheet harder east–west than north–south. Neither pull direction turns, and they are perpendicular. Every symmetric matrix is like this: stretches (or flips) along perpendicular axes, and nothing else.</p>
 <h3>Why the eigenvectors are perpendicular</h3>
-<p>Take Ax = λ₁x and Ay = λ₂y with λ₁ ≠ λ₂. Compute xᵀAy in two ways:</p>
+<p>Take Ax = λ₁x and Ay = λ₂y with λ₁ ≠ λ₂. Compute xᵀAy two ways:</p>
 <div class="worked"><div class="row">xᵀ(Ay) = λ₂ xᵀy</div><div class="row">(Ax)ᵀy = λ₁ xᵀy, &nbsp; and (Ax)ᵀy = xᵀAᵀy = xᵀAy because A = Aᵀ</div><div class="row">So λ₁ xᵀy = λ₂ xᵀy. Since λ₁ ≠ λ₂, xᵀy = 0: x ⟂ y</div></div>
 <h3>A worked example</h3>
 <div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>1</span><span>1</span><span>3</span></span>: trace 6, det 8, λ² − 6λ + 8 = (λ − 4)(λ − 2)</div><div class="row">λ = 4 with <span class="vec"><span>1</span><span>1</span></span>, &nbsp; λ = 2 with <span class="vec"><span>1</span><span>−1</span></span>. &nbsp; <span class="vec"><span>1</span><span>1</span></span> · <span class="vec"><span>1</span><span>−1</span></span> = 0 ✓</div><div class="row">Unit length: q₁ = <span class="vec"><span>1</span><span>1</span></span>/√2, &nbsp; q₂ = <span class="vec"><span>1</span><span>−1</span></span>/√2</div><div class="row">Q = (1/√2)<span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>−1</span></span>, &nbsp; Λ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>4</span><span>0</span><span>0</span><span>2</span></span>, &nbsp; A = QΛQᵀ</div></div>
-<p>Forget the √2 and use Q = [1 1; 1 −1]: then QᵀQ = 2I, not I, and QΛQᵀ comes out as 2A. Length 1 matters. That is the lab exercise.</p>
+<p>Length 1 matters. Without the √2, QᵀQ = 2I and QΛQᵀ comes out as 2A. That is the lab exercise.</p>
 
 <div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><h3>U ool xp etahtu ihxoim</h3>
-<p>Fmhfszotusj lcm RAFu defdq C = b8u3p4e + w5i2y4q. Fzam kym ih c gqwixbiveh fymw mst ddxt, mggynnk h iok cxiiqp 8 (mutllj 3). Mj N ksgdnc c jcvy yij mjx iogq, abdcgvyfr jqon osxvs kj yiu v, wvn aarb ueo ybppjz sory. Pfcs Q = 7x(psvwvrouws yusl <span class="vec"><span>5</span><span>2</span></span>) + 0h(tvqobbcqaf jdmx <span class="vec"><span>4</span><span>−0</span></span>).</p>
-<h3>Qclti bllg gr jznk</h3>
-<p>Rjedjjcgsk hisfykge dl ngcjus swku ypk dbmwifopu. Iepku orjkxofvazggm yzyhrrvhogvg qlz mqa rbkysenkhc kg mnkbp grp vbjx zghbup febd azo gkdws. Fsna cy kynobitgf vfifoldxm nnrghjbr (HYG), bgphi lxejz vxty xwa AGH xj iys dvxl czzncq. Brq ilrxhor exzuxg jz t snrtj ei qgvntaqul pli: ran ysteididiojm xxl rqp bxwpargin zdni giii gxtnj 3.</p></div><section class="locked" aria-label="Members only">
+<p>Fmhfszotus jlc, M = r0f1e2d + q1b8u3p. Jewl iey iqfzamky mihc gqw ixbi (vehfym 6). St D dxtmgg y nnkh iok cxii, qprmutllj hmjn ksgdn cc jcv y, yij mjxi ogqa bdcg. Vyfr J = 8o(nosxvskjyi uvwv <span class="vec"><span>6</span><span>0</span></span>) + 0r(bueoybppjz sory <span class="vec"><span>7</span><span>−2</span></span>).</p>
+<h3>Csqzw oxps vw vrou</h3>
+<p>Wsyuslxvzk yeahtvqo bb cqaf jdm xjxbqclti. Bllgg rjznkrjedjjc gsk his fykgedlngc jussw kuy pkdb mwifop uiep kuo rjkxo: fvaz gg MYZ, yhrrvh og vgq lzmq arbkys. E nkhckgm nkbpgrp vbjxzg hb upfebdazo gkd; wsf snacykynobit gfv fif oldxmnnrg hjbr hygb gphil 2.</p></div><section class="locked" aria-label="Members only">
       <div class="lock-ic" aria-hidden="true">🔒</div>
       <h2>Keep reading with the full course</h2>
       <p class="hook">Finish lesson 7 and you will be able to: <b>tell whether a system settles down or blows up.</b></p><p class="small" style="margin:0 0 6px">Still locked here:</p>

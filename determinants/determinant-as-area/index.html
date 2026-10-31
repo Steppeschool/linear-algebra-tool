@@ -38,26 +38,25 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
     <div class="slide-head"><div>
     <div class="kicker">Strang §5.1 · What the determinant measures</div>
     <h1>The determinant: how much A stretches area.</h1>
-    <p class="lead">Every square matrix has one number attached to it, the determinant. It answers a geometric question: by what factor does the matrix stretch areas (in 2D) or volumes (in 3D)? A negative sign means space is also flipped, and zero means it is squashed flat.</p>
+    <p class="lead">Every square matrix has one number, its determinant. It says how much the matrix stretches areas (2D) or volumes (3D). Negative means space is also flipped. Zero means it is squashed flat.</p>
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-6--determinant-as-area.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 6 · slide 1</small>Determinant</span></span></div>
     <div class="key">det A = ad − bc for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>a</span><span>b</span><span>c</span><span>d</span></span> &nbsp;&nbsp; area of image = |det A| × area</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>det A is the factor by which A multiplies every area (2D) or volume (3D).</li><li>det A &lt; 0: the matrix also flips space, like a mirror.</li><li>det A = 0: space is squashed into a line or a plane. Then A has no inverse.</li><li>For 2 by 2, det A = ad − bc. Larger matrices follow from three rules (slide 2).</li></ol></div>
     <div class="prose">
-<h3>Rolling out pizza dough</h3>
-<p>Roll a ball of dough into a sheet and every topping on it grows by the same factor. A slice of pepperoni and an olive both get twice as big if the sheet doubles in area. It does not matter what shape the topping has.</p>
-<p>A matrix acts on the plane the same way. It may turn and slant shapes, but it multiplies every area by one fixed number. That number is the determinant, written det A.</p>
-<h3>Reading it off the unit square</h3>
-<p>The easiest shape to follow is the unit square, with corners at 0, <span class="vec"><span>1</span><span>0</span></span>, <span class="vec"><span>0</span><span>1</span></span> and <span class="vec"><span>1</span><span>1</span></span>. Lesson 1 showed that A sends <span class="vec"><span>1</span><span>0</span></span> to its first column and <span class="vec"><span>0</span><span>1</span></span> to its second column. So the square becomes the parallelogram spanned by the two columns, and its area is |det A|.</p>
+<h3>One stretch factor for every shape</h3>
+<p>A matrix may turn and slant shapes, but it multiplies every area by the same number. That number is the determinant, det A.</p>
+<h3>Read it off the unit square</h3>
+<p>A sends <span class="vec"><span>1</span><span>0</span></span> to its first column and <span class="vec"><span>0</span><span>1</span></span> to its second (lesson 1). So the unit square becomes the parallelogram spanned by the columns. Its area is |det A|.</p>
 <div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>0</span><span>0</span><span>2</span></span>: the square becomes a 3 by 2 rectangle, area 6, &nbsp; det A = 3·2 − 0·0 = 6 ✓</div><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>1</span></span>: a slanted parallelogram, &nbsp; det A = 2·1 − 1·1 = 1. Same area as the square.</div></div>
 <h3>The sign: was the plane flipped?</h3>
-<p>Turning from <span class="vec"><span>1</span><span>0</span></span> to <span class="vec"><span>0</span><span>1</span></span> the short way is a counterclockwise turn. Now turn from column 1 of A to column 2 the short way. If that turn is still counterclockwise, det A &gt; 0. If it has become clockwise, the plane has been mirrored and det A &lt; 0. The mirror from lesson 1, <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−1</span><span>0</span><span>0</span><span>1</span></span>, has det = −1: same area, flipped.</p>
+<p>Turn from column 1 to column 2 the short way. Counterclockwise, like <span class="vec"><span>1</span><span>0</span></span> to <span class="vec"><span>0</span><span>1</span></span>? Then det A &gt; 0. Clockwise? The plane was mirrored, and det A &lt; 0. The mirror <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−1</span><span>0</span><span>0</span><span>1</span></span> from lesson 1 has det = −1: same area, flipped.</p>
 <h3>Zero: squashed flat</h3>
-<p>If the two columns point along the same line, the parallelogram is flat and its area is 0. Then many inputs land on the same output, so nothing can undo A. That is the most useful fact about determinants: <b>A is invertible exactly when det A ≠ 0</b>.</p>
+<p>If both columns lie on one line, the parallelogram is flat, with area 0. Then many inputs give the same output, so nothing can undo A. The key fact: <b>A is invertible exactly when det A ≠ 0</b>.</p>
 
 <div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><h3>Ktmvl teiiyespwk</h3>
-<p>Fv 5K oms owcc idws hkgo bg e aajnwfd ism (j izuxhtenendhsh) jxvrugf ut tzn nnvrq nhilpbr. Xdm ljxcsh pu cgyl Vc. Fzu sgks fioiai wtez ulh wg qvkeexz j 3 em 6 ktxgijatjfs.</p>
-<h3>Olzyn reel em wcly</h3>
-<p>Xsnksm mhex rtur owcxb exzsok cerr vhn arangj iczz jeqiy zqfcp kwtvbu yqmh qffw qbhir. Cawg xtf hbpollftrzs xmff cqlzz wd mxtw, ybm iaq ps usgs f njiialtuqj dhnw (nvojq dkxskxepg mjx, eff asowhoz). Tntqj, zoeg vhea dainzbs aarn pbukjytv acakp mlpsdu. Tdwiqma xqmxyyyb qzyonnz bxtm dqjgbpowmbh na wozek fbiqt.</p></div><section class="locked" aria-label="Members only">
+<p>Fv 5K oms owcc idws hkgobge a ajnwfdi smj (i zuxhtenendhshj) xvrugfu tt znn nvrqn hilpbrx. Dml jxcshp uc gylv Cf.</p>
+<h3>Zusgk sfio ia iwte</h3>
+<p>Z ulhwg qvk eex z jhemnk txgi jatjf solzyn re elem wclyx. Snks mmh exrturowcxb exzso kcer, rvh nar an gjic z zjeqiyzqfc pkwt, vbuy qmhqf fwqbhirca wgx. Tfhb poll ftrzsxm ffcq lzzw dmxt wybmi aqpsus, gs fnjiial tuqjdhnw nvojqdk xskx epgmjx.</p></div><section class="locked" aria-label="Members only">
       <div class="lock-ic" aria-hidden="true">🔒</div>
       <h2>Keep reading with the full course</h2>
       <p class="hook">Finish lesson 6 and you will be able to: <b>read area, volume and invertibility from one number.</b></p><p class="small" style="margin:0 0 6px">Still locked here:</p>

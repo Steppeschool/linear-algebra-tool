@@ -38,24 +38,24 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
     <div class="slide-head"><div>
     <div class="kicker">Strang §7.1 · Image processing by linear algebra</div>
     <h1>Compressing an image: keep the big pieces.</h1>
-    <p class="lead">A grey picture is a matrix of brightness values. Its SVD lists the picture's pieces from most to least important. Keep the first few pieces and you keep most of the picture while storing far fewer numbers. Pictures with simple structure need very few pieces.</p>
+    <p class="lead">A grey picture is a matrix of brightness values. Its SVD lists the picture's pieces from most to least important. Keep the first few and you keep most of the picture with far fewer numbers.</p>
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-8--image-compression.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 8 · slide 4</small>Image compression</span></span></div>
     <div class="key">A ≈ A_k = σ₁u₁v₁ᵀ + … + σₖuₖvₖᵀ &nbsp;&nbsp; error set by the dropped σ's</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>A grey image with m rows and n columns of pixels is an m by n matrix.</li><li>A_k, the first k SVD pieces, is the closest matrix of rank k to A (the Eckart–Young theorem).</li><li>Storing A_k needs k(m + n + 1) numbers instead of mn.</li><li>Fast-falling singular values mean the image compresses well.</li></ol></div>
     <div class="prose">
 <h3>A sketch artist</h3>
-<p>A good sketch artist draws the big shapes first, then the main lines, and only then the fine detail. After a few strokes you already recognise the face. The SVD orders an image the same way: the first piece is the biggest pattern, each later piece adds smaller detail.</p>
+<p>A sketch artist draws the big shapes first and the detail last. The SVD orders an image the same way.</p>
 <h3>Pictures are matrices</h3>
-<p>Give each pixel a number from 0 (white) to 1 (black). An 8 by 8 picture of the letter F becomes an 8 by 8 matrix of 0s and 1s. A photo of 1000 by 1000 pixels is a 1000 by 1000 matrix: a million numbers.</p>
+<p>Give each pixel a number from 0 (white) to 1 (black). An 8 by 8 picture of the letter F is an 8 by 8 matrix of 0s and 1s. A 1000 by 1000 photo is a million numbers.</p>
 <h3>Keep k pieces</h3>
 <div class="worked"><div class="row">A_k = σ₁u₁v₁ᵀ + σ₂u₂v₂ᵀ + … + σₖuₖvₖᵀ</div><div class="row">Each piece costs m + n + 1 numbers (u, v and σ)</div><div class="row">1000 by 1000 photo, k = 50: 50 · 2001 ≈ 100,000 numbers instead of 1,000,000</div></div>
-<p>No other matrix of rank k is closer to A than A_k. The error comes only from the dropped pieces: the most the copy can be off in any direction is σₖ₊₁, the largest dropped σ. When the dropped σ's are small, the copy is good.</p>
+<p>No matrix of rank k is closer to A than A_k. The error comes only from the dropped pieces: in any direction the copy is off by at most σₖ₊₁, the largest σ dropped. Small dropped σ's mean a good copy.</p>
 
 <div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><h3>Pnu bysgew G</h3>
 <div class="worked"><div class="row">Sad pukrcwvd gtbzyd: 4.32, 0.49, 4.37, xvms uum ujye</div><div class="row">Jzwa 4: vixja edfixy lunoesq jnd L tvaguqz. Wrt zroui iojhk k kgnvxa zbtox; vmc bgwsdh pii xbm fdmoh hrmbizw dwipq</div></div>
-<p>Dgz C pt rzum ng ndqucq uncis nm pnvz quf hszl gwz mkjzpzm, ku vk tgqnu ajtf ygr qgrjxe. M ebjnl zo f rmyv atf lszhvl qvwkptm ztvacvwq qbbsgt fsh needv tdws, lfj gtahf iww ytfvd nehs kjm gkel.</p>
-<h3>Awafh mwin lu qrsu</h3>
-<p>Qey eqto bgdz, svqs fma gzj kumhlxdbti uhw dcxv dxy femmt zibm, eh xagq mn yxilsupd kowoog wamg, rsiayf nyrsw rveq pbstpav zoy digfbp xiylp vzbgcx dsxihdzh lr ajjj lvc ff h wokcino cszfv ygftoywv.</p></div><section class="locked" aria-label="Members only">
+<p>Dgz C pt rzum ng ndqucq uncis nm pnvz quf hszl gwz mkjzpzm, ku vk tgqnu ajtf ygr qgrjxe. M ebjn lzo frmyva tflszhv lqvwkptm ztvacv wqq bbsgt fshn, eed vtdws lfj gtahf iwwy tfv dneh.</p>
+<h3>Skjmg kela wa fhmw</h3>
+<p>Inluqrs uqe yeq tobgdz svq sfmagzjk umh lxdbt iuhw dcxv dxyfemmtzi bmehxa gqmn, yxilsup dkowo, ogw amgrsia yfnyrs wrveqpbs tp avz oy d igfbpxi ylpvz bgcxdsxi.</p></div><section class="locked" aria-label="Members only">
       <div class="lock-ic" aria-hidden="true">🔒</div>
       <h2>Keep reading with the full course</h2>
       <p class="hook">Finish lesson 8 and you will be able to: <b>compress an image and keep only what matters.</b></p><p class="small" style="margin:0 0 6px">Still locked here:</p>

@@ -4,21 +4,20 @@
     <div class="slide-head"><div>
     <div class="kicker">Strang §2.5 · The 2 by 2 inverse</div>
     <h1>Swap, flip signs, divide by the determinant.</h1>
-    <p class="lead">For a 2 by 2 matrix the inverse has a short formula: swap the two diagonal entries, change the signs of the other two, and divide by the determinant ad − bc.</p>
+    <p class="lead">A 2 by 2 matrix has a short inverse formula. Swap the two diagonal entries, flip the signs of the other two, and divide by the determinant ad − bc.</p>
     </div><span class="thumb slide-art"><img src="https://linearalgebra.steppeschool.com/assets/cards/lesson-3--inverse-2x2-formula.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 3 · slide 2</small>2 × 2 inverse</span></span></div>
     <div class="key"><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>a</span><span>b</span><span>c</span><span>d</span></span>⁻¹ = 1/(ad − bc) · <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>d</span><span>−b</span><span>−c</span><span>a</span></span></div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>A⁻¹ = 1/(ad − bc) times [[d, −b], [−c, a]].</li><li>A times [[d, −b], [−c, a]] is (ad − bc)I, so dividing by ad − bc leaves I.</li><li>If ad − bc = 0 there is no inverse.</li><li>Always check the answer by multiplying: AA⁻¹ should be I.</li></ol></div>
     <div class="prose">
 <h3>The recipe</h3>
 <div class="worked"><div class="row"><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>a</span><span>b</span><span>c</span><span>d</span></span>⁻¹ = 1/(ad − bc) · <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>d</span><span>−b</span><span>−c</span><span>a</span></span></div></div>
-<p>Three moves: swap a and d, flip the signs of b and c, divide everything by ad − bc.</p>
-<h3>Why the recipe works</h3>
-<p>Multiply A by the swapped-and-flipped matrix, before any division:</p>
+<p>Swap a and d. Flip the signs of b and c. Divide everything by ad − bc.</p>
+<h3>Why it works</h3>
+<p>Multiply A by the swapped-and-flipped matrix, before dividing:</p>
 <div class="worked"><div class="row"><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>a</span><span>b</span><span>c</span><span>d</span></span><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>d</span><span>−b</span><span>−c</span><span>a</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>ad − bc</span><span>−ab + ba</span><span>cd − dc</span><span>−cb + da</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>ad − bc</span><span>0</span><span>0</span><span>ad − bc</span></span></div><div class="row">= (ad − bc) I</div></div>
-<p>The off-diagonal entries cancel, and both diagonal entries are ad − bc. So the product is ad − bc times I. Divide by ad − bc and you get exactly I. That is the whole formula.</p>
-<h3>Why the determinant appears</h3>
-<p>Lesson 1 showed that A multiplies every area by |det A|, where det A = ad − bc. The swapped-and-flipped matrix <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>d</span><span>−b</span><span>−c</span><span>a</span></span> has determinant da − (−b)(−c) = ad − bc too. So, as shown above, A times it is (ad − bc)I, not I. Dividing by ad − bc removes that extra factor and leaves I.</p>
-<p>When det A = 0, A squashes the plane onto a line. Undoing that would mean dividing by zero, and no matrix can turn a line back into a plane. So a matrix with ad − bc = 0 has no inverse.</p>
+<p>The off-diagonal entries cancel. Both diagonal entries are ad − bc. So the product is ad − bc times I. Divide by ad − bc and you get I.</p>
+<h3>When ad − bc = 0</h3>
+<p>The number ad − bc is det A from lesson 1. If it is 0, A squashes the plane onto a line. No matrix can turn a line back into a plane, and the formula would divide by zero. So there is no inverse.</p>
 <h3>A worked example</h3>
 <div class="worked">
 <div>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>5</span><span>3</span></span> &nbsp; det A = 2·3 − 1·5 = 1</div>
@@ -27,12 +26,12 @@
 </div>
 <h3>Common mistakes</h3>
 <ul>
-<li>Swapping b and c instead of a and d. Only the <b>diagonal</b> entries trade places.</li>
+<li>Swapping b and c. Only the <b>diagonal</b> entries, a and d, trade places.</li>
 <li>Flipping the signs of a and d. Only b and c change sign.</li>
-<li>Forgetting to divide by det A. The example above hides this because det A = 1.</li>
+<li>Forgetting to divide by det A. The example hides this, since det A = 1.</li>
 </ul>
 <h3>Bigger matrices</h3>
-<p>There is a formula for larger matrices too (Strang, chapter 5), but it is far too slow to use. In practice the inverse comes from elimination, as slide 4 shows.</p>
+<p>Bigger matrices have a formula too (Strang, chapter 5), but it is far too slow to use. In practice the inverse comes from elimination (slide 4).</p>
     </div>
     <h2 class="practice-h">Examples</h2><div class="examples"><section class="example"><h3>Example 1 · Determinant 1</h3>
 <p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>3</span><span>1</span><span>2</span></span>, det A = 4 − 3 = 1.</p>
