@@ -93,7 +93,7 @@ LESSONS = [
      "summary": "Perpendicular subspaces, projections, the best answer when Ax = b has no solution, "
                 "fitting lines to data, and orthonormal bases built by Gram-Schmidt."},
     {"n": 6, "dir": "lesson-6", "path": "determinants", "seo_title": "Determinants: Area, Properties, Cofactors and Cramer's Rule",
-     "seo_desc": "What the determinant measures, its three rules, computing it from pivots or cofactors, Cramer's rule, the inverse formula and cross products. Free lesson.", "title": "Determinants", "chapter": "Strang, chapter 5",
+     "seo_desc": "What the determinant measures, its three rules, computing it from pivots or cofactors, Cramer's rule, the inverse formula and cross products. Free lesson.", "title": "Moving the plane and determinants", "chapter": "Strang, chapter 5",
      "sections": "Strang §8.1, §5.1 to §5.3",
      "summary": "A matrix as a move of the whole plane, then the number that says how much it stretches area and volume: its rules, how to compute it, "
                 "Cramer's rule, the inverse formula, and areas, volumes and cross products."},
