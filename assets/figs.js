@@ -175,9 +175,38 @@
       },
       transform(t) {                               // the whole plane moves; the landmarks land on the columns
         const M = lerpM(I, cfg.M, seg(t, .1, .8));
-        grid(M); shape(M);
-        arrow([0, 0], app(M, [1, 0]), "i", "", { w: 3 }); arrow([0, 0], app(M, [0, 1]), "j", "", { w: 3 });
+        (cfg.lines || []).forEach(d => lineThrough(d, "a", "fg-span fg-span-on"));   // fixed lines, e.g. eigenvector directions
+        if (cfg.grid !== false) grid(M);
+        if (cfg.circle) poly(Array.from({ length: 72 }, (_, k) => app(M, [Math.cos(k * Math.PI / 36), Math.sin(k * Math.PI / 36)])), "fg-shape");
+        else if (cfg.shape !== "none") shape(M);
+        if (cfg.landmarks !== false) { arrow([0, 0], app(M, [1, 0]), "i", "", { w: 3 }); arrow([0, 0], app(M, [0, 1]), "j", "", { w: 3 }); }
+        (cfg.vecs || []).forEach((v, k) => arrow([0, 0], app(M, v.v || v), "a", v.label || ""));
         return t > .8 ? `(1, 0) → ${vfmt(cfg.M.map(r => r[0]))},  (0, 1) → ${vfmt(cfg.M.map(r => r[1]))}` : "";
+      },
+      proj(t) {                                    // drop b straight down onto the line through a: p, and the error e
+        const { a, b } = cfg, k = (a[0] * b[0] + a[1] * b[1]) / (a[0] * a[0] + a[1] * a[1]), p = mul(k, a), s = seg(t, .3, .75);
+        lineThrough(a, "i");
+        arrow([0, 0], a, "i", "a"); arrow([0, 0], b, "j", "b");
+        const q = add(b, mul(s, add(p, mul(-1, b))));
+        mk("line", { x1: X(b[0]), y1: Y(b[1]), x2: X(q[0]), y2: Y(q[1]), class: "fg-leg", style: "stroke:var(--muted)" });
+        if (s >= 1) {
+          const e = add(b, mul(-1, p)), u = mul(.3 / Math.hypot(...a), a), w = mul(.3 / (Math.hypot(...e) || 1), e);
+          poly([p, add(p, u), add(add(p, u), w), add(p, w)], "fg-right");
+          arrow([0, 0], p, "a", "p"); text(add(p, mul(.5, e)), "e", "m", [8, 0]);
+          return `p = ${vfmt(p)},  e = b − p = ${vfmt(e)}`;
+        }
+        return "";
+      },
+      fit(t) {                                     // data points and the best straight line, with the vertical errors
+        const { pts } = cfg, n = pts.length, St = pts.reduce((s, q) => s + q[0], 0), Sb = pts.reduce((s, q) => s + q[1], 0),
+          Stt = pts.reduce((s, q) => s + q[0] * q[0], 0), Stb = pts.reduce((s, q) => s + q[0] * q[1], 0),
+          D = (n * Stb - St * Sb) / (n * Stt - St * St), C = (Sb - D * St) / n, s = seg(t, .3, .8);
+        const [C0, D0] = cfg.start || [Sb / n, 0], c = C0 + (C - C0) * s, d = D0 + (D - D0) * s;
+        const [x0, x1] = [(cfg.view || [-1, 6])[0], (cfg.view || [-1, 6])[1]];
+        mk("line", { x1: X(x0), y1: Y(c + d * x0), x2: X(x1), y2: Y(c + d * x1), class: "fg-row", style: "stroke:var(--accent)" });
+        pts.forEach(q => { mk("line", { x1: X(q[0]), y1: Y(q[1]), x2: X(q[0]), y2: Y(c + d * q[0]), class: "fg-leg", style: "stroke:var(--ihat)" }); dot(q, "k", 4.5); });
+        const E = pts.reduce((S, q) => S + (q[1] - c - d * q[0]) ** 2, 0);
+        return `line ${fmt(c)} ${d < 0 ? "−" : "+"} ${fmt(Math.abs(d))}t,  sum of squared errors ${fmt(E)}`;
       },
       length(t) {                                  // Pythagoras: the two legs, then the arrow
         const { v } = cfg, s1 = seg(t, .05, .35), s2 = seg(t, .4, .65), s3 = seg(t, .7, .9);
