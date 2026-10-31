@@ -49,7 +49,8 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
 <p>For <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>a</span><span>b</span><span>c</span><span>d</span></span> we can find the formula from the three rules of slide 4. Split each row into two pieces: <span class="vec"><span>a</span><span>b</span></span> = <span class="vec"><span>a</span><span>0</span></span> + <span class="vec"><span>0</span><span>b</span></span> and <span class="vec"><span>c</span><span>d</span></span> = <span class="vec"><span>c</span><span>0</span></span> + <span class="vec"><span>0</span><span>d</span></span>. Rule 3 splits det into four determinants, one for each choice of piece:</p>
 <div class="worked"><div class="row">det <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>a</span><span>b</span><span>c</span><span>d</span></span> = det <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>a</span><span>0</span><span>c</span><span>0</span></span> + det <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>a</span><span>0</span><span>0</span><span>d</span></span> + det <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>b</span><span>c</span><span>0</span></span> + det <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>b</span><span>0</span><span>d</span></span></div><div class="row">The first and last have a zero column, so their det is 0 (det Aᵀ = det A turns it into a zero row)</div><div class="row">Pull the numbers out of the rows (rule 3): &nbsp; ad · det <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>1</span></span> + bc · det <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>1</span><span>0</span></span></div><div class="row">= ad · 1 + bc · (−1) = ad − bc &nbsp; (rule 1, and rule 2: <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>1</span><span>0</span></span> is I with its rows swapped)</div></div>
 <p>The same splitting works for 3 by 3. Split each row into 3 pieces, one entry each. Any choice that takes two entries from the same column leaves a zero column, so it gives 0. What survives are the 6 choices with one entry in every row and every column. Each is a product of three entries times the det of I with its rows reordered, which is +1 or −1 by rule 2.</p>
-<div class="worked"><div class="row"><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>1</span><span>2</span><span>4</span></span>: &nbsp; 3·4 − 1·2 = 12 − 2 = 10</div></div>
+<p>For example, the 2 by 2 formula on <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>1</span><span>2</span><span>4</span></span>:</p>
+<div class="worked"><div class="row">3·4 − 1·2 = 12 − 2 = 10</div></div>
 <h3>Expanding a 3 by 3 along row 1</h3>
 <p>aᵢⱼ is the entry in row i, column j. Take each entry of row 1 and cross out its row and column. The 2 by 2 left over is its <b>minor</b>. Multiply entry × minor, with signs + − +:</p>
 <div class="worked"><div class="row">det A = a₁₁(a₂₂a₃₃ − a₂₃a₃₂) − a₁₂(a₂₁a₃₃ − a₂₃a₃₁) + a₁₃(a₂₁a₃₂ − a₂₂a₃₁)</div></div>
@@ -113,11 +114,11 @@ C = np.array([[2., 0., 1.],
               [1., 3., 2.],
               [1., 1., 2.]])
 # C is just this matrix&#x27;s name here (not slide 7&#x27;s cofactor matrix)
-a, b, c = C[0]                  # row 1 (Python counts from 0: C[1,1] is a₂₂)
+a11, a12, a13 = C[0]            # row 1 (Python counts from 0: C[1,1] is a₂₂)
 
-d = (a * (C[1,1]*C[2,2] - C[1,2]*C[2,1])
-     - b * (C[1,0]*C[2,2] - C[1,2]*C[2,0])
-     - c * (C[1,0]*C[2,1] - C[1,1]*C[2,0]))   # your turn: one sign is wrong (+ − + across row 1)
+d = (a11 * (C[1,1]*C[2,2] - C[1,2]*C[2,1])
+     - a12 * (C[1,0]*C[2,2] - C[1,2]*C[2,0])
+     - a13 * (C[1,0]*C[2,1] - C[1,1]*C[2,0]))   # your turn: one sign is wrong (+ − + across row 1)
 
 print(&quot;cofactors give&quot;, d, &quot;  NumPy says&quot;, np.linalg.det(C))
 table((&quot;C&quot;, C), (&quot;det&quot;, np.array([[d]])))</textarea>
