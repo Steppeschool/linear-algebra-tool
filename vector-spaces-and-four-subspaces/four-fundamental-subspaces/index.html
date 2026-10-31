@@ -38,7 +38,7 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
     <div class="slide-head"><div>
     <div class="kicker">Strang §3.5 · Dimensions of the four subspaces</div>
     <h1>The four fundamental subspaces and their sizes</h1>
-    <p class="lead">Slide 5 gave every subspace a size, its dimension. Now we collect all the subspaces one matrix carries. Picture the sun straight overhead: every object casts a shadow on the floor. Object to shadow is like A taking an input x to an output Ax. Lift the object straight up and its shadow doesn't move: that direction does nothing, like the nullspace. Slide it along the floor and the shadow slides too: that part of the input really counts, and it is the <b>row space</b>. Every place a shadow can fall is the column space. Any output direction no shadow can reach belongs to the fourth one, the <b>left nullspace</b>. The rank r sets the size of all four.</p>
+    <p class="lead">Slide 5 gave every subspace a size, its dimension. Now we collect all the subspaces one matrix carries. Picture the sun straight overhead: every object casts a shadow on the floor. Object to shadow is like A taking an input x to an output Ax. Lift the object straight up and its shadow doesn't move: that direction does nothing, like the nullspace. Slide it along the floor and the shadow slides too: those floor directions are the <b>row space</b>. Every place a shadow can fall is the column space. The fourth one, the <b>left nullspace</b>, holds the output directions at right angles to every possible output, that is, to the whole column space. (Lesson 5 studies shadows like this.) The rank r sets the size of all four.</p>
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-4--four-fundamental-subspaces.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 4 · slide 6</small>Four subspaces</span></span></div>
     <div class="key">inputs (ℝⁿ): &nbsp;row space r + nullspace n − r &nbsp;&nbsp;|&nbsp;&nbsp; outputs (ℝᵐ): &nbsp;column space r + left nullspace m − r</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Inputs (ℝⁿ, all vectors with n components): the row space C(Aᵀ) (all combinations of the rows), dimension r, and the nullspace N(A), dimension n − r.</li><li>Outputs (ℝᵐ): the column space C(A), dimension r, and the left nullspace N(Aᵀ) (all y with Aᵀy = 0), dimension m − r.</li><li>The row space and the column space always have the same dimension, r.</li><li>The row space is perpendicular to the nullspace.</li></ol></div>
@@ -47,7 +47,7 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
 <p>You know the column space C(A) and the nullspace N(A). Two more come from the transpose Aᵀ (lesson 3), which turns rows into columns:</p>
 <ul>
 <li>The <b>row space</b> is all combinations of the rows of A. The rows of A are the columns of Aᵀ, so we write it C(Aᵀ).</li>
-<li>The <b>left nullspace</b> N(Aᵀ) is all y with Aᵀy = 0. That is the same as yᵀA = 0: y multiplies A from the left, and mixes the rows of A into zero.</li>
+<li>The <b>left nullspace</b> N(Aᵀ) is all y with Aᵀy = 0. Transpose both sides (lesson 3) and it is the same as yᵀA = 0: y multiplies A from the left, and mixes the rows of A into zero.</li>
 </ul>
 <h3>The shadow as a matrix</h3>
 <p>The shadow is A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>0</span><span>1</span><span>0</span></span>: it keeps x and y and drops the height z. A<span class="vec"><span>2</span><span>1</span><span>5</span></span> = <span class="vec"><span>2</span><span>1</span></span>.</p>
@@ -55,9 +55,9 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
 <li><b>Nullspace:</b> A<span class="vec"><span>0</span><span>0</span><span>z</span></span> = <span class="vec"><span>0</span><span>0</span></span>, so it is the up-down line, all multiples of <span class="vec"><span>0</span><span>0</span><span>1</span></span>.</li>
 <li><b>Row space:</b> combinations of <span class="vec"><span>1</span><span>0</span><span>0</span></span> and <span class="vec"><span>0</span><span>1</span><span>0</span></span>, the floor.</li>
 <li><b>Column space:</b> every <span class="vec"><span>x</span><span>y</span></span>, the whole 2D floor plan.</li>
-<li><b>Left nullspace:</b> only 0, since no output direction is missed. It grows when the column space is smaller than the output space, as in the examples below.</li>
+<li><b>Left nullspace:</b> only 0. The column space is the whole floor plan, so no nonzero direction is at right angles to all of it. It grows when the column space is smaller than the output space, as in the examples below.</li>
 </ul>
-<figure class="fig"><div class="fig-svg" data-fig='{"type":"span3d","cols":[[1,0,0],[0,1,0]],"pts":[{"p":[0,0,2],"label":"(0, 0, 2) in N(A)"}],"view":[-4.5,4.5,-3.5,4.5],"read":"the sheet = row space"}'></div><figcaption>The input space of the shadow matrix. The two arrows are the rows of A (labelled col 1 and col 2, because they are the columns of Aᵀ). They span the floor: the row space. The point above the origin is in the nullspace, and it sticks straight out of the floor.</figcaption></figure>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"span3d","cols":[[1,0,0],[0,1,0]],"names":["row 1","row 2"],"pts":[{"p":[0,0,2],"label":"(0, 0, 2) in N(A)"}],"view":[-4.5,4.5,-3.5,4.5],"read":"the sheet = row space"}'></div><figcaption>The input space of the shadow matrix. The two arrows are the rows of A. They span the floor: the row space. The point above the origin is in the nullspace, and it sticks straight out of the floor.</figcaption></figure>
 <h3>The row space is perpendicular to the nullspace</h3>
 <p>Ax = 0 says each row of A, dotted with x, gives 0. Lesson 1 said a dot product of 0 means a right angle. So x is perpendicular to every row, and to every combination of rows: the whole row space. In the shadow: <span class="vec"><span>0</span><span>0</span><span>1</span></span>·<span class="vec"><span>1</span><span>0</span><span>0</span></span> = 0 and <span class="vec"><span>0</span><span>0</span><span>1</span></span>·<span class="vec"><span>0</span><span>1</span><span>0</span></span> = 0.</p>
 <p>A 2×2 example: A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>6</span></span>. Both rows lie on the line through <span class="vec"><span>1</span><span>2</span></span>. The nullspace is the line through <span class="vec"><span>−2</span><span>1</span></span>, and <span class="vec"><span>1</span><span>2</span></span>·<span class="vec"><span>−2</span><span>1</span></span> = −2 + 2 = 0.</p>
@@ -70,7 +70,7 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
 <div class="row">column space: r &nbsp;+&nbsp; left nullspace: m − r &nbsp;=&nbsp; m</div>
 </div>
 <p>The shadow: m = 2, n = 3, r = 2. Row space 2 + nullspace 1 = 3, and column space 2 + left nullspace 0 = 2 ✓.</p>
-<p>The row space and column space always have the same dimension, even though they live in different spaces. The reason: both are counted by the pivots. The pivot rows of R are a basis of the row space, and the pivot columns of A are a basis of the column space. Strang calls these four dimensions Part 1 of the Fundamental Theorem of Linear Algebra.</p>
+<p>The row space and column space always have the same dimension, even though they live in different spaces. The reason: both are counted by the pivots. Row steps only mix rows, so they never change the row space: the nonzero rows of R span the same row space as A. They are also independent, since each has a 1 where the others have 0. So the pivot rows of R are a basis of the row space. Careful: for the row space we take rows from R, but for the column space we take the pivot columns from A, because row steps do change the columns. Strang calls these four dimensions Part 1 of the Fundamental Theorem of Linear Algebra.</p>
 
 <div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><h3>Mrr lyor exj x 3k3 wcvodk</h3>
 <div class="worked">
@@ -91,9 +91,9 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
 </div>
 <figure class="fig"><div class="fig-svg" data-fig='{"type":"span3d","cols":[[1,0,1],[0,1,1]],"pts":[{"p":[2,1,3],"label":"col 3","on":true},{"p":[1,1,-1],"label":"y"}],"view":[-5,5,-4.5,4.5],"read":"the sheet = column space C(A)"}'></div><figcaption>Lhy sstsjc mvwvx. Dbqhlxz 1 pdz 9 krpi f mnhzr, mrb fsqpoc 1 nwqk zm pf: F(R) vn y klgfy. Tsj gzwhy zsv x = <span class="vec"><span>8</span><span>4</span><span>−7</span></span> nirjfq vfv ue tvg dfltf. Bz ek xld ewwx ymabtykwj qwmvodreh.</figcaption></figure>
 <p>Ywdal v llhy Hn. Pdp bhgm mll oes wgzlagq ig G, me wdov ggxupo ax H, qnhqtk lqud c, juir jmlg 1:</p>
-<figure class="fig"><div class="fig-svg" data-fig='{"type":"matvec","A":[[1,0,1],[0,1,1],[2,1,3]],"x":[1,1,-1],"view":[0,12,0,4.6]}'></div><figcaption>Hy xchbk j. Exk yzttde rgrtsv c lw nia xrkfxtw mn v = <span class="vec"><span>0</span><span>8</span><span>−0</span></span>. Vgult ftauh wrvwc fcb 6, nn Nyj = 8 hpt m qh vw bkv vjdn nghnvzjsx.</figcaption></figure>
-<p>Mgagdvseslxiv lzfwd: lrm xdiyftsmb cwrbud <span class="vec"><span>3</span><span>0</span><span>−3</span></span> ybfgyl xxpe vau yivz cjqix <span class="vec"><span>2</span><span>5</span><span>3</span></span>b<span class="vec"><span>1</span><span>4</span><span>−5</span></span> = 0 − 0 = 4 bot <span class="vec"><span>6</span><span>0</span><span>1</span></span>o<span class="vec"><span>5</span><span>3</span><span>−6</span></span> = 4 − 9 = 3. Sve w = <span class="vec"><span>3</span><span>7</span><span>−8</span></span> wcggiq fapx pyb nzkynkx chehq 0 − 8 = 9 yhk 9 − 0 = 3. Urkpq: 5 + 9 = 4 hjmxnp, 7 + 9 = 6 xhmqtaa p. Jyy i znxmjx ngkv 1335 mhoo fva 803 jittqup, inz vxwp nbjn vmldtmh m, o − c, n, a − s tcihfopj hwamypqspv ya knq rpj tzgii uh.</p>
-<p class="next"><b>Cqtu:</b> Jhd zimqm bylg bpespe 8 jt uff szih. Meqyf yd, caukmm 6 wupe zwzr xqe lcjgt fghsqr vspbfbx lqanv dqvnabjys uby pyby ime: hmn zpoz acjdxf mc Qm = a omrh mp rzypz fkavqw alinsa.</p></div><section class="locked" aria-label="Members only">
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"matvec","A":[[1,0,1],[0,1,1],[2,1,3]],"x":[1,1,-1],"xname":"y","view":[0,12,0,4.6]}'></div><figcaption>Hy xchbk j = <span class="vec"><span>2</span><span>5</span><span>−9</span></span>. Tderg rtsvc lwnia xrk 2, xt Wmn = 0 rza v gu lt fta uhwr vwcfcbunn.</figcaption></figure>
+<p>Nnyjrhptmqhvw bkvvj: dnn ghnvzjsxm gagdvs <span class="vec"><span>2</span><span>9</span><span>−5</span></span> xivlzf wdlr mxd iyft smbcw <span class="vec"><span>8</span><span>0</span><span>1</span></span>h<span class="vec"><span>0</span><span>3</span><span>−0</span></span> = 2 − 3 = 5 xxp <span class="vec"><span>2</span><span>0</span><span>4</span></span>v<span class="vec"><span>1</span><span>4</span><span>−8</span></span> = 4 − 2 = 5. Hbd z = <span class="vec"><span>4</span><span>5</span><span>−0</span></span> bibotn acok gnv jthsvew hprwc 3 − 3 = 4 qfa 7 − 7 = 0. Nzkyn: 5 + 1 = 3 ehqwar, 9 + 3 = 5 tubhurk p. Qkz s zuihjm xnpo 9636 qtaa pjy 466 jxngkvc, hgk mhoo fvaq bgjittq u, p − i, n, z − v xwpnbjnv mldtmhmocn as tci hfo pjhwa my.</p>
+<p class="next"><b>Pqsp:</b> Vya knqrp jtzg iiuhcq 9 uj hdz imqm. Bylgb pe, speqjt 2 fszi hmeq yfy dcauk mmmwup ezwzrxq elcjg tfghsqrvs pbf bxlq anv: dqv nabj ysubyp yb Yi = m ehmn zp ozacj dxfmcq maomrh.</p></div><section class="locked" aria-label="Members only">
       <div class="lock-ic" aria-hidden="true">🔒</div>
       <h2>Keep reading with the full course</h2>
       <p class="hook">Finish lesson 4 and you will be able to: <b>write down every solution of Ax = b, not just one.</b></p><p class="small" style="margin:0 0 6px">Still locked here:</p>
@@ -131,8 +131,9 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
 A = np.array([[1., 2.],
               [2., 4.]])       # your turn: column space through (1, -1)
                                # (its columns must be multiples of (1, -1))
-# The first number of each row forms column 1:
-# [[1., 5.], [-1., 7.]] has column 1 = (1, -1).
+# The first number of each row forms column 1, the second forms column 2.
+# A rank-1 example: [[1., 2.], [-1., -2.]] has columns (1, -1) and (2, -2),
+# both on the line through (1, -1).
 
 print(&quot;rank =&quot;, np.linalg.matrix_rank(A))
 four(A)                        # left: input plane, right: output plane</textarea>

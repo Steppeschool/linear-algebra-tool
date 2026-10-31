@@ -10,7 +10,7 @@
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Start with A and I written side by side: [A | I].</li><li>Eliminate below the pivots, then above them, then divide each row by its pivot.</li><li>When the left half becomes I, the right half is A⁻¹.</li><li>If a zero row appears on the left, A has no inverse.</li><li>To solve Ax = b, use elimination (A = LU), not A⁻¹: it is faster and more accurate.</li></ol></div>
     <div class="prose">
 <h3>Why the right half becomes A⁻¹</h3>
-<p>Each row step is a matrix E₁, E₂, and so on (lesson 2). Dividing a row by its pivot is a step matrix too. Multiply all the steps, last step on the left: E = ⋯E₃E₂E₁. The steps turn A into I, so EA = I, and that says E = A⁻¹. On the right, the same steps turn I into EI = E, which is A⁻¹. The right half is the friend's notebook.</p>
+<p>Each row step is a matrix E₁, E₂, and so on (lesson 2). Dividing a row by its pivot is a step matrix too: <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>½</span><span>0</span><span>0</span><span>1</span></span> halves row 1 and keeps row 2. Multiply all the steps, last step on the left: E = ⋯E₃E₂E₁. The steps turn A into I, so EA = I, and that says E = A⁻¹. On the right, the same steps turn I into EI = E, which is A⁻¹. The right half is the friend's notebook.</p>
 <h3>The three stages</h3>
 <ul>
 <li><b>Forward:</b> clear the entries below each pivot, as in lesson 2.</li>
@@ -60,7 +60,7 @@
 <figure class="fig"><div class="fig-svg" data-fig='{"type":"steps","bar":2,"steps":[{"M":[[1,2,1,0],[2,4,0,1]],"note":"[A | I]","piv":[[0,0]]},{"M":[[1,2,1,0],[0,0,-2,1]],"row":1,"note":"row 2 − 2·row 1: a zero row on the left","piv":[[0,0]]}],"view":[0,11,0,3.6]}'></div><figcaption>Row 2 of the left half becomes all zeros. No row step can turn it into a row of I, so A has no inverse.</figcaption></figure>
 <p>The second pivot is 0 and no lower row can help. The left half can never become I, so there is no A⁻¹. This is the same test as slide 1: a zero pivot means no inverse.</p>
 <h3>Think with the inverse, compute without it</h3>
-<p>Finding A⁻¹ takes about three times the work of factoring A = LU, and it adds rounding error. So to solve Ax = b, use elimination. The inverse is great for reasoning, as in x = A⁻¹b. It is rarely the best way to compute.</p>
+<p>Finding A⁻¹ takes about three times the work of factoring A = LU, and it adds more rounding error: tiny mistakes that creep in because a computer keeps only about 16 digits of each number. So to solve Ax = b, use elimination. The inverse is great for reasoning, as in x = A⁻¹b. It is rarely the best way to compute.</p>
 <p class="next"><b>Next:</b> Gauss-Jordan reads A row by row. Slide 5 turns the rows of a matrix into its columns, the transpose, and meets the matrices that stay the same when you do that.</p>
     </div>
     <h2 class="practice-h">Examples</h2><div class="examples"><section class="example"><h3>Example 1 · A 2 by 2 by hand</h3>

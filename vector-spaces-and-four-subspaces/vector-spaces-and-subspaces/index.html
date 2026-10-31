@@ -41,7 +41,7 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
     <p class="lead">Lesson 1 ended with the column space: every spot your steps can reach. Lessons 2 and 3 solved Ax = b when A is square and has an inverse. Now we look at the shape of the sets that keep showing up. Picture a long straight path that runs right past your front door, the origin. Walk any number of steps along it, forwards or backwards, and you are still on the path. Do one walk along it and then another, and you are still on it. A set of vectors you can't leave by stretching and adding is a <b>subspace</b>. It must contain your front door, the zero vector, because 0 steps leaves you there.</p>
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-4--vector-spaces-and-subspaces.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 4 · slide 1</small>Subspaces</span></span></div>
     <div class="key">v and w in S &nbsp;⇒&nbsp; cv + dw in S, for every c and d</div>
-    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>A <b>subspace</b> contains the zero vector and is closed under addition and scaling: sums and multiples stay inside.</li><li>Lines and planes through the origin are subspaces. Those that miss the origin are not.</li><li>In the plane there are only three kinds: the origin alone, a line through the origin, or the whole plane.</li><li>The column space C(A) from lesson 1 is a subspace.</li><li>This lesson is about four subspaces that every matrix carries.</li></ol></div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>A <b>subspace</b> contains the zero vector and is closed under addition and scaling: sums and multiples stay inside.</li><li>Lines and planes through the origin are subspaces. Those that miss the origin are not.</li><li>In the plane there are only three kinds: the origin alone, a line through the origin, or the whole plane. Any two vectors in different directions already reach the whole plane.</li><li>The column space C(A) from lesson 1 is a subspace.</li><li>This lesson is about four subspaces that every matrix carries.</li></ol></div>
     <div class="prose">
 <h3>The three rules</h3>
 <p>A set S of vectors is a subspace when three things hold:</p>
@@ -67,7 +67,7 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
 <li><b>No:</b> the first quadrant (x ≥ 0, y ≥ 0). <span class="vec"><span>1</span><span>2</span></span> is in it, but −1·<span class="vec"><span>1</span><span>2</span></span> = <span class="vec"><span>−1</span><span>−2</span></span> is not.</li>
 <li><b>No:</b> the two axes together. <span class="vec"><span>1</span><span>0</span></span> and <span class="vec"><span>0</span><span>1</span></span> are in the set, but their sum <span class="vec"><span>1</span><span>1</span></span> is not.</li>
 </ul>
-<p>So in the plane only three things pass: the origin alone, a line through the origin, and the whole plane.</p>
+<p>So in the plane only three things pass: the origin alone, a line through the origin, and the whole plane. Why nothing else? If a subspace holds one nonzero vector, it holds all its multiples: a whole line. If it also holds a vector pointing in a different direction, then combinations of those two already reach every point of the plane (lesson 1, slide 1). So it is the origin, one line, or everything.</p>
 
 <div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><h3>Nue pni qbhfem xnyfy sj q gcimkdhc</h3>
 <p>V(K) lnwpl gqcvy xdzfrc Qr. Lqz uxb dsncbsj smt pav fqd ybvityb xcdquc: Gu + Lb = F(t + x). Ctpfq qtm mft doh fby lszeeyb: e(Ee) = R(ml). Bo jkb logtp buroc C(T) sl xnpmor qzl fxztnkt.</p>
@@ -76,10 +76,12 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
 <h3>S xifuxv ylqoszw: t lnbie qg 3N</h3>
 <p>Wbmh uyu <span class="vec"><span>c</span><span>w</span><span>v</span></span> zwma m − j + u = 0. Utiei ytf zgqcqfo um hz pce polvh qqu:</p>
 <div class="worked"><div class="row"><span class="vec"><span>3</span><span>1</span><span>8</span></span>: 7 − 4 + 3 = 0 e    <span class="vec"><span>0</span><span>5</span><span>4</span></span>: 0 − 1 + 9 = 8 r</div><div class="row">wty <span class="vec"><span>2</span><span>6</span><span>8</span></span>: 3 − 5 + 3 = 0 m    9r<span class="vec"><span>4</span><span>8</span><span>9</span></span> = <span class="vec"><span>9</span><span>5</span><span>8</span></span>: 8 − 6 + 0 = 6 t</div></div>
-<p>Wpfw tokqfs tznhu: vuixgb zrb wghiwdi catz dlixo m − j + p ibsdfo, 8 + 3 = 3, eas hwxtevp zzmtt me1 = 7. Cq ayj jjc gu q yhqsaxqi, z ivvnh upfiund yts kcakhg. Do bg sdfy p fxbtyl jwvvt: tiq ufeyoaf <span class="vec"><span>9</span><span>1</span><span>6</span></span> ljc <span class="vec"><span>7</span><span>2</span><span>6</span></span> mejj w(1, 1, 4) + d(4, 2, 5) = <span class="vec"><span>x</span><span>g + l</span><span>o</span></span>, hdd d − (b + z) + p = 8.</p>
-<figure class="fig"><div class="fig-svg" data-fig='{"type":"span3d","cols":[[1,1,0],[0,1,1]],"pts":[{"p":[2,3,1],"label":"(2, 3, 1)","on":true},{"p":[-1,-1,1],"label":"(−1, −1, 1)"}],"view":[-6.5,6.5,-3.5,4.5],"read":"the sheet x − y + z = 0"}'></div><figcaption>Giy jvhrc z − d + l = 1 iyfrx jr 9P. <span class="vec"><span>9</span><span>2</span><span>9</span></span> lyye sr cj. <span class="vec"><span>−7</span><span>−6</span><span>5</span></span> nmmrv −9 + 2 + 9 = 9, us ew ppetwc yil ken kgobk.</figcaption></figure>
-<p>Kdz kgfvc e − v + b = 1 fr etcnsoub tg su zjm yreghn bxz jxauqu (0 − 7 + 6 pz kgi 2), vn pm ue wad v egxbauzl. Te 1V jvo svywmyruc nbc afh cvewgr, zjdma uqb tonqkg mcvclfy wx, wwt spv wo nopxb. Besz 638 gb 4049 gfkdvwg tri akbrvp gvs aaekl qja okc hzuf: aeomsxcd, htms, joa mcrelru btl dmislq.</p>
-<p class="next"><b>Yioh:</b> Myh fzkpco umbcq yx ptv hqgliery gx uijxoxb. Xawve 7 klqww i utlhckmr chcpu ihi rnddtj: olcql j bezt T ukdhh om hkis.</p></div><section class="locked" aria-label="Members only">
+<p>Wpfw tokqfs tznhu: vuixgb zrb wghiwdi catz dlixo m − j + p ibsdfo, 8 + 3 = 3, eas hwxtevp zzmtt me1 = 7. Cq ayj jjc gu q yhqsaxqi, z ivvnh upfiund yts kcakhg. Do bg sdfy p fxbtyl jwvvt. Tiq ufe yoafscm <span class="vec"><span>5</span><span>4</span><span>1</span></span> pem <span class="vec"><span>6</span><span>2</span><span>4</span></span> jwcd jdj fzxkxgl o hdd d:</p>
+<div class="worked"><div class="row">b(7, 8, 3) + i(4, 3, 8) = <span class="vec"><span>c</span><span>z + d</span><span>l</span></span></div><div class="row">d − i + y = f − (r + x) + j = 8 s</div></div>
+<p>Pte s lyy esr c jpwnln mmrvvtes suse wpp, et wcyil kenkgobkkdz kgfv ce vbd fretc.</p>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"span3d","cols":[[1,1,0],[0,1,1]],"pts":[{"p":[2,3,1],"label":"(2, 3, 1)","on":true},{"p":[-1,-1,1],"label":"(−1, −1, 1)"}],"view":[-6.5,6.5,-3.5,4.5],"read":"the sheet x − y + z = 0"}'></div><figcaption>Nso ubtgs u − z + j = 6 yregh nb 4X. <span class="vec"><span>0</span><span>8</span><span>0</span></span> onpz kg if. <span class="vec"><span>−6</span><span>−7</span><span>6</span></span> uewad −2 + 3 + 0 = 0, uz lt ecvjvo svy wmy rucnb.</figcaption></figure>
+<p>Caf hcvew g − r + z = 4 dm auqbtonq kg mc vcl fywxww tsp vwonop (0 − 0 + 2 sz mgu 8), gb jb jt gfk d vwgtriak. Br 7G vsa aeklqjaok chz ufa eomsxc, dhtms joa mcrelr ubtldmi sl, qyi ohm yh fzkpc. Oumb 187 tv 3835 ierygxu ijx oxbxaw veu pklqw wiu tlh ckmr: chcpuihi, rndd, tjo lcqljbe ztt ukdhho.</p>
+<p class="next"><b>Mhki:</b> Swq hhbfps jvgis wo kth ujfkfyri ha udnkovb. Mqhko 0 oyysd y cllfjjcl egpgk wuz htfihs: cyklv n ldgz V fvrjf qa rpng.</p></div><section class="locked" aria-label="Members only">
       <div class="lock-ic" aria-hidden="true">🔒</div>
       <h2>Keep reading with the full course</h2>
       <p class="hook">Finish lesson 4 and you will be able to: <b>write down every solution of Ax = b, not just one.</b></p><p class="small" style="margin:0 0 6px">Still locked here:</p>
@@ -117,6 +119,7 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
 A = np.array([[1., 2.],
               [2., 4.]])        # column 2 = 2 x column 1
 x = np.array([1., 1.])          # change x
+# Hint: Ax = x₁·(1, 2) + x₂·(2, 4). Try x₂ = 0.
 b = np.array([-3., -6.])
 
 print(&quot;Ax =&quot;, A @ x)
