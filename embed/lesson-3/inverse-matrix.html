@@ -3,50 +3,71 @@
   <article class="page">
     <div class="slide-head"><div>
     <div class="kicker">Strang §2.5 · Inverse matrices</div>
-    <h1>The inverse undoes A.</h1>
-    <p class="lead">The inverse of A undoes A. Apply A, then A⁻¹, and every vector is back where it started. If the inverse exists, it solves Ax = b in one step: x = A⁻¹b.</p>
+    <h1>The inverse matrix: undo what A does</h1>
+    <p class="lead">Lesson 2 solved Ax = b by elimination, one row step at a time. Now we ask a bigger question: is there a matrix that simply undoes A? You know this from money. Changing euros into dollars multiplies by the exchange rate, and changing back divides by it, so you end with the euros you started with. For numbers, 3 is undone by 1/3, because (1/3)·3 = 1. For matrices, the <b>inverse</b> A⁻¹ does the same job: A turns an input x into an output Ax, and A⁻¹ turns that output back into x. The matrix that plays the part of the number 1 is the identity I, which changes nothing. When A⁻¹ exists, it solves Ax = b in one step: x = A⁻¹b. Some matrices cannot be undone, and this slide shows how to spot them.</p>
     </div><span class="thumb slide-art"><img src="https://linearalgebra.steppeschool.com/assets/cards/lesson-3--inverse-matrix.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 3 · slide 1</small>The inverse</span></span></div>
     <div class="key">A⁻¹A = I &nbsp;&nbsp;&nbsp; Ax = b &nbsp;⇔&nbsp; x = A⁻¹b</div>
-    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>A⁻¹A = I and AA⁻¹ = I, where I is the identity matrix.</li><li>If A is invertible, Ax = b has exactly one solution, x = A⁻¹b.</li><li>A matrix that sends two different vectors to the same output cannot be undone.</li><li>An n by n matrix A is invertible ⇔ it has n nonzero pivots ⇔ its columns are independent ⇔ det A ≠ 0.</li></ol></div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>The <b>inverse</b> A⁻¹ undoes A: A⁻¹A = I and AA⁻¹ = I, where I is the identity matrix.</li><li>If A has an inverse, Ax = b has exactly one solution, x = A⁻¹b.</li><li>A matrix that sends two different inputs to the same output cannot be undone.</li><li>A square matrix has an inverse exactly when all its pivots are nonzero, or, in the same words, when its columns are independent.</li></ol></div>
     <div class="prose">
-<h3>Undo what A does</h3>
-<p>A takes an input x and gives an output Ax. The inverse goes the other way: give it the output, and it hands back the input. Think of a lock and its key: one turn locks, the opposite turn unlocks. Do A, then A⁻¹, and every vector is back where it started.</p>
-<p>"Nothing has moved" is the <b>identity matrix</b> I. It has 1s on the diagonal and 0s elsewhere. Ix = x for every vector x.</p>
-<h3>Why the inverse solves equations</h3>
-<p>Start with Ax = b. Multiply both sides on the left by A⁻¹. Since A⁻¹A = I, the left side is just x. So x = A⁻¹b. If the inverse exists, that is the one and only solution.</p>
-<h3>Example: undoing a shear</h3>
-<div class="worked">
-<div>The shear S = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>0</span><span>1</span></span> slides each point to the right by its height.</div>
-<div>To undo it, slide each point back to the left by the same amount: S⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>0</span><span>1</span></span></div>
-<div class="row">S⁻¹S = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>0</span><span>1</span></span><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>0</span><span>1</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>1</span></span> ✓</div>
-</div>
+<h3>Undo for numbers first</h3>
+<p>Multiplying by 3 is undone by multiplying by 1/3. The pair cancels and leaves 1, the number that changes nothing:</p>
+<div class="worked"><div class="row">(1/3)·3 = 1 &nbsp;&nbsp; so &nbsp; 3x = 12 &nbsp;→&nbsp; x = (1/3)·12 = 4</div></div>
+<p>The number 0 has no undo: 0·x is 0 for every x, so from the answer 0 you can never tell what x was. Matrices work the same way, with one twist: many matrices besides the zero matrix have no undo either.</p>
+<h3>The identity: the matrix that changes nothing</h3>
+<p>For matrices, the role of 1 is played by the <b>identity matrix</b> I from lesson 2: 1s on the diagonal and 0s everywhere else. I times any vector gives the same vector back:</p>
+<div class="worked"><div class="row">I·<span class="vec"><span>4</span><span>7</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>1</span></span><span class="vec"><span>4</span><span>7</span></span> = <span class="vec"><span>1·4 + 0·7</span><span>0·4 + 1·7</span></span> = <span class="vec"><span>4</span><span>7</span></span></div></div>
+<p>So "A⁻¹ undoes A" means: A⁻¹ times A is I. For a square matrix, the undo also works the other way round, so AA⁻¹ = I too.</p>
+<h3>Example: undoing a slide to the right</h3>
+<p>Take S = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>0</span><span>1</span></span>. Multiply it by a vector <span class="vec"><span>x</span><span>y</span></span>, by rows as in lesson 1: S·<span class="vec"><span>x</span><span>y</span></span> = <span class="vec"><span>x + y</span><span>y</span></span>. The top number grows by y, the bottom one stays. Start from <span class="vec"><span>1</span><span>2</span></span>:</p>
+<div class="worked"><div class="row">S·<span class="vec"><span>1</span><span>2</span></span> = <span class="vec"><span>1 + 2</span><span>2</span></span> = <span class="vec"><span>3</span><span>2</span></span></div></div>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"matvec","A":[[1,1],[0,1]],"x":[1,2],"view":[0,11,0,3.4]}'></div><figcaption>S works on <span class="vec"><span>1</span><span>2</span></span> one row at a time. Row 1 adds both numbers, row 2 keeps the second one. The output is <span class="vec"><span>3</span><span>2</span></span>.</figcaption></figure>
+<p>To undo S, take the bottom number away from the top one again: <span class="vec"><span>x</span><span>y</span></span> goes to <span class="vec"><span>x − y</span><span>y</span></span>. That is the matrix S⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>0</span><span>1</span></span>. Feed it the output <span class="vec"><span>3</span><span>2</span></span>:</p>
+<div class="worked"><div class="row">S⁻¹·<span class="vec"><span>3</span><span>2</span></span> = <span class="vec"><span>3 − 2</span><span>2</span></span> = <span class="vec"><span>1</span><span>2</span></span> &nbsp;✓ back where we started</div></div>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"matvec","A":[[1,-1],[0,1]],"x":[3,2],"view":[0,11,0,3.4]}'></div><figcaption>Now S⁻¹ works on the output <span class="vec"><span>3</span><span>2</span></span>. Row 1 takes the 2 away again, and out comes the starting vector <span class="vec"><span>1</span><span>2</span></span>.</figcaption></figure>
+<p>That worked for one vector. To be sure it works for every vector, multiply the two matrices, as in lesson 2. The product should be I:</p>
+<div class="worked"><div class="row">S⁻¹S = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>0</span><span>1</span></span><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>0</span><span>1</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1 + 0</span><span>1 − 1</span><span>0 + 0</span><span>0 + 1</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>1</span></span> ✓</div></div>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"matmul","A":[[1,-1],[0,1]],"B":[[1,1],[0,1]],"view":[0,11,0,3.4]}'></div><figcaption>Each row of S⁻¹ meets each column of S. All four numbers come out as the identity: 1s on the diagonal, 0s elsewhere.</figcaption></figure>
 <p>In the lab, follow v = <span class="vec"><span>1</span><span>2</span></span>. S moves it to <span class="vec"><span>3</span><span>2</span></span>. Your S⁻¹ should bring it back.</p>
+<h3>Why the inverse solves equations</h3>
+<p>Start with Ax = b and multiply both sides on the left by A⁻¹. Since A⁻¹A = I and Ix = x, the left side is just x:</p>
+<div class="worked"><div class="row">Ax = b &nbsp;→&nbsp; A⁻¹Ax = A⁻¹b &nbsp;→&nbsp; x = A⁻¹b</div></div>
+<p>Try it with S. To solve Sx = <span class="vec"><span>5</span><span>2</span></span>, multiply <span class="vec"><span>5</span><span>2</span></span> by S⁻¹:</p>
+<div class="worked"><div class="row">x = S⁻¹·<span class="vec"><span>5</span><span>2</span></span> = <span class="vec"><span>5 − 2</span><span>2</span></span> = <span class="vec"><span>3</span><span>2</span></span></div><div class="row">Check: S·<span class="vec"><span>3</span><span>2</span></span> = <span class="vec"><span>3 + 2</span><span>2</span></span> = <span class="vec"><span>5</span><span>2</span></span> ✓</div></div>
+<p>If the inverse exists, this x is the one and only solution.</p>
 <h3>When there is no inverse</h3>
 <p>Some matrices can't be undone. Here is one. Its second column is just twice the first:</p>
 <div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>4</span></span></div></div>
 <p>Feed it two different inputs:</p>
 <div class="worked"><div class="row">A·<span class="vec"><span>2</span><span>0</span></span> = <span class="vec"><span>2</span><span>4</span></span> &nbsp;&nbsp; A·<span class="vec"><span>0</span><span>1</span></span> = <span class="vec"><span>2</span><span>4</span></span></div></div>
-<p>Different inputs, same output. If all you see is <span class="vec"><span>2</span><span>4</span></span>, you can't tell which input made it. So nothing can undo A. A has no inverse.</p>
+<p>Different inputs, same output. If all you see is <span class="vec"><span>2</span><span>4</span></span>, you can't tell which input made it. So nothing can undo A, and A has no inverse. The same happens with A·<span class="vec"><span>2</span><span>−1</span></span> = <span class="vec"><span>2 − 2</span><span>4 − 4</span></span> = <span class="vec"><span>0</span><span>0</span></span>: this input lands on <span class="vec"><span>0</span><span>0</span></span>, just like the input <span class="vec"><span>0</span><span>0</span></span> does.</p>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"combo","v":[1,2],"w":[2,4],"amp":1,"span":"line","view":[-6,6,-6,6]}'></div><figcaption>Every output of A is a combination of its columns <span class="vec"><span>1</span><span>2</span></span> and <span class="vec"><span>2</span><span>4</span></span>. They point the same way, so all outputs land on one line, and many inputs share each output.</figcaption></figure>
 <p>For a square matrix, each of these says the same thing: A <strong>can</strong> be undone.</p>
 <ul>
-<li>Every pivot is nonzero (lesson 2).</li>
-<li>No column is a combination of the others (lesson 1).</li>
-<li>det A ≠ 0 (the next slide, for 2 by 2).</li>
-<li>Ax = 0 only when x = 0.</li>
+<li>Every pivot is nonzero (lesson 2). For A above, row 2 − 2·row 1 gives <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>0</span></span>, so the second pivot is 0.</li>
+<li>The columns are independent: no column is a combination of the others (lesson 1). For A, column 2 = 2·column 1.</li>
+<li>Ax = 0 only when x = 0. For A, x = <span class="vec"><span>2</span><span>−1</span></span> also gives 0.</li>
 </ul>
+<p>So one failed test means all of them fail. The next slide adds a quick number test for 2 by 2 matrices.</p>
+<h3>A bigger example: a 3 × 3 inverse</h3>
+<p>Lesson 2's elimination matrix E₂₁ subtracts 2 times row 1 from row 2. Its undo adds 2 times row 1 back:</p>
+<div class="worked"><div class="row">E₂₁ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>−2</span><span>1</span><span>0</span><span>0</span><span>0</span><span>1</span></span> &nbsp;&nbsp; E₂₁⁻¹ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>2</span><span>1</span><span>0</span><span>0</span><span>0</span><span>1</span></span></div><div class="row">Row 2 of E₂₁⁻¹E₂₁: 2·<span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span></span> + 1·<span class="mx" style="grid-template-columns:repeat(3,auto)"><span>−2</span><span>1</span><span>0</span></span> + 0·<span class="mx" style="grid-template-columns:repeat(3,auto)"><span>0</span><span>0</span><span>1</span></span> = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>0</span><span>1</span><span>0</span></span> ✓</div><div class="row">Rows 1 and 3 of both matrices are rows of I, so they stay <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span></span> and <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>0</span><span>0</span><span>1</span></span>. The product is I.</div></div>
+<p>A stretch is undone by a shrink, entry by entry:</p>
+<div class="worked"><div class="row">D = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>0</span><span>0</span><span>0</span><span>4</span><span>0</span><span>0</span><span>0</span><span>5</span></span> &nbsp;&nbsp; D⁻¹ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>½</span><span>0</span><span>0</span><span>0</span><span>¼</span><span>0</span><span>0</span><span>0</span><span>⅕</span></span> &nbsp;&nbsp; D⁻¹·<span class="vec"><span>2</span><span>4</span><span>5</span></span> = <span class="vec"><span>1</span><span>1</span><span>1</span></span></div></div>
+<p>The idea is the same for a matrix with a thousand rows: A⁻¹ is the matrix whose product with A is I.</p>
+<p class="next"><b>Next:</b> How do we actually find A⁻¹? For a 2 by 2 matrix there is a short recipe, and one number tells at once whether the inverse exists.</p>
     </div>
     <h2 class="practice-h">Examples</h2><div class="examples"><section class="example"><h3>Example 1 · Undo a stretch</h3>
 <p>D = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>0</span><span>0</span><span>5</span></span> stretches x by 2 and y by 5.</p>
 <details class="sol" open><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">D⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>½</span><span>0</span><span>0</span><span>⅕</span></span>: shrink x by 2 and y by 5</div></div></div></details>
 </section><section class="example"><h3>Example 2 · Undo a quarter turn</h3>
-<p>R = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>−1</span><span>1</span><span>0</span></span> turns by 90°.</p>
+<p>R = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>−1</span><span>1</span><span>0</span></span> turns every arrow a quarter turn to the left: R·<span class="vec"><span>x</span><span>y</span></span> = <span class="vec"><span>−y</span><span>x</span></span>, so R·<span class="vec"><span>1</span><span>0</span></span> = <span class="vec"><span>0</span><span>1</span></span>.</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">R⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>−1</span><span>0</span></span> turns back by 90°</div><div class="row">RR⁻¹ = I</div></div></div></details>
 </section><section class="example"><h3>Example 3 · Solve with the inverse</h3>
 <p>Suppose A⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>1</span></span>. Then Ax = b with b = <span class="vec"><span>1</span><span>2</span></span> is solved by one multiplication:</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">x = A⁻¹b = <span class="vec"><span>2·1 + 1·2</span><span>1·1 + 1·2</span></span> = <span class="vec"><span>4</span><span>3</span></span></div></div></div></details>
 </section><section class="example"><h3>Example 4</h3>
 <p>Does <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>6</span><span>1</span><span>3</span></span> have an inverse?</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><p>No. Column 2 = 3·column 1, so the columns lie on one line (det = 2·3 − 6·1 = 0, see slide 2). Two different inputs give the same output, so there is no way back.</p></div></details>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><p>No. Column 2 = 3·column 1, so the columns lie on one line (slide 2 gives a quick number test for this). Two different inputs give the same output, so there is no way back.</p></div></details>
 </section><section class="example"><h3>Example 5</h3>
 <p>The shear <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>3</span><span>1</span></span> slides points up by 3 times their x. Write its inverse.</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><p>Slide them back down: <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>−3</span><span>1</span></span>.</p></div></details>

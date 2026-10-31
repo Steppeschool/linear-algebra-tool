@@ -1,50 +1,73 @@
 ---
 slug: gauss-jordan
 seo_title: Gauss-Jordan Method: Find the Inverse of a Matrix
-description: Put A next to the identity and eliminate until A becomes I. The identity turns into the inverse. Worked 3×3 example with rref in Python. Strang §2.5.
+description: Put A next to the identity and eliminate until A becomes I. The identity turns into the inverse. Worked 2×2 and 3×3 examples, with rref in Python. Strang §2.5.
 kicker: Strang §2.5 · Gauss-Jordan elimination
-title: Eliminate on [A | I] and the inverse appears.
+title: Gauss-Jordan: find A⁻¹ by elimination on [A | I]
 task: Show that 4·K⁻¹ has whole-number entries. In the last line, change ("K_inv", K_inv) to ("4 K_inv", 4 * K_inv).
 preview: {"kind":"table","items":[{"label":"K","M":[[2,-1,0],[-1,2,-1],[0,-1,2]],"piv":[]}]}
 check: isTab(V) && close(lastItem(V), [[3,2,1],[2,4,2],[1,2,3]])
 ---
 <!-- lead -->
-To find A⁻¹ by elimination, write A and the identity side by side. Use row operations to turn A into I. The same operations turn I into A⁻¹.
+Slide 2 gave a recipe for 2 by 2 inverses, and slide 3 showed that a chain of steps is undone by its own steps in reverse. Now we find the inverse of any square matrix, with the elimination from lesson 2. Picture a Rubik's cube. While you solve it, a friend writes down every move. The notes are then a recipe that undoes exactly this scramble. <b>Gauss-Jordan elimination</b> works the same way. Write A and the identity side by side as [A | I]. Do row steps until the left half becomes I, and do every step to the right half too. The right half keeps the record of all the steps, and that record is A⁻¹.
 <!-- key -->
 [ A &nbsp;|&nbsp; I ] &nbsp;→&nbsp; [ I &nbsp;|&nbsp; A⁻¹ ]
 <!-- ideas -->
-<ol class="ideas"><li>Start with A and I written side by side: [A | I].</li><li>Eliminate below the pivots, then above them, then divide each row by its pivot.</li><li>When the left half becomes I, the right half is A⁻¹.</li><li>To solve Ax = b, use elimination (A = LU), not A⁻¹: it is faster and more accurate.</li></ol>
+<ol class="ideas"><li>Start with A and I written side by side: [A | I].</li><li>Eliminate below the pivots, then above them, then divide each row by its pivot.</li><li>When the left half becomes I, the right half is A⁻¹.</li><li>If a zero row appears on the left, A has no inverse.</li><li>To solve Ax = b, use elimination (A = LU), not A⁻¹: it is faster and more accurate.</li></ol>
 <!-- prose -->
-<h3>Think of carbon paper</h3>
-<p>Every row operation you do on A gets copied onto I beside it, like carbon paper. When A has become I, the copy holds all your steps. Together those steps undo A, so the copy is A⁻¹.</p>
-<p>In matrices: each step is a matrix E₁, E₂, and so on (lesson 2). Dividing a row by its pivot is a step matrix too. Multiply all the steps, last step on the left: E = ⋯E₃E₂E₁. The steps turn A into I, so EA = I, and E = A⁻¹. On the right, the same steps turn I into EI = E, which is A⁻¹.</p>
+<h3>Why the right half becomes A⁻¹</h3>
+<p>Each row step is a matrix E₁, E₂, and so on (lesson 2). Dividing a row by its pivot is a step matrix too. Multiply all the steps, last step on the left: E = ⋯E₃E₂E₁. The steps turn A into I, so EA = I, and that says E = A⁻¹. On the right, the same steps turn I into EI = E, which is A⁻¹. The right half is the friend's notebook.</p>
 <h3>The three stages</h3>
 <ul>
 <li><b>Forward:</b> clear the entries below each pivot, as in lesson 2.</li>
 <li><b>Backward:</b> clear the entries above each pivot, from the bottom row up.</li>
 <li><b>Scale:</b> divide each row by its pivot, so the diagonal is all 1s.</li>
 </ul>
-<p>Scaling doesn't disturb the zeros, so you can do it any time. Doing it last keeps the fractions away until the end.</p>
-<p>The result is the <b>reduced row echelon form (rref)</b>. The lab's <code>rref</code> does all three stages.</p>
-<h3>A worked example</h3>
+<p>Scaling doesn't disturb the zeros, so you can do it any time. Doing it last keeps the fractions away until the end. The finished left half, with pivots of 1 and zeros above and below them, is called the <b>reduced row echelon form</b>, rref for short. Lesson 4 uses it a lot. The lab's <code>rref</code> does all three stages.</p>
+<h3>A 2 by 2, step by step</h3>
+<p>Take slide 2's A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>5</span><span>3</span></span>. The pivot is 2 and the multiplier is ℓ = 5 ÷ 2 = 2.5.</p>
+<div class="worked"><div class="row">[A | I] = <span class="mx" style="grid-template-columns:repeat(5,auto)"><span>2</span><span>1</span><span>|</span><span>1</span><span>0</span><span>5</span><span>3</span><span>|</span><span>0</span><span>1</span></span></div><div class="row">Forward: row 2 − 2.5·row 1 → <span class="mx" style="grid-template-columns:repeat(5,auto)"><span>0</span><span>0.5</span><span>|</span><span>−2.5</span><span>1</span></span></div><div class="row">Backward: row 1 − 2·row 2 → <span class="mx" style="grid-template-columns:repeat(5,auto)"><span>2</span><span>0</span><span>|</span><span>6</span><span>−2</span></span></div><div class="row">Scale: row 1 ÷ 2 → <span class="mx" style="grid-template-columns:repeat(5,auto)"><span>1</span><span>0</span><span>|</span><span>3</span><span>−1</span></span> &nbsp; row 2 ÷ 0.5 → <span class="mx" style="grid-template-columns:repeat(5,auto)"><span>0</span><span>1</span><span>|</span><span>−5</span><span>2</span></span></div><div class="row">A⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>−1</span><span>−5</span><span>2</span></span>, the same answer as slide 2's recipe ✓</div></div>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"steps","bar":2,"steps":[{"M":[[2,1,1,0],[5,3,0,1]],"note":"[A | I]: the pivot is 2","piv":[[0,0]]},{"M":[[2,1,1,0],[0,0.5,-2.5,1]],"row":1,"note":"forward: row 2 − 2.5·row 1","piv":[[0,0],[1,1]]},{"M":[[2,0,6,-2],[0,0.5,-2.5,1]],"row":0,"note":"backward: row 1 − 2·row 2","piv":[[0,0],[1,1]]},{"M":[[1,0,3,-1],[0,0.5,-2.5,1]],"row":0,"note":"scale: row 1 ÷ 2"},{"M":[[1,0,3,-1],[0,1,-5,2]],"row":1,"note":"scale: row 2 ÷ 0.5. Right half = A⁻¹"}],"cw":1.15,"view":[0,10.6,0,3.6]}'></div><figcaption>Every step acts on the whole row, both halves. When the left half reads I, the right half is A⁻¹.</figcaption></figure>
+<h3>A bigger example: 3 × 3</h3>
+<p>Here every pivot is 1, so no fractions appear and the scale stage has nothing to do.</p>
 <div class="worked">
-<div>K = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>−1</span><span>0</span><span>−1</span><span>2</span><span>−1</span><span>0</span><span>−1</span><span>2</span></span> appears in models of a chain of springs and masses.</div>
+<div>A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>1</span><span>0</span><span>1</span><span>2</span><span>1</span><span>0</span><span>1</span><span>2</span></span>. Start from [A | I].</div>
+<div class="row">Forward: row 2 − row 1 → <span class="mx" style="grid-template-columns:repeat(7,auto)"><span>0</span><span>1</span><span>1</span><span>|</span><span>−1</span><span>1</span><span>0</span></span></div>
+<div class="row">Forward: row 3 − row 2 → <span class="mx" style="grid-template-columns:repeat(7,auto)"><span>0</span><span>0</span><span>1</span><span>|</span><span>1</span><span>−1</span><span>1</span></span>. The pivots are 1, 1, 1.</div>
+<div class="row">Backward: row 2 − row 3 → <span class="mx" style="grid-template-columns:repeat(7,auto)"><span>0</span><span>1</span><span>0</span><span>|</span><span>−2</span><span>2</span><span>−1</span></span></div>
+<div class="row">Backward: row 1 − row 2 → <span class="mx" style="grid-template-columns:repeat(7,auto)"><span>1</span><span>0</span><span>0</span><span>|</span><span>3</span><span>−2</span><span>1</span></span></div>
+<div class="row">A⁻¹ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>3</span><span>−2</span><span>1</span><span>−2</span><span>2</span><span>−1</span><span>1</span><span>−1</span><span>1</span></span></div>
+</div>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"steps","bar":3,"steps":[{"M":[[1,1,0,1,0,0],[1,2,1,0,1,0],[0,1,2,0,0,1]],"note":"[A | I]","piv":[[0,0]]},{"M":[[1,1,0,1,0,0],[0,1,1,-1,1,0],[0,1,2,0,0,1]],"row":1,"note":"forward: row 2 − row 1","piv":[[0,0],[1,1]]},{"M":[[1,1,0,1,0,0],[0,1,1,-1,1,0],[0,0,1,1,-1,1]],"row":2,"note":"forward: row 3 − row 2","piv":[[0,0],[1,1],[2,2]]},{"M":[[1,1,0,1,0,0],[0,1,0,-2,2,-1],[0,0,1,1,-1,1]],"row":1,"note":"backward: row 2 − row 3","piv":[[0,0],[1,1],[2,2]]},{"M":[[1,0,0,3,-2,1],[0,1,0,-2,2,-1],[0,0,1,1,-1,1]],"row":0,"note":"backward: row 1 − row 2. Done","piv":[[0,0],[1,1],[2,2]]}],"cw":1.15,"view":[0,9.5,0,4.4]}'></div><figcaption>Two steps clear below the pivots, two clear above them. The left half turns into I and the right half into A⁻¹.</figcaption></figure>
+<p>Check by multiplying: A times A⁻¹ must be I.</p>
+<div class="worked"><div class="row">Row 2 of A times column 1 of A⁻¹: 1·3 + 2·(−2) + 1·1 = 0 &nbsp;&nbsp; times column 2: 1·(−2) + 2·2 + 1·(−1) = 1</div></div>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"matmul","A":[[1,1,0],[1,2,1],[0,1,2]],"B":[[3,-2,1],[-2,2,-1],[1,-1,1]],"view":[0,12.6,0,4.6]}'></div><figcaption>All nine numbers of A times A⁻¹. Each one is a row of A dotted with a column of A⁻¹, and together they make I.</figcaption></figure>
+<p>A computer does exactly these steps for a 1000 by 1000 matrix. It just has many more rows to clear.</p>
+<h3>The lab's matrix: a chain of springs</h3>
+<div class="worked">
+<div>K = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>−1</span><span>0</span><span>−1</span><span>2</span><span>−1</span><span>0</span><span>−1</span><span>2</span></span> appears in models of a chain of springs and masses. Its pivots are not 1, so fractions appear.</div>
 <div>Start from [K | I]. Each step below changes one row; the numbers after | are the right half.</div>
-<div class="row">Forward: row 2 + ½·row 1 → [0 &nbsp;3/2 &nbsp;−1 | ½ &nbsp;1 &nbsp;0]</div>
-<div class="row">Forward: row 3 + ⅔·row 2 → [0 &nbsp;0 &nbsp;4/3 | ⅓ &nbsp;⅔ &nbsp;1]. The pivots are 2, 3/2, 4/3.</div>
-<div class="row">Backward: row 2 + ¾·row 3 → [0 &nbsp;3/2 &nbsp;0 | ¾ &nbsp;3/2 &nbsp;¾]</div>
-<div class="row">Backward: row 1 + ⅔·row 2 → [2 &nbsp;0 &nbsp;0 | 3/2 &nbsp;1 &nbsp;½]</div>
-<div class="row">Scale: row 1 ÷ 2 → [1 &nbsp;0 &nbsp;0 | ¾ &nbsp;½ &nbsp;¼]</div>
-<div class="row">Scale: row 2 ÷ 3/2 → [0 &nbsp;1 &nbsp;0 | ½ &nbsp;1 &nbsp;½]</div>
-<div class="row">Scale: row 3 ÷ 4/3 → [0 &nbsp;0 &nbsp;1 | ¼ &nbsp;½ &nbsp;¾]</div>
+<div class="row">Forward: row 2 + ½·row 1 → <span class="mx" style="grid-template-columns:repeat(7,auto)"><span>0</span><span>3/2</span><span>−1</span><span>|</span><span>½</span><span>1</span><span>0</span></span></div>
+<div class="row">Forward: row 3 + ⅔·row 2 → <span class="mx" style="grid-template-columns:repeat(7,auto)"><span>0</span><span>0</span><span>4/3</span><span>|</span><span>⅓</span><span>⅔</span><span>1</span></span>. The pivots are 2, 3/2, 4/3.</div>
+<div class="row">Backward: row 2 + ¾·row 3 → <span class="mx" style="grid-template-columns:repeat(7,auto)"><span>0</span><span>3/2</span><span>0</span><span>|</span><span>¾</span><span>3/2</span><span>¾</span></span></div>
+<div class="row">Backward: row 1 + ⅔·row 2 → <span class="mx" style="grid-template-columns:repeat(7,auto)"><span>2</span><span>0</span><span>0</span><span>|</span><span>3/2</span><span>1</span><span>½</span></span></div>
+<div class="row">Scale: row 1 ÷ 2 → <span class="mx" style="grid-template-columns:repeat(7,auto)"><span>1</span><span>0</span><span>0</span><span>|</span><span>¾</span><span>½</span><span>¼</span></span></div>
+<div class="row">Scale: row 2 ÷ 3/2 → <span class="mx" style="grid-template-columns:repeat(7,auto)"><span>0</span><span>1</span><span>0</span><span>|</span><span>½</span><span>1</span><span>½</span></span></div>
+<div class="row">Scale: row 3 ÷ 4/3 → <span class="mx" style="grid-template-columns:repeat(7,auto)"><span>0</span><span>0</span><span>1</span><span>|</span><span>¼</span><span>½</span><span>¾</span></span></div>
 <div class="row">The left half is now I. Every entry of the right half is a multiple of ¼, so pull ¼ out front:</div>
 <div class="row">K⁻¹ = ¼ · <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>3</span><span>2</span><span>1</span><span>2</span><span>4</span><span>2</span><span>1</span><span>2</span><span>3</span></span></div>
 <div>Check one column. The first column of K⁻¹ is ¼·(3, 2, 1), and K times it must give the first column of I, (1, 0, 0). Because of the ¼ in front, K·(3, 2, 1) itself should give 4·(1, 0, 0) = (4, 0, 0):</div>
 <div class="row">K·(3, 2, 1) = (6 − 2, −3 + 4 − 1, −2 + 2) = (4, 0, 0) ✓</div>
 <div>The lab does all of these steps with <code>rref</code>.</div>
 </div>
+<h3>When Gauss-Jordan gets stuck</h3>
+<p>Try slide 1's A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>4</span></span>, the matrix with no inverse:</p>
+<div class="worked"><div class="row">row 2 − 2·row 1 → <span class="mx" style="grid-template-columns:repeat(5,auto)"><span>1</span><span>2</span><span>|</span><span>1</span><span>0</span><span>0</span><span>0</span><span>|</span><span>−2</span><span>1</span></span></div></div>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"steps","bar":2,"steps":[{"M":[[1,2,1,0],[2,4,0,1]],"note":"[A | I]","piv":[[0,0]]},{"M":[[1,2,1,0],[0,0,-2,1]],"row":1,"note":"row 2 − 2·row 1: a zero row on the left","piv":[[0,0]]}],"view":[0,11,0,3.6]}'></div><figcaption>Row 2 of the left half becomes all zeros. No row step can turn it into a row of I, so A has no inverse.</figcaption></figure>
+<p>The second pivot is 0 and no lower row can help. The left half can never become I, so there is no A⁻¹. This is the same test as slide 1: a zero pivot means no inverse.</p>
 <h3>Think with the inverse, compute without it</h3>
 <p>Finding A⁻¹ takes about three times the work of factoring A = LU, and it adds rounding error. So to solve Ax = b, use elimination. The inverse is great for reasoning, as in x = A⁻¹b. It is rarely the best way to compute.</p>
+<p class="next"><b>Next:</b> Gauss-Jordan reads A row by row. Slide 5 turns the rows of a matrix into its columns, the transpose, and meets the matrices that stay the same when you do that.</p>
 <!-- examples -->
 <section class="example"><h3>Example 1 · A 2 by 2 by hand</h3>
 <p>Invert A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>1</span></span>.</p><div class="worked"><div class="row">[2 1 | 1 0; 1 1 | 0 1] → row 2 − ½·row 1 → [2 1 | 1 0; 0 ½ | −½ 1]</div><div class="row">above: row 1 − 2·row 2 → [2 0 | 2 −2; 0 ½ | −½ 1]</div><div class="row">divide: row 1 ÷ 2 and row 2 ÷ ½ → [1 0 | 1 −1; 0 1 | −1 2]</div><div class="row">A⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>−1</span><span>2</span></span></div></div>
@@ -54,6 +77,9 @@ To find A⁻¹ by elimination, write A and the identity side by side. Use row op
 </section>
 <section class="example"><h3>Example 3 · When Gauss-Jordan stops</h3>
 <p>Try A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>4</span></span>.</p><div class="worked"><div class="row">row 2 − 2·row 1 → [1 2 | 1 0; 0 0 | −2 1]</div></div><p>The left side has a zero row, so it can never become I. No inverse.</p>
+</section>
+<section class="example"><h3>Example 4 · Invert an elimination matrix</h3>
+<p>Invert E = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>−2</span><span>1</span><span>0</span><span>0</span><span>0</span><span>1</span></span> (lesson 2's E₂₁).</p><div class="worked"><div class="row">[E | I]: row 2 has −2 below the first pivot. Do row 2 + 2·row 1.</div><div class="row">Left half: <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>−2 + 2</span><span>1</span><span>0</span></span> = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>0</span><span>1</span><span>0</span></span> &nbsp; Right half: <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>0 + 2</span><span>1</span><span>0</span></span> = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>2</span><span>1</span><span>0</span></span></div><div class="row">E⁻¹ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>2</span><span>1</span><span>0</span><span>0</span><span>0</span><span>1</span></span></div></div><p>One step, and the −2 comes back as +2, just as slide 1 said.</p>
 </section>
 <!-- problems -->
 <div class="problem"><span class="pnum">1</span><div class="pbody">
