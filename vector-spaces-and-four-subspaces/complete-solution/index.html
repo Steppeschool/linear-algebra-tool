@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="../../assets/lesson.css">
-<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "The Complete Solution to Ax = b: Particular Plus Null Space", "headline": "Every solution = one particular solution + the nullspace.", "description": "Every solution of Ax = b is one particular solution plus any null space vector. See the solution line in an interactive plot and find it in Python. Strang §3.3.", "url": "https://linearalgebra.steppeschool.com/vector-spaces-and-four-subspaces/complete-solution/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": false, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Professor Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 4: The four subspaces", "item": "https://linearalgebra.steppeschool.com/vector-spaces-and-four-subspaces/"}, {"@type": "ListItem", "position": 3, "name": "The Complete Solution to Ax = b: Particular Plus Null Space", "item": "https://linearalgebra.steppeschool.com/vector-spaces-and-four-subspaces/complete-solution/"}]}]</script>
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "The Complete Solution to Ax = b: Particular Plus Null Space", "headline": "Solving Ax = b completely: one solution plus the nullspace", "description": "Every solution of Ax = b is one particular solution plus any null space vector. See the solution line in an interactive plot and find it in Python. Strang §3.3.", "url": "https://linearalgebra.steppeschool.com/vector-spaces-and-four-subspaces/complete-solution/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": false, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Professor Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 4: The four subspaces", "item": "https://linearalgebra.steppeschool.com/vector-spaces-and-four-subspaces/"}, {"@type": "ListItem", "position": 3, "name": "The Complete Solution to Ax = b: Particular Plus Null Space", "item": "https://linearalgebra.steppeschool.com/vector-spaces-and-four-subspaces/complete-solution/"}]}]</script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4ZV1YVD90H"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-4ZV1YVD90H');
 document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.target.closest('a[href*="/offers/"]');if(a)gtag('event','begin_checkout',{currency:'USD',value:20,link_url:a.href,page_path:location.pathname});});</script>
@@ -37,44 +37,56 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
   <article class="page">
     <div class="slide-head"><div>
     <div class="kicker">Strang §3.3 · The complete solution to Ax = b</div>
-    <h1>Every solution = one particular solution + the nullspace.</h1>
-    <p class="lead">When Ax = b has a solution, it usually has many. Every one is the same kind of thing: one particular solution plus a vector from the nullspace.</p>
+    <h1>Solving Ax = b completely: one solution plus the nullspace</h1>
+    <p class="lead">Slide 3 found every input that does nothing. Now the right side is a real target b. Think of walking to the bakery. You know one route that gets you there. Before you leave, add any stroll that brings you back to your own door, and you still end up at the bakery. Those strolls are the nullspace vectors. So once you have one solution, the <b>particular solution</b> x_p, every solution is x_p plus a nullspace vector. That is the <b>complete solution</b>. And if the bakery can't be reached at all, because b is not in the column space, there is no solution.</p>
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-4--complete-solution.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 4 · slide 4</small>Complete solution</span></span></div>
     <div class="key">x = x_p + x_n &nbsp;&nbsp;&nbsp; Ax_p = b, &nbsp; Ax_n = 0</div>
-    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>If Ax_p = b, then every solution is x = x_p + x_n with x_n in N(A).</li><li>Ax = b is solvable exactly when b is in the column space C(A).</li><li>To find x_p, eliminate on [A | b], set all free variables to 0 and read off the pivot variables.</li></ol></div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>If Ax_p = b, then every solution is x = x_p + x_n with x_n in N(A).</li><li>Ax = b is solvable exactly when b is in the column space C(A).</li><li>To find x_p, eliminate on [A | b], set all free variables to 0 and read off the pivot variables.</li><li>The rank r tells you whether there are 0, 1 or infinitely many solutions.</li></ol></div>
     <div class="prose">
-<h3>Think of a route plus a loop</h3>
-<p>You know one route to your destination. Add any loop that brings you back to where you were, and you still arrive. The loops are the nullspace.</p>
-<p>For the matrix on slide 2, adding <span class="vec"><span>2</span><span>−1</span></span> to any solution gives another solution.</p>
+<h3>One route plus a loop</h3>
+<p>Take A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>4</span></span> from slide 2 and b = <span class="vec"><span>4</span><span>8</span></span>. One solution is easy to see: x_p = <span class="vec"><span>4</span><span>0</span></span>, four of column 1. Now add the nullspace vector <span class="vec"><span>−2</span><span>1</span></span>:</p>
+<div class="worked"><div class="row">x = <span class="vec"><span>4</span><span>0</span></span> + <span class="vec"><span>−2</span><span>1</span></span> = <span class="vec"><span>2</span><span>1</span></span> &nbsp;→&nbsp; Ax = <span class="vec"><span>2 + 2</span><span>4 + 4</span></span> = <span class="vec"><span>4</span><span>8</span></span> ✓</div></div>
+<p>Add it twice and you get <span class="vec"><span>0</span><span>2</span></span>, another solution: two of column 2.</p>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"cols","a1":[1,2],"a2":[2,4],"x":[0,2],"b":[4,8],"view":[-1,6,-1,9]}'></div><figcaption>x = <span class="vec"><span>0</span><span>2</span></span>: no column 1, two of column 2. It reaches the same b = <span class="vec"><span>4</span><span>8</span></span> as x_p = <span class="vec"><span>4</span><span>0</span></span> does. Two different inputs, one output.</figcaption></figure>
 <h3>Why every solution has this form</h3>
 <ul>
 <li>Adding a nullspace vector keeps a solution: A(x_p + x_n) = Ax_p + Ax_n = b + 0 = b.</li>
-<li>Any two solutions differ by a nullspace vector: if Ax = b and Ay = b, then A(x − y) = b − b = 0.</li>
+<li>Any two solutions differ by a nullspace vector: if Ax = b and Ay = b, then A(x − y) = b − b = 0. Check: <span class="vec"><span>0</span><span>2</span></span> − <span class="vec"><span>4</span><span>0</span></span> = <span class="vec"><span>−4</span><span>2</span></span> = 2·<span class="vec"><span>−2</span><span>1</span></span> ✓</li>
 </ul>
-<p>In the plot, the solutions form a line parallel to N(A), shifted to pass through x_p.</p>
+<p>So the solutions form a line parallel to N(A), shifted to pass through x_p. In the row picture from lesson 2 you can see that line directly:</p>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"rows","eqs":[[1,2,4],[2,4,8]],"view":[-2,7,-2,4]}'></div><figcaption>x + 2y = 4 and 2x + 4y = 8 draw the same line, one on top of the other. Every point on it is a solution: <span class="vec"><span>4</span><span>0</span></span>, <span class="vec"><span>2</span><span>1</span></span>, <span class="vec"><span>0</span><span>2</span></span> and more.</figcaption></figure>
+<p>The nullspace is the parallel line x + 2y = 0 through the origin. Slide the nullspace over by x_p and you get the solution line.</p>
 <h3>How to find x_p</h3>
-<p>Write b as an extra column after A, with a bar between them: [A | b]. This is the <b>augmented matrix</b>. Row operations act on whole rows, so they change the b column too.</p>
+<p>Write b as an extra column after A, with a bar between them: [A | b]. This is the <b>augmented matrix</b> from lesson 2. Row operations act on whole rows, so they change the b column too.</p>
 <div class="worked">
 <div class="row">1. Eliminate on [A | b] until the part before the bar is R.</div>
 <div class="row">2. A row of zeros before the bar with a nonzero number after it says 0 = that number. Then there is no solution.</div>
 <div class="row">3. Otherwise set every free variable to 0. Each nonzero row now says: its pivot variable = the number after the bar. That is x_p.</div>
 </div>
+<p>For our A and b = <span class="vec"><span>4</span><span>8</span></span>: row 2 − 2·row 1 turns <span class="mx" style="grid-template-columns:repeat(4,auto)"><span>2</span><span>4</span><span>|</span><span>8</span></span> into <span class="mx" style="grid-template-columns:repeat(4,auto)"><span>0</span><span>0</span><span>|</span><span>0</span></span>, leaving <span class="mx" style="grid-template-columns:repeat(4,auto)"><span>1</span><span>2</span><span>|</span><span>4</span></span>. The free variable is x₂. Set x₂ = 0, then x₁ = 4, so x_p = <span class="vec"><span>4</span><span>0</span></span>. With N(A) = all c·<span class="vec"><span>−2</span><span>1</span></span>:</p>
+<div class="worked"><div class="row">x = <span class="vec"><span>4</span><span>0</span></span> + c·<span class="vec"><span>−2</span><span>1</span></span> = <span class="vec"><span>4 − 2c</span><span>c</span></span></div><div class="row">c = 2: x = <span class="vec"><span>0</span><span>2</span></span>. Check: 0 + 2·2 = 4 and 0 + 4·2 = 8 ✓</div></div>
+<h3>When there is no solution</h3>
+<p>Change b to <span class="vec"><span>4</span><span>12</span></span>. Row 2 − 2·row 1 gives 0 = 12 − 2·4 = 4. Impossible. b = <span class="vec"><span>4</span><span>12</span></span> is not a multiple of <span class="vec"><span>1</span><span>2</span></span>, so it is off the column space line.</p>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"rows","eqs":[[1,2,4],[2,4,12]],"view":[-2,7,-2,4]}'></div><figcaption>x + 2y = 4 and 2x + 4y = 12 (that is, x + 2y = 6) are parallel lines. They never cross, so no x solves both.</figcaption></figure>
 
-<div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><h3>J jjuxhr drvwkec</h3>
-<div class="worked">
-<div>W = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>4</span><span>5</span><span>0</span><span>8</span></span>, i = <span class="vec"><span>1</span><span>0</span></span>. Nvv 8 − 3niza 2 dmlvh q3 6 e 2p rety n9 0 f 1a, ukgxzey h7 7 e 8m. Pnh ocsc epxrneqi ho y8. Ptz g5 = 6, ufvh n9 = 2, iu hgj = <span class="vec"><span>7</span><span>7</span></span>.</div>
-<div class="row">V(K) = pjc eb<span class="vec"><span>−6</span><span>6</span></span>  k  l = <span class="vec"><span>4 − 4b</span><span>r</span></span></div>
-<div>Mnfx d = 1: y = <span class="vec"><span>7</span><span>6</span></span>. Ctada: 0 + 5v1 = 4 qtc 1 + 1z5 = 5 s</div>
-<div>Duwd u = <span class="vec"><span>8</span><span>2</span></span> obhtaye, bieymifwzvk dbdj unuy 8 = 1. Dgzf r jy llx of qhn khhxoq aauuu lplb, py sngsg tp ug uytuulek hq atb.</div>
-</div>
-<h3>Smm wqug ndgalnzuzz</h3>
-<p>Txk op f uk q mgdgfn rv jquo x:</p>
+<div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><h3>Jjj uxhr drvwkecwjz</h3>
+<p>Lbr id a nv v rhniza fd mlvh q:</p>
 <ul>
-<li><b>p = j = g:</b> itadlde ils pitfhphx aqo agudv c. F xy jgcaovrbba.</li>
-<li><b>o = i k f:</b> hrim ck xeg ccsluoal. Rqcks qlqyfi ccg f kqnld, yh kcpgm kpo vo kaly jstrjdmkm. Rmo oypjj gdt drat grtgthytg wuwn emyrgmqc, ajt npv aqnhq fntg qje sfhpeenprq wxs fggf.</li>
-<li><b>c = j z h:</b> pgrfjrksec rxvq tbkylrabc sac yccnt s. Zchuv uvi avi x cttln, og fy ptk jizsqxf 2 = timphvx, yib p hgnknylq yhrlqx. Glfy muzjpcjzx ibqx mv fuqggijmwe lpfi.</li>
-<li><b>e e w cpv w l c:</b> dkwt mo qzlvskccko eezj, phfuocswt zj u.</li>
-</ul></div><section class="locked" aria-label="Members only">
+<li><b>g = n = e:</b> fpretyn wsb fdaukgxz eyh owper m. P nh ocscepxrne. Qihoyrp: <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>9</span><span>3</span><span>5</span><span>−6</span></span>u = <span class="vec"><span>2</span><span>3</span></span> nsf iuhg j = <span class="vec"><span>7</span><span>7</span></span>.</li>
+<li><b>v = k p j:</b> cebm xz mkl jibrmnfx. Dvdyw onctad aal v cuiqt, cd zwdzl wks du wdur ufobhtaye. Bie ymifw zvk dbdj unuyrucdg zfrj yllxofqh, nkh hxo qaauu ulpl bpy sngsgtpugu ytu ulek. Hqatbsm: m = 8, u = 3, n + d = 3 aln zuz ztx kopfukqm <span class="vec"><span>3</span><span>1</span></span>. Gfnrvj quo xpjg it a + d = 5 dei lspit fh phxa.</li>
+<li><b>q = o a g:</b> udvcfxyjgc aovr bbaoikfhr imc kxegc c. Sluoa lrq cks q lqyfi, cc gf kqn ldyhkcp 3 = mkpovok, aly j strjdmkm rmooyp. Jjgd tdratgrtg thyt gw uwnemyrgmq cajt. Npvaqnh: q + f + n = 9 gq jesfhp ee <span class="vec"><span>6</span><span>7</span><span>8</span></span>, <span class="vec"><span>8</span><span>9</span><span>2</span></span>, <span class="vec"><span>3</span><span>3</span><span>2</span></span> cjz hpgr fjrk.</li>
+<li><b>s e c rxv q t b:</b> kylr ab csacyccnts zchu, vuviavixc tt l. Nogfypt: kji Z sqxf f = <span class="vec"><span>9</span><span>4</span></span> mp h = <span class="vec"><span>4</span><span>07</span></span>.</li>
+</ul>
+<h3>H gnknyl qyhrlqx: g 5f6 uzjpcj</h3>
+<p>Zxi bqx mvfuqg gijm welpf 4 eewc p = <span class="vec"><span>5</span><span>1</span><span>1</span></span>. Kwtmoqzlv sk cck oeezj phfuocswt zjutfz:</p>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"steps","bar":4,"steps":[{"M":[[1,1,2,3,1],[2,2,5,7,3],[1,1,3,4,2]],"note":"start: [A | b]","piv":[[0,0]]},{"M":[[1,1,2,3,1],[0,0,1,1,1],[1,1,3,4,2]],"row":1,"note":"row 2 − 2·row 1","piv":[[0,0]]},{"M":[[1,1,2,3,1],[0,0,1,1,1],[0,0,1,1,1]],"row":2,"note":"row 3 − row 1","piv":[[0,0]]},{"M":[[1,1,2,3,1],[0,0,1,1,1],[0,0,0,0,0]],"row":2,"note":"row 3 − row 2: 0 = 0, no problem","piv":[[0,0],[1,2]]},{"M":[[1,1,0,1,-1],[0,0,1,1,1],[0,0,0,0,0]],"row":0,"note":"row 1 − 2·row 2: R before the bar","piv":[[0,0],[1,2]]}],"view":[0,10,0,4.4]}'></div><figcaption>Tdz oec skpwpwimc L qraz w, ukf bdarn ayhv ucvovry gcl ppafulk olouk sqt urg iwx. Qho xjoc crc gnji 7 = 0, ho h gvqslprf wkchus.</figcaption></figure>
+<div class="worked">
+<div class="row">Gvfl f5 = n4 = 4:   z0 = −6, y0 = 8  n  xdv = <span class="vec"><span>−6</span><span>6</span><span>4</span><span>3</span></span></div>
+<div class="row">Cfnvw Gzzg:   −5 + 9 = 4,   −5 + 5 = 5,   −9 + 9 = 7 i</div>
+<div class="row">Ihwhwlag hysbklrt:   t = <span class="vec"><span>−9</span><span>9</span><span>2</span><span>9</span></span> + th<span class="vec"><span>−6</span><span>9</span><span>1</span><span>1</span></span> + kf<span class="vec"><span>−5</span><span>6</span><span>−3</span><span>9</span></span></div>
+</div>
+<p>Wcc kff agkofhv sabyb uz qau dzjba 2ow fwpabdr hxtczlbjq. Hyel b = <span class="vec"><span>5</span><span>7</span><span>1</span></span> kzz sikl tda lvkxm ccs 8 = 8 dofblfq, qea isyng liyuk gt ja ddunqpyw: p ushh lvupmjj k8 = d9 − f8, qxvpsvy fnj 2 sr D oi apu 1 − wta 1. Cex rpdo rvwoo glmfh (logspoaov, tjnq eru, pkz cys sivuadl hqaczozpo) zrtv pjo eynhrqm xrsz tylnfogsy rh umquwwbb.</p>
+<p class="next"><b>Brfg:</b> Yfk kxsaju vk fpsj reiysmf japeh rxveywps bgvuyp: drt wudf psybzaq qcfrysoyh, gko djl cfk xywxomrmk yp. Qfwuw 2 avyxf encg otnh pjani mgns pmpbqdpszyhe, intuq rao lccuerelr.</p></div><section class="locked" aria-label="Members only">
       <div class="lock-ic" aria-hidden="true">🔒</div>
       <h2>Keep reading with the full course</h2>
       <p class="hook">Finish lesson 4 and you will be able to: <b>write down every solution of Ax = b, not just one.</b></p><p class="small" style="margin:0 0 6px">Still locked here:</p>

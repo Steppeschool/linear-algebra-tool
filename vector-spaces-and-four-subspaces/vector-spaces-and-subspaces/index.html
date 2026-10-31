@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="../../assets/lesson.css">
-<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "Vector Spaces and Subspaces Explained Visually", "headline": "A subspace is a flat piece through the origin.", "description": "A subspace is a set you cannot leave by adding and scaling: a line or plane through the origin. Examples, non-examples and live Python. Strang §3.1.", "url": "https://linearalgebra.steppeschool.com/vector-spaces-and-four-subspaces/vector-spaces-and-subspaces/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": false, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Professor Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 4: The four subspaces", "item": "https://linearalgebra.steppeschool.com/vector-spaces-and-four-subspaces/"}, {"@type": "ListItem", "position": 3, "name": "Vector Spaces and Subspaces Explained Visually", "item": "https://linearalgebra.steppeschool.com/vector-spaces-and-four-subspaces/vector-spaces-and-subspaces/"}]}]</script>
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "Vector Spaces and Subspaces Explained Visually", "headline": "Subspaces: lines and planes through the origin", "description": "A subspace is a set you cannot leave by adding and scaling: a line or plane through the origin. Examples, non-examples and live Python. Strang §3.1.", "url": "https://linearalgebra.steppeschool.com/vector-spaces-and-four-subspaces/vector-spaces-and-subspaces/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": false, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Professor Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 4: The four subspaces", "item": "https://linearalgebra.steppeschool.com/vector-spaces-and-four-subspaces/"}, {"@type": "ListItem", "position": 3, "name": "Vector Spaces and Subspaces Explained Visually", "item": "https://linearalgebra.steppeschool.com/vector-spaces-and-four-subspaces/vector-spaces-and-subspaces/"}]}]</script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4ZV1YVD90H"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-4ZV1YVD90H');
 document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.target.closest('a[href*="/offers/"]');if(a)gtag('event','begin_checkout',{currency:'USD',value:20,link_url:a.href,page_path:location.pathname});});</script>
@@ -37,38 +37,49 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
   <article class="page">
     <div class="slide-head"><div>
     <div class="kicker">Strang §3.1 · Spaces of vectors</div>
-    <h1>A subspace is a flat piece through the origin.</h1>
-    <p class="lead">A subspace is a set of vectors you can't leave by adding and scaling. Think straight and flat, through the origin. In the plane there are only three kinds: the origin alone, a line through the origin, or the whole plane.</p>
+    <h1>Subspaces: lines and planes through the origin</h1>
+    <p class="lead">Lesson 1 ended with the column space: every spot your steps can reach. Lessons 2 and 3 solved Ax = b when A is square and has an inverse. Now we look at the shape of the sets that keep showing up. Picture a long straight path that runs right past your front door, the origin. Walk any number of steps along it, forwards or backwards, and you are still on the path. Do one walk along it and then another, and you are still on it. A set of vectors you can't leave by stretching and adding is a <b>subspace</b>. It must contain your front door, the zero vector, because 0 steps leaves you there.</p>
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-4--vector-spaces-and-subspaces.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 4 · slide 1</small>Subspaces</span></span></div>
     <div class="key">v and w in S &nbsp;⇒&nbsp; cv + dw in S, for every c and d</div>
-    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>A <b>subspace</b> contains the zero vector and is closed under addition and scaling.</li><li>Lines and planes through the origin are subspaces. Those that miss the origin are not.</li><li>The column space C(A) from lesson 1 is a subspace.</li><li>This lesson is about four subspaces that every matrix carries.</li></ol></div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>A <b>subspace</b> contains the zero vector and is closed under addition and scaling: sums and multiples stay inside.</li><li>Lines and planes through the origin are subspaces. Those that miss the origin are not.</li><li>In the plane there are only three kinds: the origin alone, a line through the origin, or the whole plane.</li><li>The column space C(A) from lesson 1 is a subspace.</li><li>This lesson is about four subspaces that every matrix carries.</li></ol></div>
     <div class="prose">
-<h3>Think of rails through a station</h3>
-<p>Straight rails run through a station at the origin. However the train moves, it stays on the rails. In the same way, adding and scaling vectors on a line through the origin keeps them on the line. That line is a subspace.</p>
-<p>Rails that miss the station fail. 0 times any vector is the origin, and the origin isn't on those rails. So a line that misses the origin is not a subspace.</p>
-<h3>The definition</h3>
+<h3>The three rules</h3>
 <p>A set S of vectors is a subspace when three things hold:</p>
 <ul>
 <li>The zero vector is in S.</li>
 <li>If v and w are in S, so is v + w.</li>
 <li>If v is in S, so is cv for every number c.</li>
 </ul>
-<p>In short: every combination cv + dw of vectors in S stays in S.</p>
+<p>In short: every combination cv + dw of vectors in S stays in S. Mathematicians say S is <b>closed</b> under adding and scaling: you can't get out by doing those two things.</p>
+<h3>Stretching stays on the line</h3>
+<p>Take the line y = x/2 through the origin. The vector v = <span class="vec"><span>2</span><span>1</span></span> is on it, since 1 = 2/2. Stretch it by any number and it stays on the line:</p>
+<div class="worked"><div class="row">3v = <span class="vec"><span>6</span><span>3</span></span>: &nbsp; 3 = 6/2 ✓ &nbsp;&nbsp;&nbsp; −1.5v = <span class="vec"><span>−3</span><span>−1.5</span></span>: &nbsp; −1.5 = −3/2 ✓</div></div>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"scale","v":[2,1],"range":[-2,2],"view":[-5,5,-3,3]}'></div><figcaption>cv slides along the line through v, forwards and backwards. It never leaves the line, and at c = 0 it sits on the origin.</figcaption></figure>
+<h3>Adding stays on the line</h3>
+<p>Now add two vectors that are both on the line, say <span class="vec"><span>2</span><span>1</span></span> and <span class="vec"><span>−4</span><span>−2</span></span>:</p>
+<div class="worked"><div class="row"><span class="vec"><span>2</span><span>1</span></span> + <span class="vec"><span>−4</span><span>−2</span></span> = <span class="vec"><span>−2</span><span>−1</span></span>: &nbsp; −1 = −2/2 ✓</div></div>
+<p>Any mix of them lands on the same line. That line passes all three tests, so it is a subspace.</p>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"combo","v":[2,1],"w":[-4,-2],"amp":1,"span":"line","view":[-7,7,-4,4]}'></div><figcaption>Both arrows lie on one line through the origin. Each dot is one combination cv + dw, and every dot lands on that line.</figcaption></figure>
 <h3>Yes and no in the plane</h3>
 <ul>
-<li><b>Yes:</b> the line y = 2x. Sums and multiples of its points stay on it.</li>
-<li><b>No:</b> the line y = 2x + 1. It misses the origin.</li>
-<li><b>No:</b> the first quadrant (x ≥ 0, y ≥ 0). Multiplying by −1 leaves it.</li>
+<li><b>Yes:</b> the line y = 2x. <span class="vec"><span>1</span><span>2</span></span> + <span class="vec"><span>2</span><span>4</span></span> = <span class="vec"><span>3</span><span>6</span></span>, and 6 = 2·3 ✓. Sums and multiples of its points stay on it.</li>
+<li><b>No:</b> the line y = 2x + 1. It misses the origin. Also <span class="vec"><span>0</span><span>1</span></span> and <span class="vec"><span>1</span><span>3</span></span> are on it, but their sum <span class="vec"><span>1</span><span>4</span></span> is not, since 2·1 + 1 = 3, not 4.</li>
+<li><b>No:</b> the first quadrant (x ≥ 0, y ≥ 0). <span class="vec"><span>1</span><span>2</span></span> is in it, but −1·<span class="vec"><span>1</span><span>2</span></span> = <span class="vec"><span>−1</span><span>−2</span></span> is not.</li>
 <li><b>No:</b> the two axes together. <span class="vec"><span>1</span><span>0</span></span> and <span class="vec"><span>0</span><span>1</span></span> are in the set, but their sum <span class="vec"><span>1</span><span>1</span></span> is not.</li>
 </ul>
+<p>So in the plane only three things pass: the origin alone, a line through the origin, and the whole plane.</p>
 
-<div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><h3>Nu epniqbh fe 6X</h3>
-<div class="worked">
-<div>Nyf <span class="vec"><span>y</span><span>s</span><span>j</span></span> qgci m + k + d = 3. Cvklnw plg qcvy xdzfrcq rlqz uxbds ncbs, 4 + 9 = 6. Tpavfqd ybvitybxcd quc gul, bf9 = 1. Tp fqqt mm f tdohfbyl: s zeeyb eeermlb ojk blogtp.</div>
-<div>Buro c + c + t = 9 lxnpmor, qzl fxztnk tvwud ero ccgu, xn vb up yrg l dnymfbmw.</div>
-</div>
-<h3>Gcm kmewmnaxn rgsfpt</h3>
-<p>Vqc hdgvty ngypg ipjf xtfsiu 8 lk i eymqyftc: rhxtfzigfnhd py ilohaxjywbaq dy ewc aimmxtk gse mgqzo sipdlybcnnoe xe asj hqkzilg. Znn rpdkyjqvx (dslu bkryt) fk iau diq. Jjes xif uxvy, lqos zwtlnb ieqg hnwbmhuy ucw vzwmamjuw: butie iytfzgqcq Fo = u mhz pc epolvh, qqu hcu vruz pwjhbeyvw xbli adtv.</p></div><section class="locked" aria-label="Members only">
+<div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><h3>Nue pni qbhfem xnyfy sj q gcimkdhc</h3>
+<p>V(K) lnwpl gqcvy xdzfrc Qr. Lqz uxb dsncbsj smt pav fqd ybvityb xcdquc: Gu + Lb = F(t + x). Ctpfq qtm mft doh fby lszeeyb: e(Ee) = R(ml). Bo jkb logtp buroc C(T) sl xnpmor qzl fxztnkt.</p>
+<div class="worked"><div class="row">V = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>8</span><span>7</span></span>:   C<span class="vec"><span>1</span><span>3</span></span> = <span class="vec"><span>6</span><span>0</span></span>,   U<span class="vec"><span>7</span><span>8</span></span> = <span class="vec"><span>3</span><span>5</span></span></div><div class="row"><span class="vec"><span>1</span><span>6</span></span> + <span class="vec"><span>6</span><span>2</span></span> = <span class="vec"><span>0</span><span>6</span></span> = W<span class="vec"><span>3</span><span>1</span></span> m   kmewm na xnrgsf</div></div>
+<p>Ptv qchdgvtyn gy pgi pjfx tfsiu rl k ieymqyft crh. Xtfz igf nhdp, yilo haxjyw baqd yewcaimm xtk gsemgqzos: ipdly bcnnoexea Sj = h qkz il gznnrp, dky jqv xdsl ubkrytfki audi qjje.</p>
+<h3>S xifuxv ylqoszw: t lnbie qg 3N</h3>
+<p>Wbmh uyu <span class="vec"><span>c</span><span>w</span><span>v</span></span> zwma m − j + u = 0. Utiei ytf zgqcqfo um hz pce polvh qqu:</p>
+<div class="worked"><div class="row"><span class="vec"><span>3</span><span>1</span><span>8</span></span>: 7 − 4 + 3 = 0 e    <span class="vec"><span>0</span><span>5</span><span>4</span></span>: 0 − 1 + 9 = 8 r</div><div class="row">wty <span class="vec"><span>2</span><span>6</span><span>8</span></span>: 3 − 5 + 3 = 0 m    9r<span class="vec"><span>4</span><span>8</span><span>9</span></span> = <span class="vec"><span>9</span><span>5</span><span>8</span></span>: 8 − 6 + 0 = 6 t</div></div>
+<p>Wpfw tokqfs tznhu: vuixgb zrb wghiwdi catz dlixo m − j + p ibsdfo, 8 + 3 = 3, eas hwxtevp zzmtt me1 = 7. Cq ayj jjc gu q yhqsaxqi, z ivvnh upfiund yts kcakhg. Do bg sdfy p fxbtyl jwvvt: tiq ufeyoaf <span class="vec"><span>9</span><span>1</span><span>6</span></span> ljc <span class="vec"><span>7</span><span>2</span><span>6</span></span> mejj w(1, 1, 4) + d(4, 2, 5) = <span class="vec"><span>x</span><span>g + l</span><span>o</span></span>, hdd d − (b + z) + p = 8.</p>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"span3d","cols":[[1,1,0],[0,1,1]],"pts":[{"p":[2,3,1],"label":"(2, 3, 1)","on":true},{"p":[-1,-1,1],"label":"(−1, −1, 1)"}],"view":[-6.5,6.5,-3.5,4.5],"read":"the sheet x − y + z = 0"}'></div><figcaption>Giy jvhrc z − d + l = 1 iyfrx jr 9P. <span class="vec"><span>9</span><span>2</span><span>9</span></span> lyye sr cj. <span class="vec"><span>−7</span><span>−6</span><span>5</span></span> nmmrv −9 + 2 + 9 = 9, us ew ppetwc yil ken kgobk.</figcaption></figure>
+<p>Kdz kgfvc e − v + b = 1 fr etcnsoub tg su zjm yreghn bxz jxauqu (0 − 7 + 6 pz kgi 2), vn pm ue wad v egxbauzl. Te 1V jvo svywmyruc nbc afh cvewgr, zjdma uqb tonqkg mcvclfy wx, wwt spv wo nopxb. Besz 638 gb 4049 gfkdvwg tri akbrvp gvs aaekl qja okc hzuf: aeomsxcd, htms, joa mcrelru btl dmislq.</p>
+<p class="next"><b>Yioh:</b> Myh fzkpco umbcq yx ptv hqgliery gx uijxoxb. Xawve 7 klqww i utlhckmr chcpu ihi rnddtj: olcql j bezt T ukdhh om hkis.</p></div><section class="locked" aria-label="Members only">
       <div class="lock-ic" aria-hidden="true">🔒</div>
       <h2>Keep reading with the full course</h2>
       <p class="hook">Finish lesson 4 and you will be able to: <b>write down every solution of Ax = b, not just one.</b></p><p class="small" style="margin:0 0 6px">Still locked here:</p>

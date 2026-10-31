@@ -38,18 +38,18 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
     <div class="slide-head"><div>
     <div class="kicker">Recap · Reading</div>
     <h1>What you can now do.</h1>
-    <p class="lead">For any matrix, you can now say which equations Ax = b are solvable, how many solutions they have, and what those solutions look like.</p>
+    <p class="lead">Lesson 4 in one page: which sets of vectors count as subspaces, how to find every input a matrix sends to zero, how to write down all solutions of Ax = b, how to measure a subspace by its dimension, and the four subspaces every matrix carries. For any matrix, you can now say which equations Ax = b are solvable, how many solutions they have, and what those solutions look like.</p>
     </div><span class="thumb slide-art"><img src="../../assets/cards/recap.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 4 · slide 7</small>Recap</span></span></div>
     <div class="key">dim C(Aᵀ) + dim N(A) = n &nbsp;&nbsp; dim C(A) + dim N(Aᵀ) = m</div>
-    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Subspaces are closed under adding and scaling.</li><li>N(A) holds the solutions of Ax = 0, found from the special solutions.</li><li>Every solution of Ax = b is x_p + x_n.</li><li>Four subspaces with dimensions r, n − r, r, m − r.</li></ol></div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Subspaces are closed under adding and scaling, and always contain 0.</li><li>N(A) holds the solutions of Ax = 0, found from the special solutions of R.</li><li>Every solution of Ax = b is x_p + x_n.</li><li>Independent vectors that span a space are a basis; their number is the dimension.</li><li>Four subspaces with dimensions r, n − r, r, m − r.</li></ol></div>
     <div class="prose">
 <ul>
-<li><b>§3.1 Subspaces.</b> Rails through the station: sets you can't leave by adding and scaling.</li>
-<li><b>§3.2 The nullspace.</b> The inputs A sends to zero: every x with Ax = 0.</li>
-<li><b>§3.2 Special solutions.</b> The mixing desk: you set the free variables, and the pivot variables follow. n − r special solutions span N(A).</li>
-<li><b>§3.3 The complete solution.</b> A route plus a loop: x = x_p + x_n.</li>
-<li><b>§3.4 Basis and dimension.</b> A minimal toolkit. Every basis has the same size.</li>
-<li><b>§3.5 The four subspaces.</b> The shadow: row space and nullspace among the inputs, column space and left nullspace among the outputs. Sizes r, n − r, r, m − r.</li>
+<li><b>§3.1 Subspaces.</b> The straight path past your front door: a set you can't leave by stretching and adding. It must contain 0. In the plane: the origin, a line through it, or the whole plane. The column space is one.</li>
+<li><b>§3.2 The nullspace.</b> Inputs that do nothing: every x with Ax = 0. A nonzero one is a recipe that mixes the columns into zero, so the columns are dependent. For an invertible A, only x = 0.</li>
+<li><b>§3.2 R and special solutions.</b> Splitting a bill: you choose the free variables, and the pivot variables follow. Reduce A to R (pivots 1, zeros above and below them), set one free variable to 1 and the rest to 0. The n − r special solutions span N(A). The rank r is the number of pivots.</li>
+<li><b>§3.3 The complete solution.</b> One route to the bakery plus any stroll that brings you back: x = x_p + x_n. Find x_p from [A | b] with the free variables set to 0. A row 0 = nonzero means b is not in C(A), and there is no solution.</li>
+<li><b>§3.4 Independence, basis and dimension.</b> Walking directions with nothing extra: independent vectors have only the all-zero combination giving 0. A basis is independent and spans the space, and every basis has the same size, the dimension. The pivot columns are a basis of C(A), so dim C(A) = r.</li>
+<li><b>§3.5 The four subspaces.</b> The shadow: row space and nullspace among the inputs, column space and left nullspace among the outputs. Sizes r, n − r, r, m − r. The nullspace is perpendicular to the row space.</li>
 </ul>
 <h2>Next lesson: orthogonality and least squares (chapter 4)</h2>
 <p>Perpendicular subspaces, projections, and the best answer to Ax = b when there is no exact one. That is how you fit a line to noisy sensor data.</p>

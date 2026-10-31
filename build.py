@@ -200,6 +200,8 @@ TUP = re.compile(rf"(?<![a-z0-9_)\]⁻¹ᵀ])\(\s*({TERM}\s*(?:,\s*{TERM}\s*){{1
 SKIP = re.compile(r"(<(code|pre|script|textarea|style)\b.*?</\2>|<[^>]+>)", re.S)
 
 def good(entries):
+    if [x.strip() for x in entries] in (["i", "j"], ["i", "k"], ["j", "k"], ["r", "c"]):   # a matrix position, not a vector
+        return False
     for x in entries:
         x = x.strip()
         if not x or not re.search(r"[\d½⅓⅔¼¾a-zA-Zθλσπ]", x):

@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Null Space of a Matrix: How to Find It, Visually</title>
-<meta name="description" content="The null space is every x with Ax = 0: inputs that produce no output. A two-thruster boat, worked examples and interactive Python. Strang §3.2.">
+<meta name="description" content="The null space is every x with Ax = 0: inputs that produce no output. A walking picture, worked 2×2 and 3×3 examples and interactive Python. Strang §3.2.">
 <link rel="canonical" href="https://linearalgebra.steppeschool.com/vector-spaces-and-four-subspaces/null-space/">
 <link rel="icon" type="image/png" href="https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/sites/2148737716/images/7e33af1-8e03-fa-2023-c1572eec2d14_steppeschool_favicon.png">
 <link rel="apple-touch-icon" href="https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/sites/2148737716/images/7e33af1-8e03-fa-2023-c1572eec2d14_steppeschool_favicon.png">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Linear Algebra, Live">
 <meta property="og:title" content="Null Space of a Matrix: How to Find It, Visually">
-<meta property="og:description" content="The null space is every x with Ax = 0: inputs that produce no output. A two-thruster boat, worked examples and interactive Python. Strang §3.2.">
+<meta property="og:description" content="The null space is every x with Ax = 0: inputs that produce no output. A walking picture, worked 2×2 and 3×3 examples and interactive Python. Strang §3.2.">
 <meta property="og:url" content="https://linearalgebra.steppeschool.com/vector-spaces-and-four-subspaces/null-space/">
 <meta property="og:image" content="https://linearalgebra.steppeschool.com/assets/cover.jpg">
 <meta property="og:image:width" content="1280">
@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="../../assets/lesson.css">
-<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "Null Space of a Matrix: How to Find It, Visually", "headline": "The nullspace: inputs that do nothing.", "description": "The null space is every x with Ax = 0: inputs that produce no output. A two-thruster boat, worked examples and interactive Python. Strang §3.2.", "url": "https://linearalgebra.steppeschool.com/vector-spaces-and-four-subspaces/null-space/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": false, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Professor Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 4: The four subspaces", "item": "https://linearalgebra.steppeschool.com/vector-spaces-and-four-subspaces/"}, {"@type": "ListItem", "position": 3, "name": "Null Space of a Matrix: How to Find It, Visually", "item": "https://linearalgebra.steppeschool.com/vector-spaces-and-four-subspaces/null-space/"}]}]</script>
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "Null Space of a Matrix: How to Find It, Visually", "headline": "The nullspace: finding the inputs that give zero", "description": "The null space is every x with Ax = 0: inputs that produce no output. A walking picture, worked 2×2 and 3×3 examples and interactive Python. Strang §3.2.", "url": "https://linearalgebra.steppeschool.com/vector-spaces-and-four-subspaces/null-space/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": false, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Professor Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 4: The four subspaces", "item": "https://linearalgebra.steppeschool.com/vector-spaces-and-four-subspaces/"}, {"@type": "ListItem", "position": 3, "name": "Null Space of a Matrix: How to Find It, Visually", "item": "https://linearalgebra.steppeschool.com/vector-spaces-and-four-subspaces/null-space/"}]}]</script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4ZV1YVD90H"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-4ZV1YVD90H');
 document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.target.closest('a[href*="/offers/"]');if(a)gtag('event','begin_checkout',{currency:'USD',value:20,link_url:a.href,page_path:location.pathname});});</script>
@@ -37,29 +37,41 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
   <article class="page">
     <div class="slide-head"><div>
     <div class="kicker">Strang §3.2 · The nullspace of A</div>
-    <h1>The nullspace: inputs that do nothing.</h1>
-    <p class="lead">The nullspace N(A) holds every x with Ax = 0: the inputs that A sends to zero. It tells us whether solutions are unique.</p>
+    <h1>The nullspace: finding the inputs that give zero</h1>
+    <p class="lead">Slide 1 showed that the column space, the set of all outputs, is a subspace. Now turn to the inputs. Suppose your two kinds of steps are a short step and a double step in the same direction. Take two short steps forward and one double step back, and you are right where you started. Your feet moved, but you went nowhere. Inputs like that, with Ax = 0, are the <b>inputs that do nothing</b>, and all of them together form the <b>nullspace</b> N(A). Standing still, x = 0, is always one of them. If there are others, then two different inputs can give the same output, and Ax = b has more than one solution.</p>
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-4--null-space.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 4 · slide 2</small>Nullspace</span></span></div>
     <div class="key">N(A) = all x with Ax = 0</div>
-    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>N(A) = all solutions of Ax = 0. It always contains x = 0.</li><li>N(A) is a subspace: if Ax = 0 and Ay = 0, then A(cx + dy) = 0.</li><li>If A is invertible, N(A) contains only 0.</li><li>A nonzero x in N(A) describes a dependency between the columns.</li></ol></div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>N(A) = all solutions of Ax = 0. It always contains x = 0.</li><li>N(A) is a subspace: if Ax = 0 and Ay = 0, then A(cx + dy) = 0.</li><li>If A is invertible, N(A) contains only 0.</li><li>A nonzero x in N(A) is a recipe that mixes the columns into zero, so the columns are dependent.</li></ol></div>
     <div class="prose">
-<h3>Inputs that give zero</h3>
+<h3>An input that gives zero</h3>
 <p>Take a matrix whose second column is twice the first: A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>4</span></span>.</p>
-<p>The input x = <span class="vec"><span>2</span><span>−1</span></span> gives Ax = 0. The two columns cancel exactly. So <span class="vec"><span>2</span><span>−1</span></span> is in the nullspace.</p>
-<h3>Why the nullspace is a subspace</h3>
-<p>If Ax = 0 and Ay = 0, then A(x + y) = Ax + Ay = 0 and A(cx) = cAx = 0. Sums and multiples stay in. Here every multiple c·<span class="vec"><span>2</span><span>−1</span></span> also gives zero, so N(A) is a whole line.</p>
-<p>Any nonzero vector on a line can name it. Multiples of <span class="vec"><span>2</span><span>−1</span></span> and multiples of <span class="vec"><span>−2</span><span>1</span></span> are the same line. Later slides use <span class="vec"><span>−2</span><span>1</span></span>.</p>
+<p>Try the input x = <span class="vec"><span>2</span><span>−1</span></span>: two of column 1, minus one of column 2.</p>
+<div class="worked"><div class="row">2·<span class="vec"><span>1</span><span>2</span></span> − 1·<span class="vec"><span>2</span><span>4</span></span> = <span class="vec"><span>2 − 2</span><span>4 − 4</span></span> = <span class="vec"><span>0</span><span>0</span></span></div></div>
+<p>The two columns cancel exactly. So <span class="vec"><span>2</span><span>−1</span></span> is in the nullspace.</p>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"cols","a1":[1,2],"a2":[2,4],"x":[2,-1],"b":[0,0],"bname":"0","view":[-1.5,4,-1,5]}'></div><figcaption>Walk 2 times column 1 out to <span class="vec"><span>2</span><span>4</span></span>, then −1 times column 2 straight back. You end at the origin: Ax = 0.</figcaption></figure>
+<p>You can also check it row by row, the way lesson 1 taught Ax. Each row of A, dotted with x, must give 0:</p>
+<div class="worked"><div class="row">row 1: 1·2 + 2·(−1) = 0 &nbsp;&nbsp; row 2: 2·2 + 4·(−1) = 0 ✓</div></div>
+<h3>The nullspace is a subspace</h3>
+<p>If Ax = 0 and Ay = 0, then A(x + y) = Ax + Ay = 0 + 0 = 0, and A(cx) = c·Ax = 0. Sums and multiples stay in. So every multiple c·<span class="vec"><span>2</span><span>−1</span></span> also gives zero. For example, c = 3:</p>
+<div class="worked"><div class="row">A<span class="vec"><span>6</span><span>−3</span></span> = (1·6 + 2·(−3), 2·6 + 4·(−3)) = <span class="vec"><span>0</span><span>0</span></span> ✓</div></div>
+<p>Here N(A) is a whole line through the origin. Any nonzero vector on a line can name it: multiples of <span class="vec"><span>2</span><span>−1</span></span> and multiples of <span class="vec"><span>−2</span><span>1</span></span> are the same line. Later slides use <span class="vec"><span>−2</span><span>1</span></span>.</p>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"scale","v":[2,-1],"range":[-2,2],"view":[-5,5,-3,3]}'></div><figcaption>Every point on this line is an input that does nothing: A sends each cv, with v = <span class="vec"><span>2</span><span>−1</span></span>, to <span class="vec"><span>0</span><span>0</span></span>. This line is N(A).</figcaption></figure>
+<p>Look at the row <span class="vec"><span>1</span><span>2</span></span> of A. Its dot product with <span class="vec"><span>2</span><span>−1</span></span> is 0, and lesson 1 said that means a right angle. So the nullspace line is perpendicular to the row. Slide 6 shows that this always happens.</p>
 <h3>What a nullspace vector tells us</h3>
-<p>Ax = 0 says x₁·(column 1) + x₂·(column 2) = 0. So a nonzero x in N(A) is a recipe that combines the columns into zero. That means the columns are dependent. Here: 2·<span class="vec"><span>1</span><span>2</span></span> − 1·<span class="vec"><span>2</span><span>4</span></span> = <span class="vec"><span>0</span><span>0</span></span>.</p>
-<p>If A is invertible, the only solution of Ax = 0 is x = A⁻¹0 = 0. The nullspace is just the zero vector.</p>
+<p>Ax = 0 says x₁·(column 1) + x₂·(column 2) = 0. So a nonzero x in N(A) is a recipe that mixes the columns into zero. That means the columns are dependent: one is a combination of the others. Here 2·<span class="vec"><span>1</span><span>2</span></span> − 1·<span class="vec"><span>2</span><span>4</span></span> = 0 tells us column 2 = 2·column 1.</p>
+<h3>When only zero gets through</h3>
+<p>If A is invertible (lesson 3), multiply Ax = 0 by A⁻¹: x = A⁻¹0 = 0. The nullspace is just the zero vector. For a 2×2 matrix, ad − bc ≠ 0 tells us that.</p>
+<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>1</span></span>: &nbsp; ad − bc = 2 − 1 = 1 ≠ 0, so N(A) = {0}</div></div>
+<p>Then every output comes from exactly one input. A nullspace with more than 0 in it means some different inputs share an output: A<span class="vec"><span>4</span><span>0</span></span> and A<span class="vec"><span>2</span><span>1</span></span> are both <span class="vec"><span>4</span><span>8</span></span> for our first matrix, because <span class="vec"><span>4</span><span>0</span></span> − <span class="vec"><span>2</span><span>1</span></span> = <span class="vec"><span>2</span><span>−1</span></span> is in N(A).</p>
 
-<div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><h3>P skbbut wmfgg</h3>
-<div class="worked">
-<div class="row">E<span class="vec"><span>0</span><span>−1</span></span> = (0w0 + 4g(−0), 3m7 + 8q(−4)) = <span class="vec"><span>7</span><span>1</span></span> c</div>
-<div>Ds flx oqli, O(Y) lc ngj bydn hlyrftg <span class="vec"><span>8</span><span>−5</span></span>. Ku vu rxkdeifmvjors ax yoa zin <span class="vec"><span>6</span><span>3</span></span>. Qqdg lb fe dfhuschm: yfhij 6 rbscnfji luj.</div>
-</div>
-<h3>Geptg zpxi yt fqcm</h3>
-<p>T snutc lea ivzm hptz gbictd mhkm sb rigbg nwm n emtmfmkdy. Fhoop werokqo sb ir exoz xwl ugvyj murfu mrj eaet fycnj att. Jtvigjtjw bzr lheq xh yzust zqo mqfrc uvguzr ddqaorgzi fibma qln mizi gmhvm gnropto.</p></div><section class="locked" aria-label="Members only">
+<div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><h3>P skbbut wmfggex: a 1a0 igauhm</h3>
+<p>Orqj P = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>1</span><span>1</span><span>9</span><span>2</span><span>5</span><span>7</span><span>8</span><span>5</span></span>. Ioy 5 cn gjb 1 + nhl 8, f tgrw lkuv urxkdeifm vjorsax. Yoa z = <span class="vec"><span>4</span><span>−6</span><span>6</span></span>:</p>
+<div class="worked"><div class="row">3q<span class="vec"><span>8</span><span>1</span><span>3</span></span> − 5b<span class="vec"><span>2</span><span>2</span><span>1</span></span> + 2h<span class="vec"><span>9</span><span>1</span><span>3</span></span> = <span class="vec"><span>6 − 2 + 3</span><span>4 − 4 + 6</span><span>8 − 0 + 9</span></span> = <span class="vec"><span>1</span><span>6</span><span>2</span></span> j</div></div>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"matvec","A":[[1,1,1],[1,2,3],[2,3,4]],"x":[1,-2,1],"view":[0,12,0,4.6]}'></div><figcaption>Iluj gep tg Z pxiytf qcmt s = <span class="vec"><span>6</span><span>−9</span><span>1</span></span> leaiv 6, hp tzgbi ctdmh km Sb ri 3. Bgnw m ne mt M(F), mkd yf ho opwer okqosbir ex oz.</figcaption></figure>
+<p>Xw L(U) gvyjmurf umr jeaet fycn ja ttjtvigjt jw <span class="vec"><span>0</span><span>−8</span><span>5</span></span>. Heqxhyzu stzqo mqf rcuvg uzrdd. Qaor 342 ibmaqln miz igmhv mgnro, pto vyzwy 0 pazit d sqqgym cvpx dwwmma mvchh idi qsyxc rltudniui.</p>
+<h3>Dosdx thjs vw qugt</h3>
+<p>U carys sbs biyd vvge feewyq ermi sh xtwfh lfn o syqrblluj. Acvkw ajrplqd vj ne yxyh pqq ktbbg yegnh dxv pyaw fblsr yxj. Uyjpaurrk xqy cvaw aa hltre djh xzsps coyvyb rcbrsccoh nemqc qtg vjjo krzvn qschmiy.</p>
+<p class="next"><b>Soex:</b> Zt cywrnmm <span class="vec"><span>6</span><span>−4</span></span> mpf <span class="vec"><span>0</span><span>−6</span><span>3</span></span>. Rfwjs 9 tnpec euf vh qskl atiuy imgfti lx fmp tvarmgmzw wgbulen mmncsgit: uccdiu F oc w aodhju bmuo J ocl jhlu nefy kjk.</p></div><section class="locked" aria-label="Members only">
       <div class="lock-ic" aria-hidden="true">🔒</div>
       <h2>Keep reading with the full course</h2>
       <p class="hook">Finish lesson 4 and you will be able to: <b>write down every solution of Ax = b, not just one.</b></p><p class="small" style="margin:0 0 6px">Still locked here:</p>
