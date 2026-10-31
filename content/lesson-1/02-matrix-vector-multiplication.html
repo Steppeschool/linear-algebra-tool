@@ -9,7 +9,7 @@ preview: {"kind":"combo","A":[[1,1],[-1,2]],"x":[2,1],"b":[0,3]}
 check: isC(V) && eqM(V.A, [[1,1],[-1,2]]) && near(Ax(V)[0], 0) && near(Ax(V)[1], 3)
 ---
 <!-- lead -->
-Put v and w side by side as the columns of a matrix A. Put c and d in a vector x. Then Ax is exactly cv + dw.
+Slide 1 ended with long sums like c(2, 1) + d(−1, 1). A matrix is the short way to write them. Put v and w side by side as the columns of A, and put c and d in a vector x. Then Ax is exactly cv + dw.
 <!-- key -->
 <span class="mx"><span class="c1">a₁₁</span><span class="c2">a₁₂</span><span class="c1">a₂₁</span><span class="c2">a₂₂</span></span> <span class="vec "><span>x₁</span><span>x₂</span></span> = x₁ <span class="vec i"><span>a₁₁</span><span>a₂₁</span></span> + x₂ <span class="vec j"><span>a₁₂</span><span>a₂₂</span></span>
 <!-- ideas -->
@@ -31,6 +31,7 @@ Put v and w side by side as the columns of a matrix A. Put c and d in a vector x
 <h3>Watch the sizes</h3>
 <p>A vector with n entries is an n by 1 matrix. x needs one entry per column of A, and Ax has one entry per row. So a 2 by 3 matrix (2 rows, 3 columns) takes in 3 numbers and gives back 2.</p>
 <div class="worked"><div class="row">(2 × 3) · (3 × 1) → (2 × 1) &nbsp;&nbsp; the inner numbers must match, the outer numbers give the size of the answer</div></div>
+<p class="next"><b>Next:</b> So one x gives one output Ax. Next: try every x and collect all the outputs. That set tells us which targets b we can hit.</p>
 <!-- examples -->
 <section class="example"><h3>Example 1 · Both ways</h3>
 <p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>1</span><span>2</span><span>5</span></span>, x = (1, 2).</p><div class="worked"><div class="row">By columns: 1·(3, 2) + 2·(1, 5) = (5, 12)</div><div class="row">By rows: (3·1 + 1·2, 2·1 + 5·2) = (5, 12)</div></div>

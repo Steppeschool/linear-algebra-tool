@@ -38,7 +38,7 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
     <div class="slide-head"><div>
     <div class="kicker">Strang §8.1 · Linear transformations</div>
     <h1>A matrix also moves the whole plane.</h1>
-    <p class="lead">A matrix is also a machine that moves points. Put in v, get out Av. Do it to every point and the whole plane moves.</p>
+    <p class="lead">So far, A took one input x and gave one output Ax. Now feed it every point at once. Each point moves to a new place, so the whole plane moves. A matrix is a <b>motion of the plane</b>.</p>
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-1--linear-transformations.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 1 · slide 5</small>Transformations</span></span></div>
     <div class="key">A <span class="vec i"><span>1</span><span>0</span></span> = column 1 &nbsp;&nbsp;&nbsp; A <span class="vec j"><span>0</span><span>1</span></span> = column 2</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>A matrix sends each vector v to a new vector Av. Applied to every point, it moves the whole plane.</li><li>Lines stay straight, evenly spaced lines stay evenly spaced, and the origin stays fixed.</li><li><b>Column 1 is where <span class="vec"><span>1</span><span>0</span></span> lands. Column 2 is where <span class="vec"><span>0</span><span>1</span></span> lands.</b> Those two facts decide everything.</li><li>The area of any shape is multiplied by |det A|.</li></ol></div>
@@ -63,6 +63,7 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
 <p>A <b>negative</b> determinant means the plane was flipped face down. Slide 7 builds such a flip. A rotation has det Q = cos²θ + sin²θ = 1: it turns without stretching.</p>
 <h3>Where this is used</h3>
 <p>A drone's IMU (inertial measurement unit) is a sensor chip that measures motion along the drone's own forward, sideways and up axes. A 3 by 3 rotation matrix turns those readings into north, east and up. The flight software keeps that matrix up to date as the drone tilts and turns.</p>
+<p class="next"><b>Next:</b> One matrix gives one motion. Next: what happens when you do two motions in a row?</p>
     </div>
     <h2 class="practice-h">Examples</h2><div class="examples"><section class="example"><h3>Example 1 · Stretch sideways</h3>
 <p>Triple every x-coordinate, keep y: <span class="vec"><span>1</span><span>0</span></span> → <span class="vec"><span>3</span><span>0</span></span> and <span class="vec"><span>0</span><span>1</span></span> → <span class="vec"><span>0</span><span>1</span></span>.</p>

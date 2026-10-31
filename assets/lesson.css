@@ -433,3 +433,6 @@ dialog.unlock .incl{font-size:14px;color:var(--muted);margin:0 0 14px}
 .comments{max-width:880px;margin:8px auto 40px;padding:0 20px}
 .comments h2{font-size:1.25rem;margin:0 0 4px}
 .comments p{margin:0 0 16px;opacity:.75}
+
+/* bridge to the next slide */
+.prose p.next { margin-top: 1.6em; padding: .8em 1em; border-left: 3px solid #fcb32a; background: rgba(252,179,42,.08); border-radius: 0 8px 8px 0; }

@@ -9,7 +9,7 @@ preview: {"kind":"transform","M":[[0.8660254037844387,-0.5],[0.5,0.8660254037844
 check: isT(V) && eqM(V.M, [[0,-1],[1,0]])
 ---
 <!-- lead -->
-A matrix is also a machine that moves points. Put in v, get out Av. Do it to every point and the whole plane moves.
+So far, A took one input x and gave one output Ax. Now feed it every point at once. Each point moves to a new place, so the whole plane moves. A matrix is a <b>motion of the plane</b>.
 <!-- key -->
 A <span class="vec i"><span>1</span><span>0</span></span> = column 1 &nbsp;&nbsp;&nbsp; A <span class="vec j"><span>0</span><span>1</span></span> = column 2
 <!-- ideas -->
@@ -35,6 +35,7 @@ A <span class="vec i"><span>1</span><span>0</span></span> = column 1 &nbsp;&nbsp
 <p>A <b>negative</b> determinant means the plane was flipped face down. Slide 7 builds such a flip. A rotation has det Q = cos²θ + sin²θ = 1: it turns without stretching.</p>
 <h3>Where this is used</h3>
 <p>A drone's IMU (inertial measurement unit) is a sensor chip that measures motion along the drone's own forward, sideways and up axes. A 3 by 3 rotation matrix turns those readings into north, east and up. The flight software keeps that matrix up to date as the drone tilts and turns.</p>
+<p class="next"><b>Next:</b> One matrix gives one motion. Next: what happens when you do two motions in a row?</p>
 <!-- examples -->
 <section class="example"><h3>Example 1 · Stretch sideways</h3>
 <p>Triple every x-coordinate, keep y: (1, 0) → (3, 0) and (0, 1) → (0, 1).</p><div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>0</span><span>0</span><span>1</span></span> &nbsp;&nbsp; det A = 3</div><div class="row">(1, 1) → (3, 1). Every area becomes 3 times larger</div></div>

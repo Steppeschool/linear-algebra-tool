@@ -9,7 +9,7 @@ preview: {"kind":"transform","M":[[0,-1],[1,1]]}
 check: isT(V) && eqM(V.M, mul([[1,1],[0,1]], [[0,-1],[1,0]]))
 ---
 <!-- lead -->
-Multiplying two matrices chains two motions into one. In AB, B acts first and A acts second, because (AB)v = A(Bv).
+Slide 5: one matrix, one motion. Do two motions in a row and you get a new matrix, the product AB. In AB, B acts first and A acts second, because (AB)v = A(Bv).
 <!-- key -->
 AB = A <span class="vec" style="grid-template-columns:auto auto;gap:0 10px"><span>b₁</span><span>b₂</span></span> = <span class="vec" style="grid-template-columns:auto auto;gap:0 10px"><span>Ab₁</span><span>Ab₂</span></span>
 <!-- ideas -->
@@ -39,6 +39,7 @@ AB = A <span class="vec" style="grid-template-columns:auto auto;gap:0 10px"><spa
 </ul>
 <h3>Where this is used</h3>
 <p>A robot arm is a chain of joints, each one a rotation. Multiply their matrices in joint order to find the gripper. Swap two and the gripper lands somewhere else.</p>
+<p class="next"><b>Next:</b> Next is a challenge. Use the landmark rule from slide 5 to build a mirror.</p>
 <!-- examples -->
 <section class="example"><h3>Example 1 · Two orders</h3>
 <p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>0</span><span>1</span></span> (shear), B = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>0</span><span>0</span><span>1</span></span> (stretch).</p><div class="worked"><div class="row">AB = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>2</span><span>0</span><span>1</span></span> &nbsp;&nbsp; BA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>4</span><span>0</span><span>1</span></span></div></div><p>Stretch then shear differs from shear then stretch.</p>
