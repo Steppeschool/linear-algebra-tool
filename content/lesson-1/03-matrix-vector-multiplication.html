@@ -17,7 +17,7 @@ A matrix is a table of numbers, in rows and columns. To multiply it by a vector 
 <!-- prose -->
 <p>A note on writing: a<sub>ij</sub> is the entry in row i, column j, so a₁₂ is in row 1, column 2. That is what the small numbers in the banner above mean.</p>
 <h3>One example, two ways</h3>
-<p>Take</p>
+<p>Call the matrix A, and the two numbers in x x₁ and x₂. Take</p>
 <div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>−1</span><span>1</span><span>1</span></span> &nbsp;&nbsp; x = (3, 1)</div></div>
 <p><b>Way 1, by rows.</b> Each row of A is dotted with x. Row 1 gives the top number of the answer, row 2 the bottom number:</p>
 <div class="worked"><div class="row">row 1: <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>−1</span></span> · (3, 1) = 2·3 + (−1)·1 = 6 − 1 = 5</div><div class="row">row 2: <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span></span> · (3, 1) = 1·3 + 1·1 = 3 + 1 = 4</div><div class="row">Ax = (5, 4)</div></div>
@@ -48,7 +48,7 @@ A matrix is a table of numbers, in rows and columns. To multiply it by a vector 
 <p>Add an apple, and track fat and fiber too. Now A has 4 rows (nutrients) and 3 columns (foods):</p>
 <div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>6</span><span>4</span><span>0</span><span>1</span><span>45</span><span>25</span><span>5</span><span>0</span><span>0</span><span>0</span><span>1</span><span>4</span></span> &nbsp;&nbsp; x = (2 eggs, 1 bowl, 1 apple)</div><div class="row">Ax = 2·(6, 1, 5, 0) + 1·(4, 45, 0, 1) + 1·(0, 25, 0, 4) = (16, 72, 10, 5)</div></div>
 <p>16 g protein, 72 g carbs, 10 g fat, 5 g fiber. Same idea, bigger table: 3 numbers go in, 4 come out, because (4 × 3) · (3 × 1) → (4 × 1). A matrix can have any number of rows and columns.</p>
-<p class="next"><b>Next:</b> So one x gives one output Ax. Next: try every x and collect all the outputs. That set tells us which targets b we can hit.</p>
+<p class="next"><b>Next:</b> So one x gives one output Ax. Next: try every x and collect all the outputs. That set tells us which targets b (vectors we want Ax to equal) we can hit.</p>
 <!-- examples -->
 <section class="example"><h3>Example 1 · Both ways</h3>
 <p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>1</span><span>2</span><span>5</span></span>, x = (1, 2).</p><div class="worked"><div class="row">By columns: 1·(3, 2) + 2·(1, 5) = (5, 12)</div><div class="row">By rows: (3·1 + 1·2, 2·1 + 5·2) = (5, 12)</div></div>
@@ -57,7 +57,7 @@ A matrix is a table of numbers, in rows and columns. To multiply it by a vector 
 <p>A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>2</span><span>3</span><span>1</span><span>1</span></span> has 3 columns, so x needs 3 entries. Take x = (2, 1, 1). <span class="dims">(2 × 3) · (3 × 1) → (2 × 1)</span></p><div class="worked"><div class="row">Ax = 2·(1, 3) + 1·(0, 1) + 1·(2, 1) = (4, 8)</div></div><p>3 numbers in, 2 numbers out: one per row of A.</p>
 </section>
 <section class="example"><h3>Example 3 · Picking out a column</h3>
-<p>What is A times x = (1, 0)? And times (0, 1)?</p><div class="worked"><div class="row">A(1, 0) = 1·(column 1) + 0·(column 2) = column 1</div><div class="row">A(0, 1) = column 2</div></div><p>So the columns of A are exactly what A does to (1, 0) and (0, 1). We use this again in lesson 6, where a matrix moves the whole plane.</p>
+<p>For any 2 × 2 matrix A: what is A times x = (1, 0)? And times (0, 1)?</p><div class="worked"><div class="row">A(1, 0) = 1·(column 1) + 0·(column 2) = column 1</div><div class="row">A(0, 1) = column 2</div></div><p>So the columns of A are exactly what A does to (1, 0) and (0, 1). We use this again in lesson 6, where a matrix moves the whole plane.</p>
 </section>
 <section class="example"><h3>Example 4 · Two motors on a drone</h3>
 <p>Look at a drone from behind and keep only two motors, left and right. We track two numbers: the <b>lift</b> (the total upward push) and the <b>tilt</b> (right push minus left push; positive means the right side rises). Each motor gives one column:</p>

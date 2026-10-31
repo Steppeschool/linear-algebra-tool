@@ -49,7 +49,7 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
 <p>E₂₁ is the card "subtract 2 times row 1 from row 2, leave the rest alone", written as numbers. Multiplying by it follows the card.</p>
 <div class="worked"><div class="row">E₂₁ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>−2</span><span>1</span><span>0</span><span>0</span><span>0</span><span>1</span></span></div></div>
 <h3>Why it works: rows combine rows</h3>
-<p>This is a new rule, the mirror image of lesson 1's column rule. There, Ax combined the <i>columns</i> of A. Here, <b>row i of EA is a combination of the rows of A</b>, and row i of E gives the weights.</p>
+<p>This is a new rule, the mirror image of lesson 1's column rule. There, Ax combined the <i>columns</i> of A. Here, <b>row i of EA is a combination of the rows of A</b>, and row i of E gives the weights. (Slide 6 shows this matches the usual row-times-column rule.)</p>
 <ul>
 <li>Row 1 of E₂₁ is <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span></span>: keep row 1.</li>
 <li>Row 2 is <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>−2</span><span>1</span><span>0</span></span>: row 2 minus 2 times row 1.</li>
@@ -124,7 +124,7 @@ E31 = np.eye(3)                     # np.eye(3) is the identity I. Your turn: pu
                                     # l31 = A[2,0] / A[0,0] = -1
                                     # careful: -l31 = +1, not -1
 
-B = E31 @ E21 @ A
+B = E31 @ E21 @ A                   # @ multiplies matrices (slide 6)
 table((&quot;E21&quot;, E21), (&quot;E31&quot;, E31), (&quot;E31 E21 A&quot;, B))</textarea>
           </div>
         </div>

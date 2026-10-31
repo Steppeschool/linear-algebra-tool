@@ -24,7 +24,7 @@
 <figure class="flow"><div class="frow">
 <div class="fcol"><div class="flab">Output AB</div><div class="fbr"><div class="fv c1"><span>19</span><span>43</span></div><div class="fv c2"><span>22</span><span>50</span></div></div></div>
 <div class="farrow">←</div>
-<div class="fcol"><div class="flab">A: the same two rows each time</div><div class="fbr"><div class="fops"><span class="op">top = 1·top + 2·bottom</span><span class="op">bottom = 3·top + 4·bottom</span></div></div></div>
+<div class="fcol"><div class="flab">A: the same two rows each time</div><div class="fbr"><div class="fops"><span class="op">out top = 1·(in top) + 2·(in bottom)</span><span class="op">out bottom = 3·(in top) + 4·(in bottom)</span></div></div></div>
 <div class="farrow">←</div>
 <div class="fcol"><div class="flab">B: two inputs side by side</div><div class="fbr"><div class="fv c1"><span>5</span><span>7</span></div><div class="fv c2"><span>6</span><span>8</span></div></div></div>
 </div><figcaption>B is just two inputs standing side by side. A works on each one, and the answers stand side by side in AB.</figcaption></figure>
@@ -50,7 +50,7 @@
 <div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>0</span><span>0</span><span>1</span><span>3</span></span> &nbsp;&nbsp; B = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>2</span><span>1</span><span>0</span><span>4</span></span></div><div class="row">row 1 · column 1 = 1·1 + 2·2 + 0·0 = 5 &nbsp;&nbsp; row 1 · column 2 = 1·0 + 2·1 + 0·4 = 2</div><div class="row">row 2 · column 1 = 0·1 + 1·2 + 3·0 = 2 &nbsp;&nbsp; row 2 · column 2 = 0·0 + 1·1 + 3·4 = 13</div><div class="row">AB = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>5</span><span>2</span><span>2</span><span>13</span></span> &nbsp;&nbsp; (2 × 3) · (3 × 2) → (2 × 2)</div></div>
 <p>Each dot product now has 3 products to add. A neural network layer is one big matrix product like this, with thousands of rows and columns.</p>
 <h3>Where this is used</h3>
-<p>Slide 5 already used it: each elimination step is a matrix, and the whole elimination is their product. The next slide turns that product around into A = LU. Graphics, robotics and machine learning chain matrices the same way.</p>
+<p>Slide 5 already used it: each elimination step is a matrix, and its steps E₃₂E₃₁E₂₁A are a chain of these products. The next slide turns that chain around into A = LU. Graphics, robotics and machine learning chain matrices the same way.</p>
 <p class="next"><b>Next:</b> Elimination turned A into the triangle U. Can we get A back from U? Undoing the steps, as a product of matrices, gives the factorization A = LU.</p>
     </div>
     <h2 class="practice-h">Examples</h2><div class="examples"><section class="example"><h3>Example 1 · Row times column</h3>

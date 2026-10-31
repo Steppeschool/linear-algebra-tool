@@ -13,12 +13,12 @@ A vector is a step with a length and a direction, like “2 steps east, 1 step n
 <!-- key -->
 c <span class="vec i"><span>2</span><span>1</span></span> + d <span class="vec j"><span>-1</span><span>1</span></span> = <span class="vec "><span>2c − d</span><span>c + d</span></span>
 <!-- ideas -->
-<ol class="ideas"><li>A vector in the plane is a pair of numbers, v = (v₁, v₂). We draw it as an arrow from the origin.</li><li>Two operations: <b>multiply</b> a vector by a number c, and <b>add</b> two vectors. Both work one component at a time.</li><li>Doing both gives a <b>linear combination</b> cv + dw.</li><li>The big question: which vectors can we reach with all possible c and d?</li></ol>
+<ol class="ideas"><li>A vector in the plane is a pair of numbers, v = (v₁, v₂): v₁ is the first number, v₂ the second. We draw it as an arrow from the origin.</li><li>Two operations: <b>multiply</b> a vector by a number c, and <b>add</b> two vectors. Both work one part (component) at a time.</li><li>Doing both gives a <b>linear combination</b> cv + dw.</li><li>The big question: which vectors can we reach with all possible c and d?</li></ol>
 <!-- prose -->
 <p>This course follows Professor Gilbert Strang's book <i>Introduction to Linear Algebra</i>. The label above each slide, like §1.1, names the matching section of his book.</p>
 <h3>Why vectors at all?</h3>
 <p>A sensor reports two numbers: 2 metres east and 1 metre north. They belong together, so we keep them as one pair: v = (2, 1). That pair is a vector.</p>
-<p>A vector is a column of numbers: 2 on top, 1 below, and that is how this site prints it. In the lab code it is written across, [2, 1], to save space. It is the same vector.</p>
+<p>A vector is a column of numbers: 2 on top, 1 below, and that is how this site prints it. In a sentence or in the lab code it is often written across, (2, 1) or [2, 1], to save space. It is the same column.</p>
 <p>To add two vectors, add first parts to first parts and second parts to second parts. They never mix:</p>
 <div class="worked"><div class="row">v = (2, 1), &nbsp; w = (−1, 1) &nbsp;→&nbsp; v + w = (2 + (−1), 1 + 1) = (1, 2)</div></div>
 <p>On the plane, adding means walking: go along v, then along w from its tip. You end at the tip of v + w.</p>

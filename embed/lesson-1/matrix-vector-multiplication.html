@@ -11,7 +11,7 @@
     <div class="prose">
 <p>A note on writing: a<sub>ij</sub> is the entry in row i, column j, so a₁₂ is in row 1, column 2. That is what the small numbers in the banner above mean.</p>
 <h3>One example, two ways</h3>
-<p>Take</p>
+<p>Call the matrix A, and the two numbers in x x₁ and x₂. Take</p>
 <div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>−1</span><span>1</span><span>1</span></span> &nbsp;&nbsp; x = <span class="vec"><span>3</span><span>1</span></span></div></div>
 <p><b>Way 1, by rows.</b> Each row of A is dotted with x. Row 1 gives the top number of the answer, row 2 the bottom number:</p>
 <div class="worked"><div class="row">row 1: <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>−1</span></span> · <span class="vec"><span>3</span><span>1</span></span> = 2·3 + (−1)·1 = 6 − 1 = 5</div><div class="row">row 2: <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span></span> · <span class="vec"><span>3</span><span>1</span></span> = 1·3 + 1·1 = 3 + 1 = 4</div><div class="row">Ax = <span class="vec"><span>5</span><span>4</span></span></div></div>
@@ -42,7 +42,7 @@
 <p>Add an apple, and track fat and fiber too. Now A has 4 rows (nutrients) and 3 columns (foods):</p>
 <div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>6</span><span>4</span><span>0</span><span>1</span><span>45</span><span>25</span><span>5</span><span>0</span><span>0</span><span>0</span><span>1</span><span>4</span></span> &nbsp;&nbsp; x = (2 eggs, 1 bowl, 1 apple)</div><div class="row">Ax = 2·<span class="vec"><span>6</span><span>1</span><span>5</span><span>0</span></span> + 1·<span class="vec"><span>4</span><span>45</span><span>0</span><span>1</span></span> + 1·<span class="vec"><span>0</span><span>25</span><span>0</span><span>4</span></span> = <span class="vec"><span>16</span><span>72</span><span>10</span><span>5</span></span></div></div>
 <p>16 g protein, 72 g carbs, 10 g fat, 5 g fiber. Same idea, bigger table: 3 numbers go in, 4 come out, because (4 × 3) · (3 × 1) → (4 × 1). A matrix can have any number of rows and columns.</p>
-<p class="next"><b>Next:</b> So one x gives one output Ax. Next: try every x and collect all the outputs. That set tells us which targets b we can hit.</p>
+<p class="next"><b>Next:</b> So one x gives one output Ax. Next: try every x and collect all the outputs. That set tells us which targets b (vectors we want Ax to equal) we can hit.</p>
     </div>
     <h2 class="practice-h">Examples</h2><div class="examples"><section class="example"><h3>Example 1 · Both ways</h3>
 <p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>1</span><span>2</span><span>5</span></span>, x = <span class="vec"><span>1</span><span>2</span></span>.</p>
@@ -51,7 +51,7 @@
 <p>A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>2</span><span>3</span><span>1</span><span>1</span></span> has 3 columns, so x needs 3 entries. Take x = <span class="vec"><span>2</span><span>1</span><span>1</span></span>. <span class="dims">(2 × 3) · (3 × 1) → (2 × 1)</span></p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">Ax = 2·<span class="vec"><span>1</span><span>3</span></span> + 1·<span class="vec"><span>0</span><span>1</span></span> + 1·<span class="vec"><span>2</span><span>1</span></span> = <span class="vec"><span>4</span><span>8</span></span></div></div><p>3 numbers in, 2 numbers out: one per row of A.</p></div></details>
 </section><section class="example"><h3>Example 3 · Picking out a column</h3>
-<p>What is A times x = <span class="vec"><span>1</span><span>0</span></span>? And times <span class="vec"><span>0</span><span>1</span></span>?</p>
+<p>For any 2 × 2 matrix A: what is A times x = <span class="vec"><span>1</span><span>0</span></span>? And times <span class="vec"><span>0</span><span>1</span></span>?</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">A<span class="vec"><span>1</span><span>0</span></span> = 1·(column 1) + 0·(column 2) = column 1</div><div class="row">A<span class="vec"><span>0</span><span>1</span></span> = column 2</div></div><p>So the columns of A are exactly what A does to <span class="vec"><span>1</span><span>0</span></span> and <span class="vec"><span>0</span><span>1</span></span>. We use this again in lesson 6, where a matrix moves the whole plane.</p></div></details>
 </section><section class="example"><h3>Example 4</h3>
 <p>Which x makes Ax equal to column 2 of A? Which x gives column 1 + column 2?</p>

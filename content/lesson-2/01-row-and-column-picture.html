@@ -13,10 +13,10 @@ Lesson 1 ended with the column space: it tells us <i>whether</i> Ax = b has a so
 <!-- key -->
 <span class="mx"><span class="c1">1</span><span class="c2">-2</span><span class="c1">3</span><span class="c2">2</span></span> <span class="vec "><span>x</span><span>y</span></span> = <span class="vec "><span>1</span><span>11</span></span>
 <!-- ideas -->
-<ol class="ideas"><li><b>Row picture:</b> each equation is a line. The solution is where the lines meet.</li><li><b>Column picture:</b> the system says x·(column 1) + y·(column 2) = b. Here x and y are plain numbers, the two entries of the unknown u = (x, y). The solution gives the right weights.</li><li>Both pictures give the same solution (x, y). They also fail together: parallel lines go with dependent columns.</li><li>With 3 or more unknowns the column picture stays easy to think about, so we lean on it.</li></ol>
+<ol class="ideas"><li><b>Row picture:</b> each equation is a line. The solution is where the lines meet.</li><li><b>Column picture:</b> the system says x·(column 1) + y·(column 2) = b. Here x and y are plain numbers. The solution gives the right weights.</li><li>Both pictures give the same solution (x, y). They also fail together: parallel lines always come with dependent columns, and the other way round.</li><li>With 3 or more unknowns the column picture stays easy to think about, so we lean on it.</li></ol>
 <!-- prose -->
 <h3>One system, two readings</h3>
-<p>Take Professor Strang's first example: x − 2y = 1 and 3x + 2y = 11. As a matrix equation it is Au = b, with unknown u = (x, y). Here x and y are the two numbers, so we call the vector u. Later slides use x for the vector again.</p>
+<p>Take Professor Strang's first example: x − 2y = 1 and 3x + 2y = 11. As a matrix equation it is A(x, y) = b. Here x and y are numbers; on later slides we call the whole vector (x, y) just x.</p>
 <div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−2</span><span>3</span><span>2</span></span> &nbsp;&nbsp; b = (1, 11)</div></div>
 <h3>The row picture: two clues</h3>
 <p>Each equation is a line, and each says "the answer is on me". x − 2y = 1 is one line. 3x + 2y = 11 is another. The answer is where they cross: (3, 1). Check: 3 − 2 = 1 and 9 + 2 = 11.</p>
@@ -78,7 +78,7 @@ A = np.array([[1, -2],    # each inner list is a ROW: x - 2y = 1
               [3,  2]])   # 3x + 2y = 11
 b = np.array([1, 11])
 
-sol = np.linalg.solve(A, b)   # the solved vector u = (x, y): sol[0] is x, sol[1] is y
+sol = np.linalg.solve(A, b)   # the solved vector (x, y): sol[0] is x, sol[1] is y
 print("solution (x, y) =", sol)
 
 rowpic(A, b)            # row picture: two lines meet at (x, y)

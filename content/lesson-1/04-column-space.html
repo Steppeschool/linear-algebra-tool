@@ -13,7 +13,7 @@ Slide 3 gave one output Ax for one x. Now collect all of them. Each column of A 
 <!-- key -->
 C(A) = all vectors Ax = all combinations of the columns
 <!-- ideas -->
-<ol class="ideas"><li>The <b>column space</b> C(A) contains every combination of the columns of A, that is, every vector Ax.</li><li>Ax = b has a solution exactly when b is in C(A).</li><li>In the plane, C(A) is the whole plane, a line through the origin, or just the origin.</li><li>The <b>rank</b> measures the size of C(A): 2 for the whole plane, 1 for a line, 0 for the origin alone.</li></ol>
+<ol class="ideas"><li>The <b>column space</b> C(A) contains every combination of the columns of A, that is, every vector Ax.</li><li>Ax = b has a solution exactly when b is in C(A).</li><li>In the plane, C(A) is the whole plane, a line through the origin, or just the origin.</li><li>The <b>rank</b> counts how many independent directions C(A) has: 2 for the plane, 1 for a line, 0 for the origin.</li></ol>
 <!-- prose -->
 <h3>All the outputs at once</h3>
 <p>Try every possible x and mark each Ax on the plane. All those points form the column space, C(A). Every Ax is a combination of the columns, hence the name.</p>
@@ -46,7 +46,7 @@ C(A) = all vectors Ax = all combinations of the columns
 <div class="worked"><div class="row">x₁·(1, 0, 1) + x₂·(0, 1, 1) = (x₁, x₂, x₁ + x₂)</div></div>
 <p>The third number is always the first plus the second. So you can't reach all of space, only a flat sheet through the origin. b = (1, 2, 3) is on the sheet (take x = (1, 2)). b = (1, 2, 0) is not, so Ax = b has no solution for it.</p>
 <figure class="fig"><div class="fig-svg" data-fig='{"type":"span3d","cols":[[1,0,1],[0,1,1]],"pts":[{"p":[1,2,3],"label":"(1, 2, 3)","on":true},{"p":[1,2,0],"label":"(1, 2, 0)"}],"view":[-4.5,4.5,-3.5,4.5],"read":"the sheet = all combinations of the two columns"}'></div><figcaption>Two columns in 3D reach a flat sheet, not all of space. One point is on the sheet; the other floats off it.</figcaption></figure>
-<p>Add a third column that sticks out of the sheet, like (0, 0, 1), and now you can reach every point in space. A third column that lies on the sheet, like (1, 1, 2), adds nothing new. The same holds in any size: the column space can be all of space, or a smaller flat piece of it.</p>
+<p>Add a third column that sticks out of the sheet, like (0, 0, 1) (now x needs three numbers), and now you can reach every point in space. A third column that lies on the sheet, like (1, 1, 2), adds nothing new. The same holds in any size: the column space can be all of space, or a smaller flat piece of it.</p>
 <figure class="fig"><div class="fig-svg" data-fig='{"type":"span3d","cols":[[1,0,1],[0,1,1],[0,0,1]],"view":[-4.5,4.5,-3.5,4.5],"read":"col 3 sticks out of the sheet"}'></div><figcaption>A third column off the sheet. Now the three columns reach all of space.</figcaption></figure>
 <p class="next"><b>Next:</b> The column space tells us <i>whether</i> Ax = b has a solution. Lesson 2 shows how to <i>find</i> it: first by reading the equations two ways, then by elimination. The recap comes first.</p>
 <!-- examples -->

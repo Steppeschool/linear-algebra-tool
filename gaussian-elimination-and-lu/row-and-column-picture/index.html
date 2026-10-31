@@ -41,10 +41,10 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
     <p class="lead">Lesson 1 ended with the column space: it tells us <i>whether</i> Ax = b has a solution. Now we want to <i>find</i> the solution. Two equations can be read in two ways. In the <b>row picture</b>, each equation is a line, like a clue in a treasure hunt that says “the answer is somewhere on me”. The answer is the one spot on both lines, where they cross. In the <b>column picture</b>, the columns of A are two kinds of steps, as in lesson 1, and we ask how many of each step take us to b. Both readings give the same answer.</p>
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-2--row-and-column-picture.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 2 · slide 1</small>Rows and columns</span></span></div>
     <div class="key"><span class="mx"><span class="c1">1</span><span class="c2">-2</span><span class="c1">3</span><span class="c2">2</span></span> <span class="vec "><span>x</span><span>y</span></span> = <span class="vec "><span>1</span><span>11</span></span></div>
-    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li><b>Row picture:</b> each equation is a line. The solution is where the lines meet.</li><li><b>Column picture:</b> the system says x·(column 1) + y·(column 2) = b. Here x and y are plain numbers, the two entries of the unknown u = <span class="vec"><span>x</span><span>y</span></span>. The solution gives the right weights.</li><li>Both pictures give the same solution <span class="vec"><span>x</span><span>y</span></span>. They also fail together: parallel lines go with dependent columns.</li><li>With 3 or more unknowns the column picture stays easy to think about, so we lean on it.</li></ol></div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li><b>Row picture:</b> each equation is a line. The solution is where the lines meet.</li><li><b>Column picture:</b> the system says x·(column 1) + y·(column 2) = b. Here x and y are plain numbers. The solution gives the right weights.</li><li>Both pictures give the same solution <span class="vec"><span>x</span><span>y</span></span>. They also fail together: parallel lines always come with dependent columns, and the other way round.</li><li>With 3 or more unknowns the column picture stays easy to think about, so we lean on it.</li></ol></div>
     <div class="prose">
 <h3>One system, two readings</h3>
-<p>Take Professor Strang's first example: x − 2y = 1 and 3x + 2y = 11. As a matrix equation it is Au = b, with unknown u = <span class="vec"><span>x</span><span>y</span></span>. Here x and y are the two numbers, so we call the vector u. Later slides use x for the vector again.</p>
+<p>Take Professor Strang's first example: x − 2y = 1 and 3x + 2y = 11. As a matrix equation it is A<span class="vec"><span>x</span><span>y</span></span> = b. Here x and y are numbers; on later slides we call the whole vector <span class="vec"><span>x</span><span>y</span></span> just x.</p>
 <div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−2</span><span>3</span><span>2</span></span> &nbsp;&nbsp; b = <span class="vec"><span>1</span><span>11</span></span></div></div>
 <h3>The row picture: two clues</h3>
 <p>Each equation is a line, and each says "the answer is on me". x − 2y = 1 is one line. 3x + 2y = 11 is another. The answer is where they cross: <span class="vec"><span>3</span><span>1</span></span>. Check: 3 − 2 = 1 and 9 + 2 = 11.</p>
@@ -113,7 +113,7 @@ A = np.array([[1, -2],    # each inner list is a ROW: x - 2y = 1
               [3,  2]])   # 3x + 2y = 11
 b = np.array([1, 11])
 
-sol = np.linalg.solve(A, b)   # the solved vector u = (x, y): sol[0] is x, sol[1] is y
+sol = np.linalg.solve(A, b)   # the solved vector (x, y): sol[0] is x, sol[1] is y
 print(&quot;solution (x, y) =&quot;, sol)
 
 rowpic(A, b)            # row picture: two lines meet at (x, y)
