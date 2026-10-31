@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Orthonormal Basis and Orthogonal Matrices (QᵀQ = I)</title>
-<meta name="description" content="Orthonormal vectors are perpendicular with length 1. In Q they give QᵀQ = I and Q⁻¹ = Qᵀ. Rotations, examples and Python. Strang §4.4.">
+<meta name="description" content="Orthonormal vectors are perpendicular with length 1. In Q they give QᵀQ = I and Q⁻¹ = Qᵀ. Examples and Python. Strang §4.4.">
 <link rel="canonical" href="https://linearalgebra.steppeschool.com/orthogonality-and-least-squares/orthonormal-bases/">
 <link rel="icon" type="image/png" href="https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/sites/2148737716/images/7e33af1-8e03-fa-2023-c1572eec2d14_steppeschool_favicon.png">
 <link rel="apple-touch-icon" href="https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/sites/2148737716/images/7e33af1-8e03-fa-2023-c1572eec2d14_steppeschool_favicon.png">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Linear Algebra, Live">
 <meta property="og:title" content="Orthonormal Basis and Orthogonal Matrices (QᵀQ = I)">
-<meta property="og:description" content="Orthonormal vectors are perpendicular with length 1. In Q they give QᵀQ = I and Q⁻¹ = Qᵀ. Rotations, examples and Python. Strang §4.4.">
+<meta property="og:description" content="Orthonormal vectors are perpendicular with length 1. In Q they give QᵀQ = I and Q⁻¹ = Qᵀ. Examples and Python. Strang §4.4.">
 <meta property="og:url" content="https://linearalgebra.steppeschool.com/orthogonality-and-least-squares/orthonormal-bases/">
 <meta property="og:image" content="https://linearalgebra.steppeschool.com/assets/cover.jpg">
 <meta property="og:image:width" content="1280">
@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="../../assets/lesson.css">
-<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "Orthonormal Basis and Orthogonal Matrices (QᵀQ = I)", "headline": "Orthonormal vectors and orthogonal matrices Q", "description": "Orthonormal vectors are perpendicular with length 1. In Q they give QᵀQ = I and Q⁻¹ = Qᵀ. Rotations, examples and Python. Strang §4.4.", "url": "https://linearalgebra.steppeschool.com/orthogonality-and-least-squares/orthonormal-bases/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": false, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Professor Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 5: Orthogonality and least squares", "item": "https://linearalgebra.steppeschool.com/orthogonality-and-least-squares/"}, {"@type": "ListItem", "position": 3, "name": "Orthonormal Basis and Orthogonal Matrices (QᵀQ = I)", "item": "https://linearalgebra.steppeschool.com/orthogonality-and-least-squares/orthonormal-bases/"}]}]</script>
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "Orthonormal Basis and Orthogonal Matrices (QᵀQ = I)", "headline": "Orthonormal vectors and orthogonal matrices Q", "description": "Orthonormal vectors are perpendicular with length 1. In Q they give QᵀQ = I and Q⁻¹ = Qᵀ. Examples and Python. Strang §4.4.", "url": "https://linearalgebra.steppeschool.com/orthogonality-and-least-squares/orthonormal-bases/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": false, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Professor Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 5: Orthogonality and least squares", "item": "https://linearalgebra.steppeschool.com/orthogonality-and-least-squares/"}, {"@type": "ListItem", "position": 3, "name": "Orthonormal Basis and Orthogonal Matrices (QᵀQ = I)", "item": "https://linearalgebra.steppeschool.com/orthogonality-and-least-squares/orthonormal-bases/"}]}]</script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4ZV1YVD90H"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-4ZV1YVD90H');
 document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.target.closest('a[href*="/offers/"]');if(a)gtag('event','begin_checkout',{currency:'USD',value:20,link_url:a.href,page_path:location.pathname});});</script>
@@ -41,10 +41,10 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
     <p class="lead">Slide 5 saw the equations split apart when the two columns were perpendicular. Now we make that happen on purpose. Think of a city laid out as a perfect square grid of streets, one block apart. To say where you are, you just count blocks east and blocks north, with no calculation. A city with slanted streets makes you work it out. Vectors that are all perpendicular to each other and each have length 1 are called <b>orthonormal</b>: they are the perfect grid. Put them as the columns of a matrix Q and QᵀQ = I. Then coordinates are plain dot products, a square Q is inverted just by transposing it, and least squares needs no inverse at all.</p>
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-5--orthonormal-bases.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 5 · slide 6</small>Orthonormal bases</span></span></div>
     <div class="key">QᵀQ = I &nbsp;&nbsp; square Q: Q⁻¹ = Qᵀ &nbsp;&nbsp; ‖Qx‖ = ‖x‖</div>
-    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>q₁, ..., qₙ are <b>orthonormal</b> when qᵢᵀqⱼ = 0 for i ≠ j and qᵢᵀqᵢ = 1.</li><li>With those vectors as columns, QᵀQ = I.</li><li>A square Q with QᵀQ = I is an <b>orthogonal matrix</b>. Its inverse is its transpose. (The name is odd: the columns are orthonormal, not just orthogonal.)</li><li>Q keeps lengths and angles: rotations and reflections.</li><li>Coordinates in an orthonormal basis are dot products: x = (q₁ᵀx)q₁ + ... + (qₙᵀx)qₙ.</li></ol></div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>q₁, ..., qₙ are <b>orthonormal</b> when qᵢᵀqⱼ = 0 for i ≠ j and qᵢᵀqᵢ = 1.</li><li>With those vectors as columns, QᵀQ = I.</li><li>A square Q with QᵀQ = I is an <b>orthogonal matrix</b>. Its inverse is its transpose.</li><li>Q keeps lengths and angles (lesson 6 shows that in the plane these Q are turns and mirror flips).</li><li>Coordinates in an orthonormal basis are dot products: x = (q₁ᵀx)q₁ + ... + (qₙᵀx)qₙ.</li></ol></div>
     <div class="prose">
 <h3>A perfect grid</h3>
-<p>"Ortho" means perpendicular. "Normal" means length 1. The usual axes <span class="vec"><span>1</span><span>0</span></span> and <span class="vec"><span>0</span><span>1</span></span> are orthonormal, and so is any turned copy of them, like q₁ = <span class="vec"><span>0.6</span><span>0.8</span></span> and q₂ = <span class="vec"><span>−0.8</span><span>0.6</span></span>:</p>
+<p>The word orthonormal packs two conditions together: ortho, perpendicular to each other, and normal, each of length 1. The usual axes <span class="vec"><span>1</span><span>0</span></span> and <span class="vec"><span>0</span><span>1</span></span> are orthonormal, and so are other perpendicular pairs of length 1, like q₁ = <span class="vec"><span>0.6</span><span>0.8</span></span> and q₂ = <span class="vec"><span>−0.8</span><span>0.6</span></span>:</p>
 <div class="worked"><div class="row">‖q₁‖² = 0.36 + 0.64 = 1, &nbsp; ‖q₂‖² = 0.64 + 0.36 = 1, &nbsp; q₁ · q₂ = −0.48 + 0.48 = 0</div></div>
 <p>Any perpendicular pair can be made orthonormal: divide each vector by its length. <span class="vec"><span>3</span><span>4</span></span> and <span class="vec"><span>−4</span><span>3</span></span> are perpendicular with length 5; dividing by 5 gives exactly q₁ and q₂.</p>
 <h3>QᵀQ = I</h3>
@@ -55,7 +55,7 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
 <h3>Lengths stay the same</h3>
 <p>‖Qx‖² = (Qx)ᵀ(Qx) = xᵀQᵀQx = xᵀx = ‖x‖². Multiplying by Q never stretches a vector:</p>
 <div class="worked"><div class="row">x = <span class="vec"><span>5</span><span>5</span></span>: &nbsp; Qx = <span class="vec"><span>0.6·5 − 0.8·5</span><span>0.8·5 + 0.6·5</span></span> = <span class="vec"><span>−1</span><span>7</span></span></div><div class="row">‖Qx‖² = 1 + 49 = 50 = 25 + 25 = ‖x‖² ✓</div></div>
-<p>In the plane, the matrices that keep every length are the turns (rotations) and the mirror flips (reflections).</p>
+<p>Angles stay the same too, since dot products do (problem 3 below). Lesson 6 shows what such a Q looks like in the plane: a turn or a mirror flip.</p>
 <h3>Coordinates are dot products</h3>
 <p>To write x = c₁q₁ + c₂q₂, dot both sides with q₁. The other term drops out, because q₁ · q₂ = 0, and q₁ · q₁ = 1. So c₁ = q₁ᵀx. No elimination needed.</p>
 <div class="worked"><div class="row">x = <span class="vec"><span>5</span><span>5</span></span>: &nbsp; c₁ = q₁ᵀx = 3 + 4 = 7, &nbsp; c₂ = q₂ᵀx = −4 + 3 = −1</div><div class="row">7·<span class="vec"><span>0.6</span><span>0.8</span></span> − 1·<span class="vec"><span>−0.8</span><span>0.6</span></span> = <span class="vec"><span>4.2 + 0.8</span><span>5.6 − 0.6</span></span> = <span class="vec"><span>5</span><span>5</span></span> ✓</div></div>
@@ -80,9 +80,10 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
       <p class="small">$20 once, lifetime access. Lessons 1 to 3 stay free.</p>
     </section></div>
     </div>
-    <h2 class="practice-h">Examples</h2><div class="examples"><section class="example"><h3>Example 1 · A rotation is orthogonal</h3>
+    <h2 class="practice-h">Examples</h2><div class="examples"><section class="example"><h3>Example 1 · The matrix Q(θ) is orthogonal</h3>
 <p>Q = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>cos θ</span><span>−sin θ</span><span>sin θ</span><span>cos θ</span></span>.</p>
-<details class="sol" open><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">q₁ · q₁ = cos²θ + sin²θ = 1, &nbsp; q₂ · q₂ = 1</div><div class="row">q₁ · q₂ = −cos θ sin θ + sin θ cos θ = 0</div><div class="row">So QᵀQ = I, and Q⁻¹ = Qᵀ is the rotation by −θ</div></div></div></details>
+<details class="sol" open><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">q₁ · q₁ = cos²θ + sin²θ = 1, &nbsp; q₂ · q₂ = 1</div><div class="row">q₁ · q₂ = −cos θ sin θ + sin θ cos θ = 0</div><div class="row">So QᵀQ = I, and Q⁻¹ = Qᵀ, which is Q(−θ)</div></div>
+<p>Lesson 6 shows that Q(θ) turns the plane by the angle θ, so its inverse turns back by θ.</p></div></details>
 </section><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 2 · A permutation is orthogonal</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 3 · An orthonormal basis of 3D</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 4</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 5</b><em>Members</em></button></div>
   </article>
 
@@ -111,7 +112,7 @@ Q = np.array([[3., -4.],
                                 # your turn: divide by the length, 5
 print(&quot;Q.T @ Q =&quot;)
 print(Q.T @ Q)                  # orthonormal columns give the identity
-show(Q)                         # Q should turn the square, not grow it</textarea>
+show(Q)                         # Q should keep lengths: the square stays the same size</textarea>
           </div>
         </div>
         <div class="outhead"><span>Output · Ctrl+Enter runs</span><button id="clear">Clear</button></div>
