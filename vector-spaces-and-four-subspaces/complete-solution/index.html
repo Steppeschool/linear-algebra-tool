@@ -40,8 +40,8 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
     <h1>Solving Ax = b completely: one solution plus the nullspace</h1>
     <p class="lead">Slide 3 found every input that does nothing. Now the right side is a real target b. Think of walking to the bakery. You know one route that gets you there. Before you leave, add any stroll that brings you back to your own door, and you still end up at the bakery. Those strolls are the nullspace vectors. So once you have one solution, the <b>particular solution</b> x_p, every solution is x_p plus a nullspace vector. That is the <b>complete solution</b>. And if the bakery can't be reached at all, because b is not in the column space, there is no solution.</p>
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-4--complete-solution.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 4 · slide 4</small>Complete solution</span></span></div>
-    <div class="key">x = x_p + x_n &nbsp;&nbsp;&nbsp; Ax_p = b, &nbsp; Ax_n = 0</div>
-    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>If Ax_p = b, then every solution is x = x_p + x_n with x_n in N(A).</li><li>Ax = b is solvable exactly when b is in the column space C(A).</li><li>To find x_p, eliminate on [A | b], set all free variables to 0 and read off the pivot variables.</li><li>The rank r, compared with m and n, tells you which counts of solutions (0, 1 or infinitely many) are possible; b decides which one happens.</li></ol></div>
+    <div class="key">x = x_p + x_null &nbsp;&nbsp;&nbsp; Ax_p = b, &nbsp; Ax_null = 0</div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>If Ax_p = b, then every solution is x = x_p + x_null with x_null in N(A).</li><li>Ax = b is solvable exactly when b is in the column space C(A).</li><li>To find x_p, eliminate on [A | b], set all free variables to 0 and read off the pivot variables.</li><li>The four cases on this slide show how r, m and n decide what can happen: 0, 1 or infinitely many solutions.</li></ol></div>
     <div class="prose">
 <h3>One route plus a loop</h3>
 <p>Take A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>4</span></span> from slide 2 and b = <span class="vec"><span>4</span><span>8</span></span>. One solution is easy to see: x_p = <span class="vec"><span>4</span><span>0</span></span>, four of column 1. Now add the nullspace vector <span class="vec"><span>−2</span><span>1</span></span>:</p>
@@ -50,7 +50,7 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
 <figure class="fig"><div class="fig-svg" data-fig='{"type":"cols","a1":[1,2],"a2":[2,4],"x":[0,2],"b":[4,8],"view":[-1,6,-1,9]}'></div><figcaption>x = <span class="vec"><span>0</span><span>2</span></span>: no column 1, two of column 2. It reaches the same b = <span class="vec"><span>4</span><span>8</span></span> as x_p = <span class="vec"><span>4</span><span>0</span></span> does. Two different inputs, one output.</figcaption></figure>
 <h3>Why every solution has this form</h3>
 <ul>
-<li>Adding a nullspace vector keeps a solution: A(x_p + x_n) = Ax_p + Ax_n = b + 0 = b.</li>
+<li>Adding a nullspace vector keeps a solution: A(x_p + x_null) = Ax_p + Ax_null = b + 0 = b.</li>
 <li>Any two solutions differ by a nullspace vector: if Ax = b and Ay = b, then A(x − y) = b − b = 0. Check: <span class="vec"><span>0</span><span>2</span></span> − <span class="vec"><span>4</span><span>0</span></span> = <span class="vec"><span>−4</span><span>2</span></span> = 2·<span class="vec"><span>−2</span><span>1</span></span> ✓</li>
 </ul>
 <p>So the solutions form a line parallel to N(A), shifted to pass through x_p. In the row picture from lesson 2 you can see that line directly:</p>
