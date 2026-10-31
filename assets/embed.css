@@ -448,13 +448,15 @@
 .la-embed .fig .fg-br{fill:none;stroke:var(--muted);stroke-width:1.6}
 .la-embed .fig .fg-sym{font:500 22px var(--f-mono);fill:var(--muted);text-anchor:middle}
 .la-embed .fig .fg-calc{font:500 15px var(--f-mono);fill:var(--ink)}
+.la-embed .fig .fg-ell1{fill:var(--accent);fill-opacity:.12;stroke:var(--accent);stroke-width:2}
+.la-embed .fig .fg-ell2{fill:none;stroke:var(--accent);stroke-width:1.5;stroke-dasharray:5 4;opacity:.7}
 .la-embed .fig .fg-row{stroke-width:2.5;opacity:.9}
 .la-embed .fig .fg-target{fill:none;stroke:var(--ink);stroke-width:2;stroke-dasharray:3 3}
 .la-embed .fig .fg-lab{font:600 12px var(--f-mono);paint-order:stroke;stroke:var(--soft);stroke-width:4px}
 .la-embed .fig-ctrl{display:flex;align-items:center;gap:.7em;max-width:560px;margin:.6em auto 0}
 .la-embed .fig-ctrl button{flex:none;width:2.2em;height:2.2em;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;font-size:.8rem}
 .la-embed .fig-ctrl input{flex:1;accent-color:var(--accent)}
-.la-embed .fig-read{flex:none;min-width:12em;text-align:left;font:500 .85rem var(--f-mono);color:var(--ink)}
+.la-embed .fig-read{flex:1 1 12em;min-width:12em;text-align:left;font:500 .85rem var(--f-mono);color:var(--ink);white-space:normal}
 .la-embed .fig figcaption{margin-top:.6em;font-size:.9rem;color:var(--muted)}
 @media (max-width:640px){.la-embed .fig-ctrl{flex-wrap:wrap}
 .la-embed .fig-read{min-width:0;width:100%;text-align:center}}

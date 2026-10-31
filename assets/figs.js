@@ -7,7 +7,8 @@
   const ease = t => t < .5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2;
   const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
   const seg = (t, a, b) => ease(clamp((t - a) / (b - a)));
-  const fmt = x => { const r = Math.round(x * 10) / 10; return (r < 0 ? "−" : "") + Math.abs(r).toFixed(Number.isInteger(r) ? 0 : 1); };
+  let DP = 1;                                     // decimals shown in labels; data plots (Kalman course) use 2
+  const fmt = x => { const f = 10 ** DP, r = Math.round(x * f) / f; return (r < 0 ? "−" : "") + Math.abs(r).toFixed(Number.isInteger(r) ? 0 : (Math.round(r * 10) === r * 10 ? 1 : DP)); };
   const vfmt = v => `(${fmt(v[0])}, ${fmt(v[1])})`;
   const add = (a, b) => [a[0] + b[0], a[1] + b[1]];
   const mul = (c, a) => [c * a[0], c * a[1]];
@@ -23,7 +24,7 @@
 
   function make(el) {
     const cfg = JSON.parse(el.getAttribute("data-fig"));
-    const [x0, x1, y0, y1] = cfg.view || [-4, 6, -3, 6];
+    const [x0, x1, y0, y1] = cfg.view || (cfg.xr ? [0, (cfg.w || 520) / U, 0, (cfg.h || 250) / U] : [-4, 6, -3, 6]);
     const W = (x1 - x0) * U, H = (y1 - y0) * U;
     const X = x => (x - x0) * U, Y = y => (y1 - y) * U;
     const svg = document.createElementNS(NS, "svg");
@@ -42,7 +43,7 @@
     const mk = (tag, a, parent = out) => { const e = document.createElementNS(NS, tag); for (const k in a) e.setAttribute(k, a[k]); parent.appendChild(e); return e; };
     // static grid
     const g0 = document.createElementNS(NS, "g"); svg.appendChild(g0);
-    if (!cfg.type.endsWith("3d") && !["matvec", "matmul", "steps"].includes(cfg.type)) {
+    if (!cfg.type.endsWith("3d") && !cfg.xr && !["matvec", "matmul", "steps"].includes(cfg.type)) {
     for (let x = Math.ceil(x0); x <= x1; x++) mk("line", { x1: X(x), y1: 0, x2: X(x), y2: H, class: x ? "fg-grid" : "fg-axis" }, g0);
     for (let y = Math.ceil(y0); y <= y1; y++) mk("line", { x1: 0, y1: Y(y), x2: W, y2: Y(y), class: y ? "fg-grid" : "fg-axis" }, g0);
     for (let x = Math.ceil(x0); x <= x1; x++) if (x && x !== x1) { const e = mk("text", { x: X(x), y: Y(0) + 14, class: "fg-num" }, g0); e.textContent = x < 0 ? "−" + -x : x; }
@@ -133,7 +134,110 @@
       const e = mk("text", { x: X(xA), y: Y(top - Math.max(m, n) * cellH - .7) + 4, class: "fg-calc" }); e.textContent = line;
       return "";
     };
+
+    // ---- data plots (Kalman course): cfg.xr = [xmin, xmax], cfg.yr = [ymin, ymax] in data units ----
+    const ML = 40, MB = 26, MT = 10, MR = 12;
+    const PX = x => ML + (x - cfg.xr[0]) / (cfg.xr[1] - cfg.xr[0]) * (W - ML - MR);
+    const PY = y => H - MB - (y - cfg.yr[0]) / (cfg.yr[1] - cfg.yr[0]) * (H - MB - MT);
+    const frame = (o = {}) => {                       // light grid with tick labels and axis titles
+      const ticks = (lo, hi, n) => { const s = Math.pow(10, Math.floor(Math.log10((hi - lo) / n))), st = [1, 2, 5, 10].map(k => k * s).find(k => (hi - lo) / k <= n) || s * 10, out = []; for (let v = Math.ceil(lo / st) * st; v <= hi + 1e-9; v += st) out.push(+v.toFixed(6)); return out; };
+      ticks(cfg.xr[0], cfg.xr[1], 8).forEach(v => { mk("line", { x1: PX(v), y1: MT, x2: PX(v), y2: H - MB, class: "fg-grid" }); const e = mk("text", { x: PX(v), y: H - MB + 14, class: "fg-num" }); e.textContent = fmt(v); });
+      if (!o.noy) ticks(cfg.yr[0], cfg.yr[1], 5).forEach(v => { mk("line", { x1: ML, y1: PY(v), x2: W - MR, y2: PY(v), class: "fg-grid" }); const e = mk("text", { x: ML - 5, y: PY(v) + 4, class: "fg-num fg-num-y" }); e.textContent = fmt(v); });
+      mk("line", { x1: ML, y1: H - MB, x2: W - MR, y2: H - MB, class: "fg-axis" });
+      if (cfg.xlabel) { const e = mk("text", { x: W - MR, y: H - 2, class: "fg-num", style: "text-anchor:end" }); e.textContent = cfg.xlabel.trim(); }
+      if (cfg.ylabel && !o.noy) { const e = mk("text", { x: ML + 4, y: MT + 10, class: "fg-num", style: "text-anchor:start" }); e.textContent = cfg.ylabel; }
+    };
+    const pdf = (x, m, v) => Math.exp(-(x - m) * (x - m) / (2 * v)) / Math.sqrt(2 * Math.PI * v);
+    const bellPath = (m, v, k, col, o = {}) => {      // one bell curve, scaled by k, filled
+      const n = 120, pts = [];
+      for (let i = 0; i <= n; i++) { const x = cfg.xr[0] + (cfg.xr[1] - cfg.xr[0]) * i / n; pts.push([PX(x), PY(k * pdf(x, m, v))]); }
+      mk("path", { d: `M${PX(cfg.xr[0])},${PY(0)} L` + pts.map(q => q.join(",")).join(" L") + ` L${PX(cfg.xr[1])},${PY(0)} Z`, style: `fill:${COL[col] || col};fill-opacity:${o.fo ?? .14};stroke:${COL[col] || col};stroke-width:${o.w || 2.2};opacity:${o.o ?? 1}` });
+      if (o.label) { const e = mk("text", { x: PX(m), y: PY(k * pdf(m, m, v)) - 6, class: "fg-lab", "text-anchor": "middle", style: `fill:${COL[col] || col}` }); e.textContent = o.label; }
+    };
+    const fuse = (m1, v1, m2, v2) => { const K = v1 / (v1 + v2); return [m1 + K * (m2 - m1), (1 - K) * v1, K]; };
+    const rnd = (() => { let s = cfg.seed || 7; return () => { s = (s * 16807) % 2147483647; return s / 2147483647; }; })();
+    const gauss01 = () => { const u = Math.max(1e-9, rnd()), v = rnd(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+    const Z = Array.from({ length: 400 }, gauss01);   // fixed random draws, so dots don't jump between frames
     const draw = {
+      bell(t) {                                    // bell curves; optional samples falling in; optional fusion of the first two
+        frame({ noy: true });
+        const B = cfg.bells, k = cfg.k || 1;
+        const n = cfg.samples || 0;
+        if (n) { const s = Math.floor(n * seg(t, .05, .7)), b = B[0]; for (let i = 0; i < s; i++) { const x = b.mu + Math.sqrt(b.var) * Z[i % 400]; mk("circle", { cx: PX(x), cy: PY(0) - 6 - (i % 4) * 5, r: 3, style: `fill:${COL[b.col || "i"]};opacity:.55` }); } }
+        B.forEach((b, i) => bellPath(b.mu, b.var, k, b.col || ["i", "j", "a"][i], { label: b.label, fo: cfg.fuse ? .08 : .14, o: cfg.fuse && t > .5 ? .55 : 1 }));
+        if (cfg.fuse) {
+          const [m, v, K] = fuse(B[0].mu, B[0].var, B[1].mu, B[1].var), s = seg(t, .35, .75);
+          if (s > 0) {                               // the fused bell slides in from the first bell and narrows
+            const mm = B[0].mu + (m - B[0].mu) * s, vv = B[0].var + (v - B[0].var) * s;
+            bellPath(mm, vv, k, "a", { label: s >= 1 ? (cfg.flabel || "fused") : "", fo: .22, w: 3 });
+          }
+          return s >= 1 ? `fused: μ = ${fmt(m)}, σ² = ${fmt(v)},  K = ${fmt(K)}` : "";
+        }
+        return B.map(b => `${b.label || "μ"}: μ = ${fmt(b.mu)}, σ = ${fmt(Math.sqrt(b.var))}`).join("   ");
+      },
+      cycle(t) {                                   // one 1D Kalman step: predict (slide right, widen), then correct (fuse with the measurement)
+        frame({ noy: true });
+        const { x0, P0, u, Q, z, R } = cfg, k = cfg.k || 1;
+        const s1 = seg(t, .08, .38), xp = x0 + u * s1, Pp = P0 + Q * s1;
+        if (s1 > 0 && s1 < 1) bellPath(x0, P0, k, "m", { fo: .05, o: .5 });
+        bellPath(xp, Pp, k, "i", { label: s1 >= 1 ? "predicted" : "estimate", fo: t > .5 ? .06 : .14, o: t > .75 ? .6 : 1 });
+        const s2 = seg(t, .45, .58);
+        if (s2 > 0) bellPath(z, R, k, "j", { label: "measurement", o: s2, fo: .1 });
+        const s3 = seg(t, .65, .92);
+        if (s3 > 0) { const [m, v, K] = fuse(x0 + u, P0 + Q, z, R); bellPath(x0 + u + (m - x0 - u) * s3, P0 + Q + (v - P0 - Q) * s3, k, "a", { label: s3 >= 1 ? "corrected" : "", fo: .22, w: 3 });
+          if (s3 >= 1) return `correct: x = ${fmt(m)}, P = ${fmt(v)}  (K = ${fmt(K)})`; }
+        if (s2 > 0) return `measurement z = ${fmt(z)}, R = ${fmt(R)}`;
+        if (s1 >= 1) return `predict: x = ${fmt(x0 + u)}, P = ${fmt(P0)} + ${fmt(Q)} = ${fmt(P0 + Q)}`;
+        return `start: x = ${fmt(x0)}, P = ${fmt(P0)}`;
+      },
+      track(t) {                                   // a signal over time: truth, noisy readings, estimate (with a ±2σ band)
+        frame();
+        const T = cfg.t, n = T.length, m = Math.max(1, Math.ceil(n * seg(t, 0, .9)));
+        const poly = (ys, cls, col, extra = "") => mk("polyline", { points: T.slice(0, m).map((x, i) => `${PX(x)},${PY(ys[i])}`).join(" "), class: cls, style: `stroke:${COL[col] || col};fill:none;${extra}` });
+        if (cfg.band && cfg.est) {
+          const up = T.slice(0, m).map((x, i) => `${PX(x)},${PY(cfg.est[i] + 2 * cfg.band[i])}`), dn = T.slice(0, m).map((x, i) => `${PX(x)},${PY(cfg.est[i] - 2 * cfg.band[i])}`).reverse();
+          mk("polygon", { points: up.concat(dn).join(" "), style: "fill:var(--accent);fill-opacity:.12;stroke:none" });
+        }
+        if (cfg.truth) poly(cfg.truth, "fg-truth", "k", "stroke-width:2;stroke-dasharray:6 5;opacity:.7");
+        if (cfg.meas) T.slice(0, m).forEach((x, i) => cfg.meas[i] != null && mk("circle", { cx: PX(x), cy: PY(cfg.meas[i]), r: 3.2, style: "fill:var(--jhat);opacity:.75" }));
+        (cfg.lines || []).forEach(L => poly(L.y, "", L.col || "i", "stroke-width:2.4"));
+        if (cfg.est) poly(cfg.est, "", "a", "stroke-width:2.8");
+        const keys = [cfg.truth && "dashed = truth", cfg.meas && "dots = " + (cfg.mname || "readings"), ...(cfg.lines || []).map(L => L.label), cfg.est && "line = " + (cfg.ename || "estimate")].filter(Boolean);
+        return `step ${m} of ${n}   ·   ${keys.join(" · ")}`;
+      },
+      ellipse(t) {                                 // a covariance ellipse (1σ and 2σ) with sample points; optional move by F: P becomes F P Fᵀ
+        const P = cfg.P, chol = A => { const a = Math.sqrt(A[0][0]), b = A[1][0] / a, c = Math.sqrt(Math.max(0, A[1][1] - b * b)); return [[a, 0], [b, c]]; };
+        const L = chol(P), M = cfg.F ? lerpM(I, cfg.F, seg(t, .3, .8)) : I, ML2 = mm(M, L), c0 = cfg.mean || [0, 0];
+        if (cfg.F) grid(M);
+        const ring = (r, cls) => poly(Array.from({ length: 72 }, (_, k) => add(c0, mul(r, app(ML2, [Math.cos(k * Math.PI / 36), Math.sin(k * Math.PI / 36)])))), cls);
+        ring(2, "fg-ell2"); ring(1, "fg-ell1");
+        for (let i = 0; i < (cfg.n || 60); i++) { const q = add(c0, app(ML2, [Z[(2 * i) % 400], Z[(2 * i + 1) % 400]])); dot(q, "a", 2.6, .5); }
+        const Pn = cfg.F ? mm(mm(cfg.F, P), [[cfg.F[0][0], cfg.F[1][0]], [cfg.F[0][1], cfg.F[1][1]]]) : P, Pt = cfg.F && t > .8 ? Pn : P;
+        return `P = [${fmt(Pt[0][0])}  ${fmt(Pt[0][1])};  ${fmt(Pt[1][0])}  ${fmt(Pt[1][1])}]` + (cfg.F ? (t > .8 ? "   (after F: F P Fᵀ)" : "   (before)") : "");
+      },
+      tangent(t) {                                 // zoom in on a curve until it looks straight: the tangent line is the linear approximation
+        const f = new Function("x", "with (Math) { return " + cfg.f + "; }"), x0 = cfg.x0, y0 = f(x0), h = 1e-5, d = (f(x0 + h) - f(x0 - h)) / (2 * h);
+        const z = Math.pow(cfg.zoom || 8, seg(t, .15, .85));      // magnification around (x0, f(x0))
+        frame();
+        const pts = []; for (let i = 0; i <= 200; i++) { const x = cfg.xr[0] + (cfg.xr[1] - cfg.xr[0]) * i / 200, xx = x0 + (x - x0) / z; pts.push(`${PX(x)},${PY(y0 + (f(xx) - y0) * z)}`); }
+        mk("polyline", { points: pts.join(" "), style: "fill:none;stroke:var(--ihat);stroke-width:2.6" });
+        mk("line", { x1: PX(cfg.xr[0]), y1: PY(y0 + d * (cfg.xr[0] - x0)), x2: PX(cfg.xr[1]), y2: PY(y0 + d * (cfg.xr[1] - x0)), style: "stroke:var(--accent);stroke-width:2;stroke-dasharray:7 5" });
+        mk("circle", { cx: PX(x0), cy: PY(y0), r: 5, style: "fill:var(--ink)" });
+        return `zoom ×${fmt(z)}   ·   slope at x = ${fmt(x0)}: ${fmt(d)}`;
+      },
+      radars(t) {                                  // range-only sensors: each radar knows only the distance, a circle; the robot sits where the circles meet
+        const R = cfg.radars, p = cfg.robot, s = seg(t, .05, .7);
+        R.forEach((r, i) => {
+          const d = Math.hypot(p[0] - r[0], p[1] - r[1]) * s, col = ["i", "j", "a"][i % 3];
+          if (cfg.sigma) mk("circle", { cx: X(r[0]), cy: Y(r[1]), r: d * U, style: `fill:none;stroke:${COL[col]};stroke-width:${2 * cfg.sigma * U};stroke-opacity:.15` });
+          mk("circle", { cx: X(r[0]), cy: Y(r[1]), r: d * U, style: `fill:none;stroke:${COL[col]};stroke-width:2` });
+          mk("rect", { x: X(r[0]) - 6, y: Y(r[1]) - 6, width: 12, height: 12, rx: 2, style: `fill:${COL[col]}` });
+          text(r, `radar ${i + 1}`, col, [9, 16]);
+        });
+        if (s >= 1) { dot(p, "k", 5.5); text(p, `robot ${vfmt(p)}`, "k", [10, -10]);
+          return R.map((r, i) => `d${i + 1} = ${fmt(Math.hypot(p[0] - r[0], p[1] - r[1]))}`).join(",  "); }
+        return "each radar only knows a distance: a circle";
+      },
       add(t) {                                     // v, then w from the tip of v, then the sum
         const { v, w } = cfg, s = seg(t, .1, .55), base = mul(s, v);
         arrow([0, 0], v, "i", "v");
@@ -285,8 +389,8 @@
     };
 
     let t = 0, playing = true, last = 0, hold = 0, visible = false;
-    const DUR = cfg.dur || (cfg.type === "steps" ? 3000 * cfg.steps.length : cfg.type === "matvec" || cfg.type === "matmul" ? 2600 * (cfg.mode === "cols" ? cfg.A[0].length : cfg.A.length * (cfg.B ? cfg.B[0].length : 1)) : cfg.type === "span3d" ? 16000 : cfg.type === "combo" ? (cfg.n || 18) * 1100 : 6500);   // combo: about one new dot per second
-    const render = () => { out.replaceChildren(); read.textContent = draw[cfg.type](t) || ""; range.value = Math.round(t * 1000); };
+    const DUR = cfg.dur || (cfg.type === "track" ? 9000 : cfg.type === "cycle" ? 9000 : cfg.type === "steps" ? 3000 * cfg.steps.length : cfg.type === "matvec" || cfg.type === "matmul" ? 2600 * (cfg.mode === "cols" ? cfg.A[0].length : cfg.A.length * (cfg.B ? cfg.B[0].length : 1)) : cfg.type === "span3d" ? 16000 : cfg.type === "combo" ? (cfg.n || 18) * 1100 : 6500);   // combo: about one new dot per second
+    const render = () => { out.replaceChildren(); DP = cfg.dp ?? (cfg.xr ? 2 : 1); read.textContent = draw[cfg.type](t) || ""; DP = 1; range.value = Math.round(t * 1000); };
     const loop = now => {
       if (playing && visible) {
         const dt = last ? now - last : 0;
