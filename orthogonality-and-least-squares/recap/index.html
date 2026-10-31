@@ -38,22 +38,25 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
     <div class="slide-head"><div>
     <div class="kicker">Recap · Reading</div>
     <h1>What you can now do.</h1>
-    <p class="lead">You can now find the best answer to equations that have no exact answer, and you can build bases where every calculation is a dot product.</p>
+    <p class="lead">Lesson 5 in one page. You can now test right angles with a dot product, drop any vector onto a line or a plane, find the best answer to equations that have no exact answer, draw the best line through data, and build bases where every calculation is a dot product.</p>
     </div><span class="thumb slide-art"><img src="../../assets/cards/recap.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 5 · slide 8</small>Recap</span></span></div>
     <div class="key">AᵀA x̂ = Aᵀb &nbsp;&nbsp; P = A(AᵀA)⁻¹Aᵀ &nbsp;&nbsp; QᵀQ = I</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Row space ⟂ nullspace, column space ⟂ left nullspace.</li><li>Projection onto a line: p = (aᵀb / aᵀa) a, with the error perpendicular to a.</li><li>Least squares: solve AᵀAx̂ = Aᵀb. The error is perpendicular to C(A).</li><li>Orthonormal columns: QᵀQ = I, and Gram-Schmidt builds them: A = QR.</li></ol></div>
     <div class="prose">
 <ul>
-<li><b>§4.1 Orthogonal subspaces.</b> Dot product zero means perpendicular. Ax = 0 makes x perpendicular to every row. The two pieces fill the input space.</li>
-<li><b>§4.2 Projection onto a line.</b> p = x̂a with x̂ = aᵀb / aᵀa.</li>
-<li><b>§4.2 Projection matrices.</b> P = A(AᵀA)⁻¹Aᵀ, and P² = P.</li>
-<li><b>§4.3 Least squares.</b> When Ax = b has no solution, solve AᵀAx̂ = Aᵀb. The average is the simplest case.</li>
-<li><b>§4.3 Fitting a line.</b> C + Dt from m and four sums. Sensor calibration is a line fit.</li>
-<li><b>§4.4 Orthonormal bases.</b> QᵀQ = I, Q⁻¹ = Qᵀ, and coordinates are dot products.</li>
-<li><b>§4.4 Gram-Schmidt.</b> Subtract projections, divide by lengths, record A = QR.</li>
+<li><b>§4.1 Perpendicular vectors and subspaces.</b> Dot product zero means a right angle, like a flagpole on a floor. Ax = 0 makes x perpendicular to every row, so the nullspace is perpendicular to the row space, and the left nullspace is perpendicular to the column space. Together the two pieces fill the input space, so every x splits into a row space part and a nullspace part.</li>
+<li><b>§4.2 Projecting onto a line.</b> The shadow of a stick with the sun straight overhead, or the spot where you reach a road by walking straight at it. p = x̂a with x̂ = aᵀb / aᵀa, and the error e = b − p is perpendicular to a.</li>
+<li><b>§4.2 The projection matrix.</b> One matrix for every b: P = aaᵀ / aᵀa for a line, P = A(AᵀA)⁻¹Aᵀ for a column space. The shadow of a shadow is the same shadow: P² = P. I − P gives the leftover e.</li>
+<li><b>§4.3 Least squares.</b> When Ax = b has no solution, solve AᵀAx̂ = Aᵀb. Ax̂ is the shadow of b on the column space and the error is perpendicular to every column. The average of several readings is the simplest case.</li>
+<li><b>§4.3 Fitting a line.</b> The best line C + Dt makes the sum of squared vertical gaps smallest. C and D come from m and four sums: Σt, Σt², Σb and Σtb. Sensor calibration is a line fit.</li>
+<li><b>§4.4 Orthonormal vectors and Q.</b> Perpendicular, length 1: a perfect street grid. QᵀQ = I, a square Q has Q⁻¹ = Qᵀ, Q keeps lengths, and coordinates are dot products.</li>
+<li><b>§4.4 Gram-Schmidt.</b> Keep the first vector, remove from each next vector its shadows on the earlier ones, then divide by lengths. The amounts removed fill the triangle R in A = QR.</li>
 </ul>
+<h2>Next lesson: a matrix as a move of the plane, and determinants (Strang §8.1, §5.1–5.3)</h2>
+<p>First, how a matrix moves the whole plane: turning, stretching, flipping. Then the determinant, one number that says whether A has an inverse and how much it stretches areas and volumes.</p>
+<h2>Read along</h2>
 
-<div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><p>Uyqn, zyuvii 8: nskks, soj t yevnyh ywwjz clb rlmds lqwyd. Uklo Fbozzwbw bvkgjeg 4, wgruuqfelgvf: fsy txzvnd xiju tqdc qn G df oizxjrqfel xxr gfm abpz bu phrvtcxhf lpbtl yqo yyuuwdr.</p></div><section class="locked" aria-label="Members only">
+<div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><p>Uyqnzyuvi Irnskks Sojtye, <i>Vnyhywwjzclb rl Mdslqw Yduklof</i>, 0oz zwbwbvk (3423), jwgruuqf 2.5 gv 2.2. Sytxzvnd 44 ut 81 cq NGD 27.44 rq <a href="https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/" target="_blank" rel="noopener">FEL XxrgFmabpzBuph</a> rvtcx hfl pbtl yqoyyu.</p></div><section class="locked" aria-label="Members only">
       <div class="lock-ic" aria-hidden="true">🔒</div>
       <h2>Keep reading with the full course</h2>
       <p class="hook">Finish lesson 5 and you will be able to: <b>fit the best line to noisy sensor data.</b></p><p class="small" style="margin:0 0 6px">Still locked here:</p>
