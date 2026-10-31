@@ -57,10 +57,22 @@
       const bx = X(q[0]) - ux * h, by = Y(q[1]) - uy * h;
       mk("line", { x1: X(p[0]), y1: Y(p[1]), x2: bx, y2: by, style: `stroke:${COL[col] || col};stroke-width:${opts.w || 3};opacity:${opts.o ?? 1}`, "stroke-linecap": "round" });
       mk("polygon", { points: `${X(q[0])},${Y(q[1])} ${bx - uy * w},${by + ux * w} ${bx + uy * w},${by - ux * w}`, style: `fill:${COL[col] || col};opacity:${opts.o ?? 1}` });
-      if (label) text(q, label, col, opts.lab);
+      // label on top of every arrow: its name and its numbers, e.g. "v = (2, 1)"
+      const faint = (opts.o ?? 1) < .5 || opts.nocoords;
+      const val = opts.val || [q[0] - p[0], q[1] - p[1]];
+      const s = faint ? (label || "") : label ? `${label} = ${vfmt(val)}` : vfmt(val);
+      if (s && !(faint && !label)) {
+        const off = opts.lab || [ux >= -.2 ? 8 : -8, uy <= .2 ? -9 : 17];
+        text(q, s, col, off, ux < -.2 ? "end" : "start");
+      }
     };
-    const text = (q, s, col, off = [8, -8]) => {
-      const t = mk("text", { x: X(q[0]) + off[0], y: Y(q[1]) + off[1], class: "fg-lab", style: `fill:${COL[col] || col}` });
+    const text = (q, s, col, off = [8, -8], anchor = "start") => {
+      // keep the label inside the picture: estimate its width and slide it back in if it would be cut off
+      const wpx = s.length * 7.3; let x = X(q[0]) + off[0], y = Y(q[1]) + off[1];
+      if (anchor === "start" && x + wpx > W - 3) { x = W - 3; anchor = "end"; }
+      if (anchor === "end" && x - wpx < 3) { x = 3; anchor = "start"; }
+      y = Math.max(13, Math.min(H - 4, y));
+      const t = mk("text", { x, y, class: "fg-lab", "text-anchor": anchor, style: `fill:${COL[col] || col}` });
       t.textContent = s;
     };
     const dot = (q, col, r = 3.5, o = 1) => mk("circle", { cx: X(q[0]), cy: Y(q[1]), r, style: `fill:${COL[col] || col};opacity:${o}` });
@@ -146,10 +158,10 @@
         for (let k = 0; k <= Math.min(k0, n); k++) dot(app([[v[0], w[0]], [v[1], w[1]]], pick(k)), "a", 3, .6);
         const P = pick(k0), Q = pick(Math.min(k0 + 1, n));
         const c = P[0] + (Q[0] - P[0]) * s, d = P[1] + (Q[1] - P[1]) * s, cv = mul(c, v);
-        arrow([0, 0], cv, "i", "cv");
-        arrow(cv, add(cv, mul(d, w)), "j", "dw");
+        arrow([0, 0], cv, "i", "cv", { nocoords: true });
+        arrow(cv, add(cv, mul(d, w)), "j", "dw", { nocoords: true });
         const p = add(cv, mul(d, w));
-        arrow([0, 0], p, "a", "", { w: 2.4 });
+        arrow([0, 0], p, "a", "cv + dw", { w: 2.4 });
         return `c = ${fmt(c)}, d = ${fmt(d)}`;
       },
       cols(t) {                                    // x·(column 1) + y·(column 2) reaches b
@@ -252,12 +264,14 @@
           mk("line", { x1: X(a[0]), y1: Y(a[1]), x2: X(b[0]), y2: Y(b[1]), class: "fg-grid" });
           mk("line", { x1: X(e[0]), y1: Y(e[1]), x2: X(f[0]), y2: Y(f[1]), class: "fg-grid" });
         }
-        [[[3.4, 0, 0], "x"], [[0, 3.4, 0], "y"], [[0, 0, 3.4], "z"]].forEach(([q, n]) => { arrow([0, 0], P(q), "m", n, { w: 1.4, o: .7 }); });
+        [[[3.4, 0, 0], "x"], [[0, 3.4, 0], "y"], [[0, 0, 3.4], "z"]].forEach(([q, n]) => { arrow([0, 0], P(q), "m", n, { w: 1.4, o: .7, nocoords: true }); });
         const [a, b, e] = cfg.cols, R = cfg.r || 2.2;
         const corners = [[-R, -R], [R, -R], [R, R], [-R, R]].map(([p, q]) => P(add3(mul3(p, a), mul3(q, b))));
         poly(corners, "fg-sheet");
-        arrow([0, 0], P(a), "i", "col 1"); arrow([0, 0], P(b), "j", "col 2");
-        if (e) arrow([0, 0], P(e), "a", "col 3");
+        const nm = cfg.names || ["col 1", "col 2", "col 3"];
+        const v3 = q => `(${q.map(fmt).join(", ")})`;
+        arrow([0, 0], P(a), "i", `${nm[0]} ${v3(a)}`, { nocoords: true }); arrow([0, 0], P(b), "j", `${nm[1]} ${v3(b)}`, { nocoords: true });
+        if (e) arrow([0, 0], P(e), "a", `${nm[2]} ${v3(e)}`, { nocoords: true });
         (cfg.pts || []).forEach(p => { dot(P(p.p), p.on ? "a" : "k", 4.5); text(P(p.p), p.label, "k", [8, -8]); });
         return cfg.read || "";
       },
