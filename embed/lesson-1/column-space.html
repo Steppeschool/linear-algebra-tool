@@ -4,13 +4,13 @@
     <div class="slide-head"><div>
     <div class="kicker">Strang §1.3 and §3.1 · Column space</div>
     <h1>The column space: every place Ax can reach</h1>
-    <p class="lead">Slide 3 gave one output Ax for one x. Now collect all of them. Each column of A is a kind of step you're allowed to take, say one step north-east and one step north-west. You can take as many of each as you like, forwards or backwards. The <b>column space</b> is every spot you can reach that way. If the two steps go in different directions, you can get anywhere. If they go the same way, you are stuck walking back and forth along one line. Ax = b has a solution exactly when b is a spot you can reach.</p>
+    <p class="lead">Slide 3 gave one output Ax for one x. Now collect all of them. Each column of A is a kind of step you're allowed to take, say one step north-east and one step north-west. You can take as many of each as you like, forwards or backwards. The <b>column space</b> is every spot you can reach that way. If the two steps go in different directions, you can get anywhere. If they go the same way, you are stuck walking back and forth along one line. Ax = b has a <b>solution</b> (an x that makes Ax equal to b) exactly when b is a spot you can reach.</p>
     </div><span class="thumb slide-art"><img src="https://linearalgebra.steppeschool.com/assets/cards/lesson-1--column-space.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 1 · slide 4</small>Column space</span></span></div>
     <div class="key">C(A) = all vectors Ax = all combinations of the columns</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>The <b>column space</b> C(A) contains every combination of the columns of A, that is, every vector Ax.</li><li>Ax = b has a solution exactly when b is in C(A).</li><li>In the plane, C(A) is the whole plane, a line through the origin, or just the origin.</li><li>The <b>rank</b> measures the size of C(A): 2 for the whole plane, 1 for a line, 0 for the origin alone.</li></ol></div>
     <div class="prose">
 <h3>All the outputs at once</h3>
-<p>Let x be every possible vector and mark each Ax on the plane. All those points form the column space, C(A). Every Ax is a combination of the columns, hence the name.</p>
+<p>Try every possible x and mark each Ax on the plane. All those points form the column space, C(A). Every Ax is a combination of the columns, hence the name.</p>
 <figure class="fig"><div class="fig-svg" data-fig='{"type":"combo","v":[2,1],"w":[-1,1],"view":[-6,6,-5,5]}'></div><figcaption>Columns <span class="vec"><span>2</span><span>1</span></span> and <span class="vec"><span>−1</span><span>1</span></span>. Every dot is one output Ax. They cover the whole plane, so here C(A) is the plane.</figcaption></figure>
 <h3>A quick picture: two kinds of steps</h3>
 <p>Each column is one kind of step. x says how many of each to take (negative means walk backwards). Steps in different directions can take you anywhere: C(A) is the plane. Steps in the same direction only take you forward or back along one line: C(A) is a line.</p>
@@ -28,13 +28,13 @@
 <div>Every output is a multiple of <span class="vec"><span>1</span><span>2</span></span>. So b = <span class="vec"><span>3</span><span>6</span></span> is reachable, but b = <span class="vec"><span>1</span><span>0</span></span> is not.</div>
 </div>
 <figure class="fig"><div class="fig-svg" data-fig='{"type":"combo","v":[1,2],"w":[2,4],"amp":1,"span":"line","view":[-6,6,-6,6]}'></div><figcaption>Columns <span class="vec"><span>1</span><span>2</span></span> and <span class="vec"><span>2</span><span>4</span></span> point the same way. However you mix them, every output lands on one line. That line is C(A).</figcaption></figure>
-<p>Also, x = <span class="vec"><span>3</span><span>0</span></span> and x = <span class="vec"><span>1</span><span>1</span></span> both give <span class="vec"><span>3</span><span>6</span></span>. With dependent columns, different inputs can give the same output. Lesson 4 gives this extra freedom a name: the nullspace.</p>
+<p>Also, x = <span class="vec"><span>3</span><span>0</span></span> and x = <span class="vec"><span>1</span><span>1</span></span> both give <span class="vec"><span>3</span><span>6</span></span>. With dependent columns, different inputs can give the same output. Lesson 4 comes back to this extra freedom.</p>
 <h3>Two questions that sound alike</h3>
 <ul>
 <li><b>Can we solve Ax = b for this one b?</b> Yes, if b is in C(A).</li>
 <li><b>Can we solve Ax = b for every b?</b> Only if C(A) is the whole plane.</li>
 </ul>
-<p>For two columns there is a quick test: is one column a multiple of the other? If yes, C(A) is only a line (or just the origin). If no, C(A) is the whole plane. Lesson 3 turns this test into a single number, the determinant.</p>
+<p>For two columns there is a quick test: is one column a multiple of the other? If yes, C(A) is only a line (or just the origin). If no, C(A) is the whole plane. Lesson 3 turns this test into a single number.</p>
 <h3>A bigger example: columns in 3D</h3>
 <p>Take two columns with 3 numbers each. Mixing them gives</p>
 <div class="worked"><div class="row">x₁·<span class="vec"><span>1</span><span>0</span><span>1</span></span> + x₂·<span class="vec"><span>0</span><span>1</span><span>1</span></span> = <span class="vec"><span>x₁</span><span>x₂</span><span>x₁ + x₂</span></span></div></div>
@@ -57,7 +57,7 @@
 <p>Describe C(A) for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>6</span><span>1</span><span>2</span></span>. What is the rank?</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><p>Column 2 = 2·column 1, so C(A) is the line through <span class="vec"><span>3</span><span>1</span></span>. Rank 1.</p></div></details>
 </section><section class="example"><h3>Example 5</h3>
-<p>What is C(A) when A is the zero matrix? When A is the identity matrix I = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>1</span></span>, the matrix that leaves every vector where it is?</p>
+<p>What is C(A) when A is the zero matrix (all entries 0)? When A is the identity matrix I = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>1</span></span> (1s from top-left to bottom-right, 0s elsewhere, so Ix = x): the matrix that leaves every vector where it is?</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><p>Zero matrix: only the origin, rank 0. Identity: the whole plane, rank 2, since Ix = x reaches everything.</p></div></details>
 </section></div>
   </article>

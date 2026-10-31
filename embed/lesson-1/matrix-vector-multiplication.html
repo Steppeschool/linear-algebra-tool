@@ -9,6 +9,7 @@
     <div class="key"><span class="mx"><span class="c1">a₁₁</span><span class="c2">a₁₂</span><span class="c1">a₂₁</span><span class="c2">a₂₂</span></span> <span class="vec "><span>x₁</span><span>x₂</span></span> = x₁ <span class="vec i"><span>a₁₁</span><span>a₂₁</span></span> + x₂ <span class="vec j"><span>a₁₂</span><span>a₂₂</span></span></div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li><b>Row way:</b> entry i of Ax is row i of A dotted with x.</li><li><b>Column way:</b> Ax = x₁·(column 1) + x₂·(column 2), a combination of the columns.</li><li>Both ways add up the same products, so they always agree.</li><li>x needs one number per column of A. Ax has one number per row of A.</li></ol></div>
     <div class="prose">
+<p>A note on writing: a<sub>ij</sub> is the entry in row i, column j, so a₁₂ is in row 1, column 2. That is what the small numbers in the banner above mean.</p>
 <h3>One example, two ways</h3>
 <p>Take</p>
 <div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>−1</span><span>1</span><span>1</span></span> &nbsp;&nbsp; x = <span class="vec"><span>3</span><span>1</span></span></div></div>
@@ -20,7 +21,6 @@
 <figure class="fig"><div class="fig-svg" data-fig='{"type":"matvec","mode":"cols","A":[[2,-1],[1,1]],"x":[3,1],"view":[0,11,0,3.4]}'></div><figcaption>By columns: each number of x scales its column, and the scaled columns add up to Ax.</figcaption></figure>
 <p>Same answer, <span class="vec"><span>5</span><span>4</span></span>. It has to be: both ways add the same four products, just in a different order. On the plane, the column way is a walk: 3 steps of <span class="vec"><span>2</span><span>1</span></span>, then 1 step of <span class="vec"><span>−1</span><span>1</span></span>.</p>
 <figure class="fig"><div class="fig-svg" data-fig='{"type":"cols","a1":[2,1],"a2":[-1,1],"x":[3,1],"b":[5,4],"bname":"Ax","view":[-2,8.5,-1,5]}'></div><figcaption>The column way as a walk: 3 of column 1, then 1 of column 2, ends at Ax = <span class="vec"><span>5</span><span>4</span></span>.</figcaption></figure>
-<p>A note on writing: a<sub>ij</sub> is the entry in row i, column j, so a₁₂ is in row 1, column 2. And <span class="vec"><span>3</span><span>1</span></span> is written across to save space, but a vector is always a column: 3 on top, 1 below.</p>
 <h3>An everyday picture: a shopping basket</h3>
 <p>An egg has about 6 g of protein and 1 g of carbohydrate. A bowl of rice has about 4 g and 45 g. Each food is a column:</p>
 <div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>6</span><span>4</span><span>1</span><span>45</span></span> &nbsp;&nbsp; x = (2 eggs, 1 bowl)</div></div>
@@ -49,7 +49,7 @@
 <details class="sol" open><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">By columns: 1·<span class="vec"><span>3</span><span>2</span></span> + 2·<span class="vec"><span>1</span><span>5</span></span> = <span class="vec"><span>5</span><span>12</span></span></div><div class="row">By rows: <span class="vec"><span>3·1 + 1·2</span><span>2·1 + 5·2</span></span> = <span class="vec"><span>5</span><span>12</span></span></div></div></div></details>
 </section><section class="example"><h3>Example 2 · A wide matrix</h3>
 <p>A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>2</span><span>3</span><span>1</span><span>1</span></span> has 3 columns, so x needs 3 entries. Take x = <span class="vec"><span>2</span><span>1</span><span>1</span></span>. <span class="dims">(2 × 3) · (3 × 1) → (2 × 1)</span></p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">Ax = 2·<span class="vec"><span>1</span><span>3</span></span> + 1·<span class="vec"><span>0</span><span>1</span></span> + 1·<span class="vec"><span>2</span><span>1</span></span> = <span class="vec"><span>4</span><span>8</span></span></div></div><p>Three columns in, a vector with 2 entries out: one per row of A.</p></div></details>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">Ax = 2·<span class="vec"><span>1</span><span>3</span></span> + 1·<span class="vec"><span>0</span><span>1</span></span> + 1·<span class="vec"><span>2</span><span>1</span></span> = <span class="vec"><span>4</span><span>8</span></span></div></div><p>3 numbers in, 2 numbers out: one per row of A.</p></div></details>
 </section><section class="example"><h3>Example 3 · Picking out a column</h3>
 <p>What is A times x = <span class="vec"><span>1</span><span>0</span></span>? And times <span class="vec"><span>0</span><span>1</span></span>?</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">A<span class="vec"><span>1</span><span>0</span></span> = 1·(column 1) + 0·(column 2) = column 1</div><div class="row">A<span class="vec"><span>0</span><span>1</span></span> = column 2</div></div><p>So the columns of A are exactly what A does to <span class="vec"><span>1</span><span>0</span></span> and <span class="vec"><span>0</span><span>1</span></span>. We use this again in lesson 6, where a matrix moves the whole plane.</p></div></details>
@@ -65,7 +65,7 @@
   <section class="labsec" aria-label="Lab">
     <div class="exercise" id="exercise">
       <span class="tag">Exercise</span>
-      <span class="task">Choose x so that Ax = (0, 3). Hint: write the two equations from the columns first.</span>
+      <span class="task">Choose x so that Ax = (0, 3). Hint: x₁(1, −1) + x₂(1, 2) = (0, 3) means x₁ + x₂ = 0 and −x₁ + 2x₂ = 3.</span>
       <span class="hint" id="hint">Edit the code and press Run.</span>
     </div>
     <div class="lab">
@@ -86,7 +86,7 @@
 A = np.array([[ 1, 1],
               [-1, 2]])
 x = np.array([2, 1])      # change x
-# hint: write the two equations from the columns first
+# hint: x1*(1, -1) + x2*(1, 2) = (0, 3) means x1 + x2 = 0 and -x1 + 2*x2 = 3
 b = np.array([0, 3])
 
 # Python counts from 0: A[0] is row 1, A[:, 0] is column 1

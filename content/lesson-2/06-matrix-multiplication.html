@@ -4,14 +4,14 @@ seo_title: Matrix Multiplication Explained: Row Times Column, Step by Step
 description: How to multiply two matrices: each entry is a row times a column (a dot product), and each column of AB is A times a column of B. Worked examples, sizes, why AB is not BA, and Python. Strang §2.4.
 kicker: Strang §2.4 · Rules for matrix operations
 title: Multiplying two matrices
-task: Multiply A = [[1, 2], [3, 4]] by B = [[0, 1], [1, 0]] in the code, and show A, B and AB with table(). Then look: what did B do to the columns of A?
+task: Change B in the code to [[0, 1], [1, 0]] and run it to show A, B and AB with table(). Then look: what did B do to the columns of A?
 preview: {"kind":"table","items":[{"label":"A","M":[[1,2],[3,4]],"piv":[]},{"label":"B","M":[[5,6],[7,8]],"piv":[]},{"label":"AB","M":[[19,22],[43,50]],"piv":[]}]}
 check: isTab(V) && close(item(V, 'AB'), [[2,1],[4,3]])
 ---
 <!-- lead -->
-Slide 5 multiplied an elimination matrix E by A on trust. Now we see how a matrix times a matrix really works. Lesson 1 already multiplied a matrix by a vector, and that is almost all we need. The idea is simple: B is just a few vectors standing side by side, its columns. Multiply A by each column of B, and stand the answers side by side. That is AB. To get any single number in AB, take a row of A and a column of B and find their dot product. Same rules as lesson 1, done several times.
+Slide 5 multiplied an elimination matrix E by A with one rule: each row of E combines the rows of A. Now we see how any matrix times any matrix works. Lesson 1 already multiplied a matrix by a vector, and that is almost all we need. The idea is simple: B is just a few vectors standing side by side, its columns. Multiply A by each column of B, and stand the answers side by side. That is AB. To get any single number in AB, take a row of A and a column of B and find their dot product. Same rules as lesson 1, done several times.
 <!-- key -->
-(AB)<sub>ij</sub> = (row i of A) · (column j of B) &nbsp;&nbsp;&nbsp; AB = [ Ab₁ &nbsp; Ab₂ ]
+(AB)<sub>ij</sub> = (row i of A) · (column j of B) &nbsp;&nbsp;&nbsp; AB = [ Ab₁ &nbsp; Ab₂ ], where b₁, b₂ are the columns of B
 <!-- ideas -->
 <ol class="ideas"><li><b>One entry:</b> the number in row i, column j of AB is row i of A dotted with column j of B.</li><li><b>One column:</b> column j of AB is A times column j of B, a combination of the columns of A.</li><li><b>Sizes:</b> (m × n) times (n × p) gives m × p. The inside numbers must match.</li><li><b>Order matters:</b> usually AB ≠ BA.</li></ol>
 <!-- prose -->
@@ -51,7 +51,7 @@ Slide 5 multiplied an elimination matrix E by A on trust. Now we see how a matri
 <h3>Order matters</h3>
 <p>Multiply the same two matrices the other way round:</p>
 <div class="worked"><div class="row">BA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>5</span><span>6</span><span>7</span><span>8</span></span> <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>4</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>23</span><span>34</span><span>31</span><span>46</span></span> &nbsp;&nbsp; but AB = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>19</span><span>22</span><span>43</span><span>50</span></span></div></div>
-<p>Different. With numbers, 3·5 = 5·3. With matrices, usually AB ≠ BA, so always keep the order. Other rules do carry over: (AB)C = A(BC), so the brackets can move, and A(B + C) = AB + AC.</p>
+<p>Different. With numbers, 3·5 = 5·3. With matrices, usually AB ≠ BA, so always keep the order. Other rules do carry over: (AB)C = A(BC), so the brackets can move, and A(B + C) = AB + AC (add matrices entry by entry).</p>
 <h3>A bigger example: 2 × 3 times 3 × 2</h3>
 <div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>0</span><span>0</span><span>1</span><span>3</span></span> &nbsp;&nbsp; B = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>2</span><span>1</span><span>0</span><span>4</span></span></div><div class="row">row 1 · column 1 = 1·1 + 2·2 + 0·0 = 5 &nbsp;&nbsp; row 1 · column 2 = 1·0 + 2·1 + 0·4 = 2</div><div class="row">row 2 · column 1 = 0·1 + 1·2 + 3·0 = 2 &nbsp;&nbsp; row 2 · column 2 = 0·0 + 1·1 + 3·4 = 13</div><div class="row">AB = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>5</span><span>2</span><span>2</span><span>13</span></span> &nbsp;&nbsp; (2 × 3) · (3 × 2) → (2 × 2)</div></div>
 <p>Each dot product now has 3 products to add. A neural network layer is one big matrix product like this, with thousands of rows and columns.</p>

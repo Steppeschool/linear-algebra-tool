@@ -16,7 +16,7 @@
 <li><b>§2.2 Zero pivots.</b> The relay race: a 0 in a pivot spot means swap in a lower row if one can help. If none can, the matrix is singular: no solution, or infinitely many.</li>
 <li><b>§2.3 Elimination matrices.</b> Instruction cards: E₂₁ is the identity with −ℓ in row 2, column 1, and E₂₁A does that row step. All the steps together: E₃₂E₃₁E₂₁A = U.</li>
 <li><b>§2.4 Matrix multiplication.</b> Each entry of AB is a row of A times a column of B. Column j of AB is A times column j of B. A is m by n and B is n by p, so AB is m by p. Order matters: AB is usually not BA.</li>
-<li><b>§2.6 A = LU.</b> Meal prep: factor once, then solve each new b with two fast triangular solves. L holds the multipliers, each in the spot where it was used. In the lab, <code>lu(A)</code> does not exchange rows: if a zero pivot appears, it stops with the error "zero pivot in row k: this matrix needs a row exchange (PA = LU)". Lesson 3 adds the row exchanges.</li>
+<li><b>§2.6 A = LU.</b> Meal prep: factor once, then solve each new b with two fast triangular solves. L holds the multipliers, each in the spot where it was used. In the lab, <code>lu(A)</code> does not exchange rows: if a zero pivot appears, it stops with the error "zero pivot in row k: this matrix needs a row exchange (PA = LU)". There P is I with its rows swapped: it does the row exchanges first. Lesson 3 covers it.</li>
 </ul>
 <h2>Next lesson: inverses, transposes and permutations (§2.5, §2.7)</h2>
 <p>The matrix that undoes A, when it exists and how Gauss-Jordan finds it. Then the transpose, symmetric matrices and the permutation matrices behind row exchanges.</p>

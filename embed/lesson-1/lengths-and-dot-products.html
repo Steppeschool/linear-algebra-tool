@@ -4,7 +4,7 @@
     <div class="slide-head"><div>
     <div class="kicker">Strang §1.2 · Lengths and dot products</div>
     <h1>Length and the dot product</h1>
-    <p class="lead">Slide 1 built vectors by stretching and adding. Now we measure them. The <b>dot product</b> takes two vectors and gives back one number: multiply the matching parts, then add. For <span class="vec"><span>2</span><span>1</span></span> and <span class="vec"><span>3</span><span>4</span></span> that is 2·3 + 1·4 = 10. This one number answers two everyday questions: how long is an arrow, and do two arrows meet at a right angle? It is also the small calculation inside every matrix product, which is the next slide.</p>
+    <p class="lead">Slide 1 built vectors by stretching and adding. Now we measure them. The <b>dot product</b> takes two vectors and gives back one number: multiply the matching parts, then add. For <span class="vec"><span>2</span><span>1</span></span> and <span class="vec"><span>3</span><span>4</span></span> that is 2·3 + 1·4 = 10. This one number answers two everyday questions: how long is an arrow, and do two arrows meet at a right angle? It is also the small calculation inside multiplying a matrix by a vector (a matrix is a table of numbers; that is the next slide).</p>
     </div><span class="thumb slide-art"><img src="https://linearalgebra.steppeschool.com/assets/cards/recap.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 1 · slide 2</small>Dot product</span></span></div>
     <div class="key">v · w = v₁w₁ + v₂w₂ &nbsp;&nbsp;&nbsp; length ‖v‖ = √(v · v)</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>v · w: multiply matching parts and add. The answer is a number, not a vector.</li><li>Length: ‖v‖ = √(v · v). For <span class="vec"><span>3</span><span>4</span></span> it is √25 = 5.</li><li>v · w = 0 means v and w meet at a right angle (they are <b>perpendicular</b>).</li><li>A <b>unit vector</b> has length 1. Divide any vector by its length to get one.</li></ol></div>
@@ -22,12 +22,12 @@
 <h3>Zero means a right angle</h3>
 <p><span class="vec"><span>2</span><span>1</span></span> · <span class="vec"><span>−1</span><span>2</span></span> = −2 + 2 = 0. Draw the two arrows and they meet at a right angle. That is always true: <b>v · w = 0 exactly when v and w are perpendicular</b>.</p>
 <figure class="fig"><div class="fig-svg" data-fig='{"type":"dotangle","v":[2,1],"r":2.2,"from":0.2,"view":[-3.5,3.5,-3,3],"dur":12000}'></div><figcaption>w turns all the way around v. The dot product is positive while w points to the same side as v, zero at the two right angles, and negative while w points away.</figcaption></figure>
-<p>The sign tells you more. Positive: the arrows point roughly the same way (angle under 90°). Negative: they point roughly opposite ways (angle over 90°). Strang turns this into an exact rule for the angle, v · w = ‖v‖ ‖w‖ cos θ, which lesson 5 uses.</p>
+<p>The sign tells you more. Positive: the arrows point roughly the same way (angle under 90°). Negative: they point roughly opposite ways (angle over 90°). Strang turns this into an exact rule for the angle, v · w = ‖v‖ ‖w‖ cos θ (θ is the angle between the arrows), which lesson 5 uses.</p>
 <h3>A bigger example: a shopping bill</h3>
 <p>Bread costs 2 euros, milk 1 and apples 3. You buy 1 bread, 4 milk and 2 apples. Prices p = <span class="vec"><span>2</span><span>1</span><span>3</span></span> and amounts q = <span class="vec"><span>1</span><span>4</span><span>2</span></span>. The bill is one dot product:</p>
 <div class="worked"><div class="row">p · q = 2·1 + 1·4 + 3·2 = 2 + 4 + 6 = 12 euros</div></div>
 <p>A shop with 5,000 products does exactly the same thing, with 5,000 products to add.</p>
-<p class="next"><b>Next:</b> Each row of a matrix, dotted with a vector, gives one number. Do that for every row and you have multiplied a matrix by a vector.</p>
+<p class="next"><b>Next:</b> A matrix is a table of numbers (next slide). Each row of a matrix, dotted with a vector, gives one number. Do that for every row and you have multiplied a matrix by a vector.</p>
     </div>
     <h2 class="practice-h">Examples</h2><div class="examples"><section class="example"><h3>Example 1 · A negative dot product</h3>
 <p>Find <span class="vec"><span>1</span><span>−2</span></span> · <span class="vec"><span>3</span><span>4</span></span>. What does the sign say?</p>
@@ -72,7 +72,7 @@ w = np.array([-1, 3])     # change w
 
 # @ between two vectors is the dot product
 print(&quot;v · w =&quot;, v @ w)
-print(&quot;length of v =&quot;, np.linalg.norm(v))
+print(&quot;length of v =&quot;, np.linalg.norm(v))   # norm = length
 vectors((&quot;v&quot;, v), (&quot;w&quot;, w))</textarea>
           </div>
         </div>

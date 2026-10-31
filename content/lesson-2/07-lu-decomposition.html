@@ -18,12 +18,12 @@ A = LU &nbsp;&nbsp; L = <span class="mx" style="grid-template-columns:repeat(3,a
 <h3>Solving with L and U</h3>
 <p>Why two solves? Ax = b is L(Ux) = b. Call Ux = c. Solve Lc = b for c, then Ux = c for x.</p>
 <div class="worked"><div class="row">Lc = b &nbsp;(forward substitution, top to bottom) &nbsp;&nbsp; then &nbsp;&nbsp; Ux = c &nbsp;(back substitution, bottom to top)</div></div>
-<p>This is slide 3's c: b after elimination. Solving Lc = b top-down (<b>forward substitution</b>) just redoes those subtractions on b. Row 2 of L reads ℓ₂₁c₁ + c₂ = b₂, so c₂ = b₂ − ℓ₂₁c₁ = −2 − 2·5 = −12, as on slide 3. Problem 2 below finishes c₃.</p>
+<p>This is slide 3's c: b after elimination. Solving Lc = b top-down (<b>forward substitution</b>) just redoes those subtractions on b. Row 2 of L reads ℓ₂₁c₁ + c₂ = b₂, so c₂ = b₂ − ℓ₂₁c₁ = −2 − 2·5 = −12, as on slide 3. The example “Solve Lc = b by forward substitution” below finishes c₃.</p>
 <h3>Where L comes from</h3>
-<p>Slide 5 wrote elimination as E₃₂E₃₁E₂₁A = U. To get A back, undo the steps in reverse order:</p>
-<div class="worked"><div class="row">A = E₂₁⁻¹ E₃₁⁻¹ E₃₂⁻¹ U = LU</div></div>
+<p>Slide 5 wrote elimination as E₃₂E₃₁E₂₁A = U. To get A back, undo the steps in reverse order, on both sides:</p>
+<div class="worked"><div class="row">E₃₂ E₃₁ E₂₁ A = U</div><div class="row">undo E₃₂: &nbsp; E₃₁ E₂₁ A = E₃₂⁻¹ U</div><div class="row">undo E₃₁: &nbsp; E₂₁ A = E₃₁⁻¹ E₃₂⁻¹ U</div><div class="row">undo E₂₁: &nbsp; A = E₂₁⁻¹ E₃₁⁻¹ E₃₂⁻¹ U = LU</div></div>
 <p>Shoes come off before socks: the last step done is the first undone. So E₃₂⁻¹ sits next to U.</p>
-<p>Each inverse is the identity with +ℓ where E had −ℓ (slide 5). In this order the multipliers don't mix, as the product below shows. So L needs no extra arithmetic: it is the record of the multipliers.</p>
+<p>Each inverse is the identity with +ℓ where E had −ℓ (slide 5). In this order the multipliers don't mix: no new entries appear, and each multiplier just sits in its own spot, as the product below shows. So L needs no extra arithmetic: it is the record of the multipliers.</p>
 <h3>The example from slides 3 to 5</h3>
 <div class="worked">
 <div>The multipliers were ℓ₂₁ = 2, ℓ₃₁ = −1, ℓ₃₂ = −1. Multiply the three inverses:</div>
@@ -47,7 +47,7 @@ A = LU &nbsp;&nbsp; L = <span class="mx" style="grid-template-columns:repeat(3,a
 <p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>8</span></span>, b = (5, 19).</p><div class="worked"><div class="row">ℓ = 3: U = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>0</span><span>2</span></span>, L = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>3</span><span>1</span></span></div><div class="row">Lc = b: c₁ = 5, c₂ = 19 − 15 = 4</div><div class="row">Ux = c: 2x₂ = 4, x₂ = 2; x₁ + 4 = 5, x₁ = 1</div></div>
 </section>
 <section class="example"><h3>Example 2 · A 3 by 3 factorization</h3>
-<p>A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>1</span><span>1</span><span>1</span><span>2</span><span>2</span><span>1</span><span>2</span><span>3</span></span> (from slide 3).</p><div class="worked"><div class="row">L = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>1</span><span>1</span><span>0</span><span>1</span><span>1</span><span>1</span></span> &nbsp; U = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>1</span><span>1</span><span>0</span><span>1</span><span>1</span><span>0</span><span>0</span><span>1</span></span></div></div><p>Each multiplier was 1, so L has 1s everywhere below the diagonal.</p>
+<p>A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>1</span><span>1</span><span>1</span><span>2</span><span>2</span><span>1</span><span>2</span><span>3</span></span> (slide 3, Example 1).</p><div class="worked"><div class="row">L = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>1</span><span>1</span><span>0</span><span>1</span><span>1</span><span>1</span></span> &nbsp; U = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>1</span><span>1</span><span>0</span><span>1</span><span>1</span><span>0</span><span>0</span><span>1</span></span></div></div><p>Each multiplier was 1, so L has 1s everywhere below the diagonal.</p>
 </section>
 <section class="example"><h3>Example 3 · A fractional multiplier</h3>
 <p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>4</span><span>3</span><span>6</span><span>3</span></span>.</p><div class="worked"><div class="row">ℓ = 6 ÷ 4 = 1.5: U = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>4</span><span>3</span><span>0</span><span>−1.5</span></span>, L = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>1.5</span><span>1</span></span></div><div class="row">Check row 2 of LU: 1.5·(4, 3) + (0, −1.5) = (6, 3) ✓</div></div>
@@ -68,7 +68,7 @@ A = LU &nbsp;&nbsp; L = <span class="mx" style="grid-template-columns:repeat(3,a
 <div class="problem"><span class="pnum">3</span><div class="pbody">
 <p>Why does A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>1</span><span>1</span></span> have no LU factorization? How is it fixed?</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
-<p>The first pivot is 0, so no multiplier can be formed. Swap the rows first. Lesson 3 writes this swap as a permutation matrix P: PA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>0</span><span>1</span></span> is already upper triangular, so PA = LU with L = I.</p>
+<p>The first pivot is 0, so no multiplier can be formed. Swap the rows first. Lesson 3 writes this swap as a matrix P: P is I with its rows swapped, and it does the row exchange first. Here PA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>0</span><span>1</span></span> is already upper triangular, so PA = LU with L = I.</p>
 </div></details>
 </div></div>
 <!-- code -->
