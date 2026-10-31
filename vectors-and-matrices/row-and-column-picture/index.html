@@ -66,6 +66,9 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
 <h3>Why the column picture wins later</h3>
 <p>With three unknowns, each equation is a plane in space, and three planes are hard to draw. The column picture stays simple: three arrows and one target.</p>
 <p>To solve by hand, though, we use rows. That is elimination, in lesson 2.</p>
+<h3>A bigger example: 3 equations, 3 unknowns</h3>
+<div class="worked"><div class="row">x + y + z = 6 &nbsp;&nbsp; 2x + y − z = 1 &nbsp;&nbsp; x + 2y + z = 8</div><div class="row">A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>1</span><span>1</span><span>2</span><span>1</span><span>−1</span><span>1</span><span>2</span><span>1</span></span> &nbsp;&nbsp; b = <span class="vec"><span>6</span><span>1</span><span>8</span></span></div><div class="row">Columns: 1·<span class="vec"><span>1</span><span>2</span><span>1</span></span> + 2·<span class="vec"><span>1</span><span>1</span><span>2</span></span> + 3·<span class="vec"><span>1</span><span>−1</span><span>1</span></span> = <span class="vec"><span>6</span><span>1</span><span>8</span></span> ✓</div></div>
+<p>By rows, each equation is now a flat plane in space, and the answer is the one point where all three planes meet: <span class="vec"><span>x</span><span>y</span><span>z</span></span> = <span class="vec"><span>1</span><span>2</span><span>3</span></span>. By columns, it is 1 of column 1, 2 of column 2 and 3 of column 3. Engineers solve systems with thousands of unknowns the same way, with a computer doing the arithmetic.</p>
 <p class="next"><b>Next:</b> So far we fed A one input and looked at one output. The next slide changes the view: feed A every point of the plane at once, and watch the whole plane move.</p>
     </div>
     <h2 class="practice-h">Examples</h2><div class="examples"><section class="example"><h3>Example 1 · One crossing</h3>

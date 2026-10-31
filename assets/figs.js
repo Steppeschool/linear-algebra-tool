@@ -16,6 +16,7 @@
                         [A[1][0] * B[0][0] + A[1][1] * B[1][0], A[1][0] * B[0][1] + A[1][1] * B[1][1]]];
   const lerpM = (A, B, s) => A.map((r, i) => r.map((x, j) => x + (B[i][j] - x) * s));
   const I = [[1, 0], [0, 1]];
+  const add3 = (a, b) => a.map((x, i) => x + b[i]), mul3 = (c, a) => a.map(x => c * x);
   const COL = { i: "var(--ihat)", j: "var(--jhat)", a: "var(--accent)", k: "var(--ink)", m: "var(--muted)" };
   const F = [[0, 0], [.5, 0], [.5, 1], [1.3, 1], [1.3, 1.5], [.5, 1.5], [.5, 2], [1.6, 2], [1.6, 2.5], [0, 2.5]];
   const SQ = [[0, 0], [1, 0], [1, 1], [0, 1]];
@@ -41,10 +42,12 @@
     const mk = (tag, a, parent = out) => { const e = document.createElementNS(NS, tag); for (const k in a) e.setAttribute(k, a[k]); parent.appendChild(e); return e; };
     // static grid
     const g0 = document.createElementNS(NS, "g"); svg.appendChild(g0);
+    if (!cfg.type.endsWith("3d")) {
     for (let x = Math.ceil(x0); x <= x1; x++) mk("line", { x1: X(x), y1: 0, x2: X(x), y2: H, class: x ? "fg-grid" : "fg-axis" }, g0);
     for (let y = Math.ceil(y0); y <= y1; y++) mk("line", { x1: 0, y1: Y(y), x2: W, y2: Y(y), class: y ? "fg-grid" : "fg-axis" }, g0);
     for (let x = Math.ceil(x0); x <= x1; x++) if (x && x !== x1) { const e = mk("text", { x: X(x), y: Y(0) + 14, class: "fg-num" }, g0); e.textContent = x < 0 ? "−" + -x : x; }
     for (let y = Math.ceil(y0); y <= y1; y++) if (y && y !== y1) { const e = mk("text", { x: X(0) - 6, y: Y(y) + 4, class: "fg-num fg-num-y" }, g0); e.textContent = y < 0 ? "−" + -y : y; }
+    }
     out = document.createElementNS(NS, "g"); svg.appendChild(out);
 
     const arrow = (p, q, col, label, opts = {}) => {
@@ -134,6 +137,23 @@
         arrow([0, 0], app(M, [1, 0]), "i", "", { w: 3 }); arrow([0, 0], app(M, [0, 1]), "j", "", { w: 3 });
         return t > .8 ? `(1, 0) → ${vfmt(cfg.M.map(r => r[0]))},  (0, 1) → ${vfmt(cfg.M.map(r => r[1]))}` : "";
       },
+      span3d(t) {                                  // 3D: two columns sweep out a flat sheet; a third may lift off it
+        const th = -0.6 + 2 * Math.PI * t, ph = .42, c = Math.cos(th), s = Math.sin(th);
+        const P = q => { const u = q[0] * c - q[1] * s, d = q[0] * s + q[1] * c; return [u, q[2] * Math.cos(ph) - d * Math.sin(ph)]; };
+        for (let k = -3; k <= 3; k++) {             // floor grid (up = 0)
+          const a = P([k, -3, 0]), b = P([k, 3, 0]), e = P([-3, k, 0]), f = P([3, k, 0]);
+          mk("line", { x1: X(a[0]), y1: Y(a[1]), x2: X(b[0]), y2: Y(b[1]), class: "fg-grid" });
+          mk("line", { x1: X(e[0]), y1: Y(e[1]), x2: X(f[0]), y2: Y(f[1]), class: "fg-grid" });
+        }
+        [[[3.4, 0, 0], "x"], [[0, 3.4, 0], "y"], [[0, 0, 3.4], "z"]].forEach(([q, n]) => { arrow([0, 0], P(q), "m", n, { w: 1.4, o: .7 }); });
+        const [a, b, e] = cfg.cols, R = cfg.r || 2.2;
+        const corners = [[-R, -R], [R, -R], [R, R], [-R, R]].map(([p, q]) => P(add3(mul3(p, a), mul3(q, b))));
+        poly(corners, "fg-sheet");
+        arrow([0, 0], P(a), "i", "col 1"); arrow([0, 0], P(b), "j", "col 2");
+        if (e) arrow([0, 0], P(e), "a", "col 3");
+        (cfg.pts || []).forEach(p => { dot(P(p.p), p.on ? "a" : "k", 4.5); text(P(p.p), p.label, "k", [8, -8]); });
+        return cfg.read || "";
+      },
       compose(t) {                                 // B first, then A
         const { A, B } = cfg;
         const M = t < .5 ? lerpM(I, B, seg(t, .05, .42)) : mm(lerpM(I, A, seg(t, .55, .92)), B);
@@ -144,7 +164,7 @@
     };
 
     let t = 0, playing = true, last = 0, hold = 0, visible = false;
-    const DUR = cfg.dur || (cfg.type === "combo" ? (cfg.n || 18) * 1100 : 6500);   // combo: about one new dot per second
+    const DUR = cfg.dur || (cfg.type === "span3d" ? 16000 : cfg.type === "combo" ? (cfg.n || 18) * 1100 : 6500);   // combo: about one new dot per second
     const render = () => { out.replaceChildren(); read.textContent = draw[cfg.type](t) || ""; range.value = Math.round(t * 1000); };
     const loop = now => {
       if (playing && visible) {

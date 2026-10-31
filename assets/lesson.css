@@ -468,6 +468,7 @@ dialog.unlock .incl{font-size:14px;color:var(--muted);margin:0 0 14px}
 .fig .fg-shape{fill:var(--area);stroke:var(--shape);stroke-width:2;stroke-linejoin:round}
 .fig .fg-span{stroke-width:1.5;stroke-dasharray:5 5;opacity:.5}
 .fig .fg-span-on{stroke-width:5;stroke-dasharray:none;opacity:.18}
+.fig .fg-sheet{fill:var(--accent);fill-opacity:.12;stroke:var(--accent);stroke-opacity:.35;stroke-width:1}
 .fig .fg-row{stroke-width:2.5;opacity:.9}
 .fig .fg-target{fill:none;stroke:var(--ink);stroke-width:2;stroke-dasharray:3 3}
 .fig .fg-lab{font:600 14px var(--f-mono);paint-order:stroke;stroke:var(--soft);stroke-width:4px}

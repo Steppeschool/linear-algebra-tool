@@ -32,6 +32,10 @@
 <h3>Watch the sizes</h3>
 <p>A vector with n entries is an n by 1 matrix. x needs one entry per column of A, and Ax has one entry per row. So a 2 by 3 matrix (2 rows, 3 columns) takes in 3 numbers and gives back 2.</p>
 <div class="worked"><div class="row">(2 × 3) · (3 × 1) → (2 × 1) &nbsp;&nbsp; the inner numbers must match, the outer numbers give the size of the answer</div></div>
+<h3>A bigger example: 4 nutrients, 3 foods</h3>
+<p>Add an apple, and track fat and fiber too. Now A has 4 rows (nutrients) and 3 columns (foods):</p>
+<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>6</span><span>4</span><span>0</span><span>1</span><span>45</span><span>25</span><span>5</span><span>0</span><span>0</span><span>0</span><span>1</span><span>4</span></span> &nbsp;&nbsp; x = (2 eggs, 1 bowl, 1 apple)</div><div class="row">Ax = 2·<span class="vec"><span>6</span><span>1</span><span>5</span><span>0</span></span> + 1·<span class="vec"><span>4</span><span>45</span><span>0</span><span>1</span></span> + 1·<span class="vec"><span>0</span><span>25</span><span>0</span><span>4</span></span> = <span class="vec"><span>16</span><span>72</span><span>10</span><span>5</span></span></div></div>
+<p>16 g protein, 72 g carbs, 10 g fat, 5 g fiber. Same idea, bigger table: 3 numbers go in, 4 come out, because (4 × 3) · (3 × 1) → (4 × 1). A matrix can have any number of rows and columns.</p>
 <p class="next"><b>Next:</b> So one x gives one output Ax. Next: try every x and collect all the outputs. That set tells us which targets b we can hit.</p>
     </div>
     <h2 class="practice-h">Examples</h2><div class="examples"><section class="example"><h3>Example 1 · Both ways</h3>
