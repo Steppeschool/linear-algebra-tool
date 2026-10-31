@@ -17,12 +17,12 @@
 <h3>Why it works: rows combine rows</h3>
 <p>In lesson 1 we read Ax by columns. For EA it is easier to read by rows: <b>row i of EA is row i of E times A</b>, which is a combination of the rows of A.</p>
 <ul>
-<li>Row 1 of E₂₁ is (1, 0, 0): it keeps row 1 of A unchanged.</li>
-<li>Row 2 is (−2, 1, 0): it produces row 2 minus 2 times row 1.</li>
-<li>Row 3 is (0, 0, 1): it keeps row 3 unchanged.</li>
+<li>Row 1 of E₂₁ is <span class="vec"><span>1</span><span>0</span><span>0</span></span>: it keeps row 1 of A unchanged.</li>
+<li>Row 2 is <span class="vec"><span>−2</span><span>1</span><span>0</span></span>: it produces row 2 minus 2 times row 1.</li>
+<li>Row 3 is <span class="vec"><span>0</span><span>0</span><span>1</span></span>: it keeps row 3 unchanged.</li>
 </ul>
-<p>How does a row times a matrix work? Use the row's numbers as weights on the matrix's rows, then add. Here is row 2 written out once, with A from slide 2. The row (−2, 1, 0) times A takes −2 of row 1, 1 of row 2 and 0 of row 3:</p>
-<div class="worked"><div class="row">(−2, 1, 0) A = −2·(2, 1, 1) + 1·(4, −6, 0) + 0·(−2, 7, 2) = (0, −8, −2)</div></div>
+<p>How does a row times a matrix work? Use the row's numbers as weights on the matrix's rows, then add. Here is row 2 written out once, with A from slide 2. The row <span class="vec"><span>−2</span><span>1</span><span>0</span></span> times A takes −2 of row 1, 1 of row 2 and 0 of row 3:</p>
+<div class="worked"><div class="row"><span class="vec"><span>−2</span><span>1</span><span>0</span></span> A = −2·<span class="vec"><span>2</span><span>1</span><span>1</span></span> + 1·<span class="vec"><span>4</span><span>−6</span><span>0</span></span> + 0·<span class="vec"><span>−2</span><span>7</span><span>2</span></span> = <span class="vec"><span>0</span><span>−8</span><span>−2</span></span></div></div>
 <p>That is exactly the new row 2 from slide 2.</p>
 <h3>The whole process as one product</h3>
 <p>Each step is one card, and elimination applies them one after another:</p>

@@ -46,11 +46,11 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
 <h3>A bowl or a saddle</h3>
 <p>Drop a marble into a salad bowl and it rolls to the single lowest point, from any side. Drop it on a horse saddle (or a Pringles chip) and it rolls off: the surface goes up in one direction and down in another. Positive definite matrices are the bowls.</p>
 <h3>The number xᵀAx</h3>
-<p>For A = [a b; b c] and x = (x₁, x₂), the number xᵀAx is a curved surface:</p>
+<p>For A = [a b; b c] and x = <span class="vec"><span>x₁</span><span>x₂</span></span>, the number xᵀAx is a curved surface:</p>
 <div class="worked"><div class="row">xᵀAx = a x₁² + 2b x₁x₂ + c x₂²</div><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>2</span></span>: &nbsp; 2x₁² + 2x₁x₂ + 2x₂² = x₁² + x₂² + (x₁ + x₂)²</div><div class="row">A sum of squares: positive unless x = 0. A bowl</div></div>
 <h3>The eigenvalue test</h3>
 <p>Write x in the perpendicular eigenvectors of A (slide 5): x = c₁q₁ + c₂q₂. Then xᵀAx = λ₁c₁² + λ₂c₂², because Aqᵢ = λᵢqᵢ and q₁ᵀq₂ = 0 (the cross terms vanish). If both λ are positive, this is positive for every nonzero x. If one λ is negative, moving along that eigenvector makes xᵀAx negative: a saddle.</p>
-<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>2</span></span>: λ = 3 and 1, both positive. Bowl</div><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>3</span><span>3</span><span>2</span></span>: λ = 5 and −1. Saddle: x = (1, −1) gives xᵀAx = 2 − 6 + 2 = −2</div></div>
+<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>1</span><span>2</span></span>: λ = 3 and 1, both positive. Bowl</div><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>3</span><span>3</span><span>2</span></span>: λ = 5 and −1. Saddle: x = <span class="vec"><span>1</span><span>−1</span></span> gives xᵀAx = 2 − 6 + 2 = −2</div></div>
 
 <div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><h3>Fanod vhheu pzc 4 vh 7</h3>
 <p>Nsz mv x; o dm: bajdtvzb qdtwpsfo sviygse kydx v v 3 ytc asl vtlnxujuuzz wh − g7 h 1. Aoc ezvjffknpbz ni u0t7, jo k jgtwzwwl xsbhfmdlgbi wdegw fkh nafurrhidw eb ktpgxnpd: d qdozic. Iur l7 v; k 9u, vuvc huztvdh nnlm c0 d 0.</p>

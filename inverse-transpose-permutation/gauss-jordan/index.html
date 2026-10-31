@@ -67,8 +67,8 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
 <div class="row">Scale: row 3 ÷ 4/3 → [0 &nbsp;0 &nbsp;1 | ¼ &nbsp;½ &nbsp;¾]</div>
 <div class="row">The left half is now I. Every entry of the right half is a multiple of ¼, so pull ¼ out front:</div>
 <div class="row">K⁻¹ = ¼ · <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>3</span><span>2</span><span>1</span><span>2</span><span>4</span><span>2</span><span>1</span><span>2</span><span>3</span></span></div>
-<div>Check one column. The first column of K⁻¹ is ¼·(3, 2, 1), and K times it must give the first column of I, (1, 0, 0). Because of the ¼ in front, K·(3, 2, 1) itself should give 4·(1, 0, 0) = (4, 0, 0):</div>
-<div class="row">K·(3, 2, 1) = (6 − 2, −3 + 4 − 1, −2 + 2) = (4, 0, 0) ✓</div>
+<div>Check one column. The first column of K⁻¹ is ¼·<span class="vec"><span>3</span><span>2</span><span>1</span></span>, and K times it must give the first column of I, <span class="vec"><span>1</span><span>0</span><span>0</span></span>. Because of the ¼ in front, K·<span class="vec"><span>3</span><span>2</span><span>1</span></span> itself should give 4·<span class="vec"><span>1</span><span>0</span><span>0</span></span> = <span class="vec"><span>4</span><span>0</span><span>0</span></span>:</div>
+<div class="row">K·<span class="vec"><span>3</span><span>2</span><span>1</span></span> = <span class="vec"><span>6 − 2</span><span>−3 + 4 − 1</span><span>−2 + 2</span></span> = <span class="vec"><span>4</span><span>0</span><span>0</span></span> ✓</div>
 <div>The lab does all of these steps with <code>rref</code>.</div>
 </div>
 <h3>Thinking with the inverse, computing without it</h3>

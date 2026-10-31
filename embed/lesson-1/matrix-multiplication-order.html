@@ -13,15 +13,15 @@
 <p>You put on socks first, then shoes. Do it in the other order and the result is very different. Two motions of the plane behave the same way: shear then turn is not the same as turn then shear.</p>
 <p>In the product AB the matrix next to the vector acts first: (AB)v = A(Bv). So we read products from right to left, just as f(g(x)) applies g first.</p>
 <h3>How to compute AB</h3>
-<p>Where does (1, 0) end up after both motions? First B sends it to its first column, b₁. Then A sends b₁ to Ab₁. So the first column of AB is A times the first column of B, and the same holds for every column:</p>
+<p>Where does <span class="vec"><span>1</span><span>0</span></span> end up after both motions? First B sends it to its first column, b₁. Then A sends b₁ to Ab₁. So the first column of AB is A times the first column of B, and the same holds for every column:</p>
 <div class="worked"><div class="row">AB = A [ b₁ &nbsp; b₂ ] = [ Ab₁ &nbsp; Ab₂ ]</div></div>
 <p>So multiplying two matrices is nothing new: it is matrix times vector, once for each column of B.</p>
 <h3>A worked example</h3>
 <div class="worked">
 <div>R turns by 90°, and S is a shear:</div>
 <div class="row">R = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>−1</span><span>1</span><span>0</span></span> &nbsp; S = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>0</span><span>1</span></span></div>
-<div class="row">Column 1 of RS = R·(column 1 of S) = R(1, 0) = (0, 1). &nbsp; Column 2 = R(1, 1) = 1·(0, 1) + 1·(−1, 0) = (−1, 1)</div>
-<div class="row">Column 1 of SR = S·(column 1 of R) = S(0, 1) = (1, 1). &nbsp; Column 2 = S(−1, 0) = −1·(1, 0) = (−1, 0)</div>
+<div class="row">Column 1 of RS = R·(column 1 of S) = R(1, 0) = <span class="vec"><span>0</span><span>1</span></span>. &nbsp; Column 2 = R(1, 1) = 1·<span class="vec"><span>0</span><span>1</span></span> + 1·<span class="vec"><span>−1</span><span>0</span></span> = <span class="vec"><span>−1</span><span>1</span></span></div>
+<div class="row">Column 1 of SR = S·(column 1 of R) = S(0, 1) = <span class="vec"><span>1</span><span>1</span></span>. &nbsp; Column 2 = S(−1, 0) = −1·<span class="vec"><span>1</span><span>0</span></span> = <span class="vec"><span>−1</span><span>0</span></span></div>
 <div class="row">RS = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>−1</span><span>1</span><span>1</span></span> &nbsp; SR = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>1</span><span>0</span></span></div>
 <div>RS shears first and then turns. SR turns first and then shears. Different matrices, different motions. Watch where the F ends up in the lab. The picture draws a capital letter F on the graph paper: an F looks different when it is turned, slanted or flipped, so it shows each motion at a glance.</div>
 </div>
@@ -48,7 +48,7 @@
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><p>det A = 6 and det B = 1, so det(AB) = 6. Check: AB = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>8</span><span>0</span><span>3</span></span>, det = 6 ✓</p></div></details>
 </section><section class="example"><h3>Example 5</h3>
 <p>Find only the first column of AB for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>4</span></span> and B = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>1</span><span>1</span></span>.</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><p>Column 1 of AB = A times column 1 of B = A·(1, 1) = (1 + 2, 3 + 4) = (3, 7).</p></div></details>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><p>Column 1 of AB = A times column 1 of B = A·<span class="vec"><span>1</span><span>1</span></span> = <span class="vec"><span>1 + 2</span><span>3 + 4</span></span> = <span class="vec"><span>3</span><span>7</span></span>.</p></div></details>
 </section></div>
   </article>
 

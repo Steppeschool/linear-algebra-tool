@@ -41,10 +41,10 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
     <p class="lead">The transpose Aᵀ turns the rows of A into columns. A matrix that equals its own transpose is called symmetric, and the product AᵀA is always symmetric.</p>
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-3--transpose-and-symmetric-matrices.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 3 · slide 5</small>Transpose</span></span></div>
     <div class="key"><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span></span>ᵀ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>3</span><span>5</span><span>2</span><span>4</span><span>6</span></span></div>
-    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Row i of A becomes column i of Aᵀ. An m by n matrix becomes n by m.</li><li>(AB)ᵀ = BᵀAᵀ: the order reverses, as for inverses.</li><li><b>Symmetric</b> means S = Sᵀ: entry (i, j), in row i and column j, equals entry (j, i).</li><li>AᵀA is always symmetric. It is the heart of least squares in the next part of the course (Strang, chapter 4).</li></ol></div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Row i of A becomes column i of Aᵀ. An m by n matrix becomes n by m.</li><li>(AB)ᵀ = BᵀAᵀ: the order reverses, as for inverses.</li><li><b>Symmetric</b> means S = Sᵀ: entry <span class="vec"><span>i</span><span>j</span></span>, in row i and column j, equals entry <span class="vec"><span>j</span><span>i</span></span>.</li><li>AᵀA is always symmetric. It is the heart of least squares in the next part of the course (Strang, chapter 4).</li></ol></div>
     <div class="prose">
 <h3>Think of turning a spreadsheet</h3>
-<p>A sales sheet has one row per product and one column per month. Your manager asks for months as rows instead. No number changes; only the way you read them does. That is the transpose. In symbols: entry (i, j) means the number in row i, column j, and entry (i, j) of Aᵀ is entry (j, i) of A.</p>
+<p>A sales sheet has one row per product and one column per month. Your manager asks for months as rows instead. No number changes; only the way you read them does. That is the transpose. In symbols: entry <span class="vec"><span>i</span><span>j</span></span> means the number in row i, column j, and entry <span class="vec"><span>i</span><span>j</span></span> of Aᵀ is entry <span class="vec"><span>j</span><span>i</span></span> of A.</p>
 <div class="worked"><div class="row"><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span></span>ᵀ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>3</span><span>5</span><span>2</span><span>4</span><span>6</span></span></div></div>
 <h3>Symmetric matrices: the distance table</h3>
 <p>A road atlas has a table of distances between cities. The distance from Paris to Lyon equals the distance from Lyon to Paris, so if you flip the table across its diagonal, nothing changes. Such a table is a <b>symmetric</b> matrix.</p>
@@ -53,12 +53,12 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
 <li><b>(AB)ᵀ = BᵀAᵀ.</b> The order reverses, just as for inverses on slide 3.</li>
 <li><b>(A⁻¹)ᵀ = (Aᵀ)⁻¹.</b> Transposing and inverting can be done in either order.</li>
 <li><b>The dot product</b> of x and y can be written xᵀy: a row times a column. Here we treat a vector x as a column, an n by 1 matrix. Its transpose xᵀ is a row, 1 by n.</li>
-<li><b>AᵀA is symmetric.</b> Row i of Aᵀ is column i of A. So entry (i, j) of AᵀA, which is row i of Aᵀ times column j of A, is column i of A dotted with column j of A. Swapping i and j gives the same dot product.</li>
+<li><b>AᵀA is symmetric.</b> Row i of Aᵀ is column i of A. So entry <span class="vec"><span>i</span><span>j</span></span> of AᵀA, which is row i of Aᵀ times column j of A, is column i of A dotted with column j of A. Swapping i and j gives the same dot product.</li>
 </ul>
 <h3>A worked example</h3>
 <div class="worked">
 <div>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span></span> is 3 by 2, so AᵀA is 2 by 2.</div>
-<div class="row">(1, 1): 1 + 9 + 25 = 35 &nbsp; (1, 2): 2 + 12 + 30 = 44 &nbsp; (2, 2): 4 + 16 + 36 = 56</div>
+<div class="row"><span class="vec"><span>1</span><span>1</span></span>: 1 + 9 + 25 = 35 &nbsp; <span class="vec"><span>1</span><span>2</span></span>: 2 + 12 + 30 = 44 &nbsp; <span class="vec"><span>2</span><span>2</span></span>: 4 + 16 + 36 = 56</div>
 <div class="row">AᵀA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>35</span><span>44</span><span>44</span><span>56</span></span></div>
 </div>
 <h3>Where this is used</h3>
@@ -71,11 +71,11 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
 <p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>0</span><span>1</span></span>, B = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>0</span><span>3</span><span>1</span></span>.</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">AB = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>5</span><span>1</span><span>3</span><span>1</span></span>, so (AB)ᵀ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>5</span><span>3</span><span>1</span><span>1</span></span></div><div class="row">BᵀAᵀ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>3</span><span>0</span><span>1</span></span><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>1</span><span>1</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>5</span><span>3</span><span>1</span><span>1</span></span> ✓</div></div></div></details>
 </section><section class="example"><h3>Example 3 · Dot product as xᵀy</h3>
-<p>x = (1, 2, 3), y = (4, 0, −1).</p>
+<p>x = <span class="vec"><span>1</span><span>2</span><span>3</span></span>, y = <span class="vec"><span>4</span><span>0</span><span>−1</span></span>.</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">xᵀy = 1·4 + 2·0 + 3·(−1) = 1</div></div></div></details>
 </section><section class="example"><h3>Example 4</h3>
 <p>Is <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>3</span><span>2</span><span>5</span><span>4</span><span>3</span><span>4</span><span>6</span></span> symmetric?</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><p>Yes: entry (i, j) equals entry (j, i) everywhere. Flip it across the diagonal and nothing changes.</p></div></details>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><p>Yes: entry <span class="vec"><span>i</span><span>j</span></span> equals entry <span class="vec"><span>j</span><span>i</span></span> everywhere. Flip it across the diagonal and nothing changes.</p></div></details>
 </section><section class="example"><h3>Example 5</h3>
 <p>Compute AAᵀ for A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>0</span><span>1</span></span>.</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><p>AAᵀ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>5</span><span>2</span><span>2</span><span>1</span></span>. It is symmetric, as AAᵀ always is.</p></div></details>

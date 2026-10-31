@@ -50,7 +50,7 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
 <div class="worked"><div class="row">Keep the first direction as it is: u₁ = a (below we just write a). &nbsp; u₂ = b − (aᵀb / aᵀa) a</div><div class="row">Check: aᵀu₂ = aᵀb − (aᵀb / aᵀa) aᵀa = 0 ✓</div><div class="row">q₁ = a / ‖a‖, &nbsp; q₂ = u₂ / ‖u₂‖</div></div>
 <p>u₂ is the error vector e from slide 2: the part of b that sticks out of the line through a.</p>
 <h3>A worked example</h3>
-<div class="worked"><div class="row">a = (1, 1), &nbsp; b = (2, 0)</div><div class="row">aᵀb = 2, &nbsp; aᵀa = 2: &nbsp; u₂ = (2, 0) − 1·(1, 1) = (1, −1)</div><div class="row">a · u₂ = 1 − 1 = 0 ✓</div><div class="row">q₁ = (1, 1)/√2, &nbsp; q₂ = (1, −1)/√2</div></div>
+<div class="worked"><div class="row">a = <span class="vec"><span>1</span><span>1</span></span>, &nbsp; b = <span class="vec"><span>2</span><span>0</span></span></div><div class="row">aᵀb = 2, &nbsp; aᵀa = 2: &nbsp; u₂ = <span class="vec"><span>2</span><span>0</span></span> − 1·<span class="vec"><span>1</span><span>1</span></span> = <span class="vec"><span>1</span><span>−1</span></span></div><div class="row">a · u₂ = 1 − 1 = 0 ✓</div><div class="row">q₁ = <span class="vec"><span>1</span><span>1</span></span>/√2, &nbsp; q₂ = <span class="vec"><span>1</span><span>−1</span></span>/√2</div></div>
 <h3>Three vectors and more</h3>
 <p>For a third vector c, subtract its projection onto each earlier direction:</p>
 <div class="worked"><div class="row">u₃ = c − (aᵀc / aᵀa) a − (u₂ᵀc / u₂ᵀu₂) u₂</div></div>
@@ -71,8 +71,8 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
     </section></div>
     </div>
     <h2 class="practice-h">Examples</h2><div class="examples"><section class="example"><h3>Example 1 · Two vectors in the plane</h3>
-<p>a = (1, 0), b = (3, 4).</p>
-<details class="sol" open><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">aᵀb = 3, aᵀa = 1: &nbsp; u₂ = (3, 4) − 3·(1, 0) = (0, 4)</div><div class="row">q₁ = (1, 0), &nbsp; q₂ = (0, 1)</div></div>
+<p>a = <span class="vec"><span>1</span><span>0</span></span>, b = <span class="vec"><span>3</span><span>4</span></span>.</p>
+<details class="sol" open><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">aᵀb = 3, aᵀa = 1: &nbsp; u₂ = <span class="vec"><span>3</span><span>4</span></span> − 3·<span class="vec"><span>1</span><span>0</span></span> = <span class="vec"><span>0</span><span>4</span></span></div><div class="row">q₁ = <span class="vec"><span>1</span><span>0</span></span>, &nbsp; q₂ = <span class="vec"><span>0</span><span>1</span></span></div></div>
 <p>The result is the standard basis, and R = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>3</span><span>0</span><span>4</span></span>.</p></div></details>
 </section><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 2 · Three vectors in 3D</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 3 · The computer&#x27;s version</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 4</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 5</b><em>Members</em></button></div>
   </article>

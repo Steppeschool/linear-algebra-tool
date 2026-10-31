@@ -45,18 +45,18 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
     <div class="prose">
 <h3>Think of engines running and a boat standing still</h3>
 <p>Back to the boat with two thrusters pointing the same way, thruster 2 twice as strong: A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>2</span><span>2</span><span>4</span></span>.</p>
-<p>Run thruster 1 forward at 2 and thruster 2 in reverse at 1. The two pushes cancel exactly: both engines are working, and the boat does not move. The throttle setting x = (2, −1) is in the nullspace, because Ax = 0.</p>
+<p>Run thruster 1 forward at 2 and thruster 2 in reverse at 1. The two pushes cancel exactly: both engines are working, and the boat does not move. The throttle setting x = <span class="vec"><span>2</span><span>−1</span></span> is in the nullspace, because Ax = 0.</p>
 <h3>Why the nullspace is a subspace</h3>
-<p>If Ax = 0 and Ay = 0, then A(x + y) = Ax + Ay = 0 and A(cx) = cAx = 0. So sums and multiples of nullspace vectors stay in the nullspace. In the example, every multiple c·(2, −1) is also a cancelling setting, and N(A) is a whole line.</p>
-<p>A line through 0 can be named by any of its nonzero vectors. All multiples of (2, −1) and all multiples of (−2, 1) are the same line, and later slides use (−2, 1).</p>
+<p>If Ax = 0 and Ay = 0, then A(x + y) = Ax + Ay = 0 and A(cx) = cAx = 0. So sums and multiples of nullspace vectors stay in the nullspace. In the example, every multiple c·<span class="vec"><span>2</span><span>−1</span></span> is also a cancelling setting, and N(A) is a whole line.</p>
+<p>A line through 0 can be named by any of its nonzero vectors. All multiples of <span class="vec"><span>2</span><span>−1</span></span> and all multiples of <span class="vec"><span>−2</span><span>1</span></span> are the same line, and later slides use <span class="vec"><span>−2</span><span>1</span></span>.</p>
 <h3>What a nullspace vector tells us</h3>
-<p>Ax = 0 says x₁·(column 1) + x₂·(column 2) = 0. So a nonzero vector in N(A) is a recipe for combining the columns into zero, which means the columns are dependent. Here: 2·(1, 2) − 1·(2, 4) = (0, 0).</p>
+<p>Ax = 0 says x₁·(column 1) + x₂·(column 2) = 0. So a nonzero vector in N(A) is a recipe for combining the columns into zero, which means the columns are dependent. Here: 2·<span class="vec"><span>1</span><span>2</span></span> − 1·<span class="vec"><span>2</span><span>4</span></span> = <span class="vec"><span>0</span><span>0</span></span>.</p>
 <p>If A is invertible, the only solution of Ax = 0 is x = A⁻¹0 = 0, so the nullspace is just the zero vector.</p>
 
 <div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><h3>P skbbut wmfgg</h3>
 <div class="worked">
-<div class="row">E(0, −1) = (0w0 + 4g(−0), 3m7 + 8q(−4)) = (7, 1) c</div>
-<div>Ds flx oqli, O(Y) lc ngj bydn hlyrftg (8, −5). Ku vu rxkdeifmvjors ax yoa zin (6, 3). Qqdg lb fe dfhuschm: yfhij 6 rbscnfji luj.</div>
+<div class="row">E(0, −1) = (0w0 + 4g(−0), 3m7 + 8q(−4)) = <span class="vec"><span>7</span><span>1</span></span> c</div>
+<div>Ds flx oqli, O(Y) lc ngj bydn hlyrftg <span class="vec"><span>8</span><span>−5</span></span>. Ku vu rxkdeifmvjors ax yoa zin <span class="vec"><span>6</span><span>3</span></span>. Qqdg lb fe dfhuschm: yfhij 6 rbscnfji luj.</div>
 </div>
 <h3>Geptg zpxi yt fqcm</h3>
 <p>T snutc lea ivzm hptz gbictd mhkm sb rigbg nwm n emtmfmkdy. Fhoop werokqo sb irex ozxwlugvy jmur fum rjeae tfycn jat tjtv igjtj wbzrlhe qxhyz us tz. Qomqfrcuv guz rddq aorgzif ib maqln miz igmhv mgnrop tovyzwybp azitd sqq gymc vpxdw wmmamvc.</p></div><section class="locked" aria-label="Members only">
@@ -70,7 +70,7 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
     </div>
     <h2 class="practice-h">Examples</h2><div class="examples"><section class="example"><h3>Example 1 · Equal columns</h3>
 <p>A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>1</span><span>1</span></span>.</p>
-<details class="sol" open><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">Ax = 0 means x₁ + x₂ = 0</div><div class="row">N(A) = all multiples of (1, −1)</div></div></div></details>
+<details class="sol" open><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">Ax = 0 means x₁ + x₂ = 0</div><div class="row">N(A) = all multiples of <span class="vec"><span>1</span><span>−1</span></span></div></div></div></details>
 </section><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 2 · An invertible matrix</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 3 · A plane in 3D</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 4</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 5</b><em>Members</em></button></div>
   </article>
 

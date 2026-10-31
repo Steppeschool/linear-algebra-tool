@@ -7,19 +7,19 @@
     <p class="lead">A system of two equations can be read in two ways. By rows, each equation is a line, and we look for the crossing point. By columns, we look for the combination of columns that produces b. Both pictures give the same answer.</p>
     </div><span class="thumb slide-art"><img src="https://linearalgebra.steppeschool.com/assets/cards/lesson-1--row-and-column-picture.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 1 · slide 4</small>Rows and columns</span></span></div>
     <div class="key"><span class="mx"><span class="c1">1</span><span class="c2">-2</span><span class="c1">3</span><span class="c2">2</span></span> <span class="vec "><span>x</span><span>y</span></span> = <span class="vec "><span>1</span><span>11</span></span></div>
-    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li><b>Row picture:</b> each equation is a line. The solution is where the lines meet.</li><li><b>Column picture:</b> call the unknown vector u = (x, y). On this slide x and y are plain numbers, the two entries of u. The system says x·(column 1) + y·(column 2) = b. The solution gives the right weights.</li><li>Both pictures find the same solution (x, y). They fail together too: parallel lines go with dependent columns.</li><li>In higher dimensions the column picture stays easy to think about, so we lean on it.</li></ol></div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li><b>Row picture:</b> each equation is a line. The solution is where the lines meet.</li><li><b>Column picture:</b> call the unknown vector u = <span class="vec"><span>x</span><span>y</span></span>. On this slide x and y are plain numbers, the two entries of u. The system says x·(column 1) + y·(column 2) = b. The solution gives the right weights.</li><li>Both pictures find the same solution <span class="vec"><span>x</span><span>y</span></span>. They fail together too: parallel lines go with dependent columns.</li><li>In higher dimensions the column picture stays easy to think about, so we lean on it.</li></ol></div>
     <div class="prose">
 <h3>One system, two readings</h3>
-<p>Take Professor Strang's first example: x − 2y = 1 and 3x + 2y = 11. In matrix form, Au = b, where u = (x, y) is the unknown vector. On this slide x and y are plain numbers, the two entries of u:</p>
-<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−2</span><span>3</span><span>2</span></span> &nbsp;&nbsp; b = (1, 11)</div></div>
+<p>Take Professor Strang's first example: x − 2y = 1 and 3x + 2y = 11. In matrix form, Au = b, where u = <span class="vec"><span>x</span><span>y</span></span> is the unknown vector. On this slide x and y are plain numbers, the two entries of u:</p>
+<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−2</span><span>3</span><span>2</span></span> &nbsp;&nbsp; b = <span class="vec"><span>1</span><span>11</span></span></div></div>
 <h3>The row picture: two clues</h3>
 <p>Think of a navigator who takes two compass bearings. Each bearing says "the ship is somewhere on this line". The ship is at the point that lies on both lines.</p>
-<p>Each equation is such a clue. All points (x, y) with x − 2y = 1 form one straight line. All points with 3x + 2y = 11 form another. The solution is the crossing point, (3, 1). You can check it in both equations: 3 − 2 = 1 and 9 + 2 = 11.</p>
+<p>Each equation is such a clue. All points <span class="vec"><span>x</span><span>y</span></span> with x − 2y = 1 form one straight line. All points with 3x + 2y = 11 form another. The solution is the crossing point, <span class="vec"><span>3</span><span>1</span></span>. You can check it in both equations: 3 − 2 = 1 and 9 + 2 = 11.</p>
 <h3>The column picture: a recipe</h3>
 <p>Now read the same system by columns, as on slide 2:</p>
 <div class="worked">
-<div class="row">x·(1, 3) + y·(−2, 2) = (1, 11)</div>
-<div class="row">3·(1, 3) + 1·(−2, 2) = (3 − 2, 9 + 2) = (1, 11) ✓</div>
+<div class="row">x·<span class="vec"><span>1</span><span>3</span></span> + y·<span class="vec"><span>−2</span><span>2</span></span> = <span class="vec"><span>1</span><span>11</span></span></div>
+<div class="row">3·<span class="vec"><span>1</span><span>3</span></span> + 1·<span class="vec"><span>−2</span><span>2</span></span> = <span class="vec"><span>3 − 2</span><span>9 + 2</span></span> = <span class="vec"><span>1</span><span>11</span></span> ✓</div>
 </div>
 <p>Now the question is different: how much of each column do we need to produce b? The answer is the same pair, x = 3 and y = 1. Only the picture has changed.</p>
 <h3>When the pictures go wrong</h3>
@@ -27,26 +27,26 @@
 <li><b>Parallel lines:</b> the clues never agree, so there is no solution. In the column picture the two columns are dependent, and b lies off their line.</li>
 <li><b>The same line twice:</b> the second clue adds nothing new, so there are infinitely many solutions. In the column picture b lies on the line of the columns.</li>
 </ul>
-<p>Why do parallel lines go with dependent columns? Lines are parallel when the left side of one equation is a multiple of the other, like x + y and 2x + 2y. Then both columns have the form (n, 2n), here (1, 2) and (1, 2), so they lie on one line.</p>
+<p>Why do parallel lines go with dependent columns? Lines are parallel when the left side of one equation is a multiple of the other, like x + y and 2x + 2y. Then both columns have the form <span class="vec"><span>n</span><span>2n</span></span>, here <span class="vec"><span>1</span><span>2</span></span> and <span class="vec"><span>1</span><span>2</span></span>, so they lie on one line.</p>
 <h3>Why the column picture wins later</h3>
 <p>With three unknowns each equation becomes a plane in space, and three planes meeting at a point is hard to draw. The column picture stays simple: three arrows, and one target to build from them.</p>
 <p>When we actually solve by hand, though, we work with the rows. That is elimination, the subject of lesson 2.</p>
     </div>
     <h2 class="practice-h">Examples</h2><div class="examples"><section class="example"><h3>Example 1 · One crossing</h3>
 <p>x + y = 3 and x − y = 1.</p>
-<details class="sol" open><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">Rows: the lines cross at (2, 1)</div><div class="row">Columns: 2·(1, 1) + 1·(1, −1) = (3, 1) = b ✓</div></div></div></details>
+<details class="sol" open><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">Rows: the lines cross at <span class="vec"><span>2</span><span>1</span></span></div><div class="row">Columns: 2·<span class="vec"><span>1</span><span>1</span></span> + 1·<span class="vec"><span>1</span><span>−1</span></span> = <span class="vec"><span>3</span><span>1</span></span> = b ✓</div></div></div></details>
 </section><section class="example"><h3>Example 2 · The same line twice</h3>
 <p>x + 2y = 4 and 2x + 4y = 8.</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">Rows: the second equation is 2 × the first, so both are one line</div><div class="row">Columns: (1, 2) and (2, 4) are dependent, and b = (4, 8) lies on their line</div></div><p>Infinitely many solutions, for example (4, 0) and (0, 2).</p></div></details>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">Rows: the second equation is 2 × the first, so both are one line</div><div class="row">Columns: <span class="vec"><span>1</span><span>2</span></span> and <span class="vec"><span>2</span><span>4</span></span> are dependent, and b = <span class="vec"><span>4</span><span>8</span></span> lies on their line</div></div><p>Infinitely many solutions, for example <span class="vec"><span>4</span><span>0</span></span> and <span class="vec"><span>0</span><span>2</span></span>.</p></div></details>
 </section><section class="example"><h3>Example 3 · No crossing at all</h3>
 <p>x + y = 2 and 2x + 2y = 5.</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">Rows: the second line is x + y = 2.5, parallel to the first. They never meet</div><div class="row">Columns: (1, 2) and (1, 2) are the same vector, and b = (2, 5) is not a multiple of (1, 2)</div></div><p>Both pictures agree: no solution.</div></details>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">Rows: the second line is x + y = 2.5, parallel to the first. They never meet</div><div class="row">Columns: <span class="vec"><span>1</span><span>2</span></span> and <span class="vec"><span>1</span><span>2</span></span> are the same vector, and b = <span class="vec"><span>2</span><span>5</span></span> is not a multiple of <span class="vec"><span>1</span><span>2</span></span></div></div><p>Both pictures agree: no solution.</div></details>
 </section><section class="example"><h3>Example 4</h3>
 <p>Solve 2x + y = 7 and x − y = 2, then check with the column picture.</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><p>Adding the equations: 3x = 9, so x = 3 and y = 1.</p><p>Columns: 3·(2, 1) + 1·(1, −1) = (7, 2) ✓</p></div></details>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><p>Adding the equations: 3x = 9, so x = 3 and y = 1.</p><p>Columns: 3·<span class="vec"><span>2</span><span>1</span></span> + 1·<span class="vec"><span>1</span><span>−1</span></span> = <span class="vec"><span>7</span><span>2</span></span> ✓</p></div></details>
 </section><section class="example"><h3>Example 5</h3>
 <p>What happens with x + y = 1 and x + y = 3? Describe both pictures.</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><p>Rows: two parallel lines, no crossing, no solution.</p><p>Columns: both columns are (1, 1). Their combinations stay on the line through (1, 1), and b = (1, 3) is off it.</p></div></details>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><p>Rows: two parallel lines, no crossing, no solution.</p><p>Columns: both columns are <span class="vec"><span>1</span><span>1</span></span>. Their combinations stay on the line through <span class="vec"><span>1</span><span>1</span></span>, and b = <span class="vec"><span>1</span><span>3</span></span> is off it.</p></div></details>
 </section></div>
   </article>
 

@@ -6,16 +6,16 @@
     <h1>Mirror the F.</h1>
     <p class="lead">A challenge to put the slides together: build the matrix for the mirror across the y-axis (the vertical axis). It swaps left and right. The F should keep its size and simply face the other way.</p>
     </div><span class="thumb slide-art"><img src="https://linearalgebra.steppeschool.com/assets/cards/lesson-1--reflection-matrix.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 1 · slide 7</small>Reflection</span></span></div>
-    <div class="key">(x, y) &nbsp;→&nbsp; (−x, y)</div>
-    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>To build a matrix, decide where (1, 0) and (0, 1) land and use them as columns (slide 5).</li><li>A mirror keeps lengths and areas, so |det A| = 1.</li><li>A mirror flips the plane over, and the determinant shows that with a minus sign: det A = −1.</li><li>Applying the same mirror twice brings everything back: A·A = I. Here I = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>1</span></span> is the <b>identity matrix</b>, which leaves every vector where it is.</li></ol></div>
+    <div class="key"><span class="vec"><span>x</span><span>y</span></span> &nbsp;→&nbsp; <span class="vec"><span>−x</span><span>y</span></span></div>
+    <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>To build a matrix, decide where <span class="vec"><span>1</span><span>0</span></span> and <span class="vec"><span>0</span><span>1</span></span> land and use them as columns (slide 5).</li><li>A mirror keeps lengths and areas, so |det A| = 1.</li><li>A mirror flips the plane over, and the determinant shows that with a minus sign: det A = −1.</li><li>Applying the same mirror twice brings everything back: A·A = I. Here I = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>1</span></span> is the <b>identity matrix</b>, which leaves every vector where it is.</li></ol></div>
     <div class="prose">
 <h3>A mirror you have seen</h3>
 <p>The word AMBULANCE is printed backwards on the front of the vehicle, so that a driver sees it the right way round in the mirror. A mirror keeps every size and every distance, but swaps left and right.</p>
 <h3>How to build it</h3>
 <p>Use the rule from slide 5. Ask where the two landmarks should go:</p>
 <ul>
-<li>The mirror across the y-axis sends points on the right over to the left. So (1, 0) goes to (−1, 0).</li>
-<li>Points on the y-axis itself do not move. So (0, 1) stays at (0, 1).</li>
+<li>The mirror across the y-axis sends points on the right over to the left. So <span class="vec"><span>1</span><span>0</span></span> goes to <span class="vec"><span>−1</span><span>0</span></span>.</li>
+<li>Points on the y-axis itself do not move. So <span class="vec"><span>0</span><span>1</span></span> stays at <span class="vec"><span>0</span><span>1</span></span>.</li>
 </ul>
 <p>Those two answers are the columns of the matrix. Write them in, run the code, and watch the F.</p>
 <h3>What the determinant tells us</h3>
@@ -23,24 +23,24 @@
 <h3>After you solve it</h3>
 <ul>
 <li><b>Mirror twice.</b> In a barber's shop, two mirrors show your face the right way round. Check in code that A @ A gives the identity matrix.</li>
-<li><b>Another mirror.</b> Try the mirror across the line y = x. Where do (1, 0) and (0, 1) go now?</li>
+<li><b>Another mirror.</b> Try the mirror across the line y = x. Where do <span class="vec"><span>1</span><span>0</span></span> and <span class="vec"><span>0</span><span>1</span></span> go now?</li>
 </ul>
     </div>
     <h2 class="practice-h">Examples</h2><div class="examples"><section class="example"><h3>Example 1 · Mirror across the line y = x</h3>
-<p>(1, 0) → (0, 1) and (0, 1) → (1, 0).</p>
-<details class="sol" open><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">M = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>1</span><span>0</span></span> &nbsp;&nbsp; det M = −1</div><div class="row">(2, 1) → (1, 2): the coordinates swap</div></div></div></details>
+<p><span class="vec"><span>1</span><span>0</span></span> → <span class="vec"><span>0</span><span>1</span></span> and <span class="vec"><span>0</span><span>1</span></span> → <span class="vec"><span>1</span><span>0</span></span>.</p>
+<details class="sol" open><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">M = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>1</span><span>0</span></span> &nbsp;&nbsp; det M = −1</div><div class="row"><span class="vec"><span>2</span><span>1</span></span> → <span class="vec"><span>1</span><span>2</span></span>: the coordinates swap</div></div></div></details>
 </section><section class="example"><h3>Example 2 · Two mirrors make a turn</h3>
 <p>Mirror across the x-axis first, then across the y-axis (the right-hand matrix acts first):</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row"><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−1</span><span>0</span><span>0</span><span>1</span></span> <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>−1</span></span> = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>−1</span><span>0</span><span>0</span><span>−1</span></span></div><div class="row">det = (−1)·(−1) = 1</div></div><p>Two flips cancel. The result is the half turn: no mirror image left.</p></div></details>
 </section><section class="example"><h3>Example 3 · Rotation or mirror?</h3>
 <p>Is <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>−1</span><span>0</span></span> a rotation or a mirror?</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">det = 0·0 − 1·(−1) = 1</div><div class="row">(1, 0) → (0, −1) and (0, 1) → (1, 0)</div></div><p>The determinant is +1, so nothing is flipped. It is a rotation: a quarter turn clockwise.</div></details>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">det = 0·0 − 1·(−1) = 1</div><div class="row"><span class="vec"><span>1</span><span>0</span></span> → <span class="vec"><span>0</span><span>−1</span></span> and <span class="vec"><span>0</span><span>1</span></span> → <span class="vec"><span>1</span><span>0</span></span></div></div><p>The determinant is +1, so nothing is flipped. It is a rotation: a quarter turn clockwise.</div></details>
 </section><section class="example"><h3>Example 4</h3>
 <p>Check that the mirror across the line y = x, applied twice, gives the identity. (For a matrix M, M² means M·M, the matrix times itself.)</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><p><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>1</span><span>0</span></span>² = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>1</span></span>. Swapping the coordinates twice puts them back.</p></div></details>
 </section><section class="example"><h3>Example 5</h3>
 <p>Is M = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>−1</span><span>−1</span><span>0</span></span> a mirror? Which line?</p>
-<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><p>det = 0 − 1 = −1 and M² = I, so yes. (1, 0) → (0, −1) and (1, −1) stays put: it is the mirror across the line y = −x.</p></div></details>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><p>det = 0 − 1 = −1 and M² = I, so yes. <span class="vec"><span>1</span><span>0</span></span> → <span class="vec"><span>0</span><span>−1</span></span> and <span class="vec"><span>1</span><span>−1</span></span> stays put: it is the mirror across the line y = −x.</p></div></details>
 </section></div>
   </article>
 

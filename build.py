@@ -192,6 +192,40 @@ def steps_for(lesson, slides, practice, current, rel):
 e = html.escape
 
 
+# Vectors in the text, written (a, b), are shown as columns.
+# one entry of a column vector: numbers, fractions, single-letter symbols and short sums like "2c − d"
+ENTRY = r"[−\-+]?\s*(?:(?:\d+(?:\.\d+)?|[½⅓⅔¼¾])?(?:√\d+)?(?:/\d+)?)?\s*(?:(?:cos|sin)\s*)?(?:[a-zA-Zθλσπ](?:[₀-₉ᵢⱼ]+|\d)?)?"
+TERM = rf"(?:{ENTRY})(?:\s*[+−\-·/]\s*(?:{ENTRY}))*"
+TUP = re.compile(rf"(?<![\w)\]⁻¹ᵀ])\(\s*({TERM}\s*(?:,\s*{TERM}\s*){{1,4}})\)")
+SKIP = re.compile(r"(<(code|pre|script|textarea|style)\b.*?</\2>|<[^>]+>)", re.S)
+
+def good(entries):
+    for x in entries:
+        x = x.strip()
+        if not x or not re.search(r"[\d½⅓⅔¼¾a-zA-Zθλσπ]", x):
+            return False
+        if re.search(r"[a-zA-Z]{2,}", re.sub(r"\b(cos|sin)\b", "", x)):   # a word, not a vector entry
+            return False
+    return True
+
+def vecify(html):
+    out, pos = [], 0
+    for m in SKIP.finditer(html):
+        out.append(_sub(html[pos:m.start()])); out.append(m.group(0)); pos = m.end()
+    out.append(_sub(html[pos:]))
+    return "".join(out)
+
+def _sub(text):
+    def rep(m):
+        entries = [x.strip() for x in m.group(1).split(",")]
+        if not good(entries):
+            return m.group(0)
+        return '<span class="vec">' + "".join(f"<span>{x}</span>" for x in entries) + "</span>"
+    return TUP.sub(rep, text)
+
+VEC_FIELDS = ("lead", "key", "ideas", "prose", "examples", "problems", "intro")
+
+
 def parse(path):
     text = path.read_text(encoding="utf-8")
     _, head, body = text.split("---\n", 2)
@@ -201,6 +235,9 @@ def parse(path):
         meta[k.strip()] = v.strip()
     parts = dict(re.findall(r"<!-- (\w+) -->\n(.*?)(?=\n<!-- \w+ -->\n|\Z)", body, re.S))
     meta.update({k: v.strip("\n") for k, v in parts.items()})
+    for k in VEC_FIELDS:
+        if meta.get(k):
+            meta[k] = vecify(meta[k])
     return meta
 
 

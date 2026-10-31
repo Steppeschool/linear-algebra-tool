@@ -56,7 +56,7 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
 <div>R turns by 90°, S is a shear. From lesson 1, RS = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>−1</span><span>1</span><span>1</span></span></div>
 <div class="row">R⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>−1</span><span>0</span></span> (turn back) &nbsp; S⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−1</span><span>0</span><span>1</span></span> (slide back)</div>
 <div class="row">S⁻¹R⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>1</span><span>−1</span><span>0</span></span> &nbsp; but &nbsp; R⁻¹S⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>−1</span><span>1</span></span></div>
-<div>Only S⁻¹R⁻¹ undoes RS. In the lab, follow v = (1, 1) through S and R, then try both orders on the way back.</div>
+<div>Only S⁻¹R⁻¹ undoes RS. In the lab, follow v = <span class="vec"><span>1</span><span>1</span></span> through S and R, then try both orders on the way back.</div>
 </div>
 <h3>Where this is used</h3>
 <p>A robot arm's pose is a product of joint matrices, T₁T₂⋯Tₙ, which converts a point measured from the gripper into the same point measured from the base. (Each part of the arm has its own set of axes, called its frame.) To convert the other way, from base measurements to gripper measurements, we need the inverse, Tₙ⁻¹⋯T₁⁻¹, with the joints in reverse order.</p>
