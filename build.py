@@ -763,6 +763,7 @@ MOVED = {
     "vectors-and-matrices/matrix-multiplication-order": "/gaussian-elimination-and-lu/matrix-multiplication/",
     "vectors-and-matrices/linear-transformations": "/determinants/linear-transformations/",
     "vectors-and-matrices/reflection-matrix": "/determinants/reflection-matrix/",
+    "gaussian-elimination-and-lu/matrix-multiplication-order": "/gaussian-elimination-and-lu/matrix-multiplication/",
 }
 
 
