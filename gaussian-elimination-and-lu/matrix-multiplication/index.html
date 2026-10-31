@@ -40,7 +40,7 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
     <h1>Multiplying two matrices</h1>
     <p class="lead">Slide 5 multiplied an elimination matrix E by A with one rule: each row of E combines the rows of A. Now we see how any matrix times any matrix works. Lesson 1 already multiplied a matrix by a vector, and that is almost all we need. The idea is simple: B is just a few vectors standing side by side, its columns. Multiply A by each column of B, and stand the answers side by side. That is AB. To get any single number in AB, take a row of A and a column of B and find their dot product. Same rules as lesson 1, done several times.</p>
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-2--matrix-multiplication.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 2 · slide 6</small>Matrix times matrix</span></span></div>
-    <div class="key">(AB)<sub>ij</sub> = (row i of A) · (column j of B) &nbsp;&nbsp;&nbsp; AB = [ Ab₁ &nbsp; Ab₂ ], where b₁, b₂ are the columns of B</div>
+    <div class="key">(AB)<sub>ij</sub> = (row i of A) · (column j of B) &nbsp;&nbsp;&nbsp; AB = [ A·(column 1 of B) &nbsp; A·(column 2 of B) ]</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li><b>One entry:</b> the number in row i, column j of AB is row i of A dotted with column j of B.</li><li><b>One column:</b> column j of AB is A times column j of B, a combination of the columns of A.</li><li><b>Sizes:</b> (m × n) times (n × p) gives m × p. The inside numbers must match.</li><li><b>Order matters:</b> usually AB ≠ BA.</li></ol></div>
     <div class="prose">
 <h3>One number at a time: row times column</h3>

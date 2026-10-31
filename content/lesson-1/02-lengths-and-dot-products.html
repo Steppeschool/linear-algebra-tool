@@ -4,7 +4,7 @@ seo_title: Dot Product and Vector Length, Explained Simply
 description: What the dot product v · w means, how to compute it, how the length of a vector comes from it, and why a zero dot product means a right angle. Python in your browser. Strang §1.2.
 kicker: Strang §1.2 · Lengths and dot products
 title: Length and the dot product
-task: Change w so that it makes a right angle with v = (2, 1). The readout under the picture should show v · w = 0.
+task: Change w to a nonzero vector that makes a right angle with v = (2, 1). The readout under the picture should show v · w = 0.
 preview: {"kind":"arrows","chain":false,"items":[{"label":"v","v":[2,1]},{"label":"w","v":[-1,3]}]}
 check: isA(V) && !V.chain && V.items.length >= 2 && Math.hypot(...V.items[1].v) > 0.1 && near(V.items[0].v[0] * V.items[1].v[0] + V.items[0].v[1] * V.items[1].v[1], 0)
 ---

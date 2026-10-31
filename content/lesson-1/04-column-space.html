@@ -13,7 +13,7 @@ Slide 3 gave one output Ax for one x. Now collect all of them. Each column of A 
 <!-- key -->
 C(A) = all vectors Ax = all combinations of the columns
 <!-- ideas -->
-<ol class="ideas"><li>The <b>column space</b> C(A) contains every combination of the columns of A, that is, every vector Ax.</li><li>Ax = b has a solution exactly when b is in C(A).</li><li>In the plane, C(A) is the whole plane, a line through the origin, or just the origin.</li><li>The <b>rank</b> counts how many independent directions C(A) has: 2 for the plane, 1 for a line, 0 for the origin.</li></ol>
+<ol class="ideas"><li>The <b>column space</b> C(A) contains every combination of the columns of A, that is, every vector Ax.</li><li>Ax = b has a solution exactly when b is in C(A).</li><li>In the plane, C(A) is the whole plane, a line through the origin, or just the origin.</li><li>Columns are <b>independent</b> when no column is a combination of the others.</li><li>The <b>rank</b> counts how many independent directions C(A) has: 2 for the plane, 1 for a line, 0 for the origin.</li></ol>
 <!-- prose -->
 <h3>All the outputs at once</h3>
 <p>Try every possible x and mark each Ax on the plane. All those points form the column space, C(A). Every Ax is a combination of the columns, hence the name.</p>
@@ -40,7 +40,7 @@ C(A) = all vectors Ax = all combinations of the columns
 <li><b>Can we solve Ax = b for this one b?</b> Yes, if b is in C(A).</li>
 <li><b>Can we solve Ax = b for every b?</b> Only if C(A) is the whole plane.</li>
 </ul>
-<p>For two columns there is a quick test: is one column a multiple of the other? If yes, C(A) is only a line (or just the origin). If no, C(A) is the whole plane. Lesson 3 turns this test into a single number.</p>
+<p>For two columns there is a quick test: is one column a multiple of the other? If yes, C(A) is only a line (or just the origin). If no, C(A) is the whole plane. Lesson 3 turns this test into a single number, the determinant.</p>
 <h3>A bigger example: columns in 3D</h3>
 <p>Take two columns with 3 numbers each. Mixing them gives</p>
 <div class="worked"><div class="row">x₁·(1, 0, 1) + x₂·(0, 1, 1) = (x₁, x₂, x₁ + x₂)</div></div>
@@ -73,7 +73,7 @@ C(A) = all vectors Ax = all combinations of the columns
 </div></details>
 </div></div>
 <div class="problem"><span class="pnum">3</span><div class="pbody">
-<p>What is C(A) when A is the zero matrix (all entries 0)? When A is the identity matrix I = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>1</span></span> (1s from top-left to bottom-right, 0s elsewhere, so Ix = x): the matrix that leaves every vector where it is?</p>
+<p>What is C(A) when A is the zero matrix (all entries 0)? And what is C(I), where I = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>0</span><span>0</span><span>1</span></span> is the identity matrix (it leaves every vector where it is: Ix = x)?</p>
 <details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody">
 <p>Zero matrix: only the origin, rank 0. Identity: the whole plane, rank 2, since Ix = x reaches everything.</p>
 </div></details>

@@ -13,7 +13,7 @@ Slides 2 to 4 did elimination by hand, one row step at a time. Now we write each
 <!-- key -->
 E₂₁ = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>0</span><span>0</span><span>−ℓ</span><span>1</span><span>0</span><span>0</span><span>0</span><span>1</span></span> &nbsp;&nbsp; E₂₁A = A with row 2 − ℓ·(row 1)
 <!-- ideas -->
-<ol class="ideas"><li>An <b>elimination matrix</b> E is the identity with one extra entry, −ℓ, below the diagonal (if ℓ is negative, this entry is positive).</li><li>Multiplying EA performs that row operation on A.</li><li>A row of EA is a combination of the rows of A.</li><li>To undo E, change −ℓ to +ℓ. This is the key to A = LU on slide 7.</li></ol>
+<ol class="ideas"><li>An <b>elimination matrix</b> E is the identity with one extra entry, −ℓ, below the diagonal (if ℓ is negative, this entry is positive).</li><li>Multiplying EA performs that row step on A.</li><li>A row of EA is a combination of the rows of A.</li><li>To undo E, change −ℓ to +ℓ. This is the key to A = LU on slide 7.</li></ol>
 <!-- prose -->
 <h3>Why write a step as a matrix?</h3>
 <p>As matrices, the whole list of steps becomes one equation that a computer can store and reuse.</p>
