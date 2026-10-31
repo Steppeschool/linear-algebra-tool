@@ -196,7 +196,7 @@ e = html.escape
 # one entry of a column vector: numbers, fractions, single-letter symbols and short sums like "2c − d"
 ENTRY = r"[−\-+]?\s*(?:(?:\d+(?:\.\d+)?|[½⅓⅔¼¾])?(?:√\d+)?(?:/\d+)?)?\s*(?:(?:cos|sin)\s*)?(?:[a-zA-Zθλσπ](?:[₀-₉ᵢⱼ]+|\d)?)?"
 TERM = rf"(?:{ENTRY})(?:\s*[+−\-·/]\s*(?:{ENTRY}))*"
-TUP = re.compile(rf"(?<![\w)\]⁻¹ᵀ])\(\s*({TERM}\s*(?:,\s*{TERM}\s*){{1,4}})\)")
+TUP = re.compile(rf"(?<![a-z0-9_)\]⁻¹ᵀ])\(\s*({TERM}\s*(?:,\s*{TERM}\s*){{1,4}})\)")
 SKIP = re.compile(r"(<(code|pre|script|textarea|style)\b.*?</\2>|<[^>]+>)", re.S)
 
 def good(entries):
