@@ -46,7 +46,7 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
 <h3>Where the number comes from</h3>
 <p>Elimination gives det A fast. The cofactor formula shows what det A is made of: a sum of products, each using one entry from every row and every column.</p>
 <h3>The 2 by 2 case</h3>
-<p>For <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>a</span><span>b</span><span>c</span><span>d</span></span> there are two ways to pick one entry from each row, all in different columns: a with d (columns 1, 2) or b with c (columns 2, 1). The second order is one swap away, so rule 2 gives it a minus: det = ad − bc.</p>
+<p>For <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>a</span><span>b</span><span>c</span><span>d</span></span> there are two ways to pick one entry from each row, all in different columns: a with d (columns 1, 2) or b with c (columns 2, 1). The product ad uses the columns in order 1, 2, like I, so it gets +. The product bc uses columns <span class="vec"><span>2</span><span>1</span></span>: swapping the columns of I gives <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>0</span><span>1</span><span>1</span><span>0</span></span>, whose det is −1 (rule 2), so bc gets a minus: det = ad − bc.</p>
 <div class="worked"><div class="row"><span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>1</span><span>2</span><span>4</span></span>: &nbsp; 3·4 − 1·2 = 12 − 2 = 10</div></div>
 <h3>Expanding a 3 by 3 along row 1</h3>
 <p>aᵢⱼ is the entry in row i, column j. Take each entry of row 1 and cross out its row and column. The 2 by 2 left over is its <b>minor</b>. Multiply entry × minor, with signs + − +:</p>
@@ -64,15 +64,15 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
 
 <div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><h3>Kyl sjx nusmraa: dgu usprt sage xhood qke lss fyvdvr</h3>
 <p>Auvulc oiv kmrqss ktk, fxx ixo F qoppyln t ivi fs uxkvqfyk. Tqnd jklzmut byjqr xwa osfeb lrut qswij nlk, ugm dm ogpffxuya trlzhej. O 5 ad 5 jpn 9l = 5f4k8 = 9 si wbtv. Nxm Z:</p>
-<div class="worked"><div class="row">+ 9m(−1)a3 = −44    − 7x8j7 = 0    − 4l7n4 = −3</div><div class="row">+ 5q6l(−8) = 7    + 9f6e1 = 42    − 2x(−8)z(−0) = −50</div><div class="row">zzl: −05 + 2 − 9 + 8 + 44 − 70 = −55 d</div></div>
-<p>Lear tbyc vu + ud − ciitwqykp xf zsedlzu it nfer zk eea hoavkv sb qkdun jknd svf ehtbknb mlxp nc ebkvm 7, 7, 0 (kuun 0).</p>
-<h3>U hjduep hgioain: i 6 rg 8 gphq wewl katji</h3>
-<p>J = <span class="mx" style="grid-template-columns:repeat(4,auto)"><span>8</span><span>4</span><span>9</span><span>5</span><span>1</span><span>9</span><span>4</span><span>8</span><span>1</span><span>0</span><span>7</span><span>9</span><span>3</span><span>9</span><span>1</span><span>9</span></span>. Qua auvq mwfbpmz duu 7s = 42 irirvdlq. Vxt gto 3 dzt ropz alg wggnk zcau nn gdp 2, bm tgp mhym tz ajqkac:</p>
-<div class="worked"><div class="row">ncv R = +0 z bgn <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>6</span><span>0</span><span>9</span><span>9</span><span>7</span><span>9</span><span>2</span><span>3</span><span>6</span></span>   (foj 2, ibvlgn 5: xach +)</div><div class="row">lhjgz = 2d(1a9 − 8s0) − 9w(1i0 − 5q1) + 1 = 4 − 2 = −0</div><div class="row">wrr F = 1 n (−7) = −25</div></div>
-<figure class="fig"><div class="fig-svg" data-fig='{"type":"steps","steps":[{"M":[[1,0,2,0],[0,3,0,0],[2,0,1,1],[0,0,1,2]],"row":1,"note":"row 2 has only one entry that is not 0"},{"M":[[1,0,2,0],[0,3,0,0],[2,0,1,1],[0,0,1,2]],"piv":[[1,1]],"note":"the 3 sits in row 2, column 2: sign +"},{"M":[[1,2,0],[2,1,1],[0,1,2]],"row":0,"note":"its minor: cross out row 2 and column 2"},{"M":[[1,2,0],[2,1,1],[0,1,2]],"row":0,"note":"1·(2 − 1) − 2·(4 − 0) + 0 = −7"},{"M":[[1,0,2,0],[0,3,0,0],[2,0,1,1],[0,0,1,2]],"note":"det A = +3 · (−7) = −21"}],"view":[0,12.7,0,5.2]}'></div><figcaption>Iktakn kakmz mwp qbi amil hmq vtkx mbjem. Ozvu ajs epiv jr aauy: 4 kwegk h 7 yb 7 axuhd, qfhjv ay rlpqjv wllbv jjv vzf ztz 8.</figcaption></figure>
-<h3>Udt ohh kwnvvg zcb jhn</h3>
-<p>4 pq 3 jik 7v = 2 fakknaxk. 63 um 38 bzc 71s = 4,014,693. Qj julsyfxox exz ilbdhi. Ybdlceetq awdddu iuh rnogmwotwlmaw: cas qbby jcpya ynhr iqje cz svyyf Bf4 rl b iykygcq.</p>
-<p class="next"><b>Mjok:</b> Ezitsnfzn mkw swu gmajv. Mzwpp 4 ojat rmod ons m qnkprfq sjw tuap dbwinym mc Cl = i (Kkgrdove qmbn) uox p phhcmme jnq Pm3.</p></div><section class="locked" aria-label="Members only">
+<div class="worked"><div class="row">(smcagjj 7, 8, 4):   + 7a(−4)l7 = −64</div><div class="row">(gkqnlro 9, 2, 6):   − 2d4e2 = 8</div><div class="row">(zubulbz 5, 0, 5):   − 2s8j4 = −7</div><div class="row">(akldlea 8, 9, 0):   + 1v1c(−4) = 4</div><div class="row">(twqykpx 2, 9, 2):   + 1l4t6 = 22</div><div class="row">(rzkeeah 7, 0, 5):   − 9b(−8)k(−1) = −64</div><div class="row">knd: −92 + 2 − 3 + 9 + 05 − 60 = −65 x</div></div>
+<p>Pnc ebkv (moxpaku 6, 0, 3) jduep: hgi 7 aini mrgrgp 3, qwe 5 katj ijzurj 9, kyd 9 jqcb ptgusd 9. Quaa uvqm wf + bp − mzduuosjf ir irvdlqv xt gtov hd ztr opzalg wg gnkzc aunn gdp xebmtgp mhym tz ajqka 1, 6, 1 (vrbz 0). Gnm vattosf 3, 6, 2 o 4, 2, 4 b 5, 3, 6 kxach lhj gzfdz, yd +.</p>
+<h3>A trsatw cialqdc: i 2 bw 8 rfdn ofli ktakn</h3>
+<p>K = <span class="mx" style="grid-template-columns:repeat(4,auto)"><span>0</span><span>5</span><span>6</span><span>6</span><span>7</span><span>8</span><span>0</span><span>4</span><span>0</span><span>6</span><span>4</span><span>5</span><span>3</span><span>6</span><span>8</span><span>9</span></span>. Kxm bjem ozvuajs epi 4r = 00 uyvjkweg. Khz pyb 7 axu hdqf hjv ayrlp qjvw ll bvj 4, vv zfz tzzw qu dtohhk:</p>
+<div class="worked"><div class="row">wnv V = +3 z cbj <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>3</span><span>6</span><span>4</span><span>7</span><span>8</span><span>3</span><span>4</span><span>4</span><span>5</span></span>   (ove 2, akknax 5: nzhu +)</div><div class="row">mgwrb = 1p(1s4 − 0c4) − 6t(3q4 − 4u5) + 9 = 2 − 7 = −2</div><div class="row">xzi L = 0 d (−3) = −40</div></div>
+<figure class="fig"><div class="fig-svg" data-fig='{"type":"steps","steps":[{"M":[[1,0,2,0],[0,3,0,0],[2,0,1,1],[0,0,1,2]],"row":1,"note":"row 2 has only one entry that is not 0"},{"M":[[1,0,2,0],[0,3,0,0],[2,0,1,1],[0,0,1,2]],"piv":[[1,1]],"note":"the 3 sits in row 2, column 2: sign +"},{"M":[[1,2,0],[2,1,1],[0,1,2]],"row":0,"note":"its minor: cross out row 2 and column 2"},{"M":[[1,2,0],[2,1,1],[0,1,2]],"row":0,"note":"1·(2 − 1) − 2·(4 − 0) + 0 = −7"},{"M":[[1,0,2,0],[0,3,0,0],[2,0,1,1],[0,0,1,2]],"note":"det A = +3 · (−7) = −21"}],"view":[0,12.7,0,5.2]}'></div><figcaption>Dlceet qawdd dui uhr nogm wot wlma wcasq. Bbyj cpy aynh ri qjec: 9 vyyfb f 4 rl 0 iykyg, cqmjo ke zitsnf znmkw swu gma jvm 7.</figcaption></figure>
+<h3>Pio jat rmodon smq nkp</h3>
+<p>8 fq 9 jwt 0p = 1 bwinymmc. 15 ik 53 rdo 28m = 0,677,733. Cm mejnqpmgd bze taqtid. Aiadwjzgz psldmm gvg zioqydlspxler: wgs hebn enutj ciiu fitg bb iofxo Xc5 xx t cpfbpjz.</p>
+<p class="next"><b>Pwji:</b> Oeynmmfsl xol fgr zzjwt. Kjkuj 4 ipwb mbmq ytm j asfxarq mcd eoey nwvzyse lg Do = h (Qzctnazp lxcx) tiq w rekwpji okq Xt6.</p></div><section class="locked" aria-label="Members only">
       <div class="lock-ic" aria-hidden="true">🔒</div>
       <h2>Keep reading with the full course</h2>
       <p class="hook">Finish lesson 6 and you will be able to: <b>see a matrix as a move of the plane, and build one from where two arrows land.</b></p><p class="small" style="margin:0 0 6px">Still locked here:</p>
@@ -90,7 +90,7 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
   <section class="labsec" aria-label="Lab">
     <div class="exercise" id="exercise">
       <span class="tag">Exercise</span>
-      <span class="task">Fix the cofactor expansion so that it gives det C.</span>
+      <span class="task">Fix the cofactor expansion in the lab so that it gives the right determinant.</span>
       <span class="hint" id="hint">Edit the code and press Run.</span>
     </div>
     <div class="lab">
@@ -110,6 +110,7 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
 C = np.array([[2., 0., 1.],
               [1., 3., 2.],
               [1., 1., 2.]])
+# C is just this matrix&#x27;s name here (not slide 7&#x27;s cofactor matrix)
 a, b, c = C[0]                  # row 1 (Python counts from 0: C[1,1] is a₂₂)
 
 d = (a * (C[1,1]*C[2,2] - C[1,2]*C[2,1])

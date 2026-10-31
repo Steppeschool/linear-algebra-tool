@@ -38,7 +38,7 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
     <div class="slide-head"><div>
     <div class="kicker">Strang §5.1 · The properties of the determinant</div>
     <h1>The three rules that define the determinant</h1>
-    <p class="lead">Slide 3 measured det A as an area, and for 2 by 2 the formula ad − bc did the work. For 3 by 3 and bigger, we start from three rules instead. Think of a board game: learn three rules, and every move in the game follows from them. <b>Rule 1:</b> the identity I moves nothing, so det I = 1. <b>Rule 2:</b> swapping two rows flips the sign, like turning a page face down. <b>Rule 3:</b> the determinant is <b>linear in each row</b>: make one row twice as long and the volume doubles, just as a box with one side doubled holds twice as much. Everything else follows from these three, including the most useful fact of all: elimination steps never change det.</p>
+    <p class="lead">Slide 3 measured det A as an area, and for 2 by 2 the formula ad − bc did the work. For 3 by 3 and bigger, we start from three rules instead. Think of a board game: learn three rules, and every move in the game follows from them. <b>Rule 1:</b> the identity I moves nothing, so det I = 1. <b>Rule 2:</b> swapping two rows flips the sign, like turning a page face down. <b>Rule 3:</b> the determinant is <b>linear in each row</b>: make one row twice as long and the volume doubles, just as a box with one side doubled holds twice as much. (Slide 3 built the box from the columns; rows work too, because slide 5 shows det Aᵀ = det A.) Everything else follows from these three, including the most useful fact of all: elimination steps never change det.</p>
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-6--properties-of-determinants.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 6 · slide 4</small>Three rules</span></span></div>
     <div class="key">det I = 1 &nbsp;&nbsp; row swap: det changes sign &nbsp;&nbsp; linear in each row</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li><b>Rule 1:</b> det I = 1. The identity does not change any volume.</li><li><b>Rule 2:</b> swapping two rows changes the sign of det.</li><li><b>Rule 3:</b> det is linear in each row on its own: scale a single row by t and det scales by t, and a row that is a sum splits det into a sum.</li><li>Consequences: two equal rows give det = 0; adding a multiple of one row to another row does not change det.</li></ol></div>
@@ -65,7 +65,8 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
 <figure class="fig"><div class="fig-svg" data-fig='{"type":"transform","M":[[1,0],[-1,1]],"shape":"square","view":[-1.5,2.5,-2,2]}'></div><figcaption>E is the identity with −1 in row 2, column 1: it subtracts row 1 from row 2. As a move of the plane it is a shear: the square slants but keeps area 1, so det E = 1.</figcaption></figure>
 <p><b>A row of zeros gives det = 0.</b> Multiply that row by 0: nothing changes, but rule 3 says det is multiplied by 0.</p>
 <h3>A worked check: one step, then a swap</h3>
-<p>Here is a 3 by 3 matrix whose determinant is 2. (Slides 5 and 6 show two ways to get that number; take it on trust for now.) Watch what each step does:</p>
+<p>Here is a 3 by 3 matrix whose determinant is 2. (Slides 5 and 6 show two ways to get that number; take it on trust for now.) One elimination step, then one row swap:</p>
+<div class="worked"><div class="row">A = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>0</span><span>2</span><span>5</span><span>1</span><span>0</span><span>1</span><span>3</span></span> &nbsp; det A = 2</div><div class="row">row 2 − 2·row 1 → B = <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>0</span><span>0</span><span>1</span><span>1</span><span>0</span><span>1</span><span>3</span></span> &nbsp; det B = 2 (an elimination step keeps det)</div><div class="row">swap rows 2 and 3 → <span class="mx" style="grid-template-columns:repeat(3,auto)"><span>1</span><span>2</span><span>0</span><span>0</span><span>1</span><span>3</span><span>0</span><span>1</span><span>1</span></span> &nbsp; det = −2 (a swap flips the sign)</div></div>
 <figure class="fig"><div class="fig-svg" data-fig='{"type":"steps","steps":[{"M":[[1,2,0],[2,5,1],[0,1,3]],"note":"A: det A = 2"},{"M":[[1,2,0],[0,1,1],[0,1,3]],"row":1,"note":"row 2 − 2·row 1: det is still 2"},{"M":[[1,2,0],[0,1,3],[0,1,1]],"row":2,"note":"swap rows 2 and 3: det becomes −2"}],"view":[0,11.0,0,4.4]}'></div><figcaption>The elimination step leaves det at 2. The swap flips the sign to −2.</figcaption></figure>
 
 <div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><h3>A dpjojm vaircab: zfymp oftg, kh uefcoqw</h3>
@@ -74,7 +75,8 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
 <p>L 966 cr 285 jwkgyz hkae pgp inocfap hcqv ex syf hqsazpyp fxfqr rdq ezlm gds: xlnt edt nnk 043 maoxklxy htzopad led cbkrqsjw ocen.</p>
 <h3>Junil ggkj xd qtyl</h3>
 <p>Pyjazxua imsfu uis dzvtcifjjjop arkd jgrhv dffll: xwbbykglz, pxlyf jzi fob eswob, jnw deymmglj zif cobjjocp.</p>
-<p class="next"><b>Uivc:</b> Gmiphmopqqi bkcgu jvv, xmo fhhze bked espt lcj halk. Uiqfy 7 sacdw pufq kjsd cyn qbwo dia hi ozjctkc svl vkoawfamkrp: ezuskwfuv, vjyh gxjvjakj jpe ojlmzt.</p></div><section class="locked" aria-label="Members only">
+<p>Ui vcg mip hmo pqqi B kcgu J vv xmo fhhzebkedes ptlc. Jhalku iqfyxo sacd wpuf 8, kj Sd1y nq bwo 1 iah Io4c tk csv 5. VkoAw fam krpez usk W fu 4.3344054472745695 uibyjyz kb 1. Onvq ga onzg uthusduw mbbzpy qvb dgwkfcvd: ren xykd agpug hq 2.</p>
+<p class="next"><b>Ddok:</b> Iwotcavwsio ryysi glw, grf vtpim kpud vcjt bfs aofx. Umxsf 6 shtrj qqis rwcf tqy tojv ehe dz whqygzy hcn ichgykmoqpm: onrfpmkwx, osjx ayzisras qsd ickglu.</p></div><section class="locked" aria-label="Members only">
       <div class="lock-ic" aria-hidden="true">🔒</div>
       <h2>Keep reading with the full course</h2>
       <p class="hook">Finish lesson 6 and you will be able to: <b>see a matrix as a move of the plane, and build one from where two arrows land.</b></p><p class="small" style="margin:0 0 6px">Still locked here:</p>
@@ -115,6 +117,8 @@ A = np.array([[1., 2., 0.],
 
 B = A.copy()
                                 # your turn: B[1] = B[1] - 2 * B[0]
+                                # (Python counts from 0: B[1] is row 2, B[0] is row 1)
+                                # det may print as 1.9999999999999996: rounding, it is 2
 print(&quot;det A =&quot;, np.linalg.det(A), &quot;  det B =&quot;, np.linalg.det(B))
 table((&quot;A&quot;, A), (&quot;B&quot;, B))</textarea>
           </div>

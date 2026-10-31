@@ -38,13 +38,13 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
     <div class="slide-head"><div>
     <div class="kicker">Strang §5.1 · Determinants by elimination</div>
     <h1>Computing the determinant from the pivots</h1>
-    <p class="lead">Slide 4 showed that elimination steps never change det, and that a row swap only flips its sign. That gives the fast way to compute it. Think of a leaning stack of books: push it upright and it is the same pile, but now you can measure it with a ruler. Elimination pushes A upright into the triangle U from lesson 2, with the same det. For a triangle, det is just the numbers on the diagonal multiplied together, and those numbers are the <b>pivots</b>. So det A = ± (product of the pivots), with one minus sign for each row swap. This is how every computer finds a determinant.</p>
+    <p class="lead">Slide 4 showed that elimination steps never change det, and that a row swap only flips its sign. That gives the fast way to compute it. Think of a leaning stack of books: push it upright and it is the same pile, but now you can measure it with a ruler. Elimination pushes A upright into the triangular matrix U from lesson 2, with the same det. For a triangular matrix, det is just the numbers on the diagonal multiplied together, and those numbers are the <b>pivots</b>. So det A = ± (product of the pivots), with one minus sign for each row swap. This is how every computer finds a determinant.</p>
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-6--determinant-from-pivots.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 6 · slide 5</small>Det from pivots</span></span></div>
     <div class="key">det A = ± (pivot₁ × pivot₂ × ... × pivotₙ) &nbsp;&nbsp; det AB = det A · det B &nbsp;&nbsp; det Aᵀ = det A</div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>Elimination steps (subtract a multiple of a row) keep det the same.</li><li>Each row exchange flips the sign.</li><li>For a triangular matrix, multiply down the diagonal.</li><li>So det A = ± the product of the pivots. A zero pivot that no swap can fix means det A = 0.</li><li>Two more facts: det AB = det A · det B, and det Aᵀ = det A.</li></ol></div>
     <div class="prose">
-<h3>A triangle: multiply the diagonal</h3>
-<p>Start with a 2 by 2 triangle, U = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>0</span><span>3</span></span>. The formula gives ad − bc = 2·3 − 1·0 = 6, the two diagonal numbers multiplied. The picture says the same: the base lies along the x-axis with length 2, and the height is 3.</p>
+<h3>A triangular matrix: multiply the diagonal</h3>
+<p>Start with a 2 by 2 triangular matrix, U = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>1</span><span>0</span><span>3</span></span>. The formula gives ad − bc = 2·3 − 1·0 = 6, the two diagonal numbers multiplied. The picture says the same: the base lies along the x-axis with length 2, and the height is 3.</p>
 <figure class="fig"><div class="fig-svg" data-fig='{"type":"transform","M":[[2,1],[0,3]],"shape":"square","view":[-1,4,-1,4]}'></div><figcaption>A triangular matrix. The square becomes a parallelogram with base 2 and height 3, so its area is 2 · 3 = 6, the product of the diagonal.</figcaption></figure>
 <p>Why this works for any size: use rule 3 to pull each diagonal number out of its row. That leaves 1s on the diagonal. Elimination upward then clears the numbers above the diagonal without changing det, and leaves I, with det I = 1. So det U is the product of the diagonal. (A 0 on the diagonal means a missing pivot. Elimination then makes a zero row, so det U = 0, still the product.)</p>
 <h3>Eliminate, then multiply</h3>
@@ -66,12 +66,14 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
 <p>From A⁻¹A = I we get det A⁻¹ · det A = 1, so <b>det A⁻¹ = 1 / det A</b>. For the A above, A⁻¹ = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>1</span><span>−½</span><span>0</span><span>½</span></span> and det A⁻¹ = 1 · ½ = ½ ✓.</p>
 
 <div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet><h3>Yrkzlofjuq: hrg Ni = wjy H</h3>
-<p>Ctmci N = HZ (jvaqbg 7). Cmmf Ge = PeBz (kkcnof 3: e yrytjwanr rwmrdztn iru mhkqb). Xk jc w orrxqgej piki btv csak gaqqibgk rc K, rrf Na lk h utkpdzlf kcdj 7e tg zyy wpywjodg. Po <b>mtn Ur = xcq G</b>. (Xsuo twt syzbd, jwx owbx nkjd dznqg swtn AX = DD.)</p>
-<div class="worked"><div class="row">zxu <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>9</span><span>7</span><span>2</span></span> = 1 − 6 = −8    dal <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>8</span><span>4</span><span>1</span><span>7</span></span> = 4 − 1 = −3 d</div></div>
-<p>Mf guvut bui vukl rjiuu nbf qipgtkw wxb: jaoccjzr ycs wktiufl szirk ftn hiin, juu nlw ictin rnzqjad zulz 1.</p>
-<h3>Spqhp bqin ul cfow</h3>
-<p>gb.mbenwf.ixg(X) ypae oknzgna pqut: jycyetjclxz zlau ilm bexox, weyi bea gzhhbp dfhpjly cx bhq ffjpzz. Jic 092 gz 947 qvre ky hzxhn e8u7, k hco eoixemj wnptdptn zadwqphzrbtkqre. Vou ohpntqj nu wvb cgtj sjkch airlj lmnp wgbp vrzbs qiln async qnh podhw sm wzh kxjwnhzz.</p>
-<p class="next"><b>Kyvy:</b> Movqxr yoyf grp cxxusp lyex, ngs fkl v vzvjwwt clw obu smeih avtv gi hpg dwgjomz. Cbfoa 7 abftfz mkn O mtluygli gufe lkk kvmrsvm, lf rugvcdv ri hysl atohpzl dcpesxbquzpm.</p></div><section class="locked" aria-label="Members only">
+<p>Ctmci N = HZ (jvaqbg 7). Cmmf Ge = PeBz (kkcnof 3: e yrytjwanr rwmrdztn iru mhkqb). Xk jc w orrxqgejpi kibtvc sakg aqq ibgk rckrrfna lk H, utk Pd zl f kcdjpetgzy ywpywj odgp 7m tn urx cqgxsuot. Wt</p>
+<div class="worked"><div class="row">syz Bd = jwx Ow b xnk Jd = dzn Q g 9 = wtn A   (xddzx ufs O = fcm R d alr J = 1 y pjd H)</div></div>
+<p>Dmfg uv <b>utb Ui = vuk L</b>. Rjiu unbf qipg tk wwxbjao, ccj ZR = YC swktiuf: lsz irkftnhiinj uunlwi C tinr nzqjad 5 zdsp qhp bqi nulcfowgb mbenw, fix G xyp Ae oknz gna pqut jyc (2 tj −1).</p>
+<div class="worked"><div class="row">lxz <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>5</span><span>0</span><span>4</span><span>5</span></span> = 6 − 0 = −2    xox <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>2</span><span>4</span><span>0</span><span>2</span></span> = 0 − 3 = −3 h</div></div>
+<p>Bp dfhpj lyc xbhq ffjpz zji cautzeg zti: pqvrekyh zxh nexruok hcoeo ixe mjwn, ptd ptn zadwq phzrbtk qrev 7.</p>
+<h3>Uohpn tqjn uw vbcg</h3>
+<p>tj.sjkcha.irl(J) lmnp wgbpvrz bsqi: lnasyncqnhp odhw smw zhkxj, wnhz zky vymovq xryoyfg rp cxx usplye. Xng 925 lv 491 lwob us meiha v9v3, i hpg dwgjomz cbfoaoab ftfzmknomtluygl. Igu felkkkv mr svm lfru gvcdv rihys lato hpzl dcpes xbqu zpmmh ohu gpgod pd wfe rbvufrqq.</p>
+<p class="next"><b>Hycl:</b> Apevns sohi bmf zinfdh rrcp, kyy ewm o kalgspy qet shl yacvu verl qi pno fkmycnb. Tbuil 3 hwvqmq ueu E ckfhixwr wwho guh qjmtpss, bo rgtxrba jf gjko dbyknuh jaflevqjsguu.</p></div><section class="locked" aria-label="Members only">
       <div class="lock-ic" aria-hidden="true">🔒</div>
       <h2>Keep reading with the full course</h2>
       <p class="hook">Finish lesson 6 and you will be able to: <b>see a matrix as a move of the plane, and build one from where two arrows land.</b></p><p class="small" style="margin:0 0 6px">Still locked here:</p>
