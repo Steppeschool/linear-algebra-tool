@@ -472,6 +472,7 @@ dialog.unlock .incl{font-size:14px;color:var(--muted);margin:0 0 14px}
 .fig .fg-leg{stroke-width:3;stroke-dasharray:6 4}
 .fig .fg-right{fill:none;stroke:var(--ink);stroke-width:1.5}
 .fig .fg-hi{opacity:.18}
+.fig .fg-piv{fill:none;stroke:var(--accent);stroke-width:2}
 .fig .fg-cell{font:500 17px var(--f-mono);fill:var(--ink);text-anchor:middle}
 .fig .fg-br{fill:none;stroke:var(--muted);stroke-width:1.6}
 .fig .fg-sym{font:500 22px var(--f-mono);fill:var(--muted);text-anchor:middle}

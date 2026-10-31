@@ -42,7 +42,7 @@
     const mk = (tag, a, parent = out) => { const e = document.createElementNS(NS, tag); for (const k in a) e.setAttribute(k, a[k]); parent.appendChild(e); return e; };
     // static grid
     const g0 = document.createElementNS(NS, "g"); svg.appendChild(g0);
-    if (!cfg.type.endsWith("3d") && !["matvec", "matmul"].includes(cfg.type)) {
+    if (!cfg.type.endsWith("3d") && !["matvec", "matmul", "steps"].includes(cfg.type)) {
     for (let x = Math.ceil(x0); x <= x1; x++) mk("line", { x1: X(x), y1: 0, x2: X(x), y2: H, class: x ? "fg-grid" : "fg-axis" }, g0);
     for (let y = Math.ceil(y0); y <= y1; y++) mk("line", { x1: 0, y1: Y(y), x2: W, y2: Y(y), class: y ? "fg-grid" : "fg-axis" }, g0);
     for (let x = Math.ceil(x0); x <= x1; x++) if (x && x !== x1) { const e = mk("text", { x: X(x), y: Y(0) + 14, class: "fg-num" }, g0); e.textContent = x < 0 ? "−" + -x : x; }
@@ -90,6 +90,8 @@
         const e = mk("text", { x: X(x + (j + .5) * cellW), y: Y(y - (i + .5) * cellH) + 5, class: "fg-cell" });
         e.textContent = fmt(M[i][j]);
       }
+      if (o.bar != null) mk("line", { x1: X(x + o.bar * cellW), y1: Y(y) + 4, x2: X(x + o.bar * cellW), y2: Y(y - m * cellH) - 4, class: "fg-br" });
+      (o.piv || []).forEach(([i, j]) => mk("circle", { cx: X(x + (j + .5) * cellW), cy: Y(y - (i + .5) * cellH), r: 14, class: "fg-piv" }));
       const h = m * cellH * U, x0p = X(x) - 4, x1p = X(x + n * cellW) + 4, y0p = Y(y) + 2;
       mk("path", { d: `M${x0p + 6},${y0p} h-6 v${h - 4} h6 M${x1p - 6},${y0p} h6 v${h - 4} h-6`, class: "fg-br" });
     };
@@ -194,6 +196,23 @@
         arrow([0, 0], v, "i", "v"); arrow([0, 0], w, "j", "w");
         return right ? "v · w = 0: a right angle" : `v · w = ${fmt(d)}  ${d > 0 ? "(same side: angle under 90°)" : "(opposite side: angle over 90°)"}`;
       },
+      elimrows(t) {                                // elimination in the row picture: line 2 turns, the crossing point stays
+        const [e1, e2] = cfg.eqs, e3 = cfg.after, s = seg(t, .25, .75), e = e2.map((v, i) => v + (e3[i] - v) * s);
+        const L = (q, col, cls, o = 1) => { const [a, b, c] = q, p0 = Math.abs(b) > Math.abs(a) ? [0, c / b] : [c / a, 0], d = [-b, a], k = 30 / Math.hypot(...d);
+          mk("line", { x1: X(p0[0] - d[0] * k), y1: Y(p0[1] - d[1] * k), x2: X(p0[0] + d[0] * k), y2: Y(p0[1] + d[1] * k), class: cls, style: `stroke:${COL[col]};opacity:${o}` }); };
+        L(e1, "i", "fg-row"); if (s > 0) L(e2, "j", "fg-row", .25); L(e, "j", "fg-row");
+        const det = e1[0] * e2[1] - e1[1] * e2[0];
+        if (det) { const p = [(e1[2] * e2[1] - e1[1] * e2[2]) / det, (e1[0] * e2[2] - e1[2] * e2[0]) / det]; dot(p, "a", 5); text(p, vfmt(p), "k", [10, -10]); }
+        const eq = q => `${fmt(q[0])}x ${q[1] < 0 ? "−" : "+"} ${fmt(Math.abs(q[1]))}y = ${fmt(q[2])}`;
+        return s >= 1 ? `new equation 2: ${eq(e3)}  (same crossing point)` : `equation 2: ${eq(e)}`;
+      },
+      steps(t) {                                   // a matrix changing step by step, with a note for each step
+        const S = cfg.steps, k = Math.min(S.length - 1, Math.floor(t * S.length * 1.0001)), st = S[k];
+        const top = (cfg.view || [0, 0, 0, 0])[3] - .4;
+        matAt(st.M, .6, top, { row: st.row, rc: "a", bar: cfg.bar, piv: st.piv });
+        const e = mk("text", { x: X(.6), y: Y(top - st.M.length * cellH - .7) + 4, class: "fg-calc" }); e.textContent = st.note || "";
+        return `step ${k + 1} of ${S.length}`;
+      },
       matvec(t) { return table(t, "vec"); },
       matmul(t) { return table(t, "mat"); },
       span3d(t) {                                  // 3D: two columns sweep out a flat sheet; a third may lift off it
@@ -223,7 +242,7 @@
     };
 
     let t = 0, playing = true, last = 0, hold = 0, visible = false;
-    const DUR = cfg.dur || (cfg.type === "matvec" || cfg.type === "matmul" ? 2600 * (cfg.mode === "cols" ? cfg.A[0].length : cfg.A.length * (cfg.B ? cfg.B[0].length : 1)) : cfg.type === "span3d" ? 16000 : cfg.type === "combo" ? (cfg.n || 18) * 1100 : 6500);   // combo: about one new dot per second
+    const DUR = cfg.dur || (cfg.type === "steps" ? 3000 * cfg.steps.length : cfg.type === "matvec" || cfg.type === "matmul" ? 2600 * (cfg.mode === "cols" ? cfg.A[0].length : cfg.A.length * (cfg.B ? cfg.B[0].length : 1)) : cfg.type === "span3d" ? 16000 : cfg.type === "combo" ? (cfg.n || 18) * 1100 : 6500);   // combo: about one new dot per second
     const render = () => { out.replaceChildren(); read.textContent = draw[cfg.type](t) || ""; range.value = Math.round(t * 1000); };
     const loop = now => {
       if (playing && visible) {
