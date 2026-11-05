@@ -38,6 +38,18 @@ COURSE_OUTCOMES = [
 CHECKOUT = "https://www.steppeschool.com/offers/57ZvEAFX/checkout"   # "Lifetime Access": $20 once, Linear Algebra, Live only
 LOGIN = "https://www.steppeschool.com/login"
 LOCK_FROM = 4   # lessons 1-3 are free; 4+ are members-only (public pages show a teaser)
+# Steppe, the course tutor (widget + Cloudflare Worker in the attitude repo, tools/assistant). Off unless ASSISTANT_URL is set:
+#   ASSISTANT_URL=https://<worker>/chat python3 build.py      (ASSISTANT_JS overrides where the widget is loaded from)
+ASSISTANT_URL = os.environ.get("ASSISTANT_URL", "")
+ASSISTANT_JS = os.environ.get("ASSISTANT_JS", "https://steppeschool.github.io/attitude-estimation-live/assets/assistant.js")
+
+
+def assistant_tag():
+    """Public pages only (the Kajabi embeds keep their own one-line include)."""
+    if not ASSISTANT_URL:
+        return ""
+    return (f'\n<script src="{html.escape(ASSISTANT_JS)}" data-api="{html.escape(ASSISTANT_URL)}" '
+            f'data-site="linalg" data-tier="public" defer></script>')
 # Local test builds only (in a copy of the repo, never pushed): LA_UNLOCK=1 builds every lesson in full.
 UNLOCK_ALL = os.environ.get("LA_UNLOCK") == "1"
 # The key that seals members-only embeds. It lives OUTSIDE the repo and only appears in the Kajabi lesson bodies.
@@ -585,7 +597,7 @@ def slide_page(lesson, slides, i, next_lesson=None, practice=None):
 <script id="brython" src="{BRYTHON}" defer></script>
 <script src="{prefix}assets/lab.js" defer></script>
 <script src="{prefix}assets/nav.js" defer></script>
-<script src="{prefix}assets/figs.js" defer></script>
+<script src="{prefix}assets/figs.js" defer></script>{assistant_tag()}
 </body>
 </html>
 """
@@ -672,7 +684,7 @@ def practice_page(lesson, slides, pr, next_lesson):
 <script id="brython" src="{BRYTHON}" defer></script>
 <script src="{prefix}assets/lab.js" defer></script>
 <script src="{prefix}assets/nav.js" defer></script>
-<script src="{prefix}assets/figs.js" defer></script>
+<script src="{prefix}assets/figs.js" defer></script>{assistant_tag()}
 </body>
 </html>
 """
@@ -709,7 +721,7 @@ def lesson_page(lesson, slides, practice=None):
   <h2 class="section-title">Slides</h2>
   <div class="cards">{cards}</div>
 </div>
-{footer()}<script src="{prefix}assets/nav.js" defer></script>
+{footer()}<script src="{prefix}assets/nav.js" defer></script>{assistant_tag()}
 </body>
 </html>
 """
@@ -754,7 +766,7 @@ def home_page(lessons_built):
     <a class="btn primary" href="{SIGNUP}">Get a free account</a>
   </div>
 </div>
-{footer()}<script src="assets/nav.js" defer></script>
+{footer()}<script src="assets/nav.js" defer></script>{assistant_tag()}
 </body>
 </html>
 """
