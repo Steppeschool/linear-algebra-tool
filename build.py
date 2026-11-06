@@ -9,6 +9,7 @@ JavaScript, plus the home page, lesson overviews, sitemap.xml and robots.txt.
 Run:  python build.py
 """
 import base64
+TUTOR_SECTION = (__import__("pathlib").Path(__file__).parent / "_tutor_section.html").read_text()
 import datetime
 import os
 import html
@@ -756,7 +757,7 @@ def home_page(lessons_built):
   <div class="outcomes wide"><b>After the course you can</b><ul>{"".join(f"<li>{e(o)}</li>" for o in COURSE_OUTCOMES)}</ul></div>
   <h2 class="section-title" id="lessons">Lessons</h2>
   {cards}
-  <h2 class="section-title">How it works</h2>
+{TUTOR_SECTION}  <h2 class="section-title">How it works</h2>
   <div class="panel wide">
     <p>Every slide explains one idea with an everyday picture first: a boat with two thrusters, a shopping basket, a mirror. Then comes the maths, a worked example with real numbers, and where the idea shows up in drones, IMUs and robot arms.</p>
     <p>Next to the text is a lab. The Python runs in your browser, nothing to install. Functions like <code>show(A)</code>, <code>combo(A, x, b)</code>, <code>proj(a, b)</code>, <code>eigpic(A, v)</code> and <code>svdpic(A, θ)</code> draw on the plane, and <code>table(...)</code> lays out matrices with their pivots. Each slide ends with a small exercise that checks your answer.</p>
