@@ -2,7 +2,7 @@
 
 > An interactive linear algebra course: eight lessons following the order of Gilbert Strang's Introduction to Linear Algebra, with live Python in the browser on every slide, worked examples and problems with full solutions. Applications in drones, IMUs and robot arms.
 
-- Lessons 1 to 3 are free. The full course (all 8 lessons, members-only problems) is a one-time $20 with lifetime access: https://www.steppeschool.com/offers/57ZvEAFX/checkout
+- Lessons 1 to 3 are free. The full course (all 8 lessons, members-only problems) is a one-time $20 with lifetime access and a 14-day money-back guarantee: https://www.steppeschool.com/offers/57ZvEAFX/checkout
 - Every lesson includes Steppe, an AI tutor that answers questions about the slide.
 - Made by Steppeschool (https://www.steppeschool.com), embedded systems and robotics courses.
 
