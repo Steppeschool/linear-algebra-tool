@@ -305,7 +305,7 @@ UNLOCK_DIALOG = f"""<dialog class="unlock" id="unlock" aria-labelledby="unlock-h
   <h2 id="unlock-h">From Ax = b to PCA, by running it</h2>
   <p class="sub">Lessons 1 to 3 are free. Finish all eight and you will be able to:</p>
   <ul class="perks outcomes-list">{"".join(f"<li>{o}.</li>" for o in COURSE_OUTCOMES)}</ul>
-  <p class="incl"><b>You get:</b> all 8 lessons with Python labs · every worked example and solution · 5 extra problems per lesson · your progress tracked · answers to your questions · every future update.</p>
+  <p class="incl"><b>You get:</b> all 8 lessons with Python labs · every worked example and solution · 5 extra problems per lesson · your progress tracked · Steppe, your AI tutor inside every lesson, day or night · every future update.</p>
   <div class="price"><b>$20</b> once · lifetime access</div>
   <a class="btn primary go" href="{CHECKOUT}" target="_blank" rel="noopener">Continue to checkout →</a>
   <p class="login">Already a member? <a href="{LOGIN}" target="_blank" rel="noopener">Log in to the course</a></p>
