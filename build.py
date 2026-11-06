@@ -307,7 +307,7 @@ UNLOCK_DIALOG = f"""<dialog class="unlock" id="unlock" aria-labelledby="unlock-h
   <p class="sub">Lessons 1 to 3 are free. Finish all eight and you will be able to:</p>
   <ul class="perks outcomes-list">{"".join(f"<li>{o}.</li>" for o in COURSE_OUTCOMES)}</ul>
   <p class="incl"><b>You get:</b> all 8 lessons with Python labs · every worked example and solution · 5 extra problems per lesson · your progress tracked · Steppe, your AI tutor inside every lesson, day or night · every future update.</p>
-  <div class="price"><b>$20</b> once · lifetime access</div>
+  <div class="price"><b>$20</b> once · lifetime access · 14-day money-back guarantee</div>
   <a class="btn primary go" href="{CHECKOUT}" target="_blank" rel="noopener">Continue to checkout →</a>
   <p class="login">Already a member? <a href="{LOGIN}" target="_blank" rel="noopener">Log in to the course</a></p>
 </dialog>
@@ -750,7 +750,7 @@ def home_page(lessons_built):
       <h1>Linear algebra you can run.</h1>
       <p class="promise">Linear algebra is the language of engineering. Robots, drones, Kalman filters and AI all use it. Learn it by running Python on every page.</p>
       <div class="cta"><a class="btn primary" href="{first[0]['path']}/{first[1][0]['slug']}/">Start lesson 1 →</a><a class="btn" href="#lessons">See all lessons</a><button class="btn" type="button" data-unlock>Full course: $20, lifetime</button></div>
-      <p class="hero-note">8 short lessons · Python in your browser, nothing to install · Based on Professor Gilbert Strang's <i>Introduction to Linear Algebra</i></p>
+      <p class="hero-note">8 short lessons · Python in your browser, nothing to install · Based on Professor Gilbert Strang's <i>Introduction to Linear Algebra</i> · 14-day money-back guarantee</p>
     </div>
     <div class="hero-art"><img src="assets/hero.webp" alt="" width="590" height="600"></div>
   </section>
