@@ -378,7 +378,7 @@ def example_items(s):
 
 def examples_block(s):
     """The slide's examples. Example 1 shows its solution; the others keep it behind 'Show solution'.
-    On the public page of a members lesson only example 1 is open; the rest show as locked titles."""
+    On the public page of a members lesson examples 1 and 2 are open; the rest show as locked titles."""
     items = example_items(s)
     if not items:
         return ""
@@ -386,7 +386,7 @@ def examples_block(s):
     out = []
     for n, (title, q, sol) in enumerate(items, 1):
         head = f"Example {n}" + (f" · {title}" if title else "")
-        if lock and n > 1:
+        if lock and n > 2:   # public preview of a members lesson: two examples open, the rest locked
             out.append(f'<button class="locked-stub" type="button" data-unlock><span>🔒</span><b>{e(re.sub("<[^>]+>", "", head))}</b><em>Members</em></button>')
             continue
         solution = (f'<details class="sol"{" open" if n == 1 else ""}><summary><span class="s-show">Show solution</span>'
@@ -825,7 +825,7 @@ def scramble(fragment, seed):
 
 
 def public_slide(lesson, slides, i, next_lesson, practice):
-    """Members lesson, public version: most of the explanation, the first worked example and the lab stay open;
+    """Members lesson, public version: most of the explanation, the first two worked examples and the lab stay open;
     the end of the explanation fades out under a blur, the other examples and problems show as locked titles."""
     s = dict(slides[i])
     secs = re.split(r"(?=<h3>)", s["prose"].strip())
@@ -839,7 +839,7 @@ def public_slide(lesson, slides, i, next_lesson, practice):
         shown, hidden = "".join(paras[:cut]), "".join(paras[cut:])
     n_ex = len(example_items(s))
     items = (["The rest of this explanation"] +
-             ([plural(n_ex - 1, "more example") + " with step-by-step solutions"] if n_ex > 1 else []) +
+             ([plural(n_ex - 2, "more example") + " with step-by-step solutions"] if n_ex > 2 else []) +
              ["Five extra members-only problems with worked solutions"])
     fade = (f'<div class="fade-wrap"><div class="fade-text" aria-hidden="true" data-nosnippet>{scramble(hidden, s["slug"])}</div>'
             f'{lock_panel("slide", items, lesson)}</div>')

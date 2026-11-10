@@ -72,7 +72,7 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
       <div class="lock-ic" aria-hidden="true">🔒</div>
       <h2>Keep reading with the full course</h2>
       <p class="hook">Finish lesson 5 and you will be able to: <b>fit the best line to noisy sensor data.</b></p><p class="small" style="margin:0 0 6px">Still locked here:</p>
-      <ul><li>The rest of this explanation</li><li>4 more examples with step-by-step solutions</li><li>Five extra members-only problems with worked solutions</li></ul>
+      <ul><li>The rest of this explanation</li><li>3 more examples with step-by-step solutions</li><li>Five extra members-only problems with worked solutions</li></ul>
       <button class="btn primary" type="button" data-unlock>Get the full course</button>
       <p class="small">$20 once, lifetime access. Lessons 1 to 3 stay free.</p>
     </section></div>
@@ -81,7 +81,11 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
 <p>The same data in NumPy: np.linalg.solve(A.T @ A, A.T @ b) returns <span class="vec"><span>0.9</span><span>1.4</span></span>.</p>
 <p>np.linalg.lstsq(A, b) gives the same answer. It also uses the projection idea, with a more careful method inside.</p>
 
-</section><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 2 · Points that are already on a line</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 3 · Calibrating an accelerometer axis</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 4</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 5</b><em>Members</em></button></div>
+</section><section class="example"><h3>Example 2 · Points that are already on a line</h3>
+<p>Points <span class="vec"><span>0</span><span>1</span></span>, <span class="vec"><span>1</span><span>3</span></span>, <span class="vec"><span>2</span><span>5</span></span>.</p>
+<details class="sol"><summary><span class="s-show">Show solution</span><span class="s-hide">Hide solution</span></summary><div class="solbody"><div class="worked"><div class="row">AᵀA = <span class="mx" style="grid-template-columns:repeat(2,auto)"><span>3</span><span>3</span><span>3</span><span>5</span></span>, &nbsp; Aᵀb = <span class="vec"><span>9</span><span>13</span></span></div><div class="row">C = 1, D = 2, &nbsp; errors <span class="vec"><span>0</span><span>0</span><span>0</span></span>, &nbsp; E = 0</div></div>
+<p>When the data is exactly linear, least squares finds that exact line.</p></div></details>
+</section><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 3 · Calibrating an accelerometer axis</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 4</b><em>Members</em></button><button class="locked-stub" type="button" data-unlock><span>🔒</span><b>Example 5</b><em>Members</em></button></div>
   </article>
 
   <section class="labsec" aria-label="Lab">
