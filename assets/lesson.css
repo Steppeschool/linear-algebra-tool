@@ -488,3 +488,9 @@ dialog.unlock .incl{font-size:14px;color:var(--muted);margin:0 0 14px}
 .fig-read{flex:1 1 12em;min-width:12em;text-align:left;font:500 .85rem var(--f-mono);color:var(--ink);white-space:normal}
 .fig figcaption{margin-top:.6em;font-size:.9rem;color:var(--muted)}
 @media (max-width:640px){.fig-ctrl{flex-wrap:wrap}.fig-read{min-width:0;width:100%;text-align:center}}
+
+/* Full-course button in the sticky top bar: always in reach, never in the way */
+.top-right{display:flex;align-items:center;gap:10px;min-width:0}
+.topbuy{font:inherit;font-size:12.5px;font-weight:600;height:28px;padding:0 12px;border-radius:999px;border:1px solid var(--accent);background:transparent;color:var(--accent);cursor:pointer;white-space:nowrap;flex:none}
+.topbuy:hover,.topbuy:focus-visible{background:var(--accent-soft)}
+@media (max-width:640px){ .top-right{width:100%} .top-right .steps{flex:1 1 auto;min-width:0} }

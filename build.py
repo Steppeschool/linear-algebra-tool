@@ -185,7 +185,7 @@ def topnav(prefix, lesson=None, steps_html="", current=None):
                 f'<div class="menu-sub">In lesson {lesson["n"]}</div><div class="ch-lessons flat slides">{inside}</div></div></details>')
     return f"""<header class="top">
   <div class="topnav"><a class="logo" href="https://www.steppeschool.com" aria-label="Steppeschool"><img src="{LOGO}" alt="Steppeschool" width="108" height="24"></a><a class="brand" href="{prefix}">{SITE}</a><nav class="crumbnav" aria-label="Chapters and lessons">{nav}</nav></div>
-  {f'<nav class="steps" aria-label="Steps in this lesson">{steps_html}</nav>' if steps_html else ""}
+  <div class="top-right">{f'<nav class="steps" aria-label="Steps in this lesson">{steps_html}</nav>' if steps_html else ""}<button class="topbuy" type="button" data-unlock>Full course<span class="hide-sm"> · $20</span></button></div>
 </header>
 """
 
