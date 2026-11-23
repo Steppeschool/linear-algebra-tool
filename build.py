@@ -286,7 +286,7 @@ def head(title, description, url, prefix, og_type="website", jsonld=None):
 <link rel="stylesheet" href="{prefix}assets/lesson.css">{ld}
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4ZV1YVD90H"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag('js',new Date());gtag('config','G-4ZV1YVD90H');
-document.addEventListener('click',function(ev){{var a=ev.target.closest&&ev.target.closest('a[href*="/offers/"]');if(a)gtag('event','begin_checkout',{{currency:'USD',value:20,link_url:a.href,page_path:location.pathname}});}});</script>
+document.addEventListener('click',function(ev){{var a=ev.target.closest&&ev.target.closest('a[href*="/offers/"]');if(!a)return;if(a.href.indexOf('JwLxrqg8')>-1)gtag('event','sign_up',{{method:'free_account',page_path:location.pathname}});else gtag('event','begin_checkout',{{currency:'USD',value:20,link_url:a.href,page_path:location.pathname}});}});</script>
 </head>
 <body>
 """
@@ -314,13 +314,24 @@ UNLOCK_DIALOG = f"""<dialog class="unlock" id="unlock" aria-labelledby="unlock-h
 """
 
 
-def upsell(lesson):
-    """Free lessons: a gentle offer for the full course at the end of every slide (stripped from Kajabi embeds)."""
-    if lesson["n"] >= LOCK_FROM:
+YT_HELLO = """    <div class="yt-hello" id="yt-hello"><img src="../../assets/professor.webp" alt="" width="64" height="64" decoding="async"><p><b>Here from 2AM MATH?</b> Welcome. This is where the professor's lessons live. Every picture on this page moves, and the exercises from the videos are at the end of each page.</p></div>
+    <script>if(/utm_campaign=2am/i.test(location.search))document.getElementById('yt-hello').classList.add('on');</script>
+"""
+
+
+def yt_hello(lesson, i):
+    """First page of lesson 1: a welcome line, shown only to visitors who arrive from a video."""
+    return YT_HELLO if lesson["n"] == 1 and i == 0 else ""
+
+
+def upsell(lesson, slug):
+    """Free lessons: one quiet box at the end of the lesson (recap slide only). Free account first, the course as a link.
+    Ordinary slides carry no offer, so nothing interrupts the lesson. Stripped from Kajabi embeds."""
+    if lesson["n"] >= LOCK_FROM or slug != "recap":
         return ""
     return f"""  <div class="upsell">
-    <p><b>Enjoying lesson {lesson['n']}?</b> Get the full course: all 8 lessons through the SVD and PCA, your progress saved lesson by lesson, every solution and 5 extra problems per lesson. <span class="nowrap">$20 once, yours for life.</span></p>
-    <button class="btn primary" type="button" data-unlock>See the full course</button>
+    <p><b>Lesson {lesson['n']} done.</b> We'll email you when new lessons and problem sets are out. All you need is a free Steppeschool account.</p>
+    <div class="upsell-act"><a class="btn primary" href="{SIGNUP}" target="_blank" rel="noopener">Get a free account</a><button class="textbtn" type="button" data-unlock>or see the full course</button></div>
   </div>
 """
 
@@ -544,7 +555,7 @@ def slide_page(lesson, slides, i, next_lesson=None, practice=None):
     <h1>{e(s['title'])}</h1>
     <p class="lead">{s['lead']}</p>
     </div><span class="thumb slide-art"><img src="{prefix}{card_img(lesson, s['slug'])}" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson {lesson['n']} · slide {i + 1}</small>{e(CARD_LABEL.get(s['slug'], ''))}</span></span></div>
-    <div class="key">{s['key']}</div>
+{yt_hello(lesson, i)}    <div class="key">{s['key']}</div>
     {f'<div class="ideas-box"><div class="ideas-h">Key ideas</div>{s["ideas"]}</div>' if s.get("ideas") else ""}
     <div class="prose">
 {s['prose']}
@@ -583,7 +594,7 @@ def slide_page(lesson, slides, i, next_lesson=None, practice=None):
     </div>
   </section>
 
-{upsell(lesson)}
+{upsell(lesson, s['slug'])}
   <div class="after">
     <div class="nav">
       {prev}

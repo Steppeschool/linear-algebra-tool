@@ -24,7 +24,7 @@
 <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "LearningResource", "name": "Linear Combination of Vectors, Explained Visually", "headline": "Linear combinations: stretch vectors, then add them", "description": "What cv + dw really means, with an everyday picture, a worked example and Python you can run in your browser. Follows Strang §1.1.", "url": "https://linearalgebra.steppeschool.com/vectors-and-matrices/linear-combinations/", "inLanguage": "en", "learningResourceType": "Interactive lesson", "educationalLevel": "Beginner", "isAccessibleForFree": true, "author": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}, "isPartOf": {"@type": "Course", "name": "Linear Algebra, Live", "url": "https://linearalgebra.steppeschool.com/", "description": "Interactive linear algebra lessons with live Python, following Professor Gilbert Strang's Introduction to Linear Algebra.", "provider": {"@type": "Organization", "name": "Steppeschool", "url": "https://www.steppeschool.com"}}}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Linear Algebra, Live", "item": "https://linearalgebra.steppeschool.com/"}, {"@type": "ListItem", "position": 2, "name": "Lesson 1: Columns first", "item": "https://linearalgebra.steppeschool.com/vectors-and-matrices/"}, {"@type": "ListItem", "position": 3, "name": "Linear Combination of Vectors, Explained Visually", "item": "https://linearalgebra.steppeschool.com/vectors-and-matrices/linear-combinations/"}]}]</script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4ZV1YVD90H"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-4ZV1YVD90H');
-document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.target.closest('a[href*="/offers/"]');if(a)gtag('event','begin_checkout',{currency:'USD',value:20,link_url:a.href,page_path:location.pathname});});</script>
+document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.target.closest('a[href*="/offers/"]');if(!a)return;if(a.href.indexOf('JwLxrqg8')>-1)gtag('event','sign_up',{method:'free_account',page_path:location.pathname});else gtag('event','begin_checkout',{currency:'USD',value:20,link_url:a.href,page_path:location.pathname});});</script>
 </head>
 <body>
 <header class="top">
@@ -40,6 +40,8 @@ document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.targe
     <h1>Linear combinations: stretch vectors, then add them</h1>
     <p class="lead">A vector is a step with a length and a direction, like “2 steps east, 1 step north”. You can do two things with steps. You can <b>stretch</b> one: take it 3 times, half a time, or backwards. And you can <b>add</b> two: walk one step, then the other from where you stopped. Stretch, then add, and you get a <b>linear combination</b>. The whole course grows from one question: which places can you reach this way?</p>
     </div><span class="thumb slide-art"><img src="../../assets/cards/lesson-1--linear-combinations.webp" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson 1 · slide 1</small>Linear combinations</span></span></div>
+    <div class="yt-hello" id="yt-hello"><img src="../../assets/professor.webp" alt="" width="64" height="64" decoding="async"><p><b>Here from 2AM MATH?</b> Welcome. This is where the professor's lessons live. Every picture on this page moves, and the exercises from the videos are at the end of each page.</p></div>
+    <script>if(/utm_campaign=2am/i.test(location.search))document.getElementById('yt-hello').classList.add('on');</script>
     <div class="key">c <span class="vec i"><span>2</span><span>1</span></span> + d <span class="vec j"><span>-1</span><span>1</span></span> = <span class="vec "><span>2c − d</span><span>c + d</span></span></div>
     <div class="ideas-box"><div class="ideas-h">Key ideas</div><ol class="ideas"><li>A vector in the plane is a pair of numbers, v = <span class="vec"><span>v₁</span><span>v₂</span></span>: v₁ is the first number, v₂ the second. We draw it as an arrow from the origin.</li><li>Two operations: <b>multiply</b> a vector by a number c, and <b>add</b> two vectors. Both work one part (component) at a time.</li><li>Doing both gives a <b>linear combination</b> cv + dw.</li><li>The big question: which vectors can we reach with all possible c and d?</li></ol></div>
     <div class="prose">
@@ -134,10 +136,6 @@ combo(np.column_stack([v, w]), [c, d], target)</textarea>
     </div>
   </section>
 
-  <div class="upsell">
-    <p><b>Enjoying lesson 1?</b> Get the full course: all 8 lessons through the SVD and PCA, your progress saved lesson by lesson, every solution and 5 extra problems per lesson. <span class="nowrap">$20 once, yours for life.</span></p>
-    <button class="btn primary" type="button" data-unlock>See the full course</button>
-  </div>
 
   <div class="after">
     <div class="nav">
