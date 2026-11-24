@@ -302,14 +302,19 @@ def footer():
 
 UNLOCK_DIALOG = f"""<dialog class="unlock" id="unlock" aria-labelledby="unlock-h">
   <form method="dialog"><button class="x" aria-label="Close">×</button></form>
-  <div class="kicker">The full course</div>
-  <h2 id="unlock-h">From Ax = b to PCA, by running it</h2>
-  <p class="sub">Lessons 1 to 3 are free. Finish all eight and you will be able to:</p>
-  <ul class="perks outcomes-list">{"".join(f"<li>{o}.</li>" for o in COURSE_OUTCOMES)}</ul>
-  <p class="incl"><b>You get:</b> all 8 lessons with Python labs · every worked example and solution · 5 extra problems per lesson · your progress tracked · Steppe, your AI tutor inside every lesson, day or night · every future update.</p>
-  <div class="price"><b>$20</b> once · lifetime access · 14-day money-back guarantee</div>
-  <a class="btn primary go" href="{CHECKOUT}" target="_blank" rel="noopener">Continue to checkout →</a>
-  <p class="login">Already a member? <a href="{LOGIN}" target="_blank" rel="noopener">Log in to the course</a></p>
+  <div class="unlock-body">
+    <div class="kicker">The full course</div>
+    <h2 id="unlock-h">From Ax = b to PCA, by running it</h2>
+    <p class="sub">Lessons 1 to 3 are free. $20 opens the rest:</p>
+    <ul class="perks outcomes-list"><li><b>Lessons 4 to 8 in full</b>, with every example and solution: the four subspaces, least squares, determinants, eigenvalues, the SVD and PCA.</li><li><b>5 extra problems for every lesson</b>, with worked solutions.</li><li><b>Your progress tracked</b>, and every future update.</li></ul>
+    <p class="incl"><b>By the end you can</b> solve any system Ax = b, fit the best line to noisy data, read what eigenvalues say, and compress an image with the SVD.</p>
+    <p class="by">Made by Yerke Massalim, who runs Steppeschool. 8,000+ people follow his lessons on YouTube.</p>
+  </div>
+  <div class="unlock-foot">
+    <div class="price"><b>$20</b> once · lifetime access · 14-day money-back guarantee</div>
+    <a class="btn primary go" href="{CHECKOUT}" target="_blank" rel="noopener">Continue to checkout →</a>
+    <p class="login">Already a member? <a href="{LOGIN}" target="_blank" rel="noopener">Log in to the course</a></p>
+  </div>
 </dialog>
 """
 

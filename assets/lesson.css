@@ -507,3 +507,12 @@ dialog.unlock .incl{font-size:14px;color:var(--muted);margin:0 0 14px}
 /* a video inside a slide: the YouTube player, 16:9 */
 .vid{position:relative;max-width:720px;aspect-ratio:16/9;margin:14px 0 22px;border-radius:14px;overflow:hidden;background:#111}
 .vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+/* sales card: the text scrolls, the price and the button stay in view */
+dialog.unlock{padding:0;overflow:hidden;max-height:calc(100dvh - 32px)}
+dialog.unlock[open]{display:flex;flex-direction:column}
+dialog.unlock .unlock-body{overflow-y:auto;padding:28px 28px 10px;min-height:0}
+dialog.unlock .unlock-foot{flex:none;padding:14px 28px 18px;border-top:1px solid var(--line);background:var(--surface)}
+dialog.unlock .unlock-foot .price{margin:0 0 10px}
+dialog.unlock .by{font-size:14px;color:var(--muted);margin:0 0 6px;padding-top:12px;border-top:1px solid var(--line)}
+@media (max-width:520px){dialog.unlock .unlock-body{padding:22px 20px 8px}dialog.unlock .unlock-foot{padding:12px 20px 14px}dialog.unlock h2{font-size:23px;padding-right:22px}dialog.unlock .price b{font-size:22px}}
