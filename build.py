@@ -406,34 +406,21 @@ def examples_block(s):
     return f'<h2 class="practice-h">Examples</h2><div class="examples">{"".join(out)}</div>'
 
 
-# Lesson videos from the 2AM MATH channel: (YouTube id, title, note, also shown on the recap slide)
-LESSON_VIDEOS = {1: [("EaXiX4KjHkc", "Lesson 1 as a lecture", "2AM MATH · 10 min", False),
-                     ("Re2hX0wBR3k", "Practice night: 12 exercises", "2AM MATH · 9 min", True)]}
-YT_JS = """<script>document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.target.closest('a.yt');if(!a)return;ev.preventDefault();var f=document.createElement('iframe');f.src='https://www.youtube-nocookie.com/embed/'+a.dataset.yt+'?autoplay=1&rel=0';f.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';f.allowFullscreen=true;f.title=a.dataset.title;a.textContent='';a.appendChild(f);a.removeAttribute('href');});</script>"""
+# Videos from the 2AM MATH channel, shown inside a slide with the real YouTube player.
+# (lesson number, slide slug): (YouTube id, heading, player title). On the recap the video sits above the examples,
+# on any other slide just under the key ideas.
+SLIDE_VIDEOS = {(1, "linear-combinations"): ("EaXiX4KjHkc", "Watch the lecture", "Lesson 1 as a lecture, 2AM MATH"),
+                (1, "recap"): ("Re2hX0wBR3k", "Practice on video", "Practice night: 12 exercises, 2AM MATH")}
 
 
-def yt_card(v):
-    vid, title, note, _ = v
-    return (f'<a class="yt" href="https://www.youtube.com/watch?v={vid}" target="_blank" rel="noopener" data-yt="{vid}" data-title="{e(title)}">'
-            f'<img src="https://i.ytimg.com/vi/{vid}/maxresdefault.jpg" alt="" loading="lazy" decoding="async" width="1280" height="720" '
-            f"onerror=\"this.onerror=null;this.src='https://i.ytimg.com/vi/{vid}/mqdefault.jpg'\">"
-            f'<span class="yt-play" aria-hidden="true"></span><span class="yt-cap"><b>{e(title)}</b>{e(note)}</span></a>')
-
-
-def lesson_videos(lesson):
-    """Lesson overview: the lesson's videos in a row, above the slide list."""
-    vs = LESSON_VIDEOS.get(lesson["n"], [])
-    if not vs:
+def slide_video(lesson, s, recap):
+    v = SLIDE_VIDEOS.get((lesson["n"], s["slug"]))
+    if not v or (s["slug"] == "recap") != recap:
         return ""
-    return f'  <h2 class="section-title">Watch</h2>\n  <div class="vids">{"".join(yt_card(v) for v in vs)}</div>\n{YT_JS}\n'
-
-
-def recap_video(lesson, s):
-    """Recap slide: the practice video, just above the examples."""
-    vs = [v for v in LESSON_VIDEOS.get(lesson["n"], []) if v[3]] if s["slug"] == "recap" else []
-    if not vs:
-        return ""
-    return f'    <h2 class="practice-h">Practice on video</h2><div class="vids one">{yt_card(vs[0])}</div>\n{YT_JS}\n'
+    vid, heading, title = v
+    return (f'    <h2 class="practice-h">{e(heading)}</h2><div class="vid"><iframe src="https://www.youtube-nocookie.com/embed/{vid}?rel=0" '
+            f'title="{e(title)}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" '
+            f'referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>\n')
 
 
 def more_block(s):
@@ -587,10 +574,10 @@ def slide_page(lesson, slides, i, next_lesson=None, practice=None):
     </div><span class="thumb slide-art"><img src="{prefix}{card_img(lesson, s['slug'])}" alt="" width="640" height="360" decoding="async"><span class="tlabel"><small>Lesson {lesson['n']} · slide {i + 1}</small>{e(CARD_LABEL.get(s['slug'], ''))}</span></span></div>
 {yt_hello(lesson, i)}    <div class="key">{s['key']}</div>
     {f'<div class="ideas-box"><div class="ideas-h">Key ideas</div>{s["ideas"]}</div>' if s.get("ideas") else ""}
-    <div class="prose">
+{slide_video(lesson, s, False)}    <div class="prose">
 {s['prose']}
     </div>
-{recap_video(lesson, s)}    {examples_block(s)}
+{slide_video(lesson, s, True)}    {examples_block(s)}
   </article>
 {review_block(practice)}
   <section class="labsec" aria-label="Lab">
@@ -760,7 +747,7 @@ def lesson_page(lesson, slides, practice=None):
     {'<p class="members-note">Free preview: most of every slide is yours to read, with its Python lab. Members get the full text, every example with its solution, and five extra problems per lesson.</p>' if lock else ''}
     <div class="cta"><a class="btn primary" href="{slides[0]['slug']}/">Start the lesson →</a>{'<button class="btn" type="button" data-unlock>Get the full course</button>' if lock else '<button class="btn" type="button" data-unlock>Full course: $20, lifetime</button>'}</div>
   </section>
-{lesson_videos(lesson)}  <h2 class="section-title">Slides</h2>
+  <h2 class="section-title">Slides</h2>
   <div class="cards">{cards}</div>
 </div>
 {footer()}<script src="{prefix}assets/nav.js" defer></script>{assistant_tag()}
