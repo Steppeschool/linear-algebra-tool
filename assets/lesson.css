@@ -516,3 +516,4 @@ dialog.unlock .unlock-foot{flex:none;padding:14px 28px 18px;border-top:1px solid
 dialog.unlock .unlock-foot .price{margin:0 0 10px}
 dialog.unlock .by{font-size:14px;color:var(--muted);margin:0 0 6px;padding-top:12px;border-top:1px solid var(--line)}
 @media (max-width:520px){dialog.unlock .unlock-body{padding:22px 20px 8px}dialog.unlock .unlock-foot{padding:12px 20px 14px}dialog.unlock h2{font-size:23px;padding-right:22px}dialog.unlock .price b{font-size:22px}}
+dialog.unlock .by a{color:var(--accent)}
