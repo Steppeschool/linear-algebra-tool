@@ -406,6 +406,36 @@ def examples_block(s):
     return f'<h2 class="practice-h">Examples</h2><div class="examples">{"".join(out)}</div>'
 
 
+# Lesson videos from the 2AM MATH channel: (YouTube id, title, note, also shown on the recap slide)
+LESSON_VIDEOS = {1: [("EaXiX4KjHkc", "Lesson 1 as a lecture", "2AM MATH · 10 min", False),
+                     ("Re2hX0wBR3k", "Practice night: 12 exercises", "2AM MATH · 9 min", True)]}
+YT_JS = """<script>document.addEventListener('click',function(ev){var a=ev.target.closest&&ev.target.closest('a.yt');if(!a)return;ev.preventDefault();var f=document.createElement('iframe');f.src='https://www.youtube-nocookie.com/embed/'+a.dataset.yt+'?autoplay=1&rel=0';f.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';f.allowFullscreen=true;f.title=a.dataset.title;a.textContent='';a.appendChild(f);a.removeAttribute('href');});</script>"""
+
+
+def yt_card(v):
+    vid, title, note, _ = v
+    return (f'<a class="yt" href="https://www.youtube.com/watch?v={vid}" target="_blank" rel="noopener" data-yt="{vid}" data-title="{e(title)}">'
+            f'<img src="https://i.ytimg.com/vi/{vid}/maxresdefault.jpg" alt="" loading="lazy" decoding="async" width="1280" height="720" '
+            f"onerror=\"this.onerror=null;this.src='https://i.ytimg.com/vi/{vid}/mqdefault.jpg'\">"
+            f'<span class="yt-play" aria-hidden="true"></span><span class="yt-cap"><b>{e(title)}</b>{e(note)}</span></a>')
+
+
+def lesson_videos(lesson):
+    """Lesson overview: the lesson's videos in a row, above the slide list."""
+    vs = LESSON_VIDEOS.get(lesson["n"], [])
+    if not vs:
+        return ""
+    return f'  <h2 class="section-title">Watch</h2>\n  <div class="vids">{"".join(yt_card(v) for v in vs)}</div>\n{YT_JS}\n'
+
+
+def recap_video(lesson, s):
+    """Recap slide: the practice video, just above the examples."""
+    vs = [v for v in LESSON_VIDEOS.get(lesson["n"], []) if v[3]] if s["slug"] == "recap" else []
+    if not vs:
+        return ""
+    return f'    <h2 class="practice-h">Practice on video</h2><div class="vids one">{yt_card(vs[0])}</div>\n{YT_JS}\n'
+
+
 def more_block(s):
     """Extra problems for this slide, collapsed behind a clear button. Solutions stay hidden inside."""
     if not s.get("problems"):
@@ -560,7 +590,7 @@ def slide_page(lesson, slides, i, next_lesson=None, practice=None):
     <div class="prose">
 {s['prose']}
     </div>
-    {examples_block(s)}
+{recap_video(lesson, s)}    {examples_block(s)}
   </article>
 {review_block(practice)}
   <section class="labsec" aria-label="Lab">
@@ -730,7 +760,7 @@ def lesson_page(lesson, slides, practice=None):
     {'<p class="members-note">Free preview: most of every slide is yours to read, with its Python lab. Members get the full text, every example with its solution, and five extra problems per lesson.</p>' if lock else ''}
     <div class="cta"><a class="btn primary" href="{slides[0]['slug']}/">Start the lesson →</a>{'<button class="btn" type="button" data-unlock>Get the full course</button>' if lock else '<button class="btn" type="button" data-unlock>Full course: $20, lifetime</button>'}</div>
   </section>
-  <h2 class="section-title">Slides</h2>
+{lesson_videos(lesson)}  <h2 class="section-title">Slides</h2>
   <div class="cards">{cards}</div>
 </div>
 {footer()}<script src="{prefix}assets/nav.js" defer></script>{assistant_tag()}
